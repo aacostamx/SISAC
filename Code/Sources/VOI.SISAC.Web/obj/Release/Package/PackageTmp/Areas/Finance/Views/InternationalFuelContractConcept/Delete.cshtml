@@ -1,0 +1,118 @@
+﻿@model VOI.SISAC.Web.Models.VO.Finance.InternationalFuelContractConceptVO
+
+@{
+    ViewBag.Title = Resource.Delete;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>@Resource.Delete</h2>
+    <h3>@Resource.ConfirmDelete</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.InternationalFuelContractConceptID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.InternationalFuelContractConceptID)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.EffectiveDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EffectiveDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AirlineCode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AirlineCode)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.StationCode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.StationCode)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ServiceCode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ServiceCode)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ProviderNumberPrimary)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProviderNumberPrimary)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FuelConceptID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FuelConceptID)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FuelConceptTypeCode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FuelConceptTypeCode)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ChargeFactorTypeID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ChargeFactorTypeID)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ProviderNumber)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProviderNumber)
+            </dd>
+
+        </dl>
+    </div>
+
+    @using (Html.BeginForm("Delete", "InternationalFuelContractConcept", FormMethod.Post, new { name = "formConcepts", id = "formConcepts" }))
+            {
+        @Html.AntiForgeryToken()
+        <br />
+        <div class="form-actions no-color">
+            <button class="btn btn-default btn-lg" type="button" name="Back" title="@VOI.SISAC.Web.Resources.Resource.Back" onclick="location.href='@Url.Action("Edit", "InternationalFuelContract", new { effectiveDate = Model.EffectiveDate.ToShortDateString(), airlineCode = Model.AirlineCode, stationCode = Model.StationCode, serviceCode = Model.ServiceCode, providerNumberPrimary = Model.ProviderNumberPrimary })'">
+                <i class="fa fa-arrow-left fa-fw"></i>&nbsp;@Resource.Back
+            </button>
+            <button id="btnContract" type="button" class="btn btn-default btn-lg btn-green" name="Save" title="@Resource.Delete" onclick="postGeneric()">
+                <i class="fa fa-trash fa-fw"></i>&nbsp;@Resource.Delete
+            </button>
+        </div>
+    }
+</div>
+<script>
+    function postGeneric() {
+        var form = document.getElementById('formConcepts');
+        if (form) {
+            form.submit();
+        }
+    }
+</script>

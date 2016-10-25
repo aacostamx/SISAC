@@ -1,0 +1,200 @@
+﻿@model IEnumerable<VOI.SISAC.Web.Models.VO.Process.NationalJetFuelReconcileControlVO>
+
+@{
+    this.ViewBag.Title = VOI.SISAC.Web.Resources.Resource.ReconcileInvoicesMain;
+    this.Layout = "~/Views/Shared/_Layout.cshtml";
+    var cultureForm = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+@Styles.Render("~/Content/bootstrapdtimecss")
+@Styles.Render("~/bundles/SweetAlertCSS")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+
+    <h2 class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.ReconcileInvoicesMain</h2>
+    <div id="toolbar">
+        @if (User.IsInRole("NTLJETREC-SEARCH"))
+        {
+            <button id="btnSearch" type="button"
+                    class="btn btn-default" name="Search"
+                    title="@VOI.SISAC.Web.Resources.Resource.AdvanceSearch"
+                    onclick="location.href='@Url.Action("AdvanceSearch", "NationalJetFuelReconcileInvoice")'">
+                <i class="fa fa-search fa-fw"></i>
+                &nbsp;@VOI.SISAC.Web.Resources.Resource.AdvanceSearch
+            </button>
+        }
+    </div>
+    <table id="tbNationalJetFuelReconcileInvoice"
+           data-toolbar="#toolbar"
+           data-toggle="table"
+           data-locale="@cultureForm.ToString()"
+           class="table"
+           data-export-types="['excel']"
+           data-show-export="true"
+           data-show-columns="true"
+           data-search="true"
+           data-show-toggle="true"
+           data-show-pagination-switch="true"
+           data-mobile-responsive="true"
+           data-check-on-init="true"
+           data-pagination="true"
+           data-export-data-type="all"
+           data-page-size="10">
+        <thead>
+            <tr>
+                <th data-field="Actions" data-align="center" data-halign="center" data-formatter="commonFunctions.actionsButtons">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
+                </th>
+
+                <th data-field="AirlineCode" data-halign="center" data-align="center">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.AirlineCode</strong>
+                </th>
+
+                <th data-field="RemittanceID" data-halign="center" data-align="center">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.RemittanceId</strong>
+                </th>
+
+                <th data-field="MonthYear" data-halign="center" data-align="center">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.MonthYear</strong>
+                </th>
+
+                <th data-field="Period" data-halign="center" data-align="center">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.Period</strong>
+                </th>
+
+                <th data-field="ReconciliationStatusCode" data-halign="center" data-align="center">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.ReconciliationStatusCode</strong>
+                </th>
+
+                <th data-field="TotalInvoicesInRemittance" data-halign="center" data-align="center">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.TotalInvoicesInRemittance</strong>
+                </th>
+
+                <th data-field="CountRecords" data-halign="center" data-align="center">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.CountRecords</strong>
+                </th>
+
+                <th data-field="CountReconciledRecords" data-halign="center" data-align="center">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.CountReconciledRecords</strong>
+                </th>
+
+                <th data-field="PctReconciledRecords" data-halign="center" data-align="center">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.PctReconciledRecords</strong>
+                </th>
+
+                <th data-field="SubtotalAmount" data-halign="center" data-align="center">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.SubtotalAmount</strong>
+                </th>
+
+                <th data-field="ReconciledSubtotalAmount" data-halign="center" data-align="center">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.ReconciledSubtotalAmount</strong>
+                </th>
+
+                <th data-field="DateReconciled" data-halign="center" data-align="center">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.DateReconciled</strong>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td id="Actions"></td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AirlineCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RemittanceID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MonthYear)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Period)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReconciliationStatusCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InvoiceCount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CountRecords)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CountReconciledRecords)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PctReconciledRecords)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SubtotalAmount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReconciledSubtotalAmount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateReconciled)
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+
+    <ul id="context-menu" class="dropdown-menu">
+        @if (User.IsInRole("NTLJETREC-RECON"))
+        {
+            <li data-item="Reconcile"><a><i class="fa fa-calculator fa-fw"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.Reconcile</a></li>
+        }
+        @if (User.IsInRole("NTLJETREC-RECON"))
+        {
+            <li data-item="ReconcileManual"><a><i class="fa fa-calculator fa-fw"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.ReconcileManual</a></li>
+        }
+        @if (User.IsInRole("NTLJETREC-PRINTREP"))
+        {
+            <li data-item="ExportReconciliationDetail"><a><i class="fa fa-share-square-o fa-fw"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.ExportReconciliationDetail</a></li>
+        }
+    </ul>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrapTable")
+    @Scripts.Render("~/bundles/bootstrapTablePlugins")
+    @Scripts.Render("~/bundles/CommonFunctions")
+    @Scripts.Render("~/bundles/BootstrapContextMenu")
+
+    <script>
+        var currentLang = '@cultureForm.ToString()';
+
+
+        $('#tbNationalJetFuelReconcileInvoice').bootstrapTable({
+            contextMenu: '#context-menu',
+            contextMenuButton: '.menuButton',
+            contextMenuAutoClickRow: true,
+            contextMenuTrigger: 'right',
+            onContextMenuItem: function (row, $el) {
+                if ($el.data("item") == 'Reconcile') {
+                    var url = '@Url.Action("NationalJetFuelReconcileProcess", "NationalJetFuelReconcileInvoice")';
+                    url = url.concat('?RemittanceID=' + $.trim(row.RemittanceID) + '&' + 'monthYear=' + $.trim(row.MonthYear) + '&' + 'period=' + $.trim(row.Period));
+                    window.location = url;
+                }
+                if ($el.data("item") == 'ReconcileManual') {
+                    var url = '@Url.Action("NationalJetFuelReconcileManualProcess", "NationalJetFuelReconcileInvoice")';
+                    url = url.concat('?RemittanceID=' + $.trim(row.RemittanceID) + '&' + 'MonthYear=' + $.trim(row.MonthYear) + '&' + 'Period=' + $.trim(row.Period));
+                    window.location = url;
+                }
+                if ($el.data("item") == 'ExportReconciliationDetail') {
+                    var url = '@Url.Action("ExportReconciliationDetail", "NationalJetFuelReconcileInvoice")';
+                    url = url.concat('?RemittanceID=' + $.trim(row.RemittanceID) + '&' + 'monthYear=' + $.trim(row.MonthYear) + '&' + 'period=' + $.trim(row.Period));
+                    window.location = url;
+                }
+            }
+        })
+    </script>
+}

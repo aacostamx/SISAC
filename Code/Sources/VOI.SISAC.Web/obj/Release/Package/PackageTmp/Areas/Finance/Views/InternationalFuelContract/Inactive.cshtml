@@ -1,0 +1,121 @@
+﻿@model VOI.SISAC.Web.Models.VO.Finance.InternationalFuelContractVO
+
+@{
+    ViewBag.Title = "Inactive";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Inactive</h2>
+
+<h3>Are you sure you want to inactive this?</h3>
+<div>
+    <h4>InternationalFuelContractVO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EffectiveDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EffectiveDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AirlineCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AirlineCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StationCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StationCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ServiceCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServiceCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProviderNumberPrimary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProviderNumberPrimary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CCNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CCNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccountingAccountNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccountingAccountNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LiabilityAccountNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LiabilityAccountNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OperationTypeID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OperationTypeID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrencyCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrencyCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndDateContract)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndDateContract)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Inactive" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

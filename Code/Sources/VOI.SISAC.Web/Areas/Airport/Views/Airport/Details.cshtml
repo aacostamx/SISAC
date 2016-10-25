@@ -1,0 +1,50 @@
+﻿@model VOI.SISAC.Web.Models.VO.Airport.AirportVO
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <h2 class="subtitle_h3_black">Detalles del Aeropuerto </h2>
+    <h3 class="subtitle_h3">@Model.StationName</h3>
+
+    <div class="dl-horizontal">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                @Html.LabelFor(model => model.StationCode, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.StationCode, new { htmlAttributes = new { @class = "form-control", @disabled = "" } })
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                @Html.LabelFor(model => model.StationName, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.StationName, new { htmlAttributes = new { @class = "form-control", @disabled = "" } })
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                @Html.LabelFor(model => model.CountryCode, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.CountryCode, new { htmlAttributes = new { @class = "form-control", @disabled = "" } })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                @Html.LabelFor(model => model.OpeningTime, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.OpeningTime, new { htmlAttributes = new { @class = "form-control", @disabled = "" } })
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                @Html.LabelFor(model => model.ClosingTime, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.ClosingTime, new { htmlAttributes = new { @class = "form-control", @disabled = "" } })
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <br />
+            <input onclick="location.href='@Url.Action("Index","Airport")'" type="reset" class="btnVolaris" value=@Resource.Back>
+            <input onclick="location.href='@Url.Action("Edit","Airport", new { id = Model.StationCode } )'" type="submit" class="btnVolaris" value="Editar">
+            <br />
+        </div>
+
+    </div>
+
+</div>

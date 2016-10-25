@@ -1,0 +1,137 @@
+﻿@{
+    var cultureForm = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+}
+
+<div class="modal" id="prev-flight" tabindex="-1" role="dialog" aria-labelledby="smallModal" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="subtitle_h3_black">@Resource.SelectPrevFlight</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label">@Resource.EquipmentNumber</label>
+                            <input type="text" class="inputForm form-control" id="EquipmentNumberParam" name="EquipmentNumberParam" 
+                                   onkeypress="return PassengerController.validarMaxLengthAlfanumerico(event, this);"
+                                   onkeyup="PassengerController.validarMaxLengthAlfanumerico(event, this);" />
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label">@Resource.DepartureDate</label>
+                            <input type="text" class="inputForm form-control" id="DepartureDateParam" name="DepartureDateParam" placeholder="YYYY/MM/DD" />
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label">@Resource.FlightNumber</label>
+                            <input type="text" class="inputForm form-control" id="FlightNumberParam" name="FlightNumberParam"
+                                   onkeypress="return PassengerController.validarMaxLengthAlfanumerico(event, this);"
+                                   onkeyup="PassengerController.validarMaxLengthAlfanumerico(event, this);" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <label class="subtitle_h5 control-label">@Resource.DepartureAirport</label>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            @*<select class="inputForm form-control combobox remove-ms-clear"></select>*@
+                            @Html.DropDownList("DepartureStationParam", new List<SelectListItem>(), new
+                                {
+                                    @id = "DepartureStationParam",
+                                    @name = "DepartureStationParam",
+                                    @class = "inputForm form-control combobox remove-ms-clear"
+                                })
+                            @Html.ValidationMessage("DepartureStationParam")
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <button type="button" class="btn btn-default" onclick="searchPrevFlight()">
+                                <i class="fa fa-fw fa-search" aria-hidden="true"></i>&nbsp;@Resource.Search
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="note_text">**&nbsp;@Resource.ApplyPrevFlightNote
+                    </label>
+                </div>
+                <br />
+                <div class="fixed-table-body">
+                    <table id="tb-search-flight"
+                           data-toggle="table"
+                           data-locale="@cultureForm.ToString()"
+                           class="table"
+                           data-cache="false"
+                           data-mobile-responsive="true"
+                           data-check-on-init="true"
+                           data-pagination="true"
+                           data-query-params="queryParams"
+                           data-side-pagination="server"
+                           data-query-params-type=""
+                           data-unique-id="Id"
+                           data-page-size="3"
+                           data-page-list="[3, 5, 10]">
+                        <thead>
+                            <tr>
+                                <th data-field="Actions" data-align="center" data-halign="center" data-formatter="PassengerController.buttonFormatter">
+                                    <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
+                                </th>
+                                <th data-field="Id" data-halign="center" data-align="center" data-visible="false"></th>
+                                <th data-field="Sequence" data-halign="center" data-align="center" data-visible="false">
+                                    <strong>@Resource.Sequence</strong>
+                                </th>
+                                <th data-field="AirlineCode" data-halign="center" data-align="center">
+                                    <strong>@Resource.AirlineCode</strong>
+                                </th>
+                                <th data-field="FlightNumber" data-halign="center" data-align="center">
+                                    <strong>@Resource.FlightNumber</strong>
+                                </th>
+                                <th data-field="ItineraryKey" data-halign="center" data-align="center" data-visible="false">
+                                    <strong>@Resource.ItineraryKey</strong>
+                                </th>
+                                <th data-field="EquipmentNumber" data-halign="center" data-align="center">
+                                    <strong>@Resource.EquipmentNumber</strong>
+                                </th>
+                                <th data-field="DepartureDate" data-halign="center" data-align="center" data-formatter="PassengerController.formatDate">
+                                    <strong>@Resource.DepartureDate</strong>
+                                </th>
+                                <th data-field="DepartureTime" data-halign="center" data-align="center" data-formatter="PassengerController.formatTime">
+                                    <strong>@Resource.DepartureTime</strong>
+                                </th>
+                                <th data-field="DepartureStation" data-halign="center" data-align="center">
+                                    <strong>@Resource.DepartureAirport</strong>
+                                </th>
+                                <th data-field="ArrivalDate" data-halign="center" data-align="center" data-formatter="PassengerController.formatDate">
+                                    <strong>@Resource.ArrivalDate</strong>
+                                </th>
+                                <th data-field="ArriveTime" data-halign="center" data-align="center" data-formatter="PassengerController.formatTime">
+                                    <strong>@Resource.ArriveTime</strong>
+                                </th>
+                                <th data-field="ArrivalStation" data-halign="center" data-align="center">
+                                    <strong>@Resource.ArrivalAirport</strong>
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-default" data-dismiss="modal" onclick="PassengerController.cancelSelectFlight()" value="@Resource.Cancel" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    //Take querystrings and send back to server REST
+    function queryParams(params) {
+        return {
+            pageNumber: params.pageNumber,
+            pageSize: params.pageSize,
+            EquipmentNumber: $('#EquipmentNumberParam').val(),
+            DepartureDate: $('#DepartureDateParam').val(),
+            FlightNumber: $('#FlightNumberParam').val(),
+            DepartureStation: $('#DepartureStationParam').val(),
+            ArrivalDate: $('#DepartureDateFlight').val(),
+            ArrivalStation: $('#Departure').val()
+        };
+    }
+</script>

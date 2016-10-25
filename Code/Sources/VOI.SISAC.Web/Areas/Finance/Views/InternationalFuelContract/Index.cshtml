@@ -1,0 +1,380 @@
+﻿@model IEnumerable<VOI.SISAC.Web.Models.VO.Finance.InternationalFuelContractVO>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cultureForm = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+}
+@Styles.Render("~/Content/bootstraptablecss")
+@Styles.Render("~/bundles/CSSbootstrapCombobox")
+@Styles.Render("~/Content/bootstrapdtimecss")
+
+<div class="container">
+    @Html.Partial("Partial/InactivateContractModal")
+    @Html.Partial("_AlertView")
+    @Html.Partial("_UnauthorizedActionModal")
+    <h2 class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.InternationalFuelContractTitle</h2>
+    <div class="row">
+        @Html.Partial("Partial/InternationalFuelContractSearch")
+    </div>
+    <div id="toolbar">
+        @using (Html.BeginForm("Reset", "InternationalFuelContract", FormMethod.Post, new { name = "formContract", id = "formContract", style = "margin-bottom: 0px;" }))
+        {
+            if (ViewBag.search != "search")
+            {
+                <button type="button" class="btn btn-default" name="Agregar" title="@VOI.SISAC.Web.Resources.Resource.Add" onclick="location.href='@Url.Action("Create", "InternationalFuelContract")'">
+                    <i class="fa fa-plus"></i> &nbsp; @VOI.SISAC.Web.Resources.Resource.Add
+                </button>
+            }
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#UploadModalContracts">
+                <i class="fa fa-cloud-upload"></i>&nbsp;Contracts
+            </button>
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#UploadModalRates">
+                <i class="fa fa-cloud-upload"></i>&nbsp;Rates
+            </button>
+            <button type="button" class="btn btn-default" name="Search" title="@Resource.Search" data-toggle="modal" data-target="#modalTable">
+                <i class="fa fa-search"></i> &nbsp;@Resource.Search
+            </button>
+
+            <button id="btnClearForm" type="button" class="btn btn-default" name="Clear" title="@Resource.Clear" onclick="location.href='@Url.Action("Index", "InternationalFuelContract")'">
+                <i class="fa fa-undo"></i> &nbsp;@Resource.Clear
+            </button>
+        }
+    </div>
+
+    <table id="tbInternationalFuelContract"
+           data-toolbar="#toolbar"
+           class="table"
+           data-toggle="table"
+           data-show-export="true"
+           data-export-types="['excel']"
+           data-show-columns="true"
+           data-search="true"
+           data-show-toggle="true"
+           data-show-pagination-switch="true"
+           data-mobile-responsive="true"
+           data-pagination="true"
+           data-page-size="10"
+           data-export-data-type="all"
+           data-click-to-select="true"
+           data-single-select="true">
+        <thead>
+            <tr>
+                @if (User.IsInRole("IFUELCON-VIE")
+                || User.IsInRole("IFUELCON-DEL")
+                || User.IsInRole("IFUELCON-UPD")
+                || User.IsInRole("IFUELRATE-IDX")
+                || User.IsInRole("IFUELCON-INC"))
+                {
+                    <th data-field="Actions" data-align="center" data-halign="center"
+                        data-formatter="InternationalFuelContractController.actionsButtons">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
+                    </th>
+                }
+                @*<th data-field="state" data-radio="true"></th>*@
+                <th data-field="EffectiveDate" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.EffectiveDate)</strong>
+                </th>
+
+
+                <th data-field="AirlineCode" data-halign="center" data-align="center" data-sortable="true" data-visible="false" style="display:none;" data-tableexport-display="always">
+                    <strong>@Html.DisplayNameFor(model => model.AirlineCode)</strong>
+                </th>
+                <th data-field="AirlineName" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.Airline.AirlineName)</strong>
+                </th>
+
+                <th data-field="StationCode" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                    <strong>@Html.DisplayNameFor(model => model.StationCode)</strong>
+                </th>
+                <th data-field="StationName" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.Airport.StationName)</strong>
+                </th>
+
+                <th data-field="ServiceCode" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                    <strong>@Html.DisplayNameFor(model => model.ServiceCode)</strong>
+                </th>
+                <th data-field="ServiceName" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.Service.ServiceName)</strong>
+                </th>
+
+                <th data-field="ProviderNumberPrimary" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                    <strong>@Html.DisplayNameFor(model => model.ProviderNumberPrimary)</strong>
+                </th>
+                <th data-field="ProviderNumberPrimaryName" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.Provider.ProviderName)</strong>
+                </th>
+
+
+                <th data-field="AircraftRegistCCFlag" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                    <strong>@Html.DisplayNameFor(model => model.AircraftRegistCCFlag)</strong>
+                </th>
+                <th data-field="CCNumber" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                    <strong>@Html.DisplayNameFor(model => model.CostCenter.CCNumber)</strong>
+                </th>
+                <th data-field="AccountingAccountNumber" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                    <strong>@Html.DisplayNameFor(model => model.AccountingAccount.AccountingAccountNumber)</strong>
+                </th>
+                <th data-field="LiabilityAccountNumber" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                    <strong>@Html.DisplayNameFor(model => model.LiabilityAccount.LiabilityAccountNumber)</strong>
+                </th>
+                <th data-field="OperationTypeID" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                    <strong>@Html.DisplayNameFor(model => model.OperationType.OperationName)</strong>
+                </th>
+                <th data-field="CurrencyCode" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                    <strong>@Html.DisplayNameFor(model => model.Currency.CurrencyName)</strong>
+                </th>
+                <th data-field="EndDateContract" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                    <strong>@Html.DisplayNameFor(model => model.EndDateContract)</strong>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        @if (User.IsInRole("IFUELCON-VIE")
+                        || User.IsInRole("IFUELCON-DEL")
+                        || User.IsInRole("IFUELCON-UPD")
+                        || User.IsInRole("IFUELRATE-IDX")
+                        || User.IsInRole("IFUELCON-INC"))
+                        {
+                            <td id="Actions"></td>
+                        }
+                        @*<td id="status"></td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EffectiveDate, "ToShortDate")
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AirlineCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Airline.AirlineName)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StationCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Airport.StationName)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ServiceCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Service.ServiceName)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProviderNumberPrimary)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Provider.ProviderName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AircraftRegistCCFlag)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CCNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AccountingAccountNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LiabilityAccountNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OperationTypeID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CurrencyCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EndDateContract, "ToShortDate")
+                        </td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+    <!-- context menu -->
+    <ul id="context-menu" class="dropdown-menu">
+        @if (ViewBag.search == "search")
+        {
+            if (User.IsInRole("IFUELCON-VIE"))
+            { 
+            <li data-item="@Resource.Details"><a><i class="fa fa-eye fa-fw"></i>&nbsp;@Resource.Details</a></li>
+            }
+
+            if (User.IsInRole("IFUELRATE-IDX"))
+            { 
+                <li data-item="@Resource.Rate"><a><i class="fa fa-clone fa-fw"></i>&nbsp;@Resource.Rate</a></li>
+            }
+        }
+        else
+        {
+            if (User.IsInRole("IFUELCON-VIE"))
+            { 
+            <li data-item="@Resource.Details"><a><i class="fa fa-eye fa-fw"></i>&nbsp;@Resource.Details</a></li>
+            }
+            
+            if (User.IsInRole("IFUELCON-UPD"))
+            { 
+            <li data-item="@Resource.Edit"><a><i class="fa fa-pencil fa-fw"></i>&nbsp;@Resource.Edit</a></li>
+            }
+
+            if (User.IsInRole("IFUELCON-DEL"))
+            { 
+            <li data-item="@Resource.Delete"><a><i class="fa fa-trash-o fa-fw"></i>&nbsp;@Resource.Delete</a></li>
+            }
+
+            if (User.IsInRole("IFUELCON-INC"))
+            { 
+            <li data-item="@Resource.Inactive"><a><i class="fa fa-file-text fa-fw"></i>&nbsp;@Resource.Inactive</a></li> 
+            }            
+
+            if (User.IsInRole("IFUELRATE-IDX"))
+            { 
+                <li data-item="@Resource.Rate"><a><i class="fa fa-usd fa-fw"></i>&nbsp;@Resource.Rate</a></li>
+            }
+        }        
+    </ul>
+
+
+    <br />
+
+    <div class="modal fade" id="UploadModalContracts" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="subtitle_h3_black">@Resource.UploadFile</h4>
+                </div>
+
+                @using (Html.BeginForm("UploadFile", "InternationalFuelContract", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="modal-body">
+                        <input type="file" name="file" class="filestyle" data-icon="false" data-buttonname="btn-primary" data-buttontext="@VOI.SISAC.Web.Resources.Resource.SelectFile" data-placeholder="@VOI.SISAC.Web.Resources.Resource.NotFile" accept=".txt" required="required"/>
+                        @Html.ActionLink(Resource.DownloadTemplateFile, "DownloadContractTemplate")
+                    </div>
+
+                    <div class="modal-footer">
+                        <input type="reset" value="@Resource.Close" class="btnVolaris" data-dismiss="modal" />
+                        <input type="submit" value="@Resource.UploadFile" class="btnVolaris" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="UploadModalRates" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="subtitle_h3_black">@Resource.UploadFile</h4>
+                </div>
+                @using (Html.BeginForm("UploadFileRates", "InternationalFuelContract", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="modal-body">
+                        <input type="file" name="file" class="filestyle" data-icon="false" data-buttonname="btn-primary" data-buttontext="@VOI.SISAC.Web.Resources.Resource.SelectFile" data-placeholder="@VOI.SISAC.Web.Resources.Resource.NotFile" accept=".txt" required="required"/>
+                        @Html.ActionLink(Resource.DownloadTemplateFile, "DownloadRatesTemplate")
+                    </div>
+                    <div class="modal-footer">
+                        <input type="reset" value="@Resource.Close" class="btnVolaris" data-dismiss="modal" />
+                        <input type="submit" value="@Resource.UploadFile" class="btnVolaris" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/bootstrapTable")
+    @Scripts.Render("~/bundles/bootstrapTablePlugins")
+    @Scripts.Render("~/bundles/ExportTable")
+    @Scripts.Render("~/bundles/BootstrapInputFile")
+    @Scripts.Render("~/bundles/BootstrapContextMenu")
+    @Scripts.Render("~/bundles/JSbootstrapCombobox")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/JSDateTimeValidate")
+    @Scripts.Render("~/bundles/InternationalFuelContract")
+    <script type="text/javascript">
+        var currentLang = '@cultureForm.ToString()';
+
+        var $table = $('#table');
+
+        $('#modalTable').on('shown.bs.modal', function () {
+            $table.bootstrapTable('resetView');
+        });
+
+        $(document).ready(function () {
+            $('.combobox').combobox();
+        });
+
+
+        $('#tbInternationalFuelContract').bootstrapTable({
+            contextMenu: '#context-menu',
+            contextMenuButton: '.menuButton',
+            contextMenuAutoClickRow: true,
+            contextMenuTrigger: 'right',
+            onContextMenuItem: function (row, $el) {
+
+                if ($el.data("item") == '@Resource.Edit') {
+                    var url = '@Url.Action("Edit", "InternationalFuelContract")';
+                    url = url.concat('?effectiveDate=' + row.EffectiveDate.trim());
+                    url = url.concat('&airlineCode=' + row.AirlineCode.trim());
+                    url = url.concat('&stationCode=' + row.StationCode.trim());
+                    url = url.concat('&serviceCode=' + row.ServiceCode.trim());
+                    url = url.concat('&providerNumberPrimary=' + row.ProviderNumberPrimary.trim());
+                    window.location = url;
+                }
+
+                if ($el.data("item") == '@Resource.Delete') {
+                    var url = '@Url.Action("Delete", "InternationalFuelContract")';
+                    url = url.concat('?effectiveDate=' + row.EffectiveDate.trim());
+                    url = url.concat('&airlineCode=' + row.AirlineCode.trim());
+                    url = url.concat('&stationCode=' + row.StationCode.trim());
+                    url = url.concat('&serviceCode=' + row.ServiceCode.trim());
+                    url = url.concat('&providerNumberPrimary=' + row.ProviderNumberPrimary.trim());
+                    window.location = url;
+                }
+
+                if ($el.data("item") == '@Resource.Details') {
+                    var url = '@Url.Action("Details", "InternationalFuelContract")';
+                    url = url.concat('?effectiveDate=' + row.EffectiveDate.trim());
+                    url = url.concat('&airlineCode=' + row.AirlineCode.trim());
+                    url = url.concat('&stationCode=' + row.StationCode.trim());
+                    url = url.concat('&serviceCode=' + row.ServiceCode.trim());
+                    url = url.concat('&providerNumberPrimary=' + row.ProviderNumberPrimary.trim());
+                    window.location = url;
+                }
+
+                if ($el.data("item") == '@Resource.Rate') {
+                    var url = '@Url.Action("Index", "InternationalFuelRate")';
+                    url = url.concat('?effectiveDate=' + row.EffectiveDate.trim());
+                    url = url.concat('&airlineCode=' + row.AirlineCode.trim());
+                    url = url.concat('&stationCode=' + row.StationCode.trim());
+                    url = url.concat('&serviceCode=' + row.ServiceCode.trim());
+                    url = url.concat('&providerNumberPrimary=' + row.ProviderNumberPrimary.trim());
+                    url = url.concat('&search=' + '@(ViewBag.search)');
+                    window.location = url;
+                }
+
+                if ($el.data("item") == '@Resource.Inactive') {
+                    InternationalFuelContractController.showInactiveWindow(row);                    
+                }
+            }
+        });
+    </script>
+}

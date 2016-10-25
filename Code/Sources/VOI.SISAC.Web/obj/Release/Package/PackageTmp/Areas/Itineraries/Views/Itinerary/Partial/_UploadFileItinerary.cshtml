@@ -1,0 +1,97 @@
+﻿@{
+    var cultureForm = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+}
+
+<div class="modal fade" id="modalTableItinterary" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="subtitle_h3_black">@Resource.UploadItinerary</h4>
+            </div>
+            @using (Html.BeginForm("UploadFileItinerary", "Itinerary", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="modal-body">
+                    <div class="row">
+                        <div class='col-xs-12 col-sm-12 col-md-6 col-lg-6'>
+                            <div class="subtitle_h5">@Resource.AirlineCode:</div>
+                            <div class="styled-select">
+                                <select id="AirlineCodeCombobox" name="AirlineCodeCombobox"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class='col-xs-12 col-sm-12 col-md-6 col-lg-6'>
+                            <label class="subtitle_h5">@Resource.StartDate:</label>
+                            <div class="form-group">
+                                <div class='input-group date' id='dtpStartDate'>
+                                    <input id="StartDate" name="StartDate" type='text' class="form-control"
+                                           placeholder="@DateTime.Today.Date.ToString("yyyy/MM/dd")" required/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col-xs-12 col-sm-12 col-md-6 col-lg-6'>
+                            <label class="subtitle_h5">@Resource.EndDate:</label>
+                            <div class="form-group">
+                                <div class='input-group date' id='dtpEndDate'>
+                                    <input id="EndDate" name="EndDate" type='text' class="form-control" placeholder="@DateTime.Today.Date.ToString("yyyy/MM/dd")" required/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <label class="subtitle_h5">@Resource.UploadFile</label>
+                                <input type="file" name="file" class="filestyle" data-icon="false" data-buttonName="btn-primary" data-buttonText="@Resource.SelectFile" data-placeholder="@Resource.NotFile" required/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <input type="submit" value="@Resource.UploadFile" class="btnVolaris" />
+                    <input type="reset" value="@Resource.Close" class="btnVolaris" data-dismiss="modal">
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var currentLang = '@cultureForm.ToString()';
+
+    $(function () {
+        $('#dtpStartDate').datetimepicker({
+            format: 'YYYY/MM/DD',
+            locale: currentLang,
+            showTodayButton: true,
+            showClose: true,
+            showClear: true
+        });
+        $('#dtpEndDate').datetimepicker({
+            format: 'YYYY/MM/DD',
+            locale: currentLang,
+            locale: currentLang,
+            showTodayButton: true,
+            showClose: true,
+            showClear: true,
+            useCurrent: false
+        });
+        $("#dtpStartDate").on("dp.change", function (e) {
+            $('#dtpEndDate').data("DateTimePicker").minDate(e.date);
+        });
+        $("#dtpEndDate").on("dp.change", function (e) {
+            $('#dtpStartDate').data("DateTimePicker").maxDate(e.date);
+        });
+    });
+
+    $(window).load(function () {
+        $('.bootstrap-filestyle').css("margin-right", "14px");
+    });
+</script>

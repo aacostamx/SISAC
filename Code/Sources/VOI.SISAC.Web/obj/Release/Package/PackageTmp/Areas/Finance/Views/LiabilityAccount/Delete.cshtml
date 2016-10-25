@@ -1,0 +1,44 @@
+﻿@model VOI.SISAC.Web.Models.VO.Finance.LiabilityAccountVO
+
+@{
+    ViewBag.Title = @Resource.Delete;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <p class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.LiabilityAccountMenu</p>
+    <p class="subtitle_h3_ancillarie">@VOI.SISAC.Web.Resources.Resource.Delete</p>
+</div>
+
+<div class="container">
+    <div class="form-horizontal">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                @Html.LabelFor(model => model.LiabilityAccountNumber, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.LiabilityAccountNumber, new { htmlAttributes = new { @class = "form-control specialInput", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.LiabilityAccountNumber, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                @Html.LabelFor(model => model.LiabilityAccountName, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.LiabilityAccountName, new { htmlAttributes = new { @class = "inputForm form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.LiabilityAccountName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <br />
+                <input onclick="@("location.href='" + @Url.Action("Index", "LiabilityAccount") + "'")" type="reset" class="btn btn-default" value="@VOI.SISAC.Web.Resources.Resource.Back" title="@VOI.SISAC.Web.Resources.Resource.Back" />
+                <input type="submit" value="@VOI.SISAC.Web.Resources.Resource.Delete" title="@VOI.SISAC.Web.Resources.Resource.Delete" class="btn btn-default" />
+            </div>
+        </div>
+    }
+</div>
+

@@ -1,0 +1,35 @@
+﻿@model VOI.SISAC.Web.Models.VO.Airport.AirportServiceVO
+
+@{
+    ViewBag.Title = "StartProcess";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var processes = this.ViewBag.Services != null ? this.ViewBag.Processes as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto> :
+       new List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>();
+}
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p class="subtitle_h3_black">Submit Calculation Process International Fuel</p>
+        <p class="subtitle_h3_ancillarie">Start Process</p>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            @Html.LabelFor(model => model.ServiceCode, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+            <div class="styled-select">
+                @*@Html.DropDownListFor(model => model.ServiceCode, services.Select(h => new SelectListItem
+                               {
+                                   Text = h.Description,
+                                   Value = h.Id
+                               }), @Resource.SelectItem, new { @class = "inputForm form-control", @placeholder = Resource.SelectItem, @onchange = "AirportServicesController.GetProviders()", @id = "ServicesDropDown" })*@
+            </div>
+            @Html.ValidationMessageFor(model => model.ServiceCode, "", new { @class = "text-danger text-danger-error" })
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        </div>
+    </div>
+</div>

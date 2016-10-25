@@ -1,0 +1,33 @@
+﻿@model VOI.SISAC.Web.Models.VO.Finance.AirportServiceContractVO
+
+@{
+    ViewBag.Title = Resource.AirportServiceContractName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.AirportServiceContractName</p>
+        <p class="subtitle_h3_ancillarie">@VOI.SISAC.Web.Resources.Resource.Delete</p>
+    </div>
+    <br />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        
+        @Html.Partial("Partial/AirportServiceContractDetails")
+        
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <br />
+            <input type="reset" class="btnVolaris" value="@VOI.SISAC.Web.Resources.Resource.Back" onclick="@("location.href='" + @Url.Action("Index", "AirportServiceContract") + "'")" />
+            <input type="submit" value="@VOI.SISAC.Web.Resources.Resource.Delete" class="btnVolaris" />
+            <br />
+        </div>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/CommonFunctions")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/SISAC/Finance/AirportServiceContract.js"></script>
+}

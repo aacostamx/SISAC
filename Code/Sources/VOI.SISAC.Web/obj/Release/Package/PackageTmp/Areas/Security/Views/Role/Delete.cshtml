@@ -1,0 +1,58 @@
+﻿@model VOI.SISAC.Web.Models.VO.Security.RoleVO
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cultureForm = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
+}
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <p class="subtitle_h3_black">@Resource.RoleTitle</p>
+    <p class="subtitle_h3_ancillarie">@VOI.SISAC.Web.Resources.Resource.Delete</p>
+</div>
+
+@Styles.Render("~/Content/bootstraptablecss")
+@Styles.Render("~/bundles/SweetAlertCSS")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <h3>@VOI.SISAC.Web.Resources.Resource.ConfirmDelete</h3>
+    @using (Html.BeginForm("Delete", "Role", FormMethod.Post, new { id = "RoleForm" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="dl-horizontal">
+            <div class="row">
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.RoleCode, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                    @Html.EditorFor(model => model.RoleCode, new { htmlAttributes = new { @class = "form-control specialInput", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.RoleCode, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.RoleName, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                    @Html.EditorFor(model => model.RoleName, new { htmlAttributes = new { @class = "form-control specialInput", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.RoleName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <br />
+                <button class="btn btn-default btn-lg" type="button" name="Back" title="@VOI.SISAC.Web.Resources.Resource.Back" onclick="@("location.href='" + @Url.Action("Index", "Role") + "'")">
+                    <i class="fa fa-arrow-left fa-fw"></i>&nbsp;@Resource.Back
+                </button>
+                <button type="button" class="btn btn-default btn-lg btn-green" name="Delete" title="@Resource.Delete" onclick="@("RoleController.ConfirmDelete('" + @Model.RoleCode.ToString() + "')")">
+                    <i class="fa fa-trash fa-fw"></i>&nbsp;@Resource.Delete
+                </button>
+            </div>
+        </div>
+    }
+
+</div>
+
+@Scripts.Render("~/bundles/SweetAlertJS")
+@Scripts.Render("~/bundles/RoleJS")
+<script type="text/javascript">
+    var currentLang = '@cultureForm.ToString()';
+</script>

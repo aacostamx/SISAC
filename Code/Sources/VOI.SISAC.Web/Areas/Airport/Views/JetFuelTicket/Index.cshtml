@@ -1,0 +1,267 @@
+﻿@model IEnumerable<VOI.SISAC.Web.Models.VO.Airport.JetFuelTicketVO>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ///Itinerary
+    var Sequence = this.ViewBag.Sequence;
+    var AirlineCode = this.ViewBag.AirlineCode;
+    var FlightNumber = this.ViewBag.FlightNumber;
+    var ItineraryKey = this.ViewBag.ItineraryKey;
+    var OperationTypeName = this.ViewBag.OperationTypeName;
+
+    VOI.SISAC.Web.Models.VO.Itineraries.ItineraryVO ItineraryVO = this.ViewBag.ItineraryVO as VOI.SISAC.Web.Models.VO.Itineraries.ItineraryVO;
+
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+
+<div class="container">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        @Html.Partial("_AlertView")
+    </div>
+</div>
+<div class="container">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h2 class="subtitle_h3_black">
+            @VOI.SISAC.Web.Resources.Resource.JetFuelTicketTitle
+        </h2>
+    </div>
+    <div id="toolbar">
+        <div class="btn-group dropdown">
+            @if (User.IsInRole("JETFUELTIC-ADD"))
+            {
+                <button type="button" class="btn btn-default" name="Agregar" title="@VOI.SISAC.Web.Resources.Resource.Add" onclick="location.href='@Url.Action("Create", "JetFuelTicket", new { Sequence = Sequence, AirlineCode = AirlineCode, FlightNumber = FlightNumber, ItineraryKey = ItineraryKey, OperationTypeName = OperationTypeName })'">
+                    <i class="fa fa-plus"></i>&nbsp; @VOI.SISAC.Web.Resources.Resource.Add
+                </button>
+            }
+        </div>
+    </div>
+    @if (ItineraryVO != null)
+    {
+        @Html.Partial("_FlightInformation", ItineraryVO)
+    }
+</div>
+<div class="container">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <table id="tbJetFuelTicket"
+            data-toolbar="#toolbar"
+            class="table"
+            data-toggle="table"
+            data-show-columns="true"
+            data-search="true"
+            data-show-toggle="true"
+            data-show-pagination-switch="true"
+            data-mobile-responsive="true"
+            data-pagination="true"
+            data-page-size="10"
+            data-show-export="true"
+            data-export-types="['excel']"
+            data-export-data-type="all">
+            <thead>
+                <tr>
+                    <th data-field="JetFuelTicketID" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                        <strong>@Html.DisplayNameFor(model => model.JetFuelTicketID)</strong>
+                    </th>
+                    <th data-field="Sequence" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                        <strong>@Html.DisplayNameFor(model => model.Sequence)</strong>
+                    </th>
+                    <th data-field="AirlineCode" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.AirlineCode)</strong>
+                    </th>
+                    <th data-field="FlightNumber" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.FlightNumber)</strong>
+                    </th>
+                    <th data-field="ItineraryKey" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.ItineraryKey)</strong>
+                    </th>
+                    <th data-field="OperationTypeName" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.OperationTypeName)</strong>
+                    </th>
+                    <th data-field="Service.ServiceName" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.Service.ServiceName)</strong>
+                    </th>
+                    <th data-field="FuelingDate" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.FuelingDate)</strong>
+                    </th>
+                    <th data-field="FuelingTime" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.FuelingTime)</strong>
+                    </th>
+                    <th data-field="JetFuelProviderNumber" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.JetFuelProviderNumber)</strong>
+                    </th>
+                    <th data-field="JetFuelProvider.ProviderName" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.JetFuelProvider.ProviderName)</strong>
+                    </th>
+                    <th data-field="IntoPlaneProviderNumber" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.IntoPlaneProviderNumber)</strong>
+                    </th>
+                    <th data-field="IntoPlaneProvider.ProviderName" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.IntoPlaneProvider.ProviderName)</strong>
+                    </th>
+                    <th data-field="TicketNumber" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.TicketNumber)</strong>
+                    </th>
+                    <th data-field="FueledQtyGals" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.FueledQtyGals)</strong>
+                    </th>
+                    <th data-field="RemainingQry" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.RemainingQry)</strong>
+                    </th>
+                    <th data-field="RequestedQry" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.RequestedQry)</strong>
+                    </th>
+                    <th data-field="FueledQry" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.FueledQry)</strong>
+                    </th>
+                    <th data-field="DensityFactor" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.DensityFactor)</strong>
+                    </th>
+                    <th data-field="NombreUsuario" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.User.NombreUsuario)</strong>
+                    </th>
+                    <th data-field="SupplierResponsible" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.SupplierResponsible)</strong>
+                    </th>
+                    <th data-field="Remarks" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.Remarks)</strong>
+                    </th>
+                    @if (User.IsInRole("JETFUELTIC-UPD") || User.IsInRole("JETFUELTIC-DEL") || User.IsInRole("JETFUELTIC-VIE") || User.IsInRole("JETFUELTIC-PRINTREP")) 
+                    { 
+                        <th data-field="Acctions" data-align="center" data-halign="center">
+                            <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
+                        </th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.JetFuelTicketID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Sequence)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AirlineCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FlightNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ItineraryKey)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OperationTypeName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Service.ServiceName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FuelingDate, "ToShortDate")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FuelingTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.JetFuelProviderNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.JetFuelProvider.ProviderName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IntoPlaneProviderNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IntoPlaneProvider.ProviderName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TicketNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FueledQtyGals)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RemainingQry)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RequestedQry)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FueledQry)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DensityFactor)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.NombreUsuario)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SupplierResponsible)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Remarks)
+                        </td>
+                        @if (User.IsInRole("JETFUELTIC-UPD") || User.IsInRole("JETFUELTIC-DEL") || User.IsInRole("JETFUELTIC-VIE") || User.IsInRole("JETFUELTIC-PRINTREP")) 
+                        {
+                            <td>
+                                @if (User.IsInRole("JETFUELTIC-VIE"))
+                                {
+                                    <button class="btn btn-default" type="button" name="Details" title="@VOI.SISAC.Web.Resources.Resource.Details" onclick="location.href='@Url.Action("Details", "JetFuelTicket", new { id = item.JetFuelTicketID, Sequence = Sequence, AirlineCode = AirlineCode, FlightNumber = FlightNumber, ItineraryKey = ItineraryKey, OperationTypeName = OperationTypeName })'"><i class="fa fa-eye fa-fw"></i></button>
+                                }
+                                @if (User.IsInRole("JETFUELTIC-UPD"))
+                                {
+                                    <button class="btn btn-default" type="button" name="Edit" title="@VOI.SISAC.Web.Resources.Resource.Edit" onclick="location.href='@Url.Action("Edit", "JetFuelTicket", new { id = item.JetFuelTicketID, Sequence = Sequence, AirlineCode = AirlineCode, FlightNumber = FlightNumber, ItineraryKey = ItineraryKey, OperationTypeName = OperationTypeName })'"><i class="fa fa-pencil fa-fw"></i></button>
+                                }
+                                @if (User.IsInRole("JETFUELTIC-DEL"))
+                                {
+                                    <button class="btn btn-default" type="button" name="Delete" title="@VOI.SISAC.Web.Resources.Resource.Delete" onclick="location.href='@Url.Action("Delete", "JetFuelTicket", new { id = item.JetFuelTicketID })'"><i class="fa fa-trash-o fa-fw"></i></button>
+                                }
+                                @if (User.IsInRole("JETFUELTIC-PRINTREP"))
+                                {
+                                    <button class="btn btn-default" type="button" name="VerReporte" title="@VOI.SISAC.Web.Resources.Resource.Export" onclick="location.href='@Url.Action("VerReporte", "JetFuelTicket", new { id = item.JetFuelTicketID })'"><i class="fa-fw glyphicon glyphicon-export icon-share"></i></button>
+                                }
+                            </td>
+                        }    
+                    </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12  text-center">
+                <br />
+                <button id="btnBackServices" type="button" class="btn btn-default" name="@Resource.Back" title="@Resource.Back" onclick="location.href='@Url.Action("Index", "Itinerary", new { area = "Itineraries" })'">
+                    <i class="fa fa-arrow-left fa-fw"></i>
+                    &nbsp;@Resource.Back
+                </button>
+            </div>
+        </div>
+    </div>
+    <br />
+</div>
+
+@Scripts.Render("~/bundles/bootstrapTable")
+@Scripts.Render("~/bundles/bootstrapTablePlugins")
+@Scripts.Render("~/bundles/ExportTable")
+<script>
+    $(function () {
+        selectAll = function () {
+            var table = $("#tbJetFuelTicket");
+            var hiddenColumns = $(table).bootstrapTable('getHiddenColumns');
+
+            if (hiddenColumns.length > 0) {
+                for (i = 0; i < hiddenColumns.length; i++) {
+                    $(table).bootstrapTable('showColumn', hiddenColumns[i].field)
+                }
+            }
+        };
+    });
+</script>
+

@@ -1,0 +1,43 @@
+﻿@{
+    var conn = new System.Data.SqlClient.SqlConnectionStringBuilder(System.Configuration.ConfigurationManager.ConnectionStrings["SisacDBConnectionString"].ConnectionString);
+}
+
+<div class="jumbotron">
+    <h1>SISAC API</h1>
+    <p class="lead">Sistema Integral de Servicios Aeroportuarios y Combustible</p>
+    <h2>API Info</h2>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Data Source</td>
+                <td>@conn.DataSource</td>
+            </tr>
+            <tr>
+                <td>Initial Catalog</td>
+                <td>@conn.InitialCatalog</td>
+            </tr>
+            <tr>
+                <td>Network Path</td>
+                <td>@System.Web.Configuration.WebConfigurationManager.AppSettings["NetworkPath"]
+                <td>
+            </tr>
+            <tr>
+                <td>File Path</td>
+                <td>@System.Web.Configuration.WebConfigurationManager.AppSettings["FilePath"]
+                <td>
+            </tr>
+            <tr>
+                <td>Network User</td>
+                <td>@System.Web.Configuration.WebConfigurationManager.AppSettings["NetworkUser"]
+                <td>
+            </tr>
+        </tbody>
+    </table>
+</div>

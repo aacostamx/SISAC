@@ -1,0 +1,104 @@
+﻿@model IEnumerable<VOI.SISAC.Web.Models.VO.Airport.AirportScheduleVO>
+
+@{
+    ViewBag.Title = VOI.SISAC.Web.Resources.Resource.AirportScheduleTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h2 class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.AirportScheduleTitle</h2>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div id="toolbar">
+            <div class="btn-group dropdown">
+                @if (User.IsInRole("AIRPSCHE-ADD"))
+                {
+                    <button type="button" class="btn btn-default" name="Agregar" title="@VOI.SISAC.Web.Resources.Resource.Add" onclick="location.href='@Url.Action("Create", "AirportSchedule")'">
+                        <i class="fa fa-plus"></i>&nbsp; @VOI.SISAC.Web.Resources.Resource.Add
+                    </button>
+                }
+            </div>
+        </div>
+        <table id="tbAguaPotable"
+               data-toolbar="#toolbar"
+               class="table"
+               data-toggle="table"
+               data-show-columns="true"
+               data-search="true"
+               data-show-toggle="true"
+               data-show-pagination-switch="true"
+               data-mobile-responsive="true"
+               data-pagination="true"
+               data-page-size="10"
+               data-show-export="true"
+               data-export-types="['excel']"
+               data-export-data-type="all">
+            <thead>
+                <tr>
+                    <th data-field="StationCode" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.StationCode)</strong>
+                    </th>
+                    <th data-field="ScheduleTypeCode" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.ScheduleTypeCode)</strong>
+                    </th>
+                    <th data-field="StartTimeSchedule" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.StartTimeSchedule)</strong>
+                    </th>
+                    <th data-field="EndTimeSchedule" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.EndTimeSchedule)</strong>
+                    </th>
+                   @* @if (User.IsInRole("DRINKWATER-UPD") || User.IsInRole("DRINKWATER-DEL"))
+                    {
+                        *@<th data-field="Acctions" data-align="center" data-halign="center">
+                            <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
+                        </th>
+                   @* }*@
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StationCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ScheduleTypeCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartTimeSchedule)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EndTimeSchedule)
+                        </td>
+                        @if (User.IsInRole("AIRPSCHE-UPD") || User.IsInRole("AIRPSCHE-DEL"))
+                        {
+                            <td>
+                                @if (User.IsInRole("AIRPSCHE-UPD"))
+                                {
+                                    <button class="btn btn-default" type="button" name="Edit" title="@VOI.SISAC.Web.Resources.Resource.Edit" onclick="location.href='@Url.Action("Edit", "AirportSchedule", new { id = item.AirportScheduleID })'"><i class="fa fa-pencil  fa-fw"></i></button>
+                                }
+                                @if (User.IsInRole("AIRPSCHE-DEL"))
+                                {
+                                    <button class="btn btn-default" type="button" name="Delete" title="@VOI.SISAC.Web.Resources.Resource.Delete" onclick="location.href='@Url.Action("Delete", "AirportSchedule", new { id = item.AirportScheduleID })'"><i class="fa fa-trash-o  fa-fw"></i></button>
+                                }
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <br />
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/bootstrapTable")
+@Scripts.Render("~/bundles/bootstrapTablePlugins")
+@Scripts.Render("~/bundles/ExportTable")
+
+

@@ -1,0 +1,420 @@
+﻿@model VOI.SISAC.Web.Models.VO.Finance.AirportServiceContractVO
+
+@{
+    ViewBag.Title = Resource.AirportServiceContractName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var airline = this.ViewBag.Airline as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var airport = this.ViewBag.Airport as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var service = this.ViewBag.Service as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var provider = this.ViewBag.Provider as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var costCenter = this.ViewBag.CostCenter as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var accountingAccount = this.ViewBag.AccountingAccount as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var liabilityAccount = this.ViewBag.LiabilityAccount as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var tax = this.ViewBag.Tax as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var currency = this.ViewBag.Currency as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var airplaneWeightMeasureType = this.ViewBag.AirplaneWeightMeasureType as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var airplaneWeightType = this.ViewBag.AirplaneWeightType as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var operationType = this.ViewBag.OperationType as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var serviceCalculationType = this.ViewBag.ServiceCalculationType as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var serviceType = this.ViewBag.ServiceType as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var cultureForm = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
+}
+
+@Styles.Render("~/Content/bootstrapdtimecss")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.AirportServiceContractName</p>
+        <p class="subtitle_h3_ancillarie">@VOI.SISAC.Web.Resources.Resource.Add</p>
+    </div>
+    <br />
+
+    @using (Html.BeginForm())
+    {
+        
+        @Html.AntiForgeryToken()
+    
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <br />
+            <br />
+            <br />
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+
+                        <h4 class="panel-title subtitle_h6" onclick="AirportServiceContract.toggle_visibility('dvCD');">
+                            <strong>@VOI.SISAC.Web.Resources.Resource.ContractDefinition</strong>
+                        </h4>
+
+                    </div>
+                    <div id="dvCD">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.EffectiveDate, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                @Html.EditorFor(model => model.EffectiveDate, new { htmlAttributes = new { @class = "form-control ClassDate", @placeholder = Resource.FormatDate } })
+                                @Html.ValidationMessageFor(model => model.EffectiveDate, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.AirlineName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                <div class="styled-select">
+                                    @Html.DropDownListFor(model => model.AirlineCode, airline.Select(h => new SelectListItem
+                                    {
+                                        Text = h.CodeAndDescription,
+                                        Value = h.Id
+                                    }), Resource.SelectItem, new { @class = "inputForm form-control", @onchange = "AirportServiceContract.GetAirlineCode()", @id = "ddlCCFlag" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.AirlineCode, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.StationName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                <div class="styled-select">
+                                    @Html.DropDownListFor(model => model.StationCode, airport.Select(h => new SelectListItem
+                                    {
+                                        Text = h.CodeAndDescription,
+                                        Value = h.Id
+                                    }), Resource.SelectItem, new { @class = "inputForm form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.StationCode, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.ServiceName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                <div class="styled-select">
+                                    @Html.DropDownListFor(model => model.ServiceCode, service.Select(h => new SelectListItem
+                                    {
+                                        Text = h.DescriptionAndCode,
+                                        Value = h.Id
+                                    }), Resource.SelectItem, new { @class = "inputForm form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.ServiceCode, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.ProviderName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                <div class="styled-select">
+                                    @Html.DropDownListFor(model => model.ProviderNumber, provider.Select(h => new SelectListItem
+                                    {
+                                        Text = h.DescriptionAndCode,
+                                        Value = h.Id
+                                    }), Resource.SelectItem, new { @class = "inputForm form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.ProviderNumber, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.CCName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                <div class="styled-select">
+                                    @Html.DropDownListFor(model => model.CostCenterNumber, costCenter.Select(h => new SelectListItem
+                                    {
+                                        Text = h.CodeAndDescription,
+                                        Value = h.Id
+                                    }), Resource.SelectItem, new { @class = "inputForm form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.CostCenterNumber, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title subtitle_h6" onclick="AirportServiceContract.toggle_visibility('dvAC');">
+                            <strong>@VOI.SISAC.Web.Resources.Resource.AccountingConfiguration</strong>
+                        </h4>
+                    </div>
+                    <div id="dvAC">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.AccountingAccountName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                <div class="styled-select">
+                                    @Html.DropDownListFor(model => model.AccountingAccountNumber, accountingAccount.Select(h => new SelectListItem
+                                    {
+                                        Text = h.CodeAndDescription,
+                                        Value = h.Id
+                                    }), Resource.SelectItem, new { @class = "inputForm form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.AccountingAccountNumber, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.LiabilityAccountName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                <div class="styled-select">
+                                    @Html.DropDownListFor(model => model.LiabilityAccountNumber, liabilityAccount.Select(h => new SelectListItem
+                                    {
+                                        Text = h.CodeAndDescription,
+                                        Value = h.Id
+                                    }), Resource.SelectItem, new { @class = "inputForm form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.LiabilityAccountNumber, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.OperationName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                <div class="styled-select">
+                                    @Html.DropDownListFor(model => model.OperationTypeId, operationType.Select(h => new SelectListItem
+                                    {
+                                        Text = h.Description,
+                                        Value = h.Id
+                                    }), Resource.SelectItem, new { @class = "inputForm form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.OperationTypeId, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.ServiceTypeName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                <div class="styled-select">
+                                    @Html.DropDownListFor(model => model.ServiceTypeCode, serviceType.Select(h => new SelectListItem
+                                    {
+                                        Text = h.Description,
+                                        Value = h.Id
+                                    }), Resource.SelectItem, new { @class = "inputForm form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.ServiceTypeCode, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingFour">
+                        <h4 class="panel-title subtitle_h6" onclick="AirportServiceContract.toggle_visibility('dvRPC');">
+                            <strong>@VOI.SISAC.Web.Resources.Resource.RateParamsConfiguration</strong>
+                        </h4>
+                    </div>
+                    <div id="dvRPC">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.Rate, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                @Html.EditorFor(model => model.Rate, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeroDecimal(event, this, 17, 5);", @onkeyup = "return commonFunctions.validarNumeroDecimal(event, this, 17, 5)" } })
+                                @Html.ValidationMessageFor(model => model.Rate, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.CurrencyName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                <div class="styled-select">
+                                    @Html.DropDownListFor(model => model.CurrencyCode, currency.Select(h => new SelectListItem
+                                    {
+                                        Text = h.CodeAndDescription,
+                                        Value = h.Id
+                                    }), Resource.SelectItem, new { @class = "inputForm form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.CurrencyCode, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.MultiRateFlag, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                <input class="checkVolaris top-padding" data-val="true" type="checkbox" id="MultiRateFlag" name="MultiRateFlag" value="true" />
+                                <label for="MultiRateFlag" class="control_gris"><span></span></label>
+                                @Html.ValidationMessageFor(model => model.MultiRateFlag, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+                        </div>
+                        <div class="row" id="dvAirplanetWeightFlag">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                @Html.LabelFor(model => model.AirplanetWeightFlag, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                <input class="checkVolaris top-padding" data-val="true" type="checkbox" id="AirplanetWeightFlag" name="AirplanetWeightFlag" value="true" checked="checked" onclick="AirportServiceContract.muestraoculta('dvAirplanetWeight', this)" />
+                                <label for="AirplanetWeightFlag" class="control_gris"><span></span></label>
+                                @Html.ValidationMessageFor(model => model.AirplanetWeightFlag, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+                        </div>
+
+                        <div class="row" id="dvAirplanetWeight" style="display: block">
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                @Html.LabelFor(model => model.AirplaneWeightName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                <div class="styled-select">
+                                    @Html.DropDownListFor(model => model.AirplaneWeightCode, airplaneWeightType.Select(h => new SelectListItem
+                                    {
+                                        Text = h.Description,
+                                        Value = h.Id
+                                    }), Resource.SelectItem, new { @class = "inputForm form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.AirplaneWeightCode, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                @Html.LabelFor(model => model.AirplaneWeightUnitName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                <div class="styled-select">
+                                    @Html.DropDownListFor(model => model.AirplaneWeightUnit, airplaneWeightMeasureType.Select(h => new SelectListItem
+                                    {
+                                        Text = h.Description,
+                                        Value = h.Id
+                                    }), Resource.SelectItem, new { @class = "inputForm form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.AirplaneWeightUnit, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                @Html.LabelFor(model => model.AirplaneWeightMultiplier, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                @Html.EditorFor(model => model.AirplaneWeightMultiplier, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)" } })
+                                @Html.ValidationMessageFor(model => model.AirplaneWeightMultiplier, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                        <h4 class="panel-title subtitle_h6" onclick="AirportServiceContract.toggle_visibility('dvRFC');">
+                            <strong>@VOI.SISAC.Web.Resources.Resource.RateFeeConfiguration</strong>
+                        </h4>
+                    </div>
+                    <div id="dvRFC">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.AirportFeeCode, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                <div class="styled-select">
+                                    @Html.DropDownListFor(model => model.AirportFeeCode, tax.Select(h => new SelectListItem
+                                    {
+                                        Text = h.CodeAndDescription,
+                                        Value = h.Id
+                                    }), Resource.SelectItem, new { @class = "inputForm form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.AirportFeeCode, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.AirportFeeValue, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                @Html.EditorFor(model => model.AirportFeeValue, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeroDecimal(event, this, 6, 2);", @onkeyup = "return commonFunctions.validarNumeroDecimal(event, this, 6, 2)" } })
+                                @Html.ValidationMessageFor(model => model.AirportFeeValue, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.AirportFeeFlag, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                <input class="checkVolaris top-padding" data-val="true" type="checkbox" id="AirportFeeFlag" name="AirportFeeFlag" value="true" />
+                                <label for="AirportFeeFlag" class="control_gris"><span></span></label>
+                                @Html.ValidationMessageFor(model => model.AirportFeeFlag, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.LocalTaxCode, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                <div class="styled-select">
+                                    @Html.DropDownListFor(model => model.LocalTaxCode, tax.Select(h => new SelectListItem
+                                    {
+                                        Text = h.CodeAndDescription,
+                                        Value = h.Id
+                                    }), Resource.SelectItem, new { @class = "inputForm form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.LocalTaxCode, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.LocalTaxValue, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                @Html.EditorFor(model => model.LocalTaxValue, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeroDecimal(event, this, 6, 2);", @onkeyup = "return commonFunctions.validarNumeroDecimal(event, this, 6, 2)" } })
+                                @Html.ValidationMessageFor(model => model.LocalTaxValue, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.LocalTaxFlag, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                <input class="checkVolaris top-padding" data-val="true" type="checkbox" id="LocalTaxFlag" name="LocalTaxFlag" value="true" />
+                                <label for="LocalTaxFlag" class="control_gris"><span></span></label>
+                                @Html.ValidationMessageFor(model => model.LocalTaxFlag, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.StateTaxCode, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                <div class="styled-select">
+                                    @Html.DropDownListFor(model => model.StateTaxCode, tax.Select(h => new SelectListItem
+                                    {
+                                        Text = h.CodeAndDescription,
+                                        Value = h.Id
+                                    }), Resource.SelectItem, new { @class = "inputForm form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.StateTaxCode, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.StateTaxValue, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                @Html.EditorFor(model => model.StateTaxValue, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeroDecimal(event, this, 6, 2);", @onkeyup = "return commonFunctions.validarNumeroDecimal(event, this, 6, 2)" } })
+                                @Html.ValidationMessageFor(model => model.StateTaxValue, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.StateTaxFlag, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                <input class="checkVolaris top-padding" data-val="true" type="checkbox" id="StateTaxFlag" name="StateTaxFlag" value="true" />
+                                <label for="StateTaxFlag" class="control_gris"><span></span></label>
+                                @Html.ValidationMessageFor(model => model.StateTaxFlag, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.FederalTaxCode, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                <div class="styled-select">
+                                    @Html.DropDownListFor(model => model.FederalTaxCode, tax.Select(h => new SelectListItem
+                                    {
+                                        Text = h.CodeAndDescription,
+                                        Value = h.Id
+                                    }), Resource.SelectItem, new { @class = "inputForm form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.FederalTaxCode, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.FederalTaxValue, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                @Html.EditorFor(model => model.FederalTaxValue, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeroDecimal(event, this, 6, 2);", @onkeyup = "return commonFunctions.validarNumeroDecimal(event, this, 6, 2)" } })
+                                @Html.ValidationMessageFor(model => model.FederalTaxValue, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.FederalTaxFlag, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                <input class="checkVolaris top-padding" data-val="true" type="checkbox" id="FederalTaxFlag" name="FederalTaxFlag" value="true" />
+                                <label for="FederalTaxFlag" class="control_gris"><span></span></label>
+                                @Html.ValidationMessageFor(model => model.FederalTaxFlag, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingFive">
+                        <h4 class="panel-title subtitle_h6" onclick="AirportServiceContract.toggle_visibility('dvCTC');">
+                            <strong>@VOI.SISAC.Web.Resources.Resource.CalculationTypeConfiguration</strong>
+                        </h4>
+                    </div>
+                    <div id="dvCTC">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.ServiceRecordFlag, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                <input class="checkVolaris top-padding" data-val="true" type="checkbox" id="ServiceRecordFlag" name="ServiceRecordFlag" value="true" />
+                                <label for="ServiceRecordFlag" class="control_gris"><span></span></label>
+                                @Html.ValidationMessageFor(model => model.ServiceRecordFlag, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.CalculationTypeName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                <div class="styled-select">
+                                    @Html.DropDownListFor(model => model.CalculationTypeId, serviceCalculationType.Select(h => new SelectListItem
+                                    {
+                                        Text = h.Description,
+                                        Value = h.Id
+                                    }), Resource.SelectItem, new { @class = "inputForm form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.CalculationTypeId, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <input onclick="@("location.href='" + @Url.Action("Index", "AirportServiceContract") + "'")" type="reset" class="btnVolaris" value="@Resource.Back"/>
+                        <input type="submit" value="@Resource.Save" class="btnVolaris"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+    @Scripts.Render("~/bundles/JSDateTimeValidate")
+    @Scripts.Render("~/bundles/AirportServiceContract")
+    @Scripts.Render("~/bundles/CommonFunctions")
+    <script type="text/javascript">
+        var currentLang = '@cultureForm.ToString()';
+    </script>
+}

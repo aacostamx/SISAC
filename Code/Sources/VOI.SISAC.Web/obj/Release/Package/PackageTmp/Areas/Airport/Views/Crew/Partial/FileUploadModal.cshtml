@@ -1,0 +1,27 @@
+﻿<div class="modal fade" id="UploadCrewModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="subtitle_h3_black">@Resource.UploadFile</h4>
+            </div>
+            @using (Html.BeginForm("UploadFile", "Crew", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="modal-body">
+                    <input type="file" name="file" class="filestyle" data-icon="false" data-buttonname="btn-primary" data-buttontext="@VOI.SISAC.Web.Resources.Resource.SelectFile" data-placeholder="@VOI.SISAC.Web.Resources.Resource.NotFile" accept=".txt" required="required"/>
+                    @Html.ActionLink(Resource.DownloadTemplateFile, "Download")
+                </div>
+                <div class="modal-footer">                    
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="fa fa-times"></i>
+                        @Resource.Close
+                    </button>
+                    <button type="submit" class="btn btn-default btn-green">
+                        <i class="fa fa-upload"></i>
+                        @Resource.UploadFile
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,104 @@
+﻿@model IEnumerable<VOI.SISAC.Web.Models.VO.Airport.DelayVO>
+
+@{
+    ViewBag.Title = @Resource.DelayTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <h2 class="subtitle_h3_black">@Resource.DelayTitle</h2>
+    <div id="toolbar">
+        @if (User.IsInRole("DELAY-ADD"))
+        {
+            <button type="button" class="btn btn-default" name="Add" title=@Resource.Add onclick="location.href='@Url.Action("Create","Delay")'">
+                <i class="fa fa-plus"></i> &nbsp;@Resource.Add
+            </button>
+        }
+    </div>
+
+    <table id="tbDelay"
+           data-toolbar="#toolbar"
+           class="table"
+           data-toggle="table"
+           data-show-export="true"
+           data-export-types="['excel']"
+           data-show-columns="true"
+           data-search="true"
+           data-show-toggle="true"
+           data-show-pagination-switch="true"
+           data-mobile-responsive="true"
+           data-check-on-init="true"
+           data-pagination="true"
+           data-export-data-type="all"
+           data-page-size="10">
+        <thead>
+            <tr>
+                <th data-field="DelayCode" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.DelayCode)</strong>
+                </th>
+                <th data-field="DelayName" data-halign="left" data-align="left" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.DelayName)</strong>
+                </th>
+                <th data-field="FunctionalAreaID" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.FunctionalArea.FunctionalAreaName)</strong>
+                </th>
+                <th data-field="UnderControl" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.UnderControl)</strong>
+                </th>
+                @if (User.IsInRole("DELAY-UPD") || User.IsInRole("DELAY-DEL"))
+                {
+                    <th data-field="@Resource.Actions" data-align="center" data-halign="center">
+                        <strong>@Resource.Actions</strong>
+                    </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DelayCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DelayName)
+                        </td>
+                        <td>
+                            @{
+                                var functionalArea = item.FunctionalArea.FunctionalAreaName + " - " + item.FunctionalArea.FunctionalAreaDescription;
+                            }
+
+                            @Html.DisplayFor(modelItem => functionalArea)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UnderControl)
+                        </td>
+                        @if (User.IsInRole("DELAY-UPD") || User.IsInRole("DELAY-DEL"))
+                        {
+                            <td>
+                                @if (User.IsInRole("DELAY-UPD"))
+                                {
+                                    <button class="btn btn-default" type="button" name="Edit" title=@Resource.Edit onclick="location.href='@Url.Action("Edit","Delay", new { id = item.DelayCode } )'"><i class="fa fa-pencil fa-fw"></i></button>
+                                }
+                                @if (User.IsInRole("DELAY-DEL"))
+                                {
+                                    <button class="btn btn-default" type="button" name="Delete" title=@Resource.Delete onclick="location.href='@Url.Action("Delete","Delay", new { id = item.DelayCode } )'"><i class="fa fa-trash-o fa-fw"></i></button>
+                                }
+                            </td>
+                        }
+                    </tr>
+                                    }
+                                }
+        </tbody>
+    </table>
+</div>
+<br />
+
+@Scripts.Render("~/bundles/bootstrapTable")
+@Scripts.Render("~/bundles/bootstrapTablePlugins")
+@Scripts.Render("~/bundles/ExportTable")

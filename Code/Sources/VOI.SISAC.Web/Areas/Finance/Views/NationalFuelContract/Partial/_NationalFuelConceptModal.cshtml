@@ -1,0 +1,83 @@
+﻿@model VOI.SISAC.Web.Models.VO.Finance.NationalFuelContractVO
+@{
+    var fuelConcept = this.ViewBag.FuelConcept as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var fuelConceptType = this.ViewBag.FuelConceptType as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var chargeFactorType = this.ViewBag.ChargeFactorType as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var provider = this.ViewBag.Provider as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+}
+
+<div class="modal fade" id="modalNationalConcept" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style='padding-bottom: 0px;'>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="subtitle_h3_black" aria-hidden="true">&times;</span>
+                </button>
+                <h2 class="subtitle_h3_black">@Resource.AddFuelConcept</h2>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <label class="subtitle_h5 control-label required-field">@Resource.FuelConceptName</label>
+                        <div class="styled-select">
+                            @Html.DropDownListFor(model => model.NationalFuelContractConcept.FirstOrDefault().FuelConceptID, fuelConcept.Select(h => new SelectListItem
+                               {
+                                   Text = h.Description,
+                                   Value = h.Id
+                               }), Resource.SelectItem, new { htmlAttributes = new { @class = "inputForm form-control" } })
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <label class="subtitle_h5 control-label required-field">@Resource.FuelConceptTypeName</label>
+                        <div class="styled-select">
+                            @Html.DropDownListFor(model => model.NationalFuelContractConcept.FirstOrDefault().FuelConceptTypeCode, fuelConceptType.Select(h => new SelectListItem
+                               {
+                                   Text = h.Description,
+                                   Value = h.Id
+                               }), Resource.SelectItem, new { htmlAttributes = new { @class = "inputForm form-control" } })
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <label class="subtitle_h5 control-label required-field">@Resource.ChargeFactorTypeName</label>
+                        <div class="styled-select">
+                            @Html.DropDownListFor(model => model.NationalFuelContractConcept.FirstOrDefault().ChargeFactorTypeID, chargeFactorType.Select(h => new SelectListItem
+                               {
+                                   Text = h.Description,
+                                   Value = h.Id
+                               }), Resource.SelectItem, new { htmlAttributes = new { @class = "inputForm form-control" } })
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <label class = "subtitle_h5 control-label required-field">@Resource.ProviderName</label>
+                        <div class="styled-select">
+                            @Html.DropDownListFor(model => model.NationalFuelContractConcept.FirstOrDefault().ProviderNumber, provider.Select(h => new SelectListItem
+                               {
+                                   Text = h.DescriptionAndCode,
+                                   Value = h.Id
+                               }), Resource.SelectItem, new { htmlAttributes = new { @class = "inputForm form-control" } })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <button type="button" class="btn btn-default" name="Add" title="@Resource.AddFuelConcept" onclick="NationalFuelConcept.getCombo()">
+                            <i class="fa fa-plus fa-fw"></i>&nbsp;@Resource.Add
+                        </button>
+                        <button type="button" class="btn btn-default" name="Clear" title="@Resource.Clear" onclick="NationalFuelConcept.settingComboboxes()">
+                            <i class="fa fa-undo fa-fw"></i>&nbsp;@Resource.Clear
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

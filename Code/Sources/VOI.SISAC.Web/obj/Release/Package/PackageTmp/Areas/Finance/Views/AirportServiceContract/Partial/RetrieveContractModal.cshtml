@@ -1,0 +1,101 @@
+﻿@model VOI.SISAC.Web.Models.VO.Finance.ContractParametersVO
+@{
+    var airline = this.ViewBag.Airline as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var airport = this.ViewBag.Airport as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var service = this.ViewBag.Service as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var provider = this.ViewBag.Provider as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var costCenter = this.ViewBag.CostCenter as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var cultureForm = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+}
+@using (Html.BeginForm("RetrieveContracs", "AirportServiceContract", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="modal fade" id="ShowRetrieveContract" tabindex="-1" role="dialog" aria-labelledby="smallModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h2 class="subtitle_h3_black">@Resource.RetrieveContractTitle</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            @Html.LabelFor(model => model.EffectiveDateParameter, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                            @Html.EditorFor(model => model.EffectiveDateParameter, new { htmlAttributes = new { @class = "form-control ClassDate", @placeholder = Resource.FormatDate } })
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            @Html.LabelFor(model => model.AirlineDescription, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                            <div class="styled-select">
+                                @Html.DropDownListFor(model => model.AirlineDescription, airline.Select(h => new SelectListItem
+                               {
+                                   Text = h.CodeAndDescription,
+                                   Value = h.Id,
+                               }), Resource.SelectItem, new { @class = "inputForm form-control", @onchange = "AirportServiceContract.GetAirlineCode()", @id = "ddlCCFlag" })
+                            </div>
+                            @*@Html.EditorFor(model => model.AirlineDescription, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumericoCaracteresEspeciales(event, this, 100, 2);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumericoCaracteresEspeciales(event, this, 100, 2)" } })*@
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            @Html.LabelFor(model => model.AirportDescription, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                            <div class="styled-select">
+                                @Html.DropDownListFor(model => model.AirportDescription, airport.Select(h => new SelectListItem
+                               {
+                                   Text = h.CodeAndDescription,
+                                   Value = h.Id
+                               }), Resource.SelectItem, new { @class = "inputForm form-control" })
+                            </div>
+                            @*@Html.EditorFor(model => model.AirportDescription, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumericoCaracteresEspeciales(event, this, 100, 2);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumericoCaracteresEspeciales(event, this, 100, 2)" } })*@
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            @Html.LabelFor(model => model.ServiceDescription, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                            <div class="styled-select">
+                                @Html.DropDownListFor(model => model.ServiceDescription, service.Select(h => new SelectListItem
+                               {
+                                   Text = h.DescriptionAndCode,
+                                   Value = h.Id
+                               }), Resource.SelectItem, new { @class = "inputForm form-control" })
+                            </div>
+                            @*@Html.EditorFor(model => model.ServiceDescription, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumericoCaracteresEspeciales(event, this, 100, 2);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumericoCaracteresEspeciales(event, this, 100, 2)" } })*@
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            @Html.LabelFor(model => model.ProviderDescription, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                            <div class="styled-select">
+                                @Html.DropDownListFor(model => model.ProviderDescription, provider.Select(h => new SelectListItem
+                               {
+                                   Text = h.DescriptionAndCode,
+                                   Value = h.Id
+                               }), Resource.SelectItem, new { @class = "inputForm form-control" })
+                            </div>
+                            @*@Html.EditorFor(model => model.ProviderDescription, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumericoCaracteresEspeciales(event, this, 100, 2);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumericoCaracteresEspeciales(event, this, 100, 2)" } })*@
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            @Html.LabelFor(model => model.CostCenterNumber, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                            <div class="styled-select">
+                                @Html.DropDownListFor(model => model.CostCenterNumber, costCenter.Select(h => new SelectListItem
+                               {
+                                   Text = h.CodeAndDescription,
+                                   Value = h.Id
+                               }), Resource.SelectItem, new { @class = "inputForm form-control", @id = "CostCenterNumber" })
+                            </div>
+                            @*@Html.EditorFor(model => model.CostCenterDescription, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumericoCaracteresEspeciales(event, this, 100, 2);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumericoCaracteresEspeciales(event, this, 100, 2)" } })*@
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-volaris-style btn btn-default" data-dismiss="modal">
+                        <i class="fa fa-times"></i>
+                        @Resource.Close
+                    </button>
+                    <button type="submit" class="btn-volaris-style btn btn-default" onclick="">
+                        <i class="fa fa-search"></i>
+                        @Resource.Search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

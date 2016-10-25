@@ -1,0 +1,96 @@
+﻿@model IEnumerable<VOI.SISAC.Web.Models.VO.Airport.DrinkingWaterVO>
+
+@{
+    ViewBag.Title = VOI.SISAC.Web.Resources.Resource.DrinkingWaterTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h2 class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.DrinkingWaterTitle</h2>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div id="toolbar">
+            <div class="btn-group dropdown">
+                @if (User.IsInRole("DRINKWATER-ADD"))
+                {
+                    <button type="button" class="btn btn-default" name="Agregar" title="@VOI.SISAC.Web.Resources.Resource.Add" onclick="location.href='@Url.Action("Create", "DrinkingWater")'">
+                        <i class="fa fa-plus"></i>&nbsp; @VOI.SISAC.Web.Resources.Resource.Add
+                    </button>
+                }
+            </div>
+        </div>
+        <table id="tbAguaPotable"
+               data-toolbar="#toolbar"
+               class="table"
+               data-toggle="table"
+               data-show-columns="true"
+               data-search="true"
+               data-show-toggle="true"
+               data-show-pagination-switch="true"
+               data-mobile-responsive="true"
+               data-pagination="true"
+               data-page-size="10"
+               data-show-export="true"
+               data-export-types="['excel']"
+               data-export-data-type="all">
+            <thead>
+                <tr>
+                    <th data-field="EquipmentNumber" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.EquipmentNumber)</strong>
+                    </th>
+                    <th data-field="AirplaneModel" data-halign="left" data-align="left" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.DrinkingWaterName)</strong>
+                    </th>
+                    <th data-field="MaximumTakeoffWeight" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.Value)</strong>
+                    </th>
+                    @if (User.IsInRole("DRINKWATER-UPD") || User.IsInRole("DRINKWATER-DEL"))
+                    {
+                        <th data-field="Acctions" data-align="center" data-halign="center">
+                            <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
+                        </th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EquipmentNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DrinkingWaterName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Value)
+                        </td>
+                        @if (User.IsInRole("DRINKWATER-UPD") || User.IsInRole("DRINKWATER-DEL"))
+                        {
+                            <td>
+                                @if (User.IsInRole("DRINKWATER-UPD"))
+                                {
+                                    <button class="btn btn-default" type="button" name="Edit" title="@VOI.SISAC.Web.Resources.Resource.Edit" onclick="location.href='@Url.Action("Edit", "DrinkingWater", new { id = item.DrinkingWaterId })'"><i class="fa fa-pencil  fa-fw"></i></button>
+                                }
+                                @if (User.IsInRole("DRINKWATER-DEL"))
+                                {
+                                    <button class="btn btn-default" type="button" name="Delete" title="@VOI.SISAC.Web.Resources.Resource.Delete" onclick="location.href='@Url.Action("Delete", "DrinkingWater", new { id = item.DrinkingWaterId })'"><i class="fa fa-trash-o  fa-fw"></i></button>
+                                }
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <br />
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/bootstrapTable")
+@Scripts.Render("~/bundles/bootstrapTablePlugins")
+@Scripts.Render("~/bundles/ExportTable")

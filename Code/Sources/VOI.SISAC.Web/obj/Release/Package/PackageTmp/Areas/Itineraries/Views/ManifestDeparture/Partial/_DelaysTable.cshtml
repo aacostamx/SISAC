@@ -1,0 +1,38 @@
+﻿@{
+    var cultureForm = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
+}
+
+<table
+    id="table-delays"
+    class="table"
+    data-toolbar="#toolbar"
+    data-toggle="table"
+    data-locale="@cultureForm.ToString()"
+    data-unique-id="DelayCode"
+    data-mobile-responsive="true"
+    data-query-params-type=""
+    data-url="@Url.Action("GetDelaysForManifest", "ManifestDeparture")"
+    data-query-params="queryParams"
+    data-cache="false"
+    data-side-pagination="server"
+    data-check-on-init="true">
+    <thead>
+        <tr>
+            <th data-field="Actions" data-align="center" data-halign="center" data-formatter="ManifestDepartureController.deleteButtonFormat"><strong>@Resource.Actions</strong></th>
+            <th data-field="DelayCode" data-align="center" data-halign="center"><strong>@Resource.DelayCode</strong></th>
+            <th data-field="DelayName" data-align="left" data-halign="center"><strong>@Resource.DelayName</strong></th>
+        </tr>
+    </thead>
+</table>
+
+<script>
+    //Take querystrings and send back to server REST
+    function queryParams(params) {
+        return {
+            Sequence: $('#Sequence').val(),
+            AirlineCode: $('#AirlineCode').val(),
+            FlightNumber: $('#FlightNumber').val(),
+            ItineraryKey: $('#ItineraryKey').val()
+        };
+    }
+</script>

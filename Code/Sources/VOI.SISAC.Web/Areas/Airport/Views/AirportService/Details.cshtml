@@ -1,0 +1,195 @@
+﻿@model VOI.SISAC.Web.Models.VO.Airport.AirportServiceVO
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AirportServiceVO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AirportServiceID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AirportServiceID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sequence)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sequence)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AirlineCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AirlineCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FlightNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FlightNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItineraryKey)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItineraryKey)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StationCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StationCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ServiceCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServiceCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProviderNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProviderNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApronPosition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApronPosition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QtyServices)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QtyServices)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QtyHours)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QtyHours)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDateService)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDateService)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndDateService)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndDateService)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DrinkingWaterID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DrinkingWaterID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GpuCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GpuCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GpuStartMeter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GpuStartMeter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GpuEndMeter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GpuEndMeter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GpuObservationCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GpuObservationCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OperationTypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OperationTypeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FuelBeforeLanding)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FuelBeforeLanding)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FuelLoaded)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FuelLoaded)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remarks)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

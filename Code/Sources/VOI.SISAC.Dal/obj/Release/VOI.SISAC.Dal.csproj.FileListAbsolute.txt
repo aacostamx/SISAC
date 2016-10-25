@@ -1,0 +1,12 @@
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Dal\bin\Release\VOI.SISAC.Dal.dll.config
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Dal\bin\Release\VOI.SISAC.Dal.dll
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Dal\bin\Release\VOI.SISAC.Dal.pdb
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Dal\bin\Release\EntityFramework.dll
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Dal\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Dal\bin\Release\VOI.SISAC.Entities.dll
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Dal\bin\Release\VOI.SISAC.Entities.pdb
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Dal\bin\Release\EntityFramework.xml
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Dal\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Dal\obj\Release\VOI.SISAC.Dal.csprojResolveAssemblyReference.cache
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Dal\obj\Release\VOI.SISAC.Dal.dll
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Dal\obj\Release\VOI.SISAC.Dal.pdb

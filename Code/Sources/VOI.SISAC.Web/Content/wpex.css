@@ -1,0 +1,96 @@
+﻿.wpex-single-timeline h1.tl-title,
+.wpex-timeline-list.show-icon li .wpex-content-left,
+.wpex .wpex-dates a,
+.wpex h2,
+.wpex h2 a,
+.wpex .timeline-details h2,
+.wpex-timeline > li .wpex-timeline-time span:last-child,
+.wpex .timeline-details h2 {
+    font-family: "Oswald", sans-serif;
+}
+
+    .wpex-single-timeline h1.tl-title,
+    .wpex-timeline > li .wpex-timeline-time span:last-child,
+    .wpex h2,
+    .wpex h2 a,
+    .wpex .timeline-details h2,
+    .wpex .timeline-details h2 {
+        font-size: 20px;
+    }
+
+.ct-color > a {
+    color: red;
+}
+
+.entry-header {
+    display: none;
+}
+
+.site-footer .main-navigation,
+.site-header {
+    padding: 20px 30px !important;
+    background: #262626;
+}
+
+.site-branding .site-title a,
+.menu-toggle,
+.dropdown-toggle,
+.main-navigation #menu-demo-timeline > li > a {
+    color: #fff;
+    font-family: "Oswald", sans-serif;
+}
+
+    .site-branding .site-title a:hover,
+    .main-navigation #menu-demo-timeline > li > a:hover {
+        color: rgba(255, 255, 255, 0.4);
+    }
+
+.site-description {
+    display: none !important;
+}
+
+body {
+    background: transparent !important;
+}
+
+.site-branding,
+.site-header-menu,
+.header-image {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.dropdown-toggle:focus,
+.menu-toggle.toggled-on:focus {
+    outline: none;
+}
+
+@media screen and (max-width: 56.874em) {
+    .main-navigation a {
+        color: #fff;
+    }
+}
+
+.main-navigation a {
+    font-family: "Oswald", sans-serif;
+}
+
+.main-navigation .button-buyplugin a {
+    background: #83217a;
+    border-bottom: 0 !important;
+    transition: all .2s;
+}
+
+    .main-navigation .button-buyplugin a:hover {
+        background: #000;
+        color: #fff;
+    }
+
+.wpex-tl-horizontal .wptl-item .wpex-timeline-label .timeline-media a,
+.wpex .wpex-content-left .wpex-leftdate + a {
+    width: 100%;
+}
+
+.wpb_animate_when_almost_visible {
+    opacity: 1;
+}

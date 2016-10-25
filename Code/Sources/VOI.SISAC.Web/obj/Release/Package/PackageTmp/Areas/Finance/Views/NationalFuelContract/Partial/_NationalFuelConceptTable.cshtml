@@ -1,0 +1,73 @@
+﻿@model VOI.SISAC.Web.Models.VO.Finance.NationalFuelContractVO
+
+<table id="tbFuelContractConcept"
+    data-toolbar="#toolbar"
+    class="table"
+    data-unique-id="InterConceptID"
+    data-toggle="table"
+    data-show-columns="true"
+    data-search="true"
+    data-show-toggle="true"
+    data-show-pagination-switch="true"
+    data-mobile-responsive="true"
+    data-check-on-init="true"
+    data-pagination="false"
+    data-page-size="3">
+    <thead>
+        <tr>
+            <th data-field="Actions" data-align="center" data-halign="center">
+                <strong>@Resource.Actions</strong>
+            </th>
+
+            <th data-field="InterConceptID" data-align="center" data-halign="center" data-visible="false">
+                <strong id="InterConceptID">ID</strong>
+            </th>
+
+            <th data-field="FuelConceptID" data-align="center" data-halign="center" data-visible="false" data-formatter="NationalFuelConcept.AddAttributeFuelConceptID">
+                <strong>
+                    @Resource.FuelConceptID
+                </strong>
+            </th>
+            <th data-field="FuelConceptName" data-halign="center" data-align="center" data-sortable="true">
+                <strong>
+                    @Resource.FuelConceptName
+                </strong>
+            </th>
+
+            <th data-field="FuelConceptTypeCode" data-halign="center" data-align="center" data-visible="false" data-formatter="NationalFuelConcept.AddAttributeFuelConceptTypeCode">
+                <strong>
+                    @Resource.FuelConceptTypeCode
+                </strong>
+            </th>
+
+            <th data-field="FuelConceptTypeName" data-halign="center" data-align="center" data-sortable="true">
+                <strong>
+                    @Resource.FuelConceptTypeName
+                </strong>
+            </th>
+
+            <th data-field="ChargeFactorTypeID" data-halign="center" data-align="center" data-visible="false" data-formatter="NationalFuelConcept.AddAttributeChargeFactorTypeID">
+                <strong>
+                    @Resource.ChargeFactorTypeID
+                </strong>
+            </th>
+            <th data-field="ChargeFactorTypeName" data-halign="center" data-align="center" data-sortable="true">
+                <strong>
+                    @Resource.ChargeFactorTypeName
+                </strong>
+            </th>
+
+            <th data-field="ProviderNumber" data-halign="center" data-align="center" data-visible="false" data-formatter="NationalFuelConcept.AddAttributeProviderNumber">
+                <strong>
+                    @Resource.ProviderNumber
+                </strong>
+            </th>
+            <th data-field="ProviderName" data-halign="center" data-align="center" data-sortable="true">
+                <strong>
+                    @Resource.ProviderName
+                </strong>
+            </th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>

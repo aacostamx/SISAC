@@ -1,0 +1,140 @@
+﻿@model IEnumerable<VOI.SISAC.Web.Models.VO.Finance.AirportServiceContractVO>
+@{
+    ViewBag.Title = VOI.SISAC.Web.Resources.Resource.ServiceContractCatalogTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cultureForm = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+@Styles.Render("~/Content/bootstrapdtimecss")
+<div class="container">
+    @Html.Partial("Partial/InactivateContractModal")
+    @Html.Action("ShowRetrieveContracts")
+    @Html.Partial("Partial/FileUploadModal")
+    @Html.Partial("_AlertView")
+    @Html.Partial("_UnauthorizedActionModal")
+    <h2 class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.ServiceContractCatalogTitle</h2>
+    <h3 class="subtitle_h3_ancillarie">@this.ViewBag.AdvanceSearchSubtitle</h3>
+    <div id="toolbar">
+        @if (User.IsInRole("AIRPSERVCN-ADD"))
+        { 
+            <button 
+            type="button" 
+            class="btn btn-default" 
+            name="@Resource.Add" 
+            title="@Resource.Add" 
+            onclick="location.href='@Url.Action("Create", "AirportServiceContract")'">
+                <i class="fa fa-plus fa-fw"></i>&nbsp; @Resource.Add
+            </button>
+        }
+        
+        @if (User.IsInRole("AIRPSERVCN-UPLF"))
+        { 
+            <button
+            data-toggle="modal"
+            data-target="#UploadServiceContractsModal"
+            type="button" 
+            class="btn btn-default" 
+            name="@Resource.UploadFile" 
+            title="@Resource.UploadFile">
+                <i class="fa fa-upload fa-fw"></i>&nbsp; @Resource.UploadFile
+            </button>
+        }
+        
+        <button
+            data-toggle="modal"
+            data-target="#ShowRetrieveContract"
+            type="button"
+            class="btn btn-default"
+            name="@Resource.AdvanceSearch"
+            title="@Resource.AdvanceSearch">
+            <i class="fa fa-search fa-fw"></i>&nbsp; @Resource.AdvanceSearch
+        </button>
+        
+        <button 
+            type="button" 
+            class="btn btn-default" 
+            name="@Resource.Clear" 
+            title="@Resource.Clear"
+            onclick="location.href='@Url.Action("Index", "AirportServiceContract")'">
+            <i class="fa fa-undo fa-fw"></i>&nbsp; @Resource.Clear
+        </button>
+    </div>
+    <div id="TableContent">
+        @Html.Partial("Partial/AirportServiceContractGridView")
+    </div>
+    <br />
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+    @Scripts.Render("~/bundles/bootstrapTable")
+    @Scripts.Render("~/bundles/bootstrapTablePlugins")
+    @Scripts.Render("~/bundles/BootstrapInputFile")
+    @Scripts.Render("~/bundles/BootstrapContextMenu")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/JSDateTimeValidate")
+    @Scripts.Render("~/bundles/ExportTable")
+    @Scripts.Render("~/bundles/CommonFunctions")
+    <script src="~/Scripts/SISAC/Finance/AirportServiceContract.js"></script>
+    <script type="text/javascript">
+        var currentLang = '@cultureForm.ToString()';
+        $('#tbAirportServiceContract').bootstrapTable({
+            contextMenu: '#context-menu',
+            contextMenuButton: '.menuButton',
+            contextMenuAutoClickRow: true,
+            contextMenuTrigger: 'right',
+            onContextMenuItem: function (row, $el) {
+
+                if ($el.data("item") == '@Resource.Edit') {
+                    var url = '@Url.Action("Edit", "AirportServiceContract")';
+                    url = url.concat('?effectiveDate=' + row.EffectiveDate.trim());
+                    url = url.concat('&airlineCode=' + row.AirlineCode.trim());
+                    url = url.concat('&stationCode=' + row.StationCode.trim());
+                    url = url.concat('&serviceCode=' + row.ServiceCode.trim());
+                    url = url.concat('&providerNumber=' + row.ProviderNumber.trim());
+                    url = url.concat('&costCenterNumber=' + row.CostCenterNumber.trim());
+                    window.location = url;
+                }
+
+                if ($el.data("item") == '@Resource.Delete') {
+                    var url = '@Url.Action("Delete", "AirportServiceContract")';
+                    url = url.concat('?effectiveDate=' + row.EffectiveDate.trim());
+                    url = url.concat('&airlineCode=' + row.AirlineCode.trim());
+                    url = url.concat('&stationCode=' + row.StationCode.trim());
+                    url = url.concat('&serviceCode=' + row.ServiceCode.trim());
+                    url = url.concat('&providerNumber=' + row.ProviderNumber.trim());
+                    url = url.concat('&costCenterNumber=' + row.CostCenterNumber.trim());
+                    window.location = url;
+                }
+
+                if ($el.data("item") == '@Resource.Details') {
+                    var url = '@Url.Action("Details", "AirportServiceContract")';
+                    url = url.concat('?effectiveDate=' + row.EffectiveDate.trim());
+                    url = url.concat('&airlineCode=' + row.AirlineCode.trim());
+                    url = url.concat('&stationCode=' + row.StationCode.trim());
+                    url = url.concat('&serviceCode=' + row.ServiceCode.trim());
+                    url = url.concat('&providerNumber=' + row.ProviderNumber.trim());
+                    url = url.concat('&costCenterNumber=' + row.CostCenterNumber.trim());
+                    window.location = url;
+                }
+
+                if ($el.data("item") == '@Resource.Rate') {
+                    var url = '@Url.Action("Rate", "AirportServiceContract")';
+                    url = url.concat('?effectiveDate=' + row.EffectiveDate.trim());
+                    url = url.concat('&airlineCode=' + row.AirlineCode.trim());
+                    url = url.concat('&stationCode=' + row.StationCode.trim());
+                    url = url.concat('&serviceCode=' + row.ServiceCode.trim());
+                    url = url.concat('&providerNumber=' + row.ProviderNumber.trim());
+                    url = url.concat('&costCenterNumber=' + row.CostCenterNumber.trim());
+                    window.location = url;
+                }
+
+                if ($el.data("item") == '@Resource.Inactive') {
+                    AirportServiceContract.showInactiveWindow(row);
+                    //$('#ShowEndDate').modal('show');
+                }
+            }
+        });
+    </script>
+}

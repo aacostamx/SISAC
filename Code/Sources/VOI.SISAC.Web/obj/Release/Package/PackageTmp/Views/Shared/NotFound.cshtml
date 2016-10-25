@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = Resource.PageNotFound;
+    var cultureForm = System.Threading.Thread.CurrentThread.CurrentUICulture.Name;
+    var user = string.Empty;
+    if (HttpContext.Current.User != null)
+    {
+        user = HttpContext.Current.User.Identity.Name;
+    }
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 centerText">
+            <h1>@Resource.PageNotFound</h1>
+            <img class="img-responsive center-block" src="~/Content/images/404Error.jpg" alt="PageNotFound">
+            <p>@Resource.CouldNotFindPage: <strong>@ViewBag.RequestedUrl</strong></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 centerText">
+            <button id="btnBackToPage" type="button" class="btn btn-default" name="@Resource.Index" title="@Resource.Back" onclick="@("location.href='" + @Url.Action("Index", "Home", new { Area = ""}) + "'")">
+                <i class="fa fa-home fa-fw"></i>
+                &nbsp;@Resource.Index
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(".breadcrumb").append('<li><a href=\"/Home/Index\">Home</a></li> <li class="active">Page Not Found</li>');
+    var user = '@user';
+
+    if (!user) {
+        $(".nav.navbar-nav").hide();
+    }
+    else {
+        $(".nav.navbar-nav").show();
+    }
+
+</script>

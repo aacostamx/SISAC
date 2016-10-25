@@ -1,0 +1,68 @@
+﻿@if (this.TempData["OperationSuccess"] != null)
+{
+    <div>
+        <div class="alert alert-success alert-dismissible fade in" role="alert" id="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <h5 class="subtitle_h5 colorWhite">@TempData["OperationSuccess"]</h5>
+            <br />
+        </div>
+    </div>
+}
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="greenBackground">
+        <div class="alert alert-danger alert-dismissible fade in" role="alert" id="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <h5 class="subtitle_h5">@ViewBag.ErrorMessage</h5>
+            <br />
+        </div>
+    </div>
+}
+
+@if (ViewBag.ListErrorMessage != null)
+{    
+    List<string> errors = this.ViewBag.ListErrorMessage as List<string>;
+    <div class="greenBackground">
+        <div class="alert alert-danger alert-dismissible fade in" role="alert" id="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            @foreach (string item in errors) 
+            { 
+                <h5 class="subtitle_h5">@item</h5>
+            }            
+            <br />
+        </div>
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="greenBackground">
+        <div class="alert alert-danger alert-dismissible fade in" role="alert" id="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <h5 class="subtitle_h5">@TempData["ErrorMessage"]</h5>
+            <br />
+        </div>
+    </div>
+}
+
+@if (TempData["ListErrorMessage"] != null)
+{
+    List<string> errors = this.TempData["ListErrorMessage"] as List<string>;
+    <div class="greenBackground">
+        <div class="alert alert-danger alert-dismissible fade in" role="alert" id="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            @foreach (string item in errors) 
+            { 
+                <h5 class="subtitle_h5">@item</h5>
+            }            
+            <br />
+        </div>
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        $("#alert").fadeTo(6500, 500).slideUp(900);
+    });
+</script>

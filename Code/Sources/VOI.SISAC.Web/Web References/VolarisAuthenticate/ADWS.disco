@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://10.10.32.16:81/ADWS/ADWS.asmx?wsdl" docRef="http://10.10.32.16:81/ADWS/ADWS.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://10.10.32.16:81/ADWS/ADWS.asmx" xmlns:q1="http://tempuri.org/ADWS/ADWS.asmx" binding="q1:ADWSSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://10.10.32.16:81/ADWS/ADWS.asmx" xmlns:q2="http://tempuri.org/ADWS/ADWS.asmx" binding="q2:ADWSSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

@@ -1,0 +1,307 @@
+﻿@model VOI.SISAC.Web.Models.VO.Finance.NationalFuelContractVO
+
+@{
+    ViewBag.Title = Resource.NationalFuelContract;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var airline = this.ViewBag.Airline as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var airport = this.ViewBag.Airport as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var service = this.ViewBag.Service as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var provider = this.ViewBag.Provider as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var costCenter = this.ViewBag.CostCenter as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var accountingAccount = this.ViewBag.AccountingAccount as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var liabilityAccount = this.ViewBag.LiabilityAccount as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var tax = this.ViewBag.Tax as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var currency = this.ViewBag.Currency as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var operationType = this.ViewBag.OperationType as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var cultureForm = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p class="subtitle_h3_black">@Resource.NationalFuelContract</p>
+        <p class="subtitle_h3_ancillarie">@VOI.SISAC.Web.Resources.Resource.Edit</p>
+        <br />
+    </div>
+    <br />
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+    
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <br />
+            <br />
+            <br />
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title subtitle_h6" onclick="">
+                            <strong>@VOI.SISAC.Web.Resources.Resource.ContractDefinition</strong>
+                        </h4>
+                    </div>
+                    <div id="dvCD">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.EffectiveDate, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                @Html.TextBoxFor(model => model.EffectiveDate, new { @class = "form-control", @Value = Model.EffectiveDate.ToString(Resource.DateTimeFormat), @readonly = "readonly" })
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.AirlineName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                @Html.EditorFor(model => model.AirlineCode, new { htmlAttributes = new { @class = "form-control specialInput", @readonly = "readonly" } })
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.StationName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                @Html.EditorFor(model => model.StationCode, new { htmlAttributes = new { @class = "form-control specialInput", @readonly = "readonly" } })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.ServiceDescription, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                @Html.EditorFor(model => model.ServiceCode, new { htmlAttributes = new { @class = "form-control specialInput", @readonly = "readonly" } })
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.ProviderName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                @Html.EditorFor(model => model.ProviderNumberPrimary, new { htmlAttributes = new { @class = "form-control specialInput", @readonly = "readonly" } })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title subtitle_h6" onclick="">
+                            <strong>@VOI.SISAC.Web.Resources.Resource.AccountingConfiguration</strong>
+                        </h4>
+                    </div>
+                    <div id="dvAC">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.Label(Resource.AircraftRegistCCFlag, new { @class = "subtitle_h5 control-label required-field" })
+                                <input class="checkVolaris top-padding" data-val="true" type="checkbox" id="AircraftRegistCCFlag" name="AircraftRegistCCFlag" value="true" checked="@Model.AircraftRegistCCFlag" onclick="NationalFuelContract.ShowCostCenterInput('CostCenterInput', this)" />
+                                <label for="AircraftRegistCCFlag" class="control_gris"><span></span></label>
+                                @Html.ValidationMessageFor(model => model.AircraftRegistCCFlag)
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" id="CostCenterInput">
+                                @Html.LabelFor(model => model.CostCenterName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                <div class="styled-select">
+                                    @Html.DropDownListFor(model => model.CCNumber, costCenter.Select(h => new SelectListItem
+                                    {
+                                        Text = h.CodeAndDescription,
+                                        Value = h.Id
+                                    }), Resource.SelectItem, new { @class = "inputForm form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.CCNumber, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.AccountingAccountName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                <div class="styled-select">
+                                    @Html.DropDownListFor(model => model.AccountingAccountNumber, accountingAccount.Select(h => new SelectListItem
+                                    {
+                                        Text = h.CodeAndDescription,
+                                        Value = h.Id
+                                    }), Resource.SelectItem, new { @class = "inputForm form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.AccountingAccountNumber, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.LiabilityAccountName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                <div class="styled-select">
+                                    @Html.DropDownListFor(model => model.LiabilityAccountNumber, liabilityAccount.Select(h => new SelectListItem
+                                    {
+                                        Text = h.CodeAndDescription,
+                                        Value = h.Id
+                                    }), Resource.SelectItem, new { @class = "inputForm form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.LiabilityAccountNumber, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.OperationTypeName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                <div class="styled-select">
+                                    @Html.DropDownListFor(model => model.OperationTypeID, operationType.Select(h => new SelectListItem
+                                    {
+                                        Text = h.Description,
+                                        Value = h.Id
+                                    }), Resource.SelectItem, new { @class = "inputForm form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.OperationTypeID, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                        <h4 class="panel-title subtitle_h6" onclick="AirportServiceContract.toggle_visibility('dvRFC');">
+                            <strong>@VOI.SISAC.Web.Resources.Resource.RateFeeConfiguration</strong>
+                        </h4>
+                    </div>
+                    <div id="dvRFC">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.FederalTaxCode, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                <div class="styled-select">
+                                    @Html.DropDownListFor(model => model.FederalTaxCode, tax.Select(h => new SelectListItem
+                                    {
+                                        Text = h.CodeAndDescription,
+                                        Value = h.Id
+                                    }), Resource.SelectItem, new { @class = "inputForm form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.FederalTaxCode, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.FederalTaxValue, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                @Html.EditorFor(model => model.FederalTaxValue, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeroDecimal(event, this, 6, 2);", @onkeyup = "return commonFunctions.validarNumeroDecimal(event, this, 6, 2)" } })
+                                @Html.ValidationMessageFor(model => model.FederalTaxValue, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.FederalTaxFlag, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                <input class="checkVolaris top-padding" data-val="true" type="checkbox" id="FederalTaxFlag" name="FederalTaxFlag" value="true" checked="@Model.FederalTaxFlag"/>
+                                <label for="FederalTaxFlag" class="control_gris"><span></span></label>
+                                @Html.ValidationMessageFor(model => model.FederalTaxFlag, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.CurrencyName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                <div class="styled-select">
+                                    @Html.DropDownListFor(model => model.CurrencyCode, currency.Select(h => new SelectListItem
+                                    {
+                                        Text = h.CodeAndDescription,
+                                        Value = h.Id
+                                    }), Resource.SelectItem, new { @class = "inputForm form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.CurrencyCode, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="subtitle_h3_black">@Resource.FuelConceptTitle</p>
+            <br />
+            <div id="TableContect">
+                <table id="tbFuelContractConcept"
+                    data-toolbar="#toolbar"
+                    class="table"
+                    data-unique-id="InterConceptID"
+                    data-toggle="table"
+                    data-show-columns="true"
+                    data-search="true"
+                    data-show-toggle="true"
+                    data-show-pagination-switch="true"
+                    data-mobile-responsive="true"
+                    data-check-on-init="true"
+                    data-pagination="false"
+                    data-page-size="3">
+                    <thead>
+                        <tr>
+                            <th data-field="Actions" data-align="center" data-halign="center">
+                                <strong>@Resource.Actions</strong>
+                            </th>
+
+                            <th data-field="InterConceptID" data-align="center" data-halign="center" data-visible="false">
+                                <strong id="InterConceptID">ID</strong>
+                            </th>
+                            <th data-field="FuelConceptName" data-halign="center" data-align="center" data-sortable="true">
+                                <strong>
+                                    @Resource.FuelConceptName
+                                </strong>
+                            </th>
+
+                            <th data-field="FuelConceptTypeName" data-halign="center" data-align="center" data-sortable="true">
+                                <strong>
+                                    @Resource.FuelConceptTypeName
+                                </strong>
+                            </th>
+
+                            <th data-field="ChargeFactorTypeName" data-halign="center" data-align="center" data-sortable="true">
+                                <strong>
+                                    @Resource.ChargeFactorTypeName
+                                </strong>
+                            </th>
+
+                            <th data-field="ProviderName" data-halign="center" data-align="center" data-sortable="true">
+                                <strong>
+                                    @Resource.ProviderName
+                                </strong>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            if (Model.NationalFuelContractConcept != null)
+                            {
+                                foreach (var item in Model.NationalFuelContractConcept)
+                                {
+                                    <tr>
+                                        <td>
+                                            @if (this.User.IsInRole("NATCONCEPT-UPD"))
+                                            { 
+                                                <button class="btn btn-default" type="button" name="Edit" title="@Resource.Edit" onclick="location.href='@Url.Action("Edit", "NationalFuelContractConcept", new { id = item.NationalFuelContractConceptId })'"><i class="fa fa-pencil"></i></button>
+                                            }
+                                            @if (this.User.IsInRole("NATCONCEPT-DEL")) { 
+                                                <button class="btn btn-default" type="button" name="Delete" title="@Resource.Delete" onclick="location.href='@Url.Action("Delete", "NationalFuelContractConcept", new { id = item.NationalFuelContractConceptId })'"><i class="fa fa-trash-o"></i></button>
+                                            }
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NationalFuelContractConceptId)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FuelConceptName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FuelConceptTypeName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ChargeFactorTypeName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ProviderName)
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <input onclick="@("location.href='" + @Url.Action("Index", "NationalFuelContract") + "'")" type="reset" class="btnVolaris" value="@Resource.Back"/>
+                    <input type="submit" value="@Resource.Save" class="btnVolaris"/>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrapTable")
+    @Scripts.Render("~/bundles/NationalFuelContractJS")
+    @Scripts.Render("~/bundles/NationalFuelContractConceptJS")
+    @Scripts.Render("~/bundles/CommonFunctions")
+    <script type="text/javascript">
+        var currentLang = '@cultureForm.ToString()';
+    </script>
+}
+

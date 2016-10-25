@@ -1,0 +1,38 @@
+﻿@model VOI.SISAC.Web.Models.VO.Airport.PassengerInformationVO
+
+<table id="tb-information-flight" class="table" data-toggle="table">
+    <thead>
+        <tr>
+            <th class="subtable_title_white" data-field="AirlineCode">@Resource.AirlineCode</th>
+            <th class="subtable_title_white" data-field="FlightNumber">@Resource.FlightNumber</th>
+            <th class="subtable_title_white" data-field="EquipmentNumber">@Resource.EquipmentNumber</th>
+            <th class="subtable_title_white" data-field="Flight">@Resource.Flight</th>
+            <th class="subtable_title_white" data-field="DepartureDate" data-formatter="PassengerController.formatDate">@Resource.DepartureDate</th>
+            <th class="subtable_title_white" data-field="DepartureTime" data-formatter="PassengerController.formatTime">@Resource.DepartureTime</th>
+            <th class="subtable_title_white" data-field="ArrivalDate" data-formatter="PassengerController.formatDate">@Resource.ArrivalDate</th>
+            <th class="subtable_title_white" data-field="ArrivalTime" data-formatter="PassengerController.formatTime">@Resource.ArriveTime</th>
+            <th class="subtable_title_white" data-field="Sequence" data-visible="false">@Resource.Sequence</th>
+            <th class="subtable_title_white" data-field="ItineraryKey" data-visible="false">@Resource.ItineraryKey</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <input type="hidden" name="PreviousSequence" id="PreviousSequence" value="@Model.PreviousSequence" />
+                <input type="hidden" name="PreviousAirlineCode" id="PreviousAirlineCode" value="@Model.PreviousAirlineCode" />
+            </td>
+            <td>
+                <input type="hidden" name="PreviousItineraryKey" id="PreviousItineraryKey" value="@Model.PreviousItineraryKey" />
+                <input type="hidden" name="PreviousFlightNumber" id="PreviousFlightNumber" value="@Model.PreviousFlightNumber" />
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>

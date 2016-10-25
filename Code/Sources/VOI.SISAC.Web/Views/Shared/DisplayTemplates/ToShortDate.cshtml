@@ -1,0 +1,9 @@
+﻿@model DateTime?          
+@if (!Model.HasValue)
+    {
+    <text></text>
+}
+else
+{
+    @Model.Value.ToShortDateString()
+}

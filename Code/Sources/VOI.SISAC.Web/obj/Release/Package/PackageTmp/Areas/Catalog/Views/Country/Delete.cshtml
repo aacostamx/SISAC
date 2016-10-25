@@ -1,0 +1,50 @@
+﻿@model VOI.SISAC.Web.Models.VO.Catalog.CountryVO
+@{
+    ViewBag.Title = @VOI.SISAC.Web.Resources.Resource.Delete;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+       <p class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.CountryTitle</p>
+       <p class="subtitle_h3_ancillarie">@VOI.SISAC.Web.Resources.Resource.Delete</p>
+</div>
+
+@Styles.Render("~/Content/bootstraptablecss")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <h3>@VOI.SISAC.Web.Resources.Resource.ConfirmDelete</h3>
+
+    <div class="dl-horizontal">
+        <div class="row"> 
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                @Html.LabelFor(model => model.CountryCode, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.CountryCode, new { htmlAttributes = new { @class = "form-control specialInput", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.CountryCode, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                @Html.LabelFor(model => model.CountryName, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.CountryName, new { htmlAttributes = new { @class = "form-control specialInput", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.CountryName, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                @Html.LabelFor(model => model.CountryCodeShort, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.CountryCodeShort, new { htmlAttributes = new { @class = "form-control specialInput", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.CountryCodeShort, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <br />
+                    <input onclick="@("location.href='" + @Url.Action("Index", "Country") + "'")" type="reset" class="btn btn-default" value="@VOI.SISAC.Web.Resources.Resource.Back" title="@VOI.SISAC.Web.Resources.Resource.Back" />
+                    <input type="submit" value="@VOI.SISAC.Web.Resources.Resource.Delete" title="@VOI.SISAC.Web.Resources.Resource.Delete" class="btn btn-default" />
+                </div>
+            </div>
+        }
+    </div>

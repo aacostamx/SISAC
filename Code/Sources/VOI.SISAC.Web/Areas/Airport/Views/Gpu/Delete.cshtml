@@ -1,0 +1,46 @@
+﻿@model VOI.SISAC.Web.Models.VO.Airport.GpuModelVO
+
+    @{
+        ViewBag.Title = @Resource.GpuTitle;
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <div class="container">
+
+        @Html.Partial("_AlertView")
+        <div class="form-horizontal">
+            <h2 class="subtitle_h3_black">Eliminar GPU</h2>
+            <h3>¿Estás seguro que deseas eliminar el registro?</h3>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    @Html.LabelFor(model => model.Gpu.GpuCode, htmlAttributes: new { @class = "control-label subtitle_h5 required-field" })
+                    @Html.EditorFor(model => model.Gpu.GpuCode, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    @Html.LabelFor(model => model.Gpu.GpuName, htmlAttributes: new { @class = "control-label subtitle_h5 required-field" })
+                    @Html.EditorFor(model => model.Gpu.GpuName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    @Html.LabelFor(model => model.Gpu.StationCode, htmlAttributes: new { @class = "control-label subtitle_h5 required-field" })
+                    @Html.EditorFor(model => model.Gpu.StationCode, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                </div>
+            </div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <br />
+                        <input onclick="location.href='@Url.Action("Index", "Gpu")'" type="reset" class="btnVolaris" value=@Resource.Back>
+                        <input type="submit" value=@Resource.Delete class="btnVolaris">
+                        <br />
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>

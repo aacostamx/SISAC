@@ -1,0 +1,235 @@
+﻿@model VOI.SISAC.Web.Models.VO.Airport.NationalJetFuelTicketVO
+
+@{
+    ViewBag.Title = Resource.Details;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cultureForm = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
+    var itinerary = this.ViewBag.ItineraryVO as VOI.SISAC.Web.Models.VO.Itineraries.ItineraryVO;
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p class="subtitle_h3_black">@Resource.NationalJetFuelTicketTitle</p>
+        <p class="subtitle_h3_ancillarie">@Resource.Details</p>
+    </div>
+
+    @if (itinerary != null)
+    {
+        @Html.Partial("_FlightInformation", itinerary)
+    }
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <table id="tbNationalJetFuelTicketView"
+               class="table"
+               data-locale="@cultureForm.ToString()"
+               data-toggle="table"
+               data-mobile-responsive="true">
+            <thead>
+                <tr>
+                    <th data-field="JetFuelTicketID" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                        <strong>@Html.DisplayNameFor(model => model.NationalJetFuelTicketID)</strong>
+                    </th>
+
+                    <th data-field="Sequence" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                        <strong>@Html.DisplayNameFor(model => model.Sequence)</strong>
+                    </th>
+
+                    <th data-field="AirlineCode" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.AirlineCode)</strong>
+                    </th>
+
+                    <th data-field="FlightNumber" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.FlightNumber)</strong>
+                    </th>
+
+                    <th data-field="ItineraryKey" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.ItineraryKey)</strong>
+                    </th>
+
+                    <th data-field="OperationTypeName" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.OperationTypeName)</strong>
+                    </th>
+
+                    <th data-field="Service.ServiceName" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.Service.ServiceName)</strong>
+                    </th>
+
+                    <th data-field="FuelingDateStart" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.FuelingDateStart)</strong>
+                    </th>
+
+                    <th data-field="FuelingTimeStart" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.FuelingTimeStart)</strong>
+                    </th>
+
+                    <th data-field="FuelingDateEnd" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.FuelingDateEnd)</strong>
+                    </th>
+
+                    <th data-field="FuelingTimeEnd" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.FuelingTimeEnd)</strong>
+                    </th>
+
+                    <th data-field="ApronPosition" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.ApronPosition)</strong>
+                    </th>
+
+                    <th data-field="JetFuelProviderNumber" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.JetFuelProviderNumber)</strong>
+                    </th>
+
+                    <th data-field="JetFuelProvider.ProviderName" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.JetFuelProvider.ProviderName)</strong>
+                    </th>
+
+                    <th data-field="IntoPlaneProviderNumber" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.IntoPlaneProviderNumber)</strong>
+                    </th>
+
+                    <th data-field="IntoPlaneProvider.ProviderName" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.IntoPlaneProvider.ProviderName)</strong>
+                    </th>
+
+                    <th data-field="TicketNumber" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.TicketNumber)</strong>
+                    </th>
+
+                    <th data-field="FueledQtyLts" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.FueledQtyLts)</strong>
+                    </th>
+
+                    <th data-field="RemainingQtyKgs" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.RemainingQtyKgs)</strong>
+                    </th>
+
+                    <th data-field="RequestedQtyKgs" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.RequestedQtyKgs)</strong>
+                    </th>
+
+                    <th data-field="FueledQtyKgs" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.FueledQtyKgs)</strong>
+                    </th>
+
+                    <th data-field="DensityFactor" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.DensityFactor)</strong>
+                    </th>
+
+                    <th data-field="NombreUsuario" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.User.NombreUsuario)</strong>
+                    </th>
+
+                    <th data-field="SupplierResponsible" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.SupplierResponsible)</strong>
+                    </th>
+
+                    <th data-field="Remarks" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.Remarks)</strong>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => model.NationalJetFuelTicketID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Sequence)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.AirlineCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.FlightNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.ItineraryKey)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.OperationTypeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Service.ServiceName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.FuelingDateStart, "ToShortDate")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.FuelingTimeStart)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.FuelingDateEnd, "ToShortDate")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.FuelingTimeEnd)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.ApronPosition)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.JetFuelProviderNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.JetFuelProvider.ProviderName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.IntoPlaneProviderNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.IntoPlaneProvider.ProviderName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.TicketNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.FueledQtyLts)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.RemainingQtyKgs)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.RequestedQtyKgs)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.FueledQtyKgs)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.DensityFactor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.User.NombreUsuario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.SupplierResponsible)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Remarks)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 centerText">
+        <br />
+        <button id="btnBackTicketView" type="button" class="btn btn-default" name="@Resource.Back" title="@Resource.Back" onclick="location.href='@Url.Action("Index", "NationalJetFuelTicket", new { Sequence = itinerary.Sequence, AirlineCode = itinerary.AirlineCode, FlightNumber = itinerary.FlightNumber, ItineraryKey = itinerary.ItineraryKey, OperationTypeName = itinerary.OperationTypeName }) '">
+            <i class="fa fa-arrow-left fa-fw"></i>
+            &nbsp;@Resource.Back
+        </button>
+    </div>
+    <br />
+
+</div>
+
+@Scripts.Render("~/bundles/bootstrapTable")
+@Scripts.Render("~/bundles/bootstrapTablePlugins")
+
+<script>
+    var currentLang = '@cultureForm.ToString()';
+
+    $(document).ready(function () {
+        $('#tbNationalJetFuelTicketView').bootstrapTable('toggleView');
+    });
+</script>

@@ -1,0 +1,91 @@
+﻿@model VOI.SISAC.Web.Models.VO.Airport.AirportScheduleVO
+@{
+    ViewBag.Title = VOI.SISAC.Web.Resources.Resource.Add;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var airport = this.ViewBag.Airport as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var scheduleType = this.ViewBag.ScheduleType as List<VOI.SISAC.Business.Dto.Catalogs.ScheduleTypeDto>;
+
+    var cultureForm = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
+}
+
+@Styles.Render("~/Content/bootstrapdtimecss")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.AirportScheduleTitle</p>
+        <p class="subtitle_h3_ancillarie">@VOI.SISAC.Web.Resources.Resource.Add</p>
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                    @Html.LabelFor(model => model.StationCode, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    <div class="styled-select">
+                        @Html.DropDownListFor(model => model.StationCode, airport.Select(h => new SelectListItem
+                            {
+                                Text = h.CodeAndDescription,
+                                Value = h.Id
+                            }), VOI.SISAC.Web.Resources.Resource.SelectItem, new { htmlAttributes = new { @class = "inputForm form-control" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.StationCode, "", new { @class = "text-danger text-danger-error" })
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                    @Html.LabelFor(model => model.ScheduleTypeCode, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    <div class="styled-select">
+                        @Html.DropDownListFor(model => model.ScheduleTypeCode, scheduleType.Select(h => new SelectListItem
+                            {
+                                Text = h.ScheduleTypeName,
+                                Value = h.ScheduleTypeCode
+                            }), VOI.SISAC.Web.Resources.Resource.SelectItem, new { htmlAttributes = new { @class = "inputForm form-control" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.ScheduleTypeCode, "", new { @class = "text-danger text-danger-error" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    @Html.LabelFor(model => model.StartTimeSchedule, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.StartTimeSchedule, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.StartTimeSchedule, "", new { @class = "text-danger text-danger-error" })
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    @Html.LabelFor(model => model.EndTimeSchedule, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.EndTimeSchedule, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EndTimeSchedule, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <br />
+                    <input type="reset" class="btnVolaris" value="@VOI.SISAC.Web.Resources.Resource.Back" onclick="@("location.href='" + @Url.Action("Index", "AirportSchedule") + "'")">
+                    <input type="submit" value="@VOI.SISAC.Web.Resources.Resource.Create" class="btnVolaris">
+                    <br />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+    @Scripts.Render("~/bundles/JSDateTimeValidate")
+    @Scripts.Render("~/bundles/CommonFunctions")
+
+    <script type="text/javascript">
+        var currentLang = '@cultureForm.ToString()';
+    </script>
+
+    <script>
+        $(function () {
+            $('#StartTimeSchedule, #EndTimeSchedule').datetimepicker({
+                format: 'HH:mm'
+            });
+        });
+    </script>
+}
+

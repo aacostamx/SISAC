@@ -1,0 +1,234 @@
+﻿@model VOI.SISAC.Web.Models.VO.Airport.NationalJetFuelTicketVO
+
+@{
+    ViewBag.Title = Resource.Create;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var providerJetFuel = this.ViewBag.ProviderJetFuel as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var providerSupply = this.ViewBag.ProviderSupply as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var userAOR = this.ViewBag.UserAOR as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var service = this.ViewBag.Service as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var itinerary = this.ViewBag.ItineraryVO as VOI.SISAC.Web.Models.VO.Itineraries.ItineraryVO;
+    var cultureForm = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
+    var value = itinerary.DepartureDate.Date;
+    var editDate = itinerary.DepartureDate != DateTime.MinValue ? itinerary.DepartureDate.ToString() : DateTime.Now.ToString();
+    var editEndDate = itinerary.DepartureDate.AddHours(1).ToString();
+}
+
+@Styles.Render("~/Content/bootstrapdtimecss")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p class="subtitle_h3_black">@Resource.NationalJetFuelTicketTitle</p>
+        <p class="subtitle_h3_ancillarie">@Resource.Create</p>
+    </div>
+
+    @if (itinerary != null)
+    {
+        @Html.Partial("_FlightInformation", itinerary)
+    }
+    <br />
+
+    @using (Html.BeginForm())
+    {
+
+        @Html.AntiForgeryToken()
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title subtitle_h6" onclick="toggle_visibility('dvNational');">
+                                <strong>@Resource.NationalJetFuelTicketTitle @Resource.Departure</strong>
+                            </h4>
+                        </div>
+                        <div id="dvNational">
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.ServiceCode, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    <div class="styled-select">
+                                        @Html.DropDownListFor(model => model.ServiceCode, service.Select(h => new SelectListItem
+                                   {
+                                       Text = h.DescriptionAndCode,
+                                       Value = h.Id
+                                   }), Resource.SelectItem, new { ServiceCode = new { @class = "inputForm form-control" } })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.ServiceCode, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.FuelingDateStart, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    @Html.EditorFor(model => model.FuelingDateStart, new { htmlAttributes = new { @class = "form-control", @placeholder = Resource.FormatDateTime, @Value = editDate } })
+                                    @Html.ValidationMessageFor(model => model.FuelingDateStart, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.FuelingDateEnd, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    @Html.EditorFor(model => model.FuelingDateEnd, new { htmlAttributes = new { @class = "form-control", @placeholder = Resource.FormatDateTime, @Value = editEndDate } })
+                                    @Html.ValidationMessageFor(model => model.FuelingDateEnd, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.ApronPosition, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    @Html.EditorFor(model => model.ApronPosition, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumericoCaracteresEspeciales(event, this, 8, 1);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumericoCaracteresEspeciales(event, this, 8, 1)" } })
+                                    @Html.ValidationMessageFor(model => model.ApronPosition, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.JetFuelProviderNumber, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    <div class="styled-select">
+                                        @Html.DropDownListFor(model => model.JetFuelProviderNumber, providerJetFuel.Select(h => new SelectListItem
+                                   {
+                                       Text = h.DescriptionAndCode,
+                                       Value = h.Id
+                                   }), Resource.SelectItem, new { htmlAttributes = new { @class = "inputForm form-control" } })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.JetFuelProviderNumber, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.IntoPlaneProviderNumber, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    <div class="styled-select">
+                                        @Html.DropDownListFor(model => model.IntoPlaneProviderNumber, providerSupply.Select(h => new SelectListItem
+                                   {
+                                       Text = h.DescriptionAndCode,
+                                       Value = h.Id
+                                   }), Resource.SelectItem, new { htmlAttributes = new { @class = "inputForm form-control" } })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.IntoPlaneProviderNumber, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.TicketNumber, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    @Html.EditorFor(model => model.TicketNumber, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumericoDiagonalGuion(event, this, 10);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumericoDiagonalGuion(event, this, 10)" } })
+                                    @Html.ValidationMessageFor(model => model.TicketNumber, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.FueledQtyLts, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    @Html.EditorFor(model => model.FueledQtyLts, new { htmlAttributes = new { @class = "form-control specialInput", @min = 0, @max = 1000000, @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)" } })
+                                    @Html.ValidationMessageFor(model => model.FueledQtyLts, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.RemainingQtyKgs, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                    @Html.EditorFor(model => model.RemainingQtyKgs, new { htmlAttributes = new { @class = "form-control specialInput", @min = 0, @max = 1000000, @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)" } })
+                                    @Html.ValidationMessageFor(model => model.RemainingQtyKgs, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.RequestedQtyKgs, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                    @Html.EditorFor(model => model.RequestedQtyKgs, new { htmlAttributes = new { @class = "form-control specialInput", @min = 0, @max = 1000000, @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)" } })
+                                    @Html.ValidationMessageFor(model => model.RequestedQtyKgs, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.FueledQtyKgs, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                    @Html.EditorFor(model => model.FueledQtyKgs, new { htmlAttributes = new { @class = "form-control specialInput", @min = 0, @max = 1000000, @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)" } })
+                                    @Html.ValidationMessageFor(model => model.FueledQtyKgs, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.DensityFactor, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                    @Html.EditorFor(model => model.DensityFactor, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeroDecimal(event, this, 8, 3);", @onkeyup = "return commonFunctions.validarNumeroDecimal(event, this, 8, 3)" } })
+                                    @Html.ValidationMessageFor(model => model.DensityFactor, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.Label(Resource.NombreUsuario, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    <div class="styled-select">
+                                        @Html.DropDownListFor(model => model.AorUserID, userAOR.Select(h => new SelectListItem
+                                   {
+                                       Text = h.Description,
+                                       Value = h.Id
+                                   }), Resource.SelectItem, new { htmlAttributes = new { @class = "inputForm form-control" } })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.AorUserID, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.SupplierResponsible, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                    @Html.EditorFor(model => model.SupplierResponsible, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 60);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 60)" } })
+                                    @Html.ValidationMessageFor(model => model.SupplierResponsible, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                    @Html.TextAreaFor(model => model.Remarks, 5, 100, new { @class = "form-control", @style = "resize: none;", @onkeypress = "return commonFunctions.validarComentarios(event, this);", @onkeyup = "return commonFunctions.validarComentarios(event, this)" })
+                                    @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <input onclick="@("location.href='" + @Url.Action("Index", "NationalJetFuelTicket", new { Sequence = itinerary.Sequence, AirlineCode = itinerary.AirlineCode, FlightNumber = itinerary.FlightNumber, ItineraryKey = itinerary.ItineraryKey, OperationTypeName = itinerary.OperationTypeName }) + "'")" type="reset" class="btnVolaris" value="@Resource.Back" />
+                            <input type="submit" value=@Resource.Save class="btnVolaris" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+    @Scripts.Render("~/bundles/JSDateTimeValidate")
+    @Scripts.Render("~/bundles/CommonFunctions")
+
+    <script type="text/javascript">
+        var currentLang = '@cultureForm.ToString()';
+        var format = '@Resource.FormatDateTime'
+
+        $(function () {
+            $('#FuelingDateStart').datetimepicker({
+                format: format.toString(),
+                locale: currentLang,
+                stepping: 5,
+                showTodayButton: true,
+                showClear: true
+            });
+            $('#FuelingDateEnd').datetimepicker({
+                useCurrent: false,
+                format: format.toString(),
+                locale: currentLang,
+                stepping: 5,
+                showTodayButton: true,
+                showClear: true
+            });
+        });
+
+        $(function () {
+            $("#FuelingDateStart").on("dp.change", function (e) {
+                $('#FuelingDateEnd').data("DateTimePicker").clear();
+                $('#FuelingDateEnd').data("DateTimePicker").minDate(e.date);
+            });
+            $("#FuelingDateEnd").on("dp.change", function (e) {
+                $('#FuelingDateStart').data("DateTimePicker").maxDate(e.date);
+            });
+        });
+
+        function toggle_visibility(id) {
+            var e = document.getElementById(id);
+            e.style.display = (e.style.display == 'none') ? 'block' : 'none';
+        }
+    </script>
+}
+

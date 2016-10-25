@@ -1,0 +1,113 @@
+﻿@model IEnumerable<VOI.SISAC.Web.Models.VO.Finance.NationalFuelContractVO>
+
+@{
+    ViewBag.Title = Resource.NationalFuelContract;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cultureForm = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+}
+@Styles.Render("~/Content/bootstraptablecss")
+@Styles.Render("~/bundles/CSSbootstrapCombobox")
+@Styles.Render("~/Content/bootstrapdtimecss")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    @Html.Partial("_UnauthorizedActionModal")
+    <h2 class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.NationalFuelContract</h2>
+    @Html.Partial("Partial/_SearchModal")
+    @Html.Partial("Partial/_InactiveModal")
+    @Html.Partial("Partial/_UploadFile")
+    <div id="toolbar">
+        @if (this.User.IsInRole("NATFUELCON-ADD")) {
+            <button type="button" class="btn btn-default" name="Add" title="@VOI.SISAC.Web.Resources.Resource.Add" onclick="location.href='@Url.Action("Create", "NationalFuelContract")'">
+                <i class="fa fa-plus"></i>&nbsp; @VOI.SISAC.Web.Resources.Resource.Add
+            </button>
+        }
+        @if (this.User.IsInRole("NATFUELCON-UPLF")) { 
+            <button type="button" class="btn btn-default" name="Upload" title="@Resource.UploadFile" data-toggle="modal" data-target="#UploadFile">
+                <i class="fa fa-cloud-upload"></i>&nbsp; @Resource.UploadFile
+            </button>
+        }
+        @if (this.User.IsInRole("NATFUELCON-SEARCH")) { 
+            <button type="button" class="btn btn-default" name="Search" title="@Resource.Search" data-toggle="modal" data-target="#SearchModal">
+                <i class="fa fa-search"></i>&nbsp;@Resource.Search
+            </button>
+        }
+    </div>
+
+    <div id="TableContent">
+        @Html.Partial("Partial/_NationalFuelContractTable", Model)
+    </div>
+
+    <br />
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/bootstrapTable")
+    @Scripts.Render("~/bundles/bootstrapTablePlugins")
+    @Scripts.Render("~/bundles/ExportTable")
+    @Scripts.Render("~/bundles/BootstrapInputFile")
+    @Scripts.Render("~/bundles/BootstrapContextMenu")
+    @Scripts.Render("~/bundles/JSbootstrapCombobox")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/JSDateTimeValidate")
+    @Scripts.Render("~/bundles/NationalFuelContractJS")
+    <script type="text/javascript">
+        var currentLang = '@cultureForm.ToString()';
+
+        var $table = $('#table');
+
+        $('#modalTable').on('shown.bs.modal', function () {
+            $table.bootstrapTable('resetView');
+        });
+
+        $(document).ready(function () {
+            $('.combobox').combobox();
+        });
+
+
+        $('#tbNationalFuelContract').bootstrapTable({
+            contextMenu: '#context-menu',
+            contextMenuButton: '.menuButton',
+            contextMenuAutoClickRow: true,
+            contextMenuTrigger: 'right',
+            onContextMenuItem: function (row, $el) {
+
+                if ($el.data("item") == '@Resource.Edit') {
+                    var url = '@Url.Action("Edit", "NationalFuelContract")';
+                    url = url.concat('?effectiveDate=' + row.EffectiveDate.trim());
+                    url = url.concat('&airlineCode=' + row.AirlineCode.trim());
+                    url = url.concat('&stationCode=' + row.StationCode.trim());
+                    url = url.concat('&serviceCode=' + row.ServiceCode.trim());
+                    url = url.concat('&providerNumberPrimary=' + row.ProviderNumberPrimary.trim());
+                    window.location = url;
+                }
+
+                if ($el.data("item") == '@Resource.Delete') {
+                    var url = '@Url.Action("Delete", "NationalFuelContract")';
+                    url = url.concat('?effectiveDate=' + row.EffectiveDate.trim());
+                    url = url.concat('&airlineCode=' + row.AirlineCode.trim());
+                    url = url.concat('&stationCode=' + row.StationCode.trim());
+                    url = url.concat('&serviceCode=' + row.ServiceCode.trim());
+                    url = url.concat('&providerNumberPrimary=' + row.ProviderNumberPrimary.trim());
+                    window.location = url;
+                }
+
+                if ($el.data("item") == '@Resource.Details') {
+                    var url = '@Url.Action("Detail", "NationalFuelContract")';
+                    url = url.concat('?effectiveDate=' + row.EffectiveDate.trim());
+                    url = url.concat('&airlineCode=' + row.AirlineCode.trim());
+                    url = url.concat('&stationCode=' + row.StationCode.trim());
+                    url = url.concat('&serviceCode=' + row.ServiceCode.trim());
+                    url = url.concat('&providerNumberPrimary=' + row.ProviderNumberPrimary.trim());
+                    window.location = url;
+                }
+
+                if ($el.data("item") == '@Resource.Inactive') {
+                    NationalFuelContract.showInactiveWindow(row);
+                }
+            }
+        });
+    </script>
+}

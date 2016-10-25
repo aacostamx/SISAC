@@ -1,0 +1,176 @@
+﻿@model VOI.SISAC.Web.Models.VO.Airport.JetFuelTicketVO
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ///Itinerary
+    var Sequence = this.ViewBag.Sequence;
+    var AirlineCode = this.ViewBag.AirlineCode;
+    var FlightNumber = this.ViewBag.FlightNumber;
+    var ItineraryKey = this.ViewBag.ItineraryKey;
+    var OperationTypeName = this.ViewBag.OperationTypeName;
+}
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.JetFuelTicketTitle</p>
+        <p class="subtitle_h3_ancillarie">@VOI.SISAC.Web.Resources.Resource.Details</p>
+    </div>
+    @if (Model.Itinerary != null)
+        {
+            @Html.Partial("_FlightInformation", Model.Itinerary)
+        }
+    <br />
+   
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="dl-horizontal overflow-row">
+            <br />
+    @*        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <br />
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <p class="subtitle_h4">@VOI.SISAC.Web.Resources.Resource.ItineraryDefinition</p>
+                </div>
+                <dl>                
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.JetFuelTicketID)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.JetFuelTicketID)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.Sequence)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.Sequence)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.AirlineCode)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.AirlineCode)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.FlightNumber)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.FlightNumber)
+                    </dd>   
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.ItineraryKey)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.ItineraryKey)
+                    </dd>                          
+                </dl>
+                <br />
+            </div>*@
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">            
+                <dl>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.OperationTypeName)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.OperationTypeName)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.Service.ServiceName)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.Service.ServiceName)
+                    </dd>                   
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.FuelingDate)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.FuelingDate, "ToShortDate")
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.FuelingTime)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.FuelingTime)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.JetFuelProvider.ProviderName)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.JetFuelProvider.ProviderName)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.IntoPlaneProvider.ProviderName)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.IntoPlaneProvider.ProviderName)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.TicketNumber)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.TicketNumber)
+                    </dd>   
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.FueledQtyGals)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.FueledQtyGals)
+                    </dd> 
+                
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.RemainingQry)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.RemainingQry)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.FueledQry)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.FueledQry)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.DensityFactor)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.DensityFactor)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.User.NombreUsuario)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.User.NombreUsuario)
+                    </dd>   
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.SupplierResponsible)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.SupplierResponsible)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.Remarks)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.Remarks)
+                    </dd>        
+                </dl>
+                <br />
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <br />
+            <br />
+            <input style="vertical-align:central" onclick="@("location.href='" + @Url.Action("Index", "JetFuelTicket", new { Sequence = Sequence, AirlineCode = AirlineCode, FlightNumber = FlightNumber, ItineraryKey = ItineraryKey, OperationTypeName = OperationTypeName}) + "'")" type="reset" class="btnVolaris" value="@Resource.Back">
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/CommonFunctions")
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+

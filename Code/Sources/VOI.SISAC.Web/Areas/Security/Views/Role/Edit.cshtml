@@ -1,0 +1,51 @@
+﻿@model VOI.SISAC.Web.Models.VO.Security.RoleVO
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/bootstrapdtimecss")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            
+            <div class="form-horizontal">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                   <p class="subtitle_h3_black">@Resource.RoleTitle</p>
+                   <p class="subtitle_h3_ancillarie">@VOI.SISAC.Web.Resources.Resource.Add</p>
+            </div>
+            @Html.ValidationSummary(true)
+            <div class="row">
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        @Html.LabelFor(model => model.RoleCode,  new { @class = "subtitle_h5 control-label required-field"})
+                        @Html.EditorFor(model => model.RoleCode, new { htmlAttributes = new { @class = "form-control specialInput", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.RoleCode, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        @Html.LabelFor(model => model.RoleName, new { @class = "subtitle_h5 control-label required-field" })
+                        @Html.EditorFor(model => model.RoleName , new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 50);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 50)" } })
+                        @Html.ValidationMessageFor(model => model.RoleName, "", new { @class = "text-danger" })
+                    </div>
+            </div>
+
+            <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <br />
+                            <input onclick="location.href='@Url.Action("Index","Role")    '" type="reset" class="btnVolaris" value="@VOI.SISAC.Web.Resources.Resource.Back" title="@VOI.SISAC.Web.Resources.Resource.Back">
+                            <input type="submit" value="@VOI.SISAC.Web.Resources.Resource.Save" title="@VOI.SISAC.Web.Resources.Resource.Save" class="btnVolaris">
+                        <br />
+                    </div>
+            </div>
+    </div>            
+        }
+    </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/CommonFunctions")
+}

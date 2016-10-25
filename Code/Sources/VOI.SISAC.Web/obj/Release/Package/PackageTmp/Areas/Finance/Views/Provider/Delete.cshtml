@@ -1,0 +1,51 @@
+﻿@model VOI.SISAC.Web.Models.VO.Finance.ProviderVO
+@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <p class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.ProviderTitle</p>
+    <p class="subtitle_h3_ancillarie">@VOI.SISAC.Web.Resources.Resource.Delete</p>
+</div>
+
+<div class="container">
+    <h3>@VOI.SISAC.Web.Resources.Resource.ConfirmDelete</h3>
+    <div class="form-horizontal">
+        @*<hr />*@
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                @Html.LabelFor(model => model.ProviderNumber, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.ProviderNumber, new { htmlAttributes = new { @class = "form-control specialInput", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.ProviderNumber, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                @Html.LabelFor(model => model.ProviderName, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.ProviderName, new { htmlAttributes = new { @class = "inputForm form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.ProviderName, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                @Html.LabelFor(model => model.ProviderShortName, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.ProviderShortName, new { htmlAttributes = new { @class = "inputForm form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.ProviderShortName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <br />
+                    <input onclick="location.href='@Url.Action("Index","Provider")'" type="reset" class="btnVolaris" value="@VOI.SISAC.Web.Resources.Resource.Back">
+                    <input type="submit" value="@VOI.SISAC.Web.Resources.Resource.Delete" class="btnVolaris" />
+                    <br />
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/CommonFunctions")
+}

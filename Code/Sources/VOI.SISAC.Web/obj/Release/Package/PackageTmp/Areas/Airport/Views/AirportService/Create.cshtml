@@ -1,0 +1,259 @@
+﻿@model VOI.SISAC.Web.Models.VO.Airport.AirportServiceVO
+
+@{
+    this.ViewBag.Title = Resource.Edit;
+    this.Layout = "~/Views/Shared/_Layout.cshtml";
+    var cultureForm = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
+    var services = this.ViewBag.Services != null ? this.ViewBag.Services as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto> :
+        new List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>();
+    var providers = this.ViewBag.Providers != null ? this.ViewBag.Providers as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto> :
+        new List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>();
+    var waters = this.ViewBag.Waters != null ? this.ViewBag.Waters as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto> :
+        new List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>();
+    var gpu = this.ViewBag.Gpu != null ? this.ViewBag.Gpu as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto> :
+        new List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>();
+    var gpuObservation = this.ViewBag.GpuObservations != null ? this.ViewBag.GpuObservations as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto> :
+        new List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>();
+}
+
+@Styles.Render("~/Content/bootstrapdtimecss")
+@Styles.Render("~/Content/bootstraptablecss")
+@Styles.Render("~/bundles/SweetAlertCSS")
+
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        @if (ViewBag.OperationTypeName == "LLEGADA")
+        {
+            <p class="subtitle_h3_black">@Resource.AirportServicesArrive</p>
+        }
+        else if (ViewBag.OperationTypeName == "SALIDA")
+        {
+            <p class="subtitle_h3_black">@Resource.AirportServicesDeparture</p>
+        }
+        <p class="subtitle_h3_ancillarie">@Resource.Add</p>
+        <br />
+    </div>
+    @if (Model.Itinerary != null)
+    {
+        @Html.Partial("_FlightInformation", Model.Itinerary)
+    }
+</div>
+
+<div class="container">
+    @using (Html.BeginForm("Create", "AirportService", FormMethod.Post, new { name = "formAirportServices", id = "formAirportService" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @* Operative string *@
+            @Html.HiddenFor(model => model.Sequence)
+            @Html.HiddenFor(model => model.AirlineCode)
+            @Html.HiddenFor(model => model.FlightNumber)
+            @Html.HiddenFor(model => model.ItineraryKey)
+
+            @Html.HiddenFor(model => model.OperationTypeName)
+            @Html.HiddenFor(model => model.Itinerary.ArrivalStation, new { @id = "ArrivalStation" })
+            @Html.HiddenFor(model => model.Itinerary.DepartureStation, new { @id = "DepartureStation" })
+            @Html.HiddenFor(model => model.Itinerary.EquipmentNumber, new { @id = "EquipmentNumber" })
+
+            <div id="accordionAirportService" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading" id="headingOne">
+                        <h4 class="panel-title subtitle_h6">
+                            <strong>@Resource.ServiceConfiguration</strong>
+                        </h4>
+                    </div>
+                    <div id="ServiceConfiguration">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                @Html.LabelFor(model => model.ServiceCode, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                <div class="styled-select">
+                                    @Html.DropDownListFor(model => model.ServiceCode, services.Select(h => new SelectListItem
+                               {
+                                   Text = h.Description,
+                                   Value = h.Id
+                               }), Resource.SelectItem, new { @class = "inputForm form-control", @placeholder = Resource.SelectItem, @onchange = "AirportServicesController.GetProviders()", @id = "ServicesDropDown" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.ServiceCode, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                @Html.LabelFor(model => model.ProviderNumber, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                <div class="styled-select">
+                                    @Html.DropDownListFor(model => model.ProviderNumber, providers.Select(h => new SelectListItem
+                               {
+                                   Text = h.CodeAndDescription,
+                                   Value = h.Id
+                               }), Resource.SelectItem, new { @class = "inputForm form-control", @placeholder = Resource.SelectItem })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.ProviderNumber, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                @Html.LabelFor(model => model.ApronPosition, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                @Html.EditorFor(model => model.ApronPosition, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumericoCaracteresEspeciales(event, this, 8, 2);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumericoCaracteresEspeciales(event, this, 8, 2);" } })
+                                @Html.ValidationMessageFor(model => model.ApronPosition, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                @Html.LabelFor(model => model.QtyServices, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                @Html.EditorFor(model => model.QtyServices, new { htmlAttributes = new { @class = "form-control", @min = 0, @max = 1000000, @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)" } })
+                                @Html.ValidationMessageFor(model => model.QtyServices, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-3  col-md-3 col-sm-12 col-xs-12">
+                                @Html.LabelFor(model => model.StartDateService, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                @Html.EditorFor(model => model.StartDateService, new { htmlAttributes = new { @class = "form-control ClassDate", @placeholder = Resource.FormatDate } })
+                                @Html.ValidationMessageFor(model => model.StartDateService, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                @Html.LabelFor(model => model.StartTimeService, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                @Html.EditorFor(model => model.StartTimeService, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.StartTimeService, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                @Html.LabelFor(model => model.EndDateService, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                @Html.EditorFor(model => model.EndDateService, new { htmlAttributes = new { @class = "form-control ClassDate", @placeholder = Resource.FormatDate } })
+                                @Html.ValidationMessageFor(model => model.EndDateService, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                @Html.LabelFor(model => model.EndTimeService, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                @Html.EditorFor(model => model.EndTimeService, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.EndTimeService, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+                        </div>
+
+                        <div id="DrinkingWaterSection">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12 col-xs-12">
+                                    @Html.LabelFor(model => model.DrinkingWaterID, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    <div class="styled-select">
+                                        @Html.DropDownListFor(model => model.DrinkingWaterID, waters.Select(h => new SelectListItem
+                                   {
+                                       Text = h.Description,
+                                       Value = h.Id
+                                   }), Resource.SelectItem, new { @class = "inputForm form-control", @placeholder = Resource.SelectItem })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.DrinkingWaterID, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="GpuSection">
+                            <div class="row">
+                                <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+                                    @Html.LabelFor(model => model.GpuCode, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    <div class="styled-select">
+                                        @Html.DropDownListFor(model => model.GpuCode, gpu.Select(h => new SelectListItem
+                                   {
+                                       Text = h.Description,
+                                       Value = h.Id
+                                   }), Resource.SelectItem, new { @class = "inputForm form-control", @placeholder = Resource.SelectItem })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.GpuCode, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+                                <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+                                    @Html.LabelFor(model => model.GpuStartMeter, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                    @Html.EditorFor(model => model.GpuStartMeter, new { htmlAttributes = new { @class = "form-control", @min = 0, @max = 1000000, @onkeypress = "return commonFunctions.validarNumeroDecimal(event, this, 7, 2);;", @onkeyup = "return commonFunctions.validarNumeroDecimal(event, this, 7, 2);" } })
+                                    @Html.ValidationMessageFor(model => model.GpuStartMeter, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+                                <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+                                    @Html.LabelFor(model => model.GpuEndMeter, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                    @Html.EditorFor(model => model.GpuEndMeter, new { htmlAttributes = new { @class = "form-control", @min = 0, @max = 1000000, @onkeypress = "return commonFunctions.validarNumeroDecimal(event, this, 7, 2);", @onkeyup = "return commonFunctions.validarNumeroDecimal(event, this, 10, 2);" } })
+                                    @Html.ValidationMessageFor(model => model.GpuEndMeter, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+                                <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+                                    @Html.LabelFor(model => model.GpuObservationCode, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    <div class="styled-select">
+                                        @Html.DropDownListFor(model => model.GpuObservationCode, gpuObservation.Select(h => new SelectListItem
+                                   {
+                                       Text = h.CodeAndDescription,
+                                       Value = h.Id
+                                   }), Resource.SelectItem, new { @class = "inputForm form-control", @placeholder = Resource.SelectItem })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.GpuObservationCode, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="ParkingSection">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-12 col-xs-12">
+                                    @Html.LabelFor(model => model.FuelBeforeLanding, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    @Html.EditorFor(model => model.FuelBeforeLanding, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeroDecimal(event, this, 8, 2);", @onkeyup = "return commonFunctions.validarNumeroDecimal(event, this, 8, 2)" } })
+                                    @Html.ValidationMessageFor(model => model.FuelBeforeLanding, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+                                <div class="col-md-3 col-sm-12 col-xs-12">
+                                    @Html.LabelFor(model => model.FuelLoaded, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    @Html.EditorFor(model => model.FuelLoaded, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeroDecimal(event, this, 8, 2);", @onkeyup = "return commonFunctions.validarNumeroDecimal(event, this, 8, 2)" } })
+                                    @Html.ValidationMessageFor(model => model.FuelLoaded, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12 col-sm-12 col-xs-12">
+                                @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                @Html.TextAreaFor(model => model.Remarks, 5, 100, new { @class = "form-control", @style = "resize: none;", @onkeypress = "return commonFunctions.validarComentarios(event, this);", @onkeyup = "return commonFunctions.validarComentarios(event, this)" })
+                                @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger text-danger-error" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    }
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12  text-center">
+            <button id="btnBackServices" type="button" class="btn btn-default" name="@Resource.Back" title="@Resource.Back" onclick="location.href='@Url.Action("Index", "AirportService", new
+                                   {
+                                       Sequence = Model.Itinerary.Sequence,
+                                       AirlineCode = Model.Itinerary.AirlineCode,
+                                       FlightNumber = Model.Itinerary.FlightNumber,
+                                       ItineraryKey = Model.Itinerary.ItineraryKey,
+                                       OperationTypeName = Model.OperationTypeName
+                                   })'">
+                <i class="fa fa-arrow-left  fa-fw"></i>
+                &nbsp;@Resource.Back
+            </button>
+            <button id="btnSaveServices" type="button" class="btn btn-default" name="@Resource.Save" title="@Resource.Save" onclick="AirportServicesController.postForm()">
+                <i class="fa fa-floppy-o fa-fw"></i>
+                &nbsp;@Resource.Save
+            </button>
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrapTable")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+    @Scripts.Render("~/bundles/JSDateTimeValidate")
+    @Scripts.Render("~/bundles/CommonFunctions")
+    @Scripts.Render("~/bundles/AirportServicesJS")
+    @Scripts.Render("~/bundles/SweetAlertJS")
+
+    <script type="text/javascript">
+        var currentLang = '@cultureForm.ToString()';
+        var editionMode = true;
+    </script>
+
+    <script>
+        $(function () {
+            $('#StartTimeService, #EndTimeService').datetimepicker({
+                format: 'HH:mm'
+            });
+        });
+    </script>
+}

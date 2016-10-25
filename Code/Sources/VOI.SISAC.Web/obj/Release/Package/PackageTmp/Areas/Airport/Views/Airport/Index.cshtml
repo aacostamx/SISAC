@@ -1,0 +1,108 @@
+﻿@model IEnumerable<VOI.SISAC.Web.Models.VO.Airport.AirportVO>
+
+@{
+    ViewBag.Title = @Resource.AirportTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <h2 class="subtitle_h3_black">@Resource.AirportTitle</h2>
+    <div id="toolbar">
+        @if (User.IsInRole("AIRPORT-ADD"))
+        { 
+            <button type="button" class="btn btn-default" name="Add" title="@Resource.Add" onclick="location.href='@Url.Action("Create", "Airport")'">
+                <i class="fa fa-plus"></i>&nbsp;@Resource.Add
+            </button>
+        }
+    </div>
+
+    <table id="tbAirport"
+        data-toolbar="#toolbar"
+        class="table"
+        data-toggle="table"
+        data-export-types="['excel']"
+        data-show-export="true"
+        data-show-columns="true"
+        data-search="true"
+        data-show-toggle="true"
+        data-show-pagination-switch="true"
+        data-mobile-responsive="true"
+        data-check-on-init="true"
+        data-pagination="true"
+        data-export-data-type="all"
+        data-page-size="10">
+        <thead>
+            <tr>
+                <th data-field="StationCode" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.StationCode)</strong>
+                </th>
+                <th data-field="StationName" data-halign="left" data-align="left" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.StationName)</strong>
+                </th>
+                <th data-field="CountryCode" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.CountryCode)</strong>
+                </th>
+                <th data-field="OpeningTime" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.OpeningTime)</strong>
+                </th>
+                <th data-field="ClosingTime" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.ClosingTime)</strong>
+                </th>
+                <th data-field="AirportGroupCode" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                    <strong>@Html.DisplayNameFor(model => model.AirportGroupCode)</strong>
+                </th>
+                @if (User.IsInRole("AIRPORT-DEL") || User.IsInRole("AIRPORT-UPD"))
+                { 
+                    <th data-field="@Resource.Actions" data-align="center" data-halign="center"><strong>@Resource.Actions</strong></th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StationCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StationName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CountryCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OpeningTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClosingTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AirportGroupCode)
+                    </td>
+                    @if (User.IsInRole("AIRPORT-DEL") || User.IsInRole("AIRPORT-UPD"))
+                    {
+                        <td>
+                            @if (User.IsInRole("AIRPORT-UPD"))
+                            { 
+                                <button class="btn btn-default" type="button" name="Edit" title="@Resource.Edit" onclick="location.href='@Url.Action("Edit", "Airport", new { id = item.StationCode })'"><i class="fa fa-pencil fa-fw"></i></button>
+                            }
+                            @if (User.IsInRole("AIRPORT-DEL"))
+                            { 
+                                <button class="btn btn-default" type="button" name="Delete" title="@Resource.Delete" onclick="location.href='@Url.Action("Delete", "Airport", new { id = item.StationCode })'"><i class="fa fa-trash-o fa-fw"></i></button>
+                            }
+                        </td>
+                    }
+                </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+@Scripts.Render("~/bundles/bootstrapTable")
+@Scripts.Render("~/bundles/bootstrapTablePlugins")
+@Scripts.Render("~/bundles/ExportTable")

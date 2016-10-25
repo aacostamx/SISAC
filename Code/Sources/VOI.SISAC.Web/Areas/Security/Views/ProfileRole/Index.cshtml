@@ -1,0 +1,60 @@
+﻿@model VOI.SISAC.Web.Models.VO.Security.ProfileVO
+@{
+    ViewBag.Title = "ProfileRole";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cultureForm = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
+    var ListRoles = this.ViewBag.ListRoles as List<VOI.SISAC.Business.Dto.Security.RoleDto>;
+    var Profile = this.ViewBag.Profile as VOI.SISAC.Business.Dto.Security.ProfileDto;
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <h2 class="subtitle_h3_black">Roles per Profile</h2>
+    @using (Html.BeginForm("Edit","ProfileRole", FormMethod.Post))
+    {
+        <div class="form-horizontal">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <p class="subtitle_h3_ancillarie">Edit Roles</p>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <input id="ProfileCode" type="hidden" name="ProfileCode" value="@Profile.ProfileCode" />
+                <div class="row">
+                    @Html.Label("", "Profile Name", htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                    @Html.TextBox("Profile Name", Profile.ProfileName, htmlAttributes: new { @class = "form-control specialInput", @readonly = "readonly" })
+                </div>
+                <div class="row">
+                    <label class="subtitle_h5 control-label">Roles</label>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                           @* @foreach (var item in ListRoles)
+                            {
+                                <input type="checkbox" class="checkVolaris top-padding" id="@item.RoleCode" checked="@item.IsChecked" name="Role[0].item.RoleCode"/>
+                                <label for="@item.RoleCode" class="control_gris"><span>&nbsp;</span></label>
+                                <label class="subtitle_h6_blue">@item.RoleName</label>
+                                
+                            }*@
+                            <div id="RolesSection">
+                                  @* This setion will be dinamically set in JavaScriipt *@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12  text-center">
+                    <button id="btnBack" type="button" class="btn btn-default" name="@VOI.SISAC.Web.Resources.Resource.Back" title="@VOI.SISAC.Web.Resources.Resource.Back" onclick="location.href='@Url.Action("Index", "Profile")'">
+                        &nbsp;@VOI.SISAC.Web.Resources.Resource.Back
+                    </button>
+                    <input type="submit" class="btn btn-default" value="@VOI.SISAC.Web.Resources.Resource.Save">
+                </div>
+            </div>
+        </div>
+     }
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/SISAC/Security/ProfileRole.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/CommonFunctions")
+}

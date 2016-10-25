@@ -1,0 +1,135 @@
+﻿@model VOI.SISAC.Web.Models.VO.Process.JetFuelPolicyControlParamsVO
+@{
+    this.Layout = "~/Views/Shared/_Layout.cshtml";
+    this.ViewBag.Title = VOI.SISAC.Web.Resources.Resource.SendPolicy;
+    var process = this.ViewBag.Process != null ? this.ViewBag.Process as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto> : new List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>();
+    var airline = this.ViewBag.Airline != null ? this.ViewBag.Airline as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto> : new List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>();
+    var airport = this.ViewBag.Airport != null ? this.ViewBag.Airport as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto> : new List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>();
+    var service = this.ViewBag.Service != null ? this.ViewBag.Service as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto> : new List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>();
+    var provider = this.ViewBag.Provider != null ? this.ViewBag.Provider as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto> : new List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>();
+    var cultureForm = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
+}
+
+@Styles.Render("~/Content/bootstrapdtimecss")
+@Styles.Render("~/bundles/BootstrapMultiselectCSS")
+@Styles.Render("~/bundles/SweetAlertCSS")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.SendPolicy</p>
+    </div>
+
+    <div class="form-horizontal">
+        @using (Html.BeginForm("Send", "CreatePolicy", new { Area = "Process" }, FormMethod.Post, new { id = "CalculationResultForm" }))
+        {
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                    @Html.LabelFor(c => c.PolicyId, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                    @Html.EditorFor(c => c.PolicyId, new { htmlAttributes = new { @class = "form-control specialInput", @readonly = "readonly" } })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <label class="subtitle_h5 control-label">@VOI.SISAC.Web.Resources.Resource.RealPeriod</label>
+                    <div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <label class="subtitle_h5 control-label required-field">@VOI.SISAC.Web.Resources.Resource.StartDate</label>
+                            @Html.TextBoxFor(model => model.StartDateReal, new { @class = "form-control", @Value = Model.StartDateReal.ToString(VOI.SISAC.Web.Resources.Resource.DateTimeFormat), @readonly = "readonly" })
+                            @*<input class="form-control ClassDate" type="datetime" name="StartDateReal" id="StartDateReal" />*@
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label required-field">@VOI.SISAC.Web.Resources.Resource.EndDate</label>
+                            @Html.TextBoxFor(model => model.EndDateReal, new { @class = "form-control", @Value = Model.EndDateReal.ToString(VOI.SISAC.Web.Resources.Resource.DateTimeFormat), @readonly = "readonly" })
+                            @*<input class="form-control ClassDate" type="datetime" name="EndDateReal" id="EndDateReal" />*@
+                        </div>
+                    </div>
+                </div>
+
+                <div id="ComplementaryDate" name="ComplementaryDate" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <label class="subtitle_h5 control-label">@VOI.SISAC.Web.Resources.Resource.ComplementaryPeriod</label>
+                    <div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <label class="subtitle_h5 control-label required-field">@VOI.SISAC.Web.Resources.Resource.StartDate</label>
+                            @{var startDateComplementary = Model.StartDateComplementary.Value != default(DateTime) ? Model.StartDateComplementary.Value.ToString(VOI.SISAC.Web.Resources.Resource.DateTimeFormat) : string.Empty;}
+                            @Html.TextBoxFor(model => model.StartDateComplementary, new { @class = "form-control", @Value = startDateComplementary, @readonly = "readonly" })
+                            @*<input class="form-control ClassDate" type="datetime" name="StartDateComplementary" id="StartDateComplementary" readonly />*@
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <label class="subtitle_h5 control-label required-field">@VOI.SISAC.Web.Resources.Resource.EndDate</label>
+                            @{var endDateComplementary = Model.EndDateComplementary != default(DateTime) ? Model.EndDateComplementary.Value.ToString(VOI.SISAC.Web.Resources.Resource.DateTimeFormat) : string.Empty;}
+                            @Html.TextBoxFor(model => model.EndDateComplementary, new { @class = "form-control", @Value = endDateComplementary, @readonly = "readonly" })
+                            @*<input class="form-control ClassDate" type="datetime" name="EndDateComplementary" id="EndDateComplementary" readonly />*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                    <label class="subtitle_h5 control-label required-field">@VOI.SISAC.Web.Resources.Resource.BaseDate</label>
+                    @Html.TextBoxFor(model => model.DateBaseline, new { @class = "form-control", @Value = Model.DateBaseline.ToString(VOI.SISAC.Web.Resources.Resource.DateTimeFormat), @readonly = "readonly" })
+                    @*<input class="form-control ClassDate" type="datetime" name="DateBaseline" id="DateBaseline" />*@
+                    @Html.ValidationMessage("DateBaseline", new { @class = "text-danger text-danger-error" })
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                    <label class="subtitle_h5 control-label required-field">@VOI.SISAC.Web.Resources.Resource.ValueDate</label>
+                    @Html.TextBoxFor(model => model.DateValue, new { @class = "form-control", @Value = Model.DateValue.ToString(VOI.SISAC.Web.Resources.Resource.DateTimeFormat), @readonly = "readonly" })
+                    @*<input class="form-control ClassDate" type="datetime" name="DateValue" id="DateValue" />*@
+                    @Html.ValidationMessage("DateValue", new { @class = "text-danger text-danger-error" })
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                    <label class="subtitle_h5 control-label required-field">@VOI.SISAC.Web.Resources.Resource.PostingDate</label>
+                    @Html.TextBoxFor(model => model.DatePosting, new { @class = "form-control", @Value = Model.DatePosting.ToString(VOI.SISAC.Web.Resources.Resource.DateTimeFormat), @readonly = "readonly" })
+                    @*<input class="form-control ClassDate" type="datetime" name="DatePosting" id="DatePosting" />*@
+                    @Html.ValidationMessage("DatePosting", new { @class = "text-danger text-danger-error" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <label class="subtitle_h5 control-label">@VOI.SISAC.Web.Resources.Resource.HeaderText</label>
+                    @Html.TextAreaFor(model => model.HeaderText, 1, 1000, new { @class = "form-control", @readonly = "readonly" })
+                    @*<textarea class="form-control" id="HeaderText" name="HeaderText" rows="1" cols="1000"></textarea>*@
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <label class="subtitle_h5 control-label">@VOI.SISAC.Web.Resources.Resource.ItemText</label>
+                    @Html.TextAreaFor(model => model.ItemText, 1, 1000, new { @class = "form-control", @readonly = "readonly" })
+                    @*<textarea class="form-control" id="ItemText" name="ItemText" rows="1" cols="1000"></textarea>*@
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <button id="btnBack" onclick="@("location.href='" + @Url.Action("Index", "CreatePolicy") + "'")" type="button" class="btn btn-default" title="@VOI.SISAC.Web.Resources.Resource.Back" name="Back">
+                        @VOI.SISAC.Web.Resources.Resource.Back
+                    </button>
+                    @if (Model.PolicyId > 0)
+                    { 
+                        <button id="btnSendPolicy" onclick="CreatePolicyController.postSend();" type="button" class="btn btn-default" title="@VOI.SISAC.Web.Resources.Resource.SendPolicy" name="SendPolicy">
+                            @VOI.SISAC.Web.Resources.Resource.SendPolicy
+                        </button>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+    @Scripts.Render("~/bundles/JSDateTimeValidate")
+    @Scripts.Render("~/bundles/BootstrapMultiselect")
+    @Scripts.Render("~/bundles/SweetAlertJS")
+    @Scripts.Render("~/bundles/CreatePolicySendJS")
+
+    <script type="text/javascript">
+        var currentLang = '@cultureForm.ToString()';
+    </script>
+}

@@ -1,0 +1,187 @@
+﻿@{
+    this.ViewBag.Title = "Administrar Facturas";
+    this.Layout = "~/Views/Shared/_Layout.cshtml";
+    var cultureForm = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+@Styles.Render("~/Content/bootstrapdtimecss")
+@Styles.Render("~/bundles/SweetAlertCSS")
+
+<div class="container">
+    @Html.Partial("_DeleteModal")
+    @Html.Partial("_AlertView")
+
+    <h2 class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.ManageInvoices</h2>
+
+    @Html.Partial("Partial/_UploadInvoiceFile")
+    @Html.Partial("Partial/_CreatePolicy")
+    <div id="toolbar">
+        @if (User.IsInRole("NTLJETINVO-UPLF"))
+        {
+            <button id="btnUpload" data-toggle="modal"
+                    data-target="#UploadFile"
+                    type="button"
+                    class="btn btn-default"
+                    onclick="NationalJetFuelInvoiceController.getAirlinesCombo()"
+                    name="@VOI.SISAC.Web.Resources.Resource.UploadFile"
+                    title="@VOI.SISAC.Web.Resources.Resource.UploadFile">
+                <i class="fa fa-cloud-upload fa-fw"></i>
+                &nbsp;@VOI.SISAC.Web.Resources.Resource.UploadFile
+            </button>
+        }
+        @if (User.IsInRole("NTLJETINVO-SEARCH"))
+        {
+            <button id="btnSearch" type="button"
+                    class="btn btn-default" name="Search"
+                    title="@VOI.SISAC.Web.Resources.Resource.AdvanceSearch"
+                    onclick="location.href='@Url.Action("AdvanceSearch", "NationalJetFuelInvoice")'">
+                <i class="fa fa-search fa-fw"></i>
+                &nbsp;@VOI.SISAC.Web.Resources.Resource.AdvanceSearch
+            </button>
+        }
+    </div>
+    <div class="TableContent">
+        @Html.Partial("Partial/_NationalInvoiceTable")
+    </div>
+
+    <ul id="context-menu" class="dropdown-menu">
+        @if (User.IsInRole("NTLJETINVO-PRINTREP"))
+        {
+            <li data-item="@VOI.SISAC.Web.Resources.Resource.ShowErrors"><a><i class="fa fa-share-square-o fa-fw"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.ShowUploadErrorReport</a></li>
+        }
+        @if (User.IsInRole("NTLJETINVO-DEL"))
+        {
+            <li data-item="@VOI.SISAC.Web.Resources.Resource.Delete"><a><i class="fa fa-trash fa-fw"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.Delete</a></li>
+        }
+        @if (User.IsInRole("NTLJETINVO-PRINTREP"))
+        {
+            <li data-item="@VOI.SISAC.Web.Resources.Resource.ExportInvoiceSummary"><a><i class="fa fa-share-square-o fa-fw"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.ExportInvoiceSummary</a></li>
+        }
+        @if (User.IsInRole("NTLJETINVO-PRINTREP"))
+        {
+            <li data-item="@VOI.SISAC.Web.Resources.Resource.ExportInvoiceDetail"><a><i class="fa fa-share-square-o fa-fw"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.ExportInvoiceDetail</a></li>
+        }
+        @if (User.IsInRole("NTLJETINVO-ADD"))
+        {
+            <li data-item="@VOI.SISAC.Web.Resources.Resource.Add"><a><i class="fa fa-plus fa-fw"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.CreatePolicies</a></li>
+        }
+        @if (User.IsInRole("NTLJETINVO-EXP"))
+        {
+            <li data-item="@VOI.SISAC.Web.Resources.Resource.ExportPolicy"><a><i class="fa fa-share-square-o fa-fw"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.ExportInvoicePolicies</a></li>
+        }
+        @if (User.IsInRole("NTLJETINVO-SEND"))
+        {
+            <li data-item="@VOI.SISAC.Web.Resources.Resource.Send"><a><i class="fa fa-paper-plane-o fa-fw"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.SendPolicieToSap</a></li>
+        }
+    </ul>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrapTable")
+    @Scripts.Render("~/bundles/bootstrapTablePlugins")
+    @Scripts.Render("~/bundles/BootstrapInputFile")
+    @Scripts.Render("~/bundles/CommonFunctions")
+    @Scripts.Render("~/bundles/NationalJetFuelInvoiceJS")
+    @Scripts.Render("~/bundles/BootstrapContextMenu")
+    @Scripts.Render("~/bundles/JSbootstrapCombobox")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+    @Scripts.Render("~/bundles/JSDateTimeValidate")
+    @Scripts.Render("~/bundles/SweetAlertJS")
+    @Scripts.Render("~/bundles/MaskPluginJS")
+
+    <script>
+        var currentLang = '@cultureForm.ToString()';
+
+        function confirmDeleteModal(id, monthYear, period) {
+            $('#deleteModal').modal();
+            $('#deleteButton').html('<button style="background: #8bc53f" type="button" class="btn btn-default" onclick="deleteData(\'' + id + '\', \'' + monthYear + '\', \'' + period + '\')">@VOI.SISAC.Web.Resources.Resource.Delete</button>');
+        }
+
+        function deleteData(id, monthYear, period) {
+            $('#deleteModal').modal('hide');
+
+            var invoice = { RemittanceId: id, MonthYear: monthYear, Period: period };
+
+            $.ajax({
+                url: '../NationalJetFuelInvoice/Delete',
+                type: "POST",
+                data: { invoice: invoice },
+                dataType: "text",
+                async: false,
+                success: function (data) {
+                    var json = JSON.parse(data);
+                    swal({
+                        title: json.title,
+                        text: json.text,
+                        type: json.type,
+                        confirmButtonColor: "#83217a",
+                        animation: "slide-from-top",
+                        timer: 12000
+                    })
+                    $('#tbNationalInvoice').bootstrapTable('refresh', { silent: true });
+                },
+                error: function (result) {
+                    console.log("ERROR " + result.status + ' ' + result.statusText);
+                }
+            });
+        }
+
+        function createPolicyModal(id, monthYear, period) {
+            $('#RemittanceIdentifier').val(id);
+            $('#MonthYear').val(monthYear);
+            $('#Period').val(period);
+            $('#CreatePolicy').modal('show');
+        }
+
+        $('.MonthYearMask').mask('0000', {});
+
+        $('.periodMask').mask('ZZ-ZZ', {
+            translation: {
+                'Z': {
+                    pattern: /[0-9]/
+                }
+            }
+        });
+
+        $('#tbNationalInvoice').bootstrapTable({
+            contextMenu: '#context-menu',
+            contextMenuButton: '.menuButton',
+            contextMenuAutoClickRow: true,
+            contextMenuTrigger: 'right',
+            onContextMenuItem: function (row, $el) {
+                if ($el.data("item") == '@VOI.SISAC.Web.Resources.Resource.Delete') {
+                    confirmDeleteModal(row.RemittanceId, row.MonthYear, row.Period);
+                }
+                if ($el.data("item") == '@VOI.SISAC.Web.Resources.Resource.ShowErrors') {
+                    var url = '@Url.Action("ShowErrorsReport", "NationalJetFuelInvoice")';
+                    url = url.concat('?remittanceID=' + row.RemittanceId + '&' + 'monthYear=' + row.MonthYear + '&' + 'period=' + row.Period);
+                    window.location = url;
+                }
+                if ($el.data("item") == '@VOI.SISAC.Web.Resources.Resource.ExportInvoiceSummary') {
+                    var url = '@Url.Action("ShowInvoiceSummary", "NationalJetFuelInvoice")';
+                    url = url.concat('?remittanceID=' + row.RemittanceId + '&' + 'monthYear=' + row.MonthYear + '&' + 'period=' + row.Period);
+                    window.location = url;
+                }
+                if ($el.data("item") == '@VOI.SISAC.Web.Resources.Resource.ExportInvoiceDetail') {
+                    var url = '@Url.Action("ShowDetailExportReport", "NationalJetFuelInvoice")';
+                    url = url.concat('?remittanceID=' + row.RemittanceId + '&' + 'monthYear=' + row.MonthYear + '&' + 'period=' + row.Period);
+                    window.location = url;
+                }
+                if ($el.data("item") == '@VOI.SISAC.Web.Resources.Resource.Add') {
+                    createPolicyModal(row.RemittanceId, row.MonthYear, row.Period);
+                }
+                if ($el.data("item") == '@VOI.SISAC.Web.Resources.Resource.ExportPolicy') {
+                    var url = '@Url.Action("ShowInvoicePoliciesReport", "NationalJetFuelInvoice")';
+                    url = url.concat('?remittanceID=' + row.RemittanceId + '&' + 'monthYear=' + row.MonthYear + '&' + 'period=' + row.Period);
+                    window.location = url;
+                }
+                if ($el.data("item") == '@VOI.SISAC.Web.Resources.Resource.Send') {
+                    var url = '@Url.Action("Send", "NationalJetFuelInvoice")';
+                    url = url.concat('?remittanceID=' + row.RemittanceId + '&' + 'monthYear=' + row.MonthYear + '&' + 'period=' + row.Period);
+                    window.location = url;
+                }
+            }
+        })
+    </script>
+}

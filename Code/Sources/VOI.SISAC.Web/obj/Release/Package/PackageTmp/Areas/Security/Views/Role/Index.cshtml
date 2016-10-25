@@ -1,0 +1,103 @@
+﻿@model IEnumerable<VOI.SISAC.Web.Models.VO.Security.RoleVO>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cultureForm = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <h2 class="subtitle_h3_black">@Resource.RoleCode</h2>
+    <div id="toolbar">
+        <button type="button" class="btn btn-default" name="Agregar" title="@VOI.SISAC.Web.Resources.Resource.Add" onclick="location.href='@Url.Action("Create","Role")'">
+            <i class="fa fa-plus fa-fw"></i> &nbsp;@VOI.SISAC.Web.Resources.Resource.Add
+        </button>
+    </div>
+    <table id="tbRole"
+           data-toolbar="#toolbar"
+           class="table"
+           data-toggle="table"
+           data-show-columns="true"
+           data-search="true"
+           data-show-toggle="true"
+           data-show-pagination-switch="true"
+           data-mobile-responsive="true"
+           data-pagination="true"
+           data-page-size="10">
+        <thead>
+            <tr>
+                <th data-field="Actions" data-align="center" data-halign="center"
+                    data-formatter="RoleController.actionsButtons">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
+                </th>
+                <th data-field="RoleCode" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.RoleCode)</strong>
+                </th>
+                <th data-field="RoleName" data-halign="center" data-align="center" data-sortable="true">
+                    <strong> @Html.DisplayNameFor(model => model.RoleName)</strong>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td id="Actions"></td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoleCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoleName)
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <!-- context menu -->
+    <ul id="context-menu" class="dropdown-menu">
+        <li data-item="@Resource.Edit"><a><i class="fa fa-pencil fa-fw"></i>&nbsp;@Resource.Edit</a></li>
+        <li data-item="@Resource.Delete"><a><i class="fa fa-trash-o fa-fw"></i>&nbsp;@Resource.Delete</a></li>
+        <li data-item="RoleModulePermission"><a><i class="fa fa-users fa-fw"></i>&nbsp;@Resource.RoleModulePermission</a></li>
+    </ul>
+</div>
+
+@Scripts.Render("~/bundles/bootstrapTable")
+@Scripts.Render("~/bundles/bootstrapTablePlugins")
+@Scripts.Render("~/bundles/BootstrapContextMenu")
+@Scripts.Render("~/bundles/RoleJS")
+
+<script type="text/javascript">
+    var currentLang = '@cultureForm.ToString()';
+
+    $('#tbRole').bootstrapTable({
+        contextMenu: '#context-menu',
+        contextMenuButton: '.menuButton',
+        contextMenuAutoClickRow: true,
+        contextMenuTrigger: 'right',
+        onContextMenuItem: function (row, $el) {
+
+            if ($el.data("item") == 'RoleModulePermission') {
+                var url = '@Url.Action("Create", "RoleModulePermission")';
+                url = url.concat('?roleCode=' + row.RoleCode.trim());
+                window.location = url;
+            }
+
+            if ($el.data("item") == '@Resource.Edit') {
+                var url = '@Url.Action("Edit", "Role")';
+                url = url.concat('?roleCode=' + row.RoleCode.trim());
+                window.location = url;
+            }
+            if ($el.data("item") == '@Resource.Delete') {
+                var url = '@Url.Action("Delete", "Role")';
+                url = url.concat('?roleCode=' + row.RoleCode.trim());
+                window.location = url;
+            }
+        }
+    });
+</script>

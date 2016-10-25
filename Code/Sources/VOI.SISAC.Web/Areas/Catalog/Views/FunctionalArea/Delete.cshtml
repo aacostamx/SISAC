@@ -1,0 +1,46 @@
+﻿@model VOI.SISAC.Web.Models.VO.Catalog.FunctionalAreaVO
+
+@{
+    ViewBag.Title = @Resource.Delete;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <p class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.FunctionalAreaMenu</p>
+    <p class="subtitle_h3_ancillarie">@VOI.SISAC.Web.Resources.Resource.Delete</p>
+</div>
+
+@Styles.Render("~/Content/bootstraptablecss")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <h3>@VOI.SISAC.Web.Resources.Resource.ConfirmDelete</h3>
+
+    <div class="form-horizontal">
+        @Html.HiddenFor(model => model.FunctionalAreaID)
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                @Html.LabelFor(model => model.FunctionalAreaName, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.FunctionalAreaName, new { htmlAttributes = new { @class = "inputForm form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.FunctionalAreaName, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                @Html.LabelFor(model => model.FunctionalAreaDescription, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.FunctionalAreaDescription, new { htmlAttributes = new { @class = "inputForm form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.FunctionalAreaDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <input onclick="@("location.href='" + @Url.Action("Index", "FunctionalArea") + "'")" type="reset" class="btn btn-default" value="@VOI.SISAC.Web.Resources.Resource.Back" title="@VOI.SISAC.Web.Resources.Resource.Back" />
+                <input type="submit" value="@VOI.SISAC.Web.Resources.Resource.Delete" title="@VOI.SISAC.Web.Resources.Resource.Delete" class="btn btn-default" />
+            </div>
+        </div>
+    }
+</div>

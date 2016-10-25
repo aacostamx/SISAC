@@ -1,0 +1,75 @@
+﻿@{
+    var airline = this.ViewBag.Airline as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var airport = this.ViewBag.Airport as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var provider = this.ViewBag.Provider as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var status = this.ViewBag.Status as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    }
+<div class="modal fade" id="modalTable" tabindex="-1" role="dialog" aria-labelledby="myModallabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="subtitle_h3_black" aria-hidden="true">&times;</span>
+                </button>
+                <h2 class="subtitle_h3_black">@Resource.Search</h2>
+            </div>
+            @using (Html.BeginForm("Search", "InternationalFuelContract"))
+            {
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="subtitle_h5"><= @VOI.SISAC.Web.Resources.Resource.EffectiveDate:</div>
+                        <input type="text" id="EffectiveDate" name="EffectiveDate" class="form-control ClassDate" />   
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="subtitle_h5">@VOI.SISAC.Web.Resources.Resource.AirlineName:</div>
+                        @Html.DropDownList("AirlineCode", airline.Select(h => new SelectListItem
+                            {
+                                Text = h.CodeAndDescription,
+                                Value = h.Id
+                            }), Resource.SelectItem, new { @class = "inputForm form-control combobox" })
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="subtitle_h5">@VOI.SISAC.Web.Resources.Resource.StationName:</div>
+                        @Html.DropDownList("StationCode", airport.Select(h => new SelectListItem
+                            {
+                                Text = h.CodeAndDescription,
+                                Value = h.Id
+                            }), Resource.SelectItem, new { @class = "inputForm form-control combobox" })
+                    </div>
+                </div>                   
+                <div class="row">                        
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="subtitle_h5">@VOI.SISAC.Web.Resources.Resource.ProviderNumberPrimary:</div>
+                        @Html.DropDownList("ProviderNumberPrimary", provider.Select(h => new SelectListItem
+                            {
+                                Text = h.DescriptionAndCode,
+                                Value = h.Id
+                            }), Resource.SelectItem, new { @class = "inputForm form-control combobox" })
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="subtitle_h5">@VOI.SISAC.Web.Resources.Resource.Status:</div>
+                        @Html.DropDownList("statusSearch", status.Select(h => new SelectListItem
+                            {
+                                Text = h.Description,
+                                Value = h.Id
+                            }), Resource.SelectItem, new { @class = "inputForm form-control combobox" })
+                    </div>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-volaris-style btn btn-default" data-dismiss="modal">
+                    <i class="fa fa-times"></i>
+                    @Resource.Close
+                </button>
+                <button type="submit" class="btn-volaris-style btn btn-default" name="search" onclick="">
+                    <i class="fa fa-search"></i>
+                    @Resource.Search
+                </button>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/bundles/InternationalFuelContract")

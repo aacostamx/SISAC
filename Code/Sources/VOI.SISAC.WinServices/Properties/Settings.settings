@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="VOI.SISAC.WinServices.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="UrlAPI" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://10.10.32.62:81/SISAC_APIDEV/</Value>
+    </Setting>
+    <Setting Name="ActionAPI" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">api/UploadItinerary</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

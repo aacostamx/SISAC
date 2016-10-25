@@ -1,0 +1,463 @@
+﻿@model VOI.SISAC.Web.Models.VO.Process.RemittanceSearchVO
+
+@{
+    ViewBag.Title = VOI.SISAC.Web.Resources.Resource.AdvanceSearch;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var currentCulture = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+@Styles.Render("~/Content/bootstrapdtimecss")
+@Styles.Render("~/bundles/SweetAlertCSS")
+
+<div class="container">
+    @Html.Partial("_DeleteModal")
+    @Html.Partial("_AlertView")
+    @Html.Partial("Partial/_CreatePolicy")
+</div>
+
+<form id="frmSearchParams" name="frmSearchParams">
+    <div class="container">
+        <h2 class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.AdvanceSearch</h2>
+        <div id="divSearchInvoices" class="panel-group" role="tablist" aria-multiselectable="true" hidden="" style="display: block;">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab">
+                    <h4 class="panel-title subtitle_h6">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.Search</strong>
+                    </h4>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <label class="subtitle_h5 control-label">@VOI.SISAC.Web.Resources.Resource.RemittanceId</label>
+                        @Html.EditorFor(model => model.RemittanceId, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @id = "RemittanceId",
+                           @class = "form-control",
+                           @onkeypress = "return commonFunctions.validarMaxLengthAlfanumericoDiagonal(event, this, 8, 0);",
+                           @onkeyup = "return commonFunctions.validarMaxLengthAlfanumericoDiagonal(event, this, 8, 0)"
+                       }
+                   })
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <label class="subtitle_h5 control-label">@VOI.SISAC.Web.Resources.Resource.ElectronicInvoiceNumber</label>
+                        @Html.EditorFor(model => model.InvoiceNumber, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @id = "InvoiceNumber",
+                           @class = "form-control",
+                           @onkeypress = "return commonFunctions.validarMaxLengthAlfanumericoGuion(event, this, 15, 0);",
+                           @onkeyup = "return commonFunctions.validarMaxLengthAlfanumericoGuion(event, this, 15, 0)"
+                       }
+                   })
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <label class="subtitle_h5 control-label">@VOI.SISAC.Web.Resources.Resource.Airport</label>
+                        @Html.EditorFor(model => model.StationCode, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @id = "StationCode",
+                           @class = "form-control",
+                           @placeholder = VOI.SISAC.Web.Resources.Resource.IATACode,
+                           @onkeypress = "return commonFunctions.validarMaxLengthAlfabetico(event, this, 3, 0);",
+                           @onkeyup = "return commonFunctions.validarMaxLengthAlfabetico(event, this, 3, 0)"
+                       }
+                   })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <label class="subtitle_h5 control-label">@VOI.SISAC.Web.Resources.Resource.MonthYear</label>
+                        @Html.EditorFor(model => model.MonthYear, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @id = "MonthYearInput",
+                           @class = "form-control MonthYearMask",
+                           @placeholder = "MMYY"
+                       }
+                   })
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <label class="subtitle_h5 control-label">@VOI.SISAC.Web.Resources.Resource.PeriodRemittance</label>
+                        @Html.EditorFor(model => model.Period, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @id = "PeriodInput",
+                           @class = "form-control periodMask",
+                           @placeholder = "DD-DD"
+                       }
+                   })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                        <button type="button" class="btn btn-default" onclick="searchInvoice();">
+                            <i class="fa fa-search fa-fw"></i>
+                            @VOI.SISAC.Web.Resources.Resource.Search
+                        </button>
+
+                        <button type="button" class="btn btn-default" name="clear" onclick="resetForm();">
+                            <i class="fa fa-refresh fa-fw"></i>
+                            @VOI.SISAC.Web.Resources.Resource.Clear
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+@using (Html.BeginForm("AdvanceSearch", "NationalJetFuelInvoice", FormMethod.Get, new { name = "frmSearchInvoice", id = "frmSearchInvoice" }))
+{
+    <div class="container">
+        <table id="tbNationalInvoiceSearch"
+               data-toggle="table"
+               data-locale="@currentCulture.ToString()"
+               class="table"
+               data-cache="false"
+               data-mobile-responsive="true"
+               data-check-on-init="true"
+               data-pagination="true"
+               data-query-params="queryParams"
+               data-side-pagination="server"
+               data-query-params-type=""
+               data-page-list="[5,10,20,50,100,200]">
+            <thead>
+                <tr>
+                    <th data-field="Actions" data-align="center" data-halign="center" data-formatter="commonFunctions.actionsButtons">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
+                    </th>
+
+                    <th data-field="RemittanceID" data-halign="center" data-align="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.RemittanceId</strong>
+                    </th>
+                    <th data-field="MonthYear" data-halign="center" data-align="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.MonthYear</strong>
+                    </th>
+                    <th data-field="Period" data-halign="center" data-align="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.Period</strong>
+                    </th>
+                    <th data-field="AirlineCode" data-halign="center" data-align="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.AirlineCode</strong>
+                    </th>
+                    <th data-field="ProviderNumber" data-halign="center" data-align="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.ProviderNumber</strong>
+                    </th>
+                    <th data-field="JetFuelAmount" data-halign="center" data-align="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.JetFuelAmount</strong>
+                    </th>
+                    <th data-field="FreightAmount" data-halign="center" data-align="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.FreightAmount</strong>
+                    </th>
+                    <th data-field="DiscountAmount" data-halign="center" data-align="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.DiscountAmount</strong>
+                    </th>
+                    <th data-field="FuelingAmount" data-halign="center" data-align="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.FuelingAmount</strong>
+                    </th>
+                    <th data-field="SubtotalAmount" data-halign="center" data-align="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.SubtotalAmount</strong>
+                    </th>
+                    <th data-field="TaxAmount" data-halign="center" data-align="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.TaxAmount</strong>
+                    </th>
+                    <th data-field="TotalAmount" data-halign="center" data-align="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.TotalAmount</strong>
+                    </th>
+                    <th data-field="DocumentStatusName" data-halign="center" data-align="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.DocumentStatusCode</strong>
+                    </th>
+                    <th data-field="DateBaseline" data-halign="center" data-align="center" data-formatter="DateMask">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.DateBaseline</strong>
+                    </th>
+                    <th data-field="DateValue" data-halign="center" data-align="center" data-formatter="DateMask">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.DateValue</strong>
+                    </th>
+                    <th data-field="DatePosting" data-halign="center" data-align="center" data-formatter="DateMask">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.DatePosting</strong>
+                    </th>
+                    <th data-field="Society" data-halign="center" data-align="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.Society</strong>
+                    </th>
+                    <th data-field="ProcessDate" data-halign="center" data-align="center" data-formatter="DateMask">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.ProcessDate</strong>
+                    </th>
+                    <th data-field="ReconciliationStatusCode" data-halign="center" data-align="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.ReconciliationStatusCode</strong>
+                    </th>
+                    <th data-field="RemittanceStatusName" data-halign="center" data-align="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.RemittanceStatusCode</strong>
+                    </th>
+
+
+                </tr>
+            </thead>
+        </table>
+    </div>
+}
+
+<div class="container">
+    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Index", "NationalJetFuelInvoice")'">
+        <i class="fa fa-arrow-left fa-fw"></i>
+        @VOI.SISAC.Web.Resources.Resource.Back
+    </button>
+</div>
+
+<script>
+    //Take querystrings and send back to server REST
+    function queryParams(params) {
+        return {
+            pageNumber: params.pageNumber,
+            pageSize: params.pageSize,
+            RemittanceId: $('#RemittanceId').val(),
+            InvoiceNumber: $('#InvoiceNumber').val(),
+            StationCode: $('#StationCode').val(),
+            MonthYear: $('#MonthYearInput').val(),
+            Period: $('#PeriodInput').val()
+        };
+    }
+</script>
+
+
+<ul id="context-menu" class="dropdown-menu">
+    @if (User.IsInRole("NTLJETINVO-PRINTREP"))
+    {
+        <li data-item="@VOI.SISAC.Web.Resources.Resource.ShowErrors"><a><i class="fa fa-share-square-o fa-fw"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.ShowUploadErrorReport</a></li>
+    }
+    @if (User.IsInRole("NTLJETINVO-DEL"))
+    {
+        <li data-item="@VOI.SISAC.Web.Resources.Resource.Delete"><a><i class="fa fa-trash fa-fw"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.Delete</a></li>
+    }
+    @if (User.IsInRole("NTLJETINVO-PRINTREP"))
+    {
+        <li data-item="@VOI.SISAC.Web.Resources.Resource.ExportInvoiceSummary"><a><i class="fa fa-share-square-o fa-fw"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.ExportInvoiceSummary</a></li>
+    }
+    @if (User.IsInRole("NTLJETINVO-PRINTREP"))
+    {
+        <li data-item="@VOI.SISAC.Web.Resources.Resource.ExportInvoiceDetail"><a><i class="fa fa-share-square-o fa-fw"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.ExportInvoiceDetail</a></li>
+    }
+    @if (User.IsInRole("NTLJETINVO-ADD"))
+    {
+        <li data-item="@VOI.SISAC.Web.Resources.Resource.Add"><a><i class="fa fa-plus fa-fw"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.CreatePolicies</a></li>
+    }
+    @if (User.IsInRole("NTLJETINVO-EXP"))
+    {
+        <li data-item="@VOI.SISAC.Web.Resources.Resource.ExportPolicy"><a><i class="fa fa-share-square-o fa-fw"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.ExportInvoicePolicies</a></li>
+    }
+    @if (User.IsInRole("NTLJETINVO-SEND"))
+    {
+        <li data-item="@VOI.SISAC.Web.Resources.Resource.Send"><a><i class="fa fa-paper-plane-o fa-fw"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.SendPolicieToSap</a></li>
+    }
+</ul>
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrapTable")
+    @Scripts.Render("~/bundles/bootstrapTablePlugins")
+    @Scripts.Render("~/bundles/BootstrapInputFile")
+    @Scripts.Render("~/bundles/CommonFunctions")
+    @Scripts.Render("~/bundles/NationalJetFuelInvoiceJS")
+    @Scripts.Render("~/bundles/BootstrapContextMenu")
+    @Scripts.Render("~/bundles/JSbootstrapCombobox")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+    @Scripts.Render("~/bundles/JSDateTimeValidate")
+    @Scripts.Render("~/bundles/SweetAlertJS")
+    @Scripts.Render("~/bundles/MaskPluginJS")
+
+    <script>
+        var currentLang = '@currentCulture.ToString()';
+
+        function searchInvoice() {
+            var RemittanceId = $("#RemittanceId").val();
+            var InvoiceNumber = $("#InvoiceNumber").val();
+            var StationCode = $("#StationCode").val();
+            var MonthYear = $("#MonthYearInput").val();
+            var Period = $("#PeriodInput").val();
+
+            if (RemittanceId || InvoiceNumber || StationCode || MonthYear || Period) {
+                if (Period && Period.length != 5) {
+                    showAlert("Period formater is incorrect DD-DD (DAY-DAY)", "El formato del período es incorrecto DD-DD (Día-Día)", "error", "Error", "Error");
+                    return;
+                }
+                if (MonthYear && MonthYear.length != 4) {
+                    showAlert("Month-Year formater is incorrect MMYY", "El formato del Mes-Año es incorrecto MMYY", "error", "Error", "Error");
+                    return;
+                }
+                var urlRazor = '@Url.Action("SearchNationalInvoice", "NationalJetFuelInvoice")';
+                $('#tbNationalInvoiceSearch').bootstrapTable('refresh', { url: urlRazor });
+            }
+            else {
+                showAlert("You must enter at least one item", "Debe ingresar al menos un campo", "warning", "Warning", "Advertencia");
+            }
+
+        }
+
+        function resetForm() {
+            $('#frmSearchParams')[0].reset();
+            $('#tbNationalInvoiceSearch').bootstrapTable('removeAll');
+        }
+
+        $("#RemittanceId, #InvoiceNumber, #StationCode, #MonthYearInput, #PeriodInput").keyup(function (e) {
+            if (e.keyCode == 13) {
+                searchInvoice();
+            }
+        });
+
+        function confirmDeleteModal(id, monthYear, period) {
+            $('#deleteModal').modal();
+            $('#deleteButton').html('<button style="background: #8bc53f" type="button" class="btn btn-default" onclick="deleteData(\'' + id + '\', \'' + monthYear + '\', \'' + period + '\')">@VOI.SISAC.Web.Resources.Resource.Delete</button>');
+        }
+
+        function deleteData(id, monthYear, period) {
+            $('#deleteModal').modal('hide');
+
+            var invoice = { RemittanceId: id, MonthYear: monthYear, Period: period };
+
+            $.ajax({
+                url: '../NationalJetFuelInvoice/Delete',
+                type: "POST",
+                data: { invoice: invoice },
+                dataType: "text",
+                async: false,
+                success: function (data) {
+                    var json = JSON.parse(data);
+                    swal({
+                        title: json.title,
+                        text: json.text,
+                        type: json.type,
+                        confirmButtonColor: "#83217a",
+                        animation: "slide-from-top",
+                        timer: 12000
+                    })
+                    $('#tbNationalInvoiceSearch').bootstrapTable('refresh', { silent: true });
+                },
+                error: function (result) {
+                    console.log("ERROR " + result.status + ' ' + result.statusText);
+                }
+            });
+        }
+
+        function createPolicyModal(id, monthYear, period) {
+            $('#RemittanceIdentifier').val(id);
+            $('#MonthYear').val(monthYear);
+            $('#Period').val(period);
+            $('#CreatePolicy').modal('show');
+        }
+
+        $('#tbNationalInvoiceSearch').bootstrapTable({
+            contextMenu: '#context-menu',
+            contextMenuButton: '.menuButton',
+            contextMenuAutoClickRow: true,
+            contextMenuTrigger: 'right',
+            onContextMenuItem: function (row, $el) {
+                if ($el.data("item") == '@VOI.SISAC.Web.Resources.Resource.Delete') {
+                    confirmDeleteModal(row.RemittanceID, row.MonthYear, row.Period);
+                }
+                if ($el.data("item") == '@VOI.SISAC.Web.Resources.Resource.ShowErrors') {
+                    var url = '@Url.Action("ShowErrorsReport", "NationalJetFuelInvoice")';
+                    url = url.concat('?remittanceID=' + row.RemittanceID + '&' + 'monthYear=' + row.MonthYear + '&' + 'period=' + row.Period);
+                    window.location = url;
+                }
+                if ($el.data("item") == '@VOI.SISAC.Web.Resources.Resource.ExportInvoiceSummary') {
+                    var url = '@Url.Action("ShowInvoiceSummary", "NationalJetFuelInvoice")';
+                    url = url.concat('?remittanceID=' + row.RemittanceID + '&' + 'monthYear=' + row.MonthYear + '&' + 'period=' + row.Period);
+                    window.location = url;
+                }
+                if ($el.data("item") == '@VOI.SISAC.Web.Resources.Resource.ExportInvoiceDetail') {
+                    var url = '@Url.Action("ShowDetailExportReport", "NationalJetFuelInvoice")';
+                    url = url.concat('?remittanceID=' + row.RemittanceID + '&' + 'monthYear=' + row.MonthYear + '&' + 'period=' + row.Period);
+                    window.location = url;
+                }
+                if ($el.data("item") == '@VOI.SISAC.Web.Resources.Resource.Add') {
+                    createPolicyModal(row.RemittanceID, row.MonthYear, row.Period);
+                }
+                if ($el.data("item") == '@VOI.SISAC.Web.Resources.Resource.ExportPolicy') {
+                    var url = '@Url.Action("ShowInvoicePoliciesReport", "NationalJetFuelInvoice")';
+                    url = url.concat('?remittanceID=' + row.RemittanceID + '&' + 'monthYear=' + row.MonthYear + '&' + 'period=' + row.Period);
+                    window.location = url;
+                }
+                if ($el.data("item") == '@VOI.SISAC.Web.Resources.Resource.Send') {
+                    var url = '@Url.Action("Send", "NationalJetFuelInvoice")';
+                    url = url.concat('?remittanceID=' + row.RemittanceID + '&' + 'monthYear=' + row.MonthYear + '&' + 'period=' + row.Period);
+                    window.location = url;
+                }
+            }
+        })
+
+
+        $('.MonthYearMask').mask('0000', {});
+
+        $('.periodMask').mask('ZZ-ZZ', {
+            translation: {
+                'Z': {
+                    pattern: /[0-9]/
+                }
+            }
+        });
+
+        function showAlert(messageEn, messageEs, alertType, titleEn, tittleEs) {
+            //"warning", "error", "success" and "info".
+            alertType = alertType || "warning";
+            if (currentLang.includes("es")) {
+                swal({
+                    title: tittleEs,
+                    text: messageEs,
+                    type: alertType,
+                    confirmButtonColor: "#83217a",
+                    animation: "slide-from-top",
+                    timer: 12000
+                })
+            }
+            else {
+                swal({
+                    title: titleEn,
+                    text: messageEn,
+                    type: alertType,
+                    confirmButtonColor: "#83217a",
+                    animation: "slide-from-top",
+                    timer: 12000
+                })
+            }
+        }
+
+        function MonthYearMask(value, row) {
+            if (value) {
+                value = value.substring(2, 4) + value.substring(5, 7);
+            }
+            return value;
+        }
+
+        function DateMask(value, row) {
+            if (value) {
+                value = value.substring(0, 10);
+            }
+            return value;
+        }
+
+        $(document).ready(function () {
+            if (!String.prototype.includes) {
+                String.prototype.includes = function () {
+                    'use strict';
+                    return String.prototype.indexOf.apply(this, arguments) !== -1;
+                };
+            }
+        });
+
+    </script>
+}

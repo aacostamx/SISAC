@@ -1,0 +1,206 @@
+﻿@model VOI.SISAC.Web.Models.VO.Airport.JetFuelTicketVO
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var providerJetFuel = this.ViewBag.ProviderJetFuel as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var providerIntoPlane = this.ViewBag.ProviderIntoPlane as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var userAOR = this.ViewBag.UserAOR as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var service = this.ViewBag.Service as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+
+    ///Itinerary
+    var Sequence = this.ViewBag.Sequence;
+    var AirlineCode = this.ViewBag.AirlineCode;
+    var FlightNumber = this.ViewBag.FlightNumber;
+    var ItineraryKey = this.ViewBag.ItineraryKey;
+    var OperationTypeName = this.ViewBag.OperationTypeName;
+
+    var cultureForm = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
+
+}
+
+@Styles.Render("~/Content/bootstrapdtimecss")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.JetFuelTicketTitle</p>
+        <p class="subtitle_h3_ancillarie">@VOI.SISAC.Web.Resources.Resource.Create</p>
+    </div>
+    @if (Model.Itinerary != null)
+    {
+        @Html.Partial("_FlightInformation", Model.Itinerary)
+    }
+    <br />
+
+    @using (Html.BeginForm())
+    {
+
+        @Html.AntiForgeryToken()
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title subtitle_h6" onclick="JetFuelTicket.toggle_visibility('dvAC');">
+                                <strong>@VOI.SISAC.Web.Resources.Resource.JetFuelTicketTitle</strong>
+                            </h4>
+                        </div>
+                        <div id="dvAC">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.OperationTypeName, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                    @Html.EditorFor(model => model.OperationTypeName, new { htmlAttributes = new { @class = "form-control specialInput", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.OperationTypeName, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.ServiceCode, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    <div class="styled-select">
+                                        @Html.DropDownListFor(model => model.ServiceCode, service.Select(h => new SelectListItem
+                                   {
+                                       Text = h.DescriptionAndCode,
+                                       Value = h.Id
+                                   }), Resource.SelectItem, new { ServiceCode = new { @class = "inputForm form-control" } })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.ServiceCode, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.FuelingDate, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    @Html.EditorFor(model => model.FuelingDate, new { htmlAttributes = new { @class = "form-control ClassDate", @placeholder = Resource.FormatDate } })
+                                    @Html.ValidationMessageFor(model => model.FuelingDate, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.FuelingTime, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    @Html.EditorFor(model => model.FuelingTime, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.FuelingTime, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.JetFuelProviderNumber, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    <div class="styled-select">
+                                        @Html.DropDownListFor(model => model.JetFuelProviderNumber, providerJetFuel.Select(h => new SelectListItem
+                                   {
+                                       Text = h.DescriptionAndCode,
+                                       Value = h.Id
+                                   }), Resource.SelectItem, new { htmlAttributes = new { @class = "inputForm form-control" } })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.JetFuelProviderNumber, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.IntoPlaneProviderNumber, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    <div class="styled-select">
+                                        @Html.DropDownListFor(model => model.IntoPlaneProviderNumber, providerIntoPlane.Select(h => new SelectListItem
+                                   {
+                                       Text = h.DescriptionAndCode,
+                                       Value = h.Id
+                                   }), Resource.SelectItem, new { htmlAttributes = new { @class = "inputForm form-control" } })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.IntoPlaneProviderNumber, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.TicketNumber, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    @Html.EditorFor(model => model.TicketNumber, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumericoDiagonalGuion(event, this, 10);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumericoDiagonalGuion(event, this, 10)" } })
+                                    @Html.ValidationMessageFor(model => model.TicketNumber, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.FueledQtyGals, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    @Html.EditorFor(model => model.FueledQtyGals, new { htmlAttributes = new { @class = "form-control specialInput", @min = 0, @max = 1000000, @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)" } })
+                                    @Html.ValidationMessageFor(model => model.FueledQtyGals, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.RemainingQry, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                    @Html.EditorFor(model => model.RemainingQry, new { htmlAttributes = new { @class = "form-control specialInput", @min = 0, @max = 1000000, @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)" } })
+                                    @Html.ValidationMessageFor(model => model.RemainingQry, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.RequestedQry, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                    @Html.EditorFor(model => model.RequestedQry, new { htmlAttributes = new { @class = "form-control specialInput", @min = 0, @max = 1000000, @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)" } })
+                                    @Html.ValidationMessageFor(model => model.RequestedQry, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.FueledQry, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                    @Html.EditorFor(model => model.FueledQry, new { htmlAttributes = new { @class = "form-control specialInput", @min = 0, @max = 1000000, @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)" } })
+                                    @Html.ValidationMessageFor(model => model.FueledQry, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.DensityFactor, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                    @Html.EditorFor(model => model.DensityFactor, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeroDecimal(event, this, 8, 3);", @onkeyup = "return commonFunctions.validarNumeroDecimal(event, this, 8, 3)" } })
+                                    @Html.ValidationMessageFor(model => model.DensityFactor, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.Label(Resource.NombreUsuario, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    <div class="styled-select">
+                                        @Html.DropDownListFor(model => model.AorUserID, userAOR.Select(h => new SelectListItem
+                                   {
+                                       Text = h.Description,
+                                       Value = h.Id
+                                   }), Resource.SelectItem, new { htmlAttributes = new { @class = "inputForm form-control" } })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.AorUserID, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.SupplierResponsible, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                    @Html.EditorFor(model => model.SupplierResponsible, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 60);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 60)" } })
+                                    @Html.ValidationMessageFor(model => model.SupplierResponsible, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                                    @Html.TextAreaFor(model => model.Remarks, 5, 100, new { @class = "form-control", @style = "resize: none;", @onkeypress = "return commonFunctions.validarComentarios(event, this);", @onkeyup = "return commonFunctions.validarComentarios(event, this)" })
+                                    @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <input onclick="@("location.href='" + @Url.Action("Index", "JetFuelTicket", new { Sequence = Sequence, AirlineCode = AirlineCode, FlightNumber = FlightNumber, ItineraryKey = ItineraryKey, OperationTypeName = OperationTypeName }) + "'")" type="reset" class="btnVolaris" value="@Resource.Back" />
+                            <input type="submit" value=@Resource.Save class="btnVolaris" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+    @Scripts.Render("~/bundles/JSDateTimeValidate")
+    @Scripts.Render("~/bundles/JetFuelTicket")
+    @Scripts.Render("~/bundles/CommonFunctions")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+
+    <script type="text/javascript">
+        var currentLang = '@cultureForm.ToString()';
+    </script>
+
+    <script>
+        $(function () {
+            $('#FuelingTime').datetimepicker({
+                format: 'HH:mm'
+            });
+        });
+    </script>
+}
+

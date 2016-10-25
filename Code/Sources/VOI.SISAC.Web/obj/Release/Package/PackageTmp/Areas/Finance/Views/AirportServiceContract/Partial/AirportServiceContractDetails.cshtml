@@ -1,0 +1,210 @@
+﻿@model VOI.SISAC.Web.Models.VO.Finance.AirportServiceContractVO
+
+<div id="tbInternationalFuelContract" class="col-xs-12 col-sm-12 col-md-8">
+    <div class="table-responsive">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <colgroup>
+                    <col class="col-xs-2" />
+                    <col class="col-xs-5" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>@VOI.SISAC.Web.Resources.Resource.Definition</th>
+                        <th>@VOI.SISAC.Web.Resources.Resource.Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row"><code class="colorVolaris">@Resource.EffectiveDate</code></th>
+                        <td id="EffectiveDate">@Html.DisplayFor(model => model.EffectiveDate, "ToShortDate")</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code class="colorVolaris">@Resource.AirlineName</code></th>
+                        <td id="AirlineCode">@Html.DisplayFor(model => model.AirlineCode) - @Html.DisplayFor(model => model.AirlineName)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code class="colorVolaris">@Resource.StationName</code></th>
+                        <td id="StationCode">@Html.DisplayFor(model => model.StationCode) - @Html.DisplayFor(model => model.StationName)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code class="colorVolaris">@Resource.ServiceName</code></th>
+                        <td id="ServiceCode">@Html.DisplayFor(model => model.ServiceCode) - @Html.DisplayFor(model => model.ServiceName)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code class="colorVolaris">@Resource.ProviderName</code></th>
+                        <td id="ProviderNumber">@Html.DisplayFor(model => model.ProviderNumber) - @Html.DisplayFor(model => model.ProviderName)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.CCName</code></th>
+                        <td id="CCNumber">@Html.DisplayFor(model => model.CostCenterNumber) - @Html.DisplayFor(model => model.CostCenterNumber)</td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row"><code class="colorVolaris">@Resource.AccountingAccountName</code></th>
+                        <td id="AccountingAccountNumber">@Html.DisplayFor(model => model.AccountingAccountNumber) - @Html.DisplayFor(model => model.AccountingAccountName)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.LiabilityAccountName</code></th>
+                        <td id="LiabilityAccountNumber">@Html.DisplayFor(model => model.LiabilityAccountNumber) - @Html.DisplayFor(model => model.LiabilityAccountName)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.OperationName</code></th>
+                        <td id="OperationName">@Html.DisplayFor(model => model.OperationName)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.ServiceTypeCode</code></th>
+                        <td id="ServiceTypeCode">@Html.DisplayFor(model => model.ServiceTypeName)</td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.Rate</code></th>
+                        <td id="Rate">@Html.DisplayFor(model => model.Rate)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.CurrencyName</code></th>
+                        <td id="CurrencyCode">@Html.DisplayFor(model => model.CurrencyCode) - @Html.DisplayFor(model => model.CurrencyName)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.MultiRateFlag</code></th>
+                        <td id="MultiRateFlag">@Html.DisplayFor(model => model.MultiRateFlag)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.AirplanetWeightFlag</code></th>
+                        <td id="AirplanetWeightFlag">@Html.DisplayFor(model => model.AirplanetWeightFlag)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.AirplaneWeightName</code></th>
+                        <td id="AirplaneWeightName">@Html.DisplayFor(model => model.AirplaneWeightName)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.AirplaneWeightUnitName</code></th>
+                        <td id="AirplaneWeightUnitName">@Html.DisplayFor(model => model.AirplaneWeightUnitName)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.AirplaneWeightMultiplier</code></th>
+                        <td id="AirplaneWeightMultiplier">@Html.DisplayFor(model => model.AirplaneWeightMultiplier)</td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.AirportFeeCode</code></th>
+                        <td id="AirportFeeCode">@Html.DisplayFor(model => model.AirportFeeCode)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.Rate</code></th>
+                        <td id="AirportFeeValue">
+                            @if (Model.AirportFeeValue != null)
+                            {
+                                if (Model.AirportFeeFlag)
+                                { 
+                                @Html.DisplayFor(model => model.AirportFeeValue)
+                                <span>%</span>
+                                }
+                                else
+                                { 
+                                <span>$</span>
+                                @Html.DisplayFor(model => model.AirportFeeValue)
+                                @Html.HiddenFor(model => model.AirportFeeFlag)
+                                }
+                            }
+                            else
+                            { 
+                                <span>-</span>
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.LocalTaxCode</code></th>
+                        <td id="LocalTaxCode">@Html.DisplayFor(model => model.LocalTaxCode)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.Rate</code></th>
+                        <td id="LocalTaxValue">
+                            @if (Model.LocalTaxValue != null)
+                            {
+                                if (Model.LocalTaxFlag)
+                                { 
+                                @Html.DisplayFor(model => model.LocalTaxValue)
+                                <span>%</span>
+                                }
+                                else
+                                {
+                                <span>$</span>
+                                @Html.DisplayFor(model => model.LocalTaxValue) 
+                                @Html.HiddenFor(model => model.LocalTaxFlag)
+                                }
+                            }
+                            else
+                            { 
+                                <span>-</span>
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.StateTaxCode</code></th>
+                        <td id="StateTaxCode">@Html.DisplayFor(model => model.StateTaxCode)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.Rate</code></th>
+                        <td id="StateTaxValue">
+                            @if (Model.StateTaxValue != null)
+                            {
+                                if (Model.StateTaxFlag)
+                                { 
+                                @Html.DisplayFor(model => model.StateTaxValue)
+                                <span>%</span>
+                                }
+                                else
+                                {
+                                <span>$</span>
+                                @Html.DisplayFor(model => model.StateTaxValue) 
+                                @Html.HiddenFor(model => model.StateTaxFlag)
+                                }
+                            }
+                            else
+                            { 
+                                <span>-</span>
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.FederalTaxCode</code></th>
+                        <td id="FederalTaxCode">@Html.DisplayFor(model => model.FederalTaxCode)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.Rate</code></th>
+                        <td id="FederalTaxValue">
+                            @if (Model.FederalTaxValue != null)
+                            {
+                                if (Model.FederalTaxFlag)
+                                { 
+                                @Html.DisplayFor(model => model.FederalTaxValue)
+                                <span>%</span>
+                                }
+                                else
+                                {
+                                <span>$</span>
+                                @Html.DisplayFor(model => model.FederalTaxValue) 
+                                @Html.HiddenFor(model => model.FederalTaxFlag)
+                                }
+                            }
+                            else
+                            { 
+                                <span>-</span>
+                            }
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.ServiceRecordFlag</code></th>
+                        <td id="ServiceRecordFlag">@Html.DisplayFor(model => model.ServiceRecordFlag)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.CalculationTypeName</code></th>
+                        <td id="CalculationTypeName">@Html.DisplayFor(model => model.CalculationTypeName)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

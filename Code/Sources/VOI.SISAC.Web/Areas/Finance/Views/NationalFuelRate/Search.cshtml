@@ -1,0 +1,44 @@
+﻿@model IEnumerable<VOI.SISAC.Web.Models.VO.Finance.NationalFuelRateVO>
+@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cultureForm = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+    var startDate = Request.Params["EffectiveStartDate"].ToString();
+    var endDate = Request.Params["EffectiveEndDate"].ToString();
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+@Styles.Render("~/Content/bootstrapdtimecss")
+
+<div class="container">
+    @Html.Hidden("StartDate", startDate)
+    @Html.Hidden("EndDate", endDate)
+    @Html.Partial("_AlertView")
+    <h2 class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.RateTitle</h2>
+    <h3 class="subtitle_h3_ancillarie">@VOI.SISAC.Web.Resources.Resource.AdvanceSearch</h3>
+    <div id="toolbar">
+        <button id="btnClearForm" type="button" class="btn btn-default" name="Clear" title="@Resource.Clear" onclick="location.href='@Url.Action("Index", "NationalFuelRate")'">
+            <i class="fa fa-undo"></i>&nbsp;@Resource.Clear
+        </button>
+    </div>
+    <br />
+    <div id="TableContent">
+        @Html.Partial("Partial/_NationalFuelRateSearchTable")
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/bootstrapTable")
+    <script>
+        var currentLang = '@cultureForm.ToString()';
+        //Take querystrings and send back to server REST
+        function queryParams(params) {
+            return {
+                pageNumber: params.pageNumber,
+                pageSize: params.pageSize,
+                StartDate: $('#StartDate').val(),
+                EndDate: $('#EndDate').val(),
+            };
+        }
+    </script>
+}

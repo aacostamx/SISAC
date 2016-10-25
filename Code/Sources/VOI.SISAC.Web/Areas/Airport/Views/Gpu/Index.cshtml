@@ -1,0 +1,88 @@
+﻿@model IEnumerable<VOI.SISAC.Web.Models.VO.Airport.GpuVO>
+
+@{
+    ViewBag.Title = Resource.GpuTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+<div class="container">
+    @Html.Partial("_AlertView")
+    <h2 class="subtitle_h3_black">@Resource.GpuTitle</h2>
+    <div id="toolbar">
+        @if (User.IsInRole("GPU-ADD"))
+        { 
+            <button type="button" class="btn btn-default" name="Agregar" title="@Resource.Add" onclick="location.href='@Url.Action("Create", "Gpu")'">
+                <i class="fa fa-plus"></i>&nbsp;@Resource.Add
+            </button>
+        }
+    </div>
+
+    <table id="tbGpu"
+        data-toolbar="#toolbar"
+        class="table"
+        data-toggle="table"
+        data-show-export="true"
+        data-export-types="['excel']"
+        data-show-columns="true"
+        data-search="true"
+        data-show-toggle="true"
+        data-show-pagination-switch="true"
+        data-mobile-responsive="true"
+        data-pagination="true"
+        data-export-data-type="all"
+        data-page-size="10">
+        <thead>
+            <tr>
+                <th data-field="GpuCode" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.GpuCode)</strong>
+                </th>
+                <th data-field="GpuName" data-halign="left" data-align="left" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.GpuName)</strong>
+                </th>
+                <th data-field="StationCode" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.StationCode)</strong>
+                </th>
+                @if (User.IsInRole("GPU-DEL") || User.IsInRole("GPU-UPD"))
+                { 
+                    <th data-halign="center" data-align="center">
+                        <strong>@Resource.Actions</strong>
+                    </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GpuCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GpuName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StationCode)
+                    </td>
+                     @if (User.IsInRole("GPU-DEL") || User.IsInRole("GPU-UPD"))
+                    {
+                        <td>
+                            @if (User.IsInRole("GPU-UPD"))
+                            { 
+                                <button class="btn btn-default" type="button" name="Edit" title=@Resource.Edit onclick="location.href='@Url.Action("Edit", "Gpu", new { id = item.GpuCode.Trim() })'"><i class="fa fa-pencil fa-fw"></i></button>
+                            }
+                            @if (User.IsInRole("GPU-DEL"))
+                            { 
+                                <button class="btn btn-default" type="button" name="Delete" title=@Resource.Delete onclick="location.href='@Url.Action("Delete", "Gpu", new { id = item.GpuCode.Trim() })'"><i class="fa fa-trash-o fa-fw"></i></button>
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+@Scripts.Render("~/bundles/bootstrapTable")
+@Scripts.Render("~/bundles/bootstrapTablePlugins")
+@Scripts.Render("~/bundles/ExportTable")

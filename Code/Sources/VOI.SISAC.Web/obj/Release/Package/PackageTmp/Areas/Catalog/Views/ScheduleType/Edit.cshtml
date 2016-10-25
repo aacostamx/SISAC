@@ -1,0 +1,49 @@
+﻿@model VOI.SISAC.Web.Models.VO.Catalog.ScheduleTypeVO
+
+@{
+    ViewBag.Title = Resource.Edit;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cultureForm = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
+}
+
+@Styles.Render("~/Content/bootstrapdtimecss")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p class="subtitle_h3_black">@Resource.ScheduleTypeTitle</p>
+        <p class="subtitle_h3_ancillarie">@Resource.Edit</p>
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                @Html.LabelFor(model => model.ScheduleTypeCode, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                @Html.EditorFor(model => model.ScheduleTypeCode, new { htmlAttributes = new { @class = "form-control", @readonly = "" } })
+                @Html.ValidationMessageFor(model => model.ScheduleTypeCode, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                @Html.LabelFor(model => model.ScheduleTypeName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                @Html.EditorFor(model => model.ScheduleTypeName, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 30);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 30);" } })
+                @Html.ValidationMessageFor(model => model.ScheduleTypeName, "", new { @class = "text-danger" })
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <br />
+                    <input type="reset" class="btnVolaris" value="@Resource.Back" onclick="@("location.href='" + @Url.Action("Index", "ScheduleType") + "'")" />
+                    <input type="submit" value="@Resource.Edit" class="btnVolaris" />
+                    <br />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/CommonFunctions")
+}

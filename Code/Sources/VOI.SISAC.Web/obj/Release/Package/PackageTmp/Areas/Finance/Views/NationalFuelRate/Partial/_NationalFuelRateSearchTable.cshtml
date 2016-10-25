@@ -1,0 +1,81 @@
+﻿@model IEnumerable<VOI.SISAC.Web.Models.VO.Finance.NationalFuelRateVO>
+
+@{
+    var cultureForm = System.Threading.Thread.CurrentThread.CurrentUICulture.Name;
+}
+
+<table id="tbNationalFuelRate"
+    data-toolbar="#toolbar"
+    data-toggle="table"
+    data-locale="@cultureForm.ToString()"
+    class="table"
+    data-cache="false"
+    data-export-types="['excel']"
+    data-show-export="true"
+    data-show-columns="true"
+    data-show-toggle="true"
+    data-mobile-responsive="true"
+    data-check-on-init="true"
+    data-url="@Url.Action("GetRateSearch", "NationalFuelRate")"
+    data-pagination="true"
+    data-query-params="queryParams"
+    data-side-pagination="server"
+    data-query-params-type=""
+    data-page-list="[5,10,20,50,100,200,All]">
+    <thead>
+        <tr>
+            <th data-field="NationalFuelRateId" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                <strong>ID</strong>
+            </th>
+            <th data-field="StationCode" data-halign="center" data-align="center" data-sortable="true">
+                <strong>@Resource.StationCode</strong>
+            </th>
+            <th data-field="StationName" data-halign="center" data-align="center" data-sortable="true">
+                <strong>@Resource.StationName</strong>
+            </th>
+
+            <th data-field="ServiceCode" data-halign="center" data-align="center" data-sortable="true">
+                <strong>@Resource.ServiceCode</strong>
+            </th>
+            <th data-field="ServiceName" data-halign="center" data-align="center" data-sortable="true">
+                <strong>@Resource.ServiceName</strong>
+            </th>
+
+            <th data-field="ProviderNumber" data-halign="center" data-align="center" data-sortable="true">
+                <strong>@Resource.ProviderNumber</strong>
+            </th>
+            <th data-field="ProviderName" data-halign="center" data-align="center" data-sortable="true">
+                <strong>@Resource.ProviderName</strong>
+            </th>
+
+            <th data-field="EffectiveStartDate" data-halign="center" data-align="center" data-sortable="true">
+                <strong>@Resource.RateStartDate</strong>
+            </th>
+            <th data-field="EffectiveEndDate" data-halign="center" data-align="center" data-sortable="true">
+                <strong>@Resource.RateEndDate</strong>
+            </th>
+
+            <th data-field="ScheduleTypeName" data-halign="center" data-align="center" data-sortable="true">
+                <strong>@Resource.ScheduleTypeName</strong>
+            </th>
+            <th data-field="FuelConceptTypeName" data-halign="center" data-align="center" data-sortable="true">
+                <strong>@Resource.FuelConceptTypeName</strong>
+            </th>
+            <th data-field="RateValue" data-halign="center" data-align="center" data-sortable="true">
+                <strong>@Resource.Rate</strong>
+            </th>
+            <th data-field="CurrencyCode" data-halign="center" data-align="center" data-sortable="true">
+                <strong>@Resource.CurrencyName</strong>
+            </th>
+        </tr>
+    </thead>
+</table>
+
+<script>
+    function queryParams(params) {
+        return {
+            pageNumber: params.pageNumber,
+            pageSize: params.pageSize
+        };
+    }
+</script>

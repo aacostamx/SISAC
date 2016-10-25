@@ -1,0 +1,86 @@
+﻿@model IEnumerable<VOI.SISAC.Web.Models.VO.Finance.ProviderVO>
+@{
+    ViewBag.Title = VOI.SISAC.Web.Resources.Resource.ProviderTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+
+<div class="container">
+    <h2 class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.ProviderTitle</h2>
+    @Html.Partial("_AlertView")
+    <div id="toolbar">
+        @if (User.IsInRole("PROVIDER-ADD"))
+        {
+            <button type="button" class="btn btn-default" name="Agregar" title="@VOI.SISAC.Web.Resources.Resource.Add" onclick="location.href='@Url.Action("Create", "Provider")'"><i class="fa fa-plus"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.Add</button>
+        }
+    </div>
+    <table id="tbProvider"
+        data-toolbar="#toolbar"
+        class="table"
+        data-toggle="table"
+        data-show-columns="true"
+        data-search="true"
+        data-show-toggle="true"
+        data-show-export="true"
+        data-export-types="['excel']"
+        data-show-pagination-switch="true"
+        data-mobile-responsive="true"
+        data-pagination="true"
+        data-export-data-type="all"
+        data-page-size="10">
+        <thead>
+            <tr>
+                <th data-field="ProviderNumber" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.ProviderNumber)</strong>
+                </th>
+                <th data-field="ProviderName" data-halign="left" data-align="left" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.ProviderName)</strong>
+                </th>
+                <th data-field="ProviderShortName" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.ProviderShortName)</strong>
+                </th>
+                @if (User.IsInRole("PROVIDER-UPD") || User.IsInRole("PROVIDER-DEL"))
+                {
+                    <th data-field="Acctions" data-align="center" data-halign="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
+                    </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProviderNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProviderName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProviderShortName)
+                    </td>
+                    @if (User.IsInRole("PROVIDER-UPD") || User.IsInRole("PROVIDER-DEL"))
+                    {
+                        <td>
+                            @if (User.IsInRole("PROVIDER-UPD"))
+                            {
+                                <button class="btn btn-default" type="button" name="Edit" title="@VOI.SISAC.Web.Resources.Resource.Edit" onclick="location.href='@Url.Action("Edit", "Provider", new { id = item.ProviderNumber })'"><i class="fa fa-pencil fa-fw"></i></button>
+                            }
+                            @if (User.IsInRole("PROVIDER-DEL"))
+                            {
+                                <button class="btn btn-default" type="button" name="Delete" title="@VOI.SISAC.Web.Resources.Resource.Delete" onclick="location.href='@Url.Action("Delete", "Provider", new { id = item.ProviderNumber })'"><i class="fa fa-trash-o fa-fw"></i></button>
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+</div>
+@Scripts.Render("~/bundles/CommonFunctions")
+@Scripts.Render("~/bundles/bootstrapTable")
+@Scripts.Render("~/bundles/bootstrapTablePlugins")
+@Scripts.Render("~/bundles/ExportTable")

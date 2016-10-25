@@ -1,0 +1,97 @@
+﻿@model IEnumerable<VOI.SISAC.Web.Models.VO.Finance.CostCenterVO>
+
+@{
+    ViewBag.Title = @VOI.SISAC.Web.Resources.Resource.CostCenterTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <h2 class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.CostCenterTitle</h2>
+    <div id="toolbar">
+        @if (User.IsInRole("COSTCENTER-ADD"))
+        { 
+            <button type="button" class="btn btn-default" name="Agregar" title=@VOI.SISAC.Web.Resources.Resource.Add onclick="location.href='@Url.Action("Create", "CostCenter")'">
+                <i class="fa fa-plus"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.Add</button>
+        }
+    </div>
+    <table id="tbCostCenter"
+        data-toolbar="#toolbar"
+        class="table"
+        data-toggle="table"
+        data-show-export="true"
+        data-export-types="['excel']"
+        data-show-columns="true"
+        data-search="true"
+        data-show-toggle="true"
+        data-show-pagination-switch="true"
+        data-mobile-responsive="true"
+        data-pagination="true"
+        data-export-data-type="all"
+        data-page-size="10">
+        <thead>
+            <tr>
+                <th data-field="CCNumber" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.CCNumber)</strong>
+                </th>
+                <th data-field="CCName" data-halign="left" data-align="left" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.CCName)</strong>
+                </th>
+                <th data-field="AirlineCode" data-halign="left" data-align="left" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.AirlineCode)</strong>
+                </th>
+                @* <th data-field="Status" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.Status)</strong>
+                </th>*@
+                @if (User.IsInRole("COSTCENTER-UPD") || User.IsInRole("COSTCENTER-DEL"))
+                {
+                    <th data-field="Acctions" data-align="center" data-halign="center"><strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong></th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CCNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CCName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AirlineCode)
+                        @Html.DisplayName(" - ")
+                        @Html.DisplayFor(modelItem => item.Airline.AirlineName)
+                    </td>
+                    @*<td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>*@
+                    @if (User.IsInRole("COSTCENTER-UPD") || User.IsInRole("COSTCENTER-DEL"))
+                    {
+                        <td>
+                            @if (User.IsInRole("COSTCENTER-UPD"))
+                            { 
+                                <button class="btn btn-default" type="button" name="Edit" title="@VOI.SISAC.Web.Resources.Resource.Edit" onclick="location.href='@Url.Action("Edit", "CostCenter", new { id = item.CCNumber })'"><i class="fa fa-pencil fa-fw"></i></button>
+                            }
+                            @if (User.IsInRole("COSTCENTER-DEL"))
+                            { 
+                                <button class="btn btn-default" type="button" name="Delete" title="@VOI.SISAC.Web.Resources.Resource.Delete" onclick="location.href='@Url.Action("Delete", "CostCenter", new { id = item.CCNumber })'"><i class="fa fa-trash-o fa-fw"></i></button>
+                            }
+                        </td>
+                    }
+                </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <br />
+</div>
+
+@Scripts.Render("~/bundles/bootstrapTable")
+@Scripts.Render("~/bundles/bootstrapTablePlugins")
+@Scripts.Render("~/bundles/ExportTable")

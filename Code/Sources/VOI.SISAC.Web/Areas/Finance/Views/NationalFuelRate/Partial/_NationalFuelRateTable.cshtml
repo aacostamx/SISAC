@@ -1,0 +1,96 @@
+﻿@model IEnumerable<VOI.SISAC.Web.Models.VO.Finance.NationalFuelRateVO>
+
+@{
+    var cultureForm = System.Threading.Thread.CurrentThread.CurrentUICulture.Name;
+}
+
+<table id="tbNationalFuelRate"
+    data-toolbar="#toolbar"
+    data-toggle="table"
+    data-locale="@cultureForm.ToString()"
+    class="table"
+    data-cache="false"
+    data-export-types="['excel']"
+    data-show-export="true"
+    data-show-columns="true"
+    data-show-toggle="true"
+    data-mobile-responsive="true"
+    data-check-on-init="true"
+    data-url="@Url.Action("GetRateData", "NationalFuelRate")"
+    data-pagination="true"
+    data-query-params="queryParams"
+    data-side-pagination="server"
+    data-query-params-type=""
+    data-page-list="[5,10,20,50,100,200,All]">
+    <thead>
+        <tr>
+            @if (this.User.IsInRole("NATFUELRAT-UPD") || this.User.IsInRole("NATFUELRAT-DEL")) { 
+                <th data-field="Acctions" data-align="center" data-halign="center" data-formatter="NationalFuelRate.actionsButtons">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
+                </th>
+            }
+            <th data-field="NationalFuelRateId" data-halign="center" data-align="center" data-visible="false">
+                <strong>ID</strong>
+            </th>
+            <th data-field="StationCode" data-halign="center" data-align="center" data-visible="false">
+                <strong>@Resource.StationCode</strong>
+            </th>
+            <th data-field="StationName" data-halign="center" data-align="center">
+                <strong>@Resource.StationName</strong>
+            </th>
+
+            <th data-field="ServiceCode" data-halign="center" data-align="center" data-visible="false">
+                <strong>@Resource.ServiceCode</strong>
+            </th>
+            <th data-field="ServiceName" data-halign="center" data-align="center">
+                <strong>@Resource.ServiceName</strong>
+            </th>
+
+            <th data-field="ProviderNumber" data-halign="center" data-align="center" data-visible="false">
+                <strong>@Resource.ProviderNumber</strong>
+            </th>
+            <th data-field="ProviderName" data-halign="center" data-align="center">
+                <strong>@Resource.ProviderName</strong>
+            </th>
+
+            <th data-field="EffectiveStartDate" data-halign="center" data-align="center">
+                <strong>@Resource.RateStartDate</strong>
+            </th>
+            <th data-field="EffectiveEndDate" data-halign="center" data-align="center">
+                <strong>@Resource.RateEndDate</strong>
+            </th>
+
+            <th data-field="ScheduleTypeName" data-halign="center" data-align="center">
+                <strong>@Resource.ScheduleTypeName</strong>
+            </th>
+            <th data-field="FuelConceptTypeName" data-halign="center" data-align="center">
+                <strong>@Resource.FuelConceptTypeName</strong>
+            </th>
+            <th data-field="RateValue" data-halign="center" data-align="center">
+                <strong>@Resource.Rate</strong>
+            </th>
+            <th data-field="CurrencyCode" data-halign="center" data-align="center">
+                <strong>@Resource.CurrencyName</strong>
+            </th>
+        </tr>
+    </thead>
+</table>
+
+<!-- context menu -->
+<ul id="context-menu" class="dropdown-menu">
+    @if (this.User.IsInRole("NATFUELRAT-UPD")) { 
+        <li data-item="@Resource.Edit"><a><i class="fa fa-pencil fa-fw"></i>&nbsp;@Resource.Edit</a></li>
+    }
+    @if (this.User.IsInRole("NATFUELRAT-DEL")) { 
+        <li data-item="@Resource.Delete"><a><i class="fa fa-trash-o fa-fw"></i>&nbsp;@Resource.Delete</a></li>
+    }
+</ul>
+
+<script>
+    function queryParams(params) {
+        return {
+            pageNumber: params.pageNumber,
+            pageSize: params.pageSize
+        };
+    }
+</script>

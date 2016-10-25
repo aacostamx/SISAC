@@ -1,0 +1,67 @@
+﻿<ul id="context-menu" class="dropdown-menu">
+    @if (User.IsInRole("NTLJETINVO-PRINTREP"))
+    {
+        <li data-item="@VOI.SISAC.Web.Resources.Resource.ShowErrors"><a><i class="fa fa-share-square-o fa-fw"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.ShowErrors</a></li>
+    }
+    @if (User.IsInRole("NTLJETINVO-DEL"))
+    {
+        <li data-item="@VOI.SISAC.Web.Resources.Resource.Delete"><a><i class="fa fa-trash fa-fw"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.Delete</a></li>
+    }
+    @if (User.IsInRole("NTLJETINVO-PRINTREP"))
+    {
+        <li data-item="@VOI.SISAC.Web.Resources.Resource.ExportInvoiceSummary"><a><i class="fa fa-share-square-o fa-fw"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.ExportInvoiceSummary</a></li>
+    }
+    @if (User.IsInRole("NTLJETINVO-ADD"))
+    {
+        <li data-item="@VOI.SISAC.Web.Resources.Resource.Add"><a><i class="fa fa-plus fa-fw"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.CreatePolicy</a></li>
+    }
+    @if (User.IsInRole("NTLJETINVO-EXP"))
+    {
+        <li data-item="@VOI.SISAC.Web.Resources.Resource.ExportPolicy"><a><i class="fa fa-share-square-o fa-fw"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.ExportPolicy</a></li>
+    }
+    @if (User.IsInRole("NTLJETINVO-SEND"))
+    {
+        <li data-item="@VOI.SISAC.Web.Resources.Resource.Send"><a><i class="fa fa-paper-plane-o fa-fw"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.SendPolicy</a></li>
+    }
+</ul>
+
+@*@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/bootstrapTable")
+@Scripts.Render("~/bundles/bootstrapTablePlugins")*@
+
+<script>
+         $('#tbNationalInvoice').bootstrapTable({
+            contextMenu: '#context-menu',
+            contextMenuButton: '.menuButton',
+            contextMenuAutoClickRow: true,
+            contextMenuTrigger: 'right',
+            onContextMenuItem: function (row, $el) {
+                if ($el.data("item") == '@VOI.SISAC.Web.Resources.Resource.Delete') {
+                    confirmDeleteModal(row.RemittanceId);
+                }
+                if ($el.data("item") == '@VOI.SISAC.Web.Resources.Resource.ShowErrors') {
+                    var url = '@Url.Action("ShowErrorsReport", "NationalJetFuelInvoice")';
+                    url = url.concat('?remittanceID=' + row.RemittanceId);
+                    window.location = url;
+                }
+                if ($el.data("item") == '@VOI.SISAC.Web.Resources.Resource.ExportInvoiceSummary') {
+                    var url = '@Url.Action("ShowInvoiceSummary", "NationalJetFuelInvoice")';
+                    url = url.concat('?remittanceID=' + row.RemittanceId);
+                    window.location = url;
+                }
+                if ($el.data("item") == '@VOI.SISAC.Web.Resources.Resource.Add') {
+                    createPolicyModal(row.RemittanceId);
+                }
+                if ($el.data("item") == '@VOI.SISAC.Web.Resources.Resource.ExportPolicy') {
+                    var url = '@Url.Action("ShowInvoicePoliciesReport", "NationalJetFuelInvoice")';
+                    url = url.concat('?remittanceID=' + row.RemittanceId);
+                    window.location = url;
+                }
+                if ($el.data("item") == '@VOI.SISAC.Web.Resources.Resource.Send') {
+                    var url = '@Url.Action("Send", "NationalJetFuelInvoice")';
+                    url = url.concat('?remittanceID=' + row.RemittanceId);
+                    window.location = url;
+                }
+            }
+        })
+</script>

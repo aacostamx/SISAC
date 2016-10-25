@@ -1,0 +1,42 @@
+﻿@model VOI.SISAC.Web.Models.VO.Finance.NationalFuelRateVO
+<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="myModallabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="subtitle_h3_black" aria-hidden="true">&times;</span>
+                </button>
+                <h2 class="subtitle_h3_black">@Resource.Delete</h2>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("DeleteRange", "NationalFuelRate"))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="subtitle_h5">@VOI.SISAC.Web.Resources.Resource.RateStartDate:</div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <input type="text" id="RateStartDate" name="EffectiveStartDate" class="form-control ClassDate" />
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="subtitle_h5">@VOI.SISAC.Web.Resources.Resource.RateEndDate:</div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <input type="text" id="RateEndDate" name="EffectiveEndDate" class="form-control ClassDate" />
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <input type="submit" class="btnVolaris" name="Delete" value="@VOI.SISAC.Web.Resources.Resource.Delete"/>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Resource.Close</button>
+            </div>
+        </div>
+    </div>
+</div>

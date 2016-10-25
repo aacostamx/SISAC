@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition">
+  <Description />
+  <DataSet Name="DataSet1">
+    <Query>
+      <DataSourceReference>dsSISAC</DataSourceReference>
+      <DataSetParameters>
+        <DataSetParameter Name="@PeriodCode">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>AnsiString</rd:DbType>
+        </DataSetParameter>
+      </DataSetParameters>
+      <CommandType>StoredProcedure</CommandType>
+      <CommandText>Process.JetFuelReportTicket</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="Number">
+        <DataField>Number</DataField>
+        <rd:TypeName>System.Int64</rd:TypeName>
+      </Field>
+      <Field Name="PeriodCode">
+        <DataField>PeriodCode</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="Sequence">
+        <DataField>Sequence</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="AirlineCode">
+        <DataField>AirlineCode</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="FlightNumber">
+        <DataField>FlightNumber</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="EquipmentNumber">
+        <DataField>EquipmentNumber</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="DepartureStation">
+        <DataField>DepartureStation</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="DepartureDate">
+        <DataField>DepartureDate</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="ArrivalStation">
+        <DataField>ArrivalStation</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="ArrivalDate">
+        <DataField>ArrivalDate</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="TicketsNum">
+        <DataField>TicketsNum</DataField>
+        <rd:TypeName>System.Int64</rd:TypeName>
+      </Field>
+      <Field Name="JetFuelTicketID">
+        <DataField>JetFuelTicketID</DataField>
+        <rd:TypeName>System.Int64</rd:TypeName>
+      </Field>
+      <Field Name="OperationTypeName">
+        <DataField>OperationTypeName</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="TicketNumber">
+        <DataField>TicketNumber</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="FuelingDate">
+        <DataField>FuelingDate</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="FuelingTime">
+        <DataField>FuelingTime</DataField>
+        <rd:TypeName>System.TimeSpan</rd:TypeName>
+      </Field>
+      <Field Name="FueledQtyGals">
+        <DataField>FueledQtyGals</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="JetFuelProviderNumber">
+        <DataField>JetFuelProviderNumber</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="JetFuelProviderName">
+        <DataField>JetFuelProviderName</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="IntoPlaneProviderNumber">
+        <DataField>IntoPlaneProviderNumber</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="IntoPlaneProviderName">
+        <DataField>IntoPlaneProviderName</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="RemainingQry">
+        <DataField>RemainingQry</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="RequestedQry">
+        <DataField>RequestedQry</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="FueledQry">
+        <DataField>FueledQry</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="DensityFactor">
+        <DataField>DensityFactor</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="AorUserID">
+        <DataField>AorUserID</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="AorUserName">
+        <DataField>AorUserName</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="SupplierResponsible">
+        <DataField>SupplierResponsible</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="Remarks">
+        <DataField>Remarks</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

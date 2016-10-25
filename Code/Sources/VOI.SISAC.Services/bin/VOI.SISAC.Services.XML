@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VOI.SISAC.Services</name>
+    </assembly>
+    <members>
+        <member name="M:VOI.SISAC.Services.App_Start.MapperConfig.RegisterMappings">
+            <summary>
+            Registers the mappings.
+            </summary>
+        </member>
+        <member name="T:VOI.SISAC.Services.Common.AutoFacConfig">
+            <summary>
+            AutoFacConfig class
+            </summary>
+        </member>
+        <member name="M:VOI.SISAC.Services.Common.AutoFacConfig.BuildContainer">
+            <summary>
+            Configures and builds Autofac IOC container.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:VOI.SISAC.Services.Common.AutofacConfiguration">
+            <summary>
+            Dependency injection configuration class
+            </summary>
+        </member>
+        <member name="M:VOI.SISAC.Services.Common.AutofacConfiguration.Run">
+            <summary>
+            Runs this instance.
+            </summary>
+        </member>
+        <member name="M:VOI.SISAC.Services.Common.AutofacConfiguration.SetAutofacContainer">
+            <summary>
+            Sets the container.
+            </summary>
+        </member>
+        <member name="T:VOI.SISAC.Services.Global">
+            <summary>
+            Global class
+            </summary>
+        </member>
+        <member name="M:VOI.SISAC.Services.Global.Application_Start(System.Object,System.EventArgs)">
+            <summary>
+            Application_Start method
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:VOI.SISAC.Services.Global.Session_Start(System.Object,System.EventArgs)">
+            <summary>
+            Session_Start
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:VOI.SISAC.Services.Global.Application_BeginRequest(System.Object,System.EventArgs)">
+            <summary>
+            Application_BeginRequest
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:VOI.SISAC.Services.Global.Application_AuthenticateRequest(System.Object,System.EventArgs)">
+            <summary>
+            Application_AuthenticateRequest
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:VOI.SISAC.Services.Global.Application_Error(System.Object,System.EventArgs)">
+            <summary>
+            Application_Error
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:VOI.SISAC.Services.Global.Session_End(System.Object,System.EventArgs)">
+            <summary>
+            Session_End
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:VOI.SISAC.Services.Global.Application_End(System.Object,System.EventArgs)">
+            <summary>
+            Application_End
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="T:VOI.SISAC.Services.IServiceOpenManifestServices">
+            <summary>
+            IServiceOpenManifestServices
+            </summary>
+        </member>
+        <member name="M:VOI.SISAC.Services.IServiceOpenManifestServices.OpenGendecArrival(System.String,System.String,System.String,System.String)">
+            <summary>
+            OpenGendecArrival
+            </summary>
+            <param name="sequence"></param>
+            <param name="airlinecode"></param>
+            <param name="flightnumber"></param>
+            <param name="itinerarykey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Services.IServiceOpenManifestServices.OpenGendecDeparture(System.String,System.String,System.String,System.String)">
+            <summary>
+            Open Gendec Departure
+            </summary>
+            <param name="sequence"></param>
+            <param name="airlinecode"></param>
+            <param name="flightnumber"></param>
+            <param name="itinerarykey"></param>
+        </member>
+        <member name="T:VOI.SISAC.Services.ServiceOpenManifestServices">
+            <summary>
+            ServiceOpenManifestServices
+            </summary>
+        </member>
+        <member name="M:VOI.SISAC.Services.ServiceOpenManifestServices.#ctor(VOI.SISAC.Business.Itineraries.IGendecArrivalBusiness,VOI.SISAC.Business.Itineraries.IGendecDepartureBusiness)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="gendecArrivalBusiness"></param>
+        </member>
+        <member name="M:VOI.SISAC.Services.ServiceOpenManifestServices.OpenGendecArrival(System.String,System.String,System.String,System.String)">
+            <summary>
+            OpenGendecArrival
+            </summary>
+            <param name="sequence"></param>
+            <param name="airlinecode"></param>
+            <param name="flightnumber"></param>
+            <param name="itinerarykey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Services.ServiceOpenManifestServices.OpenGendecDeparture(System.String,System.String,System.String,System.String)">
+            <summary>
+            OpenGendecArrival
+            </summary>
+            <param name="sequence"></param>
+            <param name="airlinecode"></param>
+            <param name="flightnumber"></param>
+            <param name="itinerarykey"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

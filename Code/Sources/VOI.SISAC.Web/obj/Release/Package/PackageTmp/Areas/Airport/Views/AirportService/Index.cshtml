@@ -1,0 +1,247 @@
+﻿@model VOI.SISAC.Web.Models.VO.Airport.AirportServiceVO
+@{
+    ViewBag.Title = Resource.AirportService;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var services = this.ViewBag.Services as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var cultureForm = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+@Styles.Render("~/bundles/SweetAlertCSS")
+@Styles.Render("~/Content/bootstrapdtimecss")
+@Styles.Render("~/bundles/BootstrapSelectCSS")
+<div class="container">
+    @Html.Partial("_AlertView")
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        @if (ViewBag.OperationTypeName == "LLEGADA")
+        {
+            <p class="subtitle_h3_black">@Resource.AirportServicesArrive</p>
+        }
+        else if (ViewBag.OperationTypeName == "SALIDA")
+        {
+            <p class="subtitle_h3_black">@Resource.AirportServicesDeparture</p>
+        }
+        <br />
+    </div>
+    @if (Model.Itinerary != null)
+    {
+        <div id="FlightInformation">
+            @Html.Partial("_FlightInformation", Model.Itinerary)
+        </div>
+    }
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div id="toolbar">
+            @if (User.IsInRole("AIRPSERV-ADD"))
+            {
+                if (ViewBag.ServicesContract != null && ViewBag.ServicesContract == true)
+                {
+                <button id="btnAddServices" type="button" class="btn btn-default" name="@Resource.Add" title="@Resource.Add" onclick="location.href='@Url.Action("Create", "AirportService", new
+                {
+                    Sequence = Model.Itinerary.Sequence,
+                    AirlineCode = Model.Itinerary.AirlineCode,
+                    FlightNumber = Model.Itinerary.FlightNumber,
+                    ItineraryKey = Model.Itinerary.ItineraryKey,
+                    OperationTypeName = Model.OperationTypeName
+                })'">
+                    <i class="fa fa-plus"></i>
+                    &nbsp;@Resource.Add
+                </button>
+                }
+                else
+                {
+                <button id="btnAddServices" type="button" class="btn btn-default" name="@Resource.Add" title="@Resource.Add" onclick="AirportServicesController.validateServicesContract()">
+                    <i class="fa fa-plus"></i>
+                    &nbsp;@Resource.Add
+                </button>
+                }
+            }
+        </div>
+        <table id="tbAirportServices"
+               data-toolbar="#toolbar"
+               data-toggle="table"
+               data-locale="@cultureForm.ToString()"
+               data-show-columns="true"
+               data-search="true"
+               data-show-toggle="true"
+               data-mobile-responsive="true"
+               class="table">
+            <thead>
+                <tr>
+                    @if (User.IsInRole("AIRPSERV-UPD") || User.IsInRole("AIRPSERV-DEL"))
+                    {
+                        <th data-field="Actions" data-align="center" data-halign="center">
+                            <strong>@Resource.Actions</strong>
+                        </th>
+                    }
+                    <th data-field="ServiceName" data-halign="center" data-align="center">
+                        <strong>@Html.DisplayNameFor(c => c.Service.ServiceName)</strong>
+                    </th>
+                    <th data-field="ProviderName" data-halign="center" data-align="center">
+                        <strong>@Html.DisplayNameFor(c => c.Provider.ProviderName)</strong>
+                    </th>
+                    <th data-field="StartDateService" data-halign="center" data-align="center"
+                        data-formatter="AirportServicesController.setStartTime">
+                        <strong>@Html.DisplayNameFor(c => c.StartDateService)</strong>
+                    </th>
+                    <th data-field="StartTimeService" data-halign="center" data-align="center" data-visible="false">
+                        <strong>@Html.DisplayNameFor(c => c.StartTimeService)</strong>
+                    </th>
+                    <th data-field="EndDateService" data-halign="center" data-align="center"
+                        data-formatter="AirportServicesController.setEndTime">
+                        <strong>@Html.DisplayNameFor(c => c.EndDateService)</strong>
+                    </th>
+                    <th data-field="EndTimeService" data-halign="center" data-align="center" data-visible="false">
+                        <strong>@Html.DisplayNameFor(c => c.EndTimeService)</strong>
+                    </th>
+                    <th data-field="QtyServices" data-halign="center" data-align="center">
+                        <strong>@Html.DisplayNameFor(c => c.QtyServices)</strong>
+                    </th>
+                    <th data-field="QtyHours" data-halign="center" data-align="center">
+                        <strong>@Html.DisplayNameFor(c => c.QtyHours)</strong>
+                    </th>
+                    <th data-field="ApronPosition" data-halign="center" data-align="center">
+                        <strong>@Html.DisplayNameFor(c => c.ApronPosition)</strong>
+                    </th>
+                    <th data-field="Value" data-halign="center" data-align="center">
+                        <strong>@Html.DisplayNameFor(c => c.DrinkingWater.Value)</strong>
+                    </th>
+                    <th data-field="GpuCode" data-halign="center" data-align="center">
+                        <strong>@Html.DisplayNameFor(c => c.Gpu.GpuCode)</strong>
+                    </th>
+                    <th data-field="GpuStartMeter" data-halign="center" data-align="center">
+                        <strong>@Html.DisplayNameFor(c => c.GpuStartMeter)</strong>
+                    </th>
+                    <th data-field="GpuEndMeter" data-halign="center" data-align="center">
+                        <strong>@Html.DisplayNameFor(c => c.GpuEndMeter)</strong>
+                    </th>
+                    <th data-field="GpuObservationCodeName" data-halign="center" data-align="center">
+                        <strong>@Html.DisplayNameFor(c => c.GpuObservation.GpuObservationCodeName)</strong>
+                    </th>
+                    <th data-field="OperationTypeName" data-halign="center" data-align="center">
+                        <strong>@Html.DisplayNameFor(c => c.OperationTypeName)</strong>
+                    </th>
+                    <th data-field="FuelBeforeLanding" data-halign="center" data-align="center">
+                        <strong>@Html.DisplayNameFor(c => c.FuelBeforeLanding)</strong>
+                    </th>
+                    <th data-field="FuelLoaded" data-halign="center" data-align="center">
+                        <strong>@Html.DisplayNameFor(c => c.FuelLoaded)</strong>
+                    </th>
+                    <th data-field="Remarks" data-halign="center" data-align="center">
+                        <strong>@Html.DisplayNameFor(c => c.Remarks)</strong>
+                    </th>
+                    <th data-field="AirportServiceID" data-align="center" data-halign="center" data-visible="false">
+                        <strong>@Html.DisplayNameFor(c => c.AirportServiceID)</strong>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.ServicesAirport != null)
+                {
+                    foreach (var item in Model.ServicesAirport)
+                    {
+                    <tr>
+                        @if (User.IsInRole("AIRPSERV-UPD") || User.IsInRole("AIRPSERV-DEL"))
+                        { 
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <button type="button" class="btn btn-default dropdown-toggle menuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span> </button>
+                                </div>
+                            </td>
+                        }
+                        <td>@Html.DisplayFor(modelItem => item.Service.ServiceName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Provider.ProviderName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.StartDateService)</td>
+                        <td>@Html.DisplayFor(modelItem => item.StartTimeService)</td>
+                        <td>@Html.DisplayFor(modelItem => item.EndDateService)</td>
+                        <td>@Html.DisplayFor(modelItem => item.EndTimeService)</td>
+                        <td>@Html.DisplayFor(modelItem => item.QtyServices)</td>
+                        <td>@Html.DisplayFor(modelItem => item.QtyHours)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ApronPosition)</td>
+                        <td>@Html.DisplayFor(modelItem => item.DrinkingWater.Value)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Gpu.GpuCode)</td>
+                        <td>@Html.DisplayFor(modelItem => item.GpuStartMeter)</td>
+                        <td>@Html.DisplayFor(modelItem => item.GpuEndMeter)</td>
+                        <td>@Html.DisplayFor(modelItem => item.GpuObservation.GpuObservationCodeName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.OperationTypeName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.FuelBeforeLanding)</td>
+                        <td>@Html.DisplayFor(modelItem => item.FuelLoaded)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Remarks)</td>
+                        <td>@Html.DisplayFor(modelItem => item.AirportServiceID)</td>
+                    </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12  text-center">
+                <br />
+                <button id="btnBackServices" type="button" class="btn btn-default" name="@Resource.Back" title="@Resource.Back" onclick="location.href='@Url.Action("Index", "Itinerary", new { area = "Itineraries" })'">
+                    <i class="fa fa-arrow-left  fa-fw"></i>
+                    &nbsp;@Resource.Back
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- context menu -->
+<ul id="context-menu" class="dropdown-menu">
+    @if (User.IsInRole("AIRPSERV-UPD"))
+    {
+        <li data-item="Edit"><a><i class="fa fa-pencil fa-fw"></i>&nbsp;@Resource.Edit</a></li>
+    }
+
+    @if (User.IsInRole("AIRPSERV-DEL"))
+    {
+        <li data-item="Delete"><a><i class="fa fa-trash-o fa-fw"></i>&nbsp;@Resource.Delete</a></li>
+    }
+</ul>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/bootstrapTable")
+    @Scripts.Render("~/bundles/bootstrapTablePlugins")
+    @Scripts.Render("~/bundles/AirportServicesJS")
+    @Scripts.Render("~/bundles/SweetAlertJS")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+    @Scripts.Render("~/bundles/BootstrapSelectJS")
+
+    @Scripts.Render("~/bundles/BootstrapContextMenu")
+
+    <script type="text/javascript">
+        var currentLang = '@cultureForm.ToString()';
+        $('#tbAirportServices').bootstrapTable({
+            contextMenu: '#context-menu',
+            contextMenuButton: '.menuButton',
+            contextMenuAutoClickRow: true,
+            onContextMenuItem: function (row, $el) {
+                if ($el.data("item") == 'Edit') {
+                    var url = '@Url.Action("Edit", "AirportService")';
+                    url = url.concat('?id=' + row.AirportServiceID);
+                    window.location = url;
+                }
+
+                if ($el.data("item") == 'Delete') {
+                    var url = '@Url.Action("Delete", "AirportService")';
+                    url = url.concat('?id=' + row.AirportServiceID);
+                    window.location = url;
+                }
+            }
+        });
+
+        $(function () {
+            selectAll = function () {
+                var table = $("#tbAirportServices");
+                var hiddenColumns = $(table).bootstrapTable('getHiddenColumns');
+
+                if (hiddenColumns.length > 0) {
+                    for (i = 0; i < hiddenColumns.length; i++) {
+                        $(table).bootstrapTable('showColumn', hiddenColumns[i].field)
+                    }
+                }
+            };
+        });
+    </script>
+}

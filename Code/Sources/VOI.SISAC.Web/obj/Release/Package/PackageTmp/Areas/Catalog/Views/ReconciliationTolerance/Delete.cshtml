@@ -1,0 +1,77 @@
+﻿@model VOI.SISAC.Web.Models.VO.Catalog.ReconciliationToleranceVO
+
+@{
+    ViewBag.Title = Resource.Delete;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cultureForm = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
+}
+
+
+@Styles.Render("~/Content/bootstrapdtimecss")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p class="subtitle_h3_black">@Resource.ReconciliationToleranceTitle</p>
+        <p class="subtitle_h3_ancillarie">@Resource.Delete</p>
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    @Html.LabelFor(model => model.Service.ServiceName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    <input name="ServiceName" class="form-control text-box single-line valid" id="ServiceName" aria-invalid="false" aria-required="true" aria-describedby="ServiceName-error" type="text" readonly="readonly" value="@Model.Service.ServiceName - @Model.Service.ServiceName" data-val-required="Required Field" data-val="true">
+                    @Html.ValidationMessageFor(model => model.ServiceCode, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    @Html.LabelFor(model => model.Currency.CurrencyName, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                    <input name="CurrencyName" class="form-control text-box single-line valid" id="CurrencyName" aria-invalid="false" aria-required="true" aria-describedby="CurrencyCode-error" type="text" readonly="readonly" value="@Model.Currency.CurrencyName - @Model.Currency.CurrencyCode" data-val-required="Required Field" data-val="true">
+                    @Html.ValidationMessageFor(model => model.Currency.CurrencyName, "", new { @class = "text-danger text-danger-error" })
+                    @Html.HiddenFor(model => model.CurrencyCode)
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    @Html.LabelFor(model => model.ToleranceType.ToleranceTypeName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    <input name="ToleranceTypeName" class="form-control text-box single-line valid" id="ToleranceTypeName" aria-invalid="false" aria-required="true" aria-describedby="ToleranceTypeName-error" type="text" readonly="readonly" value="@Model.ToleranceType.ToleranceTypeName - @Model.ToleranceType.ToleranceTypeCode" data-val-required="Required Field" data-val="true">
+                    @Html.ValidationMessageFor(model => model.ServiceCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    @Html.LabelFor(model => model.ToleranceValue, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    <input class="form-control text-box single-line valid" data-val="true" data-val-number="@Resource.MustBeNumber" data-val-required="@Resource.RequiredField" id="ToleranceValue" max="1000" min="0" name="Rate" type="text" value="@Model.ToleranceValue" aria-required="true" aria-invalid="false" aria-describedby="ToleranceValue-error" readonly>
+                    @Html.ValidationMessageFor(model => model.ToleranceValue, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">                                      
+                    <input type="reset" class="btnVolaris" value="@Resource.Back" onclick="@("location.href='" + @Url.Action("Index", "ReconciliationTolerance") + "'")" />
+                    <input type="submit" value="@Resource.Delete" class="btnVolaris" />
+                    
+                    <br />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+    @Scripts.Render("~/bundles/CommonFunctions")
+
+    <script>
+        $(function () {
+            var currentLang = '@cultureForm.ToString()';
+        });
+    </script>
+}
+
+

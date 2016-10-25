@@ -1,0 +1,377 @@
+﻿@model VOI.SISAC.Web.Models.VO.Itineraries.GendecArrivalVO
+
+@{
+    ViewBag.Title = Resource.GendecArrivalTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cultureForm = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+    var users = this.ViewBag.Users as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    bool isClose = Model == null ? false : Model.Closed;
+    var totalCrews = Model.Itinerary.Airplane == null ? 0 : Model.Itinerary.Airplane.CrewCapacity;
+    var totalPassengers = Model.Itinerary.Airplane == null ? 0 : Model.Itinerary.Airplane.PassengerCapacity;
+    var totalCrew = Model.Crews == null ? 0 : Model.Crews.Count;
+}
+@Styles.Render("~/Content/bootstraptablecss")
+@Styles.Render("~/bundles/SweetAlertCSS")
+@Styles.Render("~/Content/bootstrapdtimecss")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    @Html.Partial("_UnauthorizedActionModal")
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.GendecArrivalTitle</p>
+    </div>
+
+    @if (Model.Itinerary != null)
+    {
+        @Html.Partial("_FlightInformation", Model.Itinerary)
+    }
+    <br />
+
+    @using (Html.BeginForm("OpenGendec", "GendecArrival", FormMethod.Post, new { name = "formGendec", id = "formGendec" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @{ Html.EnableClientValidation(false); }
+                <br />
+                @Html.HiddenFor(model => model.Sequence)
+                @Html.HiddenFor(model => model.AirlineCode)
+                @Html.HiddenFor(model => model.FlightNumber)
+                @Html.HiddenFor(model => model.Itinerarykey)
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title subtitle_h6">
+                                <strong>@VOI.SISAC.Web.Resources.Resource.CrewGendecTitle</strong>
+                            </h4>
+                        </div>
+                        @*Comienza el Grid para Tripulación*@
+                        <table id="tbCrew"
+                               class="table"
+                               data-unique-id="CrewID"
+                               data-toggle="table"
+                               data-mobile-responsive="true">
+
+                            <thead>
+                                <tr>
+                                    <th data-field="CrewID" data-align="center" data-halign="center" data-visible="false" data-formatter="GendecArrivalController.AddAttributeCrewID">
+                                        <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().CrewID)</strong>
+                                    </th>
+                                    <th data-field="CrewTypeId" data-align="center" data-halign="center">
+                                        <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().CrewTypeID)</strong>
+                                    </th>
+                                    <th data-field="NickName" data-align="center" data-halign="center">
+                                        <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().NickName)</strong>
+                                    </th>
+                                    <th data-field="FirstName" data-align="center" data-halign="center">
+                                        <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().FirstName)</strong>
+                                    </th>
+                                    <th data-field="LastName" data-align="center" data-halign="center">
+                                        <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().LastName)</strong>
+                                    </th>
+                                    <th data-field="PassportNumber" data-align="center" data-halign="center">
+                                        <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().PassportNumber)</strong>
+                                    </th>
+                                    <th data-field="DateOfBird" data-align="center" data-halign="center" class="ToShorDate">
+                                        <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().DateOfBird)</strong>
+                                    </th>
+                                    <th data-field="Gender" data-align="center" data-halign="center">
+                                        <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().Gender)</strong>
+                                    </th>
+                                    <th data-field="Citizenship" data-align="center" data-halign="center">
+                                        <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().Citizenship)</strong>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Crews != null)
+                                {
+                                    foreach (var item in Model.Crews)
+                                    {
+                                        if (item != null)
+                                        {
+                                            if (item.CrewTypeID == "CAP" || item.CrewTypeID == "COP")
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.CrewID)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.CrewTypeID)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.NickName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.FirstName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.LastName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.PassportNumber)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.DateOfBird, "ToShortDate")
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Gender)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Citizenship)
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                        @*Termina el Grid para Tripulación*@
+                    </div>
+                    <br />
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingSob">
+                            <h4 class="panel-title subtitle_h6">
+                                <strong>@VOI.SISAC.Web.Resources.Resource.stewardessGendecTitle</strong>
+                            </h4>
+                        </div>
+                    </div>
+                    @*Comienza el Grid para Tripulación*@
+                    <table id="tbCrewSob"
+                           data-unique-id="CrewID"
+                           class="table"
+                           data-toggle="table"
+                           data-mobile-responsive="true">
+
+                        <thead>
+                            <tr>
+                                <th data-field="CrewID" data-align="center" data-halign="center" data-visible="false" data-formatter="GendecArrivalController.AddAttributeCrewIDSob">
+                                    <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().CrewID)</strong>
+                                </th>
+                                <th data-field="CrewTypeId" data-align="center" data-halign="center">
+                                    <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().CrewTypeID)</strong>
+                                </th>
+                                <th data-field="NickName" data-align="center" data-halign="center">
+                                    <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().NickName)</strong>
+                                </th>
+                                <th data-field="FirstName" data-align="center" data-halign="center">
+                                    <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().FirstName)</strong>
+                                </th>
+                                <th data-field="LastName" data-align="center" data-halign="center">
+                                    <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().LastName)</strong>
+                                </th>
+                                <th data-field="PassportNumber" data-align="center" data-halign="center">
+                                    <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().PassportNumber)</strong>
+                                </th>
+                                <th data-field="DateOfBird" data-align="center" data-halign="center" class="ToShorDate">
+                                    <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().DateOfBird)</strong>
+                                </th>
+                                <th data-field="Gender" data-align="center" data-halign="center">
+                                    <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().Gender)</strong>
+                                </th>
+                                <th data-field="Citizenship" data-align="center" data-halign="center">
+                                    <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().Citizenship)</strong>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Crews != null)
+                            {
+                                foreach (var item in Model.Crews)
+                                {
+                                    if (item != null)
+                                    {
+                                        if (item.CrewTypeID == "SOB" || item.CrewTypeID == "JDC")
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.CrewID)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.CrewTypeID)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.NickName)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.FirstName)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.LastName)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.PassportNumber)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.DateOfBird, "ToShortDate")
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Gender)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Citizenship)
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    @*Termina el Grid para Tripulación*@
+                    <br />
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingthree">
+                            <h4 class="panel-title subtitle_h6" onclick="GendecArrivalController.toggle_visibility('dvPassenger');">
+                                <strong>@Resource.PassengerManifestSummary</strong>
+                            </h4>
+                        </div>
+                        <div id="dvPassenger">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.TotalPax, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    @Html.EditorFor(model => model.TotalPax, new { htmlAttributes = new { @id = "TotalPax", @name = "TotalPax", @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0" } })
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.GateNumber, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    @Html.EditorFor(model => model.GateNumber, new { htmlAttributes = new { @id = "GateNumber", @name = "GateNumber", @class = "form-control", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 8);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 8)" } })
+
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.BlockTime, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    @Html.EditorFor(model => model.BlockTime, new { htmlAttributes = new { @id = "BlockTime", @name = "BlockTime", @class = "input form-control" } })
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.TotalCrew, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    @Html.EditorFor(model => model.TotalCrew, new { htmlAttributes = new { @id = "TotalCrew", @readonly = "readonly", @name = "TotalCrew", @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0" } })
+
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.ManifestNumber, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    @Html.EditorFor(model => model.ManifestNumber, new { htmlAttributes = new { @id = "ManifestNumber", @name = "ManifestNumber", @class = "form-control", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 8);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 8)" } })
+
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.ActualTimeOfArrival, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    @Html.EditorFor(model => model.ActualTimeOfArrival, new { htmlAttributes = new { @id = "ActualTimeOfArrival", @name = "ActualTimeOfArrival", @class = "input form-control" } })
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingFour" onclick="GendecArrivalController.toggle_visibility('dvAutorization');">
+                            <h4 class="panel-title subtitle_h6">
+                                <strong>@Resource.Autorization</strong>
+                            </h4>
+                        </div>
+                        <div id="dvAutorization">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                                    @Html.LabelFor(model => model.Member, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    <div class="styled-select">
+                                        @Html.DropDownListFor(model => model.Member, users.Select(h => new SelectListItem
+                                   {
+                                       Text = h.Description,
+                                       Value = h.Id
+                                   }), @VOI.SISAC.Web.Resources.Resource.SelectItem, new { htmlAttributes = new { @class = "inputForm form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Member, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-xs-3 col-sm-12 col-md-3 col-lg-2">
+                                    <br />
+                                    @Html.LabelFor(model => model.Remarks, new { @class = "subtitle_h5 control-label overflow_hidden" })
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
+                                    <br />
+                                    @Html.TextAreaFor(model => model.Remarks, 5, 1000, new { @id = "Observation", @name = "Observation", @class = "form-control", @style = "resize: none;", @onkeypress = "return commonFunctions.validarComentarios(event, this);", @onkeyup = "return commonFunctions.validarComentarios(event, this)" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+                    <br />
+                    <div class="col-md-12 col-lg-12 text-center">
+                        <button id="btnBack" type="button" class="btn btn-default" name="Back" title="@Resource.Back" onclick="location.href='@Url.Action("Index", "Itinerary", new { area = "Itineraries" })'">
+                            &nbsp;@Resource.Back
+                        </button>
+                        @if (User.IsInRole("GENDECARR-OPEN"))
+                        {
+                            if (isClose)
+                            {
+                                <input class="btn btn-default" type="submit" value="@Resource.Open" name="Open" />
+                            }
+                        }
+                        @if (User.IsInRole("GENDECARR-UPD"))
+                        {
+                            if (!isClose)
+                            {
+                                <input id="Save" class="btn btn-default" type="submit" value="@Resource.Save" name="Save" />
+                            }
+                        }
+                        @if (User.IsInRole("GENDECARR-CLOSE"))
+                        {
+                            if (!isClose)
+                            {
+                                <input id="Close" class="btn btn-default" type="submit" value="@Resource.Close" name="Close" />
+                            }
+                        }
+                        @if (User.IsInRole("GENDECARR-PRINTREP") && Model.FlightNumber != null)
+                        {
+                            <button id="Print" type="button" class="btn btn-default" name="Print" title="@Resource.Print" onclick="location.href='@Url.Action("Print", "GendecArrival",
+                                new
+                                {
+                                    Sequence = Model.Sequence,
+                                    AirlineCode = Model.AirlineCode,
+                                    FlightNumber = Model.FlightNumber,
+                                    ItineraryKey = Model.Itinerarykey,
+                                    DepartureStation = Model.DepartureStation,
+                                    ArrivalStation = Model.ArrivalStation,
+                                    EquipmentNumber = Model.EquipmentNumber,
+                                    DepartureDate = this.ViewBag.DepartureDate
+                                })'">
+                                &nbsp;@Resource.Export
+                            </button>
+                        }
+                    </div>
+                </div>
+                @{ Html.EnableClientValidation(true); }
+            </div>
+        </div>
+                    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+    @Scripts.Render("~/bundles/JSDateTimeValidate")
+    @Scripts.Render("~/bundles/GendecArrivalJS")
+    @Scripts.Render("~/bundles/SweetAlertJS")
+    @Scripts.Render("~/bundles/CommonFunctions")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+
+    <script src="~/Scripts/bootstrap-table.js"></script>
+    <script type="text/javascript">
+        var currentLang = '@cultureForm.ToString()';
+        var isClose = '@isClose';
+        var totalCrews = '@totalCrews';
+        var totalPassengers = '@totalPassengers';
+        var totalCrew = '@totalCrew';
+    </script>
+
+    <script>
+        $(function () {
+            $('#ActualTimeOfArrival, #BlockTime').datetimepicker({
+                format: 'HH:mm'
+            });
+        });
+    </script>
+}

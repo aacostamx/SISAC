@@ -1,0 +1,68 @@
+﻿@model VOI.SISAC.Web.Models.VO.Airport.DelayModelVO
+
+@{
+    ViewBag.Title = Resource.DelayTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p class="subtitle_h3_black">@Resource.DelayTitle</p>
+        <p class="subtitle_h3_ancillarie">@Resource.Add</p>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    @Html.LabelFor(model => model.DelayVo.DelayCode, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.DelayVo.DelayCode, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarAlfanumericoLlaves(event, this, 2, 0);", @onkeyup = "return commonFunctions.validarAlfanumericoLlaves(event, this, 2, 0)" } })
+                    @Html.ValidationMessageFor(model => model.DelayVo.DelayCode, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    @Html.LabelFor(model => model.DelayVo.DelayName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.DelayVo.DelayName, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumericoCaracteresEspeciales(event, this, 250, 0);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumericoCaracteresEspeciales(event, this, 250, 0)" } })
+                    @Html.ValidationMessageFor(model => model.DelayVo.DelayName, "", new { @class = "text-danger" })
+                </div>
+
+                <div id="divGroup" class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    @Html.LabelFor(model => model.DelayVo.FunctionalAreaID, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    <div class="styled-select">
+                        @Html.DropDownListFor(model => model.DelayVo.FunctionalAreaID, Model.FuntionalAreasVo.Select(h => new SelectListItem
+                        {
+                            Text = h.FunctionalAreaName + "-" + h.FunctionalAreaDescription,
+                            Value = h.FunctionalAreaID.ToString()
+                        }), Resource.SelectItem, new { htmlAttributes = new { @class = "inputForm form-control" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.DelayVo.FunctionalAreaID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    @Html.LabelFor(model => model.DelayVo.UnderControl, htmlAttributes: new { @class = "subtitle_h5 control-label" })<br />
+                    <input class="checkVolaris top-padding" data-val="true" data-val-required="Required Field" type="checkbox" id="DelayVo_UnderControl" name="DelayVo.UnderControl" value="true" />
+                    <label for="DelayVo_UnderControl" class="control_gris"><span></span></label>
+                    @Html.ValidationMessageFor(model => model.DelayVo.UnderControl, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <input onclick="location.href='@Url.Action("Index","Delay")'" type="reset" class="btnVolaris" value=@Resource.Back />
+                    <input type="submit" value=@Resource.Save class="btnVolaris" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/CommonFunctions")
+    @Scripts.Render("~/bundles/jqueryval")
+}

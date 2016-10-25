@@ -1,0 +1,58 @@
+﻿@model VOI.SISAC.Web.Models.VO.Process.PeriodVO
+@{
+    ViewBag.Title = VOI.SISAC.Web.Resources.Resource.JetFuelReport;
+    var periods = this.ViewBag.Periods as List<VOI.SISAC.Web.Models.VO.Process.PeriodVO>;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    @using (Html.BeginForm("Export", "NationalJetFuelReportTicket", new { Area = "Process" }, FormMethod.Get))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                @*<p class="subtitle_h3"></p>*@
+                <p class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.ViewDetailCapture</p>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <label class="subtitle_h5 required-field">@VOI.SISAC.Web.Resources.Resource.PeriodCode</label>
+                    @*<select id="PeriodCode" name="PeriodCode" class="inputForm form-control styled-select" onchange="JetFuelReportTicketController.GetDatesByPeriod()"></select>*@
+                    <div class="styled-select">
+                        @Html.DropDownListFor(model => model.PeriodCode, periods.Select(h => new SelectListItem
+                        {
+                            Text = h.PeriodCode,
+                            Value = h.PeriodCode
+                        }), new { @class = "inputForm form-control", @onchange = "NationalJetFuelReportTicketController.GetDatesByPeriod()", @id = "PeriodCode" })
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <label class="subtitle_h5">@VOI.SISAC.Web.Resources.Resource.StartDate</label>
+                    <input id="StartDatePeriod" name="StartDatePeriod" class="inputForm form-control" readonly="" />
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <label class="subtitle_h5">@VOI.SISAC.Web.Resources.Resource.EndDate</label>
+                    <input id="EndDatePeriod" name="EndDatePeriod" class="inputForm form-control" readonly="" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <br />
+                    @*<button type="button" class="btn btn-default" name="Export" title="@VOI.SISAC.Web.Resources.Resource.Report" onclick="location.href='@Url.Action("Export", "JetFuelReportTicket", new { PeriodCode = Model.PeriodCode })'">
+                        <i class="fa fa-plus"></i>&nbsp; @VOI.SISAC.Web.Resources.Resource.Report
+                    </button>*@
+                    <input type="submit" title="Exportar" value="Exportar" class="btnVolaris" />
+                    <br />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts
+{
+    <script src="~/Scripts/SISAC/Process/NationalJetFuelReportTicket.js"></script>
+}
+
+

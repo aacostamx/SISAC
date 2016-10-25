@@ -1,0 +1,63 @@
+﻿@model VOI.SISAC.Web.Models.VO.Airport.ManifestTimeConfigVO
+
+@{
+    ViewBag.Title = @Resource.Delete;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p class="subtitle_h3_black">@Resource.ManifestTimeConfigTitle</p>
+        <p class="subtitle_h3_ancillarie">@Resource.Delete</p><br />
+    </div>
+    @Html.Partial("_AlertView")
+
+    <div class="dl-horizontal">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                @Html.LabelFor(model => model.ManifestTimeConfigID, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.ManifestTimeConfigID, new { htmlAttributes = new { @class = "form-control", @disabled = "" } })
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                @Html.LabelFor(model => model.AirlineCode, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.AirlineCode, new { htmlAttributes = new { @class = "form-control", @disabled = "" } })
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                @Html.LabelFor(model => model.ArrivalMinutesMin, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.ArrivalMinutesMin, new { htmlAttributes = new { @class = "form-control", @disabled = "" } })
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                @Html.LabelFor(model => model.ArrivalMinutesMax, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.ArrivalMinutesMax, new { htmlAttributes = new { @class = "form-control", @disabled = "" } })
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                @Html.LabelFor(model => model.DepartureMinutesMin, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.DepartureMinutesMin, new { htmlAttributes = new { @class = "form-control", @disabled = "" } })
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                @Html.LabelFor(model => model.DepartureMinutesMax, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.DepartureMinutesMax, new { htmlAttributes = new { @class = "form-control", @disabled = "" } })
+            </div>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <br />
+                    <input onclick="location.href='@Url.Action("Index", "ManifestTimeConfig")'" type="reset" class="btnVolaris" value=@Resource.Back>
+                    <input type="submit" value=@Resource.Delete class="btnVolaris" />
+                </div>
+            </div>
+        }
+    </div>
+</div>

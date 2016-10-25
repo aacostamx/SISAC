@@ -1,0 +1,274 @@
+﻿@model VOI.SISAC.Web.Models.VO.Airport.CrewModelVO
+
+@{
+    ViewBag.Title = @VOI.SISAC.Web.Resources.Resource.CrewTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cultureForm = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.CrewVO.CrewID)
+        <div class="form-horizontal">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <p class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.CrewTitle</p>
+                <p class="subtitle_h3_ancillarie">@VOI.SISAC.Web.Resources.Resource.Edit</p>
+            </div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                    @Html.LabelFor(model => model.CrewVO.CrewTypeID, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    <div class="styled-select">
+                        @Html.DropDownListFor(model => model.CrewVO.CrewTypeID, Model.CrewTypes.Select(h => new SelectListItem
+                            {
+                                Text = h.CrewTypeName,
+                                Value = h.CrewTypeID
+                            }), @VOI.SISAC.Web.Resources.Resource.SelectItem, new { htmlAttributes = new { @class = "inputForm form-control" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.CrewVO.CrewTypeID, "", new { @class = "text-danger text-danger-error" })
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                    @Html.LabelFor(model => model.CrewVO.LastName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.CrewVO.LastName, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 100);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 100)" } })
+                    @Html.ValidationMessageFor(model => model.CrewVO.LastName, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                    @Html.LabelFor(model => model.CrewVO.FirstName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.CrewVO.FirstName, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 100);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 100)" } })
+                    @Html.ValidationMessageFor(model => model.CrewVO.FirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                    @Html.LabelFor(model => model.CrewVO.MiddleName, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                    @Html.EditorFor(model => model.CrewVO.MiddleName, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 100);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 100)" } })
+                    @Html.ValidationMessageFor(model => model.CrewVO.MiddleName, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                    @Html.LabelFor(model => model.CrewVO.Gender, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    <div class="styled-select">
+                        @Html.DropDownListFor(model => model.CrewVO.Gender, Model.Genders.Select(h => new SelectListItem
+                            {
+                                Text = h.GenderName,
+                                Value = h.GenderCode
+                            }), @VOI.SISAC.Web.Resources.Resource.SelectItem, new { htmlAttributes = new { @class = "inputForm form-control" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.CrewVO.Gender, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                    @Html.LabelFor(model => model.CrewVO.CountryOfResidence, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    <div class="styled-select">
+                        @Html.DropDownListFor(model => model.CrewVO.CountryOfResidence, Model.Countries.Select(h => new SelectListItem
+                            {
+                                Text = h.CountryName,
+                                Value = h.CountryCode
+                            }), @VOI.SISAC.Web.Resources.Resource.SelectItem, new { htmlAttributes = new { @class = "inputForm form-control" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.CrewVO.CountryOfResidence, "", new { @class = "text-danger text-danger-error" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                    @Html.LabelFor(model => model.CrewVO.PlaceBirthCity, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.CrewVO.PlaceBirthCity, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 100);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 100)" } })
+                    @Html.ValidationMessageFor(model => model.CrewVO.PlaceBirthCity, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                    @Html.LabelFor(model => model.CrewVO.State, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.CrewVO.State, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 100);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 100)" } })
+                    @Html.ValidationMessageFor(model => model.CrewVO.State, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                    @Html.LabelFor(model => model.CrewVO.CountryOfBird, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    <div class="styled-select">
+                        @Html.DropDownListFor(model => model.CrewVO.CountryOfBird, Model.Countries.Where(c => c.Status == true).Select(h => new SelectListItem
+                            {
+                                Text = h.CountryName,
+                                Value = h.CountryCode
+                            }), @VOI.SISAC.Web.Resources.Resource.SelectItem, new { htmlAttributes = new { @class = "inputForm form-control" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.CrewVO.CountryOfBird, "", new { @class = "text-danger text-danger-error" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                    @Html.LabelFor(model => model.CrewVO.DateOfBird, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.CrewVO.DateOfBird, new { htmlAttributes = new { @class = "form-control ClassDate" } })
+                    @Html.ValidationMessageFor(model => model.CrewVO.DateOfBird, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                    @Html.LabelFor(model => model.CrewVO.Citizenship, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    <div class="styled-select">
+                        @Html.DropDownListFor(model => model.CrewVO.Citizenship, Model.Countries.Select(h => new SelectListItem
+                            {
+                                Text = h.CountryName,
+                                Value = h.CountryCode
+                            }), @VOI.SISAC.Web.Resources.Resource.SelectItem, new { htmlAttributes = new { @class = "inputForm form-control" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.CrewVO.Citizenship, "", new { @class = "text-danger text-danger-error" })
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                    @Html.LabelFor(model => model.CrewVO.StatusOnBoardCode, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    <div class="styled-select">
+                        @Html.DropDownListFor(model => model.CrewVO.StatusOnBoardCode, Model.StatusOnBoards.Select(h => new SelectListItem
+                            {
+                                Text = h.StatusOnBoardName,
+                                Value = h.StatusOnBoardCode
+                            }), @VOI.SISAC.Web.Resources.Resource.SelectItem, new { htmlAttributes = new { @class = "inputForm form-control" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.CrewVO.StatusOnBoardCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                    @Html.LabelFor(model => model.CrewVO.HomeAddress, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.CrewVO.HomeAddress, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 255);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 255)" } })
+                    @Html.ValidationMessageFor(model => model.CrewVO.HomeAddress, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                    @Html.LabelFor(model => model.CrewVO.HomeAddressCity, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.CrewVO.HomeAddressCity, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 100);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 100)" } })
+                    @Html.ValidationMessageFor(model => model.CrewVO.HomeAddressCity, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                    @Html.LabelFor(model => model.CrewVO.HomeAddressState, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.CrewVO.HomeAddressState, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 50);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 50)" } })
+                    @Html.ValidationMessageFor(model => model.CrewVO.HomeAddressState, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                    @Html.LabelFor(model => model.CrewVO.HomeAddressZipCode, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.CrewVO.HomeAddressZipCode, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 10);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 10)" } })
+                    @Html.ValidationMessageFor(model => model.CrewVO.HomeAddressZipCode, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                    @Html.LabelFor(model => model.CrewVO.HomeAddressCountry, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    <div class="styled-select">
+                        @Html.DropDownListFor(model => model.CrewVO.HomeAddressCountry, Model.Countries.Select(h => new SelectListItem
+                            {
+                                Text = h.CountryName,
+                                Value = h.CountryCodeShort
+                            }), @VOI.SISAC.Web.Resources.Resource.SelectItem, new { htmlAttributes = new { @class = "inputForm form-control" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.CrewVO.HomeAddressCountry, "", new { @class = "text-danger text-danger-error" })
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                    @Html.LabelFor(model => model.CrewVO.PassportNumber, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.CrewVO.PassportNumber, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 20);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 20)" } })
+                    @Html.ValidationMessageFor(model => model.CrewVO.PassportNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                    @Html.LabelFor(model => model.CrewVO.PassportCountryIssuance, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    <div class="styled-select">
+                        @Html.DropDownListFor(model => model.CrewVO.PassportCountryIssuance, Model.Countries.Select(h => new SelectListItem
+                            {
+                                Text = h.CountryName,
+                                Value = h.CountryCodeShort
+                            }), @VOI.SISAC.Web.Resources.Resource.SelectItem, new { htmlAttributes = new { @class = "inputForm form-control" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.CrewVO.PassportCountryIssuance, "", new { @class = "text-danger text-danger-error" })
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                    @Html.LabelFor(model => model.CrewVO.PassportExpiration, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.CrewVO.PassportExpiration, new { htmlAttributes = new { @class = "form-control ClassDate" } })
+                    @Html.ValidationMessageFor(model => model.CrewVO.PassportExpiration, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                    @Html.LabelFor(model => model.CrewVO.LicenceNumber, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.CrewVO.LicenceNumber, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 20);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 20)" } })
+                    @Html.ValidationMessageFor(model => model.CrewVO.LicenceNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                    @Html.LabelFor(model => model.CrewVO.LicenceCountryIssuance, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    <div class="styled-select">
+                        @Html.DropDownListFor(model => model.CrewVO.LicenceCountryIssuance, Model.Countries.Select(h => new SelectListItem
+                            {
+                                Text = h.CountryName,
+                                Value = h.CountryCodeShort
+                            }), @VOI.SISAC.Web.Resources.Resource.SelectItem, new { htmlAttributes = new { @class = "inputForm form-control" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.CrewVO.LicenceCountryIssuance, "", new { @class = "text-danger text-danger-error" })
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                    @Html.LabelFor(model => model.CrewVO.LicenceNumberExpiration, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.CrewVO.LicenceNumberExpiration, new { htmlAttributes = new { @class = "form-control specialInput ClassDate" } })
+                    @Html.ValidationMessageFor(model => model.CrewVO.LicenceNumberExpiration, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                    @Html.LabelFor(model => model.CrewVO.NickName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.CrewVO.NickName, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumericoCaracteresEspeciales(event, this, 50, 1);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumericoCaracteresEspeciales(event, this, 50, 1)" } })
+                    @Html.ValidationMessageFor(model => model.CrewVO.NickName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                    @Html.LabelFor(model => model.CrewVO.NickNameSabre, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.CrewVO.NickNameSabre, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumericoCaracteresEspeciales(event, this, 50, 1);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumericoCaracteresEspeciales(event, this, 50, 1)" } })
+                    @Html.ValidationMessageFor(model => model.CrewVO.NickNameSabre, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                    @Html.LabelFor(model => model.CrewVO.VisaExpirationDate, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.CrewVO.VisaExpirationDate, new { htmlAttributes = new { @class = "form-control ClassDate" } })
+                    @Html.ValidationMessageFor(model => model.CrewVO.VisaExpirationDate, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                    @Html.LabelFor(model => model.CrewVO.EmployeeNumber, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.CrewVO.EmployeeNumber, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 50);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 50)" } })
+                    @Html.ValidationMessageFor(model => model.CrewVO.EmployeeNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <br />
+                    <input onclick="location.href='@Url.Action("Index", "Crew")    '" type="reset" class="btnVolaris" value="@VOI.SISAC.Web.Resources.Resource.Back" title="@VOI.SISAC.Web.Resources.Resource.Back">
+                    <input type="submit" value="@VOI.SISAC.Web.Resources.Resource.Save" title="@VOI.SISAC.Web.Resources.Resource.Save" class="btnVolaris">
+                    <br />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/CommonFunctions")
+        @Scripts.Render("~/bundles/bootstrapdtimejs") 
+    @Scripts.Render("~/bundles/JSDateTimeValidate") 
+    <script type="text/javascript">
+        var currentLang= '@cultureForm.ToString()';
+    </script>
+}

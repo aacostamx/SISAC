@@ -1,0 +1,80 @@
+﻿@model VOI.SISAC.Web.Models.VO.Itineraries.ItineraryVO
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="table-responsive">
+        <table id="tbInformationFlight" class="table table-bordered">
+            <thead class="backgroundPink">
+                <tr>
+                    <th colspan="8" style="background-color: #a12885;">
+                        <img src="~/Content/images/avion.png" alt="prueba" style="width:59px;height:20px;">
+                        <strong class="table_title_white">
+                            @Resource.FlightInformation
+                        </strong>
+                    </th>
+                </tr>
+                <tr>
+                    <th class="subtable_title_white">@Resource.AirlineCode</th>
+                    <th class="subtable_title_white">@Resource.FlightNumber</th>
+                    <th class="subtable_title_white">@Resource.EquipmentNumber</th>
+                    <th class="subtable_title_white">@Resource.Flight</th>
+                    <th class="subtable_title_white">@Resource.DepartureDate</th>
+                    <th class="subtable_title_white">@Resource.DepartureTime</th>
+                    <th class="subtable_title_white">@Resource.ArrivalDate</th>
+                    <th class="subtable_title_white">@Resource.ArriveTime</th>
+                </tr>
+            </thead>
+            @if (Model != null)
+            {
+                <tbody>
+                    <tr>
+                        <td class="centerText">@Html.DisplayFor(model => model.AirlineCode)</td>
+                        <td class="centerText">@Html.DisplayFor(model => model.FlightNumber)</td>
+                        <td class="centerText">@Html.DisplayFor(model => model.EquipmentNumber)</td>
+                        @if (ViewBag.OperationTypeName != null)
+                        {
+                            if (ViewBag.OperationTypeName == "LLEGADA")
+                            {
+                                <td class="centerText">
+                                    @Model.DepartureStation <i class="fa fa-long-arrow-right fa-adjust"></i>
+                                    <strong>@Model.ArrivalStation</strong>
+                                </td>
+                            }
+                            else if (ViewBag.OperationTypeName == "SALIDA")
+                            {
+                                <td class="centerText">
+                                    <strong>@Model.DepartureStation</strong>
+                                    <i class="fa fa-long-arrow-right fa-adjust"></i> @Model.ArrivalStation
+                                </td>
+                            }
+                        }
+                        else
+                        {
+                            <td class="centerText">@Model.DepartureStation <i class="fa fa-long-arrow-right fa-adjust"></i> @Model.ArrivalStation</td>
+                        }
+                        <td id="DepartureDate" name="DepartureDate" class="centerText">@Html.DisplayFor(model => model.DepartureDate, Resource.FormatDate)</td>
+                        <td class="centerText">@Html.DisplayFor(model => model.DepartureTime)</td>
+                        <td id="ArrivalDate" name="ArrivalDate" class="centerText">@Html.DisplayFor(model => model.ArrivalDate, Resource.FormatDate)</td>
+                        <td class="centerText">@Html.DisplayFor(model => model.ArrivalTime)</td>
+                    </tr>
+                </tbody>
+            }
+
+        </table>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        var domDepartureDate = $('#DepartureDate').text();
+        if (domDepartureDate) {
+            domDepartureDate = domDepartureDate.substr(0, 10);
+            $('#DepartureDate').text(domDepartureDate);
+        }
+
+        var domArrivalDate = $('#ArrivalDate').text();
+        if (domArrivalDate) {
+            domArrivalDate = domArrivalDate.substr(0, 10);
+            $('#ArrivalDate').text(domArrivalDate);
+        }
+    });
+</script>

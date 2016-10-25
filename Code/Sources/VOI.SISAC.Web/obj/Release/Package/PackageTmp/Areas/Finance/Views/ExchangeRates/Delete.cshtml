@@ -1,0 +1,87 @@
+﻿@model VOI.SISAC.Web.Models.VO.Finance.ExchangeRatesVO
+
+@{
+    ViewBag.Title = Resource.Delete;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cultureForm = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
+    var dateExchange = Model.ExchangeDate.ToString("MMMM-yyyy");
+    var currentMonth = DateTime.Now.Month;
+    var currentYear = DateTime.Now.Year;
+    var exchangeDate = new DateTime(Model.Year, Model.Month, 1);
+    var currentDate = new DateTime(currentYear, currentMonth, 1);
+    var deteled = exchangeDate.Date >= currentDate.Date ? true : false;
+}
+
+@Styles.Render("~/Content/bootstrapdtimecss")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p class="subtitle_h3_black">@Resource.ExchangeRatesTitle</p>
+        <p class="subtitle_h3_ancillarie">@Resource.Delete</p>
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    @Html.LabelFor(model => model.ExchangeDate, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    <input class="form-control text-box single-line input-validation-error" data-val="true" data-val-required="@Resource.RequiredField" id="ExchangeDate" name="ExchangeDate" type="datetime" value="" aria-required="true" aria-invalid="true" aria-describedby="ExchangeDate-error" novalidate="novalidate" readonly>
+                    @Html.ValidationMessageFor(model => model.ExchangeDate, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    @Html.LabelFor(model => model.Currency.CurrencyName, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                    <input name="CurrencyName" class="form-control text-box single-line valid" id="CurrencyName" aria-invalid="false" aria-required="true" aria-describedby="CurrencyCode-error" type="text" readonly="readonly" value="@Model.Currency.CurrencyName - @Model.Currency.CurrencyCode" data-val-required="@Resource.RequiredField" data-val="true">
+                    @Html.ValidationMessageFor(model => model.Currency.CurrencyName, "", new { @class = "text-danger text-danger-error" })
+                    @Html.HiddenFor(model => model.CurrencyCode)
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    @Html.LabelFor(model => model.Rate, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    <input class="form-control text-box single-line valid" data-val="true" data-val-number="@Resource.MustBeNumber" data-val-required="@Resource.RequiredField" id="Rate" max="1000000" min="0" name="Rate" type="text" value="@Model.Rate" aria-required="true" aria-invalid="false" aria-describedby="Rate-error" readonly>
+                    @Html.ValidationMessageFor(model => model.Rate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    @if (!deteled)
+                    {
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <h3 class="subtitle_h5"><stong>@Resource.ExchangeRateUpdate</stong></h3>
+                        </div>
+                    }
+
+                    <input type="reset" class="btnVolaris" value="@Resource.Back" onclick="@("location.href='" + @Url.Action("Index", "ExchangeRates") + "'")" />
+
+                    @if (deteled)
+                    {
+                        <input type="submit" value="@Resource.Delete" class="btnVolaris" />
+                    }
+                    <br />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+    @Scripts.Render("~/bundles/CommonFunctions")
+
+    <script>
+        $(function () {
+            var currentLang = '@cultureForm.ToString()';
+
+            $("#ExchangeDate").datetimepicker({
+                format: "MMMM-YYYY",
+                locale: currentLang
+            });
+            var dateExchange = '@dateExchange.ToString()';
+            dateExchange = dateExchange.charAt(0).toUpperCase() + dateExchange.slice(1);;
+            $("#ExchangeDate").val(dateExchange);
+        });
+    </script>
+}

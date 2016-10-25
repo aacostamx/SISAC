@@ -1,0 +1,329 @@
+﻿@model VOI.SISAC.Web.Models.VO.Finance.AirportServiceContractVO
+
+@{
+    ViewBag.Title = Resource.AirportServiceContractName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cultureForm = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+}
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.AirportServiceContractName</p>
+        <p class="subtitle_h3_ancillarie">@VOI.SISAC.Web.Resources.Resource.NewRate</p>
+    </div>
+    <br />
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="dl-horizontal overflow-row">
+            <br />
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <br />
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <p class="subtitle_h4">@VOI.SISAC.Web.Resources.Resource.ContractDefinition</p>
+                </div>
+                <dl>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.EffectiveDate)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.EditorFor(model => model.EffectiveDate, new { htmlAttributes = new { @class = "form-control ClassDate", @placeholder = Resource.FormatDate } })
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.AirlineName)
+                        @Html.HiddenFor(model => model.AirlineCode)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.AirlineName)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.StationName)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.StationName)
+                        @Html.HiddenFor(model => model.StationCode)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.ServiceName)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.ServiceName)
+                        @Html.HiddenFor(model => model.ServiceCode)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.ProviderName)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.ProviderName)
+                        @Html.HiddenFor(model => model.ProviderNumber)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.CCName)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.CCName)
+                        @Html.HiddenFor(model => model.CostCenterNumber)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.EndDateContract)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.EndDateContract, "ToShortDate")
+                    </dd>
+                </dl>
+                <br />
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <p class="subtitle_h4">@VOI.SISAC.Web.Resources.Resource.RateFeeConfiguration</p>
+                </div>
+                <dl>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.AirportFeeCode)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.AirportTaxName)
+                        @Html.HiddenFor(model => model.AirportFeeCode)
+                        @Html.HiddenFor(model => model.AirportFeeFlag)
+                        @Html.HiddenFor(model => model.AirportFeeValue)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.AirportFeeValue)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @if (Model.AirportFeeFlag)
+                        { 
+                            @Html.DisplayFor(model => model.AirportFeeValue)
+                            <span>%</span>
+                        }
+                        else
+                        { 
+                            <span>$</span>
+                            @Html.DisplayFor(model => model.AirportFeeValue)  
+                        }
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.LocalTaxCode)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.LocalTaxName)
+                        @Html.HiddenFor(model => model.LocalTaxCode)
+                        @Html.HiddenFor(model => model.LocalTaxFlag)
+                        @Html.HiddenFor(model => model.LocalTaxValue)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.LocalTaxValue)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @if (Model.LocalTaxFlag)
+                        { 
+                            @Html.DisplayFor(model => model.LocalTaxValue)
+                            <span>%</span>
+                        }
+                        else
+                        {
+                            <span>$</span>
+                            @Html.DisplayFor(model => model.LocalTaxValue) 
+                        }
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.StateTaxCode)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.StateTaxName)
+                        @Html.HiddenFor(model => model.StateTaxCode)
+                        @Html.HiddenFor(model => model.StateTaxFlag)
+                        @Html.HiddenFor(model => model.StateTaxValue)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.StateTaxValue)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @if (Model.StateTaxFlag)
+                        { 
+                            @Html.DisplayFor(model => model.StateTaxValue)
+                            <span>%</span>
+                        }
+                        else
+                        { 
+                            <span>$</span>
+                            @Html.DisplayFor(model => model.StateTaxValue)
+                        }
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.FederalTaxCode)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.FederalTaxName)
+                        @Html.HiddenFor(model => model.FederalTaxCode)
+                        @Html.HiddenFor(model => model.FederalTaxFlag)
+                        @Html.HiddenFor(model => model.FederalTaxValue)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.FederalTaxValue)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @if (Model.FederalTaxFlag)
+                        { 
+                            @Html.DisplayFor(model => model.FederalTaxValue)
+                           
+                            <strong>%</strong> 
+                        }
+                        else
+                        { 
+                            <strong>$</strong>
+                            @Html.DisplayFor(model => model.FederalTaxValue)
+                        }
+                    </dd>
+                </dl>
+                <br />
+            </div>
+
+
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <p class="subtitle_h4">@VOI.SISAC.Web.Resources.Resource.AccountingConfiguration</p>
+                </div>
+                <dl>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.AccountingAccountName)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.AccountingAccountName)
+                        @Html.HiddenFor(model => model.AccountingAccountNumber)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.LiabilityAccountName)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.LiabilityAccountName)
+                        @Html.HiddenFor(model => model.LiabilityAccountNumber)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.OperationName)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.OperationName)
+                        @Html.HiddenFor(model => model.OperationTypeId)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.ServiceTypeName)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.ServiceTypeName)
+                        @Html.HiddenFor(model => model.ServiceTypeCode)
+                    </dd>
+                </dl>
+                <br />
+            </div>
+
+
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <p class="subtitle_h4">@VOI.SISAC.Web.Resources.Resource.RateParamsConfiguration</p>
+                </div>
+                <dl>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.Rate)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.EditorFor(model => model.Rate, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeroDecimal(event, this, 17, 5);", @onkeyup = "return commonFunctions.validarNumeroDecimal(event, this, 17, 5)" } })
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.CurrencyName)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.CurrencyName)
+                        @Html.HiddenFor(model => model.CurrencyCode)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.MultiRateFlag)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                       <input class="checkVolaris top-padding" data-val="true" type="checkbox" id="MultiRateFlag" name="MultiRateFlag" value="true" checked="@Model.MultiRateFlag" disabled="disabled"/>
+                       <label for="MultiRateFlag" class="control_gris"><span></span></label>
+                        @Html.HiddenFor(model => model.MultiRateFlag)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.AirplanetWeightFlag)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        <input class="checkVolaris top-padding" data-val="true" type="checkbox" id="AirplanetWeightFlag" name="AirplanetWeightFlag" value="true" checked="@Model.AirplanetWeightFlag" disabled="disabled"/>
+                        <label for="AirplanetWeightFlag" class="control_gris"><span></span></label>
+                        @Html.HiddenFor(model => model.AirplanetWeightFlag)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.AirplaneWeightName)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.AirplaneWeightName)
+                         @Html.HiddenFor(model => model.AirplaneWeightCode)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.AirplaneWeightUnitName)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.AirplaneWeightUnitName)
+                         @Html.HiddenFor(model => model.AirplaneWeightUnit)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.AirplaneWeightMultiplier)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.AirplaneWeightMultiplier)
+                        @Html.HiddenFor(model => model.AirplaneWeightMultiplier)
+                    </dd>
+                </dl>
+                <br />
+            </div>
+
+
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <p class="subtitle_h4">@VOI.SISAC.Web.Resources.Resource.CalculationTypeConfiguration</p>
+                </div>
+                <dl>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.ServiceRecordFlag)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                       <input class="checkVolaris top-padding" data-val="true" type="checkbox" id="ServiceRecordFlag" name="ServiceRecordFlag" value="true" checked="@Model.AirplanetWeightFlag" disabled="disabled"/>
+                       <label for="ServiceRecordFlag" class="control_gris"><span></span></label>
+                        @Html.HiddenFor(model => model.ServiceRecordFlag)
+                    </dd>
+                    <dt class="subtitle_h5">
+                        @Html.DisplayNameFor(model => model.CalculationTypeName)
+                    </dt>
+                    <dd class="subtitle_h6_blue">
+                        @Html.DisplayFor(model => model.CalculationTypeName)
+                        @Html.HiddenFor(model => model.CalculationTypeId)
+                    </dd>
+                </dl>
+                <br />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <br />
+                <input type="reset" class="btnVolaris" value="@VOI.SISAC.Web.Resources.Resource.Back" onclick="@("location.href='" + @Url.Action("Index", "AirportServiceContract") + "'")">
+                <input type="submit" value="@VOI.SISAC.Web.Resources.Resource.Save" class="btnVolaris" />
+                <br />
+            </div>
+        </div>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/CommonFunctions")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/AirportServiceContract")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+    @Scripts.Render("~/bundles/JSDateTimeValidate")
+    <script type="text/javascript">
+        var currentLang = '@cultureForm.ToString()';
+    </script>
+}

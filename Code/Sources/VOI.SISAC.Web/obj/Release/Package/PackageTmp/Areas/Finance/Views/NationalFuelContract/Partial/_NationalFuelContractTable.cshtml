@@ -1,0 +1,144 @@
+﻿@model IEnumerable<VOI.SISAC.Web.Models.VO.Finance.NationalFuelContractVO>
+
+@{
+    var cultureForm = System.Threading.Thread.CurrentThread.CurrentUICulture.Name;
+}
+
+@using (Html.BeginForm("Index", "NationalFuelContract", FormMethod.Post, new { name = "formNationalFuelContract", id = "formNationalFuelContract" }))
+{
+    <table id="tbNationalFuelContract"
+           data-toolbar="#toolbar"
+           data-toggle="table"
+           data-locale="@cultureForm.ToString()"
+           class="table"
+           data-cache="false"
+           data-export-types="['excel']"
+           data-show-export="true"
+           data-show-columns="true"
+           data-show-toggle="true"
+           data-mobile-responsive="true"
+           data-check-on-init="true"
+           data-url="@Url.Action("GetContractData", "NationalFuelContract")"
+           data-pagination="true"
+           data-query-params="queryParams"
+           data-side-pagination="server"
+           data-query-params-type=""
+           data-page-list="[5,10,20,50,100,200,All]">
+        <thead>
+            <tr>
+                @if (User.IsInRole("NATFUELCON-VIE") || User.IsInRole("NATFUELCON-INC") || User.IsInRole("NATFUELCON-DEL") || User.IsInRole("NATFUELCON-UPD")) {
+                    <th data-field="Actions" data-align="center" data-halign="center" data-formatter="NationalFuelContract.actionsButtons">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
+                    </th>
+                }
+                <th data-field="EffectiveDate" data-halign="center" data-align="center">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.EffectiveDate</strong>
+                </th>
+                <th data-field="AirlineCode" data-halign="center" data-align="center" data-visible="false">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.AirlineCode</strong>
+                </th>
+                <th data-field="AirlineName" data-halign="center" data-align="center">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.AirlineName</strong>
+                </th>
+
+                <th data-field="StationCode" data-halign="center" data-align="center" data-visible="false">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.StationCode</strong>
+                </th>
+                <th data-field="StationName" data-halign="center" data-align="center">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.StationName</strong>
+                </th>
+
+                <th data-field="ServiceCode" data-halign="center" data-align="center" data-visible="false">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.ServiceCode</strong>
+                </th>
+                <th data-field="ServiceDescription" data-halign="center" data-align="center">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.ServiceName</strong>
+                </th>
+
+                <th data-field="ProviderNumberPrimary" data-halign="center" data-align="center" data-visible="false">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.ProviderNumberPrimary</strong>
+                </th>
+                <th data-field="ProviderName" data-halign="center" data-align="center">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.ProviderName</strong>
+                </th>
+                
+                <th data-field="AircraftRegistCCFlag" data-halign="center" data-align="center" data-visible="false">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.AircraftRegistCCFlag</strong>
+                </th>
+                <th data-field="CCNumber" data-halign="center" data-align="center" data-visible="false">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.CCNumber</strong>
+                </th>
+                
+                <th data-field="Status" data-halign="center" data-align="center" data-visible="false">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.Status</strong>
+                </th>
+                <th data-field="AccountingAccountNumber" data-halign="center" data-align="center" data-visible="false">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.AccountingAccountNumber</strong>
+                </th>
+                <th data-field="AccountingAccountName" data-halign="center" data-align="center" data-visible="false">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.AccountingAccountName</strong>
+                </th>
+
+                <th data-field="LiabilityAccountNumber" data-halign="center" data-align="center" data-visible="false">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.LiabilityAccountNumber</strong>
+                </th>
+                <th data-field="LiabilityAccountName" data-halign="center" data-align="center" data-visible="false">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.LiabilityAccountName</strong>
+                </th>
+                
+                @*<th data-field="OperationTypeID" data-halign="center" data-align="center" data-visible="false">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.OperationTypeID</strong>
+                </th>*@
+                <th data-field="OperationTypeName" data-halign="center" data-align="center">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.OperationTypeName</strong>
+                </th>
+
+                <th data-field="CurrencyCode" data-halign="center" data-align="center">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.CurrencyCode</strong>
+                </th>
+                <th data-field="CurrencyName" data-halign="center" data-align="center" data-visible="false">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.CurrencyName</strong>
+                </th>                
+                
+                <th data-field="FederalTaxDescription" data-halign="center" data-align="center">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.TaxName</strong>
+                </th>
+                <th data-field="FederalTaxCode" data-halign="center" data-align="center" data-visible="false">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.FederalTaxCode</strong>
+                </th>
+                <th data-field="FederalTaxValue" data-halign="center" data-align="center">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.Rate</strong>
+                </th>
+                <th data-field="FederalTaxFlag" data-halign="center" data-align="center">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.AplicaPorcentaje_Valor</strong>
+                </th>
+            </tr>
+        </thead>
+    </table>
+}
+
+<!-- context menu -->
+<ul id="context-menu" class="dropdown-menu">
+    
+    @if (User.IsInRole("NATFUELCON-VIE")) {
+        <li data-item="@Resource.Details"><a><i class="fa fa-eye fa-fw"></i>&nbsp;@Resource.Details</a></li>
+    }
+    @if (User.IsInRole("NATFUELCON-UPD")) {
+        <li data-item="@Resource.Edit"><a><i class="fa fa-pencil fa-fw"></i>&nbsp;@Resource.Edit</a></li>
+    }
+    @if (User.IsInRole("NATFUELCON-DEL")) {
+        <li data-item="@Resource.Delete"><a><i class="fa fa-trash-o fa-fw"></i>&nbsp;@Resource.Delete</a></li>
+    }
+    @if (User.IsInRole("NATFUELCON-INC")) {
+        <li data-item="@Resource.Inactive"><a><i class="fa fa-file-text fa-fw"></i>&nbsp;@Resource.Inactive</a></li>
+    }
+</ul>
+
+<script>
+    function queryParams(params) {
+        return {
+            pageNumber: params.pageNumber,
+            pageSize: params.pageSize
+        };
+    }
+</script>

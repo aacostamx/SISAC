@@ -1,0 +1,163 @@
+﻿@model VOI.SISAC.Web.Models.VO.Finance.InternationalFuelContractVO
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cultureForm = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+
+<div class="container">
+    <h2 class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.RateTitle</h2>
+    @Html.Partial("_AlertView")
+    <div id="toolbar">
+        @*<div class="row">*@
+            <button type="button" class="btn btn-default" name="Add" title="@Resource.Search" data-toggle="modal" data-target="#modalTable">
+                <i class="fa fa-search"></i> &nbsp;@Resource.Search
+            </button>
+
+            @if (ViewBag.search == "search")
+            {
+                <div class="col-xs-6 col-sm-12 col-md-4 col-lg-4 pull-right">
+                    <button disabled type="button" class="btn btn-default" name="Delete" title="@Resource.Delete" data-toggle="modal" data-target="#modalTableDelete">
+                        <i class="fa fa-trash-o fa-fw"></i> &nbsp;@Resource.Delete
+                    </button>
+                </div>
+            }
+            else
+            {
+                <div class="col-xs-6 col-sm-12 col-md-4 col-lg-4 pull-right">
+                    <button type="button" class="btn btn-default pull-right" name="Delete" title="@Resource.Delete" data-toggle="modal" data-target="#modalTableDelete">
+                        <i class="fa fa-trash-o fa-fw"></i> &nbsp;@Resource.Delete
+                    </button>
+                </div>
+            }
+            <div class="row">
+                @Html.Partial("~/Areas/Finance/Views/InternationalFuelRate/Partial/_SearchFuelRates.cshtml")
+                @Html.Partial("~/Areas/Finance/Views/InternationalFuelRate/Partial/_DeleteFuelRates.cshtml")
+            </div>
+    </div>
+    <br />
+    <table id="tbInternationalFuelRate"
+           class="table"
+           data-toggle="table"
+           data-toolbar="#toolbar"
+           data-show-columns="true"
+           data-search="true"
+           data-show-toggle="true"
+           data-show-pagination-switch="true"
+           data-show-export="true"
+           data-export-types="['excel']"
+           data-mobile-responsive="true"
+           data-pagination="true"
+           data-page-size="10">
+        <thead>
+            <tr>
+                <th data-field="InternationalFuelRateID" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                    <strong>@Html.DisplayNameFor(model => model.InternationalFuelContractConcepts.FirstOrDefault().InternationalFuelRate.LastOrDefault().InternationalFuelRateID)</strong>
+                </th>
+                <th data-field="FuelConceptTypeCode" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.InternationalFuelContractConcepts.FirstOrDefault().FuelConcept.FuelConceptName)</strong>
+                </th>
+                <th data-field="ProviderName" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.InternationalFuelContractConcepts.FirstOrDefault().Provider.ProviderName)</strong>
+                </th>
+                <th data-field="RateStartDate" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.InternationalFuelContractConcepts.FirstOrDefault().InternationalFuelRate.LastOrDefault().RateStartDate)</strong>
+                </th>
+                <th data-field="RateEndDate" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.InternationalFuelContractConcepts.FirstOrDefault().InternationalFuelRate.LastOrDefault().RateEndDate)</strong>
+                </th>
+                <th data-field="Rate" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.InternationalFuelContractConcepts.FirstOrDefault().InternationalFuelRate.LastOrDefault().Rate)</strong>
+                </th>
+                @if (User.IsInRole("IFUELRATE-UPD") || User.IsInRole("IFUELRATE-DEL"))
+                {
+                    <th data-field="Acctions" data-align="center" data-halign="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
+                    </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.InternationalFuelContractConcepts.Count > 0)
+            {
+                foreach (var item in Model.InternationalFuelContractConcepts.FirstOrDefault().InternationalFuelRate)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InternationalFuelRateID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InternationalFuelContractConcept.FuelConcept.FuelConceptName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InternationalFuelContractConcept.Provider.ProviderName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RateStartDate, "ToShortDate")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RateEndDate, "ToShortDate")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Rate)
+                        </td>
+                        @if (User.IsInRole("IFUELRATE-UPD") || User.IsInRole("IFUELRATE-DEL"))
+                        {
+                            <td>
+                                @if (ViewBag.search == "search")
+                                {
+                                    if (User.IsInRole("IFUELRATE-UPD"))
+                                    {
+                                        <button disabled class="btn btn-default" type="button" name="Edit" title="@VOI.SISAC.Web.Resources.Resource.Edit" onclick="location.href='@Url.Action("Edit", "InternationalFuelRate", new { id = item.InternationalFuelRateID })'"><i class="fa fa-pencil"></i></button>
+                                    }
+                                    if (User.IsInRole("IFUELRATE-DEL"))
+                                    {                                       
+                                        <button disabled class="btn btn-default" type="button" name="Delete" title="@VOI.SISAC.Web.Resources.Resource.Delete" onclick="location.href='@Url.Action("Delete", "InternationalFuelRate", new { id = item.InternationalFuelRateID })'"><i class="fa fa-trash"></i></button>
+                                    }    
+                                }
+                                else
+                                {
+                                    if (User.IsInRole("IFUELRATE-UPD"))
+                                    {
+                                        <button class="btn btn-default" type="button" name="Edit" title="@VOI.SISAC.Web.Resources.Resource.Edit" onclick="location.href='@Url.Action("Edit", "InternationalFuelRate", new { id = item.InternationalFuelRateID })'"><i class="fa fa-pencil"></i></button>
+                                    }
+                                    if (User.IsInRole("IFUELRATE-DEL"))
+                                    {    
+                                        <button class="btn btn-default" type="button" name="Delete" title="@VOI.SISAC.Web.Resources.Resource.Delete" onclick="location.href='@Url.Action("Delete", "InternationalFuelRate", new { id = item.InternationalFuelRateID })'"><i class="fa fa-trash"></i></button>
+                                    }    
+                                }
+                            </td>
+                        }
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <br />
+    <div class="col-md-12 col-lg-12 text-center">
+        <button id="btnBack" type="button" class="btn btn-default btn-lg" name="Back" title="@Resource.Back" onclick="location.href='@Url.Action("Index","InternationalFuelContract")'">
+            <i class="fa fa-arrow-left fa-fw"></i> &nbsp;@Resource.Back
+        </button>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/CommonFunctions")
+    @Scripts.Render("~/bundles/bootstrapTable")
+    @Scripts.Render("~/bundles/bootstrapTablePlugins")
+    @Scripts.Render("~/bundles/ExportTable")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+    @Scripts.Render("~/bundles/JSDateTimeValidate")
+  
+    <script type="text/javascript">
+        var currentLang = '@cultureForm.ToString()';
+        $('#modalTable').on('shown.bs.modal', function () {
+            $table.bootstrapTable('resetView');
+        });
+    </script>
+}
+

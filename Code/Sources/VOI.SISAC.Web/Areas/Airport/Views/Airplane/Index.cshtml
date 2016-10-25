@@ -1,0 +1,173 @@
+﻿@model IEnumerable<VOI.SISAC.Web.Models.VO.Airport.AirplaneVO>
+
+@{
+    ViewBag.Title = VOI.SISAC.Web.Resources.Resource.AirplaneTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h2 class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.AirplaneTitle</h2>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div id="toolbar">
+            <div class="btn-group dropdown">
+                @if (User.IsInRole("AIRPLANE-ADD"))
+                {
+                    <button type="button" class="btn btn-default" name="Agregar" title="@VOI.SISAC.Web.Resources.Resource.Add" onclick="location.href='@Url.Action("Create", "Airplane")'">
+                        <i class="fa fa-plus"></i>&nbsp; @VOI.SISAC.Web.Resources.Resource.Add
+                    </button>
+                }
+            </div>
+        </div>
+        <table id="tbAirplane"
+               data-toolbar="#toolbar"
+               class="table"
+               data-toggle="table"
+               data-show-columns="true"
+               data-search="true"
+               data-show-toggle="true"
+               data-show-pagination-switch="true"
+               data-mobile-responsive="true"
+               data-pagination="true"
+               data-page-size="10"
+               data-show-export="true"
+               data-export-types="['excel']"
+               data-export-data-type="all">
+            <thead>
+                <tr>
+                    <th data-field="EquipmentNumber" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.EquipmentNumber)</strong>
+                    </th>
+                    <th data-field="AirplaneModel" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.AirplaneModel)</strong>
+                    </th>
+                    <th data-field="AirlineCode" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.AirlineCode)</strong>
+                    </th>
+                    <th data-field="SerialNumber" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.SerialNumber)</strong>
+                    </th>
+                    <th data-field="MaximumTakeoffWeight" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.MaximumTakeoffWeight)</strong>
+                    </th>
+                    <th data-field="WeightInPound" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                        <strong>@Html.DisplayNameFor(model => model.WeightInPound)</strong>
+                    </th>
+                    <th data-field="WeightInTonnes" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                        <strong>@Html.DisplayNameFor(model => model.WeightInTonnes)</strong>
+                    </th>
+                    <th data-field="EmptyOperatingWeight" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                        <strong>@Html.DisplayNameFor(model => model.EmptyOperatingWeight)</strong>
+                    </th>
+                    <th data-field="FilmingMaximumWeight" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                        <strong>@Html.DisplayNameFor(model => model.FilmingMaximumWeight)</strong>
+                    </th>
+                    <th data-field="TakeoffWeightInTonnes" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                        <strong>@Html.DisplayNameFor(model => model.TakeoffWeightInTonnes)</strong>
+                    </th>
+                    <th data-field="GroupWeight" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                        <strong>@Html.DisplayNameFor(model => model.GroupWeight)</strong>
+                    </th>
+                    <th data-field="MaximumLandingWeight" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.MaximumLandingWeight)</strong>
+                    </th>
+                    <th data-field="MaximumZeroFuelWeight" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.MaximumZeroFuelWeight)</strong>
+                    </th>
+                    <th data-field="PassengerCapacity" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.PassengerCapacity)</strong>
+                    </th>
+                    <th data-field="CrewCapacity" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.CrewCapacity)</strong>
+                    </th>
+                    <th data-field="Magnitude" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>@Html.DisplayNameFor(model => model.Magnitude)</strong>
+                    </th>
+                    @if (User.IsInRole("AIRPLANE-DEL") || User.IsInRole("AIRPLANE-UPD"))
+                    {
+                        <th data-field="Acctions" data-align="center" data-halign="center">
+                            <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
+                        </th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EquipmentNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AirplaneModel)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AirlineCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SerialNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MaximumTakeoffWeight)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WeightInPound)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WeightInTonnes)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmptyOperatingWeight)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FilmingMaximumWeight)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TakeoffWeightInTonnes)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GroupWeight)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MaximumLandingWeight)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MaximumZeroFuelWeight)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PassengerCapacity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CrewCapacity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Magnitude)
+                        </td>
+                        @if (User.IsInRole("AIRPLANE-DEL") || User.IsInRole("AIRPLANE-UPD"))
+                        {
+                            <td>
+                                @if (User.IsInRole("AIRPLANE-UPD"))
+                                {
+                                    <button class="btn btn-default" type="button" name="Edit" title="@VOI.SISAC.Web.Resources.Resource.Edit" onclick="location.href='@Url.Action("Edit", "Airplane", new { id = item.EquipmentNumber })'"><i class="fa fa-pencil fa-fw"></i></button>
+                                }
+                                @if (User.IsInRole("AIRPLANE-DEL"))
+                                {
+                                    <button class="btn btn-default" type="button" name="Delete" title="@VOI.SISAC.Web.Resources.Resource.Delete" onclick="location.href='@Url.Action("Delete", "Airplane", new { id = item.EquipmentNumber })'"><i class="fa fa-trash-o fa-fw"></i></button>
+                                }
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <br />
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/bootstrapTable")
+@Scripts.Render("~/bundles/bootstrapTablePlugins")
+@Scripts.Render("~/bundles/ExportTable")

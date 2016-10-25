@@ -1,0 +1,43 @@
+﻿@model VOI.SISAC.Web.Models.VO.Airport.DelayVO
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    @Html.Partial("_AlertView")
+
+    <h3>¿Estás seguro que deseas eliminar el registro?</h3>
+    <div class="dl-horizontal">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                @Html.LabelFor(model => model.DelayCode, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.DelayCode, new { htmlAttributes = new { @class = "form-control", @disabled = "" } })
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                @Html.LabelFor(model => model.DelayName, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.DelayName, new { htmlAttributes = new { @class = "form-control", @disabled = "" } })
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                @Html.LabelFor(model => model.FunctionalAreaID, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.FunctionalAreaID, new { htmlAttributes = new { @class = "form-control", @disabled = "" } })
+            </div>
+        </div>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <br />
+                <input onclick="location.href='@Url.Action("Index", "Delay")'" type="reset" class="btnVolaris" value=@Resource.Back>
+                <input type="submit" value="Elminar" class="btnVolaris" />
+            </div>
+        </div>
+    }
+
+</div>

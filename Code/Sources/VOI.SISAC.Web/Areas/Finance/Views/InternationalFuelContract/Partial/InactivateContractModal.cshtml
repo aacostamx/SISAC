@@ -1,0 +1,22 @@
+﻿<div class="modal fade" id="ShowEndDate" tabindex="-1" role="dialog" aria-labelledby="smallModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4>@Resource.InactivateServiceContractTitle</h4>
+            </div>
+            <div class="modal-body">
+                <div id="AlertMessageModal"></div>
+                @Html.Label("EndDateContractTitle", "End Date Contract", htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                @Html.Editor("EndDateContract", "ToShortDate", new { htmlAttributes = new { @class = "form-control ClassDate required-field", @placeholder = Resource.FormatDate } })
+                <div id="ErrorMessageModal" class="text-danger text-danger-error"></div>
+            </div>
+            <div class="modal-footer">
+                <input type="reset" class="btnVolaris" data-dismiss="modal" value="@Resource.Close" />
+                <input type="submit" class="btnVolaris" value="@Resource.Accept" onclick="InternationalFuelContractController.inactiveContract()" />
+                @*<button type="button" class="btn btn-default" data-dismiss="modal">@Resource.Close</button>
+                <button type="button" class="btn btn-primary" onclick="AirportServiceContract.inactiveContract()">@Resource.Accept</button>*@
+            </div>
+        </div>
+    </div>
+</div>

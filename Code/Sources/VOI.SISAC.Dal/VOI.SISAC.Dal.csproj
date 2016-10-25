@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DAFCEEDF-DF9E-424A-9B69-858EB36CA0F7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VOI.SISAC.Dal</RootNamespace>
+    <AssemblyName>VOI.SISAC.Dal</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>..\..\Binaries\VolarisRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Debug\VOI.SISAC.Dal.XML</DocumentationFile>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>VOI.SISAC.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\Airport\AirportScheduleConfiguration.cs" />
+    <Compile Include="Configuration\Airport\AirlineConfiguration.cs" />
+    <Compile Include="Configuration\Airport\AirplaneConfiguration.cs" />
+    <Compile Include="Configuration\Airport\AirplaneTypeConfiguration.cs" />
+    <Compile Include="Configuration\Airport\AirportConfiguration.cs" />
+    <Compile Include="Configuration\Airport\AirportGroupConfiguration.cs" />
+    <Compile Include="Configuration\Airport\AirportServiceConfiguration.cs" />
+    <Compile Include="Configuration\Airport\CompartmentTypeConfiguration.cs" />
+    <Compile Include="Configuration\Airport\CompartmentTypeConfigConfiguration.cs" />
+    <Compile Include="Configuration\Airport\CompartmentTypeInformationConfiguration.cs" />
+    <Compile Include="Configuration\Airport\CrewConfiguration.cs" />
+    <Compile Include="Configuration\Airport\CrewTypeConfiguration.cs" />
+    <Compile Include="Configuration\Airport\DelayConfiguration.cs" />
+    <Compile Include="Configuration\Airport\DrinkingWaterConfiguration.cs" />
+    <Compile Include="Configuration\Airport\FuelConceptConfiguration.cs" />
+    <Compile Include="Configuration\Airport\FuelConceptTypeConfiguration.cs" />
+    <Compile Include="Configuration\Airport\GpuConfiguration.cs" />
+    <Compile Include="Configuration\Airport\GpuObservationConfiguration.cs" />
+    <Compile Include="Configuration\Airport\JetFuelTicketConfiguration.cs" />
+    <Compile Include="Configuration\Airport\ManifestTimeConfigConfiguration.cs" />
+    <Compile Include="Configuration\Airport\NationalJetFuelTicketConfiguration.cs" />
+    <Compile Include="Configuration\Airport\PassengerInformationConfiguration.cs" />
+    <Compile Include="Configuration\Airport\ServiceConfiguration.cs" />
+    <Compile Include="Configuration\Catalog\AirplaneWeightMeasureTypeConfiguration.cs" />
+    <Compile Include="Configuration\Catalog\AirplaneWeightTypeConfiguration.cs" />
+    <Compile Include="Configuration\Catalog\ChargeFactorTypeConfiguration.cs" />
+    <Compile Include="Configuration\Catalog\FunctionalAreaConfiguration.cs" />
+    <Compile Include="Configuration\Catalog\ReconciliationToleranceConfiguration.cs" />
+    <Compile Include="Configuration\Catalog\ScheduleTypeConfiguration.cs" />
+    <Compile Include="Configuration\Catalog\ServiceCalculationTypeConfiguration.cs" />
+    <Compile Include="Configuration\Catalog\StatusOnBoardConfiguration.cs" />
+    <Compile Include="Configuration\Catalog\MovementTypeConfiguration.cs" />
+    <Compile Include="Configuration\Catalog\ToleranceTypeConfiguration.cs" />
+    <Compile Include="Configuration\Finance\AirportServiceContractConfiguration.cs" />
+    <Compile Include="Configuration\Finance\NationalFuelContractConceptConfiguration.cs" />
+    <Compile Include="Configuration\Finance\NationalFuelContractConfiguration.cs" />
+    <Compile Include="Configuration\Finance\CostCenterConfiguration.cs" />
+    <Compile Include="Configuration\Finance\AccountingAccountConfiguration.cs" />
+    <Compile Include="Configuration\Catalog\CountryConfiguration.cs" />
+    <Compile Include="Configuration\Finance\CurrencyConfiguration.cs" />
+    <Compile Include="Configuration\Finance\ExchangeRatesConfiguration.cs" />
+    <Compile Include="Configuration\Finance\InternationalFuelContractConceptConfiguration.cs" />
+    <Compile Include="Configuration\Finance\InternationalFuelContractConfiguration.cs" />
+    <Compile Include="Configuration\Finance\InternationalFuelRateConfiguration.cs" />
+    <Compile Include="Configuration\Finance\LiabilityAccountConfiguration.cs" />
+    <Compile Include="Configuration\Catalog\OperationTypeConfiguration.cs" />
+    <Compile Include="Configuration\Finance\NationalFuelRateConfiguration.cs" />
+    <Compile Include="Configuration\Finance\ProviderConfiguration.cs" />
+    <Compile Include="Configuration\Catalog\ServiceTypeConfiguration.cs" />
+    <Compile Include="Configuration\Finance\TaxConfiguration.cs" />
+    <Compile Include="Configuration\Itineraries\TimelineMovementConfiguration.cs" />
+    <Compile Include="Configuration\Itineraries\TimelineConfiguration.cs" />
+    <Compile Include="Configuration\Itineraries\ManifestArrivalConfiguration.cs" />
+    <Compile Include="Configuration\Itineraries\GendecArrivalConfiguration.cs" />
+    <Compile Include="Configuration\Itineraries\GendecDepartureConfiguration.cs" />
+    <Compile Include="Configuration\Itineraries\ItineraryConfiguration.cs" />
+    <Compile Include="Configuration\Itineraries\ItineraryLogConfiguration.cs" />
+    <Compile Include="Configuration\Itineraries\ManifestDepartureConfiguration.cs" />
+    <Compile Include="Configuration\Process\CalculationStatusConfiguration.cs" />
+    <Compile Include="Configuration\Process\ConfirmationStatusConfiguration.cs" />
+    <Compile Include="Configuration\Process\NationalJetFuelInvoiceDetailConfiguration.cs" />
+    <Compile Include="Configuration\Process\NationalJetFuelInvoiceControlConfiguration.cs" />
+    <Compile Include="Configuration\Process\NationalJetFuelInvoicePolicyConfiguration.cs" />
+    <Compile Include="Configuration\Process\NationalJetFuelPolicyConfiguration.cs" />
+    <Compile Include="Configuration\Process\JetFuelPolicyConfiguration.cs" />
+    <Compile Include="Configuration\Process\JetFuelLogErrorConfiguration.cs" />
+    <Compile Include="Configuration\Process\NationalJetFuelPolicyControlConfiguration.cs" />
+    <Compile Include="Configuration\Process\JetFuelPolicyControlConfiguration.cs" />
+    <Compile Include="Configuration\Process\JetFuelProcessConfiguration.cs" />
+    <Compile Include="Configuration\Process\JetFuelProvisionConfiguration.cs" />
+    <Compile Include="Configuration\Process\NationalJetFuelCostConfiguration.cs" />
+    <Compile Include="Configuration\Process\NationalJetFuelLogErrorConfiguration.cs" />
+    <Compile Include="Configuration\Process\NationalJetFuelProcessConfiguration.cs" />
+    <Compile Include="Configuration\Process\DocumentStatusConfiguration.cs" />
+    <Compile Include="Configuration\Process\StatusProcessConfiguration.cs" />
+    <Compile Include="Configuration\Security\MenuConfiguration.cs" />
+    <Compile Include="Configuration\Security\DepartmentConfiguration.cs" />
+    <Compile Include="Configuration\Security\ModuleConfiguration.cs" />
+    <Compile Include="Configuration\Security\ModulePermissionConfiguration.cs" />
+    <Compile Include="Configuration\Security\PageReportConfiguration.cs" />
+    <Compile Include="Configuration\Security\PermissionConfiguration.cs" />
+    <Compile Include="Configuration\Security\ProfileConfiguration.cs" />
+    <Compile Include="Configuration\Security\ProfileRoleConfiguration.cs" />
+    <Compile Include="Configuration\Security\RoleConfiguration.cs" />
+    <Compile Include="Configuration\Security\UserAirportConfiguration.cs" />
+    <Compile Include="Configuration\Security\UserConfiguration.cs" />
+    <Compile Include="Configuration\Security\UserProfileRoleConfiguration.cs" />
+    <Compile Include="ExceptionDal\DalException.cs" />
+    <Compile Include="Infrastructure\DbFactory.cs" />
+    <Compile Include="Infrastructure\Disposable.cs" />
+    <Compile Include="Infrastructure\IDbFactory.cs" />
+    <Compile Include="Infrastructure\IRepository.cs" />
+    <Compile Include="Infrastructure\IUnitOfWork.cs" />
+    <Compile Include="Infrastructure\Repository.cs">
+      <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Infrastructure\UnitOfWork.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Airports\AirlineRepository.cs" />
+    <Compile Include="Repository\Airports\AirplaneRepository.cs" />
+    <Compile Include="Repository\Airports\AirplaneTypeRepository.cs" />
+    <Compile Include="Repository\Airports\AirportGroupRepository.cs" />
+    <Compile Include="Repository\Airports\AirportRepository.cs" />
+    <Compile Include="Repository\Airports\AirportScheduleRepository.cs" />
+    <Compile Include="Repository\Airports\AirportServiceRepository.cs" />
+    <Compile Include="Repository\Airports\CompartmentTypeRepository.cs" />
+    <Compile Include="Repository\Airports\CrewRepository.cs" />
+    <Compile Include="Repository\Airports\CrewTypeRepository.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Repository\Airports\DelayRepository.cs" />
+    <Compile Include="Repository\Airports\DrinkingWaterRepository.cs" />
+    <Compile Include="Repository\Airports\FuelConceptRepository.cs" />
+    <Compile Include="Repository\Airports\FuelConceptTypeRepository.cs" />
+    <Compile Include="Repository\Airports\GpuObservationRepository.cs" />
+    <Compile Include="Repository\Airports\GpuRepository.cs" />
+    <Compile Include="Repository\Airports\IAirportScheduleRepository.cs" />
+    <Compile Include="Repository\Airports\IAirportServiceRepository.cs" />
+    <Compile Include="Repository\Airports\ICompartmentTypeRepository.cs" />
+    <Compile Include="Repository\Airports\IAirplaneRepository.cs" />
+    <Compile Include="Repository\Airports\IAirlineRepository.cs" />
+    <Compile Include="Repository\Airports\IAirplaneTypeRepository.cs" />
+    <Compile Include="Repository\Airports\IAirportGroupRepository.cs" />
+    <Compile Include="Repository\Airports\IAirportRepository.cs" />
+    <Compile Include="Repository\Airports\ICrewRepository.cs" />
+    <Compile Include="Repository\Airports\ICrewTypeRepository.cs" />
+    <Compile Include="Repository\Airports\IDelayRepository.cs" />
+    <Compile Include="Repository\Airports\IDrinkingWaterRepository.cs" />
+    <Compile Include="Repository\Airports\IFuelConceptRepository.cs" />
+    <Compile Include="Repository\Airports\IFuelConceptTypeRepository.cs" />
+    <Compile Include="Repository\Airports\IGpuObservationRepository.cs" />
+    <Compile Include="Repository\Airports\IGpuRepository.cs" />
+    <Compile Include="Repository\Airports\IJetFuelTicketRepository.cs" />
+    <Compile Include="Repository\Airports\IManifestTimeConfigRepository.cs" />
+    <Compile Include="Repository\Airports\INationalJetFuelTicketRepository.cs" />
+    <Compile Include="Repository\Airports\IPassengerInformationRepository.cs" />
+    <Compile Include="Repository\Airports\JetFuelTicketRepository.cs" />
+    <Compile Include="Repository\Airports\ManifestTimeConfigRepository.cs" />
+    <Compile Include="Repository\Airports\NationalJetFuelTicketRepository.cs" />
+    <Compile Include="Repository\Airports\PassengerInformationRepository.cs" />
+    <Compile Include="Repository\Catalog\AirplaneWeightMeasureTypeRepository.cs" />
+    <Compile Include="Repository\Catalog\AirplaneWeightTypeRepository.cs" />
+    <Compile Include="Repository\Catalog\ChargeFactorTypeRepository.cs" />
+    <Compile Include="Repository\Catalog\IAirplaneWeightMeasureTypeRepository.cs" />
+    <Compile Include="Repository\Catalog\IAirplaneWeightTypeRepository.cs" />
+    <Compile Include="Repository\Catalog\IChargeFactorTypeRepository.cs" />
+    <Compile Include="Repository\Catalog\IOperationTypeRepository.cs" />
+    <Compile Include="Repository\Catalog\IReconciliationToleranceRepository.cs" />
+    <Compile Include="Repository\Catalog\IScheduleTypeRepository.cs" />
+    <Compile Include="Repository\Catalog\IServiceCalculationTypeRepository.cs" />
+    <Compile Include="Repository\Catalog\IMovementTypeRepository.cs" />
+    <Compile Include="Repository\Catalog\IServiceTypeRepository.cs" />
+    <Compile Include="Repository\Catalog\IStatusOnBoardRepository.cs" />
+    <Compile Include="Repository\Catalog\IToleranceTypeRepository.cs" />
+    <Compile Include="Repository\Catalog\OperationTypeRepository.cs" />
+    <Compile Include="Repository\Catalog\ReconciliationToleranceRepository.cs" />
+    <Compile Include="Repository\Catalog\ScheduleTypeRepository.cs" />
+    <Compile Include="Repository\Catalog\ServiceCalculationTypeRepository.cs" />
+    <Compile Include="Repository\Catalog\MovementTypeRepository.cs" />
+    <Compile Include="Repository\Catalog\ServiceTypeRepository.cs" />
+    <Compile Include="Repository\Catalog\StatusOnBoardRepository.cs" />
+    <Compile Include="Repository\Catalog\ToleranceTypeRepository.cs" />
+    <Compile Include="Repository\Finance\AirportServiceContractRepository.cs" />
+    <Compile Include="Repository\Finance\INationalFuelRateRepository.cs" />
+    <Compile Include="Repository\Finance\NationalFuelContractConceptRepository.cs" />
+    <Compile Include="Repository\Finance\INationalFuelContractConceptRepository.cs" />
+    <Compile Include="Repository\Finance\NationalFuelContractRepository.cs" />
+    <Compile Include="Repository\Finance\INationalFuelContractRepository.cs" />
+    <Compile Include="Repository\Finance\ExchangeRatesRepository.cs" />
+    <Compile Include="Repository\Finance\IAirportServiceContractRepository.cs" />
+    <Compile Include="Repository\Airports\ServiceRepository.cs" />
+    <Compile Include="Repository\Catalog\CountryRepository.cs" />
+    <Compile Include="Repository\Catalog\FunctionalAreaRepository.cs" />
+    <Compile Include="Repository\Catalog\ICountryRepository.cs" />
+    <Compile Include="Repository\Catalog\IFunctionalAreaRepository.cs" />
+    <Compile Include="Repository\Finance\AccountingAccountRepository.cs" />
+    <Compile Include="Repository\Finance\CostCenterRepository.cs" />
+    <Compile Include="Repository\Finance\CurrencyRepository.cs" />
+    <Compile Include="Repository\Finance\IAccountingAccountRepository.cs" />
+    <Compile Include="Repository\Finance\ICostCenterRepository.cs" />
+    <Compile Include="Repository\Finance\ICurrencyRepository.cs" />
+    <Compile Include="Repository\Finance\IExchangeRatesRepository.cs" />
+    <Compile Include="Repository\Finance\IInternationalFuelContractConceptRepository.cs" />
+    <Compile Include="Repository\Finance\IInternationalFuelContractRepository.cs" />
+    <Compile Include="Repository\Finance\IInternationalFuelRateRepository.cs" />
+    <Compile Include="Repository\Finance\ILiabilityAccountRepository.cs" />
+    <Compile Include="Repository\Finance\InternationalFuelContractConceptRepository.cs" />
+    <Compile Include="Repository\Finance\InternationalFuelContractRepository.cs" />
+    <Compile Include="Repository\Finance\InternationalFuelRateRepository.cs" />
+    <Compile Include="Repository\Finance\IProviderRepository.cs" />
+    <Compile Include="Repository\Airports\IServiceRepository.cs" />
+    <Compile Include="Repository\Finance\ITaxRepository.cs" />
+    <Compile Include="Repository\Finance\LiabilityAccountRepository.cs" />
+    <Compile Include="Repository\Finance\NationalFuelRateRepository.cs" />
+    <Compile Include="Repository\Finance\ProviderRepository.cs" />
+    <Compile Include="Repository\Finance\TaxRepository.cs" />
+    <Compile Include="Repository\Itineraries\ITimelineMovementRepository.cs" />
+    <Compile Include="Repository\Itineraries\ITimelineRepository.cs" />
+    <Compile Include="Repository\Itineraries\TimelineMovementRepository.cs" />
+    <Compile Include="Repository\Itineraries\TimelineRepository.cs" />
+    <Compile Include="Repository\Itineraries\ManifestArrivalRepository.cs" />
+    <Compile Include="Repository\Itineraries\IManifestArrivalRepository.cs" />
+    <Compile Include="Repository\Itineraries\GendecArrivalRepository.cs" />
+    <Compile Include="Repository\Itineraries\GendecDepartureRepository.cs" />
+    <Compile Include="Repository\Itineraries\IGendecArrivalRepository.cs" />
+    <Compile Include="Repository\Itineraries\IGendecDepartureRepository.cs" />
+    <Compile Include="Repository\Itineraries\IItineraryLogRepository.cs" />
+    <Compile Include="Repository\Itineraries\IItineraryRepository.cs" />
+    <Compile Include="Repository\Itineraries\IManifestDepartureRepository.cs" />
+    <Compile Include="Repository\Itineraries\ItineraryLogRepository.cs" />
+    <Compile Include="Repository\Itineraries\ItineraryRepository.cs" />
+    <Compile Include="Repository\Itineraries\ManifestDepartureRepository.cs" />
+    <Compile Include="Repository\Process\IJetFuelCostRepository.cs" />
+    <Compile Include="Repository\Process\INationalJetFuelInvoiceControlRepository.cs" />
+    <Compile Include="Repository\Process\INationalJetFuelInvoiceDetailRepository.cs" />
+    <Compile Include="Repository\Process\INationalJetFuelInvoicePolicyRepository.cs" />
+    <Compile Include="Repository\Process\INationalJetFuelPolicyControlRepository.cs" />
+    <Compile Include="Repository\Process\INationalJetFuelPolicyRepository.cs" />
+    <Compile Include="Repository\Process\INationalJetFuelLogErrorRepository.cs" />
+    <Compile Include="Repository\Process\IJetFuelLogErrorRepository.cs" />
+    <Compile Include="Repository\Process\IJetFuelPolicyControlRepository.cs" />
+    <Compile Include="Repository\Process\IJetFuelPolicyRepository.cs" />
+    <Compile Include="Repository\Process\INationalJetFuelProcessRepository.cs" />
+    <Compile Include="Repository\Process\IJetFuelProcessRepository.cs" />
+    <Compile Include="Repository\Process\IJetFuelProvisionRepository.cs" />
+    <Compile Include="Repository\Process\NationalJetFuelInvoiceControlRepository.cs" />
+    <Compile Include="Repository\Process\NationalJetFuelInvoiceDetailRepository.cs" />
+    <Compile Include="Repository\Process\NationalJetFuelInvoicePolicyRepository.cs" />
+    <Compile Include="Repository\Process\NationalJetFuelPolicyControlRepository.cs" />
+    <Compile Include="Repository\Process\NationalJetFuelPolicyRepository.cs" />
+    <Compile Include="Repository\Process\NationalJetFuelCostRepository.cs" />
+    <Compile Include="Repository\Process\NationalJetFuelLogErrorRepository.cs" />
+    <Compile Include="Repository\Process\JetFuelLogErrorRepository.cs" />
+    <Compile Include="Repository\Process\JetFuelPolicyControlRepository.cs" />
+    <Compile Include="Repository\Process\JetFuelPolicyRepository.cs" />
+    <Compile Include="Repository\Process\NationalJetFuelProcessRepository.cs" />
+    <Compile Include="Repository\Process\JetFuelProcessRepository.cs" />
+    <Compile Include="Repository\Process\JetFuelProvisionRepository.cs" />
+    <Compile Include="Repository\Security\DepartmentRepository.cs" />
+    <Compile Include="Repository\Security\IDepartmentRepository.cs" />
+    <Compile Include="Repository\Security\IMenuRepository.cs" />
+    <Compile Include="Repository\Security\IModulePermissionRepository.cs" />
+    <Compile Include="Repository\Security\IModuleRepository.cs" />
+    <Compile Include="Repository\Security\IPageReportRepository.cs" />
+    <Compile Include="Repository\Security\IPermissionRepository.cs" />
+    <Compile Include="Repository\Security\IProfileRepository.cs" />
+    <Compile Include="Repository\Security\IProfileRoleRepository.cs" />
+    <Compile Include="Repository\Security\IRoleRepository.cs" />
+    <Compile Include="Repository\Security\IUserRepository.cs" />
+    <Compile Include="Repository\Security\MenuRepository.cs" />
+    <Compile Include="Repository\Security\ModulePermissionRepository.cs" />
+    <Compile Include="Repository\Security\ModuleRepository.cs" />
+    <Compile Include="Repository\Security\PageReportRepository.cs" />
+    <Compile Include="Repository\Security\PermissionRepository.cs" />
+    <Compile Include="Repository\Security\ProfileRepository.cs" />
+    <Compile Include="Repository\Security\ProfileRoleRepository.cs" />
+    <Compile Include="Repository\Security\RoleRepository.cs" />
+    <Compile Include="Repository\Security\UserRepository.cs" />
+    <Compile Include="SisacContext.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+    <None Include="VOI.SISAC.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VOI.SISAC.Entities\VOI.SISAC.Entities.csproj">
+      <Project>{b5f8b0b8-963d-4d6b-bcb8-04f678f7eb2d}</Project>
+      <Name>VOI.SISAC.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

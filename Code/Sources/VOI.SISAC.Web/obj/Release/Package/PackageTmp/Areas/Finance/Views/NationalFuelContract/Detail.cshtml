@@ -1,0 +1,212 @@
+﻿@model VOI.SISAC.Web.Models.VO.Finance.NationalFuelContractVO
+
+@{
+    ViewBag.Title = Resource.NationalFuelContract;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cultureForm = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p class="subtitle_h3_black">@Resource.NationalFuelContract</p>
+        <p class="subtitle_h3_ancillarie">@VOI.SISAC.Web.Resources.Resource.Details</p>
+    </div>
+    <br />
+
+    <div id="tbNationalFuelContract" class="col-xs-12 col-sm-12 col-md-8">
+        <div class="table-responsive">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <colgroup>
+                        <col class="col-xs-2" />
+                        <col class="col-xs-5" />
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>@VOI.SISAC.Web.Resources.Resource.Definition</th>
+                            <th>@VOI.SISAC.Web.Resources.Resource.Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@Resource.EffectiveDate</code></th>
+                            <td id="EffectiveDate">@Html.DisplayFor(model => model.EffectiveDate, "ToShortDate")</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@Resource.AirlineCode</code></th>
+                            <td id="AirlineCode">@Html.DisplayFor(model => model.AirlineCode)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@Resource.AirlineName</code></th>
+                            <td id="AirlineName">@Html.DisplayFor(model => model.AirlineName)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@Resource.StationCode</code></th>
+                            <td id="StationCode">@Html.DisplayFor(model => model.StationCode)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@Resource.StationName</code></th>
+                            <td id="StationName">@Html.DisplayFor(model => model.StationName)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@Resource.ServiceCode</code></th>
+                            <td id="ServiceCode">@Html.DisplayFor(model => model.ServiceCode)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@Resource.ServiceName</code></th>
+                            <td id="ServiceDescription">@Html.DisplayFor(model => model.ServiceDescription)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@Resource.ProviderName</code></th>
+                            <td id="ProviderName">@Html.DisplayFor(model => model.ProviderName)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@Resource.AccountingAccountNumber</code></th>
+                            <td id="AccountingAccountNumber">@Html.DisplayFor(model => model.AccountingAccountNumber)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@Resource.AccountingAccountName</code></th>
+                            <td id="AccountingAccountName">@Html.DisplayFor(model => model.AccountingAccountName)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.LiabilityAccountNumber</code></th>
+                            <td id="LiabilityAccountNumber">@Html.DisplayFor(model => model.LiabilityAccountNumber)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.LiabilityAccountName</code></th>
+                            <td id="LiabilityAccountName">@Html.DisplayFor(model => model.LiabilityAccountName)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.AircraftRegistCCFlag</code></th>
+                            <td id="AircraftRegistCCFlag">@Html.DisplayFor(model => model.AircraftRegistCCFlag)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.CCNumber</code></th>
+                            <td id="CCNumber">@Html.DisplayFor(model => model.CCNumber)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.CCName</code></th>
+                            <td id="CostCenterName">@Html.DisplayFor(model => model.CostCenterName)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.CurrencyCode</code></th>
+                            <td id="CurrencyCode">@Html.DisplayFor(model => model.CurrencyCode)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.CurrencyName</code></th>
+                            <td id="CurrencyName">@Html.DisplayFor(model => model.CurrencyName)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.FederalTaxCode</code></th>
+                            <td id="FederalTaxCode">@Html.DisplayFor(model => model.FederalTaxCode)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.TaxName</code></th>
+                            <td id="FederalTaxDescription">@Html.DisplayFor(model => model.FederalTaxDescription)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.FederalTaxValue</code></th>
+                            <td id="FederalTaxValue">
+                                @if (Model.FederalTaxFlag)
+                                { 
+                                    @Html.DisplayFor(model => model.FederalTaxValue)
+                                    <strong>%</strong> 
+                                }
+                                else
+                                { 
+                                    <strong>$</strong>
+                                    @Html.DisplayFor(model => model.FederalTaxValue)
+                                    @Html.HiddenFor(model => model.FederalTaxFlag)
+                                }
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="ContentTable" style="padding:15px">
+        <div id="TableContect">
+            <table id="tbFuelContractConcept"
+                class="table"
+                data-unique-id="InterConceptID"
+                data-toggle="table"
+                data-mobile-responsive="true"
+                data-pagination="false"
+                data-page-size="3">
+                <thead>
+                    <tr>
+                        <th data-field="InterConceptID" data-align="center" data-halign="center" data-visible="false">
+                            <strong id="InterConceptID">ID</strong>
+                        </th>
+                        <th data-field="FuelConceptName" data-halign="center" data-align="center" data-sortable="true">
+                            <strong>
+                                @Html.DisplayNameFor(model => model.NationalFuelContractConcept.FirstOrDefault().FuelConceptName)
+                            </strong>
+                        </th>
+
+                        <th data-field="FuelConceptTypeName" data-halign="center" data-align="center" data-sortable="true">
+                            <strong>
+                                @Html.DisplayNameFor(model => model.NationalFuelContractConcept.FirstOrDefault().FuelConceptTypeName)
+                            </strong>
+                        </th>
+
+                        <th data-field="ChargeFactorTypeName" data-halign="center" data-align="center" data-sortable="true">
+                            <strong>
+                                @Html.DisplayNameFor(model => model.NationalFuelContractConcept.FirstOrDefault().ChargeFactorTypeName)
+                            </strong>
+                        </th>
+
+                        <th data-field="ProviderName" data-halign="center" data-align="center" data-sortable="true">
+                            <strong>
+                                @Html.DisplayNameFor(model => model.NationalFuelContractConcept.FirstOrDefault().ProviderName)
+                            </strong>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        if (Model.NationalFuelContractConcept != null)
+                        {
+                            foreach (var item in Model.NationalFuelContractConcept)
+                            {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NationalFuelContractConceptId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FuelConceptName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FuelConceptTypeName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ChargeFactorTypeName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProviderName)
+                            </td>
+                        </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <br />
+            <input type="reset" class="btnVolaris" value="@VOI.SISAC.Web.Resources.Resource.Back" onclick="@("location.href='" + @Url.Action("Index", "NationalFuelContract") + "'")" />
+            <br />
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/bootstrapTable")
+}

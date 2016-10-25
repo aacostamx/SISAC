@@ -1,0 +1,115 @@
+﻿@model VOI.SISAC.Web.Models.VO.Itineraries.ItineraryVO
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@Html.Partial("_AlertView")
+<h2>Delete</h2>
+
+<h3>@VOI.SISAC.Web.Resources.Resource.DeleteRelationships </h3>
+<div>
+    <h4>ItineraryVO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Sequence)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sequence)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AirlineCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AirlineCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FlightNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FlightNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItineraryKey)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItineraryKey)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EquipmentNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EquipmentNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartureDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartureDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartureStation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartureStation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartureTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartureTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArrivalDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArrivalDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArrivalStation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArrivalStation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArrivalTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArrivalTime)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input onclick="@("location.href='" + @Url.Action("Index", "Itinerary") + "'")" type="reset" value="@Resource.Back"/>            
+            <input type="submit" value="Delete" class="btn btn-default" />    
+        </div>
+    }
+</div>

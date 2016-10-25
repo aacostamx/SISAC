@@ -1,0 +1,37 @@
+﻿@model VOI.SISAC.Web.Models.VO.Airport.AirportGroupVO
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2 class="subtitle_h3_black">Detalle del grupo aeroportuario</h2>
+    <hr />
+
+    @Html.Partial("_AlertView")
+
+    <div class="form-horizontal">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                @Html.LabelFor(model => model.AirportGroupCode, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.AirportGroupCode, new { htmlAttributes = new { @class = "form-control specialInput", @readonly = "readonly" } })
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                @Html.LabelFor(model => model.AirportGroupName, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.AirportGroupName, new { htmlAttributes = new { @class = "form-control specialInput", @readonly = "readonly" } })
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="container">
+    <div class="row">
+        <div>
+            <br />
+            <input onclick="location.href='@Url.Action("Index", "AirportGroup")'" type="reset" class="btnVolaris" value=@Resource.Back>
+            <input type="submit" value="Eliminar" class="btnVolaris" />
+            <br />
+        </div>
+    </div>
+</div>

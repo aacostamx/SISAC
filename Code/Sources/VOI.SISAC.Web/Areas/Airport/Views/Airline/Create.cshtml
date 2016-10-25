@@ -1,0 +1,67 @@
+﻿@model VOI.SISAC.Web.Models.VO.Airport.AirlineVO
+
+@{
+    ViewBag.Title = @VOI.SISAC.Web.Resources.Resource.Create;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    @Html.Partial("_AlertView")
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <p class="subtitle_h3">@VOI.SISAC.Web.Resources.Resource.AirlineTitle</p>
+                <p class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.Add</p>
+            </div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    @Html.LabelFor(model => model.AirlineCode, new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.AirlineCode, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarAlfanumericoLlaves(event, this, 2, 1);", @onkeyup = "return commonFunctions.validarAlfanumericoLlaves(event, this, 2, 1)" } })
+                    @Html.ValidationMessageFor(model => model.AirlineCode, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    @Html.LabelFor(model => model.AirlineName, new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.AirlineName, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 40);", @onkeyup = "return commonFunctions.validarMaxLengthAlfabetico(event, this, 40)" } })
+                    @Html.ValidationMessageFor(model => model.AirlineName, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    @Html.LabelFor(model => model.AirlineShortName, new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.AirlineShortName, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 3);", @onkeyup = "return commonFunctions.validarMaxLengthAlfabetico(event, this, 3)" } })
+                    @Html.ValidationMessageFor(model => model.AirlineShortName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    @Html.LabelFor(model => model.CompanyCode, new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.CompanyCode, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 10);", @onkeyup = "return commonFunctions.validarMaxLengthAlfabetico(event, this, 10)" } })
+                    @Html.ValidationMessageFor(model => model.CompanyCode, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    @Html.LabelFor(model => model.Division, new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.Division, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 10);", @onkeyup = "return commonFunctions.validarMaxLengthAlfabetico(event, this, 10)" } })
+                    @Html.ValidationMessageFor(model => model.Division, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <br />
+                    <input onclick="location.href='@Url.Action("Index", "Airline")    '" type="reset" class="btnVolaris" value="@VOI.SISAC.Web.Resources.Resource.Back" title="@VOI.SISAC.Web.Resources.Resource.Back"/>
+                    <input type="submit" value="@VOI.SISAC.Web.Resources.Resource.Save" title="@VOI.SISAC.Web.Resources.Resource.Save" class="btnVolaris"/>
+                    <br />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/CommonFunctions")
+}

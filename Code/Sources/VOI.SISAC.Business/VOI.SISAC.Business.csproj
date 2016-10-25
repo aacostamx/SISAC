@@ -1,0 +1,419 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BC528563-1AE7-46BC-BF27-DBBC811918A6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VOI.SISAC.Business</RootNamespace>
+    <AssemblyName>VOI.SISAC.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>..\..\Binaries\VolarisRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Debug\VOI.SISAC.Business.XML</DocumentationFile>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>VOI.SISAC.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper, Version=4.0.4.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.4.0.4\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Airport\AirportScheduleBusiness.cs" />
+    <Compile Include="Airport\AirportServiceBusiness.cs" />
+    <Compile Include="Airport\AirlineBusiness.cs" />
+    <Compile Include="Airport\AirplaneTypeBusiness.cs" />
+    <Compile Include="Airport\AirportBusiness.cs" />
+    <Compile Include="Airport\AirportGroupBusiness.cs" />
+    <Compile Include="Airport\AirplaneBusiness.cs" />
+    <Compile Include="Airport\CompartmentTypeBusiness.cs" />
+    <Compile Include="Airport\CrewBusiness.cs" />
+    <Compile Include="Airport\CrewTypeBusiness.cs" />
+    <Compile Include="Airport\DelayBusiness.cs" />
+    <Compile Include="Airport\FuelConceptBusiness.cs" />
+    <Compile Include="Airport\FuelConceptTypeBusiness.cs" />
+    <Compile Include="Airport\GpuBusiness.cs" />
+    <Compile Include="Airport\GpuObservationBusiness.cs" />
+    <Compile Include="Airport\DrinkingWaterBusiness.cs" />
+    <Compile Include="Airport\IAirplaneBusiness.cs" />
+    <Compile Include="Airport\IAirlineBusiness.cs" />
+    <Compile Include="Airport\IAirportBusiness.cs" />
+    <Compile Include="Airport\IAirportGroupBusiness.cs" />
+    <Compile Include="Airport\IAirportScheduleBusiness.cs" />
+    <Compile Include="Airport\IAirportServiceBusiness.cs" />
+    <Compile Include="Airport\ICompartmentTypeBusiness.cs" />
+    <Compile Include="Airport\ICrewBusiness.cs" />
+    <Compile Include="Airport\ICrewTypeBusiness.cs" />
+    <Compile Include="Airport\IDelayBusiness.cs" />
+    <Compile Include="Airport\IFuelConceptBusiness.cs" />
+    <Compile Include="Airport\IFuelConceptTypeBusiness.cs" />
+    <Compile Include="Airport\IGpuBusiness.cs" />
+    <Compile Include="Airport\IGpuObservationBusiness.cs" />
+    <Compile Include="Airport\IDrinkingWaterBusiness.cs" />
+    <Compile Include="Airport\IJetFuelTicketBusiness.cs" />
+    <Compile Include="Airport\IManifestTimeConfigBusiness.cs" />
+    <Compile Include="Airport\IMassiveUploadCrewBusiness.cs" />
+    <Compile Include="Airport\INationalJetFuelTicketBusiness.cs" />
+    <Compile Include="Airport\IPassengerInformationBusiness.cs" />
+    <Compile Include="Airport\IServiceBusiness.cs" />
+    <Compile Include="Airport\JetFuelTicketBusiness.cs" />
+    <Compile Include="Airport\ManifestTimeConfigBusiness.cs" />
+    <Compile Include="Airport\MassiveUploadCrewBusiness.cs" />
+    <Compile Include="Airport\NationalJetFuelTicketBusiness.cs" />
+    <Compile Include="Airport\PassengerInformationBusiness.cs" />
+    <Compile Include="Airport\ServiceBusiness.cs" />
+    <Compile Include="Catalog\AirplaneWeightMeasureTypeBusiness.cs" />
+    <Compile Include="Catalog\AirplaneWeightTypeBusiness.cs" />
+    <Compile Include="Catalog\ChargeFactorTypeBusiness.cs" />
+    <Compile Include="Catalog\CountryBusiness.cs" />
+    <Compile Include="Catalog\FunctionalAreaBusiness.cs" />
+    <Compile Include="Catalog\GenderBusiness.cs" />
+    <Compile Include="Catalog\IAirplaneWeightMeasureTypeBusiness.cs" />
+    <Compile Include="Catalog\IAirplaneWeightTypeBusiness.cs" />
+    <Compile Include="Catalog\IChargeFactorTypeBusiness.cs" />
+    <Compile Include="Catalog\ICountryBusiness.cs" />
+    <Compile Include="Catalog\IFunctionalAreaBusiness.cs" />
+    <Compile Include="Catalog\IGenderBusiness.cs" />
+    <Compile Include="Catalog\IOperationTypeBusiness.cs" />
+    <Compile Include="Catalog\IReconciliationToleranceBusiness.cs" />
+    <Compile Include="Catalog\IScheduleTypeBusiness.cs" />
+    <Compile Include="Catalog\IServiceCalculationTypeBusiness.cs" />
+    <Compile Include="Catalog\IServiceTypeBusiness.cs" />
+    <Compile Include="Catalog\IStatusOnBoardBusiness.cs" />
+    <Compile Include="Catalog\OperationTypeBusiness.cs" />
+    <Compile Include="Catalog\ReconciliationToleranceBusiness.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Catalog\ScheduleTypeBusiness.cs" />
+    <Compile Include="Catalog\ServiceCalculationTypeBusiness.cs" />
+    <Compile Include="Catalog\ServiceTypeBusiness.cs" />
+    <Compile Include="Catalog\StatusOnBoardBusiness.cs" />
+    <Compile Include="Common\GenericCatalogBusiness.cs" />
+    <Compile Include="Common\GenericNotificationBusiness.cs" />
+    <Compile Include="Common\IGenericCatalogBusiness.cs" />
+    <Compile Include="Common\IGenericNotificationBusiness.cs" />
+    <Compile Include="Common\UtilityBusiness.cs" />
+    <Compile Include="Configuration\AutoMapperConfig.cs" />
+    <Compile Include="Dto\Airports\AirlineDto.cs" />
+    <Compile Include="Dto\Airports\AirplaneDto.cs" />
+    <Compile Include="Dto\Airports\AirplaneTypeDto.cs" />
+    <Compile Include="Dto\Airports\AirportDto.cs" />
+    <Compile Include="Dto\Airports\AirportGroupDto.cs" />
+    <Compile Include="Dto\Airports\AirportScheduleDto.cs" />
+    <Compile Include="Dto\Airports\AirportServiceDto.cs" />
+    <Compile Include="Dto\Airports\CompartmentTypeDto.cs" />
+    <Compile Include="Dto\Airports\CrewDto.cs" />
+    <Compile Include="Dto\Airports\CrewTypeDto.cs" />
+    <Compile Include="Dto\Airports\DelayDto.cs" />
+    <Compile Include="Dto\Airports\DrinkingWaterDto.cs" />
+    <Compile Include="Dto\Airports\FuelConceptDto.cs" />
+    <Compile Include="Dto\Airports\FuelConceptTypeDto.cs" />
+    <Compile Include="Dto\Airports\GpuDto.cs" />
+    <Compile Include="Dto\Airports\GpuObservationDto.cs" />
+    <Compile Include="Dto\Airports\JetFuelTicketDto.cs" />
+    <Compile Include="Dto\Airports\ManifestTimeConfigDto.cs" />
+    <Compile Include="Dto\Airports\NationalJetFuelTicketDto.cs" />
+    <Compile Include="Dto\Airports\PassengerInformationDto.cs" />
+    <Compile Include="Dto\Catalogs\AirplaneWeightMeasureTypeDto.cs" />
+    <Compile Include="Dto\Catalogs\AirplaneWeightTypeDto.cs" />
+    <Compile Include="Dto\Catalogs\ChargeFactorTypeDto.cs" />
+    <Compile Include="Dto\Catalogs\CountryDto.cs" />
+    <Compile Include="Dto\Catalogs\FunctionalAreaDto.cs" />
+    <Compile Include="Dto\Catalogs\GenderDto.cs" />
+    <Compile Include="Dto\Catalogs\GenericCatalogDto.cs" />
+    <Compile Include="Dto\Catalogs\OperationTypeDto.cs" />
+    <Compile Include="Dto\Catalogs\ReconciliationToleranceDto.cs" />
+    <Compile Include="Dto\Catalogs\ScheduleTypeDto.cs" />
+    <Compile Include="Dto\Catalogs\ServiceCalculationTypeDto.cs" />
+    <Compile Include="Dto\Catalogs\ServiceTypeDto.cs" />
+    <Compile Include="Dto\Catalogs\StatusOnBoardDto.cs" />
+    <Compile Include="Dto\Catalogs\ToleranceTypeDto.cs" />
+    <Compile Include="Dto\Enums\NationalReconcileTypeProcessDto.cs" />
+    <Compile Include="Dto\Itineraries\ManifestArrivalDto.cs" />
+    <Compile Include="Dto\Itineraries\ItineraryMailDto.cs" />
+    <Compile Include="Dto\Enums\NationalTypeProcessDto.cs" />
+    <Compile Include="Dto\Enums\TypeProcessDto.cs" />
+    <Compile Include="Dto\Finances\AirportServiceContractDto.cs" />
+    <Compile Include="Dto\Finances\NationalFuelContractConceptDto.cs" />
+    <Compile Include="Dto\Finances\NationalFuelContractDto.cs" />
+    <Compile Include="Dto\Finances\CostCenterDto.cs" />
+    <Compile Include="Dto\Finances\AccountingAccountDto.cs" />
+    <Compile Include="Dto\Finances\ExchangeRatesDto.cs" />
+    <Compile Include="Dto\Finances\CurrencyDto.cs" />
+    <Compile Include="Dto\Finances\InternationalFuelContractConceptDto.cs" />
+    <Compile Include="Dto\Finances\InternationalFuelContractDto.cs" />
+    <Compile Include="Dto\Finances\InternationalFuelRateDto.cs" />
+    <Compile Include="Dto\Finances\InternationalFuelRateFileDto.cs" />
+    <Compile Include="Dto\Finances\LiabilityAccountDto.cs" />
+    <Compile Include="Dto\Finances\NationalFuelRateDto.cs" />
+    <Compile Include="Dto\Finances\ProviderDto.cs" />
+    <Compile Include="Dto\Finances\TaxDto.cs" />
+    <Compile Include="Dto\Airports\ServiceDto.cs" />
+    <Compile Include="Dto\Generic\MailModelDto.cs" />
+    <Compile Include="Dto\Itineraries\GendecArrivalDto.cs" />
+    <Compile Include="Dto\Itineraries\GendecDepartureDto.cs" />
+    <Compile Include="Dto\Itineraries\ItineraryDto.cs" />
+    <Compile Include="Dto\Itineraries\ItineraryFileDto.cs" />
+    <Compile Include="Dto\Itineraries\ItineraryLogDto.cs" />
+    <Compile Include="Dto\Itineraries\ItinerarySearchDto.cs" />
+    <Compile Include="Dto\Itineraries\ItineraryUploadDto.cs" />
+    <Compile Include="Dto\Itineraries\ManifestDepartureDto.cs" />
+    <Compile Include="Dto\Paged\PagedDto.cs" />
+    <Compile Include="Dto\Process\CalculationStatusDto.cs" />
+    <Compile Include="Dto\Process\ConfirmationStatusDto.cs" />
+    <Compile Include="Dto\Process\DocumentStatusDto.cs" />
+    <Compile Include="Dto\Process\JetFuelLogErrorDto.cs" />
+    <Compile Include="Dto\Process\JetFuelPoliciesHistoryDto.cs" />
+    <Compile Include="Dto\Process\NationalJetFuelInvoiceControlDto.cs" />
+    <Compile Include="Dto\Process\NationalJetFuelInvoiceDetailDto.cs" />
+    <Compile Include="Dto\Process\NationalJetFuelInvoicePolicyDto.cs" />
+    <Compile Include="Dto\Process\NationalJetFuelPolicyControlDto.cs" />
+    <Compile Include="Dto\Process\JetFuelPolicyControlDto.cs" />
+    <Compile Include="Dto\Process\NationalJetFuelPolicyDto.cs" />
+    <Compile Include="Dto\Process\JetFuelPolicyDto.cs" />
+    <Compile Include="Dto\Process\JetFuelProcessDto.cs" />
+    <Compile Include="Dto\Process\JetFuelProvisionDto.cs" />
+    <Compile Include="Dto\Process\JetFuelCalculationResultParametersDto.cs" />
+    <Compile Include="Dto\Process\NationalJetFuelCostDto.cs" />
+    <Compile Include="Dto\Process\NationalJetFuelLogErrorDto.cs" />
+    <Compile Include="Dto\Process\NationalJetFuelPolicyHistoryDto.cs" />
+    <Compile Include="Dto\Process\NationalJetFuelProcessDto.cs" />
+    <Compile Include="Dto\Process\RemittanceSearchDto.cs" />
+    <Compile Include="Dto\Process\RemittanceStatusDto.cs" />
+    <Compile Include="Dto\Process\StatusProcessDto.cs" />
+    <Compile Include="Dto\Security\DepartmentDto.cs" />
+    <Compile Include="Dto\Security\MenuDto.cs" />
+    <Compile Include="Dto\Security\ModuleDto.cs" />
+    <Compile Include="Dto\Security\ModulePermissionDto.cs" />
+    <Compile Include="Dto\Security\PageReportDto.cs" />
+    <Compile Include="Dto\Security\PermissionDto.cs" />
+    <Compile Include="Dto\Security\PermissionMarkedByModuleDto.cs" />
+    <Compile Include="Dto\Security\ProfileDto.cs" />
+    <Compile Include="Dto\Security\ProfileRoleDto.cs" />
+    <Compile Include="Dto\Security\RoleDto.cs" />
+    <Compile Include="Dto\Security\RolesMarkedByProfileDto.cs" />
+    <Compile Include="Dto\Security\UserAirportDto.cs" />
+    <Compile Include="Dto\Security\UserDto.cs" />
+    <Compile Include="Dto\Security\UserProfileRoleDto.cs" />
+    <Compile Include="ExceptionBusiness\BusinessException.cs" />
+    <Compile Include="Finance\AccountingAccountBusiness.cs" />
+    <Compile Include="Finance\AirportServiceContractBusiness.cs" />
+    <Compile Include="Finance\INationalFuelRateBusiness.cs" />
+    <Compile Include="Finance\IUploadNationalFuelContractBusiness.cs" />
+    <Compile Include="Finance\NationalFuelContractConceptBusiness.cs" />
+    <Compile Include="Finance\INationalFuelContractConceptBusiness.cs" />
+    <Compile Include="Finance\NationalFuelContractBusiness.cs" />
+    <Compile Include="Finance\INationalFuelContractBusiness.cs" />
+    <Compile Include="Finance\CostCenterBusiness.cs" />
+    <Compile Include="Finance\CurrencyBusiness.cs" />
+    <Compile Include="Finance\ExchangeRatesBusiness.cs" />
+    <Compile Include="Finance\IAccountingAccountBusiness.cs" />
+    <Compile Include="Finance\IAirportServiceContractBusiness.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Finance\ICostCenterBusiness.cs" />
+    <Compile Include="Airport\IAirplaneTypeBusiness.cs" />
+    <Compile Include="Finance\ICurrencyBusiness.cs" />
+    <Compile Include="Finance\IExchangeRatesBusiness.cs" />
+    <Compile Include="Finance\IInternationalFuelContractBusiness.cs" />
+    <Compile Include="Finance\IInternationalFuelRateBusiness.cs" />
+    <Compile Include="Finance\ILiabilityAccountBusiness.cs" />
+    <Compile Include="Finance\IMassiveUploadBusiness.cs" />
+    <Compile Include="Finance\InternationalFuelContractConceptBusiness.cs" />
+    <Compile Include="Finance\InternationalFuelContractBusiness.cs" />
+    <Compile Include="Finance\InternationalFuelRateBusiness.cs" />
+    <Compile Include="Finance\IProviderBusiness.cs" />
+    <Compile Include="Finance\ITaxBusiness.cs" />
+    <Compile Include="Finance\NationalFuelRateBusiness.cs" />
+    <Compile Include="Finance\UploadNationalFuelContractBusiness.cs" />
+    <Compile Include="Itineraries\ManifestArrivalBusiness.cs" />
+    <Compile Include="Itineraries\IManifestArrivalBusiness.cs" />
+    <Compile Include="Itineraries\ITimelineBusiness.cs" />
+    <Compile Include="Itineraries\IManifestDepartureBusiness.cs" />
+    <Compile Include="Itineraries\TimelineBusiness.cs" />
+    <Compile Include="Itineraries\ManifestDepartureBusiness.cs" />
+    <Compile Include="MapConfiguration\ProcessMaps.cs" />
+    <Compile Include="Process\IJetFuelLogErrorBusiness.cs" />
+    <Compile Include="Process\INationalJetFuelInvoiceControlBusiness.cs" />
+    <Compile Include="Process\INationalJetFuelInvoiceDetailBusiness.cs" />
+    <Compile Include="Process\INationalJetFuelInvoicePolicyBusiness.cs" />
+    <Compile Include="Process\INationalJetFuelPolicyBusiness.cs" />
+    <Compile Include="Process\IJetFuelPolicyBusiness.cs" />
+    <Compile Include="Process\INationalJetFuelPolicyControlBusiness.cs" />
+    <Compile Include="Process\IJetFuelPolicyControlBusiness.cs" />
+    <Compile Include="Process\INationalJetFuelLogErrorBusiness.cs" />
+    <Compile Include="Process\INationalJetFuelProcessBusiness.cs" />
+    <Compile Include="Process\IJetFuelProcessBusiness.cs" />
+    <Compile Include="Process\IJetFuelProvisionBusiness.cs" />
+    <Compile Include="Process\JetFuelLogErrorBusiness.cs" />
+    <Compile Include="Process\NationalJetFuelInvoiceControlBusiness.cs" />
+    <Compile Include="Process\NationalJetFuelInvoiceDetailBusiness.cs" />
+    <Compile Include="Process\NationalJetFuelInvoicePolicyBusiness.cs" />
+    <Compile Include="Process\NationalJetFuelPolicyBusiness.cs" />
+    <Compile Include="Process\JetFuelPolicyBusiness.cs" />
+    <Compile Include="Process\NationalJetFuelPolicyControlBusiness.cs" />
+    <Compile Include="Process\JetFuelPolicyControlBusiness.cs" />
+    <Compile Include="Process\NationalJetFuelLogErrorBusiness.cs" />
+    <Compile Include="Process\NationalJetFuelProcessBusiness.cs" />
+    <Compile Include="Process\JetFuelProcessBusiness.cs" />
+    <Compile Include="Process\JetFuelProvisionBusiness.cs" />
+    <Compile Include="Security\IMenuBusiness.cs" />
+    <Compile Include="Security\IModuleBusiness.cs" />
+    <Compile Include="Security\IModulePermissionBusiness.cs" />
+    <Compile Include="Security\IPageReportBusiness.cs" />
+    <Compile Include="Itineraries\GendecArrivalBusiness.cs" />
+    <Compile Include="Itineraries\IGendecArrivalBusiness.cs" />
+    <Compile Include="Security\IPermissionBusiness.cs" />
+    <Compile Include="Security\IProfileBusiness.cs" />
+    <Compile Include="Security\IProfileRoleBusiness.cs" />
+    <Compile Include="Security\IRoleBusiness.cs" />
+    <Compile Include="Security\IUserBusiness.cs" />
+    <Compile Include="Finance\LiabilityAccountBusiness.cs" />
+    <Compile Include="Finance\MassiveUploadBusiness.cs" />
+    <Compile Include="Finance\ProviderBusiness.cs" />
+    <Compile Include="Finance\TaxBusiness.cs" />
+    <Compile Include="Configuration\AutofacModuleConfig.cs" />
+    <Compile Include="Finance\IInternationalFuelContractConceptBusiness.cs" />
+    <Compile Include="Security\MenuBusiness.cs" />
+    <Compile Include="Security\ModuleBusiness.cs" />
+    <Compile Include="Security\ModulePermissionBusiness.cs" />
+    <Compile Include="Security\PageReportBusiness.cs" />
+    <Compile Include="Security\PermissionBusiness.cs" />
+    <Compile Include="Security\ProfileBusiness.cs" />
+    <Compile Include="Security\ProfileRoleBusiness.cs" />
+    <Compile Include="Security\RoleBusiness.cs" />
+    <Compile Include="Security\UserBusiness.cs" />
+    <Compile Include="Itineraries\GendecDepartureBusiness.cs" />
+    <Compile Include="Itineraries\IGendecDepartureBusiness.cs" />
+    <Compile Include="Itineraries\IItineraryBusiness.cs" />
+    <Compile Include="Itineraries\ItineraryBusiness.cs" />
+    <Compile Include="MapConfiguration\AirportMaps.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MapConfiguration\CatalogMaps.cs" />
+    <Compile Include="MapConfiguration\FinanceMaps.cs" />
+    <Compile Include="MapConfiguration\ItinerariesMaps.cs" />
+    <Compile Include="MapConfiguration\SecurityMaps.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Messages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Notifications\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\ComboEnum.cs" />
+    <Compile Include="Utils\StatusProcessJetFuel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VOI.SISAC.Dal\VOI.SISAC.Dal.csproj">
+      <Project>{dafceedf-df9e-424a-9b69-858eb36ca0f7}</Project>
+      <Name>VOI.SISAC.Dal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VOI.SISAC.Entities\VOI.SISAC.Entities.csproj">
+      <Project>{b5f8b0b8-963d-4d6b-bcb8-04f678f7eb2d}</Project>
+      <Name>VOI.SISAC.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Service References\Notifications\Service1.wsdl" />
+    <None Include="Service References\Notifications\ServiceNotifications.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Notifications\ServiceNotifications1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Notifications\ServiceNotifications2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Notifications\VOI.SISAC.Business.Notifications.GenericResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="VOI.SISAC.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\Notifications\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Messages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Notifications\ServiceNotifications.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Notifications\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Notifications\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Notifications\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

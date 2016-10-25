@@ -1,0 +1,2404 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccountingAccountName" xml:space="preserve">
+    <value>Accounting Account Name</value>
+  </data>
+  <data name="AccountingAccountNameRequired" xml:space="preserve">
+    <value>Accounting Account Name is required</value>
+  </data>
+  <data name="AccountingAccountNumber" xml:space="preserve">
+    <value>Accounting Account Number</value>
+  </data>
+  <data name="AccountingAccountNumberMaxMinLong" xml:space="preserve">
+    <value>Accounting Account Number must be between 6 and 8</value>
+  </data>
+  <data name="AccountingAccountNumberRequired" xml:space="preserve">
+    <value>Accounting Account Number is required</value>
+  </data>
+  <data name="AccountingAccountTitle" xml:space="preserve">
+    <value>Accounting Account Catalog</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="AirlineCode" xml:space="preserve">
+    <value>Airline Code</value>
+  </data>
+  <data name="AirlineName" xml:space="preserve">
+    <value>Airline Name</value>
+  </data>
+  <data name="AirlineShortName" xml:space="preserve">
+    <value>Airline Short Name</value>
+  </data>
+  <data name="AirlineTitle" xml:space="preserve">
+    <value>Airline Catalog</value>
+  </data>
+  <data name="AirplaneModel" xml:space="preserve">
+    <value>Airplane Model</value>
+  </data>
+  <data name="AirplaneTitle" xml:space="preserve">
+    <value>Airplane Catalog</value>
+  </data>
+  <data name="AirplaneTypeTitle" xml:space="preserve">
+    <value>Airplane Type Catalog</value>
+  </data>
+  <data name="AirportGroupCode" xml:space="preserve">
+    <value>Airport Group Code</value>
+  </data>
+  <data name="AirportGroupName" xml:space="preserve">
+    <value>Airport Group Name</value>
+  </data>
+  <data name="AirportTitle" xml:space="preserve">
+    <value>Airports Catalog</value>
+  </data>
+  <data name="ArrivalAirport" xml:space="preserve">
+    <value>Arrival airport</value>
+  </data>
+  <data name="ArrivalAirportRequired" xml:space="preserve">
+    <value>Arrival airport is required</value>
+  </data>
+  <data name="ArrivalDate" xml:space="preserve">
+    <value>Arrival date</value>
+  </data>
+  <data name="ArrivalDateRequired" xml:space="preserve">
+    <value>Arrival date is required</value>
+  </data>
+  <data name="ArrivalMinutesMax" xml:space="preserve">
+    <value>Arrival Minutes Max</value>
+  </data>
+  <data name="ArrivalMinutesMin" xml:space="preserve">
+    <value>Arrival Minutes Min</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="CCName" xml:space="preserve">
+    <value>Cost Center Name</value>
+  </data>
+  <data name="CCNumber" xml:space="preserve">
+    <value>Cost Center Number</value>
+  </data>
+  <data name="Citizenship" xml:space="preserve">
+    <value>Citizenship</value>
+  </data>
+  <data name="ClosingTime" xml:space="preserve">
+    <value>Closing</value>
+  </data>
+  <data name="CompartmentTypeCode" xml:space="preserve">
+    <value>Compartment Type</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Are you sure you want to delete this record?</value>
+  </data>
+  <data name="CostCenterTitle" xml:space="preserve">
+    <value>Cost Center Catalog</value>
+  </data>
+  <data name="CountryCode" xml:space="preserve">
+    <value>Country Code</value>
+  </data>
+  <data name="CountryCodeShort" xml:space="preserve">
+    <value>Country Code Short</value>
+  </data>
+  <data name="CountryName" xml:space="preserve">
+    <value>Country Name</value>
+  </data>
+  <data name="CountryOfBird" xml:space="preserve">
+    <value>Country Of Bird</value>
+  </data>
+  <data name="CountryOfResidence" xml:space="preserve">
+    <value>Country Of Residence</value>
+  </data>
+  <data name="CountryTitle" xml:space="preserve">
+    <value>Country Catalog</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="CreatedDate" xml:space="preserve">
+    <value>Created Date</value>
+  </data>
+  <data name="CrewCapacity" xml:space="preserve">
+    <value>Crew Capacity</value>
+  </data>
+  <data name="CrewTitle" xml:space="preserve">
+    <value>Crew Catalog</value>
+  </data>
+  <data name="CrewTypeID" xml:space="preserve">
+    <value>Crew Type</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Currency Catalog</value>
+  </data>
+  <data name="CurrencyCode" xml:space="preserve">
+    <value>Currency Code</value>
+  </data>
+  <data name="CurrencyCodeMaxLong" xml:space="preserve">
+    <value>Must be less than 4 characters</value>
+  </data>
+  <data name="CurrencyName" xml:space="preserve">
+    <value>Currency Name</value>
+  </data>
+  <data name="CurrencyNameRequired" xml:space="preserve">
+    <value>Currency Name is required</value>
+  </data>
+  <data name="DateOfBird" xml:space="preserve">
+    <value>Date Of Bird</value>
+  </data>
+  <data name="DelayCode" xml:space="preserve">
+    <value>Delay Code</value>
+  </data>
+  <data name="DelayName" xml:space="preserve">
+    <value>Delay Name</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DepartureAirport" xml:space="preserve">
+    <value>Departure airport</value>
+  </data>
+  <data name="DepartureAirportRequired" xml:space="preserve">
+    <value>Departure airport is required</value>
+  </data>
+  <data name="DepartureDate" xml:space="preserve">
+    <value>Departure Date</value>
+  </data>
+  <data name="DepartureDateRequired" xml:space="preserve">
+    <value>Departure date is required</value>
+  </data>
+  <data name="DepartureMinutesMax" xml:space="preserve">
+    <value>Departure Minutes Max</value>
+  </data>
+  <data name="DepartureMinutesMin" xml:space="preserve">
+    <value>Departure Minutes Min</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="DrinkingWaterTitle" xml:space="preserve">
+    <value>Drinking Water Catalog</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="EmployeeNumber" xml:space="preserve">
+    <value>Employee Number</value>
+  </data>
+  <data name="EmptyOperatingWeight" xml:space="preserve">
+    <value>Operating Empty Weight (Kg)</value>
+  </data>
+  <data name="EquipmentNumber" xml:space="preserve">
+    <value>A/C Registration</value>
+  </data>
+  <data name="FilmingMaximumWeight" xml:space="preserve">
+    <value>Max. Filming Weight (Kg)</value>
+    <comment>Same as Maximum_Taxi_Weight</comment>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="FlightNumber" xml:space="preserve">
+    <value>Flight Number</value>
+  </data>
+  <data name="FlightNumberMaxLong" xml:space="preserve">
+    <value>Flight number should be less than 5 characters</value>
+  </data>
+  <data name="FuelConceptID" xml:space="preserve">
+    <value>Fuel Concept ID</value>
+  </data>
+  <data name="FuelConceptName" xml:space="preserve">
+    <value>Fuel Concept Name</value>
+  </data>
+  <data name="FuelConceptNameRequired" xml:space="preserve">
+    <value>Fuel Concept Name Required</value>
+  </data>
+  <data name="FuelConceptTitle" xml:space="preserve">
+    <value>Fuel Concept Catalog</value>
+  </data>
+  <data name="FuelInGallon" xml:space="preserve">
+    <value>Fuel Capacity (Gals)</value>
+  </data>
+  <data name="FuelInKg" xml:space="preserve">
+    <value>Fuel Catacity (Kg)</value>
+  </data>
+  <data name="FuelInLiters" xml:space="preserve">
+    <value>Fuel Capacity (Lts)</value>
+  </data>
+  <data name="FunctionalAreaDescription" xml:space="preserve">
+    <value>Functional Area Description</value>
+  </data>
+  <data name="FunctionalAreaDescriptionRequired" xml:space="preserve">
+    <value>Functional Area Description Required</value>
+  </data>
+  <data name="FunctionalAreaID" xml:space="preserve">
+    <value>Functional Area ID</value>
+  </data>
+  <data name="FunctionalAreaID1" xml:space="preserve">
+    <value>Functional Area ID</value>
+  </data>
+  <data name="FunctionalAreaName" xml:space="preserve">
+    <value>Functional Area Name</value>
+  </data>
+  <data name="FunctionalAreaNameRequired" xml:space="preserve">
+    <value>Functional Area Name is required</value>
+  </data>
+  <data name="FunctionalAreaTitle" xml:space="preserve">
+    <value>Functional  Area Catalog</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="GpuCode" xml:space="preserve">
+    <value>Unit Number</value>
+  </data>
+  <data name="GpuName" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="GpuObservationCode" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="GpuObservationCodeName" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="GroupWeight" xml:space="preserve">
+    <value>Airport Groups Weight (Kg)</value>
+  </data>
+  <data name="HomeAddress" xml:space="preserve">
+    <value>Home Address</value>
+  </data>
+  <data name="HomeAddressCity" xml:space="preserve">
+    <value>Home Address City</value>
+  </data>
+  <data name="HomeAddressCountry" xml:space="preserve">
+    <value>Home Address Country</value>
+  </data>
+  <data name="HomeAddressState" xml:space="preserve">
+    <value>Home Address State</value>
+  </data>
+  <data name="HomeAddressZipCode" xml:space="preserve">
+    <value>Home Address Zip Code</value>
+  </data>
+  <data name="InvalidFormat" xml:space="preserve">
+    <value>Invalid Format</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="LengthMax10" xml:space="preserve">
+    <value>Length maximum must be 10 characters</value>
+  </data>
+  <data name="LengthMax100" xml:space="preserve">
+    <value>Length maximum must be 100 characters</value>
+  </data>
+  <data name="LengthMax12" xml:space="preserve">
+    <value>Length maximum must be 12 characters</value>
+  </data>
+  <data name="LengthMax2" xml:space="preserve">
+    <value>Length maximum must be 2characters</value>
+  </data>
+  <data name="LengthMax20" xml:space="preserve">
+    <value>Length maximum must be 20 characters</value>
+  </data>
+  <data name="LengthMax250" xml:space="preserve">
+    <value>Length maximum must be 250 characters</value>
+  </data>
+  <data name="LengthMax255" xml:space="preserve">
+    <value>Length maximum must be 255 characters</value>
+  </data>
+  <data name="LengthMax30" xml:space="preserve">
+    <value>Length maximum must be 30 characters</value>
+  </data>
+  <data name="LengthMax4" xml:space="preserve">
+    <value>Length maximum must be 4 characters</value>
+  </data>
+  <data name="LengthMax40" xml:space="preserve">
+    <value>Length maximum must be 40 characters</value>
+  </data>
+  <data name="LengthMax5" xml:space="preserve">
+    <value>Length maximum must be 5 characters</value>
+  </data>
+  <data name="LengthMax50" xml:space="preserve">
+    <value>Length maximum must be 50 characters</value>
+  </data>
+  <data name="LengthMax60" xml:space="preserve">
+    <value>Length maximum must be 60 characters</value>
+  </data>
+  <data name="LengthMax8" xml:space="preserve">
+    <value>Length maximum must be 8 characters</value>
+  </data>
+  <data name="LengthMaxHundred" xml:space="preserve">
+    <value>Length maximum must be 100 characters</value>
+  </data>
+  <data name="LengthMin2" xml:space="preserve">
+    <value>Length must be 2 characters</value>
+  </data>
+  <data name="LengthMin3" xml:space="preserve">
+    <value>Length must be 3 characters</value>
+  </data>
+  <data name="LengthMinThree" xml:space="preserve">
+    <value>Length must be 3 characters</value>
+  </data>
+  <data name="LengthMinTwo" xml:space="preserve">
+    <value>Length must be 2 characters</value>
+  </data>
+  <data name="LiabilityAccountName" xml:space="preserve">
+    <value>Liability Account Name</value>
+  </data>
+  <data name="LiabilityAccountNameRequired" xml:space="preserve">
+    <value>Liability Account Name is required</value>
+  </data>
+  <data name="LiabilityAccountNumber" xml:space="preserve">
+    <value>Liability Account Number</value>
+  </data>
+  <data name="LiabilityAccountNumberMaxMinLong" xml:space="preserve">
+    <value> LiabilityAccountNumber should be between 6 and 8</value>
+  </data>
+  <data name="LiabilityAccountNumberRequired" xml:space="preserve">
+    <value>Liability Account Number is required</value>
+  </data>
+  <data name="LiabilityAccountTitle" xml:space="preserve">
+    <value>Liability Account Catalog</value>
+  </data>
+  <data name="LicenceCountryIssuance" xml:space="preserve">
+    <value>Licence Country Issuance</value>
+  </data>
+  <data name="LicenceNumber" xml:space="preserve">
+    <value>Licence Number</value>
+  </data>
+  <data name="LicenceNumberExpiration" xml:space="preserve">
+    <value>Licence Number Expiration</value>
+  </data>
+  <data name="Magnitude" xml:space="preserve">
+    <value>Wingspan (Mts)</value>
+    <comment>Same as Wingspan</comment>
+  </data>
+  <data name="ManifestTimeConfigID" xml:space="preserve">
+    <value>Manifest ID</value>
+  </data>
+  <data name="MaximumLandingWeight" xml:space="preserve">
+    <value>Max. Landing Weight (Kg)</value>
+  </data>
+  <data name="MaximumTakeoffWeight" xml:space="preserve">
+    <value>Max. Takeoff Weight (Kg)</value>
+  </data>
+  <data name="MaximumZeroFuelWeight" xml:space="preserve">
+    <value>Max. Zero Fuel Weight (Kg)</value>
+  </data>
+  <data name="MiddleName" xml:space="preserve">
+    <value>Middle Name</value>
+  </data>
+  <data name="MustBeNumber" xml:space="preserve">
+    <value>This Field mut be a number</value>
+  </data>
+  <data name="NickName" xml:space="preserve">
+    <value>Nick Name</value>
+  </data>
+  <data name="NickNameSabre" xml:space="preserve">
+    <value>Nick Name Sabre</value>
+  </data>
+  <data name="OpeningTime" xml:space="preserve">
+    <value>Opening</value>
+  </data>
+  <data name="PassengerCapacity" xml:space="preserve">
+    <value>Pax Capacity</value>
+  </data>
+  <data name="PassportCountryIssuance" xml:space="preserve">
+    <value>Passport Country Issuance</value>
+  </data>
+  <data name="PassportExpiration" xml:space="preserve">
+    <value>Passport Expiration</value>
+  </data>
+  <data name="PassportNumber" xml:space="preserve">
+    <value>Passport Number</value>
+  </data>
+  <data name="PlaceBirthCity" xml:space="preserve">
+    <value>Place Birth City</value>
+  </data>
+  <data name="ProviderName" xml:space="preserve">
+    <value>Provider Name</value>
+  </data>
+  <data name="ProviderNameMaxLong" xml:space="preserve">
+    <value>Provider name should be less than 150 characters</value>
+  </data>
+  <data name="ProviderNumber" xml:space="preserve">
+    <value>Provider Number</value>
+  </data>
+  <data name="ProviderNumberMaxLong" xml:space="preserve">
+    <value>Provider number should be less than 8 characters</value>
+  </data>
+  <data name="ProviderTitle" xml:space="preserve">
+    <value>Provider Catalog</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>Quantity (Lts)</value>
+  </data>
+  <data name="RequiredField" xml:space="preserve">
+    <value>Required Field</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SelectItem" xml:space="preserve">
+    <value>Select...</value>
+  </data>
+  <data name="ServiceCode" xml:space="preserve">
+    <value>Service Code</value>
+  </data>
+  <data name="ServiceCodeMaxLong" xml:space="preserve">
+    <value>Service code length maximum must be 12 characters</value>
+  </data>
+  <data name="ServiceName" xml:space="preserve">
+    <value>Service Name</value>
+  </data>
+  <data name="ServiceNameMaxLong" xml:space="preserve">
+    <value>Service name should be less than 150 characters</value>
+  </data>
+  <data name="ServiceTitle" xml:space="preserve">
+    <value>Service Catalog</value>
+  </data>
+  <data name="ShortNameProvider" xml:space="preserve">
+    <value>Short name provider</value>
+  </data>
+  <data name="ShortNameProviderMaxLong" xml:space="preserve">
+    <value>Short name provider should be less than 15 characters</value>
+  </data>
+  <data name="State" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="StationCode" xml:space="preserve">
+    <value>Station Code</value>
+  </data>
+  <data name="StationName" xml:space="preserve">
+    <value>Station Name</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="StatusOnBoard" xml:space="preserve">
+    <value>Status On Board</value>
+  </data>
+  <data name="SuccessCreate" xml:space="preserve">
+    <value>The reccord has been created successfully</value>
+  </data>
+  <data name="SuccessDelete" xml:space="preserve">
+    <value>The reccord has been deleted successfully</value>
+  </data>
+  <data name="SuccessEdit" xml:space="preserve">
+    <value>The reccord has been edited successfully</value>
+  </data>
+  <data name="TakeoffWeightInTonnes" xml:space="preserve">
+    <value>Takeoff Weight (Tons)</value>
+  </data>
+  <data name="TaxCode" xml:space="preserve">
+    <value>Tax code</value>
+  </data>
+  <data name="TaxCodeMaxLong" xml:space="preserve">
+    <value>Tax code length maximum must be 12 characters</value>
+  </data>
+  <data name="TaxName" xml:space="preserve">
+    <value>Tax name</value>
+  </data>
+  <data name="TaxNameMaxLong" xml:space="preserve">
+    <value>Tax name should be less than 50 caracters</value>
+  </data>
+  <data name="TaxTitle" xml:space="preserve">
+    <value>Tax Catalog</value>
+  </data>
+  <data name="UnderControl" xml:space="preserve">
+    <value>Under Control</value>
+  </data>
+  <data name="VisaExpirationDate" xml:space="preserve">
+    <value>Visa Expiration Date</value>
+  </data>
+  <data name="WeightInPound" xml:space="preserve">
+    <value>Airplane Weight (Lb)</value>
+  </data>
+  <data name="WeightInTonnes" xml:space="preserve">
+    <value>Airplane Weight (Tons)</value>
+  </data>
+  <data name="AirportGroupTitle" xml:space="preserve">
+    <value>Airport Group Catalog</value>
+  </data>
+  <data name="DelayTitle" xml:space="preserve">
+    <value>Delay Catalog</value>
+  </data>
+  <data name="GpuObservationTitle" xml:space="preserve">
+    <value>GPU Observation Catalog</value>
+  </data>
+  <data name="GpuTitle" xml:space="preserve">
+    <value>GPU Catalog</value>
+  </data>
+  <data name="IncludeAirportGroup" xml:space="preserve">
+    <value>Include Airport Group</value>
+  </data>
+  <data name="ManifestTimeConfigTitle" xml:space="preserve">
+    <value>Manifest Time Configuration Catalog</value>
+  </data>
+  <data name="FlightScheduleTitle" xml:space="preserve">
+    <value>Flights Schedule</value>
+  </data>
+  <data name="DateTimeFormat" xml:space="preserve">
+    <value>MM/dd/yyyy</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="DateTimeValidation" xml:space="preserve">
+    <value>Must be a Date</value>
+  </data>
+  <data name="LengthMax1" xml:space="preserve">
+    <value>Length maximum must be 1 character</value>
+  </data>
+  <data name="LengthMax3" xml:space="preserve">
+    <value>Length maximum must be 3 character</value>
+  </data>
+  <data name="LengthMax200" xml:space="preserve">
+    <value>Length maximum must be 200 characters</value>
+  </data>
+  <data name="LengthMin8" xml:space="preserve">
+    <value>Length must be 8 characters</value>
+  </data>
+  <data name="Capture" xml:space="preserve">
+    <value>Capture</value>
+  </data>
+  <data name="CheckAndApprove" xml:space="preserve">
+    <value>Check and Approve</value>
+  </data>
+  <data name="Define" xml:space="preserve">
+    <value>Define</value>
+  </data>
+  <data name="Index" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Learn" xml:space="preserve">
+    <value>Learn</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="Manage" xml:space="preserve">
+    <value>Manage</value>
+  </data>
+  <data name="Process" xml:space="preserve">
+    <value>Process</value>
+  </data>
+  <data name="SISAC" xml:space="preserve">
+    <value>SISAC</value>
+  </data>
+  <data name="SISACFooter" xml:space="preserve">
+    <value>SISAC |  Volaris and its logo are trademarks of Volaris</value>
+  </data>
+  <data name="SISACFull" xml:space="preserve">
+    <value>Integrated System of Airport Services and Fuel</value>
+  </data>
+  <data name="SISACHeadTitle" xml:space="preserve">
+    <value>SISAC - Integrated System of Airport Services and Fuel</value>
+  </data>
+  <data name="ChargeFactorTypeID" xml:space="preserve">
+    <value>Charge Factor</value>
+  </data>
+  <data name="EffectiveDate" xml:space="preserve">
+    <value>Effective Date</value>
+  </data>
+  <data name="EndDateContract" xml:space="preserve">
+    <value>End Date Contract</value>
+  </data>
+  <data name="FuelConceptTypeCode" xml:space="preserve">
+    <value>Category Fuel Concept </value>
+  </data>
+  <data name="OperationTypeID" xml:space="preserve">
+    <value>Operation applied</value>
+  </data>
+  <data name="ProviderNumberPrimary" xml:space="preserve">
+    <value>Provider Number Primary</value>
+  </data>
+  <data name="Rate" xml:space="preserve">
+    <value>Rate</value>
+  </data>
+  <data name="RateEndDate" xml:space="preserve">
+    <value>Rate End Date</value>
+  </data>
+  <data name="RateStartDate" xml:space="preserve">
+    <value>Rate Start Date</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="InternationalFuelContractTitle" xml:space="preserve">
+    <value>International Fuel Contract Catalog</value>
+  </data>
+  <data name="AccountingConfiguration" xml:space="preserve">
+    <value>Accounting Configuration</value>
+  </data>
+  <data name="AirplanetWeightFlag" xml:space="preserve">
+    <value>Applies Airplane's Weight</value>
+  </data>
+  <data name="AirplaneWeightCode" xml:space="preserve">
+    <value>Airplane Weight Code</value>
+  </data>
+  <data name="AirplaneWeightMultiplier" xml:space="preserve">
+    <value>Airplane Weight Multiplier</value>
+  </data>
+  <data name="AirplaneWeightUnit" xml:space="preserve">
+    <value>Airplane Weight Unit</value>
+  </data>
+  <data name="AirportServiceContractName" xml:space="preserve">
+    <value>Airport Service Contract</value>
+  </data>
+  <data name="AplicaPorcentaje_Valor" xml:space="preserve">
+    <value>%</value>
+  </data>
+  <data name="CalculationTypeConfiguration" xml:space="preserve">
+    <value>Calculation Type Configuration</value>
+  </data>
+  <data name="CalculationTypeId" xml:space="preserve">
+    <value>Calculation Type Id</value>
+  </data>
+  <data name="ContractDefinition" xml:space="preserve">
+    <value>Contract Definition</value>
+  </data>
+  <data name="MultiRateFlag" xml:space="preserve">
+    <value>Applies Multiple Rate</value>
+  </data>
+  <data name="RateFeeConfiguration" xml:space="preserve">
+    <value>Rate Fee Configuration</value>
+  </data>
+  <data name="RateParamsConfiguration" xml:space="preserve">
+    <value>Rate Params</value>
+  </data>
+  <data name="ServiceConfiguration" xml:space="preserve">
+    <value>Service Configuration</value>
+  </data>
+  <data name="ServiceRecordFlag" xml:space="preserve">
+    <value>Capture Service is Required</value>
+  </data>
+  <data name="ServiceTypeCode" xml:space="preserve">
+    <value>Service Type</value>
+  </data>
+  <data name="ServiceContractCatalogTitle" xml:space="preserve">
+    <value>Service Contract Catalog</value>
+  </data>
+  <data name="ChargeFactorTypeName" xml:space="preserve">
+    <value>Charge Factor Type Name</value>
+  </data>
+  <data name="AddFuelConcept" xml:space="preserve">
+    <value>Add Fuel Concept</value>
+  </data>
+  <data name="FormatDate" xml:space="preserve">
+    <value>MM/dd/yyyy</value>
+  </data>
+  <data name="AirportFeeCode" xml:space="preserve">
+    <value>Airport Fee</value>
+  </data>
+  <data name="FederalTaxCode" xml:space="preserve">
+    <value>Federal Tax</value>
+  </data>
+  <data name="LocalTaxCode" xml:space="preserve">
+    <value>Local/City Tax</value>
+  </data>
+  <data name="StateTaxCode" xml:space="preserve">
+    <value>State Tax</value>
+  </data>
+  <data name="AircraftRegistCCFlag" xml:space="preserve">
+    <value>Applies Equipment Number Cost Center</value>
+  </data>
+  <data name="RateTitle" xml:space="preserve">
+    <value>Rate Catalog</value>
+  </data>
+  <data name="FuelConceptTypeName" xml:space="preserve">
+    <value>Concept Category</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="BothOfThem" xml:space="preserve">
+    <value>Both Of Them</value>
+  </data>
+  <data name="Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="NewRate" xml:space="preserve">
+    <value>New Rate</value>
+  </data>
+  <data name="Accept" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="InactivateServiceContractTitle" xml:space="preserve">
+    <value>Select the end date for the contract</value>
+  </data>
+  <data name="RetrieveContractTitle" xml:space="preserve">
+    <value>Retrieve contracts</value>
+  </data>
+  <data name="SuccessInactive" xml:space="preserve">
+    <value>The record has been inactivated successfully</value>
+  </data>
+  <data name="AirplaneWeightName" xml:space="preserve">
+    <value>Airplane Weight Name</value>
+  </data>
+  <data name="AirplaneWeightUnitName" xml:space="preserve">
+    <value>Aircraft Weight Uom</value>
+  </data>
+  <data name="CalculationTypeName" xml:space="preserve">
+    <value>Calculation Type</value>
+  </data>
+  <data name="OperationName" xml:space="preserve">
+    <value>Operation Name</value>
+  </data>
+  <data name="AdvanceSearch" xml:space="preserve">
+    <value>Advance Search</value>
+  </data>
+  <data name="Airline" xml:space="preserve">
+    <value>Airline</value>
+  </data>
+  <data name="Airport" xml:space="preserve">
+    <value>Airport</value>
+  </data>
+  <data name="CostCenter" xml:space="preserve">
+    <value>Cost Center</value>
+  </data>
+  <data name="Provider" xml:space="preserve">
+    <value>Provider</value>
+  </data>
+  <data name="Service" xml:space="preserve">
+    <value>Service</value>
+  </data>
+  <data name="WaterLevelDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="UploadFile" xml:space="preserve">
+    <value>Upload File</value>
+  </data>
+  <data name="GPULocation" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="FileErrors" xml:space="preserve">
+    <value>FileErrors</value>
+  </data>
+  <data name="SuccessfulLoadFile" xml:space="preserve">
+    <value>The file has been added successfuly</value>
+  </data>
+  <data name="LengthMax150" xml:space="preserve">
+    <value>Length maximum must be 150 characters</value>
+  </data>
+  <data name="ChooseFile" xml:space="preserve">
+    <value>Chosse File</value>
+  </data>
+  <data name="EmptyFileError" xml:space="preserve">
+    <value>The File must not be empty.</value>
+  </data>
+  <data name="FormatFileError" xml:space="preserve">
+    <value>The File must be a plain text type.</value>
+  </data>
+  <data name="ErrorReadingFile" xml:space="preserve">
+    <value>Error reading the File.</value>
+  </data>
+  <data name="ErrorValidationFile" xml:space="preserve">
+    <value>Required field or wrong format on row:</value>
+  </data>
+  <data name="SerialNumber" xml:space="preserve">
+    <value>Serial Number</value>
+  </data>
+  <data name="ServiceInfo" xml:space="preserve">
+    <value>If service code contains "-EXT" indicates that its international.</value>
+  </data>
+  <data name="AirportService" xml:space="preserve">
+    <value>Airport Service</value>
+  </data>
+  <data name="ArrivalService" xml:space="preserve">
+    <value>Arrival Service</value>
+  </data>
+  <data name="DeliveryService" xml:space="preserve">
+    <value>Delivery Service</value>
+  </data>
+  <data name="AorUserID" xml:space="preserve">
+    <value>Aor UserID</value>
+  </data>
+  <data name="DensityFactor" xml:space="preserve">
+    <value>Density Factor</value>
+  </data>
+  <data name="FueledQry" xml:space="preserve">
+    <value>Fueled Qry (Kgs)</value>
+  </data>
+  <data name="FueledQtyGals" xml:space="preserve">
+    <value>Fueled Qty (Gals)</value>
+  </data>
+  <data name="FuelingDate" xml:space="preserve">
+    <value>Fueling Date</value>
+  </data>
+  <data name="IntoPlaneProviderNumber" xml:space="preserve">
+    <value>IntoPlane Provider Number</value>
+  </data>
+  <data name="ItineraryKey" xml:space="preserve">
+    <value>Itinerary Key</value>
+  </data>
+  <data name="JetFuelProviderNumber" xml:space="preserve">
+    <value>JetFuel Provider Number</value>
+  </data>
+  <data name="JetFuelTicketID" xml:space="preserve">
+    <value>JetFuelTicket ID</value>
+  </data>
+  <data name="JetFuelTicketTitle" xml:space="preserve">
+    <value>Jet Fuel Ticket</value>
+  </data>
+  <data name="OperationTypeName" xml:space="preserve">
+    <value>Operation Type Name</value>
+  </data>
+  <data name="RemainingQry" xml:space="preserve">
+    <value>Remaining Qry (Kgs)</value>
+  </data>
+  <data name="Remarks" xml:space="preserve">
+    <value>Remarks</value>
+  </data>
+  <data name="RequestedQry" xml:space="preserve">
+    <value>Requested Qry (Kgs)</value>
+  </data>
+  <data name="Sequence" xml:space="preserve">
+    <value>Sequence</value>
+  </data>
+  <data name="SupplierResponsible" xml:space="preserve">
+    <value>Supplier Responsible</value>
+  </data>
+  <data name="TicketNumber" xml:space="preserve">
+    <value>Ticket Number</value>
+  </data>
+  <data name="AirportTaxValue" xml:space="preserve">
+    <value>Airport Tax Rate</value>
+  </data>
+  <data name="FederalTaxValue" xml:space="preserve">
+    <value>Federal Tax Rate</value>
+  </data>
+  <data name="LocalTaxValue" xml:space="preserve">
+    <value>Local Tax Rate</value>
+  </data>
+  <data name="StateTaxValue" xml:space="preserve">
+    <value>State Tax Rate</value>
+  </data>
+  <data name="NombreUsuario" xml:space="preserve">
+    <value>User Name</value>
+  </data>
+  <data name="GendecDepartureTitle" xml:space="preserve">
+    <value>General Declaration Departure</value>
+  </data>
+  <data name="ArrivalStation" xml:space="preserve">
+    <value>Arrival Airport</value>
+  </data>
+  <data name="DepartureStation" xml:space="preserve">
+    <value>Departure Airport</value>
+  </data>
+  <data name="ItineraryDefinition" xml:space="preserve">
+    <value>Itinerary Definition</value>
+  </data>
+  <data name="FuelingTime" xml:space="preserve">
+    <value>Fueling Time</value>
+  </data>
+  <data name="JetFuelTicketArrival" xml:space="preserve">
+    <value>Jet Fuel Ticket Arrival</value>
+  </data>
+  <data name="JetFuelTicketDeparture" xml:space="preserve">
+    <value>Jet Fuel Ticket Departure</value>
+  </data>
+  <data name="Adults" xml:space="preserve">
+    <value>Adults</value>
+  </data>
+  <data name="CabinA" xml:space="preserve">
+    <value>Cabin A</value>
+  </data>
+  <data name="CAbinB" xml:space="preserve">
+    <value>Cabin B</value>
+  </data>
+  <data name="CabinInformation" xml:space="preserve">
+    <value>Cabin Information</value>
+  </data>
+  <data name="Children" xml:space="preserve">
+    <value>Children</value>
+  </data>
+  <data name="ConnectionPassenger" xml:space="preserve">
+    <value>CNX's</value>
+  </data>
+  <data name="DepartureTime" xml:space="preserve">
+    <value>Departure Time</value>
+  </data>
+  <data name="DiplomaticPassenger" xml:space="preserve">
+    <value>Diplomatics</value>
+  </data>
+  <data name="ExtraCrew" xml:space="preserve">
+    <value>Extra Crew</value>
+  </data>
+  <data name="Flight" xml:space="preserve">
+    <value>Flight</value>
+  </data>
+  <data name="LocalPassenger" xml:space="preserve">
+    <value>LCL's</value>
+  </data>
+  <data name="OtherExempt" xml:space="preserve">
+    <value>Other Exempt</value>
+  </data>
+  <data name="PassengerInformation" xml:space="preserve">
+    <value>Passenger Information</value>
+  </data>
+  <data name="Teenage" xml:space="preserve">
+    <value>Teenage</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="TransitoryPassenger" xml:space="preserve">
+    <value>TTO's</value>
+  </data>
+  <data name="Autorization" xml:space="preserve">
+    <value>Autorization</value>
+  </data>
+  <data name="BaggageInformation" xml:space="preserve">
+    <value>Baggage Information</value>
+  </data>
+  <data name="FlightInformation" xml:space="preserve">
+    <value>Flight Information</value>
+  </data>
+  <data name="InternationalTUA" xml:space="preserve">
+    <value>International TUA</value>
+  </data>
+  <data name="Kilogrammes" xml:space="preserve">
+    <value>Kgs</value>
+  </data>
+  <data name="NationalTUA" xml:space="preserve">
+    <value>National TUA</value>
+  </data>
+  <data name="Observations" xml:space="preserve">
+    <value>Observations</value>
+  </data>
+  <data name="QuantityLabel" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="ResponsableASC" xml:space="preserve">
+    <value>Responsable ASC</value>
+  </data>
+  <data name="TotalAdultTeen" xml:space="preserve">
+    <value>Total Adults &amp; Teens</value>
+  </data>
+  <data name="TotalBaggage" xml:space="preserve">
+    <value>Total Baggage</value>
+  </data>
+  <data name="TotalChildren" xml:space="preserve">
+    <value>Total Children</value>
+  </data>
+  <data name="TotalConnectionPassenger" xml:space="preserve">
+    <value>Total CNX's</value>
+  </data>
+  <data name="TotalPassengerTUA" xml:space="preserve">
+    <value>Total Passenger per TUA</value>
+  </data>
+  <data name="TotalTransitoryPassenger" xml:space="preserve">
+    <value>Total TTO's</value>
+  </data>
+  <data name="TotalTUA" xml:space="preserve">
+    <value>Total TUA</value>
+  </data>
+  <data name="ArriveTime" xml:space="preserve">
+    <value>Arrive Time</value>
+  </data>
+  <data name="GendecClosedMessage" xml:space="preserve">
+    <value>The Gendec departure is closed, you could not edit the information.</value>
+  </data>
+  <data name="DepartureDateEnd" xml:space="preserve">
+    <value>Departure Date End</value>
+  </data>
+  <data name="DepartureDateStart" xml:space="preserve">
+    <value>Departure Date Start</value>
+  </data>
+  <data name="Report" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="AirportServicesArrive" xml:space="preserve">
+    <value>Services Arrive</value>
+  </data>
+  <data name="AirportServicesDeparture" xml:space="preserve">
+    <value>Services Departure</value>
+  </data>
+  <data name="GeneralServices" xml:space="preserve">
+    <value>General Services</value>
+  </data>
+  <data name="AirportServiceID" xml:space="preserve">
+    <value>Airport Service ID</value>
+  </data>
+  <data name="ApronPosition" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="DrinkingWaterID" xml:space="preserve">
+    <value>Drinking Water ID</value>
+  </data>
+  <data name="EndDateService" xml:space="preserve">
+    <value>End Date</value>
+  </data>
+  <data name="EndTimeService" xml:space="preserve">
+    <value>End Time</value>
+  </data>
+  <data name="FuelBeforeLanding" xml:space="preserve">
+    <value>Fuel Before Landing (Kg)</value>
+  </data>
+  <data name="FuelLoaded" xml:space="preserve">
+    <value>Fuel Loaded (Kg)</value>
+  </data>
+  <data name="GpuEndMeter" xml:space="preserve">
+    <value>Gpu End Meter</value>
+  </data>
+  <data name="GpuStartMeter" xml:space="preserve">
+    <value>Gpu Start Meter</value>
+  </data>
+  <data name="QtyHours" xml:space="preserve">
+    <value>Qty of Minutes</value>
+  </data>
+  <data name="QtyServices" xml:space="preserve">
+    <value>Qty of Servs.</value>
+  </data>
+  <data name="StartDateService" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="StartTimeService" xml:space="preserve">
+    <value>Start Time</value>
+  </data>
+  <data name="ItineraryCatalog" xml:space="preserve">
+    <value>Itinerary Catalog</value>
+  </data>
+  <data name="GendecArrivalClosedMessage" xml:space="preserve">
+    <value>The Gendec arrival is closed, you could not edit the information.</value>
+  </data>
+  <data name="OpenManifest" xml:space="preserve">
+    <value>Open Manifest</value>
+  </data>
+  <data name="DrinkingWaterPercentageDeparture" xml:space="preserve">
+    <value>% at Departure</value>
+  </data>
+  <data name="ItineraryTitle" xml:space="preserve">
+    <value>Flight Schedule</value>
+  </data>
+  <data name="GendecArrivalTitle" xml:space="preserve">
+    <value>General Declaration Arrival</value>
+  </data>
+  <data name="ArrivalGreaterThanDeparture" xml:space="preserve">
+    <value>Arrival Date must be greater than Departure Date</value>
+  </data>
+  <data name="DepartureAirportDistinctArrivalAirport" xml:space="preserve">
+    <value>Departure Airport and Arrival must be distinct</value>
+  </data>
+  <data name="DeleteRelationships" xml:space="preserve">
+    <value>Are you sure you want to delete this (This will delete all relationships itinerary)?</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>Print</value>
+  </data>
+  <data name="ActualTimeOfArrival" xml:space="preserve">
+    <value>Actual Time Of Arrival</value>
+  </data>
+  <data name="ActualTimeOfDeparture" xml:space="preserve">
+    <value>Actual Time Of Departure</value>
+  </data>
+  <data name="BlockTime" xml:space="preserve">
+    <value>Block Time</value>
+  </data>
+  <data name="GateNumber" xml:space="preserve">
+    <value>Gate Number</value>
+  </data>
+  <data name="ManifestNumber" xml:space="preserve">
+    <value>Manifest Number</value>
+  </data>
+  <data name="SendEmail" xml:space="preserve">
+    <value>El correo se ha enviado al jefe de estación para la reapertura del manifiesto</value>
+  </data>
+  <data name="TotalCrew" xml:space="preserve">
+    <value>Total Crew</value>
+  </data>
+  <data name="TotalPax" xml:space="preserve">
+    <value>Total Passengers</value>
+  </data>
+  <data name="ArrivalDateSmaller" xml:space="preserve">
+    <value>The arrival date of existing item must be smaller than of the departure date of the next item on the itinerary.</value>
+  </data>
+  <data name="DepartureDateGreater" xml:space="preserve">
+    <value>The departure date of existing item must be greater than of the arrival date of the preview item on the itinerary.</value>
+  </data>
+  <data name="LastDelete" xml:space="preserve">
+    <value>You can only delete the last element.</value>
+  </data>
+  <data name="LastSameFlight" xml:space="preserve">
+    <value>The departure airport must be the same of the lass sequence on the itinerary.</value>
+  </data>
+  <data name="NoGendecCrew" xml:space="preserve">
+    <value>There is no crew selected for this flight.</value>
+  </data>
+  <data name="NoGendecDeparture" xml:space="preserve">
+    <value>There is no gendec document departure created for this flight.</value>
+  </data>
+  <data name="Crew" xml:space="preserve">
+    <value>Crew</value>
+  </data>
+  <data name="ProfileCode" xml:space="preserve">
+    <value>Profile Code</value>
+  </data>
+  <data name="ProfileName" xml:space="preserve">
+    <value>Profile Name</value>
+  </data>
+  <data name="Profiles" xml:space="preserve">
+    <value>Profiles</value>
+  </data>
+  <data name="MenuCode" xml:space="preserve">
+    <value>Menu Code</value>
+  </data>
+  <data name="ControllerName" xml:space="preserve">
+    <value>Controller Name</value>
+  </data>
+  <data name="ModuleCode" xml:space="preserve">
+    <value>Module Code</value>
+  </data>
+  <data name="ModuleName" xml:space="preserve">
+    <value>Module Name</value>
+  </data>
+  <data name="ModuleTitle" xml:space="preserve">
+    <value>Module</value>
+  </data>
+  <data name="AddModulePermission" xml:space="preserve">
+    <value>Add Permission</value>
+  </data>
+  <data name="PermissionCode" xml:space="preserve">
+    <value>Permission Code</value>
+  </data>
+  <data name="PermissionMaxMinLong" xml:space="preserve">
+    <value>Permission Code should be between 3 and 10</value>
+  </data>
+  <data name="PermissionName" xml:space="preserve">
+    <value>Permission Name</value>
+  </data>
+  <data name="PermissionTitle" xml:space="preserve">
+    <value>Permission Catalog</value>
+  </data>
+  <data name="RoleCode" xml:space="preserve">
+    <value>Role Code</value>
+  </data>
+  <data name="RoleMaxMinLong" xml:space="preserve">
+    <value>Role Code should be between 3 and 5</value>
+  </data>
+  <data name="RoleName" xml:space="preserve">
+    <value>Role Name</value>
+  </data>
+  <data name="RoleTitle" xml:space="preserve">
+    <value>Role Catalog</value>
+  </data>
+  <data name="AddProfileRole" xml:space="preserve">
+    <value>Add Roles</value>
+  </data>
+  <data name="RoleModulePermission" xml:space="preserve">
+    <value>Role Module Permission</value>
+  </data>
+  <data name="CreationDate" xml:space="preserve">
+    <value>Creation Date</value>
+  </data>
+  <data name="Department" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="EntryDate" xml:space="preserve">
+    <value>Entry Date</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="UserTitle" xml:space="preserve">
+    <value>User Catalog</value>
+  </data>
+  <data name="UserVolaris" xml:space="preserve">
+    <value>User Volaris</value>
+  </data>
+  <data name="Permission" xml:space="preserve">
+    <value>PERMISSION</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="WarningModulePermission" xml:space="preserve">
+    <value>If a permission is assigned to a User(s) and/or a Role(s), the permission won´t be deleted. </value>
+  </data>
+  <data name="PermissionPerModule" xml:space="preserve">
+    <value>Permissions per Module</value>
+  </data>
+  <data name="Permissions" xml:space="preserve">
+    <value>Permissions</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Remember</value>
+  </data>
+  <data name="SingIn" xml:space="preserve">
+    <value>Sing In</value>
+  </data>
+  <data name="LoginFailed" xml:space="preserve">
+    <value>Username or Password is incorrect</value>
+  </data>
+  <data name="CrewGendecTitle" xml:space="preserve">
+    <value>Captains and pilots</value>
+  </data>
+  <data name="stewardessGendecTitle" xml:space="preserve">
+    <value>Stewardess</value>
+  </data>
+  <data name="LocalizationStation" xml:space="preserve">
+    <value>Localization</value>
+  </data>
+  <data name="UrlWebServiceSISA" xml:space="preserve">
+    <value>http://10.10.32.62:966/Gendec.svc/gendecget/</value>
+    <comment>Url para consumir el webservice para obtener la informacion del manifiesto nacional de salida, numero de psasjeros y tripulacion</comment>
+  </data>
+  <data name="PasswordAgain" xml:space="preserve">
+    <value>Password Again</value>
+  </data>
+  <data name="FileValidation" xml:space="preserve">
+    <value>The file must to be a TXT file and have some content</value>
+  </data>
+  <data name="SelectAirline" xml:space="preserve">
+    <value>Please select an airline</value>
+  </data>
+  <data name="EmailVal" xml:space="preserve">
+    <value>Please enter a valid email address</value>
+  </data>
+  <data name="LengthMax25" xml:space="preserve">
+    <value>Length maximum must be 25 characters</value>
+  </data>
+  <data name="LengthMin5" xml:space="preserve">
+    <value>Length must be 5 characters</value>
+  </data>
+  <data name="PasswordEqualVal" xml:space="preserve">
+    <value>Please enter the same password again</value>
+  </data>
+  <data name="AlreadyExistCrew" xml:space="preserve">
+    <value>You can not insert the same crew twice</value>
+  </data>
+  <data name="AlreadyExistSteward" xml:space="preserve">
+    <value>You can not insert twice the same stewardess</value>
+  </data>
+  <data name="ChoiceCrew" xml:space="preserve">
+    <value>You must select a crew</value>
+  </data>
+  <data name="ChoiceSteward" xml:space="preserve">
+    <value>You must select a steward</value>
+  </data>
+  <data name="NotCloseGendec" xml:space="preserve">
+    <value>The Gendec can not be closed because there is no crew</value>
+  </data>
+  <data name="NotEditGendec" xml:space="preserve">
+    <value>The Gendec can not be edited because it is closed</value>
+  </data>
+  <data name="NotExistCrews" xml:space="preserve">
+    <value>You must add crew</value>
+  </data>
+  <data name="rangeCrew" xml:space="preserve">
+    <value>You must add Crews between 3 and </value>
+  </data>
+  <data name="rangePax" xml:space="preserve">
+    <value>You must enter a value between 1 and </value>
+  </data>
+  <data name="NotFoundDB" xml:space="preserve">
+    <value>not Found in DB</value>
+  </data>
+  <data name="Line" xml:space="preserve">
+    <value>in Line: </value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>End Date</value>
+  </data>
+  <data name="NotFile" xml:space="preserve">
+    <value>Not File</value>
+  </data>
+  <data name="SelectFile" xml:space="preserve">
+    <value>Select File</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="UploadItinerary" xml:space="preserve">
+    <value>Upload Itinerary File</value>
+  </data>
+  <data name="InvalidDates" xml:space="preserve">
+    <value>Is necessary to have the day before and after to Bulk File</value>
+  </data>
+  <data name="AirportGroupMenu" xml:space="preserve">
+    <value>Airport Group</value>
+  </data>
+  <data name="AirplaneTypeMenu" xml:space="preserve">
+    <value>Airplane Type</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="LogOff" xml:space="preserve">
+    <value>Log Off</value>
+  </data>
+  <data name="NotExistSteward" xml:space="preserve">
+    <value>You must add stewards</value>
+  </data>
+  <data name="AccountingAccountMenu" xml:space="preserve">
+    <value>Accounting Account</value>
+  </data>
+  <data name="AirlineMenu" xml:space="preserve">
+    <value>Airline</value>
+  </data>
+  <data name="AirplaneMenu" xml:space="preserve">
+    <value>Airplane</value>
+  </data>
+  <data name="AirportServiceContractMenu" xml:space="preserve">
+    <value>Airport Service Contract</value>
+  </data>
+  <data name="CostCenterMenu" xml:space="preserve">
+    <value>Cost Center</value>
+  </data>
+  <data name="CountryMenu" xml:space="preserve">
+    <value>Countries</value>
+  </data>
+  <data name="CrewMenu" xml:space="preserve">
+    <value>Crew</value>
+  </data>
+  <data name="CurrencyMenu" xml:space="preserve">
+    <value>Currency</value>
+  </data>
+  <data name="DelayMenu" xml:space="preserve">
+    <value>Delay</value>
+  </data>
+  <data name="DrinkingWaterMenu" xml:space="preserve">
+    <value>Drinking Water</value>
+  </data>
+  <data name="FuelConceptMenu" xml:space="preserve">
+    <value>Fuel Concept</value>
+  </data>
+  <data name="FunctionalAreaMenu" xml:space="preserve">
+    <value>Functional Area</value>
+  </data>
+  <data name="GPUMenu" xml:space="preserve">
+    <value>GPU</value>
+  </data>
+  <data name="GpuObservationMenu" xml:space="preserve">
+    <value>Gpu Observation</value>
+  </data>
+  <data name="InternationalFuelContractMenu" xml:space="preserve">
+    <value>International Fuel Contract</value>
+  </data>
+  <data name="ItineraryMenu" xml:space="preserve">
+    <value>Flight Schedule</value>
+  </data>
+  <data name="LiabilityAccountMenu" xml:space="preserve">
+    <value>Liability Account</value>
+  </data>
+  <data name="ManifestTimeConfigMenu" xml:space="preserve">
+    <value>Manifest Time Config</value>
+  </data>
+  <data name="ProviderMenu" xml:space="preserve">
+    <value>Providers</value>
+  </data>
+  <data name="ServiceMenu" xml:space="preserve">
+    <value>Service</value>
+  </data>
+  <data name="TaxMenu" xml:space="preserve">
+    <value>Tax</value>
+  </data>
+  <data name="EnglishLanguage" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="SpanishLanguage" xml:space="preserve">
+    <value>Spanish</value>
+  </data>
+  <data name="EnglishCulture" xml:space="preserve">
+    <value>en</value>
+  </data>
+  <data name="SpanishCulture" xml:space="preserve">
+    <value>es</value>
+  </data>
+  <data name="Account" xml:space="preserve">
+    <value>My Account</value>
+  </data>
+  <data name="SelectLanguage" xml:space="preserve">
+    <value>Select Language</value>
+  </data>
+  <data name="JetFuelProcess" xml:space="preserve">
+    <value>Jet Fuel Process</value>
+  </data>
+  <data name="ConfirmationDate" xml:space="preserve">
+    <value>Confirmation Date</value>
+  </data>
+  <data name="ConfirmationStatusName" xml:space="preserve">
+    <value>Confirmation Status</value>
+  </data>
+  <data name="ConfirmedByUserName" xml:space="preserve">
+    <value>Confirmed By User</value>
+  </data>
+  <data name="Definition" xml:space="preserve">
+    <value>Definition</value>
+  </data>
+  <data name="EndDatePeriod" xml:space="preserve">
+    <value>End Date Period</value>
+  </data>
+  <data name="EndDateProcess" xml:space="preserve">
+    <value>End Date Process</value>
+  </data>
+  <data name="ProcessAll" xml:space="preserve">
+    <value>Process All</value>
+  </data>
+  <data name="ProcessedByUserName" xml:space="preserve">
+    <value>Processed By User</value>
+  </data>
+  <data name="ProcessPending" xml:space="preserve">
+    <value>Process Pending</value>
+  </data>
+  <data name="ProcessProgress" xml:space="preserve">
+    <value>Process Progress</value>
+  </data>
+  <data name="StartDatePeriod" xml:space="preserve">
+    <value>Start Date Period</value>
+  </data>
+  <data name="StartDateProcess" xml:space="preserve">
+    <value>Start Date Process</value>
+  </data>
+  <data name="StatusProcessCode" xml:space="preserve">
+    <value>Process Status</value>
+  </data>
+  <data name="Revert" xml:space="preserve">
+    <value>Revert</value>
+  </data>
+  <data name="ConfirmationStatusCode" xml:space="preserve">
+    <value>Confirmation Status</value>
+  </data>
+  <data name="CalculationStatusCode" xml:space="preserve">
+    <value>Calculation Status</value>
+  </data>
+  <data name="LogErrors" xml:space="preserve">
+    <value>Log Errors</value>
+  </data>
+  <data name="NoErrorsForPeriod" xml:space="preserve">
+    <value>There is no errors for this period.</value>
+  </data>
+  <data name="ProcessRunningError" xml:space="preserve">
+    <value>The calculation process for the selected period is currently on execution. Please try again later.</value>
+  </data>
+  <data name="ConfirmCalculationPeriod" xml:space="preserve">
+    <value>Confirm Calculation Period</value>
+  </data>
+  <data name="ErrorsFoundWarning" xml:space="preserve">
+    <value>There are errors in the selected period. Do you want to continue?</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="InternationalFuelTitle" xml:space="preserve">
+    <value>International Fuel</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="OperationNotProceedError" xml:space="preserve">
+    <value>The operation can not be processed.</value>
+  </data>
+  <data name="PeriodCloseSuccess" xml:space="preserve">
+    <value>The period {0} has been closed successfully.</value>
+  </data>
+  <data name="PeriodCode" xml:space="preserve">
+    <value>Period</value>
+  </data>
+  <data name="ViewDetailErrors" xml:space="preserve">
+    <value>View Log Errors</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="ModulePermission" xml:space="preserve">
+    <value>Add Permissions to Module</value>
+  </data>
+  <data name="OpenPeriodSuccessfully" xml:space="preserve">
+    <value>The period {0} has been opened successfully.</value>
+  </data>
+  <data name="ReportTicket" xml:space="preserve">
+    <value>Report Ticket</value>
+  </data>
+  <data name="ViewInternationalFuelCalculationResult" xml:space="preserve">
+    <value>View International Fuel Calculation Results</value>
+  </data>
+  <data name="CalculationPeriod" xml:space="preserve">
+    <value>Calculation Period</value>
+  </data>
+  <data name="CreatePolicy" xml:space="preserve">
+    <value>Create Policy</value>
+  </data>
+  <data name="DetailedReport" xml:space="preserve">
+    <value>Detailed Report</value>
+  </data>
+  <data name="GroupReport" xml:space="preserve">
+    <value>Group Report</value>
+  </data>
+  <data name="OpenPeriod" xml:space="preserve">
+    <value>Open Period</value>
+  </data>
+  <data name="Period" xml:space="preserve">
+    <value>Period</value>
+  </data>
+  <data name="SubmitCalculationProcess" xml:space="preserve">
+    <value>Calculation Process</value>
+  </data>
+  <data name="CalculationPeriods" xml:space="preserve">
+    <value>Calculations Periods</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="ViewDetailCapture" xml:space="preserve">
+    <value>View Detail Capture</value>
+  </data>
+  <data name="AirlineCatalog" xml:space="preserve">
+    <value>Airline Catalogs</value>
+  </data>
+  <data name="GeneralCatalog" xml:space="preserve">
+    <value>General Catalogs</value>
+  </data>
+  <data name="HelperCatalog" xml:space="preserve">
+    <value>Helper Catalogs</value>
+  </data>
+  <data name="SuccessActive" xml:space="preserve">
+    <value>The record has been activated successfully</value>
+  </data>
+  <data name="AddAirports" xml:space="preserve">
+    <value>Add Airports</value>
+  </data>
+  <data name="AddProfileAndRoles" xml:space="preserve">
+    <value>Add Profiles &amp; Roles</value>
+  </data>
+  <data name="UserInformation" xml:space="preserve">
+    <value>User Information</value>
+  </data>
+  <data name="PassengerManifestSummary" xml:space="preserve">
+    <value>Passenger Manifest Summary</value>
+  </data>
+  <data name="ExchangeRatesTitle" xml:space="preserve">
+    <value>Average Exchange Rates</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>Month</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="ExchangeDate" xml:space="preserve">
+    <value>Month and Year</value>
+  </data>
+  <data name="ExchangeRatesMenu" xml:space="preserve">
+    <value>Average Exchange Rates</value>
+  </data>
+  <data name="YearMonthFormat" xml:space="preserve">
+    <value>MM/YYYY</value>
+  </data>
+  <data name="ExchangeRate" xml:space="preserve">
+    <value>Average Exchange</value>
+  </data>
+  <data name="MonthNumber" xml:space="preserve">
+    <value>Month Number</value>
+  </data>
+  <data name="ExchangeRateUpdate" xml:space="preserve">
+    <value>*Can only be updated or deleted for the current month or later.</value>
+  </data>
+  <data name="SuccessPolicyCreate" xml:space="preserve">
+    <value>The Policy {0} has been created successfuly.</value>
+  </data>
+  <data name="CompanyCode" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="Division" xml:space="preserve">
+    <value>Division</value>
+  </data>
+  <data name="PoliciesHistoryMenu" xml:space="preserve">
+    <value>View Provision Policies History</value>
+  </data>
+  <data name="PoliciesHistoryTitle" xml:space="preserve">
+    <value>Provision Policies History</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="TimeHourFormat" xml:space="preserve">
+    <value>MM/dd/yyyy HH:mm</value>
+  </data>
+  <data name="DateBaseline" xml:space="preserve">
+    <value>Baseline Date</value>
+  </data>
+  <data name="DatePosting" xml:space="preserve">
+    <value>Posting Date</value>
+  </data>
+  <data name="DateValue" xml:space="preserve">
+    <value>Value Date</value>
+  </data>
+  <data name="EndDateComplementary" xml:space="preserve">
+    <value>End Date Comp.</value>
+  </data>
+  <data name="EndDateReal" xml:space="preserve">
+    <value>End Date Real</value>
+  </data>
+  <data name="HeaderText" xml:space="preserve">
+    <value>Header Text</value>
+  </data>
+  <data name="ItemText" xml:space="preserve">
+    <value>Item Text</value>
+  </data>
+  <data name="PolicyId" xml:space="preserve">
+    <value>Doc. Id</value>
+  </data>
+  <data name="SendByUserName" xml:space="preserve">
+    <value>Send by</value>
+  </data>
+  <data name="StartDateComplementary" xml:space="preserve">
+    <value>Begin Date Comp.</value>
+  </data>
+  <data name="StartDateReal" xml:space="preserve">
+    <value>Begin Date Real</value>
+  </data>
+  <data name="BeginPolicyId" xml:space="preserve">
+    <value>Begin Doc. Id</value>
+  </data>
+  <data name="EndPolicyId" xml:space="preserve">
+    <value>End Doc. Id</value>
+  </data>
+  <data name="SearchByRange" xml:space="preserve">
+    <value>Search by range</value>
+  </data>
+  <data name="DocError" xml:space="preserve">
+    <value>Error Doc.</value>
+  </data>
+  <data name="DocSucess" xml:space="preserve">
+    <value>Sucess Doc.</value>
+  </data>
+  <data name="DocTotal" xml:space="preserve">
+    <value>Doc. Total</value>
+  </data>
+  <data name="BaseDate" xml:space="preserve">
+    <value>Base Date</value>
+  </data>
+  <data name="ComplementaryPeriod" xml:space="preserve">
+    <value>Complementary Period</value>
+  </data>
+  <data name="PostingDate" xml:space="preserve">
+    <value>Posting Date</value>
+  </data>
+  <data name="RealPeriod" xml:space="preserve">
+    <value>Real Period</value>
+  </data>
+  <data name="SendPolicy" xml:space="preserve">
+    <value>Send Policy</value>
+  </data>
+  <data name="ValueDate" xml:space="preserve">
+    <value>Value Date</value>
+  </data>
+  <data name="TotalErrors" xml:space="preserve">
+    <value>Errores</value>
+  </data>
+  <data name="TotalProcess" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="TotalSucess" xml:space="preserve">
+    <value>Enviados</value>
+  </data>
+  <data name="CancelError" xml:space="preserve">
+    <value>Failed to Cancel Policy, Can Not Update Policies Sent to SAP</value>
+  </data>
+  <data name="UrlWebServiceSapSendPolicy" xml:space="preserve">
+    <value>https://10.10.32.43:9090/ws/simple/queryT_POLIZA</value>
+  </data>
+  <data name="ScheduleTypeCode" xml:space="preserve">
+    <value>Sched. Code</value>
+  </data>
+  <data name="ScheduleTypeName" xml:space="preserve">
+    <value>Sched. Name</value>
+  </data>
+  <data name="ScheduleTypeMenu" xml:space="preserve">
+    <value>Schedules Types</value>
+  </data>
+  <data name="ScheduleTypeTitle" xml:space="preserve">
+    <value>Schedule Types</value>
+  </data>
+  <data name="AirportScheduleID" xml:space="preserve">
+    <value>Airport Schedule ID</value>
+  </data>
+  <data name="AirportScheduleTitle" xml:space="preserve">
+    <value>Airport Schedule</value>
+  </data>
+  <data name="EndTimeSchedule" xml:space="preserve">
+    <value>End Time Schedule</value>
+  </data>
+  <data name="StartTimeSchedule" xml:space="preserve">
+    <value>Start Time Schedule</value>
+  </data>
+  <data name="AirportScheduleMenu" xml:space="preserve">
+    <value>Airport Schedule</value>
+  </data>
+  <data name="TimesSchedule" xml:space="preserve">
+    <value>End Time Schedule must be greater than Start Time Schedule</value>
+  </data>
+  <data name="FueledQtyKgs" xml:space="preserve">
+    <value>Fueled Qty (Kgs)</value>
+  </data>
+  <data name="FueledQtyLts" xml:space="preserve">
+    <value>Fueled Qty (Lts)</value>
+  </data>
+  <data name="FuelingDateEnd" xml:space="preserve">
+    <value>End Date</value>
+  </data>
+  <data name="FuelingDateStart" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="FuelingTimeEnd" xml:space="preserve">
+    <value>End Time</value>
+  </data>
+  <data name="FuelingTimeStart" xml:space="preserve">
+    <value>Start Time</value>
+  </data>
+  <data name="RemainingQtyKgs" xml:space="preserve">
+    <value>Remainig Qty (Lts)</value>
+  </data>
+  <data name="RequestedQtyKgs" xml:space="preserve">
+    <value>Requested Qty (Lts)</value>
+  </data>
+  <data name="NationalJetFuelTicketTitle" xml:space="preserve">
+    <value>Domestic Fuel Ticket</value>
+  </data>
+  <data name="Unauthorized" xml:space="preserve">
+    <value>Unauthorized</value>
+  </data>
+  <data name="UnauthorizedMessage" xml:space="preserve">
+    <value>You don't have enough permission to access this page.</value>
+  </data>
+  <data name="Arrival" xml:space="preserve">
+    <value>Arrival</value>
+  </data>
+  <data name="Departure" xml:space="preserve">
+    <value>Departure</value>
+  </data>
+  <data name="FormatDateTime" xml:space="preserve">
+    <value>MM/DD/YYYY HH:mm</value>
+  </data>
+  <data name="NationalJetFuelProcess" xml:space="preserve">
+    <value>Domestic Jet Fuel Process</value>
+  </data>
+  <data name="ViewNationalFuelCalculationResult" xml:space="preserve">
+    <value>View National Fuel Calculation Results</value>
+  </data>
+  <data name="NationalFuelTitle" xml:space="preserve">
+    <value>National Fuel</value>
+  </data>
+  <data name="DeleteRangeSuccess" xml:space="preserve">
+    <value>{0} records deleted successfuly.</value>
+  </data>
+  <data name="DeleteRangeZeroDeleted" xml:space="preserve">
+    <value>Any records match the parameters given.</value>
+  </data>
+  <data name="ErrorFormatFile" xml:space="preserve">
+    <value>The file must be a TXT file and must have content.</value>
+  </data>
+  <data name="NationalFuelContract" xml:space="preserve">
+    <value>Domestic Fuel Contracts</value>
+  </data>
+  <data name="NationalFuelRate" xml:space="preserve">
+    <value>Domestic Fuel Rates</value>
+  </data>
+  <data name="StartDateGreaterThanEndError" xml:space="preserve">
+    <value>Invalid dates. The end date must be equal or greater than start date.</value>
+  </data>
+  <data name="Modulo" xml:space="preserve">
+    <value>Module</value>
+  </data>
+  <data name="NationalFuelMenu" xml:space="preserve">
+    <value>Domestic Jet Fuel</value>
+  </data>
+  <data name="Perfil" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="Permiso" xml:space="preserve">
+    <value>Permission</value>
+  </data>
+  <data name="Rol" xml:space="preserve">
+    <value>Rol</value>
+  </data>
+  <data name="Security" xml:space="preserve">
+    <value>Security</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="SubmitNationalProcess" xml:space="preserve">
+    <value>Calculate Costs</value>
+  </data>
+  <data name="PageNotFound" xml:space="preserve">
+    <value>Page Not Found</value>
+  </data>
+  <data name="CouldNotFindPage" xml:space="preserve">
+    <value>Could not find the page</value>
+  </data>
+  <data name="GoBack" xml:space="preserve">
+    <value>Go back to the</value>
+  </data>
+  <data name="PreviousPage" xml:space="preserve">
+    <value>previous page</value>
+  </data>
+  <data name="ConfirmAction" xml:space="preserve">
+    <value>Are you sure you want to continue with this action?</value>
+  </data>
+  <data name="ConfirmNationalPeriod" xml:space="preserve">
+    <value>Confirm National Calculation Period</value>
+  </data>
+  <data name="NationalFuelConcept" xml:space="preserve">
+    <value>Domestic Fuel Concept</value>
+  </data>
+  <data name="JetFuelReport" xml:space="preserve">
+    <value>Remissions Capture Report</value>
+  </data>
+  <data name="CreateNationalPolicy" xml:space="preserve">
+    <value>Create Domestic Policy</value>
+  </data>
+  <data name="NotExchangeRates" xml:space="preserve">
+    <value>No exchange rates found for </value>
+  </data>
+  <data name="SendNationalPolicy" xml:space="preserve">
+    <value>Send Domestic Policy</value>
+  </data>
+  <data name="EndDateLoad" xml:space="preserve">
+    <value>End Date Load</value>
+  </data>
+  <data name="InitialUploadDate" xml:space="preserve">
+    <value>Initial Upload Date</value>
+  </data>
+  <data name="InvoiceNumber" xml:space="preserve">
+    <value>Invoice No.</value>
+  </data>
+  <data name="MonthYear" xml:space="preserve">
+    <value>Month-Year</value>
+    <comment>Formato: MMAA
+Ej. 0916 (Sept. 2016)</comment>
+  </data>
+  <data name="PeriodRemittance" xml:space="preserve">
+    <value>Period</value>
+    <comment>Formato DD-DD
+Ej. 01-15 (primeros quince días)</comment>
+  </data>
+  <data name="RemittanceId" xml:space="preserve">
+    <value>Remittance ID</value>
+  </data>
+  <data name="ExportInvoiceSummary" xml:space="preserve">
+    <value>Export Invoices Summary</value>
+  </data>
+  <data name="ExportPolicy" xml:space="preserve">
+    <value>Export Policies</value>
+  </data>
+  <data name="ShowErrors" xml:space="preserve">
+    <value>Show Errors</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ErrorOrNotFound" xml:space="preserve">
+    <value>An error has occurred remittance does not exist</value>
+  </data>
+  <data name="IATACode" xml:space="preserve">
+    <value>IATA Code</value>
+  </data>
+  <data name="ReadySentPolicy" xml:space="preserve">
+    <value>Invoice policy document has been sent to SAP</value>
+  </data>
+  <data name="Sucess" xml:space="preserve">
+    <value>Successful</value>
+  </data>
+  <data name="PendingReconciled" xml:space="preserve">
+    <value>Remittance has one or more conciliated records can not be deleted.</value>
+  </data>
+  <data name="ExportInvoicePolicies" xml:space="preserve">
+    <value>Export Invoice Policies</value>
+  </data>
+  <data name="ManageInvoices" xml:space="preserve">
+    <value>Manage Invoices</value>
+  </data>
+  <data name="DiscountAmount" xml:space="preserve">
+    <value>Discount Amount</value>
+  </data>
+  <data name="DocumentStatusCode" xml:space="preserve">
+    <value>Document Status Code</value>
+  </data>
+  <data name="FreightAmount" xml:space="preserve">
+    <value>Freight Amount</value>
+  </data>
+  <data name="FuelingAmount" xml:space="preserve">
+    <value>Fueling Amount</value>
+  </data>
+  <data name="JetFuelAmount" xml:space="preserve">
+    <value>Jet Fuel Amount</value>
+  </data>
+  <data name="ProcessDate" xml:space="preserve">
+    <value>Process Date</value>
+  </data>
+  <data name="ReconciliationStatusCode" xml:space="preserve">
+    <value>Reconciliation Status Code</value>
+  </data>
+  <data name="RemittanceStatusCode" xml:space="preserve">
+    <value>Remittance Status Code</value>
+  </data>
+  <data name="Society" xml:space="preserve">
+    <value>Society</value>
+  </data>
+  <data name="SubtotalAmount" xml:space="preserve">
+    <value>Subtotal Amount</value>
+  </data>
+  <data name="TaxAmount" xml:space="preserve">
+    <value>Tax Amount</value>
+  </data>
+  <data name="TotalAmount" xml:space="preserve">
+    <value>Total Amount</value>
+  </data>
+  <data name="TotalInvoicesInRemittance" xml:space="preserve">
+    <value>Invoices</value>
+  </data>
+  <data name="CreatePolicyInvoiceErrorInProcess" xml:space="preserve">
+    <value>An error ocurred while the creation process was running. Please try again.</value>
+  </data>
+  <data name="CreatePolicyInvoiceErrorInRemittance" xml:space="preserve">
+    <value>The policies could not be created because the remittance {0} has errors different from the Equipment Number not valid</value>
+  </data>
+  <data name="CreatePolicyInvoiceErrorPolicyExist" xml:space="preserve">
+    <value>The remittance {0} has already policies.</value>
+  </data>
+  <data name="CreatePolicyInvoiceSuccessful" xml:space="preserve">
+    <value>The policies for the remittance {0} were created successfully.</value>
+  </data>
+  <data name="MonthYearFormatError" xml:space="preserve">
+    <value>The format of the field Month-Year is not valid.</value>
+  </data>
+  <data name="ErrorReport" xml:space="preserve">
+    <value>Export Detail Error</value>
+  </data>
+  <data name="CrewTemplateFileName" xml:space="preserve">
+    <value>Crew_Template.txt</value>
+  </data>
+  <data name="CrewTemplateFilePath" xml:space="preserve">
+    <value>~/Files/Templates/CrewTemplate.txt</value>
+  </data>
+  <data name="DownloadTemplateFile" xml:space="preserve">
+    <value>Download Template</value>
+  </data>
+  <data name="InternationalFuelContractFileName" xml:space="preserve">
+    <value>International_Fuel_Contract_Template.txt</value>
+  </data>
+  <data name="InternationalFuelContractFilePath" xml:space="preserve">
+    <value>~/Files/Templates/InternationalFuelContract.txt</value>
+  </data>
+  <data name="InternationalFuelRateFileName" xml:space="preserve">
+    <value>International_Fuel_Rate_Template.txt</value>
+  </data>
+  <data name="InternationalFuelRateFilePath" xml:space="preserve">
+    <value>~/Files/Templates/InternationalFuelRate.txt</value>
+  </data>
+  <data name="InternationalServiceContractFileName" xml:space="preserve">
+    <value>International_Service_Contract_Template.txt</value>
+  </data>
+  <data name="InternationalServiceContractFilePath" xml:space="preserve">
+    <value>~/Files/Templates/InternationalServiceContract.txt</value>
+  </data>
+  <data name="NationalFuelContractFileName" xml:space="preserve">
+    <value>National_Fuel_Contract_Template.txt</value>
+  </data>
+  <data name="NationalFuelContractFilePath" xml:space="preserve">
+    <value>~/Files/Templates/NationalFuelContract.txt</value>
+  </data>
+  <data name="NationalFuelRateFileName" xml:space="preserve">
+    <value>National_Fuel_Rate_Template.txt</value>
+  </data>
+  <data name="NationalFuelRateFilePath" xml:space="preserve">
+    <value>~/Files/Templates/NationalFuelRate.txt</value>
+  </data>
+  <data name="NationalInvoiceFileName" xml:space="preserve">
+    <value>National_Invoice_Template.txt</value>
+  </data>
+  <data name="NationalInvoiceFilePath" xml:space="preserve">
+    <value>~/Files/Templates/NationalInvoiceTemplate.txt</value>
+  </data>
+  <data name="ExportInvoiceDetail" xml:space="preserve">
+    <value>Export Invoices Detail</value>
+  </data>
+  <data name="CreatePolicies" xml:space="preserve">
+    <value>Create Policies</value>
+  </data>
+  <data name="LengthMax14" xml:space="preserve">
+    <value>The maximun length must be less than 14 characters</value>
+  </data>
+  <data name="SendPolicieToSap" xml:space="preserve">
+    <value>Send Policies To SAP</value>
+  </data>
+  <data name="ShowUploadErrorReport" xml:space="preserve">
+    <value>Show Upload Errors Report</value>
+  </data>
+  <data name="ElectronicInvoiceNumber" xml:space="preserve">
+    <value>Electronic Invoice No.</value>
+  </data>
+  <data name="ChangeSchedule" xml:space="preserve">
+    <value>Change of itinerary</value>
+  </data>
+  <data name="ReconciliationToleranceTitle" xml:space="preserve">
+    <value>Reconciliation Tolerance</value>
+  </data>
+  <data name="ToleranceTypeCode" xml:space="preserve">
+    <value>Tolerance Type</value>
+  </data>
+  <data name="ToleranceValue" xml:space="preserve">
+    <value>Tolerance Value</value>
+  </data>
+  <data name="ToleranceTypeName" xml:space="preserve">
+    <value>Tolerance Type Name</value>
+  </data>
+  <data name="ReconciliationToleranceMenu" xml:space="preserve">
+    <value>Reconciliation Tolerances</value>
+  </data>
+  <data name="ExportReconciliationDetail" xml:space="preserve">
+    <value>Export Reconciliation Detail</value>
+  </data>
+  <data name="Reconcile" xml:space="preserve">
+    <value>Reconcile - Automatic</value>
+  </data>
+  <data name="ReconcileInvoices" xml:space="preserve">
+    <value>Remittance Reconciliation</value>
+  </data>
+  <data name="CountReconciledRecords" xml:space="preserve">
+    <value>#Recs Reconciled</value>
+  </data>
+  <data name="CountRecords" xml:space="preserve">
+    <value>#Recs Remittance</value>
+  </data>
+  <data name="DateReconciled" xml:space="preserve">
+    <value>RECONCIL Date/Time</value>
+  </data>
+  <data name="PctReconciledRecords" xml:space="preserve">
+    <value>%Recs Remittance</value>
+  </data>
+  <data name="ReconciledSubtotalAmount" xml:space="preserve">
+    <value>Reconciled Amnt.</value>
+  </data>
+  <data name="ReconciliationStatusCode1" xml:space="preserve">
+    <value>RECONCIL Status</value>
+  </data>
+  <data name="SearchReconcileInvoices" xml:space="preserve">
+    <value>Search Reconcile Invoices</value>
+  </data>
+  <data name="ManifestClosedSuccessfully" xml:space="preserve">
+    <value>The manifest has been closed succesfully.</value>
+  </data>
+  <data name="ManifestOpenedSuccessfully" xml:space="preserve">
+    <value>The manifest has been opened successfully.</value>
+  </data>
+  <data name="ManifestUpdatedSuccessfully" xml:space="preserve">
+    <value>The manifest has been updated succesfully.</value>
+  </data>
+  <data name="ActualDepartureDate" xml:space="preserve">
+    <value>Actual Departure Date</value>
+  </data>
+  <data name="ActualDepartureTime" xml:space="preserve">
+    <value>Actual Departure Time</value>
+  </data>
+  <data name="DelayRemarks" xml:space="preserve">
+    <value>Delay Remarks</value>
+  </data>
+  <data name="Infant" xml:space="preserve">
+    <value>Infant</value>
+  </data>
+  <data name="InnerSection" xml:space="preserve">
+    <value>Inner Section</value>
+  </data>
+  <data name="International" xml:space="preserve">
+    <value>International</value>
+  </data>
+  <data name="InternationalExempt" xml:space="preserve">
+    <value>International Exempt</value>
+  </data>
+  <data name="JetFuelKg" xml:space="preserve">
+    <value>Jet Fuel (Kg)</value>
+  </data>
+  <data name="NationalExempt" xml:space="preserve">
+    <value>National Exempt</value>
+  </data>
+  <data name="NextScale" xml:space="preserve">
+    <value>Next Scale</value>
+  </data>
+  <data name="OperatingWeightKg" xml:space="preserve">
+    <value>Operating Weight (Kg)</value>
+  </data>
+  <data name="RealTakeoffWeightKg" xml:space="preserve">
+    <value>Real Takeoff Weight (Kg)</value>
+  </data>
+  <data name="SafetyMarginKg" xml:space="preserve">
+    <value>Safety Margin (Kg)</value>
+  </data>
+  <data name="ScaleStation" xml:space="preserve">
+    <value>Scale Station</value>
+  </data>
+  <data name="ScheduledDepartureDate" xml:space="preserve">
+    <value>Scheduled Departure Date</value>
+  </data>
+  <data name="ScheduledDepartureTime" xml:space="preserve">
+    <value>Scheduled Departure Time</value>
+  </data>
+  <data name="StructuralTakeoffWeightKg" xml:space="preserve">
+    <value>Structural Takeoff Weight (Kg)</value>
+  </data>
+  <data name="Transit" xml:space="preserve">
+    <value>Transit</value>
+  </data>
+  <data name="UserAuthorize" xml:space="preserve">
+    <value>Authorized by</value>
+  </data>
+  <data name="UserSignature" xml:space="preserve">
+    <value>Made by</value>
+  </data>
+  <data name="InfantTickets" xml:space="preserve">
+    <value>Infent Tickets</value>
+  </data>
+  <data name="NickNameChiefCabinet" xml:space="preserve">
+    <value>Chief Cabinet</value>
+  </data>
+  <data name="NickNameCommander" xml:space="preserve">
+    <value>Commander</value>
+  </data>
+  <data name="NickNameFirstOfficial" xml:space="preserve">
+    <value>First Official</value>
+  </data>
+  <data name="NickNameFirstSupercargo" xml:space="preserve">
+    <value>First Supercargo</value>
+  </data>
+  <data name="NickNameSecondOfficial" xml:space="preserve">
+    <value>Second Official</value>
+  </data>
+  <data name="NickNameSecondSupercargo" xml:space="preserve">
+    <value>Second Supercargo</value>
+  </data>
+  <data name="NickNameThirdOfficial" xml:space="preserve">
+    <value>Third Official</value>
+  </data>
+  <data name="NickNameThirdSupercargo" xml:space="preserve">
+    <value>Third Supercargo</value>
+  </data>
+  <data name="Position" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="Authorization" xml:space="preserve">
+    <value>Authorization</value>
+  </data>
+  <data name="DelayReason" xml:space="preserve">
+    <value>Delay Reasons</value>
+  </data>
+  <data name="DifferenceMinutes" xml:space="preserve">
+    <value>Difference</value>
+  </data>
+  <data name="FormValidationError" xml:space="preserve">
+    <value>There are empty fields. Please enter the information for the required fields.</value>
+  </data>
+  <data name="ManifestDeparture" xml:space="preserve">
+    <value>Departure Manifest</value>
+  </data>
+  <data name="MovementOperations" xml:space="preserve">
+    <value>Movement Operations</value>
+  </data>
+  <data name="OperationData" xml:space="preserve">
+    <value>Operation Data</value>
+  </data>
+  <data name="Timeline" xml:space="preserve">
+    <value>Capture Timeline</value>
+  </data>
+  <data name="ApplyPrevFlight" xml:space="preserve">
+    <value>Apply Previous Flight</value>
+  </data>
+  <data name="ApplyPrevFlightNote" xml:space="preserve">
+    <value>Beside the parameters you set, the system will show flights which arrival date is equal or less than the departure date of the current flight and its arrival airport match with the departure airport of the current airport</value>
+  </data>
+  <data name="ChangeFlight" xml:space="preserve">
+    <value>Change Flight</value>
+  </data>
+  <data name="SelectPrevFlight" xml:space="preserve">
+    <value>Select Previous Flight</value>
+  </data>
+  <data name="ReconcileManual" xml:space="preserve">
+    <value>Reconcile - Manual</value>
+  </data>
+  <data name="ReconcileInvoicesManual" xml:space="preserve">
+    <value>Remittance Manual Reconciliation</value>
+  </data>
+  <data name="DownloadCostDetail" xml:space="preserve">
+    <value>Download non-reconciled Fuel Costs</value>
+  </data>
+  <data name="DownloadInvoiceDetail" xml:space="preserve">
+    <value>Download non-reconciled Invoice records</value>
+  </data>
+  <data name="ReconcileInvoicesMain" xml:space="preserve">
+    <value>Remittance Reconciliation</value>
+  </data>
+  <data name="ConciliationStatusCode" xml:space="preserve">
+    <value>Reconciliation Status</value>
+  </data>
+  <data name="Charge" xml:space="preserve">
+    <value>Charge</value>
+  </data>
+  <data name="Luggage" xml:space="preserve">
+    <value>Luggage</value>
+  </data>
+  <data name="Mail" xml:space="preserve">
+    <value>Mail</value>
+  </data>
+  <data name="PreviousScale" xml:space="preserve">
+    <value>Previous Scale</value>
+  </data>
+  <data name="JetFuelAtArrival" xml:space="preserve">
+    <value>Jet Fuel at Arrival</value>
+  </data>
+  <data name="ManifestArrival" xml:space="preserve">
+    <value>Arrival Manifest</value>
+  </data>
+  <data name="WeightInKilogram" xml:space="preserve">
+    <value>Weight (Kg)</value>
+  </data>
+  <data name="LoadLog" xml:space="preserve">
+    <value>Load Log</value>
+  </data>
+  <data name="SuccessfulLoadFileManual" xml:space="preserve">
+    <value>File has been processed. Check loading log</value>
+  </data>
+</root>

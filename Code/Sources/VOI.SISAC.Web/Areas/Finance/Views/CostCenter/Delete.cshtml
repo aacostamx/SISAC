@@ -1,0 +1,52 @@
+﻿@model VOI.SISAC.Web.Models.VO.Finance.CostCenterModelVO
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+       <p class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.CostCenterTitle</p>
+       <p class="subtitle_h3_ancillarie">@VOI.SISAC.Web.Resources.Resource.Delete</p>
+</div>
+
+<div class ="container">
+    @Html.Partial("_AlertView")
+    <h3>@VOI.SISAC.Web.Resources.Resource.ConfirmDelete</h3>
+    <div class="dl-horizontal">
+        <div class="row"> 
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                @Html.LabelFor(model => model.CostCenterVO.AirlineCode, new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.AirLineName, new { htmlAttributes = new { @class = "form-control specialInput", @readonly = "readonly"} })
+                @Html.ValidationMessageFor(model => model.CostCenterVO.AirlineCode, "", new { @class = "text-danger" })
+            </div>
+
+             <div class="col-md-4 col-sm-6 col-xs-12">
+                @Html.LabelFor(model => model.CostCenterVO.CCNumber, new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.CostCenterVO.CCNumber, new { htmlAttributes = new { @class = "form-control specialInput", @readonly = "readonly"} })
+                @Html.ValidationMessageFor(model => model.CostCenterVO.CCNumber, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                @Html.LabelFor(model => model.CostCenterVO.CCName, new { @class = "subtitle_h5 control-label required-field" })
+                @Html.EditorFor(model => model.CostCenterVO.CCName, new { htmlAttributes = new { @class = "form-control specialInput", @readonly = "readonly"} })
+                @Html.ValidationMessageFor(model => model.CostCenterVO.CCName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <br />
+                    <input onclick="location.href='@Url.Action("Index","CostCenter")'" type="reset" class="btnVolaris" value="@VOI.SISAC.Web.Resources.Resource.Back">
+                    <input type="submit" value="@VOI.SISAC.Web.Resources.Resource.Delete" class="btnVolaris" />
+                </div>
+            </div>
+        }
+
+    </div>

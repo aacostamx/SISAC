@@ -1,0 +1,510 @@
+﻿@model VOI.SISAC.Web.Models.VO.Process.NationalJetFuelReconcileControlVO
+
+@{
+    ViewBag.Title = VOI.SISAC.Web.Resources.Resource.ReconcileInvoices;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var currentCulture = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
+}
+
+@Styles.Render("~/bundles/SweetAlertCSS")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.ReconcileInvoices</p>
+    </div>
+    <br />
+
+    @using (Html.BeginForm())
+    {
+
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <br />
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                    @Html.Label(VOI.SISAC.Web.Resources.Resource.RemittanceId, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                    @Html.EditorFor(model => model.RemittanceID, new { htmlAttributes = new { @class = "form-control", @style = "width: auto;", @disabled = "" } })
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                    @Html.Label(VOI.SISAC.Web.Resources.Resource.MonthYear, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                    @Html.EditorFor(model => model.MonthYear, new { htmlAttributes = new { @class = "form-control", @style = "width: auto;", @disabled = "" } })
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                    @Html.Label(VOI.SISAC.Web.Resources.Resource.Period, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                    @Html.EditorFor(model => model.Period, new { htmlAttributes = new { @class = "form-control", @style = "width: auto;", @disabled = "" } })
+                </div>
+            </div>
+            <br />
+            <div id="tbNationalJetFuelProcess" class="col-xs-12 col-sm-12 col-md-8">
+                <div class="table-responsive">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-2">
+                                <col class="col-xs-5">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>@VOI.SISAC.Web.Resources.Resource.Definition</th>
+                                    <th>@VOI.SISAC.Web.Resources.Resource.Description</th>
+                                </tr>
+                            </thead>
+                            <tbody> 
+                                <tr>
+                                    <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.StatusProcessCode</code></th>
+                                    <td id="StatusProcessCode" name="StatusProcessCode">
+                                        @if (Model.StatusProcess != null)
+                                        {
+                                            @Model.StatusProcess.StatusProcessName
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.ProcessProgress</code></th>
+                                    <td id="ProcessProgress" name="ProcessProgress">
+                                        @{
+                                            var process = string.Empty;
+                                            if (Model.ProcessProgress != null && Model.ProcessProgress.HasValue)
+                                            {
+                                                process = @Model.ProcessProgress.ToString() + "%";
+                                            }
+                                        }
+                                        <div id="hiddenBar" class="progress" style="margin-bottom: 0">
+                                            <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-green active" role="progressbar"
+                                                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: @process;">
+                                                @process
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.StartDateProcess</code></th>
+                                    <td id="StartDateProcess" name="StartDateProcess">
+                                        @if (Model.StartDateProcess != null && Model.StartDateProcess.HasValue)
+                                        {
+                                            @Model.StartDateProcess
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.EndDateProcess</code></th>
+                                    <td id="EndDateProcess" name="EndDateProcess">
+                                        @if (@Model.EndDateProcess.HasValue)
+                                        {
+                                            @Model.EndDateProcess
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.ProcessedByUserName</code></th>
+                                    <td id="ProcessedByUserName" name="ProcessedByUserName">@Model.ProcessedByUserName</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.ConciliationStatusCode</code></th>
+                                    <td id="CalculationStatusCode" name="CalculationStatusCode">
+                                        @if (Model.CalculationStatus != null)
+                                        {
+                                            @Model.CalculationStatus.CalculationStatusName
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.ConfirmationStatusCode</code></th>
+                                    <td id="ConfirmationStatusCode" name="ConfirmationStatusCode">
+                                        @if (Model.ConfirmationStatus != null)
+                                        {
+                                            @Model.ConfirmationStatus.ConfirmationStatusName
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.ConfirmationDate</code></th>
+                                    <td id="ConfirmationDate" name="ConfirmationDate">
+                                        @Model.ConfirmationDate
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.ConfirmedByUserName</code></th>
+                                    <td id="ConfirmedByUserName" name="ConfirmedByUserName">
+                                        @Model.ConfirmedByUserName
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            @if (Model.ConfirmationStatus != null && Model.ConfirmationStatus.ConfirmationStatusCode == "CLO")
+            {
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        @if (User.IsInRole("NTLJETREC-REVERT"))
+                    {
+                            <button id="btnRevertNationalJetFuelProcess" type="button" class="btn btn-default" name="@VOI.SISAC.Web.Resources.Resource.Process" title="@VOI.SISAC.Web.Resources.Resource.Revert" onclick="ReconcileProcessController.revertReconcileProcess()" disabled>
+                                <i class="fa fa-refresh fa-fw"></i>
+                                &nbsp;@VOI.SISAC.Web.Resources.Resource.Revert
+                            </button>
+                        }
+
+                        @if (User.IsInRole("NTLJETREC-START"))
+                    {
+                            <button id="btnStartNationalJetFuelProcess" type="button" class="btn btn-default btn-green" name="@VOI.SISAC.Web.Resources.Resource.Process" title="@VOI.SISAC.Web.Resources.Resource.Process" onclick="ReconcileProcessController.startReconcileProcess()" disabled>
+                                <i class="fa fa-play fa-fw"></i>
+                                &nbsp;@VOI.SISAC.Web.Resources.Resource.Process
+                            </button>
+                        }
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div id="processRadio" class="col-xs-12 col-sm-12 col-md-12">
+                    <input type="radio" name="processAllDOM" id="processAllDOM" checked="checked" />
+                    <label id="lbAll" for="processAllDOM" onclick='ReconcileProcessController.selectProcessType("processAll")'>
+                        <span></span>@VOI.SISAC.Web.Resources.Resource.ProcessAll &nbsp&nbsp&nbsp&nbsp
+                    </label>
+                    <input type="hidden" name="processAll" id="processAll" value="false" />
+
+                    <input type="radio" name="processPendingDOM" id="processPendingDOM" />
+                    <label id="lbPen" for="processPendingDOM" onclick='ReconcileProcessController.selectProcessType("processPending")'>
+                        <span></span>@VOI.SISAC.Web.Resources.Resource.ProcessPending
+                    </label>
+                    <input type="hidden" name="processPending" id="processPending" value="true" />
+                    <br />
+                    <br />
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        @if (User.IsInRole("NTLJETREC-REVERT"))
+                    {
+                            <button id="btnRevertNationalJetFuelProcess" type="button" class="btn btn-default" name="@VOI.SISAC.Web.Resources.Resource.Process" title="@VOI.SISAC.Web.Resources.Resource.Revert" onclick="ReconcileProcessController.revertReconcileProcess()">
+                                <i class="fa fa-refresh fa-fw"></i>
+                                &nbsp;@VOI.SISAC.Web.Resources.Resource.Revert
+                            </button>
+                        }
+
+                        @if (User.IsInRole("NTLJETREC-START"))
+                    {
+                            <button id="btnStartNationalJetFuelProcess" type="button" class="btn btn-default btn-green" name="@VOI.SISAC.Web.Resources.Resource.Process" title="@VOI.SISAC.Web.Resources.Resource.Process" onclick="ReconcileProcessController.startReconcileProcess()">
+                                <i class="fa fa-play fa-fw"></i>
+                                &nbsp;@VOI.SISAC.Web.Resources.Resource.Process
+                            </button>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+                                            }
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/SweetAlertJS")
+    <script>
+        var currentLang = '@currentCulture.ToString()';
+    </script>
+
+    <script>
+        var ReconcileProcessController = {
+            GetFuelProcess: function () {
+                NationalJetFuelReconcileProcessController.blankTable();
+                var periodCode = $('#PeriodCode').val();
+
+                if (periodCode) {
+                    $.ajax({
+                        url: '../NationalJetFuelReconcileInvoice/GetReconcileProcess',
+                        data: { periodCode: periodCode },
+                        type: "GET",
+                        dataType: "JSON",
+                        async: false,
+                        success: function (data) {
+                            if (data) {
+                                var confirmationStatus;
+                                var closed;
+
+                                $('#StartDatePeriod').text(ReconcileProcessController.getDateOnly(data.StartDatePeriod));
+                                $('#EndDatePeriod').text(ReconcileProcessController.getDateOnly(data.EndDatePeriod));
+                                $('#StatusProcessCode').text(data.StatusProcesses.StatusProcessName);
+                                ReconcileProcessController.setProcessProgress(data);
+                                $('#StartDateProcess').text(ReconcileProcessController.formatDate(data.StartDateProcess));
+                                $('#EndDateProcess').text(ReconcileProcessController.formatDate(data.EndDateProcess));
+                                $('#ProcessedByUserName').text(data.ProcessedByUserName);
+                                $('#CalculationStatusCode').text(data.CalculationStatus.CalculationStatusName);
+                                $('#ConfirmationStatusCode').text(data.ConfirmationStatus.ConfirmationStatusName);
+                                $('#ConfirmationDate').text(ReconcileProcessController.formatDate(data.ConfirmationDate));
+                                $('#ConfirmedByUserName').text(data.ConfirmedByUserName);
+
+                                //Si el estatus de confirmacin es CLO = CLOSED no se podra revertir ni reprocesar
+                                confirmationStatus = data.ConfirmationStatus.ConfirmationStatusCode;
+                                //Si closed es true ya se mando a SAP y por no se podra revertir ni reprocesar
+                                closed = data.ClosedProvision;
+
+                                ReconcileProcessController.setInitialActions();
+
+                                if (confirmationStatus != 'CLO' && closed) {
+                                    $("#btnRevertJetFuelProcess").prop('disabled', true);
+                                    $("#btnStartJetFuelProcess").prop('disabled', false);
+                                    $("#processRadio").show();
+                                    $("#lbAll").hide();
+                                    ReconcileProcessController.selectProcessType("processPending")
+                                    return;
+                                }
+
+                                if (confirmationStatus === 'CLO') {
+                                    $("#btnRevertJetFuelProcess").prop('disabled', true);
+                                    $("#btnStartJetFuelProcess").prop('disabled', true);
+                                    $("#processRadio").hide();
+                                }
+                                else {
+                                    $("#btnRevertJetFuelProcess").prop('disabled', false);
+                                    $("#btnStartJetFuelProcess").prop('disabled', false);
+                                    $("#processRadio").show();
+                                }
+
+                            }
+                        },
+                        error: function (result) {
+                            console.log("ERROR " + result.status + ' ' + result.statusText);
+                        }
+                    });
+                }
+            },
+            setProcessProgress: function (obj) {
+                var $progressBar = $('#progressBar');
+                var value = obj.ProcessProgress;
+
+                $('#hiddenBar').show();
+
+                if (value) {
+                    var percentage = String();
+                    var iValue = parseInt(value);
+
+                    switch (true) {
+                        case (iValue < 0):
+                            percentage = '0';
+                            break;
+                        case (iValue > 100):
+                            percentage = '100'
+                            break;
+                        default:
+                            percentage = String(value);
+                    }
+
+                    percentage = percentage.concat('%');
+                    $progressBar.text(percentage);
+                    $progressBar.css('width', percentage);
+                }
+                else {
+                    $progressBar.text('');
+                    $progressBar.css('width', '0');
+                }
+
+            },
+            resetProgressBar: function () {
+                var $progressBar = $('#progressBar');
+
+                $progressBar.text('');
+                $progressBar.css('width', '0');
+
+                $('#hiddenBar').hide();
+            },
+            blankTable: function () {
+                $('#StartDatePeriod').text('');
+                $('#EndDatePeriod').text('');
+                $('#StatusProcessCode').text('');
+                ReconcileProcessController.resetProgressBar();
+                $('#StartDateProcess').text('');
+                $('#EndDateProcess').text('');
+                $('#ProcessedByUserName').text('');
+                $('#CalculationStatusCode').text('');
+                $('#ConfirmationStatusCode').text('');
+                $('#ConfirmationStatusName').text('');
+                $('#ConfirmationDate').text('');
+                $('#ConfirmedByUserName').text('');
+            },
+            getDateOnly: function (value) {
+                var date;
+                if (value) {
+                    date = value.substr(0, 10);
+                }
+                return date;
+            },
+            getTimeOnly: function (value) {
+                var time;
+                if (value) {
+                    time = value.substr(11, 5);
+                }
+                return time;
+            },
+            formatDate: function (value) {
+                var date, time, datetime;
+                if (value) {
+                    date = value.substr(0, 10);
+                    time = value.substr(11, 5);
+                    datetime = date.concat(' ', time);
+                }
+                return datetime;
+            },
+            selectProcessType: function (type) {
+                ReconcileProcessController.resetProcessType();
+
+                if (type === 'processAll') {
+                    $('#processAllDOM').prop("checked", true);
+                    $('#processPendingDOM').prop("checked", false);
+
+                    $('#processAll').val(true);
+                    $('#processPending').val(false);
+                }
+                else if (type === 'processPending') {
+                    $('#processAllDOM').prop("checked", false);
+                    $('#processPendingDOM').prop("checked", true);
+
+                    $('#processAll').val(false);
+                    $('#processPending').val(true);
+                }
+
+            },
+            initialProcessType: function () {
+                $('#processAllDOM').prop("checked", true);
+                $('#processPendingDOM').prop("checked", false);
+
+                $('#processAll').val(true);
+                $('#processPending').val(false);
+            },
+            resetProcessType: function () {
+                $('#processAllDOM').prop("checked", false);
+                $('#processPendingDOM').prop("checked", false);
+
+                $('#processAll').val('');
+                $('#processPending').val('');
+            },
+            revertReconcileProcess: function () {
+                var remittanceID = $("#RemittanceID").val();
+                var monthYear = $("#MonthYear").val();
+                var period = $("#Period").val();
+
+                var url = "../NationalJetFuelReconcileInvoice/RevertProcess";
+                var post;
+
+                if (remittanceID && monthYear && period) {
+                    ReconcileProcessController.blankTable();
+                    ReconcileProcessController.initialProcessType();
+
+                    // Send the data using post
+                    post = $.post(url, { RemittanceID: remittanceID, MonthYear: monthYear, Period: period });
+
+                    // Put the results in a div
+                    post.done(function (data) {
+                        if (data === '0') {
+                            ReconcileProcessController.showAlert('The reconcilation process has been reversed', 'El proceso de conciliación ha sido revertido', 'success', 'Success', 'Éxito');
+                        }
+                        if (data === '1') {
+                            ReconcileProcessController.showAlert('Remittance is closed', 'La remesa se encuentra cerrada', 'error', 'Error', 'Error');
+                        }
+                        if (data === '2') {
+                            ReconcileProcessController.showAlert('Different errors to invalid Equipment Number', 'Errores diferentes de matrículas no válidas', 'error', 'Error', 'Error');
+                        }
+
+                    });
+                }
+            },
+            selectPeriod: function () {
+                ReconcileProcessController.showAlert('You need to select a period', 'Es necesario seleccionar un período', 'info', 'Warning', 'Advertencia');
+            },
+            startReconcileProcess: function () {
+                var remittanceID = $("#RemittanceID").val();
+                var monthYear = $("#MonthYear").val();
+                var period = $("#Period").val();
+
+                var all = $("#processAll").val();
+                var pending = $("#processPending").val();
+                var url = "../NationalJetFuelReconcileInvoice/StartProcess";
+                var post;
+
+                if (remittanceID && monthYear && period) {
+                    ReconcileProcessController.blankTable();
+                    ReconcileProcessController.initialProcessType();
+
+                    // Send the data using post
+                    post = $.post(url, { RemittanceID: remittanceID, MonthYear: monthYear, Period: period, processAll: all, processPending: pending });
+
+                    // Put the results in a div
+                    post.done(function (data) {
+                        if (data === '0') {
+                            ReconcileProcessController.showAlert('The reconcilation process is complete', 'El proceso de conciliación ha finalizado', 'success', 'Success', 'Éxito');
+                        }
+                        if (data === '1') {
+                            ReconcileProcessController.showAlert('Remittance is closed', 'La remesa se encuentra cerrada', 'error', 'Error', 'Error');
+                        }
+                        if (data === '2') {
+                            ReconcileProcessController.showAlert('Different errors to invalid Equipment Number', 'Errores diferentes de matrículas no válidas', 'error', 'Error', 'Error');
+                        }
+                    });
+                }
+            },
+            resetComboboxPeriod: function () {
+                $("#PeriodCode").val('');
+            },
+            setInitialActions: function () {
+                $("#btnRevertJetFuelProcess").prop('disabled', false);
+                $("#btnStartJetFuelProcess").prop('disabled', false);
+                $("#processRadio").show();
+                $("#lbAll").show();
+                $("#lbPen").show();
+                ReconcileProcessController.selectProcessType("processAll")
+            },
+            setupAjax: function () {
+                $.ajaxSetup({ cache: false, async: false });
+            },
+            showAlert: function (messageEn, messageEs, alertType, titleEn, tittleEs) {
+                //"warning", "error", "success" and "info".
+                alertType = alertType || "warning";
+                if (currentLang.includes("es")) {
+                    swal({
+                        title: tittleEs,
+                        text: messageEs,
+                        type: alertType,
+                        confirmButtonColor: "#83217a",
+                        animation: "slide-from-top",
+                        closeOnConfirm: false
+                    },
+                    function (isConfirm) {
+                        if (isConfirm) { location.reload(); }
+                    })
+                }
+                else {
+                    swal({
+                        title: titleEn,
+                        text: messageEn,
+                        type: alertType,
+                        confirmButtonColor: "#83217a",
+                        animation: "slide-from-top",
+                        timer: 12000
+                    })
+                }
+            },
+            startDoc: function () {
+                if (!String.prototype.includes) {
+                    String.prototype.includes = function () {
+                        'use strict';
+                        return String.prototype.indexOf.apply(this, arguments) !== -1;
+                    };
+                }
+                ReconcileProcessController.setupAjax();
+                ReconcileProcessController.initialProcessType();
+            }
+        }
+        $(document).ready(ReconcileProcessController.startDoc);
+        window.onerror = function (message, url, linenumber) {
+            console.log('Message: ' + message);
+            console.log('URL: ' + url);
+            console.log('Line: ' + linenumber);
+        }
+    </script>
+}

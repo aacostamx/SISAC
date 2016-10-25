@@ -1,0 +1,49 @@
+﻿@model VOI.SISAC.Web.Models.VO.Finance.CurrencyVO
+
+@{
+    ViewBag.Title = VOI.SISAC.Web.Resources.Resource.Add;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.Currency</p>
+        <p class="subtitle_h3_ancillarie">@VOI.SISAC.Web.Resources.Resource.Add</p>
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    @Html.LabelFor(model => model.CurrencyCode, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.CurrencyCode, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarMaxLengthAlfabetico(event, this, 3, 1);", @onkeyup = "return commonFunctions.validarMaxLengthAlfabetico(event, this, 3, 1)" } })
+                    @Html.ValidationMessageFor(model => model.CurrencyCode, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    @Html.LabelFor(model => model.CurrencyName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.CurrencyName, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 40);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 40)" } })
+                    @Html.ValidationMessageFor(model => model.CurrencyName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <br />
+                    <input type="reset" class="btnVolaris" value="@VOI.SISAC.Web.Resources.Resource.Back" onclick="@("location.href='" + @Url.Action("Index", "Currency") + "'")"/>
+                    <input type="submit" value="@VOI.SISAC.Web.Resources.Resource.Create" class="btnVolaris"/>
+                    <br />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/CommonFunctions")
+}
+

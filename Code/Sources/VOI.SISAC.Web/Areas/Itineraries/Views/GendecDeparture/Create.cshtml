@@ -1,0 +1,405 @@
+﻿@model VOI.SISAC.Web.Models.VO.Itineraries.GendecDepartureVO
+
+@{
+    ViewBag.Title = Resource.GendecDepartureTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cultureForm = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+    var CrewType = this.ViewBag.CrewType as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var Crew = this.ViewBag.Crew as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var users = this.ViewBag.Users as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    bool isClose = Model == null ? false : Model.Closed;
+    var totalCrews = Model.Itinerary.Airplane == null ? 0 : Model.Itinerary.Airplane.CrewCapacity;
+    var totalPassengers = Model.Itinerary.Airplane == null ? 0 : Model.Itinerary.Airplane.PassengerCapacity;
+    var totalCrew = Model.Crews == null ? 0 : Model.Crews.Count;
+
+}
+@Styles.Render("~/Content/bootstraptablecss")
+@Styles.Render("~/bundles/SweetAlertCSS")
+@Styles.Render("~/Content/bootstrapdtimecss")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    @Html.Partial("_UnauthorizedActionModal")
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.GendecDepartureTitle</p>
+    </div>
+
+    @if (Model.Itinerary != null)
+    {
+        @Html.Partial("_FlightInformation", Model.Itinerary)
+    }
+    <br />
+
+    @using (Html.BeginForm("OpenGendec", "GendecDeparture", FormMethod.Post, new { name = "formGendec", id = "formGendec" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @{ Html.EnableClientValidation(false); }
+                <br />
+                @Html.HiddenFor(model => model.Sequence)
+                @Html.HiddenFor(model => model.AirlineCode)
+                @Html.HiddenFor(model => model.FlightNumber)
+                @Html.HiddenFor(model => model.Itinerarykey)
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingCrews">
+                            <h4 class="panel-title subtitle_h5_panel_title" onclick="GendecController.toggle_visibility('dvCrew');">
+                                <strong>@VOI.SISAC.Web.Resources.Resource.CrewGendecTitle</strong>
+                            </h4>
+                        </div>
+                        <div class="row" id="dvCrew">
+                            <div class="row">
+                                <div class="col-xs-10 col-sm-7 col-md-7 col-lg-7">
+                                    @Html.Label("", VOI.SISAC.Web.Resources.Resource.Crew, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    <div class="input-group">
+                                        @Html.DropDownListFor(model => model.Crews.FirstOrDefault().CrewType.CrewTypeName, CrewType.Select(h => new SelectListItem
+                                   {
+                                       Text = h.Description,
+                                       Value = h.Id
+                                   }), Resource.SelectItem, new { @class = "inputForm form-control", @id = "ddlCrew" })
+                                        <div class="input-group-addon mousePointer" id="AddCrew" onclick="GendecController.GetCrewsGendec()"><i class="fa fa-plus fa-fw"></i>@Resource.Add</div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        @*Comienza el Grid para Tripulación*@
+                        <table id="tbCrew"
+                               class="table"
+                               data-unique-id="CrewID"
+                               data-toggle="table"
+                               data-mobile-responsive="true">
+
+                            <thead>
+                                <tr>
+                                    <th data-field="CrewID" data-align="center" data-halign="center" data-visible="false" data-formatter="GendecController.AddAttributeCrewID">
+                                        <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().CrewID)</strong>
+                                    </th>
+                                    <th data-field="CrewTypeId" data-align="center" data-halign="center">
+                                        <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().CrewTypeID)</strong>
+                                    </th>
+                                    <th data-field="NickName" data-align="center" data-halign="center">
+                                        <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().NickName)</strong>
+                                    </th>
+                                    <th data-field="LastName" data-align="center" data-halign="center">
+                                        <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().LastName)</strong>
+                                    </th>
+                                    <th data-field="PassportNumber" data-align="center" data-halign="center">
+                                        <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().PassportNumber)</strong>
+                                    </th>
+                                    <th data-field="DateOfBird" data-align="center" data-halign="center" class="ToShorDate">
+                                        <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().DateOfBird)</strong>
+                                    </th>
+                                    <th data-field="Gender" data-align="center" data-halign="center">
+                                        <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().Gender)</strong>
+                                    </th>
+                                    <th data-field="Citizenship" data-align="center" data-halign="center">
+                                        <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().Citizenship)</strong>
+                                    </th>
+                                    <th data-field="Actions" data-align="center" data-halign="center">
+                                        <strong>@Resource.Actions</strong>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Crews != null)
+                                {
+                                    foreach (var item in Model.Crews)
+                                    {
+                                        if (item.CrewTypeID == "CAP" || item.CrewTypeID == "COP")
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.CrewID)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.CrewTypeID)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.NickName)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.LastName)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.PassportNumber)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.DateOfBird, "ToShortDate")
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Gender)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Citizenship)
+                                                </td>
+                                                <td>
+                                                    @if (!isClose)
+                                                    {
+                                                        <button id="deleteCrew" class="btn btn-default" type="button" name="Delete" title="@Resource.Delete" onclick="location.href='@Url.Action("Delete", "GendecDeparture", new { CrewID = item.CrewID, Sequence = Model.Sequence, AirlineCode = Model.AirlineCode, FlightNumber = Model.FlightNumber, Itinerarykey = Model.Itinerarykey })'">
+                                                            <i class="fa fa-trash-o fa-fw"></i>
+                                                        </button>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                        @*Termina el Grid para Tripulación*@
+
+                    </div>
+                    <br />
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingSob">
+                            <h4 class="panel-title subtitle_h5_panel_title" onclick="GendecController.toggle_visibility('dvCrewSob');">
+                                <strong>@VOI.SISAC.Web.Resources.Resource.stewardessGendecTitle</strong>
+                            </h4>
+                        </div>
+                        <div class="row" id="dvCrewSob">
+                            <div class="row">
+                                <div class="col-xs-10 col-sm-7 col-md-7 col-lg-7">
+                                    @Html.Label("", VOI.SISAC.Web.Resources.Resource.Crew, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    <div class="input-group">
+                                        @Html.DropDownListFor(model => model.Crews.FirstOrDefault().CrewID, Crew.Select(h => new SelectListItem
+                                   {
+                                       Text = h.Description,
+                                       Value = h.Id
+                                   }), Resource.SelectItem, new { @class = "inputForm form-control", @id = "ddlCrewSob" })
+                                        <div class="input-group-addon mousePointer" id="AddSob" onclick="GendecController.GetCrewsSobGendec()"><i class="fa fa-plus fa-fw"></i>@Resource.Add</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*Comienza el Grid para Tripulación*@
+                    <table id="tbCrewSob"
+                           data-unique-id="CrewID"
+                           class="table"
+                           data-toggle="table"
+                           data-mobile-responsive="true">
+
+                        <thead>
+                            <tr>
+                                <th data-field="CrewID" data-align="center" data-halign="center" data-visible="false" data-formatter="GendecController.AddAttributeCrewIDSob">
+                                    <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().CrewID)</strong>
+                                </th>
+                                <th data-field="CrewTypeId" data-align="center" data-halign="center">
+                                    <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().CrewTypeID)</strong>
+                                </th>
+                                <th data-field="NickName" data-align="center" data-halign="center">
+                                    <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().NickName)</strong>
+                                </th>
+                                <th data-field="LastName" data-align="center" data-halign="center">
+                                    <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().LastName)</strong>
+                                </th>
+                                <th data-field="PassportNumber" data-align="center" data-halign="center">
+                                    <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().PassportNumber)</strong>
+                                </th>
+                                <th data-field="DateOfBird" data-align="center" data-halign="center" class="ToShorDate">
+                                    <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().DateOfBird)</strong>
+                                </th>
+                                <th data-field="Gender" data-align="center" data-halign="center">
+                                    <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().Gender)</strong>
+                                </th>
+                                <th data-field="Citizenship" data-align="center" data-halign="center">
+                                    <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().Citizenship)</strong>
+                                </th>
+                                <th data-field="Actions" data-align="center" data-halign="center">
+                                    <strong>@Resource.Actions</strong>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Crews != null)
+                            {
+                                foreach (var item in Model.Crews)
+                                {
+                                    if (item.CrewTypeID == "SOB" || item.CrewTypeID == "JDC")
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CrewID)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CrewTypeID)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.NickName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.LastName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.PassportNumber)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.DateOfBird, "ToShortDate")
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Gender)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Citizenship)
+                                            </td>
+                                            <td>
+                                                @if (!isClose)
+                                                {
+                                                    <button id="deleteSob" class="btn btn-default" type="button" name="Delete" title="@Resource.Delete" onclick="location.href='@Url.Action("Delete", "GendecDeparture", new { CrewID = item.CrewID, Sequence = Model.Sequence, AirlineCode = Model.AirlineCode, FlightNumber = Model.FlightNumber, Itinerarykey = Model.Itinerarykey })'">
+                                                        <i class="fa fa-trash-o fa-fw"></i>
+                                                    </button>
+                                                }
+
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    @*Termina el Grid para Tripulación*@
+                    <br />
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingthree">
+                            <h4 class="panel-title subtitle_h5_panel_title" onclick="GendecController.toggle_visibility('dvPassenger');">
+                                <strong>@Resource.PassengerManifestSummary</strong>
+                            </h4>
+                        </div>
+                        <div id="dvPassenger">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.TotalPax, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    @Html.EditorFor(model => model.TotalPax, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0" } })
+                                    @Html.HiddenFor(model => model.Itinerary.Airplane.PassengerCapacity)
+                                    @*@Html.ValidationMessageFor(model => model.TotalPax, "", new { @class = "text-danger text-danger-error" })*@
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.GateNumber, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    @Html.EditorFor(model => model.GateNumber, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 8);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 8)" } })
+                                    @*@Html.ValidationMessageFor(model => model.GateNumber, "", new { @class = "text-danger text-danger-error" })*@
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.ActualTimeOfDeparture, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    @Html.EditorFor(model => model.ActualTimeOfDeparture, new { htmlAttributes = new { @class = "form-control" } })
+                                    @* @Html.ValidationMessageFor(model => model.ActualTimeOfDeparture, "", new { @class = "text-danger text-danger-error" })*@
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.TotalCrew, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    @Html.EditorFor(model => (model.TotalCrew), new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0" } })
+                                    @*@Html.ValidationMessageFor(model => model.TotalCrew, "", new { @class = "text-danger text-danger-error" })*@
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.ManifestNumber, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    @Html.EditorFor(model => model.ManifestNumber, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 8);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 8)" } })
+                                    @*@Html.ValidationMessageFor(model => model.ManifestNumber, "", new { @class = "text-danger text-danger-error" })*@
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.BlockTime, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                    @Html.EditorFor(model => model.BlockTime, new { htmlAttributes = new { @class = "form-control" } })
+                                    @*@Html.ValidationMessageFor(model => model.BlockTime, "", new { @class = "text-danger text-danger-error" })*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingFour">
+                            <h4 class="panel-title subtitle_h5_panel_title">
+                                <strong>@Resource.Autorization</strong>
+                            </h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                                @Html.LabelFor(model => model.Member, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                <div class="styled-select">
+                                    @Html.DropDownListFor(model => model.Member, users.Select(h => new SelectListItem
+                               {
+                                   Text = h.Description,
+                                   Value = h.Id
+                               }), @VOI.SISAC.Web.Resources.Resource.SelectItem, new { htmlAttributes = new { @class = "inputForm form-control" } })
+                                </div>
+                            </div>
+                            <div class="col-xs-3 col-sm-12 col-md-3 col-lg-2">
+                                <br />
+                                @Html.LabelFor(model => model.Remarks, new { @class = "subtitle_h5 control-label overflow_hidden" })
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
+                                <br />
+                                @Html.TextAreaFor(model => model.Remarks, 5, 1000, new { @name = "Observation", @class = "form-control", @style = "resize: none;", @onkeypress = "return commonFunctions.validarComentarios(event, this);", @onkeyup = "return commonFunctions.validarComentarios(event, this)" })
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="col-md-12 col-lg-12 text-center">
+                        <button id="btnBack" type="button" class="btn btn-default" name="Back" title="@Resource.Back" onclick="location.href='@Url.Action("Index", "Itinerary", new { area = "Itineraries" })'">
+                            &nbsp;@Resource.Back
+                        </button>
+                        @if (User.IsInRole("GENDECDEP-OPEN"))
+                        {
+                            if (isClose)
+                            {
+                                <input class="btn btn-default" type="submit" value="@Resource.OpenManifest" name="SendEmail" />
+                            }
+                        }
+                        @if (User.IsInRole("GENDECDEP-UPD"))
+                        {
+                            if (!isClose)
+                            {
+                                <input id="Save" class="btn btn-default" type="submit" value="@Resource.Save" name="Save" />
+                            }
+                        }
+                        @if (User.IsInRole("GENDECDEP-CLOSE"))
+                        {
+                            if (!isClose)
+                            {
+                                <input id="Close" class="btn btn-default" type="submit" value="@Resource.Close" name="Close" />
+                            }
+                        }
+                        @if (User.IsInRole("GENDECDEP-PRINTREP") && Model.FlightNumber != null)
+                        {
+                            <button id="btnPrint" type="button" class="btn btn-default" name="Print" title="@Resource.Print" onclick="location.href='@Url.Action("Print", "GendecDeparture", new { Area = "Itineraries", Sequence = Model.Sequence, AirlineCode = Model.AirlineCode, FlightNumber = Model.FlightNumber, ItineraryKey = Model.Itinerarykey })'">
+                                &nbsp;@Resource.Export
+                            </button>
+                        }
+                    </div>
+                </div>
+                @{ Html.EnableClientValidation(true); }
+            </div>
+
+        </div>
+                    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+    @Scripts.Render("~/bundles/JSDateTimeValidate")
+    @Scripts.Render("~/bundles/GendecJS")
+    @Scripts.Render("~/bundles/CommonFunctions")
+    @Scripts.Render("~/bundles/SweetAlertJS")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+
+    <script src="~/Scripts/bootstrap-table.js"></script>
+    <script type="text/javascript">
+        var currentLang = '@cultureForm.ToString()';
+        var isClose = '@isClose';
+        var totalPassengers = '@totalPassengers';
+        var totalCrews = '@totalCrews';
+        var totalCrew = '@totalCrew';
+    </script>
+
+    <script>
+        $(function () {
+            $('#ActualTimeOfDeparture, #BlockTime').datetimepicker({
+                format: 'HH:mm'
+            });
+        });
+    </script>
+}

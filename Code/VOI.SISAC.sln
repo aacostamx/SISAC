@@ -1,0 +1,147 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. DAL", "5. DAL", "{40E5618A-4BB4-431E-8C3D-6907DF49C5F5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Domain", "4. Domain", "{0DDD2613-96B6-4560-AD2D-FD1346EAC654}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Business", "3. Business", "{234D6761-F2EC-4460-B48F-46107D3BFFF5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Services", "2. Services", "{514E389C-2863-4778-ABD3-DA356370BD16}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Presentation", "1. Presentation", "{A84D5137-54A6-454C-8FC9-7519E9E3010C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VOI.SISAC.Web", "Sources\VOI.SISAC.Web\VOI.SISAC.Web.csproj", "{9CB7CCE9-9E0B-447B-82DB-492953C5A2DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VOI.SISAC.Business", "Sources\VOI.SISAC.Business\VOI.SISAC.Business.csproj", "{BC528563-1AE7-46BC-BF27-DBBC811918A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VOI.SISAC.Entities", "Sources\VOI.SISAC.Entities\VOI.SISAC.Entities.csproj", "{B5F8B0B8-963D-4D6B-BCB8-04F678F7EB2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VOI.SISAC.Dal", "Sources\VOI.SISAC.Dal\VOI.SISAC.Dal.csproj", "{DAFCEEDF-DF9E-424A-9B69-858EB36CA0F7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Binaries", "Binaries", "{09F214E1-AD96-4571-A30B-7DFE6ADADCC6}"
+	ProjectSection(SolutionItems) = preProject
+		Binaries\BootstrapTable.dll = Binaries\BootstrapTable.dll
+		Binaries\VolarisRules.ruleset = Binaries\VolarisRules.ruleset
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VOI.SISAC.Services", "Sources\VOI.SISAC.Services\VOI.SISAC.Services\VOI.SISAC.Services.csproj", "{14E5A7C9-D76F-47D3-AB10-94E66896C9BA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{37C7937B-518E-40C8-96E5-226064D57313}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VOI.SISAC.WinServices", "Sources\VOI.SISAC.WinServices\VOI.SISAC.WinServices.csproj", "{952C9D08-1C5B-4D67-BFC0-079DCEEA3553}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VOI.SISAC.TaskScheduler", "Sources\VOI.SISAC.TaskScheduler\VOI.SISAC.TaskScheduler\VOI.SISAC.TaskScheduler.csproj", "{24F1388A-9BC5-4A3A-8D5F-C4212A670668}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9CB7CCE9-9E0B-447B-82DB-492953C5A2DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CB7CCE9-9E0B-447B-82DB-492953C5A2DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CB7CCE9-9E0B-447B-82DB-492953C5A2DA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9CB7CCE9-9E0B-447B-82DB-492953C5A2DA}.Debug|x86.Build.0 = Debug|Any CPU
+		{9CB7CCE9-9E0B-447B-82DB-492953C5A2DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CB7CCE9-9E0B-447B-82DB-492953C5A2DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CB7CCE9-9E0B-447B-82DB-492953C5A2DA}.Release|x86.ActiveCfg = Release|Any CPU
+		{9CB7CCE9-9E0B-447B-82DB-492953C5A2DA}.Release|x86.Build.0 = Release|Any CPU
+		{BC528563-1AE7-46BC-BF27-DBBC811918A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC528563-1AE7-46BC-BF27-DBBC811918A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC528563-1AE7-46BC-BF27-DBBC811918A6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BC528563-1AE7-46BC-BF27-DBBC811918A6}.Debug|x86.Build.0 = Debug|Any CPU
+		{BC528563-1AE7-46BC-BF27-DBBC811918A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC528563-1AE7-46BC-BF27-DBBC811918A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC528563-1AE7-46BC-BF27-DBBC811918A6}.Release|x86.ActiveCfg = Release|Any CPU
+		{BC528563-1AE7-46BC-BF27-DBBC811918A6}.Release|x86.Build.0 = Release|Any CPU
+		{B5F8B0B8-963D-4D6B-BCB8-04F678F7EB2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5F8B0B8-963D-4D6B-BCB8-04F678F7EB2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5F8B0B8-963D-4D6B-BCB8-04F678F7EB2D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B5F8B0B8-963D-4D6B-BCB8-04F678F7EB2D}.Debug|x86.Build.0 = Debug|Any CPU
+		{B5F8B0B8-963D-4D6B-BCB8-04F678F7EB2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5F8B0B8-963D-4D6B-BCB8-04F678F7EB2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5F8B0B8-963D-4D6B-BCB8-04F678F7EB2D}.Release|x86.ActiveCfg = Release|Any CPU
+		{B5F8B0B8-963D-4D6B-BCB8-04F678F7EB2D}.Release|x86.Build.0 = Release|Any CPU
+		{DAFCEEDF-DF9E-424A-9B69-858EB36CA0F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAFCEEDF-DF9E-424A-9B69-858EB36CA0F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAFCEEDF-DF9E-424A-9B69-858EB36CA0F7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DAFCEEDF-DF9E-424A-9B69-858EB36CA0F7}.Debug|x86.Build.0 = Debug|Any CPU
+		{DAFCEEDF-DF9E-424A-9B69-858EB36CA0F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAFCEEDF-DF9E-424A-9B69-858EB36CA0F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAFCEEDF-DF9E-424A-9B69-858EB36CA0F7}.Release|x86.ActiveCfg = Release|Any CPU
+		{DAFCEEDF-DF9E-424A-9B69-858EB36CA0F7}.Release|x86.Build.0 = Release|Any CPU
+		{14E5A7C9-D76F-47D3-AB10-94E66896C9BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14E5A7C9-D76F-47D3-AB10-94E66896C9BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14E5A7C9-D76F-47D3-AB10-94E66896C9BA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{14E5A7C9-D76F-47D3-AB10-94E66896C9BA}.Debug|x86.Build.0 = Debug|Any CPU
+		{14E5A7C9-D76F-47D3-AB10-94E66896C9BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14E5A7C9-D76F-47D3-AB10-94E66896C9BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14E5A7C9-D76F-47D3-AB10-94E66896C9BA}.Release|x86.ActiveCfg = Release|Any CPU
+		{14E5A7C9-D76F-47D3-AB10-94E66896C9BA}.Release|x86.Build.0 = Release|Any CPU
+		{952C9D08-1C5B-4D67-BFC0-079DCEEA3553}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{952C9D08-1C5B-4D67-BFC0-079DCEEA3553}.Debug|x86.ActiveCfg = Debug|x86
+		{952C9D08-1C5B-4D67-BFC0-079DCEEA3553}.Debug|x86.Build.0 = Debug|x86
+		{952C9D08-1C5B-4D67-BFC0-079DCEEA3553}.Release|Any CPU.ActiveCfg = Release|x86
+		{952C9D08-1C5B-4D67-BFC0-079DCEEA3553}.Release|x86.ActiveCfg = Release|x86
+		{952C9D08-1C5B-4D67-BFC0-079DCEEA3553}.Release|x86.Build.0 = Release|x86
+		{24F1388A-9BC5-4A3A-8D5F-C4212A670668}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24F1388A-9BC5-4A3A-8D5F-C4212A670668}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24F1388A-9BC5-4A3A-8D5F-C4212A670668}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{24F1388A-9BC5-4A3A-8D5F-C4212A670668}.Debug|x86.Build.0 = Debug|Any CPU
+		{24F1388A-9BC5-4A3A-8D5F-C4212A670668}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24F1388A-9BC5-4A3A-8D5F-C4212A670668}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24F1388A-9BC5-4A3A-8D5F-C4212A670668}.Release|x86.ActiveCfg = Release|Any CPU
+		{24F1388A-9BC5-4A3A-8D5F-C4212A670668}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9CB7CCE9-9E0B-447B-82DB-492953C5A2DA} = {A84D5137-54A6-454C-8FC9-7519E9E3010C}
+		{BC528563-1AE7-46BC-BF27-DBBC811918A6} = {234D6761-F2EC-4460-B48F-46107D3BFFF5}
+		{B5F8B0B8-963D-4D6B-BCB8-04F678F7EB2D} = {0DDD2613-96B6-4560-AD2D-FD1346EAC654}
+		{DAFCEEDF-DF9E-424A-9B69-858EB36CA0F7} = {40E5618A-4BB4-431E-8C3D-6907DF49C5F5}
+		{14E5A7C9-D76F-47D3-AB10-94E66896C9BA} = {514E389C-2863-4778-ABD3-DA356370BD16}
+		{952C9D08-1C5B-4D67-BFC0-079DCEEA3553} = {37C7937B-518E-40C8-96E5-226064D57313}
+		{24F1388A-9BC5-4A3A-8D5F-C4212A670668} = {37C7937B-518E-40C8-96E5-226064D57313}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://hdq-pegaso:8080/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Sources\\VOI.SISAC.Business\\VOI.SISAC.Business.csproj
+		SccProjectTopLevelParentUniqueName1 = VOI.SISAC.sln
+		SccProjectName1 = Sources/VOI.SISAC.Business
+		SccLocalPath1 = Sources\\VOI.SISAC.Business
+		SccProjectUniqueName2 = Sources\\VOI.SISAC.Dal\\VOI.SISAC.Dal.csproj
+		SccProjectTopLevelParentUniqueName2 = VOI.SISAC.sln
+		SccProjectName2 = Sources/VOI.SISAC.Dal
+		SccLocalPath2 = Sources\\VOI.SISAC.Dal
+		SccProjectUniqueName3 = Sources\\VOI.SISAC.Entities\\VOI.SISAC.Entities.csproj
+		SccProjectTopLevelParentUniqueName3 = VOI.SISAC.sln
+		SccProjectName3 = Sources/VOI.SISAC.Entities
+		SccLocalPath3 = Sources\\VOI.SISAC.Entities
+		SccProjectUniqueName4 = Sources\\VOI.SISAC.Web\\VOI.SISAC.Web.csproj
+		SccProjectTopLevelParentUniqueName4 = VOI.SISAC.sln
+		SccProjectName4 = Sources/VOI.SISAC.Web
+		SccLocalPath4 = Sources\\VOI.SISAC.Web
+		SccProjectUniqueName5 = Sources\\VOI.SISAC.Services\\VOI.SISAC.Services\\VOI.SISAC.Services.csproj
+		SccProjectTopLevelParentUniqueName5 = VOI.SISAC.sln
+		SccProjectName5 = Sources/VOI.SISAC.Services/VOI.SISAC.Services
+		SccLocalPath5 = Sources\\VOI.SISAC.Services\\VOI.SISAC.Services
+		SccProjectUniqueName6 = Sources\\VOI.SISAC.WinServices\\VOI.SISAC.WinServices.csproj
+		SccProjectTopLevelParentUniqueName6 = VOI.SISAC.sln
+		SccProjectName6 = Sources/VOI.SISAC.WinServices
+		SccLocalPath6 = Sources\\VOI.SISAC.WinServices
+		SccProjectUniqueName7 = Sources\\VOI.SISAC.TaskScheduler\\VOI.SISAC.TaskScheduler\\VOI.SISAC.TaskScheduler.csproj
+		SccProjectTopLevelParentUniqueName7 = VOI.SISAC.sln
+		SccProjectName7 = Sources/VOI.SISAC.TaskScheduler/VOI.SISAC.TaskScheduler
+		SccLocalPath7 = Sources\\VOI.SISAC.TaskScheduler\\VOI.SISAC.TaskScheduler
+	EndGlobalSection
+EndGlobal

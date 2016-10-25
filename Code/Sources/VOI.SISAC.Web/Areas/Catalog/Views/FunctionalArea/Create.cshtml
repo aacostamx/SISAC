@@ -1,0 +1,46 @@
+﻿@model VOI.SISAC.Web.Models.VO.Catalog.FunctionalAreaVO
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <p class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.FunctionalAreaTitle</p><p class="subtitle_h3_ancillarie">@VOI.SISAC.Web.Resources.Resource.Create</p>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    @Html.LabelFor(model => model.FunctionalAreaName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.FunctionalAreaName, new { htmlAttributes = new { @class = "inputForm form-control", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 100);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 100)"} })
+                    @Html.ValidationMessageFor(model => model.FunctionalAreaName, "", new { @class = "text-danger" })
+                </div>   
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    @Html.LabelFor(model => model.FunctionalAreaDescription, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.FunctionalAreaDescription, new { htmlAttributes = new { @class = "inputForm form-control", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 100);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 100)"} })
+                    @Html.ValidationMessageFor(model => model.FunctionalAreaDescription, "", new { @class = "text-danger" })
+                </div>          
+            </div>
+        </div> 
+        <br />
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <br />
+                <input onclick="location.href='@Url.Action("Index","FunctionalArea")    '" type="reset" class="btnVolaris" value="@VOI.SISAC.Web.Resources.Resource.Back">
+                <input type="submit" value="@VOI.SISAC.Web.Resources.Resource.Save" class="btnVolaris">                   
+            </div>
+        </div>         
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/CommonFunctions")
+}
+

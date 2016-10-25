@@ -1,0 +1,362 @@
+﻿@model IEnumerable<VOI.SISAC.Web.Models.VO.Finance.AirportServiceContractVO>
+
+<table id="tbAirportServiceContract"
+    class="table"
+    data-toolbar="#toolbar"
+    data-toggle="table"
+    data-show-export="true"
+    data-export-types="['excel']"
+    data-show-columns="true"
+    data-search="true"
+    data-show-toggle="true"
+    data-show-pagination-switch="true"
+    data-mobile-responsive="true"
+    data-pagination="true"
+    data-page-size="10"
+    data-export-data-type="all">
+    <thead>
+        <tr>
+            @if (User.IsInRole("AIRPSERVCN-VIE")
+                || User.IsInRole("AIRPSERVCN-DEL")
+                || User.IsInRole("AIRPSERVCN-UPD")
+                || User.IsInRole("AIRPSERVCN-RATE")
+                || User.IsInRole("AIRPSERVCN-INC"))
+            {
+                <th data-field="Actions" data-align="center" data-halign="center"
+                    data-formatter="AirportServiceContract.actionsButtons">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
+                </th>
+            }
+            <th data-field="EffectiveDate" data-halign="center" data-align="center" data-sortable="true">
+                <strong>@Html.DisplayNameFor(model => model.EffectiveDate)</strong>
+            </th>
+            @*Airline*@
+            <th data-field="AirlineCode" data-halign="center" data-align="center" data-visible="false">
+                <strong>@Html.DisplayNameFor(model => model.AirlineCode)</strong>
+            </th>
+            <th data-field="AirlineName" data-halign="center" data-align="center" data-sortable="true">
+                <strong>@Html.DisplayNameFor(model => model.AirlineName)</strong>
+            </th>
+            @*Airport*@
+            <th data-field="StationCode" data-halign="center" data-align="center" data-visible="false">
+                <strong>@Html.DisplayNameFor(model => model.StationCode)</strong>
+            </th>
+            <th data-field="StationName" data-halign="center" data-align="center" data-sortable="true">
+                <strong>@Html.DisplayNameFor(model => model.StationName)</strong>
+            </th>
+            @*Service*@
+            <th data-field="ServiceCode" data-halign="center" data-align="center" data-visible="false">
+                <strong>@Html.DisplayNameFor(model => model.ServiceCode)</strong>
+            </th>
+            <th data-field="ServiceName" data-halign="center" data-align="center" data-sortable="true">
+                <strong>@Html.DisplayNameFor(model => model.ServiceName)</strong>
+            </th>
+            @*Provider*@
+            <th data-field="ProviderNumber" data-halign="center" data-align="center" data-visible="false">
+                <strong>@Html.DisplayNameFor(model => model.ProviderNumber)</strong>
+            </th>
+            <th data-field="ProviderName" data-halign="center" data-align="center" data-sortable="true">
+                <strong>@Html.DisplayNameFor(model => model.ProviderName)</strong>
+            </th>
+            @*Cost Center*@
+            <th data-field="CostCenterNumber" data-halign="center" data-align="center" data-visible="false">
+                <strong>@Html.DisplayNameFor(model => model.CostCenterNumber)</strong>
+            </th>
+            <th data-field="CCName" data-halign="center" data-align="center" data-sortable="true">
+                <strong>@Html.DisplayNameFor(model => model.CCName)</strong>
+            </th>
+            @*Rate*@
+            <th data-field="Rate" data-halign="center" data-align="center" data-sortable="true">
+                <strong>@Html.DisplayNameFor(model => model.Rate)</strong>
+            </th>
+            @*Currency*@
+            <th data-field="CurrencyName" data-halign="center" data-align="center" data-sortable="true">
+                <strong>@Html.DisplayNameFor(model => model.CurrencyName)</strong>
+            </th>
+            <th data-field="AccountingAccountName" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                <strong>@Html.DisplayNameFor(model => model.AccountingAccountName)</strong>
+            </th>
+            <th data-field="LiabilityAccountName" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                <strong>@Html.DisplayNameFor(model => model.LiabilityAccountName)</strong>
+            </th>
+            <th data-field="OperationName" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                <strong>@Html.DisplayNameFor(model => model.OperationName)</strong>
+            </th>
+            <th data-field="ServiceType" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                <strong>@Html.DisplayNameFor(model => model.ServiceTypeName)</strong>
+            </th>
+            @*Airport Tax*@
+            <th data-field="AirportTaxName" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                <strong>@Html.DisplayNameFor(model => model.AirportTaxName)</strong>
+            </th>
+            <th data-field="AirportFeeValue" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                <strong>@Resource.AirportTaxValue</strong>
+            </th>
+            @*Local Tax*@
+            <th data-field="LocalTaxName" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                <strong>@Html.DisplayNameFor(model => model.LocalTaxName)</strong>
+            </th>
+            <th data-field="LocalTaxValue" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                <strong>@Resource.LocalTaxValue</strong>
+            </th>
+            @*State tax*@
+            <th data-field="StateTaxName" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                <strong>@Html.DisplayNameFor(model => model.StateTaxName)</strong>
+            </th>
+            <th data-field="StateTaxValue" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                <strong>@Resource.StateTaxValue</strong>
+            </th>
+            @*Federal tax*@
+            <th data-field="FederalTaxName" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                <strong>@Html.DisplayNameFor(model => model.FederalTaxName)</strong>
+            </th>
+            <th data-field="FederalTaxValue" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                <strong>@Resource.FederalTaxValue</strong>
+            </th>
+
+            <th data-field="AirplanetWeightFlag" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                <strong>@Html.DisplayNameFor(model => model.AirplanetWeightFlag)</strong>
+            </th>
+
+            <th data-field="AirplaneWeightName" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                <strong>@Html.DisplayNameFor(model => model.AirplaneWeightName)</strong>
+            </th>
+            <th data-field="AirplaneWeightUnitName" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                <strong>@Html.DisplayNameFor(model => model.AirplaneWeightUnitName)</strong>
+            </th>
+
+            <th data-field="AirplaneWeightMultiplier" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                <strong>@Html.DisplayNameFor(model => model.AirplaneWeightMultiplier)</strong>
+            </th>
+            <th data-field="MultiRateFlag" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                <strong>@Html.DisplayNameFor(model => model.MultiRateFlag)</strong>
+            </th>
+
+            <th data-field="ServiceRecordFlag" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                <strong>@Html.DisplayNameFor(model => model.ServiceRecordFlag)</strong>
+            </th>
+            <th data-field="CalculationTypeName" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                <strong>@Html.DisplayNameFor(model => model.CalculationTypeName)</strong>
+            </th>
+            @if (this.ViewBag.AdvanceSearchSubtitle != null)
+            {
+                <th data-field="Status" data-halign="center" data-align="center">
+                    <strong>@Html.DisplayNameFor(model => model.Status)</strong>
+                </th>            
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+            <tr>
+                @*<td id="state" style="width: 1px;"></td>*@
+                @if (User.IsInRole("AIRPSERVCN-VIE")
+                    || User.IsInRole("AIRPSERVCN-DEL")
+                    || User.IsInRole("AIRPSERVCN-UPD")
+                    || User.IsInRole("AIRPSERVCN-RATE")
+                    || User.IsInRole("AIRPSERVCN-INC"))
+                {
+                    <td id="Actions"></td>
+                }
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.EffectiveDate, "ToShortDate")
+                </td>
+                @*Airline*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.AirlineCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AirlineName)
+                </td>
+                @*Airport*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.StationCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StationName)
+                </td>
+                @*Service*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServiceCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServiceName)
+                </td>
+                @*Provider*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProviderNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProviderName)
+                </td>
+                @*Cost Center*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.CostCenterNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CCName)
+                </td>
+                @*Rate*@
+                <td>
+                    <span>$</span>
+                    @Html.DisplayFor(modelItem => item.Rate)
+                </td>
+                @*Currency*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.CurrencyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountingAccountName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LiabilityAccountName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OperationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServiceTypeName)
+                </td>
+                @*Airport tax*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.AirportTaxName)
+                </td>
+                <td>
+                    @if (item.AirportFeeFlag)
+                    {
+                        @Html.DisplayFor(modelItem => item.AirportFeeValue)
+                        <span>%</span>
+                    }
+                    else
+                    {
+                        <span>$</span> 
+                        @Html.DisplayFor(modelItem => item.AirportFeeValue)
+                    }
+                </td>
+                @*Local tax*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.LocalTaxName)
+                </td>
+                <td>
+                    @if (item.LocalTaxFlag)
+                    {
+                        @Html.DisplayFor(modelItem => item.LocalTaxValue)
+                        <span>%</span>
+                    }
+                    else
+                    {
+                        <span>$</span> 
+                        @Html.DisplayFor(modelItem => item.LocalTaxValue)
+                    }
+                </td>
+                @*State tax*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.StateTaxName)
+                </td>
+                <td>
+                    @if (item.StateTaxFlag)
+                    {
+                        @Html.DisplayFor(modelItem => item.StateTaxValue)
+                        <span>%</span>
+                    }
+                    else
+                    {
+                        <span>$</span> 
+                        @Html.DisplayFor(modelItem => item.StateTaxValue)
+                    }
+                </td>
+                @*Federal tax*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.FederalTaxName)
+                </td>
+                <td>
+                    @if (item.FederalTaxFlag)
+                    {
+                        @Html.DisplayFor(modelItem => item.FederalTaxValue)
+                        <span>%</span>
+                    }
+                    else
+                    {
+                        <span>$</span> 
+                        @Html.DisplayFor(modelItem => item.FederalTaxValue)
+                    }
+                </td>
+
+                <td>
+                    <input class="checkVolaris top-padding" data-val="true" type="checkbox" id="AirplanetWeightFlag" name="AirplanetWeightFlag" value="true" checked="@item.AirplanetWeightFlag" disabled="disabled"/>
+                    <label for="AirplanetWeightFlag" class="control_gris"><span></span></label>
+                    @Html.HiddenFor(modelItem => item.AirplanetWeightFlag)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.AirplaneWeightName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AirplaneWeightUnitName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.AirplaneWeightMultiplier)
+                </td>
+                <td>
+                    <input class="checkVolaris top-padding" data-val="true" type="checkbox" id="MultiRateFlag" name="MultiRateFlag" value="true" checked="@item.MultiRateFlag" disabled="disabled"/>
+                    <label for="MultiRateFlag" class="control_gris"><span></span></label>
+                    @Html.HiddenFor(modelItem => item.MultiRateFlag)
+                </td>
+                <td>
+                    <input class="checkVolaris top-padding" data-val="true" type="checkbox" id="ServiceRecordFlag" name="ServiceRecordFlag" value="true" checked="@item.ServiceRecordFlag" disabled="disabled"/>
+                    <label for="ServiceRecordFlag" class="control_gris"><span></span></label>
+                    @Html.HiddenFor(modelItem => item.ServiceRecordFlag)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CalculationTypeName)
+                </td>
+
+                @if (this.ViewBag.AdvanceSearchSubtitle != null)
+                {
+                    <td>
+                        <input class="checkVolaris top-padding" data-val="true" type="checkbox" id="Status" name="Status" value="true" checked="@item.Status" disabled="disabled"/>
+                        <label for="Status" class="control_gris"><span></span></label>
+                        @Html.HiddenFor(modelItem => item.Status)
+                    </td>
+                }
+            </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<!-- context menu -->
+<ul id="context-menu" class="dropdown-menu">
+    @if (User.IsInRole("AIRPSERVCN-VIE"))
+    { 
+        <li data-item="@Resource.Details"><a><i class="fa fa-eye fa-fw"></i>&nbsp;@Resource.Details</a></li>
+    }
+
+    @if (this.ViewBag.AdvanceSearchSubtitle == null)
+    {
+        if (User.IsInRole("AIRPSERVCN-UPD"))
+        { 
+        <li data-item="@Resource.Edit"><a><i class="fa fa-pencil fa-fw"></i>&nbsp;@Resource.Edit</a></li>
+        }
+
+        if (User.IsInRole("AIRPSERVCN-DEL"))
+        { 
+        <li data-item="@Resource.Delete"><a><i class="fa fa-trash-o fa-fw"></i>&nbsp;@Resource.Delete</a></li>
+        }
+
+        if (User.IsInRole("AIRPSERVCN-INC"))
+        { 
+        <li data-item="@Resource.Inactive"><a><i class="fa fa-file-text fa-fw"></i>&nbsp;@Resource.Inactive</a></li> 
+        }
+    }
+
+    @if (User.IsInRole("AIRPSERVCN-RATE"))
+    { 
+        <li data-item="@Resource.Rate"><a><i class="fa fa-clone fa-fw"></i>&nbsp;@Resource.NewRate</a></li>
+    }
+</ul>

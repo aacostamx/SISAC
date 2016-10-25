@@ -1,0 +1,15 @@
+﻿@model VOI.SISAC.Web.Models.VO.Process.NationalJetFuelProcessVO
+
+@{
+    var process = this.ViewBag.Process as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+}
+
+@Html.LabelFor(model => model.PeriodCode, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+<div class="styled-select">
+    @Html.DropDownListFor(model => model.PeriodCode, process.Select(h => new SelectListItem
+                    {
+                        Text = h.Description,
+                        Value = h.Id
+                    }), VOI.SISAC.Web.Resources.Resource.SelectItem, new { @class = "inputForm form-control", @onchange = "JetFuelProcessController.GetFuelProcess()" })
+</div>
+@Html.ValidationMessageFor(model => model.PeriodCode, "", new { @class = "text-danger text-danger-error" })

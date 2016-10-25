@@ -1,0 +1,198 @@
+﻿@{
+    var cultureForm = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+}
+
+<!-- Modal -->
+<div class="modal" id="modalPoliciesHistory" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="subtitle_h3_black">
+                    @VOI.SISAC.Web.Resources.Resource.AdvanceSearch
+                </h4>
+            </div>
+
+            <form id="formPoliciesHistory" name="formPoliciesHistory">
+                <div class="modal-body">
+                    <div id="divPolicyId" class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <label class="subtitle_h5">@VOI.SISAC.Web.Resources.Resource.PolicyId</label>
+                            <input type="text" id="NationalPolicyId" name="NationalPolicyId" class="form-control" onkeypress="return commonFunctions.validarNumeros(event);" onkeyup="return commonFunctions.validarNumeros(event)" />
+                        </div>
+
+                    </div>
+                    <div id="divPolicyRange" class="row" hidden>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <label class="subtitle_h5">@VOI.SISAC.Web.Resources.Resource.BeginPolicyId:</label>
+                            <input type="text" id="BeginPolicyId" name="BeginPolicyId" class="form-control" onkeypress="return commonFunctions.validarNumeros(event);" onkeyup="return commonFunctions.validarNumeros(event)" />
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <label class="subtitle_h5">@VOI.SISAC.Web.Resources.Resource.EndPolicyId:</label>
+                            <input type="text" id="EndPolicyId" name="EndPolicyId" class="form-control" onkeypress="return commonFunctions.validarNumeros(event);" onkeyup="return commonFunctions.validarNumeros(event)" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <input class="checkVolaris top-padding" type="checkbox" id="ccpolicyRange" name="ccpolicyRange" onclick="DisplayElement()" />
+                            <label for="ccpolicyRange" class="control_gris"><span></span>@VOI.SISAC.Web.Resources.Resource.SearchByRange</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class='col-xs-12 col-sm-12 col-md-6 col-lg-6'>
+                            <label class="subtitle_h5">@VOI.SISAC.Web.Resources.Resource.StartDate:</label>
+                            <div class="form-group">
+                                <div class='input-group date' id='dtpStartDate'>
+                                    <input id="StartCreationDate" name="StartCreationDate" type='text' class="form-control"
+                                           placeholder="@DateTime.Today.Date.ToString("yyyy/MM/dd")" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col-xs-12 col-sm-12 col-md-6 col-lg-6'>
+                            <label class="subtitle_h5">@VOI.SISAC.Web.Resources.Resource.EndDate:</label>
+                            <div class="form-group">
+                                <div class='input-group date' id='dtpEndDate'>
+                                    <input id="EndCreationDate" name="EndCreationDate" type='text' class="form-control" placeholder="@DateTime.Today.Date.ToString("yyyy/MM/dd")" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+                            <button type="button" class="btn btn-default" name="search" onclick="SearchPoliciesHistory();">
+                                <i class="fa fa-search"></i>
+                                @VOI.SISAC.Web.Resources.Resource.Search
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <i class="fa fa-times"></i>
+                    @VOI.SISAC.Web.Resources.Resource.Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var currentLang = '@cultureForm.ToString()';
+
+    $(function () {
+        $('#dtpStartDate').datetimepicker({
+            format: 'YYYY/MM/DD',
+            locale: currentLang,
+            showTodayButton: true,
+            showClose: true,
+            showClear: true
+        });
+        $('#dtpEndDate').datetimepicker({
+            format: 'YYYY/MM/DD',
+            locale: currentLang,
+            showTodayButton: true,
+            showClose: true,
+            showClear: true,
+            useCurrent: false
+        });
+        $("#dtpStartDate").on("dp.change", function (e) {
+            $('#dtpEndDate').data("DateTimePicker").minDate(e.date);
+        });
+        $("#dtpEndDate").on("dp.change", function (e) {
+            $('#dtpStartDate').data("DateTimePicker").maxDate(e.date);
+        });
+    });
+</script>
+
+<script>
+    function DisplayElement() {
+        if ($('#ccpolicyRange').is(':checked')) {
+            $('#divPolicyRange').show();
+            $('#divPolicyId').hide();
+            $('#NationalPolicyId').val('');
+        }
+        else {
+            $('#divPolicyRange').hide();
+            $('#divPolicyId').show();
+            $('#BeginPolicyId').val('');
+            $('#EndPolicyId').val('');
+        }
+    }
+</script>
+
+<script>
+    function SearchPoliciesHistory() {
+
+        var NationalPolicyId = $('#NationalPolicyId').val();
+        var BeginPolicyId = $('#BeginPolicyId').val();
+        var EndPolicyId = $('#EndPolicyId').val();
+        var StartCreationDate = $("#StartCreationDate").val();
+        var EndCreationDate = $("#EndCreationDate").val();
+
+
+        if (NationalPolicyId || (BeginPolicyId && EndPolicyId) || (StartCreationDate && EndCreationDate)) {
+            if ((BeginPolicyId && EndPolicyId) && BeginPolicyId >= EndPolicyId) {
+                showAlert('The initial range of the policy must be greater than the final', 'El rango inical de la póliza debe de ser mayor a la final', 'warning', 'Warning', 'Advertencia');
+                return;
+            }
+            if ((StartCreationDate && !EndCreationDate) || (!StartCreationDate && EndCreationDate)) {
+                showAlert('You need to add the two dates ranges', 'Es necesario agregar los dos rangos de fechas', 'warning', 'Warning', 'Advertencia');
+                return;
+            }
+            var url = '@Url.Action("Search", "NationalPolicyHistory")';
+            url = url.concat('?NationalPolicyId=' + $('#NationalPolicyId').val());
+            url = url.concat('&BeginPolicyId=' + $('#BeginPolicyId').val());
+            url = url.concat('&EndPolicyId=' + $('#EndPolicyId').val());
+            url = url.concat('&StartCreationDate=' + $('#StartCreationDate').val());
+            url = url.concat('&EndCreationDate=' + $('#EndCreationDate').val());
+
+            window.location = url;
+        }
+        else {
+            if ((!BeginPolicyId && EndPolicyId) || (BeginPolicyId && !EndPolicyId)) {
+                showAlert('You need to add the two ranges of documents', 'Es necesario agregar los dos rangos de documentos', 'warning', 'Warning', 'Advertencia');
+                return;
+            }
+            else if ((StartCreationDate && !EndCreationDate) || (!StartCreationDate && EndCreationDate)) {
+                showAlert('You need to add the two date ranges', 'Es necesario agregar los dos rangos de fechas', 'warning', 'Warning', 'Advertencia');
+                return;
+            }
+            showAlert('You need to add at least one field', 'Es necesario agregar por lo menos un campo', 'warning', 'Warning', 'Advertencia');
+        }
+    }
+
+    function showAlert(messageEn, messageEs, alertType, titleEn, tittleEs) {
+        //"warning", "error", "success" and "info".
+        alertType = alertType || "warning";
+        if (currentLang.includes("es")) {
+            swal({
+                title: tittleEs,
+                text: messageEs,
+                type: alertType,
+                confirmButtonColor: "#83217a",
+                animation: "slide-from-top",
+                timer: 12000
+            })
+        }
+        else {
+            swal({
+                title: titleEn,
+                text: messageEn,
+                type: alertType,
+                confirmButtonColor: "#83217a",
+                animation: "slide-from-top",
+                timer: 12000
+            })
+        }
+    }
+</script>

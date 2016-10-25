@@ -1,0 +1,79 @@
+﻿@model IEnumerable<VOI.SISAC.Web.Models.VO.Finance.NationalFuelRateVO>
+@{
+    ViewBag.Title = Resource.NationalFuelRate;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cultureForm = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+@Styles.Render("~/Content/bootstrapdtimecss")
+
+<div class="container">
+    @Html.Partial("Partial/_SearchModal")
+    @Html.Partial("Partial/_DeleteRange")
+    @Html.Partial("Partial/_UploadFile")
+    @Html.Partial("_AlertView")
+    <h2 class="subtitle_h3_black">@Resource.NationalFuelRate</h2>
+    <div id="toolbar">
+        @if (this.User.IsInRole("NATFUELRAT-SEARCH")) { 
+            <button type="button" class="btn btn-default" name="Add" title="@Resource.Search" data-toggle="modal" data-target="#modalSearch">
+                <i class="fa fa-search"></i>&nbsp;@Resource.Search
+            </button>
+        }
+        @if (this.User.IsInRole("NATFUELRAT-UPLF")) { 
+            <button type="button" class="btn btn-default" name="Upload" title="@Resource.UploadFile" data-toggle="modal" data-target="#UploadFile">
+                <i class="fa fa-cloud-upload"></i>&nbsp; @Resource.UploadFile
+            </button>
+        }
+        @if (this.User.IsInRole("NATFUELRAT-DEL")) { 
+            <button type="button" class="btn btn-default" name="Delete" title="@Resource.Delete" data-toggle="modal" data-target="#modalDelete">
+                <i class="fa fa-trash-o fa-fw"></i>&nbsp;@Resource.Delete
+            </button>
+        }
+    </div>
+    <br />
+    <div id="TableContent">
+        @Html.Partial("Partial/_NationalFuelRateTable")
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/bootstrapTable")
+    @Scripts.Render("~/bundles/bootstrapTablePlugins")
+    @Scripts.Render("~/bundles/BootstrapInputFile")
+    @Scripts.Render("~/bundles/BootstrapContextMenu")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/ExportTable")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+    @Scripts.Render("~/bundles/JSDateTimeValidate")
+    @Scripts.Render("~/bundles/NationalFuelRateJS")
+
+    <script type="text/javascript">
+        var currentLang = '@cultureForm.ToString()';
+        $('#modalTable').on('shown.bs.modal', function () {
+            $table.bootstrapTable('resetView');
+        });
+
+        $('#tbNationalFuelRate').bootstrapTable({
+            contextMenu: '#context-menu',
+            contextMenuButton: '.menuButton',
+            contextMenuAutoClickRow: true,
+            contextMenuTrigger: 'right',
+            onContextMenuItem: function (row, $el) {
+
+                if ($el.data("item") == '@Resource.Edit') {
+                    var url = '@Url.Action("Edit", "NationalFuelRate")';
+                    url = url.concat('?id=' + row.NationalFuelRateId);
+                    window.location = url;
+                }
+
+                if ($el.data("item") == '@Resource.Delete') {
+                    var url = '@Url.Action("Delete", "NationalFuelRate")';
+                    url = url.concat('?id=' + row.NationalFuelRateId);
+                    window.location = url;
+                }
+            }
+        });
+    </script>
+}

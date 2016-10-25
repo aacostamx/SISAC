@@ -1,0 +1,103 @@
+﻿@model VOI.SISAC.Web.Models.VO.Airport.AirportModelVO
+
+@{
+    ViewBag.Title = @Resource.Edit;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/bootstrapdtimecss")
+
+<div class="container">
+
+    @Html.Partial("_AlertView")
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <p class="subtitle_h3_black">@Resource.AirportTitle</p>
+                <p class="subtitle_h3_ancillarie">@Resource.Edit</p>
+            </div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    @Html.LabelFor(model => model.AirportVO.StationCode, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                    @Html.EditorFor(model => model.AirportVO.StationCode, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.AirportVO.StationCode, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    @Html.LabelFor(model => model.AirportVO.StationName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.AirportVO.StationName, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumericoCaracteresEspeciales(event, this, 100);", @onkeyup = "return commonFunctions.validarMaxLengthAlfanumericoCaracteresEspeciales(event, this, 100)" } })
+                    @Html.ValidationMessageFor(model => model.AirportVO.StationName, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    @Html.LabelFor(model => model.AirportVO.CountryCode, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    <div class="styled-select">
+                        @Html.DropDownListFor(model => model.AirportVO.CountryCode, Model.Countries.Select(h => new SelectListItem
+                   {
+                       Text = h.CountryCode + " - " + h.CountryName,
+                       Value = h.CountryCode.ToString()
+                   }), Resource.SelectItem, new { htmlAttributes = new { @class = "inputForm form-control" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.AirportVO.CountryCode, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    @Html.LabelFor(model => model.AirportVO.OpeningTime, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                    @Html.EditorFor(model => model.AirportVO.OpeningTime, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AirportVO.OpeningTime, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    @Html.LabelFor(model => model.AirportVO.ClosingTime, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                    @Html.EditorFor(model => model.AirportVO.ClosingTime, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AirportVO.ClosingTime, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div id="divGroup" class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    @Html.LabelFor(model => model.AirportVO.AirportGroupCode, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                    <div class="styled-select">
+                        @Html.DropDownListFor(model => model.AirportVO.AirportGroupCode, Model.AirportGroupCodes.Select(h => new SelectListItem
+                   {
+                       Text = h.AirportGroupCode + " - " + h.AirportGroupName,
+                       Value = h.AirportGroupCode.ToString()
+                   }), Resource.SelectItem, new { htmlAttributes = new { @class = "inputForm form-control" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.AirportVO.AirportGroupCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <input checked="checked" class="checkVolaris top-padding" type="checkbox" id="ccGroup" name="ccGroup" onclick="DisplayElement('ccGroup', 'divGroup')" />
+                    <label for="ccGroup" class="control_gris"><span></span>@Resource.IncludeAirportGroup</label>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <input onclick="location.href='@Url.Action("Index","Airport")'" type="reset" class="btnVolaris" value=@Resource.Back />
+                    <input type="submit" value='@Resource.Save' class="btnVolaris" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/CommonFunctions")
+    @Scripts.Render("~/bundles/Airport")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+
+    <script>
+        $(function () {
+            $('#AirportVO_OpeningTime, #AirportVO_ClosingTime').datetimepicker({
+                format: 'HH:mm'
+            });
+        });
+    </script>
+}

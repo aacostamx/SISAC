@@ -1,0 +1,110 @@
+﻿@model VOI.SISAC.Web.Models.VO.Itineraries.GendecDepartureVO
+
+@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <p class="subtitle_h3_ancillarie">@VOI.SISAC.Web.Resources.Resource.Delete</p>
+</div>
+<br />
+<div class="container">
+    <h3>@VOI.SISAC.Web.Resources.Resource.ConfirmDelete</h3>
+    <div class="form-horizontal">
+
+        <table id="tvCrewDel"
+           data-unique-id="CrewID"
+           class="table"
+           data-toggle="table"
+           data-show-columns="true"
+           data-search="true"
+           data-show-toggle="true"
+           data-mobile-responsive="true">
+            <thead>
+                <tr>
+                    <th data-field="CrewID" data-align="center" data-halign="center" data-visible="false">
+                        <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().CrewID)</strong>
+                    </th>
+                    <th data-field="CrewTypeId" data-align="center" data-halign="center">
+                        <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().CrewTypeID)</strong>
+                    </th>
+                    <th data-field="NickName" data-align="center" data-halign="center">
+                        <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().NickName)</strong>
+                    </th>
+                    <th data-field="LastName" data-align="center" data-halign="center">
+                        <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().LastName)</strong>
+                    </th>
+                    <th data-field="PassportNumber" data-align="center" data-halign="center">
+                        <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().PassportNumber)</strong>
+                    </th>
+                    <th data-field="DateOfBird" data-align="center" data-halign="center" class="ToShorDate">
+                        <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().DateOfBird)</strong>
+                    </th>
+                    <th data-field="Gender" data-align="center" data-halign="center">
+                        <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().Gender)</strong>
+                    </th>
+                    <th data-field="Citizenship" data-align="center" data-halign="center">
+                        <strong>@Html.DisplayNameFor(model => model.Crews.FirstOrDefault().Citizenship)</strong>
+                    </th>
+               </tr>
+            </thead>
+            <tbody>
+                @if (Model.Crews != null)
+                {
+                    foreach (var item in Model.Crews)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CrewID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CrewTypeID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NickName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PassportNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DateOfBird, "ToShortDate")
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Gender)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Citizenship)
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+       </table>
+        <br />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <br />
+                    <button id="btnBack" type="button" class="btn btn-default" name="Back" title="@Resource.Back"  onclick="location.href='@Url.Action("Index","GendecDeparture", new { sequence = Model.Sequence, airlinecode = Model.AirlineCode, flightnumber = Model.FlightNumber, itinerarykey = Model.Itinerarykey } )'">
+                        &nbsp;@Resource.Back
+                    </button>
+                    <input type="submit" value="@VOI.SISAC.Web.Resources.Resource.Delete" class="btn btn-default" />
+                    <br />
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/CommonFunctions")
+}

@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "SISAC.Reports", "SISAC.Reports\SISAC.Reports.rptproj", "{3D6A0485-00A7-4630-9875-735B9DE12067}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://hdq-pegaso:8080/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = SISAC.Reports\\SISAC.Reports.rptproj
+		SccProjectName1 = SISAC.Reports
+		SccLocalPath1 = SISAC.Reports
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		DebugLocal|Default = DebugLocal|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3D6A0485-00A7-4630-9875-735B9DE12067}.Debug|Default.ActiveCfg = Debug
+		{3D6A0485-00A7-4630-9875-735B9DE12067}.Debug|Default.Build.0 = Debug
+		{3D6A0485-00A7-4630-9875-735B9DE12067}.Debug|Default.Deploy.0 = Debug
+		{3D6A0485-00A7-4630-9875-735B9DE12067}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{3D6A0485-00A7-4630-9875-735B9DE12067}.DebugLocal|Default.Build.0 = DebugLocal
+		{3D6A0485-00A7-4630-9875-735B9DE12067}.Release|Default.ActiveCfg = Release
+		{3D6A0485-00A7-4630-9875-735B9DE12067}.Release|Default.Build.0 = Release
+		{3D6A0485-00A7-4630-9875-735B9DE12067}.Release|Default.Deploy.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

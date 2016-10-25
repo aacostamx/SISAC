@@ -1,0 +1,128 @@
+﻿@model VOI.SISAC.Web.Models.VO.Finance.InternationalFuelContractConceptVO
+
+@{
+    ViewBag.Title = Resource.Edit;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var fuelConcept = this.ViewBag.FuelConcept as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var provider = this.ViewBag.Provider as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var fuelConceptType = this.ViewBag.FuelConceptType as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var chargeFactorType = this.ViewBag.ChargeFactorType as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+}
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    @using (Html.BeginForm(Html.BeginForm("Edit", "InternationalFuelContractConcept", FormMethod.Post, new { name = "formContract", id = "formContract" })))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div id="accordionFuelContracts">
+                <div class="panel panel-default">
+                    <div class="panel-heading" id="headingOne" onclick="FuelConceptController.toggle('ContractDefinition');">
+                        <h4 class="panel-title subtitle_h6">
+                            <strong>@Resource.InternationalFuelContractTitle</strong>
+                        </h4>
+                    </div>
+                    <div id="ContractDefinition" name="ContractDefinition">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.EffectiveDate, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                @Html.EditorFor(model => model.EffectiveDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @type = "text" } })
+                                @Html.ValidationMessageFor(model => model.EffectiveDate, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.AirlineCode, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                @Html.EditorFor(model => model.AirlineCode, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.AirlineCode, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.StationCode, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                @Html.EditorFor(model => model.StationCode, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.StationCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.ServiceCode, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                @Html.EditorFor(model => model.ServiceCode, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.ServiceCode, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                @Html.LabelFor(model => model.ProviderNumberPrimary, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                @Html.EditorFor(model => model.ProviderNumberPrimary, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.ProviderNumberPrimary, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <p class="subtitle_h3_black">@Resource.FuelConceptTitle</p>
+                <p class="subtitle_h3_ancillarie">@Resource.Edit</p><br />
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    @Html.LabelFor(model => model.FuelConceptID, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.FuelConcept.FuelConceptName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.FuelConceptID, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    @Html.LabelFor(model => model.FuelConceptTypeCode, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    <div class="styled-select">
+                        @Html.DropDownListFor(model => model.FuelConceptTypeCode, fuelConceptType.Select(h => new SelectListItem
+                   {
+                       Text = h.Description,
+                       Value = h.Id
+                   }))
+                    </div>
+                    @Html.ValidationMessageFor(model => model.FuelConceptTypeCode, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    @Html.LabelFor(model => model.ChargeFactorTypeID, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    <div class="styled-select">
+                        @Html.DropDownListFor(model => model.ChargeFactorTypeID, chargeFactorType.Select(h => new SelectListItem
+                   {
+                       Text = h.Description,
+                       Value = h.Id
+                   }))
+                    </div>
+                    @Html.ValidationMessageFor(model => model.ChargeFactorTypeID, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    @Html.LabelFor(model => model.Provider.ProviderNumber, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.EditorFor(model => model.ProviderNumber, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.ProviderNumber, "", new { @class = "text-danger" })
+                </div>
+
+                @Html.HiddenFor(model => model.FuelConceptID)
+                @Html.HiddenFor(model => model.InternationalFuelContractConceptID)
+                @Html.HiddenFor(model => model.InternationalFuelContract.EffectiveDate)
+                @Html.HiddenFor(model => model.InternationalFuelContract.AirlineCode)
+                @Html.HiddenFor(model => model.InternationalFuelContract.StationCode)
+                @Html.HiddenFor(model => model.InternationalFuelContract.ServiceCode)
+                @Html.HiddenFor(model => model.InternationalFuelContract.ProviderNumberPrimary)
+                @Html.HiddenFor(model => model.InternationalFuelContract.AircraftRegistCCFlag)
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <button class="btn btn-default btn-lg" type="button" name="Edit" title="@VOI.SISAC.Web.Resources.Resource.Edit" onclick="location.href='@Url.Action("Edit", "InternationalFuelContract", new { effectiveDate = Model.InternationalFuelContract.EffectiveDate.ToShortDateString(), airlineCode = Model.InternationalFuelContract.AirlineCode, stationCode = Model.InternationalFuelContract.StationCode, serviceCode = Model.InternationalFuelContract.ServiceCode, providerNumberPrimary = Model.InternationalFuelContract.ProviderNumberPrimary, AircraftRegistCCFlag = Model.InternationalFuelContract.AircraftRegistCCFlag })'"><i class="fa fa-arrow-left"></i>&nbsp;@Resource.Back</button>
+                <button id="btnContract" type="button" class="btn btn-default btn-lg" name="Add" title="@Resource.Save" onclick="FuelConceptController.postGeneric()">
+                    <i class="fa fa-floppy-o"></i> &nbsp;@Resource.Save
+                </button>
+            </div>
+        </div>
+
+    }
+</div>
+@Scripts.Render("~/bundles/InternationalFuelContractConcept")
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#ContractDefinition").toggle();
+    });
+</script>

@@ -1,0 +1,147 @@
+﻿@model VOI.SISAC.Web.Models.VO.Process.JetFuelCalculationResultParamsVO
+@{
+    this.Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = VOI.SISAC.Web.Resources.Resource.ViewNationalFuelCalculationResult;
+    var process = this.ViewBag.Process != null ? this.ViewBag.Process as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto> : new List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>();
+    var airline = this.ViewBag.Airline != null ? this.ViewBag.Airline as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto> : new List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>();
+    var airport = this.ViewBag.Airport != null ? this.ViewBag.Airport as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto> : new List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>();
+    var service = this.ViewBag.Service != null ? this.ViewBag.Service as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto> : new List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>();
+    var provider = this.ViewBag.Provider != null ? this.ViewBag.Provider as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto> : new List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>();
+    var cultureForm = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
+}
+
+@Styles.Render("~/Content/bootstrapdtimecss")
+@Styles.Render("~/bundles/BootstrapMultiselectCSS")
+@Styles.Render("~/bundles/SweetAlertCSS")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.ViewNationalFuelCalculationResult</p>
+    </div>
+
+    <div class="form-horizontal">
+        @using (Html.BeginForm("Search", "NationalJetFuelCalculationResult", new { Area = "Process" }, FormMethod.Post, new { id = "CalculationResultForm" }))
+        {        
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <br />
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    @*Here goes options for select the time*@
+                    <input type="radio" name="IsOpenPeriod" id="PeriodOptionRadio" checked="checked" />
+                    <label for="PeriodOptionRadio" onclick='NationalJetFuelCalculationResultController.SelectOption("PeriodOption")'>
+                        <span></span>@VOI.SISAC.Web.Resources.Resource.CalculationPeriod &nbsp&nbsp&nbsp&nbsp
+                    </label>
+                    <input type="hidden" name="IsOpenPeriod" id="PeriodOption" value="false" />
+                    
+                    <input type="radio" name="IsOpenPeriod" id="OpenOptionRadio" />
+                    <label for="OpenOptionRadio" onclick='NationalJetFuelCalculationResultController.SelectOption("OpenOption")'>
+                        <span></span>@VOI.SISAC.Web.Resources.Resource.OpenPeriod
+                    </label>
+                    <input type="hidden" name="IsOpenPeriod" id="OpenOption" value="true" />
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" id="PeriodCombo">
+                    <label class="subtitle_h5 control-label required-field">@VOI.SISAC.Web.Resources.Resource.Period</label>
+                    <div>
+                        @Html.DropDownList("PeriodCode", process.Select(h => new SelectListItem
+                        {
+                            Text = h.Description,
+                            Value = h.Id
+                   }), @VOI.SISAC.Web.Resources.Resource.SelectItem, new { @class = "inputForm form-control", @onchange = "NationalJetFuelCalculationResultController.GetDatesByPeriod()" })
+                    </div>
+                    @Html.ValidationMessage("PeriodCode", new { @class = "text-danger text-danger-error" })
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <label class="subtitle_h5 control-label required-field">@VOI.SISAC.Web.Resources.Resource.StartDate</label>
+                    <input class="form-control ClassDate" type="datetime" name="StartDate" id="StartDate" readonly="true" />
+                    @Html.ValidationMessage("StartDate", new { @class = "text-danger text-danger-error" })
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <label class="subtitle_h5 control-label required-field">@VOI.SISAC.Web.Resources.Resource.EndDate</label>
+                    <input class="form-control ClassDate" type="datetime" name="EndDate" id="EndDate" readonly="true" />
+                    @Html.ValidationMessage("EndDate", new { @class = "text-danger text-danger-error" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <label class="subtitle_h5 control-label">@VOI.SISAC.Web.Resources.Resource.Airline</label>
+                    <div>
+                        @Html.DropDownList("AirlineCode", airline.Select(h => new SelectListItem
+                        {
+                            Text = h.DescriptionAndCode,
+                            Value = h.Id
+                        }), new { @class = "inputForm form-control", @multiple = "multiple" })
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <label class="subtitle_h5 control-label">@VOI.SISAC.Web.Resources.Resource.Airport</label>
+                    <div>
+                        @Html.DropDownList("StationCode", airport.Select(h => new SelectListItem
+                        {
+                            Text = h.CodeAndDescription,
+                            Value = h.Id
+                        }), new { @class = "inputForm form-control", @multiple = "multiple" })
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <label class="subtitle_h5 control-label">@VOI.SISAC.Web.Resources.Resource.Service</label>
+                    <div>
+                        @Html.DropDownList("ServiceCode", service.Select(h => new SelectListItem
+                        {
+                            Text = h.DescriptionAndCode,
+                            Value = h.Id
+                        }), new { @class = "inputForm form-control", @multiple = "multiple" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <label class="subtitle_h5 control-label">@VOI.SISAC.Web.Resources.Resource.Provider</label>
+                    <div>
+                        @Html.DropDownList("ProviderNumber", provider.Select(h => new SelectListItem
+                        {
+                            Text = h.DescriptionAndCode,
+                            Value = h.Id
+                        }), new { @class = "inputForm form-control", @multiple = "multiple" })
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <button id="btnDetailReport" type="button" class="btn btn-default" title="Detailed Report" name="DetailedReport" onclick='NationalJetFuelCalculationResultController.PostForm("Detailed")'>
+                        @VOI.SISAC.Web.Resources.Resource.DetailedReport
+                    </button>
+                    <button id="btnGroupReport" type="button" class="btn btn-default" title="Group Report" name="GroupReport" onclick='NationalJetFuelCalculationResultController.PostForm("Group")'>
+                        @VOI.SISAC.Web.Resources.Resource.GroupReport
+                    </button>
+                    <button id="btnErrorReport" type="button" class="btn btn-default" title="Error Report" name="ErrorReport" onclick='NationalJetFuelCalculationResultController.PostForm("Error")'>
+                        @VOI.SISAC.Web.Resources.Resource.ErrorReport
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+    <div>
+    </div>
+</div>
+
+
+@section Scripts
+{
+    @*@Scripts.Render("~/bundles/")*@
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+    @Scripts.Render("~/bundles/JSDateTimeValidate")
+    @Scripts.Render("~/bundles/BootstrapMultiselect")
+    @Scripts.Render("~/bundles/SweetAlertJS")
+    @Scripts.Render("~/bundles/NationalJetFuelCalculationResultJS")
+    <script type="text/javascript">
+        var currentLang = '@cultureForm.ToString()';
+        var urlReportGroup = '@Url.Action("GroupReport","NationalJetFuelCalculationResult")';
+        var urlReportDetail = '@Url.Action("DetailedReport","NationalJetFuelCalculationResult")';
+        var urlReportError = '@Url.Action("ErrorReport","NationalJetFuelCalculationResult")';
+    </script>
+}
+

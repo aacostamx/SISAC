@@ -1,0 +1,151 @@
+﻿@model VOI.SISAC.Web.Models.VO.Process.NationalJetFuelProcessVO
+
+@{
+    ViewBag.Title = VOI.SISAC.Web.Resources.Resource.NationalJetFuelProcess;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var currentCulture = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
+}
+
+@Styles.Render("~/bundles/SweetAlertCSS")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.NationalJetFuelProcess</p>
+    </div>
+    <br />
+
+    @using (Html.BeginForm())
+    {
+
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <br />
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                    @Html.Partial("_NationalJetFuelProcessCombo", Model)
+                </div>
+            </div>
+
+            <div id="tbNationalJetFuelProcess" class="col-xs-12 col-sm-12 col-md-8">
+                <div class="table-responsive">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-2">
+                                <col class="col-xs-5">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>@VOI.SISAC.Web.Resources.Resource.Definition</th>
+                                    <th>@VOI.SISAC.Web.Resources.Resource.Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.StartDatePeriod</code></th>
+                                    <td id="StartDatePeriod" name="StartDatePeriod"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.EndDatePeriod</code></th>
+                                    <td id="EndDatePeriod" name="EndDatePeriod"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.StatusProcessCode</code></th>
+                                    <td id="StatusProcessCode" name="StatusProcessCode"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.ProcessProgress</code></th>
+                                    <td id="ProcessProgress" name="ProcessProgress">
+                                        <div id="hiddenBar" class="progress" style="margin-bottom: 0" hidden>
+                                            <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-green active" role="progressbar"
+                                                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 0;">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.StartDateProcess</code></th>
+                                    <td id="StartDateProcess" name="StartDateProcess"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.EndDateProcess</code></th>
+                                    <td id="EndDateProcess" name="EndDateProcess"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.ProcessedByUserName</code></th>
+                                    <td id="ProcessedByUserName" name="ProcessedByUserName"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.CalculationStatusCode</code></th>
+                                    <td id="CalculationStatusCode" name="CalculationStatusCode"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.ConfirmationStatusCode</code></th>
+                                    <td id="ConfirmationStatusCode" name="ConfirmationStatusCode"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.ConfirmationDate</code></th>
+                                    <td id="ConfirmationDate" name="ConfirmationDate"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.ConfirmedByUserName</code></th>
+                                    <td id="ConfirmedByUserName" name="ConfirmedByUserName"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="processRadio" class="col-xs-12 col-sm-12 col-md-12">
+                <input type="radio" name="processAllDOM" id="processAllDOM" checked="checked" />
+                <label id="lbAll" for="processAllDOM" onclick='NationalJetFuelProcessController.selectProcessType("processAll")'>
+                    <span></span>@VOI.SISAC.Web.Resources.Resource.ProcessAll &nbsp&nbsp&nbsp&nbsp
+                </label>
+                <input type="hidden" name="processAll" id="processAll" value="false" />
+
+                <input type="radio" name="processPendingDOM" id="processPendingDOM" />
+                <label id="lbPen" for="processPendingDOM" onclick='NationalJetFuelProcessController.selectProcessType("processPending")'>
+                    <span></span>@VOI.SISAC.Web.Resources.Resource.ProcessPending
+                </label>
+                <input type="hidden" name="processPending" id="processPending" value="true" />
+
+                <br />
+                <br />
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    @if (User.IsInRole("INTFUELPRO-REVERT"))
+                    {
+                        <button id="btnRevertNationalJetFuelProcess" type="button" class="btn btn-default" name="@VOI.SISAC.Web.Resources.Resource.Process" title="@VOI.SISAC.Web.Resources.Resource.Revert" onclick="NationalJetFuelProcessController.revertNationalJetFuelProcess()">
+                            <i class="fa fa-refresh fa-fw"></i>
+                            &nbsp;@VOI.SISAC.Web.Resources.Resource.Revert
+                        </button>
+                    }
+
+                    @if (User.IsInRole("INTFUELPRO-START"))
+                    {
+                        <button id="btnStartNationalJetFuelProcess" type="button" class="btn btn-default btn-green" name="@VOI.SISAC.Web.Resources.Resource.Process" title="@VOI.SISAC.Web.Resources.Resource.Process" onclick="NationalJetFuelProcessController.startNationalJetFuelProcess()">
+                            <i class="fa fa-play fa-fw"></i>
+                            &nbsp;@VOI.SISAC.Web.Resources.Resource.Process
+                        </button>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/NationalJetFuelProcessJS")
+    @Scripts.Render("~/bundles/SweetAlertJS")
+    <script>
+        var currentLang = '@currentCulture.ToString()';
+    </script>
+}

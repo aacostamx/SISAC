@@ -1,0 +1,81 @@
+﻿@model IEnumerable<VOI.SISAC.Web.Models.VO.Airport.GpuObservationVO>
+
+@{
+    ViewBag.Title = Resource.GpuObservationTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+<div class="container">
+    @Html.Partial("_AlertView")
+    <h2 class="subtitle_h3_black">@Resource.GpuObservationTitle</h2>
+    <div id="toolbar">
+        @if (User.IsInRole("GPUOBS-ADD"))
+        { 
+            <button type="button" class="btn btn-default" name="add" title="@Resource.Add" onclick="location.href='@Url.Action("Create", "GpuObservation")'">
+                <i class="fa fa-plus"></i>&nbsp;@Resource.Add
+            </button>
+        }
+    </div>
+
+    <table id="tbGpuObservation"
+        data-toolbar="#toolbar"
+        class="table"
+        data-toggle="table"
+        data-show-export="true"
+        data-export-types="['excel']"
+        data-show-columns="true"
+        data-search="true"
+        data-show-toggle="true"
+        data-show-pagination-switch="true"
+        data-mobile-responsive="true"
+        data-pagination="true"
+        data-export-data-type="all"
+        data-page-size="10">
+        <thead>
+            <tr>
+                <th data-field="GpuObservationCode" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.GpuObservationCode)</strong>
+                </th>
+                <th data-field="GpuObservationCodeName" data-halign="left" data-align="left" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.GpuObservationCodeName)</strong>
+                </th>
+                @if (User.IsInRole("GPUOBS-UPD") || User.IsInRole("GPUOBS-DEL")) 
+                { 
+                    <th data-halign="center" data-align="center">
+                        <strong>@Resource.Actions</strong>
+                    </th>
+                 }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GpuObservationCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GpuObservationCodeName)
+                    </td>
+                    @if (User.IsInRole("GPUOBS-UPD") || User.IsInRole("GPUOBS-DEL")) 
+                    { 
+                        <td>
+                            @if (User.IsInRole("GPUOBS-UPD"))
+                            {
+                                <button class="btn btn-default" type="button" name="Edit" title=@Resource.Edit onclick="location.href='@Url.Action("Edit", "GpuObservation", new { id = item.GpuObservationCode })'"><i class="fa fa-pencil fa-fw"></i></button>
+                            }
+                            @if (User.IsInRole("GPUOBS-DEL"))
+                            {
+                                <button class="btn btn-default" type="button" name="Delete" title=@Resource.Delete onclick="location.href='@Url.Action("Delete", "GpuObservation", new { id = item.GpuObservationCode })'"><i class="fa fa-trash-o fa-fw"></i></button>
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@Scripts.Render("~/bundles/bootstrapTable")
+@Scripts.Render("~/bundles/bootstrapTablePlugins")
+@Scripts.Render("~/bundles/ExportTable")

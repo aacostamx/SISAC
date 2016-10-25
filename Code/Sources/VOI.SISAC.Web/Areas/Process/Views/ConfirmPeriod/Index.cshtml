@@ -1,0 +1,75 @@
+﻿@{
+    this.ViewBag.Title = @VOI.SISAC.Web.Resources.Resource.ConfirmCalculationPeriod;
+    this.Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/bundles/SweetAlertCSS")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    @using (Html.BeginForm("Close", "ConfirmPeriod", new { Area = "Process" }, FormMethod.Post, new { id = "ConfirmPeriodForm" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                @*<p class="subtitle_h3"></p>*@
+                <p class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.ConfirmCalculationPeriod</p>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <label class="subtitle_h5 required-field">@VOI.SISAC.Web.Resources.Resource.PeriodCode</label>
+                    <div class="styled-select">
+                        <select id="PeriodCode" name="PeriodCode" class="inputForm form-control" onchange="ConfirmPeriodController.GetDatesByPeriod();ConfirmPeriodController.HideOptions()"></select>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <label class="subtitle_h5">@VOI.SISAC.Web.Resources.Resource.StartDate</label>
+                    <input id="StartDatePeriod" name="StartDatePeriod" class="inputForm form-control" readonly="" />
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <label class="subtitle_h5">@VOI.SISAC.Web.Resources.Resource.EndDate</label>
+                    <input id="EndDatePeriod" name="EndDatePeriod" class="inputForm form-control" readonly="" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <label class="subtitle_h5">@VOI.SISAC.Web.Resources.Resource.ConfirmationStatusName</label>
+                    <input id="ConfirmationStatusCode" name="ConfirmationStatusCode" class="inputForm form-control" readonly="" />
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <label class="subtitle_h5">@VOI.SISAC.Web.Resources.Resource.ConfirmationDate</label>
+                    <input id="ConfirmationDate" name="ConfirmationDate" class="inputForm form-control" readonly="" />
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <label class="subtitle_h5">@VOI.SISAC.Web.Resources.Resource.ConfirmedByUserName</label>
+                    <input id="ConfirmedByUserName" name="ConfirmedByUserName" class="inputForm form-control" readonly="" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <br />
+                    @if (User.IsInRole("CONFPERIOD-OPEN"))
+                    { 
+                        <button id="btnOpen" type="button" title="@VOI.SISAC.Web.Resources.Resource.Open" name="Open" class="btn btn-default hidden" onclick="ConfirmPeriodController.OpenPeriod()">
+                            @VOI.SISAC.Web.Resources.Resource.Open
+                        </button>
+                    }
+                    @if (User.IsInRole("CONFPERIOD-CLOSE"))
+                    {
+                        <button id="btnClose" type="button" title="@VOI.SISAC.Web.Resources.Resource.Close" name="Close" class="btn btn-default hidden" onclick="ConfirmPeriodController.ClosePeriod()">
+                            @VOI.SISAC.Web.Resources.Resource.Close
+                        </button>
+                    }
+                    <br />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ConfirmPeriodJS")
+    @Scripts.Render("~/bundles/SweetAlertJS")
+}

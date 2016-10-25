@@ -1,0 +1,82 @@
+﻿@{
+    var currency = this.ViewBag.Currency != null ? this.ViewBag.Process as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto> : new List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>();
+}
+
+<div class="modal fade" id="CreatePolicyModal" tabindex="-1" role="dialog" aria-labelledby="smallModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h2 class="subtitle_h3_black">Information for the policy document</h2>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <label class="subtitle_h5 control-label">Document Id</label>
+                        <input class="inputForm form-control" type="text" id="DocumentId" readonly="readonly" name="DocumentId"/>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <label class="subtitle_h5 control-label">Period</label>
+                        <label><span id="PeriodString"></span></label>
+                        <input type="hidden" name="StartDatePolicy" id="StartDatePolicy" value=""/>
+                        <input type="hidden" name="EndDatePolicy" id="EndDatePolicy" value=""/>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <label class="subtitle_h5 control-label">Change Type</label>
+                        @* If we would like to add the currencies existing in the DB *@
+                        @*<div class="styled-select">
+                            @Html.DropDownListFor(model => model.AirportDescription, currency.Select(h => new SelectListItem
+                               {
+                                   Text = h.CodeAndDescription,
+                                   Value = h.Id
+                               }), VOI.SISAC.Web.Resources.Resource.SelectItem, new { @class = "inputForm form-control" })
+                        </div>*@
+                        <input class="inputForm form-control" type="text" id="ChangeType" name="ChangeType"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <label class="subtitle_h5 control-label">Base Date</label>
+                        <input class="inputForm form-control" type="text" />
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <label class="subtitle_h5 control-label">Value Date</label>
+                        <input class="inputForm form-control" type="text" />
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <label class="subtitle_h5 control-label">Accounting Date</label>
+                        <input class="inputForm form-control" type="text" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <label class="subtitle_h5 control-label">Header Text</label>
+                        <textarea class="form-control" rows="1" cols="1000"></textarea>
+                        @*<input class="form-control" type="text" />*@
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <label class="subtitle_h5 control-label">Item Text</label>
+                        <textarea class="form-control" rows="1" cols="1000"></textarea>
+                        @*<input class="form-control" type="text" />*@
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <i class="fa fa-times"></i>@VOI.SISAC.Web.Resources.Resource.Close
+                </button>
+                <button type="button" class="btn btn-default btn-green" onclick="">
+                    Create and Transfer Estimate Complementary Policy
+                </button>
+                <button type="button" class="btn btn-default btn-green" onclick="">
+                    Create and Transfer Provision Policy
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

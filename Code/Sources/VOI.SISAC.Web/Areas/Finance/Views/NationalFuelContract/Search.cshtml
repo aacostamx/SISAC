@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = Resource.NationalFuelContract;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cultureForm = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+    var EffectiveDate = Request.Params["EffectiveDate"].ToString();
+    var AirlineCode = Request.Params["AirlineCode"];
+    var StationCode = Request.Params["StationCode"];
+    var ServiceCode = Request.Params["ServiceCode"];
+    var ProviderNumberPrimary = Request.Params["ProviderNumberPrimary"];
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+
+<div class="container">
+    @Html.Hidden("EffectiveDate", EffectiveDate)
+    @Html.Hidden("AirlineCode", AirlineCode)
+    @Html.Hidden("StationCode", StationCode)
+    @Html.Hidden("ServiceCode", ServiceCode)
+    @Html.Hidden("ProviderNumberPrimary", ProviderNumberPrimary)
+    <h2 class="subtitle_h3_black">@Resource.NationalFuelContract</h2>
+    <h3 class="subtitle_h3_ancillarie">@Resource.AdvanceSearch</h3>
+    <div id="toolbar">        
+        <button id="btnClearForm" type="button" class="btn btn-default" name="Clear" title="@Resource.Clear" onclick="location.href='@Url.Action("Index", "NationalFuelContract")'">
+            <i class="fa fa-undo"></i>&nbsp;@Resource.Clear
+        </button>
+    </div>
+
+    <div id="TableContent">
+        @Html.Partial("Partial/_NationalFuelContractSearchTable")
+    </div>
+    <br />
+</div>
+
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/bootstrapTable")
+    @Scripts.Render("~/bundles/bootstrapTablePlugins")
+    @Scripts.Render("~/bundles/BootstrapContextMenu")
+    @Scripts.Render("~/bundles/NationalFuelContractJS")
+    <script type="text/javascript">
+        var currentLang = '@cultureForm.ToString()';
+
+        $('#tbNationalFuelContract').bootstrapTable({
+            contextMenu: '#context-menu',
+            contextMenuButton: '.menuButton',
+            contextMenuAutoClickRow: true,
+            contextMenuTrigger: 'right',
+            onContextMenuItem: function (row, $el) {
+
+                if ($el.data("item") == '@Resource.Details') {
+                    var url = '@Url.Action("Detail", "NationalFuelContract")';
+                    url = url.concat('?effectiveDate=' + row.EffectiveDate.trim());
+                    url = url.concat('&airlineCode=' + row.AirlineCode.trim());
+                    url = url.concat('&stationCode=' + row.StationCode.trim());
+                    url = url.concat('&serviceCode=' + row.ServiceCode.trim());
+                    url = url.concat('&providerNumberPrimary=' + row.ProviderNumberPrimary.trim());
+                    window.location = url;
+                }
+            }
+        });
+
+        //Take querystrings and send back to server REST
+        function queryParams(params) {
+            return {
+                pageNumber: params.pageNumber,
+                pageSize: params.pageSize,
+                EffectiveDate: $('#EffectiveDate').val(),
+                AirlineCode: $('#AirlineCode').val(),
+                StationCode: $('#StationCode').val(),
+                ServiceCode: $('#ServiceCode').val(),
+                ProviderNumberPrimary: $('#ProviderNumberPrimary').val()
+            };
+        }
+    </script>
+}

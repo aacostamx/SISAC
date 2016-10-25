@@ -1,0 +1,317 @@
+﻿@{
+    ViewBag.Title = Resource.FlightScheduleTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cultureForm = System.Threading.Thread.CurrentThread.CurrentUICulture.Name;
+}
+@Styles.Render("~/Content/bootstraptablecss")
+@Styles.Render("~/bundles/SweetAlertCSS")
+@Styles.Render("~/Content/bootstrapdtimecss")
+@Styles.Render("~/bundles/CSSbootstrapCombobox")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <h2 id="titleItinery" class="subtitle_h3_black">@Resource.FlightScheduleTitle</h2>
+
+    @Html.Partial("Partial/_SearchParams")
+    @Html.Partial("Partial/_UploadFileItinerary")
+    @Html.Partial("Partial/_AdvanceSearchItinerary")
+    <div id="toolbar">
+        @if (User.IsInRole("ITINERARY-ADD"))
+        { 
+            <button id="btnAddItineary" type="button" class="btn btn-default" name="@Resource.Add" title="@Resource.Add" onclick="location.href='@Url.Action("Create", "Itinerary")'">
+                <i class="fa fa-plus fa-fw"></i>
+                &nbsp;@Resource.Add
+            </button>
+        }
+
+        @if (User.IsInRole("ITINERARY-UPLF"))
+        { 
+            <button id="btnUploadItinerary" type="button"
+                class="btn btn-default"
+                data-toggle="modal"
+                data-target="#modalTableItinterary"
+                onclick="ItineraryController.getAirlinesCombo()">
+                <i class="fa fa-cloud-upload fa-fw"></i>&nbsp;@Resource.UploadFile
+            </button>
+        }
+
+        <button id="btnSearchItineary" data-toggle="modal"
+                data-target="#SearchItinerary"
+                type="button"
+                class="btn btn-default"
+                name="AdvanceSearch"
+                title="@Resource.AdvanceSearch"
+                onclick="ItineraryController.settingModalSearch(); ItineraryController.clearForm();">
+            <i class="fa fa-search fa-fw"></i>&nbsp; @Resource.AdvanceSearch
+        </button>
+        <button id="btnClearForm" type="button" class="btn btn-default" name="Clear" title="@Resource.Clear" onclick="location.href='@Url.Action("Index", "Itinerary")'" style="display: none;">
+            <i class="fa fa-undo fa-fw"></i>&nbsp;@Resource.Clear
+        </button>
+    </div>
+
+    @using (Html.BeginForm("Index", "Itinerary", FormMethod.Post, new { name = "formItinerary", id = "formItinerary" }))
+    {
+        <table id="tbItinerary"
+               data-toolbar="#toolbar"
+               data-toggle="table"
+               data-locale="@cultureForm.ToString()"
+               class="table"
+               data-cache="false"
+               data-export-types="['excel']"
+               data-show-export="true"
+               data-show-columns="true"
+               data-show-toggle="true"
+               data-mobile-responsive="true"
+               data-check-on-init="true"
+               data-url="@Url.Action("GetItineraryData", "Itinerary")"
+               data-pagination="true"
+               data-query-params="queryParams"
+               data-side-pagination="server"
+               data-query-params-type=""
+               data-page-list="[5,10,20,50,100,200,All]">
+            <thead>
+                <tr>
+                    @if (User.IsInRole("ITINERARY-UPD")
+                        || User.IsInRole("ITINERARY-DEL")
+                        || User.IsInRole("PASSINFO-IDX")
+                        || User.IsInRole("GENDECDEP-UPD")
+                        || User.IsInRole("GENDECARR-UPD")
+                        || User.IsInRole("JETFUELTIC-IDX")
+                        || User.IsInRole("AIRPSERV-IDX"))
+                    { 
+                        <th data-field="Actions" data-align="center" data-halign="center"
+                            data-formatter="ItineraryController.actionsButtons">
+                            <strong>@Resource.Actions</strong>
+                        </th>
+                    }
+                    <th data-field="Sequence" data-halign="center" data-align="center" data-visible="false">
+                        <strong>@Resource.Sequence</strong>
+                    </th>
+                    <th data-field="AirlineCode" data-halign="center" data-align="center">
+                        <strong>@Resource.AirlineCode</strong>
+                    </th>
+                    <th data-field="FlightNumber" data-halign="center" data-align="center">
+                        <strong>@Resource.FlightNumber</strong>
+                    </th>
+                    <th data-field="ItineraryKey" data-halign="center" data-align="center" data-visible="false">
+                        <strong>@Resource.ItineraryKey</strong>
+                    </th>
+                    <th data-field="EquipmentNumber" data-halign="center" data-align="center">
+                        <strong>@Resource.EquipmentNumber</strong>
+                    </th>
+                    <th data-field="DepartureDate" data-halign="center" data-align="center"
+                        data-formatter="ItineraryController.formatDate">
+                        <strong>@Resource.DepartureDate</strong>
+                    </th>
+                    <th data-field="DepartureTime" data-halign="center" data-align="center"
+                        data-formatter="ItineraryController.formatTime">
+                        <strong>@Resource.DepartureTime</strong>
+                    </th>
+                    <th data-field="DepartureStation" data-halign="center" data-align="center">
+                        <strong>@Resource.DepartureAirport</strong>
+                    </th>
+                    <th data-field="ArrivalDate" data-halign="center" data-align="center"
+                        data-formatter="ItineraryController.formatDate">
+                        <strong>@Resource.ArrivalDate</strong>
+                    </th>
+                    <th data-field="ArriveTime" data-halign="center" data-align="center"
+                        data-formatter="ItineraryController.formatTime">
+                        <strong>@Resource.ArriveTime</strong>
+                    </th>
+                    <th data-field="ArrivalStation" data-halign="center" data-align="center">
+                        <strong>@Resource.ArrivalAirport</strong>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    }
+    <br />
+</div>
+
+<!-- context menu -->
+<ul id="context-menu" class="dropdown-menu">
+    @if (User.IsInRole("ITINERARY-UPD"))
+    { 
+        <li data-item="Edit"><a><i class="fa fa-pencil fa-fw"></i>&nbsp;@Resource.Edit</a></li>
+    }
+
+    @if (User.IsInRole("ITINERARY-DEL"))
+    { 
+        <li data-item="Delete"><a><i class="fa fa-trash-o fa-fw"></i>&nbsp;@Resource.Delete</a></li>
+    }
+
+    @if (User.IsInRole("PASSINFO-IDX"))
+    { 
+        <li data-item="PassengerInformation"><a><i class="fa fa-users fa-fw"></i>&nbsp;@Resource.PassengerInformation</a></li>
+    }
+
+    @if (User.IsInRole("GENDECDEP-UPD") || User.IsInRole("MANIFDEP-IDX"))
+    { 
+        <li data-item="GendecDeparture"><a><i class="fa fa-file-text fa-fw"></i>&nbsp;@Resource.GendecDepartureTitle</a></li>
+    }
+
+    @if (User.IsInRole("GENDECARR-UPD") || User.IsInRole("MANIFARR-IDX"))
+    { 
+        <li data-item="GendecArrival"><a><i class="fa fa-file-text fa-fw"></i>&nbsp;@Resource.GendecArrivalTitle</a></li>
+    }
+
+    @if (User.IsInRole("JETFUELTIC-IDX"))
+    { 
+        <li data-item="JetFuelTicketDeparture"><a><i class="fa fa-ticket fa-fw"></i>&nbsp;@Resource.JetFuelTicketDeparture</a></li>
+    }
+
+    @if (User.IsInRole("AIRPSERV-IDX"))
+    { 
+        <li data-item="AirportServicesDeparture"><a><i class="fa fa-wrench fa-fw"></i>&nbsp;@Resource.AirportServicesDeparture</a></li>
+        <li data-item="AirportServicesArrive"><a><i class="fa fa-wrench fa-fw"></i>&nbsp;@Resource.AirportServicesArrive</a></li>
+    }
+    @if (User.IsInRole("TIMELINE-IDX"))
+    {
+        <li data-item="Timeline"><a><i class="fa fa-paper-plane fa-fw"></i>&nbsp;@Resource.Timeline</a></li>
+    }
+</ul>
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/bootstrapTable")
+    @Scripts.Render("~/bundles/bootstrapTablePlugins")
+    @Scripts.Render("~/bundles/ExportTable")
+    @Scripts.Render("~/bundles/BootstrapInputFile")
+    @Scripts.Render("~/bundles/ItineraryJS")
+    @Scripts.Render("~/bundles/BootstrapContextMenu")
+    @Scripts.Render("~/bundles/SweetAlertJS")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+    @Scripts.Render("~/bundles/JSbootstrapCombobox")
+
+    <script>
+        //Take querystrings and send back to server REST
+        function queryParams(params) {
+            return {
+                pageNumber: params.pageNumber,
+                pageSize: params.pageSize,
+                AirlineCode: $('#AirlineCode').val(),
+                FlightNumber: $('#FlightNumber').val(),
+                EquipmentNumber: $('#EquipmentNumber').val(),
+                DepartureStation: $('#DepartureStation').val(),
+                ArrivalStation: $('#ArrivalStation').val(),
+                LocalizationStation: $('#LocalizationStation').val(),
+                DepartureDate: $('#DepartureDate').val(),
+                ArrivalDate: $('#ArrivalDate').val()
+            };
+        }
+
+        $('#tbItinerary').bootstrapTable({
+            contextMenu: '#context-menu',
+            contextMenuButton: '.menuButton',
+            contextMenuAutoClickRow: true,
+            onContextMenuItem: function (row, $el) {
+                if ($el.data("item") == 'Edit') {
+                    var url = '@Url.Action("Edit", "Itinerary")'
+                    url = url.concat('?Sequence=' + row.Sequence);
+                    url = url.concat('&AirlineCode=' + row.AirlineCode);
+                    url = url.concat('&FlightNumber=' + row.FlightNumber);
+                    url = url.concat('&ItineraryKey=' + row.ItineraryKey);
+                    window.location = url;
+                }
+                if ($el.data("item") == 'Delete') {
+                    var url = '@Url.Action("Delete", "Itinerary")'
+                    url = url.concat('?Sequence=' + row.Sequence);
+                    url = url.concat('&AirlineCode=' + row.AirlineCode);
+                    url = url.concat('&FlightNumber=' + row.FlightNumber);
+                    url = url.concat('&ItineraryKey=' + row.ItineraryKey);
+                    window.location = url;
+                }
+
+                if ($el.data("item") == 'AirportServicesDeparture') {
+                    var url = '@Url.Action("Index", "AirportService", new { area = "Airport" })'
+                    url = url.concat('?Sequence=' + row.Sequence);
+                    url = url.concat('&AirlineCode=' + row.AirlineCode);
+                    url = url.concat('&FlightNumber=' + row.FlightNumber);
+                    url = url.concat('&ItineraryKey=' + row.ItineraryKey);
+                    url = url.concat('&OperationTypeName=SALIDA');
+                    window.location = url;
+                }
+
+                if ($el.data("item") == 'AirportServicesArrive') {
+                    var url = '@Url.Action("Index", "AirportService", new { area = "Airport" })'
+                    url = url.concat('?Sequence=' + row.Sequence);
+                    url = url.concat('&AirlineCode=' + row.AirlineCode);
+                    url = url.concat('&FlightNumber=' + row.FlightNumber);
+                    url = url.concat('&ItineraryKey=' + row.ItineraryKey);
+                    url = url.concat('&OperationTypeName=LLEGADA');
+                    window.location = url;
+                }
+
+                if ($el.data("item") == 'PassengerInformation') {
+                    var url = '@Url.Action("Index", "PassengerInformation", new { area = "Airport" })'
+                    url = url.concat('?Sequence=' + row.Sequence);
+                    url = url.concat('&AirlineCode=' + row.AirlineCode);
+                    url = url.concat('&FlightNumber=' + row.FlightNumber);
+                    url = url.concat('&ItineraryKey=' + row.ItineraryKey);
+                    url = url.concat('&Departure=' + row.DepartureStation);
+                    window.location = url;
+                }
+                @*if ($el.data("item") == 'GendecDeparture') {
+                    var url = '@Url.Action("Create", "GendecDeparture", new { area = "Itineraries" })'
+                    url = url.concat('?Sequence=' + row.Sequence);
+                    url = url.concat('&AirlineCode=' + row.AirlineCode);
+                    url = url.concat('&FlightNumber=' + row.FlightNumber);
+                    url = url.concat('&ItineraryKey=' + row.ItineraryKey);
+                    window.location = url;
+                }*@
+                if ($el.data("item") == 'GendecDeparture') {
+                    var url = '@Url.Action("OfficialDocumentDeparture", "DetectCountry", new { area = "" })'
+                    url = url.concat('?Sequence=' + row.Sequence);
+                    url = url.concat('&AirlineCode=' + row.AirlineCode);
+                    url = url.concat('&FlightNumber=' + row.FlightNumber);
+                    url = url.concat('&ItineraryKey=' + row.ItineraryKey);
+                    url = url.concat('&DepartureStation=' + row.DepartureStation);
+                    url = url.concat('&ArrivalStation=' + row.ArrivalStation);
+                    window.location = url;
+                }
+                // Modificado Iracema 26 Enero 2016
+                @*if ($el.data("item") == 'GendecArrival') {
+                    var url = '@Url.Action("Create", "GendecArrival", new { area = "Itineraries" })'
+                    url = url.concat('?Sequence=' + row.Sequence);
+                    url = url.concat('&AirlineCode=' + row.AirlineCode);
+                    url = url.concat('&FlightNumber=' + row.FlightNumber);
+                    url = url.concat('&ItineraryKey=' + row.ItineraryKey);
+                    url = url.concat('&DepartureStation=' + row.DepartureStation);
+                    url = url.concat('&ArrivalStation=' + row.ArrivalStation);
+                    url = url.concat('&EquipmentNumber=' + row.EquipmentNumber);
+                    url = url.concat('&DepartureDate=' + row.DepartureDate);
+                    window.location = url;
+                }*@
+                if ($el.data("item") == 'GendecArrival') {
+                    var url = '@Url.Action("OfficialDocumentArrival", "DetectCountry", new { area = "" })'
+                    url = url.concat('?Sequence=' + row.Sequence);
+                    url = url.concat('&AirlineCode=' + row.AirlineCode);
+                    url = url.concat('&FlightNumber=' + row.FlightNumber);
+                    url = url.concat('&ItineraryKey=' + row.ItineraryKey);
+                    url = url.concat('&DepartureStation=' + row.DepartureStation);
+                    url = url.concat('&ArrivalStation=' + row.ArrivalStation);
+                    url = url.concat('&EquipmentNumber=' + row.EquipmentNumber);
+                    url = url.concat('&DepartureDate=' + row.DepartureDate);
+                    window.location = url;
+                }
+                if ($el.data("item") == 'JetFuelTicketDeparture') {
+                    var url = '@Url.Action("JetFuelTicket", "DetectCountry", new { area = "" })'
+                    url = url.concat('?Sequence=' + row.Sequence);
+                    url = url.concat('&AirlineCode=' + row.AirlineCode);
+                    url = url.concat('&FlightNumber=' + row.FlightNumber);
+                    url = url.concat('&ItineraryKey=' + row.ItineraryKey);
+                    url = url.concat('&DepartureStation=' + row.DepartureStation);
+                    url = url.concat('&ArrivalStation=' + row.ArrivalStation);
+                    url = url.concat('&EquipmentNumber=' + row.EquipmentNumber);
+                    url = url.concat('&DepartureDate=' + row.DepartureDate);
+                    url = url.concat('&OperationTypeName=SALIDA');
+                    window.location = url;
+                }
+                if ($el.data("item") == 'Timeline') {
+                    var url = '@Url.Action("Index", "Timeline", new { area = "Itineraries" })'
+                    window.location = url;
+                }
+            }
+        });
+    </script>
+}

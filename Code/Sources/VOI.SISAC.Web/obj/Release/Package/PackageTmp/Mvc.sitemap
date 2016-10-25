@@ -1,0 +1,398 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
+            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+
+  <!--SiteMap Home-->
+  <mvcSiteMapNode title="Home" controller="Home" action="Index">
+    <!--SiteMap Airport-->
+    <mvcSiteMapNode title="Airport" controller="Airport" area="Airport" action="Index">
+      <mvcSiteMapNode title="Add" controller="Airport" area="Airport" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="Airport" action="Edit" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Delete" controller="Airport" action="Delete" preservedRouteParameters="id"/>
+    </mvcSiteMapNode>
+    <!--SiteMap Airport Schedule-->
+    <mvcSiteMapNode title="Airport Schedule" controller="AirportSchedule" area="Airport" action="Index">
+      <mvcSiteMapNode title="Add" controller="AirportSchedule" area="Airport" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="AirportSchedule" action="Edit" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Delete" controller="AirportSchedule" action="Delete" preservedRouteParameters="id"/>
+    </mvcSiteMapNode>
+    <!--SiteMap AirportGroup-->
+    <mvcSiteMapNode title="Airport Group" controller="AirportGroup" area="Airport" action="Index">
+      <mvcSiteMapNode title="Add" controller="AirportGroup" area="Airport" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="AirportGroup" action="Edit" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Delete" controller="AirportGroup" action="Delete" preservedRouteParameters="id"/>
+    </mvcSiteMapNode>
+    <!--SiteMap AirplaneType-->
+    <mvcSiteMapNode title="Airplane Type" controller="AirplaneType" area="Airport" action="Index">
+      <mvcSiteMapNode title="Create" controller="AirplaneType" area="Airport" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="AirplaneType" action="Edit" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Delete" controller="AirplaneType" action="Delete" preservedRouteParameters="id"/>
+    </mvcSiteMapNode>
+    <!--SiteMap Airline-->
+    <mvcSiteMapNode title="Airline" controller="Airline" area="Airport" action="Index">
+      <mvcSiteMapNode title="Create" controller="Airline" area="Airport" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="Airline" action="Edit" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Delete" controller="Airline" action="Delete" preservedRouteParameters="id"/>
+    </mvcSiteMapNode>
+    <!--SiteMap Airplane-->
+    <mvcSiteMapNode title="Airplane" controller="Airplane" area="Airport" action="Index">
+      <mvcSiteMapNode title="Create" controller="Airplane" area="Airport" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="Airplane" action="Edit" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Delete" controller="Airplane" action="Delete" preservedRouteParameters="id"/>
+    </mvcSiteMapNode>
+    <!--SiteMap Service-->
+    <mvcSiteMapNode title="Service" controller="Service" area="Airport" action="Index">
+      <mvcSiteMapNode title="Create" controller="Service" area="Airport" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="Service" action="Edit" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Delete" controller="Service" action="Delete" preservedRouteParameters="id"/>
+    </mvcSiteMapNode>
+    <!--SiteMap DrinkingWater-->
+    <mvcSiteMapNode title="Drinking Water" controller="DrinkingWater" area="Airport" action="Index">
+      <mvcSiteMapNode title="Create" controller="DrinkingWater" area="Airport" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="DrinkingWater" action="Edit" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Delete" controller="DrinkingWater" action="Delete" preservedRouteParameters="id"/>
+    </mvcSiteMapNode>
+    <!--SiteMap Gpu-->
+    <mvcSiteMapNode title="GPU" controller="Gpu" area="Airport" action="Index">
+      <mvcSiteMapNode title="Create" controller="Gpu" area="Airport" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="Gpu" action="Edit" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Delete" controller="Gpu" action="Delete" preservedRouteParameters="id"/>
+    </mvcSiteMapNode>
+    <!--SiteMap GpuObservation-->
+    <mvcSiteMapNode title="GPU Observation" controller="GpuObservation" area="Airport" action="Index">
+      <mvcSiteMapNode title="Create" controller="GpuObservation" area="Airport" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="GpuObservation" action="Edit" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Delete" controller="GpuObservation" action="Delete" preservedRouteParameters="id"/>
+    </mvcSiteMapNode>
+    <!--SiteMap FuelConcept-->
+    <mvcSiteMapNode title="Fuel Concept" controller="FuelConcept" area="Airport" action="Index">
+      <mvcSiteMapNode title="Create" controller="FuelConcept" area="Airport" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="FuelConcept" action="Edit" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Delete" controller="FuelConcept" action="Delete" preservedRouteParameters="id"/>
+    </mvcSiteMapNode>
+    <!--SiteMap Delay-->
+    <mvcSiteMapNode title="Delay" controller="Delay" area="Airport" action="Index">
+      <mvcSiteMapNode title="Create" controller="Delay" area="Airport" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="Delay" action="Edit" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Delete" controller="Delay" action="Delete" preservedRouteParameters="id"/>
+    </mvcSiteMapNode>
+    <!--SiteMap ManifestTimeConfig-->
+    <mvcSiteMapNode title="Manifest Time Config" controller="ManifestTimeConfig" area="Airport" action="Index">
+      <mvcSiteMapNode title="Create" controller="ManifestTimeConfig" area="Airport" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="ManifestTimeConfig" action="Edit" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Delete" controller="ManifestTimeConfig" action="Delete" preservedRouteParameters="id"/>
+    </mvcSiteMapNode>
+    <!--SiteMap ManifestTimeConfig-->
+    <mvcSiteMapNode title="Crew" controller="Crew" area="Airport" action="Index">
+      <mvcSiteMapNode title="Create" controller="Crew" area="Airport" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="Crew" action="Edit" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Delete" controller="Crew" action="Delete" preservedRouteParameters="id"/>
+    </mvcSiteMapNode>
+    <!--SiteMap Itinerary-->
+    <mvcSiteMapNode title="Itinerary" controller="Itinerary" area="Itineraries" action="Index">
+      <mvcSiteMapNode title="Create" controller="Itinerary" area="Itineraries" action="Create"/>
+      <mvcSiteMapNode title="Upload File Itinerary" controller="Itinerary" area="Itineraries" action="UploadFileItinerary"/>
+      <mvcSiteMapNode title="Edit" controller="Itinerary" action="Edit" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Delete" controller="Itinerary" action="Delete" preservedRouteParameters="id"/>
+
+      <mvcSiteMapNode title="Passenger Information" controller="PassengerInformation" area="Airport" action="Index" key="PassengerInformation_Key" preservedRouteParameters="Sequence,AirlineCode,FlightNumber,ItineraryKey,Departure">
+        <mvcSiteMapNode title="Report" controller="PassengerInformation" area="Airport" action="Print" />
+      </mvcSiteMapNode>
+
+      <mvcSiteMapNode title="Gendec Departure" controller="GendecDeparture" area="Itineraries" action="Create" key="Gendec_Departure" preservedRouteParameters="Sequence,AirlineCode,FlightNumber,ItineraryKey">
+        <mvcSiteMapNode title="Report" controller="GendecDeparture" area="Itineraries" action="Print" />
+      </mvcSiteMapNode>
+
+      <mvcSiteMapNode title="Gendec Arrival" controller="GendecArrival" area="Itineraries" action="Create" key="Gendec_Arrival" preservedRouteParameters="Sequence,AirlineCode,FlightNumber,ItineraryKey,DepartureStation,ArrivalStation,EquipmentNumber,DepartureDate">
+        <mvcSiteMapNode title="Report" controller="GendecArrival" area="Itineraries" action="Print"/>
+      </mvcSiteMapNode>
+      
+      <!--Manifest Departure Site Map-->
+      <mvcSiteMapNode title="Departure Manifest" controller="ManifestDeparture" area="Itineraries" action="Index" key="Manifest_Departure" preservedRouteParameters="Sequence,AirlineCode,FlightNumber,ItineraryKey">
+        <mvcSiteMapNode title="Report" controller="ManifestDeparture" area="Itineraries" action="ViewReport" />
+      </mvcSiteMapNode>
+      
+        <!--Manifest Arrival Site Map-->
+      <mvcSiteMapNode title="Arrival Manifest" controller="ManifestArrival" area="Itineraries" action="Index" key="Manifest_Arrival" preservedRouteParameters="Sequence,AirlineCode,FlightNumber,ItineraryKey">
+        <mvcSiteMapNode title="Report" controller="ManifestArrival" area="Itineraries" action="ViewReport" />
+      </mvcSiteMapNode>
+      
+      <mvcSiteMapNode title="Jet Fuel Ticket" controller="JetFuelTicket" area="Airport" action="Index" key="JetFuel_Ticket" preservedRouteParameters="Sequence,AirlineCode,FlightNumber,ItineraryKey,OperationTypeName">
+        <mvcSiteMapNode title="Create" controller="JetFuelTicket" area="Airport" action="Create" />
+        <mvcSiteMapNode title="Delete" controller="JetFuelTicket" area="Airport" action="Delete" preservedRouteParameters="id"/>
+        <mvcSiteMapNode title="Edit" controller="JetFuelTicket" area="Airport" action="Edit" preservedRouteParameters="id"/>
+        <mvcSiteMapNode title="Details" controller="JetFuelTicket" area="Airport" action="Details" preservedRouteParameters="id"/>
+        <mvcSiteMapNode title="Jet Fuel Report" controller="JetFuelTicket" area="Airport" action="VerReporte" preservedRouteParameters="id"/>
+      </mvcSiteMapNode>
+
+      <mvcSiteMapNode title="Domestic Fuel Ticket" controller="NationalJetFuelTicket" area="Airport" action="Index" key="NationalJetFuelTicket" preservedRouteParameters="Sequence,AirlineCode,FlightNumber,ItineraryKey,OperationTypeName">
+        <mvcSiteMapNode title="Create" controller="NationalJetFuelTicket" area="Airport" action="Create" />
+        <mvcSiteMapNode title="Delete" controller="NationalJetFuelTicket" area="Airport" action="Delete" preservedRouteParameters="id"/>
+        <mvcSiteMapNode title="Edit" controller="NationalJetFuelTicket" area="Airport" action="Edit" preservedRouteParameters="id"/>
+        <mvcSiteMapNode title="Details" controller="NationalJetFuelTicket" area="Airport" action="Details" preservedRouteParameters="id"/>
+        <mvcSiteMapNode title="Domestic Fuel Ticket Report" controller="NationalJetFuelTicket" area="Airport" action="VerReporte" preservedRouteParameters="id"/>
+      </mvcSiteMapNode>
+
+      <mvcSiteMapNode title="Airport Service" controller="AirportService" area="Airport" action="Index" key ="Airport_Service" preservedRouteParameters="Sequence,AirlineCode,FlightNumber,ItineraryKey,OperationTypeName">
+        <mvcSiteMapNode title="Create" controller="AirportService" area="Airport" action="Create" />
+        <mvcSiteMapNode title="Edit" controller="AirportService" area="Airport" action="Edit" preservedRouteParameters="id"/>
+        <mvcSiteMapNode title="Delete" controller="AirportService" area="Airport" action="Delete" preservedRouteParameters="id"/>
+      </mvcSiteMapNode>
+
+      <mvcSiteMapNode title="Capture Timeline" controller="Timeline" area="Itineraries" action="Index">
+      </mvcSiteMapNode>
+    </mvcSiteMapNode>
+
+    <!--Catalog section-->
+    <!--SiteMap Country-->
+    <mvcSiteMapNode title="Country" controller="Country" area="Catalog" action="Index">
+      <mvcSiteMapNode title="Add" controller="Country" area="Catalog" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="Country" area="Catalog" action="Edit" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Delete" controller="Country" area="Catalog" action="Delete" preservedRouteParameters="id"/>
+    </mvcSiteMapNode>
+    <!--SiteMap Reconciliation Tolerance-->
+    <mvcSiteMapNode title="Tolerance" controller="ReconciliationTolerance" area="Catalog" action="Index">
+      <mvcSiteMapNode title="Add" controller="ReconciliationTolerance" area="Catalog" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="ReconciliationTolerance" area="Catalog" action="Edit" preservedRouteParameters="serviceCode,currencyCode,toleranceTypeCode"/>
+      <mvcSiteMapNode title="Delete" controller="ReconciliationTolerance" area="Catalog" action="Delete" preservedRouteParameters="serviceCode,currencyCode,toleranceTypeCode"/>
+    </mvcSiteMapNode>
+    <!--SiteMap Functional Area-->
+    <mvcSiteMapNode title="Functional Area" controller="FunctionalArea" area="Catalog" action="Index">
+      <mvcSiteMapNode title="Add" controller="FunctionalArea" area="Catalog" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="FunctionalArea" area="Catalog" action="Edit" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Delete" controller="FunctionalArea" area="Catalog" action="Delete" preservedRouteParameters="id"/>
+    </mvcSiteMapNode>
+
+    <!--Finance section-->
+    <!--SiteMap Currency-->
+    <mvcSiteMapNode title="Currency" controller="Currency" area="Finance" action="Index">
+      <mvcSiteMapNode title="Add" controller="Currency" area="Finance" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="Currency" area="Finance" action="Edit" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Delete" controller="Currency" area="Finance" action="Delete" preservedRouteParameters="id"/>
+    </mvcSiteMapNode>
+    <!--SiteMap ExchangeRates-->
+    <mvcSiteMapNode title="Exchange Rates" controller="ExchangeRates" area="Finance" action="Index">
+      <mvcSiteMapNode title="Add" controller="ExchangeRates" area="Finance" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="ExchangeRates" area="Finance" action="Edit" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Delete" controller="ExchangeRates" area="Finance" action="Delete" preservedRouteParameters="id"/>
+    </mvcSiteMapNode>
+    <!--SiteMap Provider-->
+    <mvcSiteMapNode title="Provider" controller="Provider" area="Finance" action="Index">
+      <mvcSiteMapNode title="Add" controller="Provider" area="Finance" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="Provider" area="Finance" action="Edit" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Delete" controller="Provider" area="Finance" action="Delete" preservedRouteParameters="id"/>
+    </mvcSiteMapNode>
+    <!--SiteMap Cost Center-->
+    <mvcSiteMapNode title="Cost Center" controller="CostCenter" area="Finance" action="Index">
+      <mvcSiteMapNode title="Add" controller="CostCenter" area="Finance" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="CostCenter" area="Finance" action="Edit" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Delete" controller="CostCenter" area="Finance" action="Delete" preservedRouteParameters="id"/>
+    </mvcSiteMapNode>
+    <!--SiteMap Accounting Account-->
+    <mvcSiteMapNode title="Accounting Account" controller="AccountingAccount" area="Finance" action="Index">
+      <mvcSiteMapNode title="Add" controller="AccountingAccount" area="Finance" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="AccountingAccount" area="Finance" action="Edit" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Delete" controller="AccountingAccount" area="Finance" action="Delete" preservedRouteParameters="id"/>
+    </mvcSiteMapNode>
+    <!--SiteMap Liability Account-->
+    <mvcSiteMapNode title="Liability Account" controller="LiabilityAccount" area="Finance" action="Index">
+      <mvcSiteMapNode title="Add" controller="LiabilityAccount" area="Finance" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="LiabilityAccount" area="Finance" action="Edit" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Delete" controller="LiabilityAccount" area="Finance" action="Delete" preservedRouteParameters="id"/>
+    </mvcSiteMapNode>
+    <!--SiteMap Tax-->
+    <mvcSiteMapNode title="Tax" controller="Tax" area="Finance" action="Index">
+      <mvcSiteMapNode title="Add" controller="Tax" area="Finance" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="Tax" area="Finance" action="Edit" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Delete" controller="Tax" area="Finance" action="Delete" preservedRouteParameters="id"/>
+    </mvcSiteMapNode>
+    <!--SiteMap Airport Service Contract-->
+    <mvcSiteMapNode title="Airport Service Contract" controller="AirportServiceContract" area="Finance" action="Index">
+      <mvcSiteMapNode title="Add" controller="AirportServiceContract" area="Finance" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="AirportServiceContract" area="Finance" action="Edit" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Delete" controller="AirportServiceContract" area="Finance" action="Delete" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Details" controller="AirportServiceContract" area="Finance" action="Details" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="New Rate" controller="AirportServiceContract" area="Finance" action="Rate" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Retrieve Contracs" controller="AirportServiceContract" area="Finance" action="RetrieveContracs" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Upload File" controller="AirportServiceContract" area="Finance" action="UploadFile" preservedRouteParameters="id"/>
+    </mvcSiteMapNode>
+    <!--SiteMap International Fuel Contract-->
+    <mvcSiteMapNode title="International Fuel Contract" controller="InternationalFuelContract" area="Finance" action="Index">
+      <mvcSiteMapNode title="Add" controller="InternationalFuelContract" area="Finance" action="Create"/>
+      <mvcSiteMapNode title="Edit Fuel Contract" controller="InternationalFuelContract" area="Finance" action="Edit" key="Fuel_Contracts" preservedRouteParameters="effectiveDate,airlineCode,stationCode,serviceCode,providerNumberPrimary">
+        <mvcSiteMapNode title="Edit" controller="InternationalFuelContractConcept" area="Finance" action="Edit" preservedRouteParameters="id"/>
+        <mvcSiteMapNode title="Delete" controller="InternationalFuelContractConcept" area="Finance" action="Delete" preservedRouteParameters="id"/>
+      </mvcSiteMapNode>
+      <mvcSiteMapNode title="Delete" controller="InternationalFuelContract" area="Finance" action="Delete" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Details" controller="InternationalFuelContract" area="Finance" action="Details" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Search" controller="InternationalFuelContract" area="Finance" action="Search" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Upload File Rates" controller="InternationalFuelContract" area="Finance" action="UploadFileRates" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Upload File" controller="InternationalFuelContract" area="Finance" action="UploadFile" preservedRouteParameters="id"/>
+      <!--SiteMap International Fuel Rate-->
+      <mvcSiteMapNode title="Rate" controller="InternationalFuelRate" area="Finance" action="Index" key="Fuel_Rates" preservedRouteParameters="effectiveDate,airlineCode,stationCode,serviceCode,providerNumberPrimary">
+        <mvcSiteMapNode title="Edit" controller="InternationalFuelRate" area="Finance" action="Edit" preservedRouteParameters="id"/>
+        <mvcSiteMapNode title="Search" controller="InternationalFuelRate" area="Finance" action="Search" preservedRouteParameters="id"/>
+        <mvcSiteMapNode title="Delete" controller="InternationalFuelRate" area="Finance" action="Delete" preservedRouteParameters="id"/>
+        <mvcSiteMapNode title="Delete Range" controller="InternationalFuelRate" area="Finance" action="DeleteAll" preservedRouteParameters="id"/>
+      </mvcSiteMapNode>
+    </mvcSiteMapNode>
+
+    <!--Security Section-->
+    <!--SiteMap User-->
+    <mvcSiteMapNode title="User" controller="User" area="Security" action="Index">
+      <mvcSiteMapNode title="Add" controller="User" area="Security" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="User" area="Security" action="Edit" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Delete" controller="User" area="Security" action="Delete" preservedRouteParameters="id"/>
+    </mvcSiteMapNode>
+    <!--SiteMap Profile-->
+    <mvcSiteMapNode title="Profile" controller="Profile" area="Security" action="Index">
+      <mvcSiteMapNode title="Add" controller="Profile" area="Security" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="Profile" area="Security" action="Edit" preservedRouteParameters="id"/>
+      <mvcSiteMapNode title="Add Roles" controller="ProfileRole" area="Security" action="Index" preservedRouteParameters="id"/>
+    </mvcSiteMapNode>
+    <!--SiteMap Role-->
+    <mvcSiteMapNode title="Role" controller="Role" area="Security" action="Index">
+      <mvcSiteMapNode title="Add" controller="Role" area="Security" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="Role" area="Security" action="Edit" preservedRouteParameters="roleCode"/>
+      <mvcSiteMapNode title="Delete" controller="Role" area="Security" action="Delete" preservedRouteParameters="roleCode"/>
+      <mvcSiteMapNode title="Add Modules and Permissions" controller="RoleModulePermission" area="Security" action="Create" preservedRouteParameters="roleCode"/>
+    </mvcSiteMapNode>
+    <!--SiteMap Module-->
+    <mvcSiteMapNode title="Module" controller="Module" area="Security" action="Index">
+      <mvcSiteMapNode title="Add" controller="Module" area="Security" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="Module" area="Security" action="Edit" preservedRouteParameters="roleCode"/>
+      <mvcSiteMapNode title="Delete" controller="Module" area="Security" action="Delete" preservedRouteParameters="roleCode"/>
+      <mvcSiteMapNode title="Add Modules and Permissions" controller="ModulePermission" area="Security" action="Create" preservedRouteParameters="roleCode"/>
+    </mvcSiteMapNode>
+    <!--SiteMap Permission-->
+    <mvcSiteMapNode title="Permission" controller="Permission" area="Security" action="Index">
+      <mvcSiteMapNode title="Add" controller="Permission" area="Security" action="Create"/>
+      <mvcSiteMapNode title="Edit" controller="Permission" area="Security" action="Edit" preservedRouteParameters="roleCode"/>
+      <mvcSiteMapNode title="Delete" controller="Permission" area="Security" action="Delete" preservedRouteParameters="roleCode"/>
+    </mvcSiteMapNode>
+
+    <!--Process section-->
+    <!--SiteMap Process-->
+    <mvcSiteMapNode title="JetFuel Process" controller="JetFuelProcess" area="Process" action="Index">
+      <mvcSiteMapNode title="Create Period" controller="JetFuelProcess" area="Process" action="Create" />
+    </mvcSiteMapNode>
+    <!--SiteMap National Process-->
+    <mvcSiteMapNode title="Domestic Jet Fuel Process" controller="NationalJetFuelProcess" area="Process" action="Index">
+    </mvcSiteMapNode>
+    <!--SiteMap NationalJetFuelLogError-->
+    <mvcSiteMapNode title="Log Errors" controller="NationalJetFuelLogError" area="Process" action="Index">
+      <mvcSiteMapNode title="Report" controller="NationalJetFuelLogError" area="Process" action="Export" />
+    </mvcSiteMapNode>
+    <!--SiteMap NationalJetFuelReport-->
+    <mvcSiteMapNode title="Domestic Jet Fuel Report Ticket" controller="NationalJetFuelReportTicket" area="Process" action="Index">
+      <mvcSiteMapNode title="Report" controller="NationalJetFuelReportTicket" area="Process" action="Export" />
+    </mvcSiteMapNode>
+    <!--SiteMap JetFuelLogError-->
+    <mvcSiteMapNode title="Log Errors" controller="JetFuelLogError" area="Process" action="Index">
+      <mvcSiteMapNode title="Report" controller="JetFuelLogError" area="Process" action="Export" />
+    </mvcSiteMapNode>
+    <!--SiteMap JetFuelLogError-->
+    <mvcSiteMapNode title="Confirm Period" controller="ConfirmPeriod" area="Process" action="Index">
+      <mvcSiteMapNode title="Close" controller="ConfirmPeriod" area="Process" action="Close" />
+      <mvcSiteMapNode title="Open" controller="ConfirmPeriod" area="Process" action="Open" />
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="Jet Fuel Report Ticket" controller="JetFuelReportTicket" area="Process" action="Index">
+      <mvcSiteMapNode title="Export" controller="JetFuelReportTicket" area="Process" action="Export" />
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="View Calculation Results" controller="JetFuelCalculationResult" area="Process" action="Index">
+      <mvcSiteMapNode title="Export" controller="JetFuelCalculationResult" area="Process" action="Grouped" />
+      <mvcSiteMapNode title="Export" controller="JetFuelCalculationResult" area="Process" action="Detailed" />
+      <mvcSiteMapNode title="Export" controller="JetFuelCalculationResult" area="Process" action="WrongLog" />
+      <!-- Validate the next nodes -->
+      <!--<mvcSiteMapNode title="Close" controller="ConfirmPeriod" area="Process" action="Close" />
+      <mvcSiteMapNode title="Open" controller="ConfirmPeriod" area="Process" action="Open" />-->
+    </mvcSiteMapNode>
+    <!--SiteMap NationalJetFuelCalculationResult-->
+    <mvcSiteMapNode title="View National Calculation Results" controller="NationalJetFuelCalculationResult" area="Process" action="Index">
+      <mvcSiteMapNode title="Export" controller="NationalJetFuelCalculationResult" area="Process" action="Grouped" />
+      <mvcSiteMapNode title="Export" controller="NationalJetFuelCalculationResult" area="Process" action="Detailed" />
+      <mvcSiteMapNode title="Export" controller="NationalJetFuelCalculationResult" area="Process" action="WrongLog" />
+    </mvcSiteMapNode>    
+    <!--SiteMap JetFuelPoliciesHistory-->
+    <mvcSiteMapNode title="Provision Policies History" controller="PoliciesHistory" area="Process" action="Index">
+      <mvcSiteMapNode title="Provision Policies History Report" controller="PoliciesHistory" area="Process" action="ShowReport" />
+      <mvcSiteMapNode title="Search" controller="PoliciesHistory" area="Process" action="Search" />
+    </mvcSiteMapNode>
+    <!--Process/CreatePolicy-->
+    <mvcSiteMapNode title="Create Provision Policies" controller="CreatePolicy" area="Process" action="Index">
+      <mvcSiteMapNode title="Send" controller="CreatePolicy" area="Process" action="Create" />
+    </mvcSiteMapNode>
+    <!--Catalog/ScheduleType-->
+    <mvcSiteMapNode title="Schedule Type" controller="ScheduleType" area="Catalog" action="Index">
+      <mvcSiteMapNode title="Create" controller="ScheduleType" area="Catalog" action="Create" />
+      <mvcSiteMapNode title="Edit" controller="ScheduleType" area="Catalog" action="Edit" />
+      <mvcSiteMapNode title="Delete" controller="ScheduleType" area="Catalog" action="Delete" />
+    </mvcSiteMapNode>
+    <!--Unauthorized-->
+    <mvcSiteMapNode title="Unauthorized" controller="Home" area="" action="Unauthorized" >
+    </mvcSiteMapNode>
+
+    <!--SiteMap National Fuel Contract-->
+    <mvcSiteMapNode title="National Fuel Contract" controller="NationalFuelContract" area="Finance" action="Index">
+      <mvcSiteMapNode title="Add" controller="NationalFuelContract" area="Finance" action="Create" />
+      <mvcSiteMapNode title="Search" controller="NationalFuelContract" area="Finance" action="Search" />
+      <mvcSiteMapNode title="Detail" controller="NationalFuelContract" area="Finance" action="Detail" />
+      <mvcSiteMapNode title="Delete" controller="NationalFuelContract" area="Finance" action="Delete" />
+      <mvcSiteMapNode title="Edit" controller="NationalFuelContract" area="Finance" action="Edit" key="Fuel_National_Contracts" preservedRouteParameters="effectiveDate,airlineCode,stationCode,serviceCode,providerNumberPrimary">
+        <mvcSiteMapNode title="Edit Concept" controller="NationalFuelContractConcept" area="Finance" action="Edit" preservedRouteParameters="id"/>
+        <mvcSiteMapNode title="Delete Concept" controller="NationalFuelContractConcept" area="Finance" action="Delete" preservedRouteParameters="id"/>
+      </mvcSiteMapNode>
+    </mvcSiteMapNode>
+
+    <!--SiteMap National Fuel Rate-->
+    <mvcSiteMapNode title="Domestic Fuel Rates" controller="NationalFuelRate" area="Finance" action="Index">
+      <mvcSiteMapNode title="Edit" controller="NationalFuelRate" area="Finance" action="Edit" />
+      <mvcSiteMapNode title="Delete" controller="NationalFuelRate" area="Finance" action="Delete" />
+      <mvcSiteMapNode title="Search" controller="NationalFuelRate" area="Finance" action="Search" />
+    </mvcSiteMapNode>
+  
+    <!--SiteMap Confirm National Period-->
+    <mvcSiteMapNode title="Confirm National Calculation Period" controller="ConfirmNationalPeriod" area="Process" action="Index">
+      <mvcSiteMapNode title="Close" controller="ConfirmNationalPeriod" area="Process" action="Close" />
+      <mvcSiteMapNode title="Open" controller="ConfirmNationalPeriod" area="Process" action="Open" />
+    </mvcSiteMapNode>
+
+    <!--SiteMap National Jet Fuel Policy-->
+    <mvcSiteMapNode title="Create Domestic Fuel Policy" controller="NationalPolicy" area="Process" action="Index">
+      <mvcSiteMapNode title="Create Domestic Fuel Policy" controller="NationalPolicy" area="Process" action="CreateNationalPolicy" />
+      <mvcSiteMapNode title="Send Domestic Fuel Policy" controller="NationalPolicy" area="Process" action="SendNationalPolicy" />
+    </mvcSiteMapNode>
+  
+    <!--SiteMap National Jet Fuel Policies History-->
+    <mvcSiteMapNode title="View Provision Policies History" controller="NationalPolicyHistory" area="Process" action="Index">
+      <mvcSiteMapNode title="Report" controller="NationalPolicyHistory" area="Process" action="ShowReport" />
+      <mvcSiteMapNode title="Search" controller="NationalPolicyHistory" area="Process" action="Search" />
+      <mvcSiteMapNode title="Send" controller="NationalPolicyHistory" area="Process" action="Send" />
+    </mvcSiteMapNode>
+
+    <!--SiteMap Domestic Fuel Manage Invoices-->
+    <mvcSiteMapNode title="Domestic Fuel Manage Invoices" controller="NationalJetFuelInvoice" area="Process" action="Index">
+      <mvcSiteMapNode title="Advance Search" controller="NationalJetFuelInvoice" area="Process" action="AdvanceSearch" />
+      <mvcSiteMapNode title="Invoice Summary Errors Report" controller="NationalJetFuelInvoice" area="Process" action="ShowErrorsReport" />
+      <mvcSiteMapNode title="Invoice Summary Report" controller="NationalJetFuelInvoice" area="Process" action="ShowInvoicePoliciesReport" />
+      <mvcSiteMapNode title="Detail Policy Report" controller="NationalJetFuelInvoice" area="Process" action="ShowInvoiceSummary" />
+      <mvcSiteMapNode title="Export Invoice Detail" controller="NationalJetFuelInvoice" area="Process" action="ShowDetailExportReport" />
+    </mvcSiteMapNode>
+
+    <!--SiteMap National Jet Fuel Reconcile Invoices-->
+    <mvcSiteMapNode title="Domestic Fuel Reconcile Invoices" controller="NationalJetFuelReconcileInvoice" area="Process" action="Index">
+      <mvcSiteMapNode title="Search Reconcile Invoices" controller="NationalJetFuelReconcileInvoice" area="Process" action="AdvanceSearch" />
+      <mvcSiteMapNode title="National JetFuel Reconcile Automatic Process" controller="NationalJetFuelReconcileInvoice" area="Process" action="NationalJetFuelReconcileProcess" />
+      <mvcSiteMapNode title="Export Reconciliation Detail" controller="NationalJetFuelReconcileInvoice" area="Process" action="ExportReconciliationDetail" />
+      
+      <mvcSiteMapNode title="National JetFuel Reconcile Manual Process" controller="NationalJetFuelReconcileInvoice" area="Process" action="NationalJetFuelReconcileManualProcess" key="JetFuelReconcileInvoice_Manual" preservedRouteParameters="RemittanceID,MonthYear,Period">      
+        <mvcSiteMapNode title="Download Invoice Detail" controller="NationalJetFuelReconcileInvoice" area="Process" action="ExportInvoiceDetail" preservedRouteParameters="RemittanceID,MonthYear,Period"/>
+        <mvcSiteMapNode title="Download Cost Detail" controller="NationalJetFuelReconcileInvoice" area="Process" action="ExportCostDetail" preservedRouteParameters="RemittanceID,MonthYear,Period"/>
+        <mvcSiteMapNode title="Load Log" controller="NationalJetFuelReconcileInvoice" area="Process" action="ExportLoadLog" preservedRouteParameters="RemittanceID,MonthYear,Period"/>
+      </mvcSiteMapNode>
+    </mvcSiteMapNode>
+    
+  </mvcSiteMapNode>
+</mvcSiteMap>
+  

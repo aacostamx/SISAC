@@ -1,0 +1,378 @@
+﻿@model VOI.SISAC.Web.Models.VO.Security.UserVO
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var airports = this.ViewBag.Airports != null ? this.ViewBag.Airports as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>
+        : new List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>();
+    var departments = this.ViewBag.Departments != null ? this.ViewBag.Departments as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>
+        : new List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>();
+    var airlines = this.ViewBag.Airlines != null ? this.ViewBag.Airlines as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>
+        : new List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>();
+    var profiles = this.ViewBag.Profiles != null ? this.ViewBag.Profiles as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>
+        : new List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>();
+    var roles = this.ViewBag.Roles != null ? this.ViewBag.Roles as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>
+        : new List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>();
+    var cultureForm = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+
+
+    //Arbol
+    var dataSection = String.Empty;
+    var permissionIndex = String.Empty;
+    var modulePermissions = this.ViewBag.ModulePermissions as List<VOI.SISAC.Web.Models.VO.Security.ModulePermissionVO>;
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+@Styles.Render("~/bundles/TreeSelectCSS")
+@Styles.Render("~/bundles/SweetAlertCSS")
+@Styles.Render("~/Content/bootstrapdtimecss")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    @Html.Partial("_UnauthorizedActionModal")
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.UserTitle</p>
+        <p class="subtitle_h3_ancillarie">@VOI.SISAC.Web.Resources.Resource.Add</p>
+    </div>
+    <br />
+
+    @using (Html.BeginForm("Create", "User", FormMethod.Post, new { name = "formUser", id = "formUser" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @{ Html.EnableClientValidation(false); }
+            <br />
+            <br />
+            <br />
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title subtitle_h6" onclick="User.toggle_visibility('dvPrincipal');">
+                            <strong>@Resource.UserInformation</strong>
+                        </h4>
+                    </div>
+                    @*Comienza Usuario Basico*@
+                    <div id="dvPrincipal">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                @Html.HiddenFor(model => model.UserID)
+                                @Html.HiddenFor(model => model.Status)
+                                @Html.LabelFor(model => model.Airlines, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                <div class="styled-select">
+                                    @Html.DropDownListFor(model => model.AirlineCode, airlines.Select(h => new SelectListItem
+                               {
+                                   Text = h.Description,
+                                   Value = h.Id
+                               }), Resource.SelectItem, new { @class = "inputForm form-control", @id = "Airline" })
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                @Html.LabelFor(model => model.EmployeeNumber, new { @class = "subtitle_h5 control-label required-field" })
+                                @Html.EditorFor(model => model.EmployeeNumber, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return User.validarMaxLengthAlfanumerico(event, this, 10);", @onkeyup = "return User.validarMaxLengthAlfanumerico(event, this, 10)" } })
+                            </div>
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                @Html.LabelFor(model => model.UserVolaris, new { @class = "subtitle_h5 control-label required-field" })
+                                <input class="checkVolaris top-padding" type="checkbox" id="UserVolaris" name="UserVolaris" onclick="User.ifUncheckPasswordRequired(event, this)" />
+                                <label for="UserVolaris" class="control_gris"><span></span></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                @Html.LabelFor(model => model.UserName, new { @class = "subtitle_h5 control-label required-field" })
+                                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return User.validarMaxLengthAlfanumericoPunto(event, this, 25);", @onkeyup = "return User.validarMaxLengthAlfanumericoPunto(event, this, 25)" } })
+                            </div>
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                @Html.Label(Resource.Password, new { @class = "subtitle_h5 control-label required-field" })
+                                @Html.Password("PasswordEncripted")
+                            </div>
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                @Html.Label(Resource.PasswordAgain, new { @class = "subtitle_h5 control-label required-field" })
+                                @Html.Password("PasswordEncriptedAgain")
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                @Html.LabelFor(model => model.Name, new { @class = "subtitle_h5 control-label required-field" })
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarMaxLengthAlfabetico(event, this, 80);", @onkeyup = "return commonFunctions.validarMaxLengthAlfabetico(event, this, 80)" } })
+
+                            </div>
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                @Html.LabelFor(model => model.FirstName, new { @class = "subtitle_h5 control-label required-field" })
+                                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarMaxLengthAlfabetico(event, this, 80);", @onkeyup = "return commonFunctions.validarMaxLengthAlfabetico(event, this, 80)" } })
+
+                            </div>
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                @Html.LabelFor(model => model.LastName, new { @class = "subtitle_h5 control-label" })
+                                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarMaxLengthAlfabetico(event, this, 80);", @onkeyup = "return commonFunctions.validarMaxLengthAlfabetico(event, this, 80)" } })
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                @Html.LabelFor(model => model.Email, new { @class = "subtitle_h5 control-label" })
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control specialInput", @onfocusout = "return User.validarEmail(event, this, 90)" } })
+
+                            </div>
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                @Html.LabelFor(model => model.DepartmentID, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                <div class="styled-select">
+                                    @Html.DropDownListFor(model => model.DepartmentID, departments.Select(h => new SelectListItem
+                               {
+                                   Text = h.Description,
+                                   Value = h.Id
+                               }), Resource.SelectItem, new { @class = "inputForm form-control", @id = "Department" })
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                @Html.LabelFor(model => model.EntryDate, new { @class = "subtitle_h5 control-label required-field" })
+                                @Html.EditorFor(model => model.EntryDate, new { htmlAttributes = new { @class = "form-control specialInput ClassDate" } })
+                            </div>
+                        </div>
+                    </div>
+                    @*Termina Usuario basico*@
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title subtitle_h6" onclick="User.toggle_visibility('dvAirport');">
+                            <strong>@Resource.AddAirports</strong>
+                        </h4>
+                    </div>
+                    @*Aeropuerto*@
+                    <div class="row" id="dvAirport">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                @Html.LabelFor(model => model.Airports, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                <div class="styled-select">
+                                    @Html.DropDownList("ddlAirport", airports.Select(h => new SelectListItem
+                               {
+                                   Text = h.CodeAndDescription,
+                                   Value = h.Id
+                               }), Resource.SelectItem, new { @class = "inputForm form-control", @id = "ddlAirport" })
+                                </div>
+
+                            </div>
+                            <br />
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <button type="button" class="btn btn-default" name="Add" title="User" onclick="User.AddAirport()" id="AddAirport">
+                                    <i class="fa fa-plus"></i>@Resource.Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    @*   Comienza el Grid para Airports   *@
+                    <table id="tbAirport"
+                           class="table"
+                           data-unique-id="StationCode"
+                           data-toggle="table"
+                           data-mobile-responsive="true">
+
+                        <thead>
+                            <tr>
+                                <th data-field="StationCode" data-align="center" data-halign="center" data-formatter="User.AddAttributeStationCode">
+                                    <strong>@Html.DisplayNameFor(model => model.Airports.FirstOrDefault().StationCode)</strong>
+                                </th>
+                                <th data-field="StationName" data-align="center" data-halign="center">
+                                    <strong>@Html.DisplayNameFor(model => model.Airports.FirstOrDefault().StationName)</strong>
+                                </th>
+                                <th data-field="Principal" data-align="center" data-halign="center" data-formatter="User.AddAttributePrincipal">
+                                    <strong>@Html.DisplayNameFor(model => model.UserAirports.FirstOrDefault().Principal)</strong>
+                                </th>
+                                <th data-field="Actions" data-align="center" data-halign="center">
+                                    <strong>@Resource.Actions</strong>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.UserAirports != null)
+                                {
+                                    foreach (var item in Model.UserAirports)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.StationCode)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Airports.StationName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Principal)
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-default" type="button" name="Remove" title="Remove" onclick="User.removeAirport('@item.StationCode')">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    @*Termina el Grid para Airports*@
+                </div>
+                <br />
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                        <h4 class="panel-title subtitle_h6" onclick="User.toggle_visibility('dvPerRol');">
+                            <strong>@Resource.AddProfileAndRoles</strong>
+                        </h4>
+                    </div>
+                    @*Perfil-Rol*@
+                    <div class="row" id="dvPerRol">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                @Html.Label(Resource.ProfileName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                <div class="styled-select">
+                                    @Html.DropDownList("ddlProfiles", profiles.Select(h => new SelectListItem
+                               {
+                                   Text = h.Description,
+                                   Value = h.Id
+                               }), Resource.SelectItem, new { @class = "inputForm form-control", @onchange = "User.GetRolesByProfile()", @id = "ddlProfiles" })
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                @Html.Label(Resource.RoleName, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+                                <div class="styled-select">
+                                    @Html.DropDownList("ddlRoles", roles.Select(h => new SelectListItem
+                               {
+                                   Text = h.Description,
+                                   Value = h.Id
+                               }), Resource.SelectItem, new { @class = "inputForm form-control", @id = "ddlRoles" })
+                                </div>
+
+                            </div>
+                            <br />
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <button type="button" class="btn btn-default" name="Add" title="User" onclick="User.AddProfileRole()" id="AddProfileRoles">
+                                    <i class="fa fa-plus"></i>@Resource.Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    @*   Comienza el Grid para Profile-Role   *@
+                    <table id="tbProfileRole"
+                           class="table"
+                           data-unique-id="ProfileRoleCode"
+                           data-toggle="table"
+                           data-mobile-responsive="true">
+                        <thead>
+                            <tr>
+                                <th data-field="ProfileRoleCode" data-align="center" data-halign="center" data-visible="true" data-formatter="User.AddAttributeProfileRoleCode">
+                                    <strong id="ProfileRoleCode" name="ProfileRoleCode">
+                                        ID
+                                    </strong>
+                                </th>
+                                <th data-field="ProfileCode" data-align="center" data-halign="center">
+                                    <strong>@Html.DisplayNameFor(model => model.Profiles.FirstOrDefault().ProfileCode)</strong>
+                                </th>
+                                <th data-field="RoleCode" data-align="center" data-halign="center">
+                                    <strong>@Html.DisplayNameFor(model => model.Roles.FirstOrDefault().RoleCode)</strong>
+                                </th>
+                                <th data-field="Principal" data-align="center" data-halign="center" data-formatter="User.AddAttributePrincipalPR">
+                                    <strong>@Html.DisplayNameFor(model => model.UserProfileRoles.FirstOrDefault().Principal)</strong>
+                                </th>
+                                <th data-field="Actions" data-align="center" data-halign="center">
+                                    <strong>@Resource.Actions</strong>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.UserProfileRoles != null)
+                                {
+                                    foreach (var item in Model.UserProfileRoles)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ProfileRoleCode)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ProfileCode)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.RoleCode)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Principal)
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-default" type="button" name="Remove" title="Remove" onclick="User.removeProfileRole('@item.ProfileRoleCode')">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    @*Termina el Grid para Profile-Role*@
+                </div>
+            </div>
+            @*Arbol*@
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <select id="selectModules" multiple="multiple">
+                    @if (modulePermissions != null)
+                    {
+                        foreach (var item in modulePermissions)
+                        {
+                            var seccion = "";
+                            if (item.Module.Menu == null)
+                            {
+                                seccion = @Resource.Permission;
+                            }
+                            else
+                            {
+                                seccion = @item.Module.Menu.MenuName;
+                            }
+
+                            dataSection = seccion + "/" + @item.Module.ModuleName;
+                            permissionIndex = @item.ModuleCode + "/" + @item.PermissionCode;
+                            <option value="@permissionIndex" data-section="@dataSection" data-module="@item.ModuleCode" data-permission="@item.PermissionCode">
+                                @item.Permission.PermissionName
+                            </option>
+                        }
+                    }
+                </select>
+            </div>
+            @*termina Arbol*@
+
+            @*Botones Atras y Guardar*@
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <br />
+                    <input onclick="location.href='@Url.Action("Index","User")'" type="reset" class="btnVolaris" value="@Resource.Back" />
+                    <input type="submit" id="Save"  name ="Create" value="@Resource.Save" class="btnVolaris" />
+                </div>
+
+            </div>
+            @*termina botones*@
+            @{ Html.EnableClientValidation(true); }
+        </div>
+                }
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/CommonFunctions")
+    @Scripts.Render("~/bundles/TreeSelectJS")
+    @Scripts.Render("~/bundles/SweetAlertJS")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+    @Scripts.Render("~/bundles/JSDateTimeValidate")
+    <script src="~/Scripts/bootstrap-table.js"></script>
+    <script src="~/Scripts/SISAC/Security/User.js"></script>
+    <script type="text/javascript">
+        var currentLang = '@cultureForm.ToString()';
+        //tree
+        var options = { hideSidePanel: true };
+        $("select#selectModules").treeMultiselect(options);
+    </script>
+}

@@ -1,0 +1,45 @@
+﻿@model VOI.SISAC.Web.Models.VO.Airport.GpuObservationVO
+
+    @{
+        ViewBag.Title = "Delete";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+
+    <div class="container">
+
+        @Html.Partial("_AlertView")
+
+        <div class="form-horizontal">
+            <h2 class="subtitle_h3_black">Eliminar Observación GPU</h2>
+            <h3>¿Estás seguro que deseas eliminar el registro?</h3>
+
+
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    @Html.LabelFor(model => model.GpuObservationCode, htmlAttributes: new { @class = "control-label subtitle_h5 required-field" })
+                    @Html.EditorFor(model => model.GpuObservationCode, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    @Html.LabelFor(model => model.GpuObservationCodeName, htmlAttributes: new { @class = "control-label subtitle_h5 required-field", @readonly = "readonly" })
+                    @Html.EditorFor(model => model.GpuObservationCodeName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                </div>
+            </div>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <br />
+                    <input onclick="location.href='@Url.Action("Index", "GpuObservation")'" type="reset" class="btnVolaris" value=@Resource.Back>
+                    <input type="submit" value="Eliminar" class="btnVolaris">
+                    <br />
+                </div>
+            </div>
+        }
+    </div>

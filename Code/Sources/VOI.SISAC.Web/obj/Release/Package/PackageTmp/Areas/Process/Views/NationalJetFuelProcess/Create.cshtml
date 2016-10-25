@@ -1,0 +1,94 @@
+﻿@model VOI.SISAC.Web.Models.VO.Process.NationalJetFuelProcessVO
+
+@{
+    ViewBag.Title = VOI.SISAC.Web.Resources.Resource.Create;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cultureForm = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+}
+
+@Styles.Render("~/bundles/SweetAlertCSS")
+@Styles.Render("~/bundles/SweetAlertCSS")
+@Styles.Render("~/Content/bootstrapdtimecss")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.NationalJetFuelProcess</p>
+        <p class="subtitle_h3_ancillarie">@VOI.SISAC.Web.Resources.Resource.Create</p>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                @Html.LabelFor(model => model.PeriodCode, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
+
+                <input class="form-control text-box single-line" data-val="true" data-val-length="El campo PeriodCode debe ser una cadena con una longitud máxima de 30." data-val-length-max="30" id="PeriodCode" name="PeriodCode" type="text" value="" readonly>
+
+            </div>
+
+            <div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'>
+                <label class="subtitle_h5">@VOI.SISAC.Web.Resources.Resource.StartDate:</label>
+                <div class="form-group">
+                    <div class='input-group date' id='dtpStartDatePeriod'>
+                        <input id="StartDatePeriod" name="StartDatePeriod" type='text' class="form-control"
+                               placeholder="@DateTime.Today.Date.ToString("yyyy/MM/dd")" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'>
+                <label class="subtitle_h5">@VOI.SISAC.Web.Resources.Resource.EndDate:</label>
+                <div class="form-group">
+                    <div class='input-group date' id='dtpEndDatePeriod'>
+                        <input id="EndDatePeriod" name="EndDatePeriod" type='text' class="form-control" placeholder="@DateTime.Today.Date.ToString("yyyy/MM/dd")" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/SweetAlertJS")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+    @Scripts.Render("~/bundles/JSbootstrapCombobox")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        var currentLang = '@cultureForm.ToString()';
+
+        $(function () {
+            $('#dtpStartDatePeriod').datetimepicker({
+                format: 'YYYY/MM/DD',
+                locale: currentLang,
+                showTodayButton: true,
+                showClose: true,
+                showClear: true
+            });
+            $('#dtpEndDatePeriod').datetimepicker({
+                format: 'YYYY/MM/DD',
+                locale: currentLang,
+                locale: currentLang,
+                showTodayButton: true,
+                showClose: true,
+                showClear: true,
+                useCurrent: false
+            });
+            $("#dtpStartDatePeriod").on("dp.change", function (e) {
+                $('#dtpEndDatePeriod').data("DateTimePicker").minDate(e.date);
+            });
+            $("#dtpEndDatePeriod").on("dp.change", function (e) {
+                $('#dtpStartDatePeriod').data("DateTimePicker").maxDate(e.date);
+            });
+        });
+    </script>
+}

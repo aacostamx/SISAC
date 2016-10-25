@@ -1,0 +1,189 @@
+﻿@{
+    ViewBag.Title = VOI.SISAC.Web.Resources.Resource.PoliciesHistoryTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cultureForm = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+@Styles.Render("~/bundles/SweetAlertCSS")
+@Styles.Render("~/Content/bootstrapdtimecss")
+@Styles.Render("~/bundles/CSSbootstrapCombobox")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+
+    <h2 class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.PoliciesHistoryTitle</h2>
+
+    @Html.Partial("Partial/_ModalPoliciesHistory")
+    <div id="toolbar">
+        @if (User.IsInRole("NAPOLHIS-SEARCH"))
+        {
+            <button id="btnSearchPoliciesHistory" data-toggle="modal"
+                    data-target="#modalPoliciesHistory"
+                    type="button"
+                    class="btn btn-default"
+                    name="@VOI.SISAC.Web.Resources.Resource.Search"
+                    title="@VOI.SISAC.Web.Resources.Resource.Search">
+                <i class="fa fa-search fa-fw"></i>
+                &nbsp;@VOI.SISAC.Web.Resources.Resource.Search
+            </button>
+        }
+
+    </div>
+
+    @using (Html.BeginForm("Index", "NationalPolicyHistory", FormMethod.Post, new { name = "formPoliciesHistory", id = "formPoliciesHistory" }))
+    {
+        <table id="tbPoliciesHistory"
+               data-toolbar="#toolbar"
+               data-toggle="table"
+               data-locale="@cultureForm.ToString()"
+               class="table"
+               data-cache="false"
+               data-export-types="['excel']"
+               data-show-export="true"
+               data-show-columns="true"
+               data-show-toggle="true"
+               data-mobile-responsive="true"
+               data-check-on-init="true"
+               data-url="@Url.Action("GetPagedPoliciesHistory", "NationalPolicyHistory")"
+               data-pagination="true"
+               data-query-params="queryParams"
+               data-side-pagination="server"
+               data-query-params-type=""
+               data-page-list="[5,10,20,50,100,200,All]">
+            <thead>
+                <tr>
+                    <th data-field="Actions" data-align="center" data-halign="center" data-formatter="commonFunctions.actionsButtons">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
+                    </th>
+                    <th data-field="NationalPolicyId" data-halign="center" data-align="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.PolicyId</strong>
+                    </th>
+                    <th data-field="CreationDate" data-halign="center" data-align="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.CreationDate</strong>
+                    </th>
+                    <th data-field="Status" data-halign="center" data-align="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.Status</strong>
+                    </th>
+                    <th data-field="StartDateReal" data-halign="center" data-align="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.StartDateReal </strong>
+                    </th>
+                    <th data-field="EndDateReal" data-halign="center" data-align="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.EndDateReal </strong>
+                    </th>
+                    <th data-field="StartDateComplementary" data-halign="center" data-align="center" data-visible="false">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.StartDateComplementary </strong>
+                    </th>
+                    <th data-field="EndDateComplementary" data-halign="center" data-align="center" data-visible="false">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.EndDateComplementary </strong>
+                    </th>
+                    <th data-field="DateBaseline" data-halign="center" data-align="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.DateBaseline </strong>
+                    </th>
+                    <th data-field="DateValue" data-halign="center" data-align="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.DateValue </strong>
+                    </th>
+                    <th data-field="DatePosting" data-halign="center" data-align="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.DatePosting </strong>
+                    </th>
+                    <th data-field="HeaderText" data-halign="center" data-align="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.HeaderText </strong>
+                    </th>
+                    <th data-field="ItemText" data-halign="center" data-align="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.ItemText </strong>
+                    </th>
+                    <th data-field="SendByUserName" data-halign="center" data-align="center" data-visible="false">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.SendByUserName </strong>
+                    </th>
+                    <th data-field="ConfirmedByUserName" data-halign="center" data-align="center" data-visible="false">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.ConfirmedByUserName </strong>
+                    </th>
+                    <th data-field="TotalProcess" data-halign="center" data-align="center" data-visible="false">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.TotalProcess </strong>
+                    </th>
+                    <th data-field="TotalSucess" data-halign="center" data-align="center" data-visible="false">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.TotalSucess </strong>
+                    </th>
+                    <th data-field="TotalErrors" data-halign="center" data-align="center" data-visible="false">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.TotalErrors </strong>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    }
+
+    <!-- context menu -->
+    <ul id="context-menu" class="dropdown-menu">
+        @if (User.IsInRole("NAPOLHIS-SEND"))
+        {
+            <li data-item="@VOI.SISAC.Web.Resources.Resource.Send"><a><i class="fa fa-paper-plane-o fa-fw"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.Send</a></li>
+        }
+
+        @if (User.IsInRole("NAPOLHIS-PRINTREP"))
+        {
+            <li data-item="@VOI.SISAC.Web.Resources.Resource.Export"><a><i class="fa fa-share-square-o fa-fw"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.Export</a></li>
+        }
+
+        @if (User.IsInRole("NAPOLHIS-CANCEL"))
+        {
+            <li data-item="@VOI.SISAC.Web.Resources.Resource.Cancel"><a><i class="fa fa-ban fa-fw"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.Cancel</a></li>
+        }
+    </ul>
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/bootstrapTable")
+    @Scripts.Render("~/bundles/bootstrapTablePlugins")
+    @Scripts.Render("~/bundles/ExportTable")
+    @Scripts.Render("~/bundles/BootstrapContextMenu")
+    @Scripts.Render("~/bundles/CommonFunctions")
+    @Scripts.Render("~/bundles/SweetAlertJS")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+    @Scripts.Render("~/bundles/JSbootstrapCombobox")
+
+    <script>
+        $(document).ready(function () {
+            if (!String.prototype.includes) {
+                String.prototype.includes = function () {
+                    'use strict';
+                    return String.prototype.indexOf.apply(this, arguments) !== -1;
+                };
+            }
+        })
+
+        //Take querystrings and send back to server REST
+        function queryParams(params) {
+            return {
+                pageNumber: params.pageNumber,
+                pageSize: params.pageSize
+            };
+        }
+
+        var currentLang = '@cultureForm.ToString()';
+
+        $('#tbPoliciesHistory').bootstrapTable({
+            contextMenu: '#context-menu',
+            contextMenuButton: '.menuButton',
+            contextMenuAutoClickRow: true,
+            contextMenuTrigger: 'right',
+            onContextMenuItem: function (row, $el) {
+                if ($el.data("item") == '@VOI.SISAC.Web.Resources.Resource.Send') {
+                    var url = '@Url.Action("Send", "NationalPolicyHistory")';
+                    url = url.concat('?nationalPolicyId=' + row.NationalPolicyId);
+                    window.location = url;
+                }
+                if ($el.data("item") == '@VOI.SISAC.Web.Resources.Resource.Export') {
+                    var url = '@Url.Action("ShowReport", "NationalPolicyHistory")';
+                    url = url.concat('?nationalPolicyId=' + row.NationalPolicyId);
+                    window.location = url;
+                }
+                if ($el.data("item") == '@VOI.SISAC.Web.Resources.Resource.Cancel') {
+                    var url = '@Url.Action("Cancel", "NationalPolicyHistory")';
+                    url = url.concat('?nationalPolicyId=' + row.NationalPolicyId);
+                    window.location = url;
+                }
+            }
+        })
+    </script>
+}

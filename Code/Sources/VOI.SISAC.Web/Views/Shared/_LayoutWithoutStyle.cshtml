@@ -1,0 +1,274 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="@VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture()" dir="@(VOI.SISAC.Web.Helpers.CultureHelper.IsRightToLeft() ? "rtl" : "ltr")">
+<!--<![endif]-->
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <meta charset="utf-8" />
+    <title>@Resource.SISAC</title>
+    <meta name="description" content="@Resource.SISACHeadTitle" />
+    <meta name="author" content="Y4" />
+
+    <!-- Mobile Specific Metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- CSS
+    ================================================== -->
+    @*@Styles.Render("~/Content/Main/css")
+    @Styles.Render("~/Content/fontawesomecss")
+    @Scripts.Render("~/bundles/modernizr")*@
+
+    <!-- JS
+    ================================================== -->
+    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrapjs")
+    @Scripts.Render("~/bundles/CommonAction")*@
+    <!-- FONTS
+    ================================================== -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900&subset=latin,latin-ext' rel='stylesheet' type='text/css' />
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    @using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm" }))
+    {
+        @Html.AntiForgeryToken()
+    }
+
+    @using (Html.BeginForm("ChangeLanguage", "Account", new { area = "" }, FormMethod.Post, new { id = "changeLanguage" }))
+    {
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="language" id="languageDiv" />
+    }
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" title="Volaris">
+                    <img style="max-width: 100px;" src="~/Content/images/logo_volaris_small.png" />
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="~/Home/Index">@Resource.Index <span class="sr-only">(current)</span></a></li>
+                    <li class="dropdown dropdown-large">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Resource.Define <b class="caret"></b></a>
+                        <ul class="dropdown-menu dropdown-menu-large row">
+
+                            <li class="col-sm-4">
+                                <ul>
+                                    <li class="dropdown-header">@Resource.GeneralCatalog</li>
+                                    <li><a href="~/Airport/Airport">@Resource.Airport</a></li>
+                                    <li><a href="~/Airport/AirportGroup">@Resource.AirportGroupMenu</a></li>
+                                    <li><a href="~/Airport/AirportSchedule">@Resource.AirportScheduleMenu</a></li>
+                                    <li><a href="~/Finance/Currency">@Resource.CurrencyMenu</a></li>
+                                    <li><a href="~/Airport/AirplaneType">@Resource.AirplaneTypeMenu</a></li>
+                                    <li><a href="~/Catalog/Country">@Resource.CountryMenu</a></li>
+                                </ul>
+                            </li>
+                            <li class="col-sm-4">
+                                <ul>
+                                    <li class="dropdown-header">@Resource.AirlineCatalog</li>
+                                    <li><a href="~/Airport/Airline">@Resource.AirlineMenu</a></li>
+                                    <li><a href="~/Airport/Airplane">@Resource.AirplaneMenu</a></li>
+                                    <li><a href="~/Finance/CostCenter">@Resource.CostCenterMenu</a></li>
+                                    <li><a href="~/Finance/InternationalFuelContract">@Resource.InternationalFuelContractMenu</a></li>
+                                    <li><a href="~/Finance/NationalFuelContract">@Resource.NationalFuelContract</a></li>
+                                    <li><a href="~/Finance/NationalFuelRate">@Resource.NationalFuelRate</a></li>
+                                    <li><a href="~/Finance/AirportServiceContract">@Resource.AirportServiceContractMenu</a></li>
+                                    <li><a href="~/Finance/AccountingAccount">@Resource.AccountingAccountMenu</a></li>
+                                    <li><a href="~/Finance/LiabilityAccount">@Resource.LiabilityAccountMenu</a></li>
+                                    <li><a href="~/Finance/Tax">@Resource.TaxMenu</a></li>
+                                    <li><a href="~/Airport/Service">@Resource.ServiceMenu</a></li>
+                                    <li><a href="~/Finance/Provider">@Resource.ProviderMenu</a></li>
+                                </ul>
+                            </li>
+                            <li class="col-sm-4">
+                                <ul>
+                                    <li class="dropdown-header">@Resource.HelperCatalog</li>
+                                    <li><a href="~/Airport/Delay">@Resource.DelayMenu</a></li>
+                                    <li><a href="~/Airport/Gpu">@Resource.GPUMenu</a></li>
+                                    <li><a href="~/Airport/ManifestTimeConfig">@Resource.ManifestTimeConfigMenu</a></li>
+                                    <li><a href="~/Airport/DrinkingWater">@Resource.DrinkingWaterMenu</a></li>
+                                    <li><a href="~/Airport/GpuObservation">@Resource.GpuObservationMenu</a></li>
+                                    <li><a href="~/Airport/FuelConcept">@Resource.FuelConceptMenu</a></li>
+                                    <li><a href="~/Airport/Crew">@Resource.CrewMenu</a></li>
+                                    <li><a href="~/Catalog/FunctionalArea">@Resource.FunctionalAreaMenu</a></li>
+                                    <li><a href="~/Finance/ExchangeRates">@Resource.ExchangeRatesMenu</a></li>
+                                    <li><a href="~/Catalog/ScheduleType">@Resource.ScheduleTypeMenu</a></li>
+                                    <li><a href="~/Catalog/ReconciliationTolerance">@Resource.ReconciliationToleranceMenu</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Resource.Capture <b class="caret"></b></a>
+                        <ul class="dropdown-menu dropdown-menu-large row">
+                            <li class="col-sm-12">
+                                <ul>
+                                    <li class="dropdown-header">@Resource.ItineraryMenu</li>
+                                    <li><a href="~/Itineraries/Itinerary">@Resource.ItineraryMenu</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown dropdown-large">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Resource.CheckAndApprove <b class="caret"></b></a>
+                        <ul class="dropdown-menu dropdown-menu-large row">
+                            <li class="col-sm-6">
+                                <ul>
+                                    <li class="dropdown-header">@Resource.InternationalFuelTitle</li>
+                                    <li><a href="~/Process/JetFuelReportTicket">@Resource.ReportTicket</a></li>
+                                </ul>
+                            </li>
+                            <li class="col-sm-6">
+                                <ul>
+                                    <li class="dropdown-header">@Resource.NationalFuelMenu</li>
+                                    <li><a href="~/Process/NationalJetFuelReportTicket">@Resource.ReportTicket</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown dropdown-large">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Resource.Process <b class="caret"></b></a>
+                        <ul class="dropdown-menu dropdown-menu-large row">
+                            <li class="col-sm-6">
+                                <ul>
+                                    <li class="dropdown-header">@Resource.InternationalFuelTitle</li>
+                                    <li><a href="~/Process/JetFuelProcess">@Resource.SubmitCalculationProcess</a></li>
+                                    <li><a href="~/Process/JetFuelCalculationResult">@Resource.ViewInternationalFuelCalculationResult</a></li>
+                                    @*<li><a href="~/Process/JetFuelLogError">@Resource.ViewDetailErrors</a></li>*@
+                                    <li><a href="~/Process/ConfirmPeriod">@Resource.ConfirmCalculationPeriod</a></li>
+                                    <li><a href="~/Process/CreatePolicy">@Resource.CreatePolicy</a></li>
+                                    <li><a href="~/Process/PoliciesHistory">@Resource.PoliciesHistoryMenu</a></li>
+                                </ul>
+                            </li>
+                            <li class="col-sm-6">
+                                <ul>
+                                    <li class="dropdown-header">@Resource.NationalFuelMenu</li>
+                                    <li><a href="~/Process/NationalJetFuelProcess">@Resource.SubmitCalculationProcess</a></li>
+                                    <li><a href="~/Process/NationalJetFuelCalculationResult">@Resource.ViewNationalFuelCalculationResult</a></li>
+                                    @*<li><a href="~/Process/NationalJetFuelLogError">@Resource.ViewDetailErrors</a></li>*@
+                                    <li><a href="~/Process/ConfirmNationalPeriod">@Resource.ConfirmCalculationPeriod</a></li>
+                                    <li><a href="~/Process/NationalPolicy">@Resource.CreatePolicy</a></li>
+                                    <li><a href="~/Process/NationalPolicyHistory">@Resource.PoliciesHistoryMenu</a></li>
+                                    <li><a href="~/Process/NationalJetFuelInvoice">@Resource.ManageInvoices</a></li>
+                                    <li><a href="~/Process/NationalJetFuelReconcileInvoice">@Resource.ReconcileInvoices</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Resource.Manage <b class="caret"></b></a>
+                        <ul class="dropdown-menu dropdown-menu-large row">
+                            <li class="col-sm-12">
+                                <ul>
+                                    <li class="dropdown-header">@Resource.Security</li>
+                                    <li><a href="~/Security/User">@Resource.User</a></li>
+                                    <li><a href="~/Security/Profile">@Resource.Perfil</a></li>
+                                    <li><a href="~/Security/Role">@Resource.Rol</a></li>
+                                    <li><a href="~/Security/Module">@Resource.Modulo</a></li>
+                                    <li><a href="~/Security/Permission">@Resource.Permiso</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#">@Resource.Learn</a></li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Resource.Language<b class="caret"></b></a>
+                        <ul class="dropdown-menu dropdown-menu-large row">
+                            <li class="col-sm-12">
+                                <ul>
+                                    <li><a href="#" onclick="accountController.ChangeLanguage('@Resource.SpanishCulture')">@Resource.SpanishLanguage</a></li>
+                                    <li><a href="#" onclick="accountController.ChangeLanguage('@Resource.EnglishCulture')">@Resource.EnglishLanguage</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown dropdown-large">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@User.Identity.Name <b class="caret"></b></a>
+                        <ul class="dropdown-menu dropdown-menu-large row">
+                            <li class="col-sm-12">
+                                <ul>
+                                    <li class="dropdown-header">@Resource.Account</li>
+                                    <li><a href="#" onclick="accountController.LogOff()">@Resource.LogOff</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="container">
+            <h1 class="title_h1 topindex">@Resource.SISAC</h1>
+            <hr class="index" />
+            <ol class="breadcrumb" style="margin-left: 0;">
+                @Html.MvcSiteMap().SiteMapPath()
+            </ol>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    <div id="footer" class="container-fluid-footer">
+        <footer class="footer">
+            <p class="centerText">
+                <span>
+                    &copy; @DateTime.Now.Year -
+                    <b>@Resource.Version @typeof(MvcApplication).Assembly.GetName().Version</b> - @Resource.SISACFooter
+                </span>
+            </p>
+        </footer>
+    </div>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+<script>
+    $('[name="Edit"').css("background", "#8bc53f");
+    $('[name="Editar"').css("background", "#8bc53f");
+
+    $(window).load(function () {
+        //$('[name="paginationSwitch"]').css("background", "white");
+        //$('[name="paginationSwitch"]').css("border", "thick solid #83217a");
+        //$('[name="paginationSwitch"]').css("color", "#83217a");
+
+        //$('[name="toggle"]').css("background", "white");
+        //$('[name="toggle"]').css("border", "thick solid #83217a");
+        //$('[name="toggle"]').css("color", "#83217a");
+
+        //$('[name="showColumns"]').css("background", "white");
+        //$('[name="showColumns"]').css("border", "thick solid #83217a");
+        //$('[name="showColumns"]').css("color", "#83217a");
+
+        //$('[name="exportTable"]').css("background", "white");
+        //$('[name="exportTable"]').css("border", "thick solid #83217a");
+        //$('[name="exportTable"]').css("color", "#83217a");
+    });
+</script>

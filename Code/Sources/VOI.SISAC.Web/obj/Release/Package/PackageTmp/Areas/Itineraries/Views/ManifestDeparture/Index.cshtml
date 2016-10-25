@@ -1,0 +1,504 @@
+﻿@model VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureVO
+@{
+    this.Layout = "~/Views/Shared/_Layout.cshtml";
+    this.ViewBag.Title = Resource.ManifestDeparture;
+    var cultureForm = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+@Styles.Render("~/bundles/CSSbootstrapCombobox")
+@Styles.Render("~/Content/bootstrapdtimecss")
+@Styles.Render("~/bundles/SweetAlertCSS")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p class="subtitle_h3_black">@Resource.ManifestDeparture</p>
+    </div>
+    @if (Model != null)
+    {
+        @Html.Partial("_FlightInformation", Model.Itinerary)
+    }
+    @using (Html.BeginForm("PerformAction", "ManifestDeparture", FormMethod.Post, new { name = "form-manifest", id = "form-manifest" }))
+    {
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="FlightNumber" id="FlightNumber" value="@Model.FlightNumber" />
+        <input type="hidden" name="Sequence" id="Sequence" value="@Model.Sequence" />
+        <input type="hidden" name="AirlineCode" id="AirlineCode" value="@Model.AirlineCode" />
+        <input type="hidden" name="ItineraryKey" id="ItineraryKey" value="@Model.ItineraryKey" />
+        <input type="hidden" name="DepartureStationCode" id="DepartureStationCode" value="@Model.DepartureStationCode" />
+        <input type="hidden" name="EquipmentNumber" id="EquipmentNumber" value="@Model.Itinerary.EquipmentNumber" />
+        <input type="hidden" name="Action" id="Action" />
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                @*Captains and pilots information*@
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="heading-crews">
+                        <h4 class="panel-title subtitle_h5_panel_title" onclick="">
+                            <strong>@VOI.SISAC.Web.Resources.Resource.CrewGendecTitle</strong>
+                        </h4>
+                    </div>
+                    <div class="row" id="crew-section">
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <label class="subtitle_h5 control-label required-field">@Resource.NickNameCommander</label>
+                            @*<select autofocus="autofocus" id="crew-member-1" name="NickNameCommander" class="inputForm form-control combobox remove-ms-clear" onchange="ManifestDepartureController.setLicense('crew-member-1')" tabindex="1"></select>*@
+                            @Html.DropDownListFor(model => model.NickNameCommander, new List<SelectListItem>(), new
+                            {
+                                //@autofocus = "autofocus",
+                                @id = "crew-member-1",
+                                @class = "inputForm form-control combobox remove-ms-clear",
+                                @onchange = "ManifestDepartureController.setLicense('crew-member-1')",
+                                @tabindex = "1"
+                            })
+                            @Html.ValidationMessageFor(model => model.NickNameCommander, "", new { @class = "text-danger text-danger-error" })
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label">@Resource.LicenceNumber</label>
+                            <input type="text" id="crew-member-1-id" name="crew-member-id-1" class="inputForm form-control" readonly="readonly" />
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <label class="subtitle_h5 control-label required-field">@Resource.NickNameFirstOfficial</label>
+                            @Html.DropDownListFor(model => model.NickNameFirstOfficial, new List<SelectListItem>(), new
+                            {
+                                @id = "crew-member-2",
+                                @class = "inputForm form-control combobox remove-ms-clear",
+                                @onchange = "ManifestDepartureController.setLicense('crew-member-2')",
+                                @tabindex = "2"
+                            })
+                            @Html.ValidationMessageFor(model => model.NickNameFirstOfficial, "", new { @class = "text-danger text-danger-error" })
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label">@Resource.LicenceNumber</label>
+                            <input type="text" id="crew-member-2-id" name="crew-member-id-2" class="inputForm form-control" readonly="readonly" />
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <label class="subtitle_h5 control-label">@Resource.NickNameSecondOfficial</label>
+                            @Html.DropDownListFor(model => model.NickNameSecondOfficial, new List<SelectListItem>(), new
+                            {
+                                @id = "crew-member-3",
+                                @class = "inputForm form-control combobox remove-ms-clear",
+                                @onchange = "ManifestDepartureController.setLicense('crew-member-3')",
+                                @tabindex = "3"
+                            })
+                            @Html.ValidationMessageFor(model => model.NickNameSecondOfficial, "", new { @class = "text-danger text-danger-error" })
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label">@Resource.LicenceNumber</label>
+                            <input type="text" id="crew-member-3-id" name="crew-member-id-3" class="inputForm form-control" readonly="readonly" />
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <label class="subtitle_h5 control-label">@Resource.NickNameThirdOfficial</label>
+                            @Html.DropDownListFor(model => model.NickNameThirdOfficial, new List<SelectListItem>(), new
+                            {
+                                @id = "crew-member-4",
+                                @class = "inputForm form-control combobox remove-ms-clear",
+                                @onchange = "ManifestDepartureController.setLicense('crew-member-4')",
+                                @tabindex = "4"
+                            })
+                            @Html.ValidationMessageFor(model => model.NickNameThirdOfficial, "", new { @class = "text-danger text-danger-error" })
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label">@Resource.LicenceNumber</label>
+                            <input type="text" id="crew-member-4-id" name="crew-member-id-4" class="inputForm form-control" readonly="readonly" />
+                        </div>
+                    </div>
+                </div>
+
+                @*Stewardess Information*@
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="heading-stewardess">
+                        <h4 class="panel-title subtitle_h5_panel_title" onclick="">
+                            <strong>@VOI.SISAC.Web.Resources.Resource.stewardessGendecTitle</strong>
+                        </h4>
+                    </div>
+                    <div class="row" id="stewardess-section">
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <label class="subtitle_h5 control-label required-field">@Resource.NickNameChiefCabinet</label>
+                            @Html.DropDownListFor(model => model.NickNameChiefCabinet, new List<SelectListItem>(), new
+                            {
+                                @id = "stewardess-1",
+                                @class = "inputForm form-control combobox remove-ms-clear",
+                                @onchange = "ManifestDepartureController.setLicense('stewardess-1')",
+                                @tabindex = "5"
+                            })
+                            @Html.ValidationMessageFor(model => model.NickNameChiefCabinet, "", new { @class = "text-danger text-danger-error" })
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label">@Resource.LicenceNumber</label>
+                            <input type="text" id="stewardess-1-id" name="stewardess-id-1" class="inputForm form-control" readonly="readonly" />
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <label class="subtitle_h5 control-label required-field">@Resource.NickNameFirstSupercargo</label>
+                            @Html.DropDownListFor(model => model.NickNameFirstSupercargo, new List<SelectListItem>(), new
+                            {
+                                @id = "stewardess-2",
+                                @class = "inputForm form-control combobox remove-ms-clear",
+                                @onchange = "ManifestDepartureController.setLicense('stewardess-2')",
+                                @tabindex = "6"
+                            })
+                            @Html.ValidationMessageFor(model => model.NickNameFirstSupercargo, "", new { @class = "text-danger text-danger-error" })
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label">@Resource.LicenceNumber</label>
+                            <input type="text" id="stewardess-2-id" name="stewardess-id-2" class="inputForm form-control" readonly="readonly" />
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <label class="subtitle_h5 control-label required-field">@Resource.NickNameSecondSupercargo</label>
+                            @Html.DropDownListFor(model => model.NickNameSecondSupercargo, new List<SelectListItem>(), new
+                            {
+                                @id = "stewardess-3",
+                                @class = "inputForm form-control combobox remove-ms-clear",
+                                @onchange = "ManifestDepartureController.setLicense('stewardess-3')",
+                                @tabindex = "7"
+                            })
+                            @Html.ValidationMessageFor(model => model.NickNameSecondSupercargo, "", new { @class = "text-danger text-danger-error" })
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label">@Resource.LicenceNumber</label>
+                            <input type="text" id="stewardess-3-id" name="stewardess-id-3" class="inputForm form-control" readonly="readonly" />
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <label class="subtitle_h5 control-label">@Resource.NickNameThirdSupercargo</label>
+                            @Html.DropDownListFor(model => model.NickNameThirdSupercargo, new List<SelectListItem>(), new
+                            {
+                                @id = "stewardess-4",
+                                @class = "inputForm form-control combobox remove-ms-clear",
+                                @onchange = "ManifestDepartureController.setLicense('stewardess-4')",
+                                @tabindex = "8"
+                            })
+                            @Html.ValidationMessageFor(model => model.NickNameThirdSupercargo, "", new { @class = "text-danger text-danger-error" })
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label">@Resource.LicenceNumber</label>
+                            <input type="text" id="stewardess-4-id" name="stewardess-id-4" class="inputForm form-control" readonly="readonly" />
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <label class="subtitle_h5 control-label">@Resource.Remarks</label>
+                            @Html.TextAreaFor(model => model.SupercargoRemarks, new
+                            {
+                                @id = "crew-remarks",
+                                @name = "SupercargoRemarks",
+                                @class = "inputForm form-control",
+                                @cols = "92",
+                                @rows = "3",
+                                @tabindex = "9"
+                            })
+                        </div>
+                    </div>
+                </div>
+
+                @*Movement Operations*@
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="operation-movements">
+                        <h4 class="panel-title subtitle_h5_panel_title" onclick="">
+                            <strong>@Resource.MovementOperations</strong>
+                        </h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label">@Resource.DepartureAirport</label>
+                            <input type="text" id="departure-station" name="departure-station" class="inputForm form-control" readonly="readonly" value="@Model.DepartureStationCode - @Model.DepartureStationName" />
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label required-field">@Resource.NextScale</label>
+                            @Html.DropDownListFor(model => model.ScaleStationCode, new List<SelectListItem>(), new
+                            {
+                                @id = "next-scale",
+                                @class = "inputForm form-control combobox remove-ms-clear",
+                                @tabindex = "10"
+                            })
+                            @Html.ValidationMessageFor(model => model.ScaleStationCode, "", new { @class = "text-danger text-danger-error" })
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label required-field">@Resource.ArrivalStation</label>
+                            @Html.DropDownListFor(model => model.ArrivalStationCode, new List<SelectListItem>(), new
+                            {
+                                @id = "arrival-station",
+                                @class = "inputForm form-control combobox remove-ms-clear",
+                                @tabindex = "11"
+                            })
+                            @Html.ValidationMessageFor(model => model.ArrivalStationCode, "", new { @class = "text-danger text-danger-error" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 no-padding-left">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <label class="subtitle_h5 control-label">@Resource.ScheduledDepartureDate</label>
+                                    <input type="text" id="scheduled-date" name="ScheduledDepartureDate" class="inputForm form-control" readonly="readonly" value="@Model.ScheduledDepartureDate" placeholder="YYYY/MM/DD" />
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <label class="subtitle_h5 control-label">@Resource.ScheduledDepartureTime</label>
+                                    <input type="text" id="scheduled-time" name="ScheduledDepartureTime" class="inputForm form-control" readonly="readonly" value="@Model.ScheduledDepartureTime"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <label class="subtitle_h5 control-label required-field">@Resource.ActualDepartureDate</label>
+                                    @Html.EditorFor(model => model.ActualDepartureDate, new { htmlAttributes = new { @id = "real-date", @class = "inputForm form-control ClassDate", @tabindex = "12" } })
+                                    @Html.ValidationMessageFor(model => model.ActualDepartureDate, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <label class="subtitle_h5 control-label required-field">@Resource.ActualDepartureTime</label>
+                                    @Html.EditorFor(model => model.ActualDepartureTime, new
+                                    {
+                                        htmlAttributes = new
+                                            {
+                                                @id = "real-time",
+                                                @class = "inputForm form-control",
+                                                @tabindex = "13",
+                                            }
+                                    })
+                                    @Html.ValidationMessageFor(model => model.ActualDepartureTime, "", new { @class = "text-danger text-danger-error" })
+                                </div>
+                            </div>
+                        </div>
+
+                        @* Example, deleted the style tags when the implementation will be the correct one *@
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="text-align: center">
+                            <div class="row">
+                                <i id="diff-icon" class="fa-times-delay-icon fa fa-times"></i>
+                            </div>
+
+                            <div class="row subtitle_h6_blue_block" style="text-align: center">
+                                <strong>
+                                    <span>@Resource.DifferenceMinutes</span>
+                                    <span id="diff-minutes"></span>
+                                </strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="delay-section">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <label class="subtitle_h5 control-label">@Resource.DelayReason</label>
+                            </div>
+                            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                <select class="inputForm form-control combobox remove-ms-clear" id="select-delay" tabindex="14"></select>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <button type="button" class="btn btn-default" id="add-delay" onclick="ManifestDepartureController.addDelays()" tabindex="15"><i class="fa fa-plus fa-fw"></i>@Resource.Add</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="table-content">
+                                    @Html.Partial("Partial/_DelaysTable")
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                <label class="subtitle_h5 control-label">@Resource.DelayRemarks</label>
+                                <textarea id="delay-details" name="DelayRemarks" class="inputForm form-control" cols="92" rows="3" tabindex="16">@Model.DelayRemarks</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @* Passenger Information *@
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="passenger-information">
+                        <h4 class="panel-title subtitle_h5_panel_title" onclick="">
+                            <strong>@Resource.PassengerInformation</strong>
+                        </h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label">@Resource.InnerSection</label>
+                            <input type="text" id="inner-trace" name="InnerSection" class="inputForm form-control" readonly="readonly" value="@Model.InnerSection" />
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label">@Resource.International</label>
+                            <input type="text" id="international" name="International" class="inputForm form-control" readonly="readonly" value="@Model.International" />
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label">@Resource.InternationalExempt</label>
+                            <input type="text" id="international-exempt" name="InternationalExempt" class="inputForm form-control" readonly="readonly" value="@Model.InternationalExempt" />
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label">@Resource.NationalExempt</label>
+                            <input type="text" id="national-exempt" name="NationalExempt" class="inputForm form-control" readonly="readonly" value="@Model.NationalExempt" />
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label">@Resource.Transit</label>
+                            <input type="text" id="transit" name="Transit" class="inputForm form-control" readonly="readonly" value="@Model.Transit" />
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label">@Resource.Infant</label>
+                            <input type="text" id="infant" name="Infant" class="inputForm form-control" readonly="readonly" value="@Model.Infant"/>
+                        </div>
+                    </div>
+                </div>
+
+                @* Operation Data *@
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="operation-data">
+                        <h4 class="panel-title subtitle_h5_panel_title" onclick="">
+                            <strong>@Resource.OperationData</strong>
+                        </h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label required-field">@Resource.JetFuelKg</label>
+                            @Html.EditorFor(model => model.JetFuel, new { htmlAttributes = new { @id = "jet-fuel", @class = "inputForm form-control", @tabindex = "17" } })
+                            @Html.ValidationMessageFor(model => model.JetFuel, "", new { @class = "text-danger text-danger-error" })
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label required-field">@Resource.RealTakeoffWeightKg</label>
+                            @Html.EditorFor(model => model.RealTakeoffWeight, new { htmlAttributes = new { @id = "real-takeoff-weight", @class = "inputForm form-control", @tabindex = "18" } })
+                            @Html.ValidationMessageFor(model => model.RealTakeoffWeight, "", new { @class = "text-danger text-danger-error" })
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label required-field">@Resource.OperatingWeightKg</label>
+                            @Html.EditorFor(model => model.OperatingWeight, new { htmlAttributes = new { @id = "operating-weight", @class = "inputForm form-control", @tabindex = "19" } })
+                            @Html.ValidationMessageFor(model => model.OperatingWeight, "", new { @class = "text-danger text-danger-error" })
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label required-field">@Resource.StructuralTakeoffWeightKg</label>
+                            @Html.EditorFor(model => model.StructuralTakeoffWeight, new { htmlAttributes = new { @id = "structural-takeoff-weight", @class = "inputForm form-control", @tabindex = "20" } })
+                            @Html.ValidationMessageFor(model => model.StructuralTakeoffWeight, "", new { @class = "text-danger text-danger-error" })
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label">@Resource.SafetyMarginKg</label>
+                            <input type="text" id="safety-margin" name="SafetyMargin" class="inputForm form-control" readonly="readonly" value="@Model.SafetyMargin" />
+                        </div>
+                    </div>
+                </div>
+
+                @* Observations *@
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="observations">
+                        <h4 class="panel-title subtitle_h5_panel_title" onclick="">
+                            <strong>@Resource.Remarks</strong>
+                        </h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label required-field">@Resource.Position</label>
+                            @Html.EditorFor(model => model.Position, new { htmlAttributes = new { @id = "position", @class = "inputForm form-control", @tabindex = "21" } })
+                            @Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger text-danger-error" })
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label required-field">@Resource.InfantTickets</label>
+                            @Html.EditorFor(model => model.InfantTickets, new { htmlAttributes = new { @id = "infant-tickets", @class = "inputForm form-control", @tabindex = "22" } })
+                            @Html.ValidationMessageFor(model => model.InfantTickets, "", new { @class = "text-danger text-danger-error" })
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <label class="subtitle_h5 control-label">@Resource.Remarks</label>
+                            @Html.TextAreaFor(model => model.Remarks, new
+                            {
+                                @id = "remarks",
+                                @class = "inputForm form-control",
+                                @cols = "88",
+                                @rows = "3",
+                                @tabindex = "23"
+                            })
+                            @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger text-danger-error" })
+                        </div>
+                    </div>
+                </div>
+
+                @* Authorizations *@
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="autorizations">
+                        <h4 class="panel-title subtitle_h5_panel_title" onclick="">
+                            <strong>@Resource.Authorization</strong>
+                        </h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <label class="subtitle_h5 control-label required-field">@Resource.UserSignature</label>
+                            @Html.DropDownListFor(model => model.UserIdSignature, new List<SelectListItem>(), new
+                            {
+                                @id = "user-1",
+                                @class = "inputForm form-control combobox remove-ms-clear",
+                                @tabindex = "24"
+                            })
+                            @Html.ValidationMessageFor(model => model.UserIdSignature, "", new { @class = "text-danger text-danger-error" })
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label required-field">@Resource.LicenceNumber</label>
+                            @Html.EditorFor(model => model.LicenceNumberSignature, new 
+                            { 
+                                htmlAttributes = new 
+                                { 
+                                    @id = "licence-number-signature", 
+                                    @class = "inputForm form-control",
+                                    @tabindex = "25" 
+                                } 
+                            })
+                            @Html.ValidationMessageFor(model => model.LicenceNumberSignature, "", new { @class = "text-danger text-danger-error" })
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <label class="subtitle_h5 control-label required-field">@Resource.UserAuthorize</label>
+                            @Html.DropDownListFor(model => model.UserIdAuthorize, new List<SelectListItem>(), new
+                            {
+                                @id = "user-2",
+                                @class = "inputForm form-control combobox remove-ms-clear",
+                                @tabindex = "26"
+                            })
+                            @Html.ValidationMessageFor(model => model.UserIdAuthorize, "", new { @class = "text-danger text-danger-error" })
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label class="subtitle_h5 control-label required-field">@Resource.LicenceNumber</label>
+                            @Html.EditorFor(model => model.LicenceNumberAuthorize, new 
+                            { 
+                                htmlAttributes = new 
+                                { 
+                                    @id = "licence-number-authorize",
+                                    @class = "inputForm form-control",
+                                    @tabindex = "27" 
+                                } 
+                            })
+                            @Html.ValidationMessageFor(model => model.LicenceNumberAuthorize, "", new { @class = "text-danger text-danger-error" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-default" name="back-btn" title="@Resource.Back" onclick="location.href='@Url.Action("Index", "Itinerary")'" tabindex="31">
+                <i class="fa fa-arrow-left fa-fw"></i>&nbsp;@Resource.Back
+            </button>
+            <button type="submit" class="btn btn-default btn-green" name="report-btn" title="@Resource.Report"  onclick="location.href='@Url.Action("ViewReport", "ManifestDeparture", new { Sequence = Model.Sequence, AirlineCode = Model.AirlineCode, FlightNumber = Model.FlightNumber, ItineraryKey = Model.ItineraryKey })'" tabindex="30">
+                <i class="fa-fw glyphicon glyphicon-export icon-share"></i>&nbsp;@Resource.Report
+            </button>
+            <button type="submit" class="btn btn-default btn-green" name="close-btn" title="@Resource.Close" onclick="ManifestDepartureController.postForm(2)" tabindex="29">
+                <i class="fa fa-lock fa-fw"></i>&nbsp;@Resource.Close
+            </button>
+            <button type="submit" class="btn btn-default btn-green" name="save-btn" title="@Resource.Save" onclick="ManifestDepartureController.postForm(1)" tabindex="28">
+                <i class="fa fa-floppy-o fa-fw"></i>&nbsp;@Resource.Save
+            </button>
+        </div>
+    }
+</div>
+
+@section Scripts{
+    <script>
+        var currentLang = '@cultureForm.ToString()';
+        var cm1_val = '@Model.NickNameCommander';
+        var cm2_val = '@Model.NickNameFirstOfficial';
+        var cm3_val = '@Model.NickNameSecondOfficial';
+        var cm4_val = '@Model.NickNameThirdOfficial';
+
+        var sm1_val = '@Model.NickNameChiefCabinet';
+        var sm2_val = '@Model.NickNameFirstSupercargo';
+        var sm3_val = '@Model.NickNameSecondSupercargo';
+        var sm4_val = '@Model.NickNameThirdSupercargo';
+
+        var u1_val = '@Model.UserIdAuthorize';
+        var u2_val = '@Model.UserIdSignature';
+
+        var aa_val = '@Model.ArrivalStationCode';
+        var sa_val = '@Model.ScaleStationCode';
+
+        var tolerance = '@Model.ToleranceTime';
+    </script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrapTable")
+    @Scripts.Render("~/bundles/JSbootstrapCombobox")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+    @Scripts.Render("~/bundles/JSDateTimeValidate")
+    @Scripts.Render("~/bundles/SweetAlertJS")
+    @Scripts.Render("~/bundles/ManifestDepartureJS")
+}

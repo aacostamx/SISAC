@@ -1,0 +1,107 @@
+﻿@model IEnumerable<VOI.SISAC.Web.Models.VO.Airport.ManifestTimeConfigVO>
+
+@{
+    ViewBag.Title = Resource.ManifestTimeConfigTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/bootstraptablecss")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <h2 class="subtitle_h3_black">@Resource.ManifestTimeConfigTitle</h2>
+    <div id="toolbar">
+        @if (User.IsInRole("MANTIMECON-ADD"))
+        { 
+            <button type="button" class="btn btn-default" name="Add" title="@Resource.Add" onclick="location.href='@Url.Action("Create", "ManifestTimeConfig")'">
+                <i class="fa fa-plus"></i>&nbsp;@Resource.Add
+            </button>
+        }
+    </div>
+
+    <table id="tbManifestTime"
+        data-toolbar="#toolbar"
+        class="table"
+        data-toggle="table"
+        data-show-columns="true"
+        data-search="true"
+        data-show-toggle="true"
+        data-show-pagination-switch="true"
+        data-mobile-responsive="true"
+        data-check-on-init="true"
+        data-pagination="true"
+        data-page-size="10">
+        <thead>
+            <tr>
+                <th data-field="ManifestTimeConfigID" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
+                    <strong>@Html.DisplayNameFor(model => model.ManifestTimeConfigID)</strong>
+                </th>
+                <th data-field="AirlineCode" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.AirlineCode)</strong>
+                </th>
+                <th data-field="ArrivalMinutesMin" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.ArrivalMinutesMin)</strong>
+                </th>
+                <th data-field="ArrivalMinutesMax" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.ArrivalMinutesMax)</strong>
+                </th>
+                <th data-field="DepartureMinutesMin" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.DepartureMinutesMin)</strong>
+                </th>
+                <th data-field="DepartureMinutesMax" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.DepartureMinutesMax)</strong>
+                </th>
+                @if (User.IsInRole("MANTIMECON-UPD") || User.IsInRole("MANTIMECON-DEL")) 
+                { 
+                    <th>
+                        <strong>@Resource.Actions</strong>
+                    </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ManifestTimeConfigID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AirlineCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ArrivalMinutesMin)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ArrivalMinutesMax)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DepartureMinutesMin)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DepartureMinutesMax)
+                    </td>
+                    @if (User.IsInRole("MANTIMECON-UPD") || User.IsInRole("MANTIMECON-DEL")) 
+                    { 
+                        <td>
+                            @if (User.IsInRole("MANTIMECON-UPD"))
+                            { 
+                                <button class="btn btn-default" type="button" name="Edit" title=@Resource.Edit onclick="location.href='@Url.Action("Edit", "ManifestTimeConfig", new { id = item.ManifestTimeConfigID })'"><i class="fa fa-pencil fa-fw"></i></button>
+                            }
+                            @if (User.IsInRole("MANTIMECON-DEL"))
+                            { 
+                                <button class="btn btn-default" type="button" name="Delete" title=@Resource.Delete onclick="location.href='@Url.Action("Delete", "ManifestTimeConfig", new { id = item.ManifestTimeConfigID })'"><i class="fa fa-trash-o fa-fw"></i></button>
+                            }
+                        </td>
+                    }
+                </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+@Scripts.Render("~/bundles/bootstrapTable")
+@Scripts.Render("~/bundles/bootstrapTablePlugins")

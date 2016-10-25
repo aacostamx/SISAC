@@ -1,0 +1,22 @@
+﻿@model VOI.SISAC.Web.Helpers.ReportingServiceViewModel
+
+<div class="container">
+    <div>
+        <br />
+        @{
+
+            @Html.Partial("Report/ReportViewerControl", Model)
+            string url = !string.IsNullOrWhiteSpace(Model.PageSourceUrl) ? Model.PageSourceUrl : this.Url.Action("Index", "Home", new { Area = "" });
+        }
+        <br />
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <button id="btnBackReport" type="button" class="btn btn-default" name="@VOI.SISAC.Web.Resources.Resource.Back" title="@VOI.SISAC.Web.Resources.Resource.Back" onclick="location.href='@url'">
+                <i class="fa fa-arrow-left  fa-fw"></i>
+                &nbsp;@VOI.SISAC.Web.Resources.Resource.Back
+            </button>
+        </div>
+    </div>
+</div>
+

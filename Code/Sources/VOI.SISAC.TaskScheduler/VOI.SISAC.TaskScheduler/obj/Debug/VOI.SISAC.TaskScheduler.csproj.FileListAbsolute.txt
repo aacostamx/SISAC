@@ -1,0 +1,14 @@
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.TaskScheduler\VOI.SISAC.TaskScheduler\bin\Debug\VOI.SISAC.TaskScheduler.exe.config
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.TaskScheduler\VOI.SISAC.TaskScheduler\bin\Debug\VOI.SISAC.TaskScheduler.exe.manifest
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.TaskScheduler\VOI.SISAC.TaskScheduler\bin\Debug\VOI.SISAC.TaskScheduler.application
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.TaskScheduler\VOI.SISAC.TaskScheduler\bin\Debug\VOI.SISAC.TaskScheduler.exe
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.TaskScheduler\VOI.SISAC.TaskScheduler\bin\Debug\VOI.SISAC.TaskScheduler.pdb
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.TaskScheduler\VOI.SISAC.TaskScheduler\bin\Debug\log4net.dll
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.TaskScheduler\VOI.SISAC.TaskScheduler\bin\Debug\RestSharp.dll
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.TaskScheduler\VOI.SISAC.TaskScheduler\bin\Debug\log4net.xml
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.TaskScheduler\VOI.SISAC.TaskScheduler\bin\Debug\RestSharp.xml
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.TaskScheduler\VOI.SISAC.TaskScheduler\obj\Debug\VOI.SISAC.TaskScheduler.csprojResolveAssemblyReference.cache
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.TaskScheduler\VOI.SISAC.TaskScheduler\obj\Debug\VOI.SISAC.TaskScheduler.exe.manifest
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.TaskScheduler\VOI.SISAC.TaskScheduler\obj\Debug\VOI.SISAC.TaskScheduler.application
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.TaskScheduler\VOI.SISAC.TaskScheduler\obj\Debug\VOI.SISAC.TaskScheduler.exe
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.TaskScheduler\VOI.SISAC.TaskScheduler\obj\Debug\VOI.SISAC.TaskScheduler.pdb

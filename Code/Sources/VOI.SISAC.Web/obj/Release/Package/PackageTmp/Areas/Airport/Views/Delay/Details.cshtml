@@ -1,0 +1,59 @@
+﻿@model VOI.SISAC.Web.Models.VO.Airport.DelayVO
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DelayDto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DelayCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DelayCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DelayName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DelayName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FunctionalAreaID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FunctionalAreaID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnderControl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnderControl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

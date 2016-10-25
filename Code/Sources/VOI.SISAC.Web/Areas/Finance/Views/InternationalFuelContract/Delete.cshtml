@@ -1,0 +1,90 @@
+﻿@model VOI.SISAC.Web.Models.VO.Finance.InternationalFuelContractVO
+
+@{
+    ViewBag.Title = Resource.Delete;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cultureForm = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
+}
+
+<div class="container">
+    @Html.Partial("_AlertView")
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p class="subtitle_h3_black">@Resource.InternationalFuelContractMenu</p>
+        <p class="subtitle_h3_ancillarie">@VOI.SISAC.Web.Resources.Resource.Delete</p>
+    </div>
+    <br />
+
+    <div id="tbInternationalFuelContract" class="col-xs-12 col-sm-12 col-md-8">
+        <div class="table-responsive">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <colgroup>
+                        <col class="col-xs-2" />
+                        <col class="col-xs-5" />
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>@VOI.SISAC.Web.Resources.Resource.Definition</th>
+                            <th>@VOI.SISAC.Web.Resources.Resource.Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@Resource.EffectiveDate</code></th>
+                            <td id="EffectiveDate">@Html.DisplayFor(model => model.EffectiveDate, "ToShortDate")</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@Resource.AirlineCode</code></th>
+                            <td id="AirlineCode">@Html.DisplayFor(model => model.AirlineCode)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@Resource.StationCode</code></th>
+                            <td id="StationCode">@Html.DisplayFor(model => model.StationCode)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@Resource.ServiceCode</code></th>
+                            <td id="ServiceCode">@Html.DisplayFor(model => model.ServiceCode)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@Resource.ProviderNumber</code></th>
+                            <td id="ProviderNumber">@Html.DisplayFor(model => model.ProviderNumberPrimary)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@Resource.AccountingAccountNumber</code></th>
+                            <td id="AccountingAccountNumber">@Html.DisplayFor(model => model.AccountingAccountNumber)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.LiabilityAccountNumber</code></th>
+                            <td id="LiabilityAccountNumber">@Html.DisplayFor(model => model.LiabilityAccountNumber)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.AircraftRegistCCFlag</code></th>
+                            <td id="AircraftRegistCCFlag">@Html.DisplayFor(model => model.AircraftRegistCCFlag)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.CCNumber</code></th>
+                            <td id="CCNumber">@Html.DisplayFor(model => model.CCNumber)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><code class="colorVolaris">@VOI.SISAC.Web.Resources.Resource.CurrencyCode</code></th>
+                            <td id="CurrencyCode">@Html.DisplayFor(model => model.CurrencyCode)</td>
+                        </tr>                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.EffectiveDate)
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <br />
+                    <input type="reset" class="btnVolaris" value="@VOI.SISAC.Web.Resources.Resource.Back" onclick="@("location.href='" + @Url.Action("Index", "NationalFuelContract") + "'")" />
+                    <input type="submit" value="@VOI.SISAC.Web.Resources.Resource.Delete" class="btnVolaris" />
+                    <br />
+                </div>
+            </div>
+        }
+    </div>
+</div>

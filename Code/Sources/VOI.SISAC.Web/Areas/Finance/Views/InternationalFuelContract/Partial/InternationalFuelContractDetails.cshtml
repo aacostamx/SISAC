@@ -1,0 +1,188 @@
+﻿@model VOI.SISAC.Web.Models.VO.Finance.InternationalFuelContractVO
+
+<div class="dl-horizontal overflow-row">
+    <br />
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <br />
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <p class="subtitle_h4">@VOI.SISAC.Web.Resources.Resource.ContractDefinition</p>
+        </div>
+        <dl>
+            <dt class="subtitle_h5">
+                @Html.DisplayNameFor(model => model.EffectiveDate)
+            </dt>
+            <dd class="subtitle_h6_blue">
+                @Html.DisplayFor(model => model.EffectiveDate, "ToShortDate")
+            </dd>
+            <dt class="subtitle_h5">
+                @Html.DisplayNameFor(model => model.Airline.AirlineName)
+            </dt>
+            <dd class="subtitle_h6_blue">
+                @Html.DisplayFor(model => model.Airline.AirlineName)
+            </dd>
+            <dt class="subtitle_h5">
+                @Html.DisplayNameFor(model => model.Airport.StationName)
+            </dt>
+            <dd class="subtitle_h6_blue">
+                @Html.DisplayFor(model => model.Airport.StationName)
+            </dd>
+            <dt class="subtitle_h5">
+                @Html.DisplayNameFor(model => model.Service.ServiceName)
+            </dt>
+            <dd class="subtitle_h6_blue">
+                @Html.DisplayFor(model => model.Service.ServiceName)
+            </dd>
+            <dt class="subtitle_h5">
+                @Html.DisplayNameFor(model => model.Provider.ProviderName)
+            </dt>
+            <dd class="subtitle_h6_blue">
+                @Html.DisplayFor(model => model.Provider.ProviderName)
+            </dd>                          
+        </dl>
+        <br />
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <br />
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <p class="subtitle_h4">@VOI.SISAC.Web.Resources.Resource.ServiceConfiguration</p>
+        </div>
+        <dl>
+            <dt class="subtitle_h5">
+                @Html.DisplayNameFor(model => model.OperationType.OperationName)
+            </dt>
+            <dd class="subtitle_h6_blue">
+                @Html.DisplayFor(model => model.OperationType.OperationName)
+            </dd>              
+        </dl>
+        <br />
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <br />
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <p class="subtitle_h4">@VOI.SISAC.Web.Resources.Resource.RateParamsConfiguration</p>
+        </div>
+        <dl>
+            <dt class="subtitle_h5">
+                @Html.DisplayNameFor(model => model.Currency.CurrencyName)
+            </dt>
+            <dd class="subtitle_h6_blue">
+                @Html.DisplayFor(model => model.Currency.CurrencyName)
+            </dd> 
+            <dt>              
+        </dl>
+        <br />
+        <br />
+    </div>
+   
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <p class="subtitle_h4">@VOI.SISAC.Web.Resources.Resource.AccountingConfiguration</p>
+        </div>
+        <dl>
+            <dt class="subtitle_h5">
+                @Html.DisplayNameFor(model => model.AircraftRegistCCFlag)
+            </dt>
+            <dd class="subtitle_h6_blue">
+                @Html.DisplayFor(model => model.AircraftRegistCCFlag)
+            </dd>
+            <dt class="subtitle_h5">
+                @Html.DisplayNameFor(model => model.CostCenter.CCName)
+            </dt>
+            <dd class="subtitle_h6_blue">
+                @Html.DisplayFor(model => model.CostCenter.CCName)
+            </dd>
+            <dt class="subtitle_h5">
+                @Html.DisplayNameFor(model => model.AccountingAccount.AccountingAccountName)
+            </dt>
+            <dd class="subtitle_h6_blue">
+                @Html.DisplayFor(model => model.AccountingAccount.AccountingAccountName)
+            </dd>
+            <dt class="subtitle_h5">
+                @Html.DisplayNameFor(model => model.LiabilityAccount.LiabilityAccountName)
+            </dt>
+            <dd class="subtitle_h6_blue">
+                @Html.DisplayFor(model => model.LiabilityAccount.LiabilityAccountName)
+            </dd>
+        </dl>
+        <br />
+    </div>
+
+    <br />
+        @*<p class="subtitle_h3_black">@Resource.FuelConceptTitle</p>*@
+        <div id="toolbar">
+        </div>
+        <table id="tbFuelContractConcept"
+               data-toolbar="#toolbar"
+               class="table"
+               data-unique-id="InterConceptID"
+               data-toggle="table"
+               data-show-columns="true"
+               data-search="true"
+               data-show-toggle="true"
+               data-show-pagination-switch="true"
+               data-mobile-responsive="true"
+               data-check-on-init="true"
+               data-pagination="true"
+               data-page-size="3">
+            <thead>
+                <tr>
+                    <th data-field="ID" data-halign="center" data-align="center" data-visible="false">
+                        <strong>
+                            @Html.DisplayNameFor(model => model.InternationalFuelContractConcepts.FirstOrDefault().InternationalFuelContractConceptID)
+                        </strong>
+                    </th>
+                    <th data-field="FuelConceptName" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>
+                            @Html.DisplayNameFor(model => model.InternationalFuelContractConcepts.FirstOrDefault().FuelConcept.FuelConceptName)
+                        </strong>
+                    </th>
+
+                    <th data-field="FuelConceptTypeName" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>
+                            @Html.DisplayNameFor(model => model.InternationalFuelContractConcepts.FirstOrDefault().FuelConceptType.FuelConceptTypeName)
+                        </strong>
+                    </th>
+
+                    <th data-field="ChargeFactorTypeName" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>
+                            @Html.DisplayNameFor(model => model.InternationalFuelContractConcepts.FirstOrDefault().ChargeFactorType.ChargeFactorTypeName)
+                        </strong>
+                    </th>
+
+                    <th data-field="ProviderName" data-halign="center" data-align="center" data-sortable="true">
+                        <strong>
+                            @Html.DisplayNameFor(model => model.InternationalFuelContractConcepts.FirstOrDefault().Provider.ProviderName)
+                        </strong>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (var item in Model.InternationalFuelContractConcepts)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.InternationalFuelContractConceptID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FuelConcept.FuelConceptName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FuelConceptType.FuelConceptTypeName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ChargeFactorType.ChargeFactorTypeName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Provider.ProviderName)
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+</div>
