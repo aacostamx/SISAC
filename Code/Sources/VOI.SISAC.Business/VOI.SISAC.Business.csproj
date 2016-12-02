@@ -139,6 +139,7 @@
     <Compile Include="Common\IGenericNotificationBusiness.cs" />
     <Compile Include="Common\UtilityBusiness.cs" />
     <Compile Include="Configuration\AutoMapperConfig.cs" />
+    <Compile Include="Dto\Airports\AdditionalPassengerInformationDto.cs" />
     <Compile Include="Dto\Airports\AirlineDto.cs" />
     <Compile Include="Dto\Airports\AirplaneDto.cs" />
     <Compile Include="Dto\Airports\AirplaneTypeDto.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="Dto\Catalogs\FunctionalAreaDto.cs" />
     <Compile Include="Dto\Catalogs\GenderDto.cs" />
     <Compile Include="Dto\Catalogs\GenericCatalogDto.cs" />
+    <Compile Include="Dto\Catalogs\MovementTypeDto.cs" />
     <Compile Include="Dto\Catalogs\OperationTypeDto.cs" />
     <Compile Include="Dto\Catalogs\ReconciliationToleranceDto.cs" />
     <Compile Include="Dto\Catalogs\ScheduleTypeDto.cs" />
@@ -174,6 +176,8 @@
     <Compile Include="Dto\Catalogs\StatusOnBoardDto.cs" />
     <Compile Include="Dto\Catalogs\ToleranceTypeDto.cs" />
     <Compile Include="Dto\Enums\NationalReconcileTypeProcessDto.cs" />
+    <Compile Include="Dto\Itineraries\AdditionalArrivalInformationDto.cs" />
+    <Compile Include="Dto\Itineraries\AdditionalDepartureInformationDto.cs" />
     <Compile Include="Dto\Itineraries\ManifestArrivalDto.cs" />
     <Compile Include="Dto\Itineraries\ItineraryMailDto.cs" />
     <Compile Include="Dto\Enums\NationalTypeProcessDto.cs" />
@@ -202,7 +206,13 @@
     <Compile Include="Dto\Itineraries\ItineraryLogDto.cs" />
     <Compile Include="Dto\Itineraries\ItinerarySearchDto.cs" />
     <Compile Include="Dto\Itineraries\ItineraryUploadDto.cs" />
+    <Compile Include="Dto\Itineraries\ManifestDepartureBoardingDetailDto.cs" />
+    <Compile Include="Dto\Itineraries\ManifestDepartureBoardingDto.cs" />
+    <Compile Include="Dto\Itineraries\ManifestDepartureBoardingInformationDto.cs" />
     <Compile Include="Dto\Itineraries\ManifestDepartureDto.cs" />
+    <Compile Include="Dto\Itineraries\AircraftMovementMessageDto.cs" />
+    <Compile Include="Dto\Itineraries\TimelineMovementDto.cs" />
+    <Compile Include="Dto\Itineraries\TimelineDto.cs" />
     <Compile Include="Dto\Paged\PagedDto.cs" />
     <Compile Include="Dto\Process\CalculationStatusDto.cs" />
     <Compile Include="Dto\Process\ConfirmationStatusDto.cs" />
@@ -271,10 +281,14 @@
     <Compile Include="Finance\ITaxBusiness.cs" />
     <Compile Include="Finance\NationalFuelRateBusiness.cs" />
     <Compile Include="Finance\UploadNationalFuelContractBusiness.cs" />
+    <Compile Include="Itineraries\AircraftMovementMessageBusiness.cs" />
+    <Compile Include="Itineraries\IAircraftMovementMessageBusiness.cs" />
+    <Compile Include="Itineraries\ITimelineMovementBusiness.cs" />
     <Compile Include="Itineraries\ManifestArrivalBusiness.cs" />
     <Compile Include="Itineraries\IManifestArrivalBusiness.cs" />
     <Compile Include="Itineraries\ITimelineBusiness.cs" />
     <Compile Include="Itineraries\IManifestDepartureBusiness.cs" />
+    <Compile Include="Itineraries\TimelineMovementBusiness.cs" />
     <Compile Include="Itineraries\TimelineBusiness.cs" />
     <Compile Include="Itineraries\ManifestDepartureBusiness.cs" />
     <Compile Include="MapConfiguration\ProcessMaps.cs" />

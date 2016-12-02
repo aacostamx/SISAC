@@ -110,6 +110,21 @@
             Initializes a new instance of the <see cref="T:VOI.SISAC.Dal.Configuration.Airport.CompartmentTypeInformationConfiguration"/> class.
             </summary>
         </member>
+        <member name="T:VOI.SISAC.Dal.Configuration.Airport.AdditionalPassengerInformationConfiguration">
+            <summary>
+            Data base configuration for Additional Passenger Information
+            </summary>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Configuration.Airport.AdditionalPassengerInformationConfiguration.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:VOI.SISAC.Dal.Configuration.Airport.AdditionalPassengerInformationConfiguration"/> class.
+            </summary>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Configuration.Airport.AdditionalPassengerInformationConfiguration.PrimaryKeyConfiguration">
+            <summary>
+            Configuration for the Primary keys.
+            </summary>
+        </member>
         <member name="T:VOI.SISAC.Dal.Configuration.Airport.CrewConfiguration">
             <summary>
             Class Configuration Crew
@@ -554,6 +569,49 @@
         <member name="M:VOI.SISAC.Dal.Configuration.CurrencyConfiguration.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:VOI.SISAC.Dal.Configuration.CurrencyConfiguration"/> class.
+            </summary>
+        </member>
+        <member name="T:VOI.SISAC.Dal.Configuration.Itineraries.AdditionalArrivalInformationConfiguration">
+            <summary>
+            AdditionalArrivalInformationConfiguration
+            </summary>
+        </member>
+        <member name="T:VOI.SISAC.Dal.Configuration.Itineraries.AdditionalDepartureInformationConfiguration">
+            <summary>
+            AdditionalDepartureInformationConfiguration
+            </summary>
+        </member>
+        <member name="T:VOI.SISAC.Dal.Configuration.Itineraries.ManifestDepartureBoardingConfiguration">
+            <summary>
+            ManifestDepartureBoardingConfiguration
+            </summary>
+            <seealso cref="!:System.Data.Entity.ModelConfiguration.EntityTypeConfiguration&lt;VOI.SISAC.Entities.Itineraries.ManifestDepartureBoarding&gt;" />
+        </member>
+        <member name="M:VOI.SISAC.Dal.Configuration.Itineraries.ManifestDepartureBoardingConfiguration.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="T:VOI.SISAC.Dal.Configuration.Itineraries.ManifestDepartureBoardingDetailConfiguration">
+            <summary>
+            ManifestDepartureBoardingDetailConfiguration
+            </summary>
+            <seealso cref="!:System.Data.Entity.ModelConfiguration.EntityTypeConfiguration&lt;VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingDetail&gt;" />
+        </member>
+        <member name="M:VOI.SISAC.Dal.Configuration.Itineraries.ManifestDepartureBoardingDetailConfiguration.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:VOI.SISAC.Dal.Configuration.Itineraries.ManifestDepartureBoardingDetailConfiguration"/> class.
+            </summary>
+        </member>
+        <member name="T:VOI.SISAC.Dal.Configuration.Itineraries.ManifestDepartureBoardingInformationConfiguration">
+            <summary>
+            ManifestDepartureBoardingInformationConfiguration
+            </summary>
+            <seealso cref="!:System.Data.Entity.ModelConfiguration.EntityTypeConfiguration&lt;VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingInformation&gt;" />
+        </member>
+        <member name="M:VOI.SISAC.Dal.Configuration.Itineraries.ManifestDepartureBoardingInformationConfiguration.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:VOI.SISAC.Dal.Configuration.Itineraries.ManifestDepartureBoardingInformationConfiguration"/> class.
             </summary>
         </member>
         <member name="T:VOI.SISAC.Dal.Configuration.Itineraries.TimelineMovementConfiguration">
@@ -1021,6 +1079,22 @@
             </summary>
             <returns>The toal of records</returns>
         </member>
+        <member name="M:VOI.SISAC.Dal.Infrastructure.IRepository`1.Find(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Boolean)">
+            <summary>
+            Finds the specified predicate.
+            </summary>
+            <param name="predicate">The predicate.</param>
+            <param name="tracking">if set to <c>true</c> [tracking].</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Infrastructure.IRepository`1.FindList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Boolean)">
+            <summary>
+            Finds the list.
+            </summary>
+            <param name="predicate">The predicate.</param>
+            <param name="tracking">if set to <c>true</c> [tracking].</param>
+            <returns></returns>
+        </member>
         <member name="T:VOI.SISAC.Dal.Infrastructure.IUnitOfWork">
             <summary>
             Unit ok Work Interface
@@ -1093,6 +1167,22 @@
             </summary>
             <returns>All the entity's records.</returns>
         </member>
+        <member name="M:VOI.SISAC.Dal.Infrastructure.Repository`1.FindList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Boolean)">
+            <summary>
+            Finds the list.
+            </summary>
+            <param name="predicate">The predicate.</param>
+            <param name="tracking">if set to <c>true</c> [tracking].</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Infrastructure.Repository`1.Find(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Boolean)">
+            <summary>
+            Finds the specified predicate.
+            </summary>
+            <param name="predicate">The predicate.</param>
+            <param name="tracking">if set to <c>true</c> [tracking].</param>
+            <returns></returns>
+        </member>
         <member name="M:VOI.SISAC.Dal.Infrastructure.Repository`1.GetServerDate">
             <summary>
             Gets the server date.
@@ -1138,6 +1228,19 @@
             <summary>
             Commits this instance.
             </summary>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Airports.AdditionalPassengerInformationRepository.#ctor(VOI.SISAC.Dal.Infrastructure.IDbFactory)">
+            <summary>
+            Initializes a new instance of the <see cref="T:VOI.SISAC.Dal.Repository.Airports.AdditionalPassengerInformationRepository"/> class.
+            </summary>
+            <param name="factory">The factory.</param>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Airports.AdditionalPassengerInformationRepository.FindById(System.Int32,System.String,System.String,System.String)">
+            <summary>
+            Finds the airplane type by its identifier.
+            </summary>
+            <param name="id">The Airplane Type's identifier.</param>
+            <returns>The Airplane Type specified.</returns>
         </member>
         <member name="T:VOI.SISAC.Dal.Repository.Airports.AirlineRepository">
             <summary>
@@ -4090,6 +4193,144 @@
             <param name="taxCodes">The taxes codes to validate.</param>
             <returns>Returns a list with the Tax Codes that do not exist.</returns>
         </member>
+        <member name="T:VOI.SISAC.Dal.Repository.Itineraries.AdditionalArrivalInformationRepository">
+            <summary>
+            AdditionalArrivalInformationRepository
+            </summary>
+            <seealso cref="!:VOI.SISAC.Dal.Infrastructure.Repository&lt;VOI.SISAC.Entities.Itineraries.AdditionalArrivalInformation&gt;" />
+            <seealso cref="T:VOI.SISAC.Dal.Repository.Itineraries.IAdditionalArrivalInformationRepository" />
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.AdditionalArrivalInformationRepository.#ctor(VOI.SISAC.Dal.Infrastructure.IDbFactory)">
+            <summary>
+            Initializes a new instance of the <see cref="T:VOI.SISAC.Dal.Repository.Itineraries.AdditionalArrivalInformationRepository"/> class.
+            </summary>
+            <param name="factory">The factory.</param>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.AdditionalArrivalInformationRepository.FindById(System.Int32,System.String,System.String,System.String)">
+            <summary>
+            Finds the by identifier.
+            </summary>
+            <param name="sequence">The sequence.</param>
+            <param name="airlineCode">The airline code.</param>
+            <param name="flightNumber">The flight number.</param>
+            <param name="itineraryKey">The itinerary key.</param>
+            <returns></returns>
+        </member>
+        <member name="T:VOI.SISAC.Dal.Repository.Itineraries.AdditionalDepartureInformationRepository">
+            <summary>
+            AdditionalDepartureInformationRepository
+            </summary>
+            <seealso cref="!:VOI.SISAC.Dal.Infrastructure.Repository&lt;VOI.SISAC.Entities.Itineraries.AdditionalDepartureInformation&gt;" />
+            <seealso cref="T:VOI.SISAC.Dal.Repository.Itineraries.IAdditionalDepartureInformationRepository" />
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.AdditionalDepartureInformationRepository.#ctor(VOI.SISAC.Dal.Infrastructure.IDbFactory)">
+            <summary>
+            Initializes a new instance of the <see cref="T:VOI.SISAC.Dal.Repository.Itineraries.AdditionalDepartureInformationRepository"/> class.
+            </summary>
+            <param name="factory">The factory.</param>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.AdditionalDepartureInformationRepository.FindById(System.Int32,System.String,System.String,System.String)">
+            <summary>
+            Finds the by identifier.
+            </summary>
+            <param name="sequence">The sequence.</param>
+            <param name="airlineCode">The airline code.</param>
+            <param name="flightNumber">The flight number.</param>
+            <param name="itineraryKey">The itinerary key.</param>
+            <returns></returns>
+        </member>
+        <member name="T:VOI.SISAC.Dal.Repository.Itineraries.IAdditionalArrivalInformationRepository">
+            <summary>
+            IAdditionalArrivalInformationRepository
+            </summary>
+            <seealso cref="!:VOI.SISAC.Dal.Infrastructure.IRepository&lt;VOI.SISAC.Entities.Itineraries.AdditionalArrivalInformation&gt;" />
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.IAdditionalArrivalInformationRepository.FindById(System.Int32,System.String,System.String,System.String)">
+            <summary>
+            Finds the by identifier.
+            </summary>
+            <param name="sequence">The sequence.</param>
+            <param name="airlineCode">The airline code.</param>
+            <param name="flightNumber">The flight number.</param>
+            <param name="itineraryKey">The itinerary key.</param>
+            <returns></returns>
+        </member>
+        <member name="T:VOI.SISAC.Dal.Repository.Itineraries.IAdditionalDepartureInformationRepository">
+            <summary>
+            IAdditionalDepartureInformationRepository
+            </summary>
+            <seealso cref="!:VOI.SISAC.Dal.Infrastructure.IRepository&lt;VOI.SISAC.Entities.Itineraries.AdditionalDepartureInformation&gt;" />
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.IAdditionalDepartureInformationRepository.FindById(System.Int32,System.String,System.String,System.String)">
+            <summary>
+            Finds the by identifier.
+            </summary>
+            <param name="sequence">The sequence.</param>
+            <param name="airlineCode">The airline code.</param>
+            <param name="flightNumber">The flight number.</param>
+            <param name="itineraryKey">The itinerary key.</param>
+            <returns></returns>
+        </member>
+        <member name="T:VOI.SISAC.Dal.Repository.Itineraries.IManifestDepartureBoardingDetailRepository">
+            <summary>
+            IManifestDepartureBoardingDetail
+            </summary>
+            <seealso cref="!:VOI.SISAC.Dal.Infrastructure.IRepository&lt;VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingDetail&gt;" />
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.IManifestDepartureBoardingDetailRepository.FindById(System.Int64)">
+            <summary>
+            Finds the by identifier.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="T:VOI.SISAC.Dal.Repository.Itineraries.IManifestDepartureBoardingInformationRepository">
+            <summary>
+            IManifestDepartureBoardingInformationRepository
+            </summary>
+            <seealso cref="!:VOI.SISAC.Dal.Infrastructure.IRepository&lt;VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingInformation&gt;" />
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.IManifestDepartureBoardingInformationRepository.FindById(System.Int64)">
+            <summary>
+            Finds the by identifier.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.IManifestDepartureBoardingInformationRepository.GetInformationByBoardingID(System.Int64,System.String)">
+            <summary>
+            Gets the information by boarding identifier.
+            </summary>
+            <param name="boardingID">The boarding identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="T:VOI.SISAC.Dal.Repository.Itineraries.IManifestDepartureBoardingRepository">
+            <summary>
+            IManifestDepartureBoardingRepository
+            </summary>
+            <seealso cref="!:VOI.SISAC.Dal.Infrastructure.IRepository&lt;VOI.SISAC.Entities.Itineraries.ManifestDepartureBoarding&gt;" />
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.IManifestDepartureBoardingRepository.GetBoardingsForManifest(System.Int32,System.String,System.String,System.String)">
+            <summary>
+            Gets the boardings for manifest.
+            </summary>
+            <param name="sequence">The sequence.</param>
+            <param name="airlineCode">The airline code.</param>
+            <param name="flightNumber">The flight number.</param>
+            <param name="itineraryKey">The itinerary key.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.IManifestDepartureBoardingRepository.FindById(System.Int32,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Finds the by identifier.
+            </summary>
+            <param name="sequence">The sequence.</param>
+            <param name="airlineCode">The airline code.</param>
+            <param name="flightNumber">The flight number.</param>
+            <param name="itineraryKey">The itinerary key.</param>
+            <param name="position">The position.</param>
+            <returns></returns>
+        </member>
         <member name="T:VOI.SISAC.Dal.Repository.Itineraries.ITimelineMovementRepository">
             <summary>
             Interface Timeline Movement
@@ -4099,6 +4340,116 @@
             <summary>
             Interface ITimeline Repository
             </summary>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.ITimelineRepository.GetTimelineByFlight(VOI.SISAC.Entities.Itineraries.Timeline)">
+            <summary>
+            Gets the timeline by flight.
+            </summary>
+            <param name="flight">The flight.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.ITimelineRepository.GetTimelineByEquipmentNumber(VOI.SISAC.Entities.Itineraries.Timeline)">
+            <summary>
+            Gets the timeline by equipment number.
+            </summary>
+            <param name="flight">The flight.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.ITimelineRepository.TimelineStartProcess(System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Timelines the start process.
+            </summary>
+            <param name="startDate">The start date.</param>
+            <param name="endDate">The end date.</param>
+            <returns></returns>
+        </member>
+        <member name="T:VOI.SISAC.Dal.Repository.Itineraries.ManifestDepartureBoardingDetailRepository">
+            <summary>
+            ManifestDepartureBoardingDetailRepository
+            </summary>
+            <seealso cref="!:VOI.SISAC.Dal.Infrastructure.Repository&lt;VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingDetail&gt;" />
+            <seealso cref="T:VOI.SISAC.Dal.Repository.Itineraries.IManifestDepartureBoardingDetailRepository" />
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.ManifestDepartureBoardingDetailRepository.#ctor(VOI.SISAC.Dal.Infrastructure.IDbFactory)">
+            <summary>
+            Initializes a new instance of the <see cref="T:VOI.SISAC.Dal.Repository.Itineraries.ManifestDepartureBoardingRepository"/> class.
+            </summary>
+            <param name="factory">The factory.</param>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.ManifestDepartureBoardingDetailRepository.FindById(System.Int64)">
+            <summary>
+            Finds the by identifier.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.ManifestDepartureBoardingDetailRepository.GetDetailByBoardingID(System.Int64,System.String)">
+            <summary>
+            Gets the detail by boarding identifier.
+            </summary>
+            <param name="boardingID">The boarding identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="T:VOI.SISAC.Dal.Repository.Itineraries.ManifestDepartureBoardingInformationRepository">
+            <summary>
+            ManifestDepartureBoardingInformationRepository
+            </summary>
+            <seealso cref="!:VOI.SISAC.Dal.Infrastructure.Repository&lt;VOI.SISAC.Entities.Itineraries.ManifestDepartureBoarding&gt;" />
+            <seealso cref="T:VOI.SISAC.Dal.Repository.Itineraries.IManifestDepartureBoardingInformationRepository" />
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.ManifestDepartureBoardingInformationRepository.#ctor(VOI.SISAC.Dal.Infrastructure.IDbFactory)">
+            <summary>
+            Initializes a new instance of the <see cref="T:VOI.SISAC.Dal.Repository.Itineraries.ManifestDepartureBoardingRepository"/> class.
+            </summary>
+            <param name="factory">The factory.</param>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.ManifestDepartureBoardingInformationRepository.FindById(System.Int64)">
+            <summary>
+            Finds the by identifier.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.ManifestDepartureBoardingInformationRepository.GetInformationByBoardingID(System.Int64,System.String)">
+            <summary>
+            Gets the information by boarding identifier.
+            </summary>
+            <param name="boardingID">The boarding identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="T:VOI.SISAC.Dal.Repository.Itineraries.ManifestDepartureBoardingRepository">
+            <summary>
+            ManifestDepartureBoardingRepository
+            </summary>
+            <seealso cref="!:VOI.SISAC.Dal.Infrastructure.Repository&lt;VOI.SISAC.Entities.Itineraries.ManifestDepartureBoarding&gt;"/>
+            <seealso cref="T:VOI.SISAC.Dal.Repository.Itineraries.IManifestDepartureBoardingRepository"/>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.ManifestDepartureBoardingRepository.#ctor(VOI.SISAC.Dal.Infrastructure.IDbFactory)">
+            <summary>
+            Initializes a new instance of the <see cref="T:VOI.SISAC.Dal.Repository.Itineraries.ManifestDepartureBoardingRepository"/> class.
+            </summary>
+            <param name="factory">The factory.</param>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.ManifestDepartureBoardingRepository.GetBoardingsForManifest(System.Int32,System.String,System.String,System.String)">
+            <summary>
+            Gets the boardings for manifest.
+            </summary>
+            <param name="sequence">The sequence.</param>
+            <param name="airlineCode">The airline code.</param>
+            <param name="flightNumber">The flight number.</param>
+            <param name="itineraryKey">The itinerary key.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.ManifestDepartureBoardingRepository.FindById(System.Int32,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Finds the by identifier.
+            </summary>
+            <param name="sequence">The sequence.</param>
+            <param name="airlineCode">The airline code.</param>
+            <param name="flightNumber">The flight number.</param>
+            <param name="itineraryKey">The itinerary key.</param>
+            <param name="position">The position.</param>
+            <returns></returns>
         </member>
         <member name="T:VOI.SISAC.Dal.Repository.Itineraries.TimelineMovementRepository">
             <summary>
@@ -4121,6 +4472,28 @@
             Initializes a new instance of the <see cref="T:VOI.SISAC.Dal.Repository.Itineraries.TimelineRepository"/> class.
             </summary>
             <param name="factory">The factory.</param>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.TimelineRepository.GetTimelineByEquipmentNumber(VOI.SISAC.Entities.Itineraries.Timeline)">
+            <summary>
+            Gets the timeline by equipment number.
+            </summary>
+            <param name="flight">The flight.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.TimelineRepository.GetTimelineByFlight(VOI.SISAC.Entities.Itineraries.Timeline)">
+            <summary>
+            Gets the timeline by flight.
+            </summary>
+            <param name="flight">The flight.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.TimelineRepository.TimelineStartProcess(System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Timelines the start process.
+            </summary>
+            <param name="startDate">The start date.</param>
+            <param name="endDate">The end date.</param>
+            <returns></returns>
         </member>
         <member name="T:VOI.SISAC.Dal.Repository.Itineraries.ManifestArrivalRepository">
             <summary>
@@ -4379,16 +4752,52 @@
             </summary>
             <param name="itineraries"></param>
         </member>
-        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.IItineraryRepository.GetItineraryWithManifestsInformation(System.Int32,System.String,System.String,System.String)">
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.IItineraryRepository.GetItineraryWithDeclarationsAndPassengerInformation(System.Int32,System.String,System.String,System.String)">
             <summary>
-            Gets the details of a flight with only the passenger information.
+            Gets the details of a flight with the passenger information, manifests and general declarations.
             </summary>
             <param name="sequence">The sequence of flight.</param>
             <param name="airlineCode">The airline code.</param>
             <param name="flightNumber">The flight Number of the airplane.</param>
             <param name="itineraryKey">The itinerary identifier.</param>
             <returns>
-            The information of a flight with the passenger information object.
+            The information of a flight with the passenger information, manifests and general declarations.
+            </returns>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.IItineraryRepository.IsDepartureStationFromMexico(System.Int32,System.String,System.String,System.String)">
+            <summary>
+            Determines whether the departure station is from Mexico.
+            </summary>
+            <param name="sequence">The sequence.</param>
+            <param name="airlineCode">The airline code.</param>
+            <param name="flightNumber">The flight number.</param>
+            <param name="itineraryKey">The itinerary key.</param>
+            <returns>
+              <c>true</c> if the departure station is from Mexico otherwise <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.IItineraryRepository.IsArrivalStationFromMexico(System.Int32,System.String,System.String,System.String)">
+            <summary>
+            Determines whether the arrival station is from Mexico.
+            </summary>
+            <param name="sequence">The sequence.</param>
+            <param name="airlineCode">The airline code.</param>
+            <param name="flightNumber">The flight number.</param>
+            <param name="itineraryKey">The itinerary key.</param>
+            <returns>
+              <c>true</c> if the arrival station is from Mexico otherwise <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.IItineraryRepository.GetItineraryInformationForMessageMVT(System.Int32,System.String,System.String,System.String)">
+            <summary>
+            Gets the details of a flight with the departure manifest and its children and Jet fuel tickets.
+            </summary>
+            <param name="sequence">The sequence of flight.</param>
+            <param name="airlineCode">The airline code.</param>
+            <param name="flightNumber">The flight Number of the airplane.</param>
+            <param name="itineraryKey">The itinerary identifier.</param>
+            <returns>
+            The information of a flight with the departure manifest and its children Jet fuel tickets.
             </returns>
         </member>
         <member name="T:VOI.SISAC.Dal.Repository.Itineraries.IManifestDepartureRepository">
@@ -4529,16 +4938,52 @@
             </summary>
             <param name="entity">The entity to update.</param>
         </member>
-        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.ItineraryRepository.GetItineraryWithManifestsInformation(System.Int32,System.String,System.String,System.String)">
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.ItineraryRepository.GetItineraryWithDeclarationsAndPassengerInformation(System.Int32,System.String,System.String,System.String)">
             <summary>
-            Gets the details of a flight with only the passenger information.
+            Gets the details of a flight with the passenger information, manifests and general declarations.
             </summary>
             <param name="sequence">The sequence of flight.</param>
             <param name="airlineCode">The airline code.</param>
             <param name="flightNumber">The flight Number of the airplane.</param>
             <param name="itineraryKey">The itinerary identifier.</param>
             <returns>
-            The information of a flight with the passenger information object.
+            The information of a flight with the passenger information, manifests and general declarations.
+            </returns>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.ItineraryRepository.IsDepartureStationFromMexico(System.Int32,System.String,System.String,System.String)">
+            <summary>
+            Determines whether the departure station is from Mexico.
+            </summary>
+            <param name="sequence">The sequence.</param>
+            <param name="airlineCode">The airline code.</param>
+            <param name="flightNumber">The flight number.</param>
+            <param name="itineraryKey">The itinerary key.</param>
+            <returns>
+              <c>true</c> if the departure station is from Mexico otherwise <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.ItineraryRepository.IsArrivalStationFromMexico(System.Int32,System.String,System.String,System.String)">
+            <summary>
+            Determines whether the arrival station is from Mexico.
+            </summary>
+            <param name="sequence">The sequence.</param>
+            <param name="airlineCode">The airline code.</param>
+            <param name="flightNumber">The flight number.</param>
+            <param name="itineraryKey">The itinerary key.</param>
+            <returns>
+              <c>true</c> if the arrival station is from Mexico otherwise <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.ItineraryRepository.GetItineraryInformationForMessageMVT(System.Int32,System.String,System.String,System.String)">
+            <summary>
+            Gets the details of a flight with the departure manifest and its children and Jet fuel tickets.
+            </summary>
+            <param name="sequence">The sequence of flight.</param>
+            <param name="airlineCode">The airline code.</param>
+            <param name="flightNumber">The flight Number of the airplane.</param>
+            <param name="itineraryKey">The itinerary identifier.</param>
+            <returns>
+            The information of a flight with the departure manifest and its children Jet fuel tickets.
             </returns>
         </member>
         <member name="T:VOI.SISAC.Dal.Repository.Itineraries.ManifestDepartureRepository">
@@ -4591,12 +5036,6 @@
             </summary>
             <param name="manifestDeparture">The manifest departure.</param>
             <param name="delays">The delays.</param>
-        </member>
-        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.ManifestDepartureRepository.RemoveAllDelaysFromManifest(VOI.SISAC.Entities.Itineraries.ManifestDeparture)">
-            <summary>
-            Removes all delays.
-            </summary>
-            <param name="manifestDeparture">The manifest departure.</param>
         </member>
         <member name="T:VOI.SISAC.Dal.Repository.Process.INationalJetFuelCostRepository">
             <summary>
@@ -6728,6 +7167,14 @@
             The national jet fuel ticket.
             </value>
         </member>
+        <member name="P:VOI.SISAC.Dal.SisacContext.AdditionalPassengerInformation">
+            <summary>
+            Gets or sets the additional passenger information.
+            </summary>
+            <value>
+            The additional passenger information.
+            </value>
+        </member>
         <member name="P:VOI.SISAC.Dal.SisacContext.ReconciliationTolerances">
             <summary>
             Gets or sets the reconciliation tolerances.
@@ -6951,6 +7398,46 @@
             </summary>
             <value>
             The manifests departure.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Dal.SisacContext.AdditionalDepartureInformation">
+            <summary>
+            Gets or sets the additional departure information.
+            </summary>
+            <value>
+            The additional departure information.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Dal.SisacContext.AdditionalArrivalInformation">
+            <summary>
+            Gets or sets the additional arrival information.
+            </summary>
+            <value>
+            The additional arrival information.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Dal.SisacContext.ManifestDepartureBoardings">
+            <summary>
+            Gets or sets the manifest departure boardings.
+            </summary>
+            <value>
+            The manifest departure boardings.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Dal.SisacContext.ManifestDepartureBoardingDetails">
+            <summary>
+            Gets or sets the manifest departure boarding details.
+            </summary>
+            <value>
+            The manifest departure boarding details.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Dal.SisacContext.ManifestDepartureBoardingInformations">
+            <summary>
+            Gets or sets the manifest departure boarding informations.
+            </summary>
+            <value>
+            The manifest departure boarding informations.
             </value>
         </member>
         <member name="P:VOI.SISAC.Dal.SisacContext.ManifestsArrival">
@@ -7275,6 +7762,21 @@
             Jets the fuel reconciliation.
             </summary>
             <param name="rec">The record.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Dal.SisacContext.JetFuelRevertManualReconcile(VOI.SISAC.Entities.Process.NationalJetFuelInvoiceControl)">
+            <summary>
+            Jets the fuel revert manual reconcile.
+            </summary>
+            <param name="rec">The record.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Dal.SisacContext.AutomaticTimeline(System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Automatics the timeline.
+            </summary>
+            <param name="startDateParam">The start date parameter.</param>
+            <param name="endDateParam">The end date parameter.</param>
             <returns></returns>
         </member>
         <member name="M:VOI.SISAC.Dal.SisacContext.Commit">

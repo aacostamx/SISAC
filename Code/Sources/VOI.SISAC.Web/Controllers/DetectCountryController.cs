@@ -140,7 +140,7 @@ namespace VOI.SISAC.Web.Controllers
                 };
                 national = this.IsNationalStation(itinerary.ArrivalStation);
                 controller = national ? "ManifestArrival" : "GendecArrival";
-                action = national ? "Index" : "Create";
+                action = "Index";
                 return this.RedirectToAction(action, controller, routeValues);
             }
             catch (Exception exception)

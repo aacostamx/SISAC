@@ -11,6 +11,7 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
     using System.Diagnostics;
     using System.Dynamic;
     using System.Net;
+    using System.Linq;
     using System.Web.Mvc;
     using AutoMapper;
     using MvcSiteMapProvider;
@@ -282,6 +283,128 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
         }
 
         /// <summary>
+        /// Gets the boarding for manifest.
+        /// </summary>
+        /// <param name="manifest">The manifest.</param>
+        /// <returns></returns>
+        public ContentResult GetBoardingForManifest(ManifestDepartureVO manifest)
+        {
+            ContentResult result = new ContentResult();
+            dynamic jsonConvert = new ExpandoObject();
+            string json = string.Empty;
+            IList<ManifestDepartureBoardingDto> boardingsDto = new List<ManifestDepartureBoardingDto>();
+            IList<ManifestDepartureBoardingVO> boardingsVO = new List<ManifestDepartureBoardingVO>();
+            List<int> PositionsAll = new List<int>() { 1,2,3,4,5 }; //5 Stations
+            List<int> PositionsBD = new List<int>();
+            List<int> PositionsRes = new List<int>();
+
+            try
+            {
+                boardingsDto = this.manifestDepartureBusiness.GetBoardingForManifest(manifest.Sequence, manifest.AirlineCode, manifest.FlightNumber, manifest.ItineraryKey);
+                boardingsVO = Mapper.Map<IList<ManifestDepartureBoardingVO>>(boardingsDto);
+
+                //Lista de Position en DB
+                PositionsBD = boardingsVO.Select(c => c.Position).ToList();
+                //Lista Restante de ALL - BD
+                PositionsRes = PositionsAll.Except(PositionsBD).ToList();
+
+                foreach (var item in PositionsRes)
+                {
+                    boardingsVO.Add(new ManifestDepartureBoardingVO { Sequence = manifest.Sequence, 
+                                                                      AirlineCode = manifest.AirlineCode, 
+                                                                      FlightNumber = manifest.FlightNumber, 
+                                                                      ItineraryKey = manifest.ItineraryKey, 
+                                                                      Position = item });
+                }
+
+                jsonConvert.total = boardingsVO != null ? boardingsVO.Count : 0;
+                jsonConvert.rows = boardingsVO;
+                json = JsonConvert.SerializeObject(
+                    jsonConvert,
+                    Formatting.Indented,
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+                result = this.Content(json);
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(string.Format(LogMessages.ErrorRetrieveInfo, this.moduleName, this.userInfo));
+                Logger.Error(exception.Message, exception);
+                Trace.TraceError(string.Format(LogMessages.ErrorRetrieveInfo, this.moduleName, this.userInfo));
+                Trace.TraceError(exception.Message, exception);
+                this.ViewBag.ErrorMessage = exception.ToString();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the boarding information for manifest.
+        /// </summary>
+        /// <param name="boardingID">The boarding identifier.</param>
+        /// <returns></returns>
+        public JsonResult GetBoardingInformationForManifest(long boardingID, ManifestDepartureVO manifest)
+        {
+            if (string.IsNullOrWhiteSpace(boardingID.ToString()))
+            {
+                Logger.Error(string.Format(LogMessages.ErrorNullObject, this.moduleName));
+                Trace.TraceError(string.Format(LogMessages.ErrorNullObject, this.moduleName));
+                return null;
+            }
+
+            List<ManifestDepartureBoardingInformationDto> boardingInformation = new List<ManifestDepartureBoardingInformationDto>();
+            try
+            {
+                var itinerary = this.itineraryBusiness.FindFlightById(manifest.Sequence, manifest.AirlineCode, manifest.FlightNumber, manifest.ItineraryKey);
+
+                if (itinerary.Airplane != null)
+                {
+                    boardingInformation = this.manifestDepartureBusiness.GetBoardingInformationForManifest(boardingID, itinerary.Airplane.AirplaneModel).ToList();
+                }
+            }
+            catch (BusinessException exception)
+            {
+                return Json(exception.Message, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(boardingInformation, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// Gets the boarding detail for manifest.
+        /// </summary>
+        /// <param name="boardingID">The boarding identifier.</param>
+        /// <returns></returns>
+        public JsonResult GetBoardingDetailForManifest(long boardingID, ManifestDepartureVO manifest)
+        {
+            if (string.IsNullOrWhiteSpace(boardingID.ToString()))
+            {
+                Logger.Error(string.Format(LogMessages.ErrorNullObject, this.moduleName));
+                Trace.TraceError(string.Format(LogMessages.ErrorNullObject, this.moduleName));
+                return null;
+            }
+
+            List<ManifestDepartureBoardingDetailDto> boardingDetail = new List<ManifestDepartureBoardingDetailDto>();
+            try
+            {
+                var itinerary = this.itineraryBusiness.FindFlightById(manifest.Sequence, manifest.AirlineCode, manifest.FlightNumber, manifest.ItineraryKey);
+
+                if (itinerary.Airplane != null)
+                {
+                    boardingDetail = this.manifestDepartureBusiness.GetBoardingDetailForManifest(boardingID, itinerary.Airplane.AirplaneModel).ToList();
+                }
+            }
+            catch (BusinessException exception)
+            {
+                return Json(exception.Message, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(boardingDetail, JsonRequestBehavior.AllowGet);
+        }        
+
+        /// <summary>
         /// Gets the users of type AOR.
         /// </summary>
         /// <param name="stationCode">The station code.</param>
@@ -409,7 +532,31 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
                     manifest.ArrivalStationCode = arrivalAirport.Substring(0, 3);
                     manifest.ArrivalStationName = arrivalAirport.Substring(2);
 
-                    ManifestDepartureDto manifestDto = Mapper.Map<ManifestDepartureDto>(manifest);
+                    ManifestDepartureDto manifestDto = new ManifestDepartureDto();
+                    manifestDto = Mapper.Map<ManifestDepartureDto>(manifest);
+
+                    if(manifest.DepartureStationCode == "MEX"){
+                        manifestDto.AdditionalDepartureInformation = new AdditionalDepartureInformationDto();
+                        manifestDto.AdditionalDepartureInformation = Mapper.Map<AdditionalDepartureInformationDto>(manifest);
+                    }
+
+                    //Informacion de Carga  Boarding
+                    foreach(var item in manifestDto.ManifestDepartureBoardings)
+                    {
+                        var boardingInfo = manifest.ManifestDepartureBoardings.Where(c => c.Position == item.Position).Select(c => c.ManifestDepartureBoardingInformations).ToList();
+                        var boardingDetailInfo = manifest.ManifestDepartureBoardings.Where(c => c.Position == item.Position).Select(c => c.ManifestDepartureBoardingDetails).ToList();
+
+                        if (boardingInfo != null)
+                        {
+                            item.ManifestDepartureBoardingInformationDtos = Mapper.Map<IList<ManifestDepartureBoardingInformationDto>>(boardingInfo[0]);
+                        }
+
+                        if (boardingDetailInfo != null)
+                        {
+                            item.ManifestDepartureBoardingDetailDtos = Mapper.Map<IList<ManifestDepartureBoardingDetailDto>>(boardingDetailInfo[0]);
+                        }
+                    }                    
+
                     return this.manifestDepartureBusiness.SaveManifestDeparture(manifestDto);
                 }
 
@@ -448,6 +595,12 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
                     manifest.ArrivalStationName = arrivalAirport.Substring(2);
 
                     ManifestDepartureDto manifestDto = Mapper.Map<ManifestDepartureDto>(manifest);
+                    if (manifest.DepartureStationCode == "MEX")
+                    {
+                        manifestDto.AdditionalDepartureInformation = new AdditionalDepartureInformationDto();
+                        manifestDto.AdditionalDepartureInformation = Mapper.Map<AdditionalDepartureInformationDto>(manifest);
+                    }
+
                     return this.manifestDepartureBusiness.CloseManifest(manifestDto);
                 }
 

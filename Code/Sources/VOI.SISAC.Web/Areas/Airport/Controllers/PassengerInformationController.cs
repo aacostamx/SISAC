@@ -123,76 +123,203 @@ namespace VOI.SISAC.Web.Areas.Airport.Controllers
         [CustomAuthorize(Roles = "PASSINFO-IDX")]
         public ActionResult Index(int sequence, string airlineCode, string flightNumber, string itineraryKey, string departure)
         {
-            //Sino tiene permiso para editar aeropuerto
-            if (NotContainsAirport(departure))
-            {
-                return RedirectToAction("Unauthorized", "Home", new { area = "" });
-            }
-
-            PassengerInformationVO passengerInformationVO = new PassengerInformationVO();
-            passengerInformationVO = this.PassengerInformationDetails(sequence, airlineCode, flightNumber, itineraryKey);
-            passengerInformationVO.AppliesPreviousFlight = false;
-
-            //Debe ser origen nacional y destino internacional para poder aplizar regla de TUA internacional anterior en otros exentos de actual
-            if (this.IsMexicanAirport(passengerInformationVO.Departure) && this.IsInternationalAirport(passengerInformationVO.Arrival)) 
-            {
-                passengerInformationVO.AppliesPreviousFlight = true;
-                int sequenceDefault = passengerInformationVO.PreviousSequence ?? 0;
-
-                if (!string.IsNullOrEmpty(passengerInformationVO.PreviousAirlineCode)
-                 && !string.IsNullOrEmpty(passengerInformationVO.PreviousFlightNumber)
-                 && !string.IsNullOrEmpty(passengerInformationVO.PreviousItineraryKey))
-                {
-                    PassengerInformationDto passengerDto = new PassengerInformationDto();
-                    passengerDto = this.passengerInformationBusiness.FindById(sequenceDefault, passengerInformationVO.PreviousAirlineCode, passengerInformationVO.PreviousFlightNumber, passengerInformationVO.PreviousItineraryKey);
-                    if (passengerDto != null)
-                    {
-                        if (passengerInformationVO.Other < passengerDto.InternationalTua)
-                        {
-                            passengerInformationVO.Other = passengerDto.InternationalTua;
-                        }
-                    }                    
-                }
-            }
-
-            if (passengerInformationVO == null)
+            if (string.IsNullOrWhiteSpace(airlineCode)
+                || string.IsNullOrWhiteSpace(flightNumber)
+                || string.IsNullOrWhiteSpace(itineraryKey)
+                || string.IsNullOrWhiteSpace(departure))
             {
                 Logger.Error(string.Format(LogMessages.ErrorNullObject, this.catalogName));
                 Trace.TraceError(string.Format(LogMessages.ErrorNullObject, this.catalogName));
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            // If the user is not allowed to access this airport's information
+            if (NotContainsAirport(departure))
+            {
+                return RedirectToAction("Unauthorized", "Home", new { area = "" });
+            }
+
+            bool isNational = false;
+            bool isClose = false;
+            bool isMexicanAirport = false;
+            PassengerInformationVO passengerInformationVO = new PassengerInformationVO();
+            GenericCatalogDto dataFounded = new GenericCatalogDto();
+            PassengerInformationDto passInfo = new PassengerInformationDto();
+
+            try
+            {
+                // Gets the Itinerary
+                passInfo = this.passengerInformationBusiness.FindById(sequence, airlineCode, flightNumber, itineraryKey);
+
+                // If Itinerary is found
+                if (passInfo != null && passInfo.Itinerary != null)
+                {
+                    // If Itinerary has Passenger Information only do the mapping
+                    passengerInformationVO = Mapper.Map<PassengerInformationDto, PassengerInformationVO>(passInfo);
+
+                    // Sets Information for the flight
+                    passengerInformationVO.ItineraryVo = new ItineraryVO();
+
+                    passengerInformationVO.AdditionalInformation = new AdditionalPassengerInformationVO();
+                    passengerInformationVO.ItineraryVo.AirlineCode = passInfo.Itinerary.AirlineCode;
+                    passengerInformationVO.ItineraryVo.FlightNumber = passInfo.Itinerary.FlightNumber;
+                    passengerInformationVO.ItineraryVo.EquipmentNumber = passInfo.Itinerary.EquipmentNumber;
+                    passengerInformationVO.ItineraryVo.DepartureDate = passInfo.Itinerary.DepartureDate;
+                    passengerInformationVO.ItineraryVo.ArrivalDate = passInfo.Itinerary.ArrivalDate;
+                    passengerInformationVO.ItineraryVo.DepartureTime = passInfo.Itinerary.DepartureTime;
+                    passengerInformationVO.ItineraryVo.ArrivalTime = passInfo.Itinerary.ArriveTime;
+                    passengerInformationVO.ItineraryVo.DepartureStation = passInfo.Itinerary.DepartureStation;
+                    passengerInformationVO.ItineraryVo.ArrivalStation = passInfo.Itinerary.ArrivalStation;
+
+                    // Use to know the station
+                    passengerInformationVO.Departure = passInfo.Itinerary.DepartureStation;
+                    passengerInformationVO.Arrival = passInfo.Itinerary.ArrivalStation;
+                    passengerInformationVO.DepartureDate = passInfo.Itinerary.DepartureDate.ToString("yyyy-MM-dd");
+                    passengerInformationVO.TimeDeparture = passInfo.Itinerary.DepartureDate.Hour + ":" + passInfo.Itinerary.DepartureDate.Minute;
+
+                    // Sets the additional information
+                    if (passInfo.AdditonalInformation != null)
+                    {
+                        passengerInformationVO.AdditionalInformation = Mapper.Map<AdditionalPassengerInformationVO>(passInfo.AdditonalInformation);
+                    }
+
+                    #region Applies Previous Flight
+                    passengerInformationVO.AppliesPreviousFlight = false;
+
+                    // Debe ser origen nacional y destino internacional para poder aplizar regla de TUA internacional anterior en otros exentos de actual
+                    if (this.IsMexicanAirport(passengerInformationVO.Departure) && !this.IsMexicanAirport(passengerInformationVO.Arrival))
+                    {
+                        passengerInformationVO.AppliesPreviousFlight = true;
+                        int sequenceDefault = passengerInformationVO.PreviousSequence ?? 0;
+
+                        if (!string.IsNullOrEmpty(passengerInformationVO.PreviousAirlineCode)
+                            && !string.IsNullOrEmpty(passengerInformationVO.PreviousFlightNumber)
+                            && !string.IsNullOrEmpty(passengerInformationVO.PreviousItineraryKey))
+                        {
+                            PassengerInformationDto passengerDto = new PassengerInformationDto();
+                            passengerDto = this.passengerInformationBusiness.FindById(
+                                sequenceDefault,
+                                passengerInformationVO.PreviousAirlineCode,
+                                passengerInformationVO.PreviousFlightNumber,
+                                passengerInformationVO.PreviousItineraryKey);
+
+                            if (passengerDto != null)
+                            {
+                                if (passengerInformationVO.Other < passengerDto.InternationalTua)
+                                {
+                                    passengerInformationVO.Other = passengerDto.InternationalTua;
+                                }
+                            }
+                        }
+                    }
+                    #endregion
+                    
+                    // Sets flags for customaze the view
+                    isNational = this.IsNationalFlight(passInfo.Itinerary.DepartureStation, passInfo.Itinerary.ArrivalStation);
+                    isClose = passInfo.Itinerary.GendecDepartureIsClose;
+                    isMexicanAirport = this.IsMexicanAirport(passInfo.Itinerary.DepartureStation);
+
+                    // USUARIOS ASC
+                    IList<GenericCatalogDto> userListFinal = new List<GenericCatalogDto>();
+
+                    // Asignamos a combo los proveedores viables
+                    userListFinal = this.genericCatalogBusiness.GetUserCatalog(passInfo.Itinerary.DepartureStation, "ASC");
+                    this.ViewBag.Users = userListFinal;
+                }
+                else
+                {
+                    ItineraryDto iti = this.itineraryBusiness.FindItineraryWithPassengerInformation(
+                        sequence,
+                        airlineCode,
+                        flightNumber,
+                        itineraryKey);
+
+                    if (iti != null)
+                    {
+                        passengerInformationVO.Sequence = iti.Sequence;
+                        passengerInformationVO.AirlineCode = iti.AirlineCode;
+                        passengerInformationVO.FlightNumber = iti.FlightNumber;
+                        passengerInformationVO.ItineraryKey = iti.ItineraryKey;
+
+                        passengerInformationVO.Departure = iti.DepartureStation;
+                        passengerInformationVO.Arrival = iti.ArrivalStation;
+                        passengerInformationVO.DepartureDate = iti.DepartureDate.ToString("yyyy-MM-dd");
+                        passengerInformationVO.TimeDeparture = iti.DepartureDate.Hour + ":" + iti.DepartureDate.Minute;
+
+                        // Sets Information for the flight string
+                        passengerInformationVO.ItineraryVo = Mapper.Map<ItineraryVO>(iti);
+
+                        // Sets flags for customaze the view
+                        isNational = this.IsNationalFlight(iti.DepartureStation, iti.ArrivalStation);
+                        isClose = iti.GendecDepartureIsClose;
+                        isMexicanAirport = this.IsMexicanAirport(iti.DepartureStation);
+
+                        // USUARIOS ASC
+                        IList<GenericCatalogDto> userListFinal = new List<GenericCatalogDto>();
+
+                        // Asignamos a combo los proveedores viables
+                        userListFinal = this.genericCatalogBusiness.GetUserCatalog(iti.DepartureStation, "ASC");
+                        this.ViewBag.Users = userListFinal;
+                    }
+                    else
+                    {
+                        // If passenger information and itinerary do not exit, returns new objects
+                        passengerInformationVO.Sequence = sequence;
+                        passengerInformationVO.AirlineCode = airlineCode;
+                        passengerInformationVO.FlightNumber = flightNumber;
+                        passengerInformationVO.ItineraryKey = itineraryKey;
+
+                        // Sets Information for the flight string
+                        passengerInformationVO.ItineraryVo = new ItineraryVO();
+                    }
+                    
+                }
+            }
+            catch (BusinessException exception)
+            {
+                Logger.Error(string.Format(LogMessages.ErrorRetrieveInfo, this.catalogName, this.userInfo));
+                Logger.Error(exception.Message, exception);
+                Trace.TraceError(string.Format(LogMessages.ErrorRetrieveInfo, this.catalogName, this.userInfo));
+                Trace.TraceError(exception.Message, exception);
+                this.ViewBag.ErrorMessage = FrontMessage.GetExceptionErrorMessage(exception.Number);
+            }
+
+            this.ViewBag.IsNationalFlag = isNational;
+            this.ViewBag.IsClose = isClose;
+            this.ViewBag.IsMexicanAirport = isMexicanAirport;
+            this.ViewBag.Itinerary = passInfo;
             SetSiteMapValues(passengerInformationVO, departure);
+
             return this.View(passengerInformationVO);
         }
 
         /// <summary>
         /// Edits the specified passenger information vo.
         /// </summary>
-        /// <param name="passengerInformationVO">The passenger information vo.</param>
+        /// <param name="passengerInformation">The passenger information vo.</param>
         /// <returns>Action Result</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [CustomAuthorize(Roles = "PASSINFO-UPD")]
-        public ActionResult Edit(PassengerInformationVO passengerInformationVO)
+        public ActionResult Edit(PassengerInformationVO passengerInformation)
         {
-            IList<string> errors = new List<string>();
-            PassengerInformationVO passengerInformationVODetails = new PassengerInformationVO();
-
-            if (passengerInformationVO == null)
+            if (passengerInformation == null)
             {
                 Logger.Error(string.Format(LogMessages.ErrorNullObject, this.catalogName));
                 Trace.TraceError(string.Format(LogMessages.ErrorNullObject, this.catalogName));
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            PassengerInformationVO passengerInfo = new PassengerInformationVO();
             try
             {
+                IList<string> errors = new List<string>();
                 this.ViewBag.Users = this.genericCatalogBusiness.GetUserCatalog();
                 PassengerInformationDto passengerInformationDto = new PassengerInformationDto();
-                passengerInformationDto = Mapper.Map<PassengerInformationVO, PassengerInformationDto>(passengerInformationVO);
-                bool isMexicanAirport = this.IsMexicanAirport(passengerInformationVO.Departure);
-                bool isInternationalAirport = this.IsInternationalAirport(passengerInformationVO.Arrival);
+                passengerInformationDto = Mapper.Map<PassengerInformationVO, PassengerInformationDto>(passengerInformation);
+                passengerInformationDto.AdditonalInformation = Mapper.Map<AdditionalPassengerInformationDto>(passengerInformation.AdditionalInformation);
+                bool isMexicanAirport = this.IsMexicanAirport(passengerInformation.Departure);
+                bool isInternationalAirport = !this.IsMexicanAirport(passengerInformation.Arrival);
                 errors = this.passengerInformationBusiness.ValidatePassengerInformation(passengerInformationDto, isMexicanAirport, isInternationalAirport);
                 if (errors.Count == 0)
                 {
@@ -202,24 +329,34 @@ namespace VOI.SISAC.Web.Areas.Airport.Controllers
                 {
                     this.TempData["ListErrorMessage"] = errors;
                 }
-
-                passengerInformationVODetails = this.PassengerInformationDetails(
-                    passengerInformationVO.Sequence,
-                    passengerInformationVO.AirlineCode,
-                    passengerInformationVO.FlightNumber,
-                    passengerInformationVO.ItineraryKey);
             }
             catch (BusinessException exception)
             {
-                this.ViewBag.Users = this.genericCatalogBusiness.GetUserCatalog();
                 Logger.Error(string.Format(LogMessages.ErrorUpdate, "PASSENGER INFORMATION", this.userInfo));
                 Logger.Error(exception.Message, exception);
                 Trace.TraceError(string.Format(LogMessages.ErrorUpdate, "PASSENGER INFORMATION", this.userInfo));
                 Trace.TraceError(exception.Message, exception);
-                this.ViewBag.ErrorMessage = FrontMessage.GetExceptionErrorMessage(exception.Number);
+                this.TempData["ErrorMessage"] = FrontMessage.GetExceptionErrorMessage(exception.Number);
+            }
+            catch (NullReferenceException exception)
+            {
+                string error = "Element in the DOM is missing.";
+                Logger.Error(string.Format(error, "PASSENGER INFORMATION", this.userInfo));
+                Logger.Error(exception.Message + " " + error, exception);
+                Trace.TraceError(string.Format(error, "PASSENGER INFORMATION", this.userInfo));
+                Trace.TraceError(exception.Message + " " + error, exception);
+                this.TempData["ErrorMessage"] = FrontMessage.GetExceptionErrorMessage();
             }
 
-            return this.RedirectToAction("Index", passengerInformationVODetails);
+            var route = new
+            {
+                Sequence = passengerInformation.Sequence,
+                AirlineCode = passengerInformation.AirlineCode,
+                FlightNumber = passengerInformation.FlightNumber,
+                ItineraryKey = passengerInformation.ItineraryKey,
+                Departure = passengerInformation.Departure
+            };
+            return this.RedirectToAction("Index", route);
         }
 
         /// <summary>
@@ -285,10 +422,6 @@ namespace VOI.SISAC.Web.Areas.Airport.Controllers
 
                     reportServicelModel.PageSourceUrl = SiteMaps.Current.FindSiteMapNodeFromKey("PassengerInformation_Key").Url;
                     return this.View("Report/ViewReport", reportServicelModel);
-                }
-                else
-                {
-                    passengerInformationVO = this.PassengerInformationDetails(sequence, airlineCode, flightNumber, itineraryKey);
                 }
             }
             catch (BusinessException exception)
@@ -360,9 +493,9 @@ namespace VOI.SISAC.Web.Areas.Airport.Controllers
                     passengerDto = this.passengerInformationBusiness.FindById(sequence, pAirlineCode, pFlightNumber, pItineraryKey);
                     if (passengerDto != null)
                     {
-                        
+
                         tuaInternational = passengerDto.InternationalTua;
-                        
+
                     }
                 }
 
@@ -439,114 +572,6 @@ namespace VOI.SISAC.Web.Areas.Airport.Controllers
         }
 
         /// <summary>
-        /// Passengers the information details.
-        /// </summary>
-        /// <param name="sequence">The sequence.</param>
-        /// <param name="airlineCode">The airline code.</param>
-        /// <param name="flightNumber">The flight number.</param>
-        /// <param name="itineraryKey">The itinerary key.</param>
-        /// <returns>Passenger Information View Object.</returns>
-        private PassengerInformationVO PassengerInformationDetails(int sequence, string airlineCode, string flightNumber, string itineraryKey)
-        {
-            PassengerInformationVO passengerInformationVO = new PassengerInformationVO();
-            GenericCatalogDto dataFounded = new GenericCatalogDto();
-            ItineraryDto itineraryDto = new ItineraryDto();
-            bool isNational = false;
-            bool isClose = false;
-            bool isMexicanAirport = false;
-
-            try
-            {
-                // Gets the Itinerary
-                itineraryDto = this.itineraryBusiness.FindFlightById(sequence, airlineCode, flightNumber, itineraryKey);
-                if (itineraryDto != null)
-                {
-                    // If Itinerary is found
-                    if (itineraryDto.PassengerInformation != null)
-                    {
-                        // If Itinerary has Passenger Information only do the mapping
-                        passengerInformationVO = Mapper.Map<PassengerInformationDto, PassengerInformationVO>(itineraryDto.PassengerInformation);
-
-                        // Sets Information for the flight string
-                        passengerInformationVO.ItineraryVo = new ItineraryVO();
-                        passengerInformationVO.ItineraryVo.AirlineCode = itineraryDto.AirlineCode;
-                        passengerInformationVO.ItineraryVo.FlightNumber = itineraryDto.FlightNumber;
-                        passengerInformationVO.ItineraryVo.EquipmentNumber = itineraryDto.EquipmentNumber;
-                        passengerInformationVO.ItineraryVo.DepartureDate = itineraryDto.DepartureDate;
-                        passengerInformationVO.ItineraryVo.ArrivalDate = itineraryDto.ArrivalDate;
-                        passengerInformationVO.ItineraryVo.DepartureTime = itineraryDto.DepartureTime;
-                        passengerInformationVO.ItineraryVo.ArrivalTime = itineraryDto.ArriveTime;
-                        passengerInformationVO.ItineraryVo.DepartureStation = itineraryDto.DepartureStation;
-                        passengerInformationVO.ItineraryVo.ArrivalStation = itineraryDto.ArrivalStation;
-
-                        // Use to know the station
-                        passengerInformationVO.Departure = itineraryDto.DepartureStation;
-                        passengerInformationVO.Arrival = itineraryDto.ArrivalStation;
-                        passengerInformationVO.DepartureDate = itineraryDto.DepartureDate.ToString("yyyy-MM-dd");
-                        passengerInformationVO.TimeDeparture = itineraryDto.DepartureDate.Hour + ":" + itineraryDto.DepartureDate.Minute;
-                    }
-                    else
-                    {
-                        // If not, mapping manually
-                        passengerInformationVO.Sequence = sequence;
-                        passengerInformationVO.AirlineCode = airlineCode;
-                        passengerInformationVO.FlightNumber = flightNumber;
-                        passengerInformationVO.ItineraryKey = itineraryKey;
-
-                        // Sets Information for the flight string
-                        passengerInformationVO.ItineraryVo = new ItineraryVO();
-                        passengerInformationVO.ItineraryVo.AirlineCode = itineraryDto.AirlineCode;
-                        passengerInformationVO.ItineraryVo.FlightNumber = itineraryDto.FlightNumber;
-                        passengerInformationVO.ItineraryVo.EquipmentNumber = itineraryDto.EquipmentNumber;
-                        passengerInformationVO.ItineraryVo.DepartureDate = itineraryDto.DepartureDate;
-                        passengerInformationVO.ItineraryVo.ArrivalDate = itineraryDto.ArrivalDate;
-                        passengerInformationVO.ItineraryVo.DepartureTime = itineraryDto.DepartureTime;
-                        passengerInformationVO.ItineraryVo.ArrivalTime = itineraryDto.ArriveTime;
-                        passengerInformationVO.ItineraryVo.DepartureStation = itineraryDto.DepartureStation;
-                        passengerInformationVO.ItineraryVo.ArrivalStation = itineraryDto.ArrivalStation;
-
-                        // Use to know the station
-                        passengerInformationVO.Departure = itineraryDto.DepartureStation;
-                        passengerInformationVO.Arrival = itineraryDto.ArrivalStation;
-                        passengerInformationVO.DepartureDate = itineraryDto.DepartureDate.ToString("yyyy-MM-dd");
-                        passengerInformationVO.TimeDeparture = itineraryDto.DepartureDate.Hour + ":" + itineraryDto.DepartureDate.Minute;
-                    }
-
-                    // Sets flags for customazing the view
-                    isNational = this.IsNationalFlight(itineraryDto.DepartureStation, itineraryDto.ArrivalStation);
-                    isClose = itineraryDto.GendecDepartureIsClose;
-                    isMexicanAirport = this.IsMexicanAirport(itineraryDto.DepartureStation);
-                }
-                else
-                {
-                    // If not found retruns null
-                    return null;
-                }
-
-                // USUARIOS ASC
-                IList<GenericCatalogDto> userListFinal = new List<GenericCatalogDto>();
-
-                // Asignamos a combo los proveedores viables
-                userListFinal = this.genericCatalogBusiness.GetUserCatalog(itineraryDto.DepartureStation, "ASC");
-                this.ViewBag.Users = userListFinal;
-            }
-            catch (BusinessException exception)
-            {
-                Logger.Error(string.Format(LogMessages.ErrorRetrieveInfo, this.catalogName, this.userInfo));
-                Logger.Error(exception.Message, exception);
-                Trace.TraceError(string.Format(LogMessages.ErrorRetrieveInfo, this.catalogName, this.userInfo));
-                Trace.TraceError(exception.Message, exception);
-                this.ViewBag.ErrorMessage = FrontMessage.GetExceptionErrorMessage(exception.Number);
-            }
-
-            this.ViewBag.IsNationalFlag = isNational;
-            this.ViewBag.IsClose = isClose;
-            this.ViewBag.IsMexicanAirport = isMexicanAirport;
-            this.ViewBag.Itinerary = itineraryDto;
-            return passengerInformationVO;
-        }
-
-        /// <summary>
         /// Determines whether is a national flight.
         /// </summary>
         /// <param name="departureStation">The departure station.</param>
@@ -574,19 +599,6 @@ namespace VOI.SISAC.Web.Areas.Airport.Controllers
             bool isMexican = airport.Country.CountryCode == "MEX";
 
             return isMexican;
-        }
-
-        /// <summary>
-        /// Determines whether [is international airport] [the specified station].
-        /// </summary>
-        /// <param name="station">The station.</param>
-        /// <returns></returns>
-        private bool IsInternationalAirport(string station)
-        {
-            AirportDto airport = this.airportBusiness.FindAirportById(station);
-            bool isInternational = airport.Country.CountryCode != "MEX";
-
-            return isInternational;
         }
 
         /// <summary>

@@ -231,6 +231,11 @@ namespace VOI.SISAC.Dal.Configuration.Itineraries
                    "FlightNumber", 
                    "ItineraryKey" 
                }));
+
+            this.HasMany(e => e.ManifestDepartureBoardings)
+                .WithRequired(e => e.ManifestDeparture)
+                .HasForeignKey(e => new { e.Sequence, e.AirlineCode, e.FlightNumber, e.ItineraryKey })
+                .WillCascadeOnDelete(true);  
         }
     }
 }

@@ -181,7 +181,10 @@
                                 @class = "inputForm form-control",
                                 @cols = "92",
                                 @rows = "3",
-                                @tabindex = "9"
+                                @tabindex = "9",
+                                @onkeypress = "return commonFunctions.validarComentarios(event, this)",
+                                @onkeyup = "return commonFunctions.validarComentarios(event, this)",
+                                @maxlength = "150"
                             })
                         </div>
                     </div>
@@ -243,11 +246,11 @@
                                     @Html.EditorFor(model => model.ActualDepartureTime, new
                                     {
                                         htmlAttributes = new
-                                            {
-                                                @id = "real-time",
-                                                @class = "inputForm form-control",
-                                                @tabindex = "13",
-                                            }
+                                        {
+                                            @id = "real-time",
+                                            @class = "inputForm form-control",
+                                            @tabindex = "13",
+                                        }
                                     })
                                     @Html.ValidationMessageFor(model => model.ActualDepartureTime, "", new { @class = "text-danger text-danger-error" })
                                 </div>
@@ -288,7 +291,37 @@
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                 <label class="subtitle_h5 control-label">@Resource.DelayRemarks</label>
-                                <textarea id="delay-details" name="DelayRemarks" class="inputForm form-control" cols="92" rows="3" tabindex="16">@Model.DelayRemarks</textarea>
+                                @Html.TextAreaFor(model => model.DelayRemarks, new
+                                {
+                                    @id = "delay-details",
+                                    @name = "DelayRemarks",
+                                    @class = "inputForm form-control",
+                                    @cols = "92",
+                                    @rows = "3",
+                                    @tabindex = "16",
+                                    @onkeypress = "return commonFunctions.validarComentarios(event, this)",
+                                    @onkeyup = "return commonFunctions.validarComentarios(event, this)",
+                                    @maxlength = "150"
+                                })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @*embarque*@
+                @Html.Partial("Partial/_BoardingInformation")
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="boarding-movements">
+                        <h4 class="panel-title subtitle_h5_panel_title" onclick="">
+                            <strong>@Resource.Boarding</strong>
+                        </h4>
+                    </div>
+                    <div id="boarding-grid">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="table-content">                                    
+                                    @Html.Partial("Partial/_BoardingTable")
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -304,27 +337,39 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <label class="subtitle_h5 control-label">@Resource.InnerSection</label>
-                            <input type="text" id="inner-trace" name="InnerSection" class="inputForm form-control" readonly="readonly" value="@Model.InnerSection" />
+                            <input type="text" id="inner-trace" name="InnerSection" class="inputForm form-control" 
+                                onkeypress="return commonFunctions.validarNumeros(event);" onkeyup="return commonFunctions.validarNumeros(event)" 
+                                readonly="readonly" value="@Model.InnerSection" />
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <label class="subtitle_h5 control-label">@Resource.International</label>
-                            <input type="text" id="international" name="International" class="inputForm form-control" readonly="readonly" value="@Model.International" />
+                            <input type="text" id="international" name="International" class="inputForm form-control" 
+                                onkeypress="return commonFunctions.validarNumeros(event);" onkeyup="return commonFunctions.validarNumeros(event)" 
+                                readonly="readonly" value="@Model.International" />
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <label class="subtitle_h5 control-label">@Resource.InternationalExempt</label>
-                            <input type="text" id="international-exempt" name="InternationalExempt" class="inputForm form-control" readonly="readonly" value="@Model.InternationalExempt" />
+                            <input type="text" id="international-exempt" name="InternationalExempt" class="inputForm form-control" 
+                                onkeypress="return commonFunctions.validarNumeros(event);" onkeyup="return commonFunctions.validarNumeros(event)" 
+                                readonly="readonly" value="@Model.InternationalExempt" />
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <label class="subtitle_h5 control-label">@Resource.NationalExempt</label>
-                            <input type="text" id="national-exempt" name="NationalExempt" class="inputForm form-control" readonly="readonly" value="@Model.NationalExempt" />
+                            <input type="text" id="national-exempt" name="NationalExempt" class="inputForm form-control" 
+                                onkeypress="return commonFunctions.validarNumeros(event);" onkeyup="return commonFunctions.validarNumeros(event)" 
+                                readonly="readonly" value="@Model.NationalExempt" />
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <label class="subtitle_h5 control-label">@Resource.Transit</label>
-                            <input type="text" id="transit" name="Transit" class="inputForm form-control" readonly="readonly" value="@Model.Transit" />
+                            <input type="text" id="transit" name="Transit" class="inputForm form-control" 
+                                onkeypress="return commonFunctions.validarNumeros(event);" onkeyup="return commonFunctions.validarNumeros(event)" 
+                                readonly="readonly" value="@Model.Transit" />
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <label class="subtitle_h5 control-label">@Resource.Infant</label>
-                            <input type="text" id="infant" name="Infant" class="inputForm form-control" readonly="readonly" value="@Model.Infant"/>
+                            <input type="text" id="infant" name="Infant" class="inputForm form-control" 
+                                onkeypress="return commonFunctions.validarNumeros(event);" onkeyup="return commonFunctions.validarNumeros(event)" 
+                                readonly="readonly" value="@Model.Infant"/>
                         </div>
                     </div>
                 </div>
@@ -339,27 +384,65 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <label class="subtitle_h5 control-label required-field">@Resource.JetFuelKg</label>
-                            @Html.EditorFor(model => model.JetFuel, new { htmlAttributes = new { @id = "jet-fuel", @class = "inputForm form-control", @tabindex = "17" } })
+                            @Html.EditorFor(model => model.JetFuel, new { htmlAttributes = 
+                                new 
+                                {
+                                    @id = "jet-fuel", 
+                                    @class = "inputForm form-control", 
+                                    @tabindex = "17",
+                                    @onkeypress="return commonFunctions.validarNumeroDecimal(event, this, 18, 5);",
+                                    @onkeyup="return commonFunctions.validarNumeroDecimal(event, this, 18, 5);" 
+                                } 
+                            })
                             @Html.ValidationMessageFor(model => model.JetFuel, "", new { @class = "text-danger text-danger-error" })
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <label class="subtitle_h5 control-label required-field">@Resource.RealTakeoffWeightKg</label>
-                            @Html.EditorFor(model => model.RealTakeoffWeight, new { htmlAttributes = new { @id = "real-takeoff-weight", @class = "inputForm form-control", @tabindex = "18" } })
+                            @Html.EditorFor(model => model.RealTakeoffWeight, new { htmlAttributes = 
+                                new 
+                                { 
+                                    @id = "real-takeoff-weight", 
+                                    @class = "inputForm form-control",
+                                    @tabindex = "18",
+                                    @onkeypress="return commonFunctions.validarNumeroDecimal(event, this, 18, 5);",
+                                    @onkeyup="return commonFunctions.validarNumeroDecimal(event, this, 18, 5);" 
+                                } 
+                            })
                             @Html.ValidationMessageFor(model => model.RealTakeoffWeight, "", new { @class = "text-danger text-danger-error" })
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <label class="subtitle_h5 control-label required-field">@Resource.OperatingWeightKg</label>
-                            @Html.EditorFor(model => model.OperatingWeight, new { htmlAttributes = new { @id = "operating-weight", @class = "inputForm form-control", @tabindex = "19" } })
+                            @Html.EditorFor(model => model.OperatingWeight, new { htmlAttributes = 
+                                new 
+                                { 
+                                    @id = "operating-weight",
+                                    @class = "inputForm form-control",
+                                    @tabindex = "19", 
+                                    @onkeypress="return commonFunctions.validarNumeroDecimal(event, this, 18, 5);",
+                                    @onkeyup="return commonFunctions.validarNumeroDecimal(event, this, 18, 5);" 
+                                } 
+                            })
                             @Html.ValidationMessageFor(model => model.OperatingWeight, "", new { @class = "text-danger text-danger-error" })
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <label class="subtitle_h5 control-label required-field">@Resource.StructuralTakeoffWeightKg</label>
-                            @Html.EditorFor(model => model.StructuralTakeoffWeight, new { htmlAttributes = new { @id = "structural-takeoff-weight", @class = "inputForm form-control", @tabindex = "20" } })
+                            @Html.EditorFor(model => model.StructuralTakeoffWeight, new { htmlAttributes = 
+                                 new 
+                                { 
+                                    @id = "structural-takeoff-weight",
+                                    @class = "inputForm form-control",
+                                    @tabindex = "20",
+                                    @onkeypress="return commonFunctions.validarNumeroDecimal(event, this, 18, 5);",
+                                    @onkeyup="return commonFunctions.validarNumeroDecimal(event, this, 18, 5);" 
+                                } 
+                           })
                             @Html.ValidationMessageFor(model => model.StructuralTakeoffWeight, "", new { @class = "text-danger text-danger-error" })
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <label class="subtitle_h5 control-label">@Resource.SafetyMarginKg</label>
-                            <input type="text" id="safety-margin" name="SafetyMargin" class="inputForm form-control" readonly="readonly" value="@Model.SafetyMargin" />
+                            <input type="text" id="safety-margin" name="SafetyMargin" class="inputForm form-control" 
+                                onkeypress="return commonFunctions.validarNumeroDecimal(event, this, 18, 5);" onkeyup="return commonFunctions.validarNumeroDecimal(event, this, 18, 5);" 
+                                readonly="readonly" value="@Model.SafetyMargin" />
                         </div>
                     </div>
                 </div>
@@ -374,12 +457,30 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <label class="subtitle_h5 control-label required-field">@Resource.Position</label>
-                            @Html.EditorFor(model => model.Position, new { htmlAttributes = new { @id = "position", @class = "inputForm form-control", @tabindex = "21" } })
+                            @Html.EditorFor(model => model.Position, new { htmlAttributes = 
+                                new 
+                                { 
+                                    @id = "position", 
+                                    @class = "inputForm form-control", 
+                                    @tabindex = "21",
+                                    @onkeypress="return commonFunctions.validarMaxLengthAlfanumericoDiagonalGuion(event, this, 50);",
+                                    @onkeyup="return commonFunctions.validarMaxLengthAlfanumericoDiagonalGuion(event, this, 50);" 
+                                } 
+                            })
                             @Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger text-danger-error" })
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <label class="subtitle_h5 control-label required-field">@Resource.InfantTickets</label>
-                            @Html.EditorFor(model => model.InfantTickets, new { htmlAttributes = new { @id = "infant-tickets", @class = "inputForm form-control", @tabindex = "22" } })
+                            @Html.EditorFor(model => model.InfantTickets, new { htmlAttributes = 
+                                new 
+                                { 
+                                    @id = "infant-tickets",
+                                    @class = "inputForm form-control",
+                                    @tabindex = "22",
+                                    @onkeypress="return commonFunctions.validarNumeros(event);",
+                                    @onkeyup="return commonFunctions.validarNumeros(event)"
+                                } 
+                            })
                             @Html.ValidationMessageFor(model => model.InfantTickets, "", new { @class = "text-danger text-danger-error" })
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -390,7 +491,10 @@
                                 @class = "inputForm form-control",
                                 @cols = "88",
                                 @rows = "3",
-                                @tabindex = "23"
+                                @tabindex = "23",
+                                @onkeypress = "return commonFunctions.validarComentarios(event, this)",
+                                @onkeyup = "return commonFunctions.validarComentarios(event, this)",
+                                @maxlength = "150"
                             })
                             @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger text-danger-error" })
                         </div>
@@ -417,14 +521,16 @@
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <label class="subtitle_h5 control-label required-field">@Resource.LicenceNumber</label>
-                            @Html.EditorFor(model => model.LicenceNumberSignature, new 
-                            { 
-                                htmlAttributes = new 
-                                { 
-                                    @id = "licence-number-signature", 
+                            @Html.EditorFor(model => model.LicenceNumberSignature, new
+                            {
+                                htmlAttributes = new
+                                {
+                                    @id = "licence-number-signature",
                                     @class = "inputForm form-control",
-                                    @tabindex = "25" 
-                                } 
+                                    @tabindex = "25",
+                                    @onkeypress = "return commonFunctions.validarAlfanumericoLlaves(event, this, 20)",
+                                    @onkeyup = "return commonFunctions.validarAlfanumericoLlaves(event, this, 20)"
+                                }
                             })
                             @Html.ValidationMessageFor(model => model.LicenceNumberSignature, "", new { @class = "text-danger text-danger-error" })
                         </div>
@@ -440,14 +546,16 @@
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <label class="subtitle_h5 control-label required-field">@Resource.LicenceNumber</label>
-                            @Html.EditorFor(model => model.LicenceNumberAuthorize, new 
-                            { 
-                                htmlAttributes = new 
-                                { 
+                            @Html.EditorFor(model => model.LicenceNumberAuthorize, new
+                            {
+                                htmlAttributes = new
+                                {
                                     @id = "licence-number-authorize",
                                     @class = "inputForm form-control",
-                                    @tabindex = "27" 
-                                } 
+                                    @tabindex = "27",
+                                    @onkeypress = "return commonFunctions.validarAlfanumericoLlaves(event, this, 20)",
+                                    @onkeyup = "return commonFunctions.validarAlfanumericoLlaves(event, this, 20)"
+                                }
                             })
                             @Html.ValidationMessageFor(model => model.LicenceNumberAuthorize, "", new { @class = "text-danger text-danger-error" })
                         </div>
@@ -455,19 +563,50 @@
                 </div>
             </div>
         </div>
+        if (Model.DepartureStationCode == "MEX")
+        {
+            @Html.Partial("Partial/_AdditionalInformation")
+            <input type="hidden" name="Pilot" id="Pilot" value="@Model.Pilot" />
+            <input type="hidden" name="Surcharge" id="Surcharge" value="@Model.Surcharge" />
+            <input type="hidden" name="ExtraCrew" id="ExtraCrew" value="@Model.ExtraCrew" />
+            <input type="hidden" name="TypeFlight" id="TypeFlight" value="@Model.TypeFlight" />
+            <input type="hidden" name="SlotAllocatedTime" id="SlotAllocatedTime" value="@Model.SlotAllocatedTime" />
+            <input type="hidden" name="SlotCoordinatedTime" id="SlotCoordinatedTime" value="@Model.SlotCoordinatedTime" />
+            <input type="hidden" name="ManeuverStartTime" id="ManeuverStartTime" value="@Model.ManeuverStartTime" />
+            <input type="hidden" name="OvernightEndTime" id="OvernightEndTime" value="@Model.OvernightEndTime" />
+            <input type="hidden" name="PositionOutputTime" id="PositionOutputTime" value="@Model.PositionOutputTime" />
+            <input type="hidden" name="FirstDelayDescription" id="FirstDelayDescription" value="@Model.FirstDelayDescription" />
+            <input type="hidden" name="SecondDelayDescription" id="SecondDelayDescription" value="@Model.SecondDelayDescription" />
+            <input type="hidden" name="ThirdDelayDescription" id="ThirdDelayDescription" value="@Model.ThirdDelayDescription" />
+        }
         <div class="row">
             <button type="button" class="btn btn-default" name="back-btn" title="@Resource.Back" onclick="location.href='@Url.Action("Index", "Itinerary")'" tabindex="31">
                 <i class="fa fa-arrow-left fa-fw"></i>&nbsp;@Resource.Back
             </button>
-            <button type="submit" class="btn btn-default btn-green" name="report-btn" title="@Resource.Report"  onclick="location.href='@Url.Action("ViewReport", "ManifestDeparture", new { Sequence = Model.Sequence, AirlineCode = Model.AirlineCode, FlightNumber = Model.FlightNumber, ItineraryKey = Model.ItineraryKey })'" tabindex="30">
-                <i class="fa-fw glyphicon glyphicon-export icon-share"></i>&nbsp;@Resource.Report
-            </button>
-            <button type="submit" class="btn btn-default btn-green" name="close-btn" title="@Resource.Close" onclick="ManifestDepartureController.postForm(2)" tabindex="29">
-                <i class="fa fa-lock fa-fw"></i>&nbsp;@Resource.Close
-            </button>
-            <button type="submit" class="btn btn-default btn-green" name="save-btn" title="@Resource.Save" onclick="ManifestDepartureController.postForm(1)" tabindex="28">
-                <i class="fa fa-floppy-o fa-fw"></i>&nbsp;@Resource.Save
-            </button>
+            @if (User.IsInRole("MANIFDEP-PRINTREP"))
+            { 
+                <button type="submit" class="btn btn-default btn-green" name="report-btn" title="@Resource.Report"  onclick="location.href='@Url.Action("ViewReport", "ManifestDeparture", new { Sequence = Model.Sequence, AirlineCode = Model.AirlineCode, FlightNumber = Model.FlightNumber, ItineraryKey = Model.ItineraryKey })'" tabindex="30">
+                    <i class="fa-fw glyphicon glyphicon-export icon-share"></i>&nbsp;@Resource.Report
+                </button>
+            }
+            @if (User.IsInRole("MANIFDEP-CLOSE"))
+            { 
+                <button type="submit" class="btn btn-default btn-green" name="close-btn" title="@Resource.Close" onclick="ManifestDepartureController.postForm(2)" tabindex="29">
+                    <i class="fa fa-lock fa-fw"></i>&nbsp;@Resource.Close
+                </button>
+            }
+            @if (User.IsInRole("MANIFDEP-UPD"))
+            { 
+                <button type="submit" class="btn btn-default btn-green" name="save-btn" title="@Resource.Save" onclick="ManifestDepartureController.postForm(1)" tabindex="28">
+                    <i class="fa fa-floppy-o fa-fw"></i>&nbsp;@Resource.Save
+                </button>
+            }
+            @if (Model.DepartureStationCode == "MEX")
+            {
+                <button type="button" class="btn btn-default btn-black aright" name="add-info-btn" title="@Resource.AdditionalInformation" onclick="" tabindex="28" data-toggle="modal" data-target="#add-info-modal">
+                    <i class="fa fa-plus fa-fw"></i>&nbsp;@Resource.AdditionalInformation
+                </button>
+            }
         </div>
     }
 </div>
@@ -493,12 +632,13 @@
 
         var tolerance = '@Model.ToleranceTime';
     </script>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryval")    
     @Scripts.Render("~/bundles/bootstrapTable")
     @Scripts.Render("~/bundles/JSbootstrapCombobox")
     @Scripts.Render("~/bundles/bootstrapdtimejs")
+    @Scripts.Render("~/bundles/bootstrapEditableTablejs")
     @Scripts.Render("~/bundles/JSDateTimeValidate")
     @Scripts.Render("~/bundles/SweetAlertJS")
     @Scripts.Render("~/bundles/ManifestDepartureJS")
+    @Scripts.Render("~/bundles/CommonFunctions")
 }

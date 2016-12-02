@@ -2073,7 +2073,7 @@
             <summary>
             Edits the specified passenger information vo.
             </summary>
-            <param name="passengerInformationVO">The passenger information vo.</param>
+            <param name="passengerInformation">The passenger information vo.</param>
             <returns>Action Result</returns>
         </member>
         <member name="M:VOI.SISAC.Web.Areas.Airport.Controllers.PassengerInformationController.GetInformationMessage">
@@ -2128,16 +2128,6 @@
             </summary>
             <param name="passengerInformation">The ticket vo.</param>
         </member>
-        <member name="M:VOI.SISAC.Web.Areas.Airport.Controllers.PassengerInformationController.PassengerInformationDetails(System.Int32,System.String,System.String,System.String)">
-            <summary>
-            Passengers the information details.
-            </summary>
-            <param name="sequence">The sequence.</param>
-            <param name="airlineCode">The airline code.</param>
-            <param name="flightNumber">The flight number.</param>
-            <param name="itineraryKey">The itinerary key.</param>
-            <returns>Passenger Information View Object.</returns>
-        </member>
         <member name="M:VOI.SISAC.Web.Areas.Airport.Controllers.PassengerInformationController.IsNationalFlight(System.String,System.String)">
             <summary>
             Determines whether is a national flight.
@@ -2154,13 +2144,6 @@
             </summary>
             <param name="station">The station.</param>
             <returns><c>true</c> if from Mexico otherwise <c>false</c>.</returns>
-        </member>
-        <member name="M:VOI.SISAC.Web.Areas.Airport.Controllers.PassengerInformationController.IsInternationalAirport(System.String)">
-            <summary>
-            Determines whether [is international airport] [the specified station].
-            </summary>
-            <param name="station">The station.</param>
-            <returns></returns>
         </member>
         <member name="M:VOI.SISAC.Web.Areas.Airport.Controllers.PassengerInformationController.NotContainsAirport(System.String)">
             <summary>
@@ -4212,6 +4195,46 @@
             <param name="id">Identificador del item del modelo a eliminar</param>
             <returns>Regresa a la vista principal</returns>
         </member>
+        <member name="T:VOI.SISAC.Web.Areas.Itineraries.Controllers.AircraftMovementMessageController">
+            <summary>
+            Aircraft movement message controller
+            </summary>
+        </member>
+        <member name="F:VOI.SISAC.Web.Areas.Itineraries.Controllers.AircraftMovementMessageController.Logger">
+            <summary>
+            The logger
+            </summary>
+        </member>
+        <member name="F:VOI.SISAC.Web.Areas.Itineraries.Controllers.AircraftMovementMessageController.mvtBusiness">
+            <summary>
+            The MVT business
+            </summary>
+        </member>
+        <member name="F:VOI.SISAC.Web.Areas.Itineraries.Controllers.AircraftMovementMessageController.userInfo">
+            <summary>
+            The machine name
+            </summary>
+        </member>
+        <member name="F:VOI.SISAC.Web.Areas.Itineraries.Controllers.AircraftMovementMessageController.moduleName">
+            <summary>
+            The machine name
+            </summary>
+        </member>
+        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.AircraftMovementMessageController.#ctor(VOI.SISAC.Business.Itineraries.IAircraftMovementMessageBusiness)">
+            <summary>
+            Initializes a new instance of the <see cref="T:VOI.SISAC.Web.Areas.Itineraries.Controllers.AircraftMovementMessageController" /> class.
+            </summary>
+            <param name="mvtBusiness">The aircraft movement message business.</param>
+        </member>
+        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.AircraftMovementMessageController.GetAircraftMovementMessage(VOI.SISAC.Web.Models.VO.Itineraries.ItineraryVO)">
+            <summary>
+            Indexes this instance.
+            </summary>
+            <param name="itinerary">The itinerary.</param>
+            <returns>
+            View with the aircraft movement message.
+            </returns>
+        </member>
         <member name="T:VOI.SISAC.Web.Areas.Itineraries.Controllers.ManifestArrivalController">
             <summary>
             Manifest Arrival Controller
@@ -4421,6 +4444,27 @@
             Content result.
             </returns>
         </member>
+        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.ManifestDepartureController.GetBoardingForManifest(VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureVO)">
+            <summary>
+            Gets the boarding for manifest.
+            </summary>
+            <param name="manifest">The manifest.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.ManifestDepartureController.GetBoardingInformationForManifest(System.Int64,VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureVO)">
+            <summary>
+            Gets the boarding information for manifest.
+            </summary>
+            <param name="boardingID">The boarding identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.ManifestDepartureController.GetBoardingDetailForManifest(System.Int64,VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureVO)">
+            <summary>
+            Gets the boarding detail for manifest.
+            </summary>
+            <param name="boardingID">The boarding identifier.</param>
+            <returns></returns>
+        </member>
         <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.ManifestDepartureController.GetAorUsers(System.String)">
             <summary>
             Gets the users of type AOR.
@@ -4492,11 +4536,17 @@
             The timeline business
             </summary>
         </member>
-        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.TimelineController.#ctor(VOI.SISAC.Business.Itineraries.ITimelineBusiness)">
+        <member name="F:VOI.SISAC.Web.Areas.Itineraries.Controllers.TimelineController.movementBusiness">
+            <summary>
+            The movement business
+            </summary>
+        </member>
+        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.TimelineController.#ctor(VOI.SISAC.Business.Itineraries.ITimelineBusiness,VOI.SISAC.Business.Itineraries.ITimelineMovementBusiness)">
             <summary>
             Initializes a new instance of the <see cref="T:VOI.SISAC.Web.Areas.Itineraries.Controllers.TimelineController"/> class.
             </summary>
             <param name="timelineBusiness">The timeline business.</param>
+            <param name="movementBusiness">The movement business.</param>
         </member>
         <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.TimelineController.Index">
             <summary>
@@ -4504,15 +4554,77 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.TimelineController.ViewTimeline">
+        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.TimelineController.AddTimelineMovement(VOI.SISAC.Web.Models.VO.Itineraries.TimelineMovementVO)">
             <summary>
-            Views the timeline.
+            Adds the timeline movement.
             </summary>
+            <param name="movement">The movement.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.TimelineController.UpdateTimelineMovement(VOI.SISAC.Web.Models.VO.Itineraries.TimelineMovementVO)">
+            <summary>
+            Updates the timeline movement.
+            </summary>
+            <param name="movement">The movement.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.TimelineController.DeleteTimelineMovement(VOI.SISAC.Web.Models.VO.Itineraries.TimelineMovementVO)">
+            <summary>
+            Deletes the timeline movement.
+            </summary>
+            <param name="movement">The movement.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.TimelineController.StartTimelineProcress(VOI.SISAC.Web.Models.VO.Itineraries.TimelineVO)">
+            <summary>
+            Starts the timeline procress.
+            </summary>
+            <param name="timelineProcess">The timeline process.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.TimelineController.GetTimelineByFlight(VOI.SISAC.Web.Models.VO.Itineraries.TimelineVO)">
+            <summary>
+            Gets the timeline by flight.
+            </summary>
+            <param name="timeline">The timeline.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.TimelineController.GetTimelineByEquipmentNumber(VOI.SISAC.Web.Models.VO.Itineraries.ItineraryVO)">
+            <summary>
+            Gets the timeline by equipment number.
+            </summary>
+            <param name="itinerary">The itinerary.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.TimelineController.ItinearyURL(VOI.SISAC.Web.Models.VO.Itineraries.ItineraryVO)">
+            <summary>
+            Itineary URL
+            </summary>
+            <param name="itineary"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.TimelineController.GetTimelineURL">
+            <summary>
+            Gets the timeline URL.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.TimelineController.RemoveCookie(System.String)">
+            <summary>
+            Removes the cookie.
+            </summary>
+            <param name="cookieName">Name of the cookie.</param>
+        </member>
+        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.TimelineController.GetTimelineMovement(VOI.SISAC.Web.Models.VO.Itineraries.TimelineMovementVO)">
+            <summary>
+            Gets the timeline movement.
+            </summary>
+            <param name="movementVO">The movement vo.</param>
             <returns></returns>
         </member>
         <member name="T:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController">
             <summary>
-            Class Gendec Arrival
+            Arrival general document controller
             </summary>
         </member>
         <member name="F:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController.Logger">
@@ -4530,14 +4642,9 @@
             The machine name
             </summary>
         </member>
-        <member name="F:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController.gendecDepartureBusiness">
-            <summary>
-            The gendec departure business/
-            </summary>
-        </member>
         <member name="F:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController.gendecArrivalBusiness">
             <summary>
-            The gendec arrival business/
+            The general document arrival business/
             </summary>
         </member>
         <member name="F:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController.crewBusiness">
@@ -4565,138 +4672,113 @@
             The page report business
             </summary>
         </member>
-        <member name="F:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController.airportBusiness">
+        <member name="F:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController.airplaneBusiness">
             <summary>
-            The airport business
+            The airplane business
             </summary>
         </member>
-        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController.#ctor(VOI.SISAC.Business.Itineraries.IGendecDepartureBusiness,VOI.SISAC.Business.Itineraries.IGendecArrivalBusiness,VOI.SISAC.Business.Airport.ICrewBusiness,VOI.SISAC.Business.Itineraries.IItineraryBusiness,VOI.SISAC.Business.Common.IGenericCatalogBusiness,VOI.SISAC.Business.Security.IUserBusiness,VOI.SISAC.Business.Security.IPageReportBusiness,VOI.SISAC.Business.Airport.IAirportBusiness)">
+        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController.#ctor(VOI.SISAC.Business.Itineraries.IGendecArrivalBusiness,VOI.SISAC.Business.Airport.ICrewBusiness,VOI.SISAC.Business.Itineraries.IItineraryBusiness,VOI.SISAC.Business.Common.IGenericCatalogBusiness,VOI.SISAC.Business.Security.IUserBusiness,VOI.SISAC.Business.Security.IPageReportBusiness,VOI.SISAC.Business.Airport.IAirplaneBusiness)">
             <summary>
             Initializes a new instance of the <see cref="T:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController" /> class.
             </summary>
-            <param name="gendecDepartureBusiness">The gendec departure business.</param>
-            <param name="gendecArrivalBusiness">The gendec arrival business.</param>
+            <param name="gendecArrivalBusiness">The general document arrival business.</param>
             <param name="crewBusiness">The crew business.</param>
             <param name="itineraryBusiness">The itinerary business.</param>
             <param name="genericCatalogBusiness">The generic catalog business.</param>
             <param name="userBusiness">The user business.</param>
             <param name="pageReportBusiness">The page report business.</param>
-            <param name="airportBusiness">The airport business.</param>
+            <param name="airplaneBusiness">The airplane business.</param>
         </member>
-        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController.Create(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController.Index(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
             <summary>
-            Creates the specified sequence.
+            Main view.
             </summary>
-            <param name="Sequence">The sequence.</param>
-            <param name="AirlineCode">The airline code.</param>
-            <param name="FlightNumber">The flight number.</param>
-            <param name="ItineraryKey">The itinerary key.</param>
-            <param name="DepartureStation">The departure station.</param>
-            <param name="ArrivalStation">The arrival station.</param>
-            <param name="EquipmentNumber">The equipment number.</param>
-            <param name="DepartureDate">The departure date.</param>
+            <param name="sequence">The sequence.</param>
+            <param name="airlineCode">The airline code.</param>
+            <param name="flightNumber">The flight number.</param>
+            <param name="itineraryKey">The itinerary key.</param>
+            <param name="departureStation">The departure station.</param>
+            <param name="arrivalStation">The arrival station.</param>
+            <param name="equipmentNumber">The equipment number.</param>
+            <param name="departureDate">The departure date.</param>
             <returns>Action result.</returns>
         </member>
-        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController.Create(VOI.SISAC.Web.Models.VO.Itineraries.GendecArrivalVO)">
+        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController.PerformAction(VOI.SISAC.Web.Models.VO.Itineraries.GendecArrivalVO)">
             <summary>
-            Creates the specified gendec arrival vo.
+            Performs the action.
             </summary>
-            <param name="gendecArrivalVO">The gendec arrival vo.</param>
-            <returns></returns>
-        </member>
-        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController.CloseGendec(VOI.SISAC.Web.Models.VO.Itineraries.GendecArrivalVO)">
-            <summary>
-            Closes the gendec.
-            </summary>
-            <param name="gendecArrivalVO">The gendec arrival vo.</param>
-            <returns></returns>
-        </member>
-        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController.OpenGendec(VOI.SISAC.Web.Models.VO.Itineraries.GendecArrivalVO)">
-            <summary>
-            Opens the gendec.
-            </summary>
-            <param name="gendecArrivalVO">The gendec arrival vo.</param>
-            <returns>Action result.</returns>
+            <param name="gendecArrivalVo">The general document information.</param>
+            <returns>
+            Action result.
+            </returns>
         </member>
         <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController.GetWarningMessageConfiguration">
             <summary>
             Gets the warning message configuration.
             </summary>
-            <returns></returns>
+            <returns>Json result.</returns>
         </member>
         <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController.Print(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
             <summary>
             Prints the specified sequence.
             </summary>
-            <param name="Sequence">The sequence.</param>
-            <param name="AirlineCode">The airline code.</param>
-            <param name="FlightNumber">The flight number.</param>
-            <param name="ItineraryKey">The itinerary key.</param>
-            <param name="DepartureStation">The departure station.</param>
-            <param name="ArrivalStation">The arrival station.</param>
-            <param name="EquipmentNumber">The equipment number.</param>
-            <param name="DepartureDate">The departure date.</param>
+            <param name="sequence">The sequence.</param>
+            <param name="airlineCode">The airline code.</param>
+            <param name="flightNumber">The flight number.</param>
+            <param name="itineraryKey">The itinerary key.</param>
+            <param name="departureStation">The departure station.</param>
+            <param name="arrivalStation">The arrival station.</param>
+            <param name="equipmentNumber">The equipment number.</param>
+            <param name="departureDate">The departure date.</param>
             <returns>Action result.</returns>
-        </member>
-        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController.LoadCatalog(System.String)">
-            <summary>
-            Load ComboBox
-            </summary>
-        </member>
-        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController.GetInformationManifiest(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
-            <summary>
-            Gets the information manifiest.
-            </summary>
-            <param name="Sequence">The sequence.</param>
-            <param name="AirlineCode">The airline code.</param>
-            <param name="FlightNumber">The flight number.</param>
-            <param name="ItineraryKey">The itinerary key.</param>
-            <param name="DepartureStation">The departure station.</param>
-            <param name="ArrivalStation">The arrival station.</param>
-            <param name="EquipmentNumber">The equipment number.</param>
-            <param name="DepartureDate">The departure date.</param>
-            <returns></returns>
-        </member>
-        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController.GetItinerary(System.Int32,System.String,System.String,System.String)">
-            <summary>
-            Gets the itinerary.
-            </summary>
-            <param name="Sequence">The sequence.</param>
-            <param name="AirlineCode">The airline code.</param>
-            <param name="FlightNumber">The flight number.</param>
-            <param name="ItineraryKey">The itinerary key.</param>
-            <returns>Itinerary view object.</returns>
-        </member>
-        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController.GetCrewsByID(VOI.SISAC.Web.Models.VO.Itineraries.GendecArrivalVO)">
-            <summary>
-            Gets the crews by identifier.
-            </summary>
-            <param name="gendecArrivalVO">The gendec arrival vo.</param>
-            <returns>Gendec Arrival View Object.</returns>
-        </member>
-        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController.SendEmail(VOI.SISAC.Web.Models.VO.Itineraries.GendecArrivalVO)">
-            <summary>
-            Sends the email.
-            </summary>
-            <param name="gendecArrivalVO">The gendec arrival vo.</param>
-            <returns></returns>
         </member>
         <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController.SetSiteMapValues(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
             <summary>
             Set Site Map Values.
             </summary>
-            <param name="Sequence">The sequence.</param>
-            <param name="AirlineCode">The airline code.</param>
-            <param name="FlightNumber">The flight number.</param>
-            <param name="ItineraryKey">The itinerary key.</param>
-            <param name="DepartureStation">The departure station.</param>
-            <param name="ArrivalStation">The arrival station.</param>
-            <param name="EquipmentNumber">The equipment number.</param>
-            <param name="DepartureDate">The departure date.</param>
+            <param name="sequence">The sequence.</param>
+            <param name="airlineCode">The airline code.</param>
+            <param name="flightNumber">The flight number.</param>
+            <param name="itineraryKey">The itinerary key.</param>
+            <param name="departureStation">The departure station.</param>
+            <param name="arrivalStation">The arrival station.</param>
+            <param name="equipmentNumber">The equipment number.</param>
+            <param name="departureDate">The departure date.</param>
+        </member>
+        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController.LoadCatalog(System.String)">
+            <summary>
+            Load ComboBox
+            </summary>
+            <param name="arrivalStation">The arrival station.</param>
+        </member>
+        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController.GetCrewsByID(VOI.SISAC.Web.Models.VO.Itineraries.GendecArrivalVO)">
+            <summary>
+            Gets the crews by identifier.
+            </summary>
+            <param name="gendecArrivalVO">The general document arrival vo.</param>
+            <returns>General Arrival View Object.</returns>
+        </member>
+        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController.Save(VOI.SISAC.Web.Models.VO.Itineraries.GendecArrivalVO)">
+            <summary>
+            Creates the specified general document arrival.
+            </summary>
+            <param name="gendecArrivalVO">The general document arrival view object.</param>
+        </member>
+        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController.Close(VOI.SISAC.Web.Models.VO.Itineraries.GendecArrivalVO)">
+            <summary>
+            Closes the general document.
+            </summary>
+            <param name="gendecArrivalVO">The general document arrival.</param>
+        </member>
+        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController.Open(VOI.SISAC.Web.Models.VO.Itineraries.GendecArrivalVO)">
+            <summary>
+            Opens the general document.
+            </summary>
+            <param name="gendecArrivalVO">The general document arrival vo.</param>
         </member>
         <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.GendecArrivalController.NotContainsAirport(System.String)">
             <summary>
-            Nots the contains airport.
+            Verify if the user has permission to enter the airport.
             </summary>
             <param name="stationCode">The station code.</param>
             <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
@@ -5043,79 +5125,19 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.ItineraryController.UploadFileItinerary(VOI.SISAC.Web.Models.VO.Itineraries.ItineraryUploadVO)">
+        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.ItineraryController.UploadFileItinerary(VOI.SISAC.Web.Models.VO.Itineraries.ItineraryUploadVO,System.Web.HttpPostedFileBase)">
             <summary>
-            Read Text File
+            Uploads the file itinerary.
             </summary>
-            <param name="input">input file</param>
-            <returns>true or false</returns>
-        </member>
-        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.ItineraryController.validateFileErrors(System.Collections.Generic.List{VOI.SISAC.Web.Models.Files.ItineraryFile},System.Collections.Generic.List{VOI.SISAC.Web.Models.Files.ItineraryFile},System.Collections.Generic.List{System.String},System.Int32)">
-            <summary>
-            Validate File Errors
-            </summary>
-            <param name="itinerariesFile"></param>
-            <param name="itinerariesFileError"></param>
-            <param name="errors"></param>
-            <param name="countErrors"></param>
+            <param name="input">The input.</param>
+            <param name="file">The file.</param>
             <returns></returns>
-        </member>
-        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.ItineraryController.Right(System.String,System.Int32)">
-            <summary>
-            Rights the specified value.
-            </summary>
-            <param name="value">The value.</param>
-            <param name="length">The length.</param>
-            <returns></returns>
-        </member>
-        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.ItineraryController.LoadDictionaries(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,VOI.SISAC.Web.Models.Files.ItineraryFile,System.Collections.Generic.Dictionary{System.Int32,System.String}@,System.Collections.Generic.Dictionary{System.Int32,System.String}@)">
-            <summary>
-            Loads the dictionaries.
-            </summary>
-            <param name="equipmentNumberText">The equipment number text.</param>
-            <param name="departureAirportText">The departure airport text.</param>
-            <param name="arrivalAirportText">The arrival airport text.</param>
-            <param name="fltNumText">The FLT number text.</param>
-            <param name="airlineText">The airline text.</param>
-            <param name="departureDate">The departure date.</param>
-            <param name="hourDeparture">The hour departure.</param>
-            <param name="hourArrival">The hour arrival.</param>
-            <param name="item">The item.</param>
-            <param name="fields">The fields.</param>
-            <param name="fieldsErrorMessenge">The fields error messenge.</param>
-        </member>
-        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.ItineraryController.streamToList(VOI.SISAC.Web.Models.VO.Itineraries.ItineraryUploadVO,System.Collections.Generic.List{System.String})">
-            <summary>
-            Stream File to List
-            </summary>
-            <param name="input"></param>
-            <param name="lines"></param>
-        </member>
-        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.ItineraryController.getFileInfo(System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.List{VOI.SISAC.Web.Models.Files.ItineraryFile},System.Collections.Generic.List{System.String},System.String,System.Int32)">
-            <summary>
-            Get File Information from the TXT
-            </summary>
-            <param name="colNamesLength"></param>
-            <param name="itinerariesFile"></param>
-            <param name="lines"></param>
-            <param name="airline"></param>
-            <param name="i"></param>
         </member>
         <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.ItineraryController.setDates(VOI.SISAC.Web.Models.Files.ItineraryFile)">
             <summary>
-            Set Arrival and Departure Dates
+            Sets the dates.
             </summary>
-            <param name="fileRow"></param>
-        </member>
-        <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.ItineraryController.searchDelimite(System.Collections.Generic.IDictionary{System.String,System.String}@,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String}@,System.Boolean@,System.Int32)">
-            <summary>
-            Search Delimited row 
-            </summary>
-            <param name="colNamesLength"></param>
-            <param name="lines"></param>
-            <param name="columnsLength"></param>
-            <param name="record"></param>
-            <param name="i"></param>
+            <param name="fileRow">The file row.</param>
         </member>
         <member name="M:VOI.SISAC.Web.Areas.Itineraries.Controllers.ItineraryController.getSessionParams">
             <summary>
@@ -9484,19 +9506,17 @@
             Scheduled Time Arrival Local Time
             </summary>
         </member>
+        <member name="P:VOI.SISAC.Web.Models.Files.ItineraryFile.FLTTYPE">
+            <summary>
+            Gets or sets the flttype.
+            </summary>
+            <value>
+            The flttype.
+            </value>
+        </member>
         <member name="P:VOI.SISAC.Web.Models.Files.ItineraryFile.AirlineCode">
             <summary>
             Airline Code
-            </summary>
-        </member>
-        <member name="P:VOI.SISAC.Web.Models.Files.ItineraryFile.DepartureStation">
-            <summary>
-            Departure Station
-            </summary>
-        </member>
-        <member name="P:VOI.SISAC.Web.Models.Files.ItineraryFile.ArrivalStation">
-            <summary>
-            Arrival Station
             </summary>
         </member>
         <member name="P:VOI.SISAC.Web.Models.Files.ItineraryFile.DepartureDate">
@@ -9560,6 +9580,171 @@
             Gets or sets the airport.
             </summary>
             <value>The airport.</value>
+        </member>
+        <member name="T:VOI.SISAC.Web.Models.VO.Airport.AdditionalPassengerInformationVO">
+            <summary>
+            Additional passenger information view object
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Airport.AdditionalPassengerInformationVO.Sequence">
+            <summary>
+            Gets or sets the sequence.
+            </summary>
+            <value>
+            The sequence.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Airport.AdditionalPassengerInformationVO.AirlineCode">
+            <summary>
+            Gets or sets the airline code.
+            </summary>
+            <value>
+            The airline code.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Airport.AdditionalPassengerInformationVO.FlightNumber">
+            <summary>
+            Gets or sets the flight number.
+            </summary>
+            <value>
+            The flight number.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Airport.AdditionalPassengerInformationVO.ItineraryKey">
+            <summary>
+            Gets or sets the itinerary key.
+            </summary>
+            <value>
+            The itinerary key.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Airport.AdditionalPassengerInformationVO.AdultNational">
+            <summary>
+            Gets or sets the adult national.
+            </summary>
+            <value>
+            The adult national.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Airport.AdditionalPassengerInformationVO.AdultInternational">
+            <summary>
+            Gets or sets the adult international.
+            </summary>
+            <value>
+            The adult international.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Airport.AdditionalPassengerInformationVO.MinorNational">
+            <summary>
+            Gets or sets the minor national.
+            </summary>
+            <value>
+            The minor national.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Airport.AdditionalPassengerInformationVO.MinorInternational">
+            <summary>
+            Gets or sets the minor international.
+            </summary>
+            <value>
+            The minor international.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Airport.AdditionalPassengerInformationVO.DiplomaticNational">
+            <summary>
+            Gets or sets the diplomatic national.
+            </summary>
+            <value>
+            The diplomatic national.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Airport.AdditionalPassengerInformationVO.DiplomaticInternational">
+            <summary>
+            Gets or sets the diplomatic international.
+            </summary>
+            <value>
+            The diplomatic international.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Airport.AdditionalPassengerInformationVO.CommissionNational">
+            <summary>
+            Gets or sets the commission national.
+            </summary>
+            <value>
+            The commission national.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Airport.AdditionalPassengerInformationVO.CommissionInternational">
+            <summary>
+            Gets or sets the commission international.
+            </summary>
+            <value>
+            The commission international.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Airport.AdditionalPassengerInformationVO.InfantNational">
+            <summary>
+            Gets or sets the infant national.
+            </summary>
+            <value>
+            The infant national.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Airport.AdditionalPassengerInformationVO.InfantInternational">
+            <summary>
+            Gets or sets the infant international.
+            </summary>
+            <value>
+            The infant international.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Airport.AdditionalPassengerInformationVO.TransitoryNational">
+            <summary>
+            Gets or sets the transitory national.
+            </summary>
+            <value>
+            The transitory national.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Airport.AdditionalPassengerInformationVO.TransitoryInternational">
+            <summary>
+            Gets or sets the transitory international.
+            </summary>
+            <value>
+            The transitory international.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Airport.AdditionalPassengerInformationVO.ConnectionNational">
+            <summary>
+            Gets or sets the connection national.
+            </summary>
+            <value>
+            The connection national.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Airport.AdditionalPassengerInformationVO.ConnectionInternational">
+            <summary>
+            Gets or sets the connection international.
+            </summary>
+            <value>
+            The connection international.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Airport.AdditionalPassengerInformationVO.OtherNational">
+            <summary>
+            Gets or sets the other national.
+            </summary>
+            <value>
+            The other national.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Airport.AdditionalPassengerInformationVO.OtherInternational">
+            <summary>
+            Gets or sets the other international.
+            </summary>
+            <value>
+            The other international.
+            </value>
         </member>
         <member name="T:VOI.SISAC.Web.Models.VO.Airport.NationalJetFuelTicketVO">
             <summary>
@@ -10645,6 +10830,14 @@
             The itinerary.
             </value>
         </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Airport.PassengerInformationVO.AdditionalInformation">
+            <summary>
+            Gets or sets the additional information.
+            </summary>
+            <value>
+            The additional information.
+            </value>
+        </member>
         <member name="T:VOI.SISAC.Web.Models.VO.Airport.AirlineVO">
             <summary>
             Class Airline VO
@@ -11510,6 +11703,35 @@
             </summary>
             <value>
             The airplanes.
+            </value>
+        </member>
+        <member name="T:VOI.SISAC.Web.Models.VO.Catalog.MovementTypeVO">
+            <summary>
+            Movement Type View Object
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Catalog.MovementTypeVO.MovementTypeCode">
+            <summary>
+            Gets or sets the movement type code.
+            </summary>
+            <value>
+            The movement type code.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Catalog.MovementTypeVO.MovementDescription">
+            <summary>
+            Gets or sets the movement description.
+            </summary>
+            <value>
+            The movement description.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Catalog.MovementTypeVO.Status">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:VOI.SISAC.Web.Models.VO.Catalog.MovementTypeVO"/> is status.
+            </summary>
+            <value>
+              <c>true</c> if status; otherwise, <c>false</c>.
             </value>
         </member>
         <member name="T:VOI.SISAC.Web.Models.VO.Catalog.ReconciliationToleranceVO">
@@ -13448,6 +13670,423 @@
               <c>true</c> if active; otherwise, <c>false</c>.
             </value>
         </member>
+        <member name="T:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingDetailVO">
+            <summary>
+            ManifestDepartureBoardingDetailVO
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingDetailVO.BoardingDetailID">
+            <summary>
+            Gets or sets the boarding detail identifier.
+            </summary>
+            <value>
+            The boarding detail identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingDetailVO.BoardingID">
+            <summary>
+            Gets or sets the boarding identifier.
+            </summary>
+            <value>
+            The boarding identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingDetailVO.CompartmentTypeID">
+            <summary>
+            Gets or sets the compartment type identifier.
+            </summary>
+            <value>
+            The compartment type identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingDetailVO.LuggageQuantity">
+            <summary>
+            Gets or sets the luggage quantity.
+            </summary>
+            <value>
+            The luggage quantity.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingDetailVO.LuggageKgs">
+            <summary>
+            Gets or sets the luggage KGS.
+            </summary>
+            <value>
+            The luggage KGS.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingDetailVO.ChargeQuantity">
+            <summary>
+            Gets or sets the charge quantity.
+            </summary>
+            <value>
+            The charge quantity.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingDetailVO.ChargeKgs">
+            <summary>
+            Gets or sets the charge KGS.
+            </summary>
+            <value>
+            The charge KGS.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingDetailVO.Remarks">
+            <summary>
+            Gets or sets the remarks.
+            </summary>
+            <value>
+            The remarks.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingDetailVO.RampResponsible">
+            <summary>
+            Gets or sets the ramp responsible.
+            </summary>
+            <value>
+            The ramp responsible.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingDetailVO.AorUserID">
+            <summary>
+            Gets or sets the aor user identifier.
+            </summary>
+            <value>
+            The aor user identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingDetailVO.CreationDate">
+            <summary>
+            Gets or sets the creation date.
+            </summary>
+            <value>
+            The creation date.
+            </value>
+        </member>
+        <member name="T:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingInformationVO">
+            <summary>
+            ManifestDepartureBoardingInformationVO
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingInformationVO.BoardingInformationID">
+            <summary>
+            Gets or sets the boarding information identifier.
+            </summary>
+            <value>
+            The boarding information identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingInformationVO.BoardingID">
+            <summary>
+            Gets or sets the boarding identifier.
+            </summary>
+            <value>
+            The boarding identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingInformationVO.CompartmentTypeID">
+            <summary>
+            Gets or sets the compartment type identifier.
+            </summary>
+            <value>
+            The compartment type identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingInformationVO.CompartmentTypeInformationID">
+            <summary>
+            Gets or sets the compartment type information identifier.
+            </summary>
+            <value>
+            The compartment type information identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingInformationVO.Checked">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="!:ManifestDepartureBoardingInformation"/> is checked.
+            </summary>
+            <value>
+              <c>true</c> if checked; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:VOI.SISAC.Web.Models.VO.Itineraries.TimelineMovementVO">
+            <summary>
+            Timeline Movement View Object
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineMovementVO.ID">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineMovementVO.Sequence">
+            <summary>
+            Gets or sets the sequence.
+            </summary>
+            <value>
+            The sequence.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineMovementVO.AirlineCode">
+            <summary>
+            Gets or sets the airline code.
+            </summary>
+            <value>
+            The airline code.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineMovementVO.FlightNumber">
+            <summary>
+            Gets or sets the flight number.
+            </summary>
+            <value>
+            The flight number.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineMovementVO.ItineraryKey">
+            <summary>
+            Gets or sets the itinerary key.
+            </summary>
+            <value>
+            The itinerary key.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineMovementVO.OperationTypeID">
+            <summary>
+            Gets or sets the operation type identifier.
+            </summary>
+            <value>
+            The operation type identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineMovementVO.OperationDescription">
+            <summary>
+            Gets or sets the operation description.
+            </summary>
+            <value>
+            The operation description.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineMovementVO.MovementTypeCode">
+            <summary>
+            Gets or sets the movement type code.
+            </summary>
+            <value>
+            The movement type code.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineMovementVO.MovementTypeDescription">
+            <summary>
+            Gets or sets the movement type description.
+            </summary>
+            <value>
+            The movement type description.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineMovementVO.MovementDate">
+            <summary>
+            Gets or sets the movement date.
+            </summary>
+            <value>
+            The movement date.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineMovementVO.Position">
+            <summary>
+            Gets or sets the position.
+            </summary>
+            <value>
+            The position.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineMovementVO.ProviderNumber">
+            <summary>
+            Gets or sets the provider number.
+            </summary>
+            <value>
+            The provider number.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineMovementVO.ProviderName">
+            <summary>
+            Gets or sets the name of the provider.
+            </summary>
+            <value>
+            The name of the provider.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineMovementVO.RemainingFuel">
+            <summary>
+            Gets or sets the remaining fuel.
+            </summary>
+            <value>
+            The remaining fuel.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineMovementVO.Remarks">
+            <summary>
+            Gets or sets the remarks.
+            </summary>
+            <value>
+            The remarks.
+            </value>
+        </member>
+        <member name="T:VOI.SISAC.Web.Models.VO.Itineraries.TimelineVO">
+            <summary>
+            Timeline View Object
+            </summary>
+        </member>
+        <member name="M:VOI.SISAC.Web.Models.VO.Itineraries.TimelineVO.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:VOI.SISAC.Web.Models.VO.Itineraries.TimelineVO"/> class.
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineVO.Sequence">
+            <summary>
+            Gets or sets the sequence.
+            </summary>
+            <value>
+            The sequence.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineVO.AirlineCode">
+            <summary>
+            Gets or sets the airline code.
+            </summary>
+            <value>
+            The airline code.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineVO.FlightNumber">
+            <summary>
+            Gets or sets the flight number.
+            </summary>
+            <value>
+            The flight number.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineVO.ItineraryKey">
+            <summary>
+            Gets or sets the itinerary key.
+            </summary>
+            <value>
+            The itinerary key.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineVO.StationCode">
+            <summary>
+            Gets or sets the station code.
+            </summary>
+            <value>
+            The station code.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineVO.EquipmentNumber">
+            <summary>
+            Gets or sets the equipment number.
+            </summary>
+            <value>
+            The equipment number.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineVO.PreviousSequence">
+            <summary>
+            Gets or sets the previous sequence.
+            </summary>
+            <value>
+            The previous sequence.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineVO.PreviousAirlineCode">
+            <summary>
+            Gets or sets the previous airline code.
+            </summary>
+            <value>
+            The previous airline code.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineVO.PreviousFlightNumber">
+            <summary>
+            Gets or sets the previous flight number.
+            </summary>
+            <value>
+            The previous flight number.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineVO.PreviousItineraryKey">
+            <summary>
+            Gets or sets the previous itinerary key.
+            </summary>
+            <value>
+            The previous itinerary key.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineVO.NextSequence">
+            <summary>
+            Gets or sets the next sequence.
+            </summary>
+            <value>
+            The next sequence.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineVO.NextAirlineCode">
+            <summary>
+            Gets or sets the next airline code.
+            </summary>
+            <value>
+            The next airline code.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineVO.NextFlightNumber">
+            <summary>
+            Gets or sets the next flight number.
+            </summary>
+            <value>
+            The next flight number.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineVO.NextItineraryKey">
+            <summary>
+            Gets or sets the next itinerary key.
+            </summary>
+            <value>
+            The next itinerary key.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineVO.SpecialCase">
+            <summary>
+            Gets or sets a value indicating whether [special case].
+            </summary>
+            <value>
+              <c>true</c> if [special case]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineVO.StartDate">
+            <summary>
+            Gets or sets the start date.
+            </summary>
+            <value>
+            The start date.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineVO.EndDate">
+            <summary>
+            Gets or sets the end date.
+            </summary>
+            <value>
+            The end date.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.TimelineVO.TimelineMovements">
+            <summary>
+            Gets or sets the timeline movement.
+            </summary>
+            <value>
+            The timeline movement.
+            </value>
+        </member>
         <member name="T:VOI.SISAC.Web.Models.VO.Itineraries.ManifestArrivalVO">
             <summary>
             Manifest departure view object
@@ -13803,6 +14442,102 @@
             The tolerance time.
             </value>
         </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestArrivalVO.Pilot">
+            <summary>
+            Gets or sets the pilot.
+            </summary>
+            <value>
+            The pilot.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestArrivalVO.Surcharge">
+            <summary>
+            Gets or sets the surcharge.
+            </summary>
+            <value>
+            The surcharge.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestArrivalVO.ExtraCrew">
+            <summary>
+            Gets or sets the extra crew.
+            </summary>
+            <value>
+            The extra crew.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestArrivalVO.TypeFlight">
+            <summary>
+            Gets or sets the type flight.
+            </summary>
+            <value>
+            The type flight.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestArrivalVO.SlotAllocatedTime">
+            <summary>
+            Gets or sets the slot allocated time.
+            </summary>
+            <value>
+            The slot allocated time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestArrivalVO.SlotCoordinatedTime">
+            <summary>
+            Gets or sets the slot coordinated time.
+            </summary>
+            <value>
+            The slot coordinated time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestArrivalVO.OvernightEndTime">
+            <summary>
+            Gets or sets the overnight end time.
+            </summary>
+            <value>
+            The overnight end time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestArrivalVO.ManeuverStartTime">
+            <summary>
+            Gets or sets the maneuver start time.
+            </summary>
+            <value>
+            The maneuver start time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestArrivalVO.PositionOutputTime">
+            <summary>
+            Gets or sets the position output time.
+            </summary>
+            <value>
+            The position output time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestArrivalVO.FirstDelayDescription">
+            <summary>
+            Gets or sets the delay description.
+            </summary>
+            <value>
+            The delay description.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestArrivalVO.SecondDelayDescription">
+            <summary>
+            Gets or sets the delay description.
+            </summary>
+            <value>
+            The delay description.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestArrivalVO.ThirdDelayDescription">
+            <summary>
+            Gets or sets the delay description.
+            </summary>
+            <value>
+            The delay description.
+            </value>
+        </member>
         <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestArrivalVO.Itinerary">
             <summary>
             Gets or sets the itinerary.
@@ -13817,6 +14552,163 @@
             </summary>
             <value>
             The delays.
+            </value>
+        </member>
+        <member name="T:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingVO">
+            <summary>
+            ManifestDepartureBoardingVO
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingVO.BoardingID">
+            <summary>
+            Gets or sets the boarding identifier.
+            </summary>
+            <value>
+            The boarding identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingVO.Sequence">
+            <summary>
+            Gets or sets the sequence.
+            </summary>
+            <value>
+            The sequence.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingVO.AirlineCode">
+            <summary>
+            Gets or sets the airline code.
+            </summary>
+            <value>
+            The airline code.
+            </value>        
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingVO.FlightNumber">
+            <summary>
+            Gets or sets the flight number.
+            </summary>
+            <value>
+            The flight number.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingVO.ItineraryKey">
+            <summary>
+            Gets or sets the itinerary key.
+            </summary>
+            <value>
+            The itinerary key.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingVO.Position">
+            <summary>
+            Gets or sets the position.
+            </summary>
+            <value>
+            The position.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingVO.Station">
+            <summary>
+            Gets or sets the station.
+            </summary>
+            <value>
+            The station.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingVO.PassengerAdult">
+            <summary>
+            Gets or sets the passenger adult.
+            </summary>
+            <value>
+            The passenger adult.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingVO.PassengerMinor">
+            <summary>
+            Gets or sets the passenger minor.
+            </summary>
+            <value>
+            The passenger minor.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingVO.PassengerInfant">
+            <summary>
+            Gets or sets the passenger infant.
+            </summary>
+            <value>
+            The passenger infant.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingVO.LuggageQuantity">
+            <summary>
+            Gets or sets the luggage quantity.
+            </summary>
+            <value>
+            The luggage quantity.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingVO.LuggageKgs">
+            <summary>
+            Gets or sets the luggage KGS.
+            </summary>
+            <value>
+            The luggage KGS.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingVO.ChargeQuantity">
+            <summary>
+            Gets or sets the charge quantity.
+            </summary>
+            <value>
+            The charge quantity.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingVO.ChargeKgs">
+            <summary>
+            Gets or sets the charge KGS.
+            </summary>
+            <value>
+            The charge KGS.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingVO.MailQuantity">
+            <summary>
+            Gets or sets the mail quantity.
+            </summary>
+            <value>
+            The mail quantity.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingVO.MailKgs">
+            <summary>
+            Gets or sets the mail KGS.
+            </summary>
+            <value>
+            The mail KGS.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingVO.ManifestDeparture">
+            <summary>
+            Gets or sets the manifest departure.
+            </summary>
+            <value>
+            The manifest departure.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingVO.ManifestDepartureBoardingDetails">
+            <summary>
+            Gets or sets the manifest departure boarding details.
+            </summary>
+            <value>
+            The manifest departure boarding details.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureBoardingVO.ManifestDepartureBoardingInformations">
+            <summary>
+            Gets or sets the manifest departure boarding informations.
+            </summary>
+            <value>
+            The manifest departure boarding informations.
             </value>
         </member>
         <member name="T:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureVO">
@@ -14190,6 +15082,102 @@
             The tolerance time.
             </value>
         </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureVO.Pilot">
+            <summary>
+            Gets or sets the pilot.
+            </summary>
+            <value>
+            The pilot.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureVO.Surcharge">
+            <summary>
+            Gets or sets the surcharge.
+            </summary>
+            <value>
+            The surcharge.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureVO.ExtraCrew">
+            <summary>
+            Gets or sets the extra crew.
+            </summary>
+            <value>
+            The extra crew.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureVO.TypeFlight">
+            <summary>
+            Gets or sets the type flight.
+            </summary>
+            <value>
+            The type flight.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureVO.SlotAllocatedTime">
+            <summary>
+            Gets or sets the slot allocated time.
+            </summary>
+            <value>
+            The slot allocated time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureVO.SlotCoordinatedTime">
+            <summary>
+            Gets or sets the slot coordinated time.
+            </summary>
+            <value>
+            The slot coordinated time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureVO.OvernightEndTime">
+            <summary>
+            Gets or sets the overnight end time.
+            </summary>
+            <value>
+            The overnight end time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureVO.ManeuverStartTime">
+            <summary>
+            Gets or sets the maneuver start time.
+            </summary>
+            <value>
+            The maneuver start time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureVO.PositionOutputTime">
+            <summary>
+            Gets or sets the position output time.
+            </summary>
+            <value>
+            The position output time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureVO.FirstDelayDescription">
+            <summary>
+            Gets or sets the delay description.
+            </summary>
+            <value>
+            The delay description.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureVO.SecondDelayDescription">
+            <summary>
+            Gets or sets the delay description.
+            </summary>
+            <value>
+            The delay description.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureVO.ThirdDelayDescription">
+            <summary>
+            Gets or sets the delay description.
+            </summary>
+            <value>
+            The delay description.
+            </value>
+        </member>
         <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureVO.Itinerary">
             <summary>
             Gets or sets the itinerary.
@@ -14204,6 +15192,14 @@
             </summary>
             <value>
             The delays.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ManifestDepartureVO.ManifestDepartureBoardings">
+            <summary>
+            Gets or sets the manifest departure boardings.
+            </summary>
+            <value>
+            The manifest departure boardings.
             </value>
         </member>
         <member name="T:VOI.SISAC.Web.Models.VO.Itineraries.ItinerarySearchVO">
@@ -14266,18 +15262,10 @@
             ItineraryUploadVO
             </summary>
         </member>
-        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ItineraryUploadVO.file">
+        <member name="M:VOI.SISAC.Web.Models.VO.Itineraries.ItineraryUploadVO.#ctor">
             <summary>
-            HttpPostedFileBase File
+            Initializes a new instance of the <see cref="T:VOI.SISAC.Web.Models.VO.Itineraries.ItineraryUploadVO"/> class.
             </summary>
-        </member>
-        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ItineraryUploadVO.lines">
-            <summary>
-            Gets or sets the lines.
-            </summary>
-            <value>
-            The lines.
-            </value>
         </member>
         <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ItineraryUploadVO.StartDate">
             <summary>
@@ -14289,10 +15277,45 @@
             End Date
             </summary>
         </member>
-        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ItineraryUploadVO.AirlineCodeCombobox">
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ItineraryUploadVO.itineraries">
             <summary>
-            AirlineCodeCombobox
+            Gets or sets the itineraries.
             </summary>
+            <value>
+            The itineraries.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ItineraryUploadVO.readServerFile">
+            <summary>
+            Gets or sets a value indicating whether [read server file].
+            </summary>
+            <value>
+              <c>true</c> if [read server file]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ItineraryUploadVO.email">
+            <summary>
+            Gets or sets a value indicating whether [send mail].
+            </summary>
+            <value>
+              <c>true</c> if [send mail]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ItineraryUploadVO.errors">
+            <summary>
+            Gets or sets the errors.
+            </summary>
+            <value>
+            The errors.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.ItineraryUploadVO.sucess">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="!:ItineraryUploadAPI"/> is sucess.
+            </summary>
+            <value>
+              <c>true</c> if sucess; otherwise, <c>false</c>.
+            </value>
         </member>
         <member name="T:VOI.SISAC.Web.Models.VO.Itineraries.MessageGendecVO">
             <summary>
@@ -14361,6 +15384,75 @@
             </summary>
             <value>
             The not exist crews.
+            </value>
+        </member>
+        <member name="T:VOI.SISAC.Web.Models.VO.Itineraries.GendecArrivalVO">
+            <summary>
+            Arrival general document view object
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.GendecArrivalVO.DepartureDate">
+            <summary>
+            Gets or sets the departure date.
+            </summary>
+            <value>
+            The departure date.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.GendecArrivalVO.ArrivalDate">
+            <summary>
+            Gets or sets the arrival date.
+            </summary>
+            <value>
+            The arrival date.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.GendecArrivalVO.TimeArrival">
+            <summary>
+            Gets or sets the time arrival.
+            </summary>
+            <value>
+            The time arrival.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.GendecArrivalVO.AirplaneModel">
+            <summary>
+            Gets or sets the airplane model.
+            </summary>
+            <value>
+            The airplane model.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.GendecArrivalVO.EquipmentNumber">
+            <summary>
+            Gets or sets the equipment number.
+            </summary>
+            <value>
+            The equipment number.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.GendecArrivalVO.DepartureStation">
+            <summary>
+            Gets or sets the departure station.
+            </summary>
+            <value>
+            The departure station.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.GendecArrivalVO.ArrivalStation">
+            <summary>
+            Gets or sets the arrival station.
+            </summary>
+            <value>
+            The arrival station.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.GendecArrivalVO.Flight">
+            <summary>
+            Gets the flight.
+            </summary>
+            <value>
+            The flight.
             </value>
         </member>
         <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.GendecArrivalVO.Sequence">
@@ -14447,6 +15539,30 @@
             <summary>
             Statof of the Gendec
             </summary>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.GendecArrivalVO.Action">
+            <summary>
+            Gets or sets the action.
+            </summary>
+            <value>
+            The action.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.GendecArrivalVO.Crews">
+            <summary>
+            Gets or sets the crews.
+            </summary>
+            <value>
+            The crews.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.GendecArrivalVO.Itinerary">
+            <summary>
+            Gets or sets the itinerary.
+            </summary>
+            <value>
+            The itinerary.
+            </value>
         </member>
         <member name="P:VOI.SISAC.Web.Models.VO.Itineraries.GendecDepartureVO.Sequence">
             <summary>
@@ -19770,6 +20886,11 @@
               Looks up a localized string similar to Add Fuel Concept.
             </summary>
         </member>
+        <member name="P:VOI.SISAC.Web.Resources.Resource.AdditionalInformation">
+            <summary>
+              Looks up a localized string similar to Additional Information.
+            </summary>
+        </member>
         <member name="P:VOI.SISAC.Web.Resources.Resource.AddModulePermission">
             <summary>
               Looks up a localized string similar to Add Permission.
@@ -20105,6 +21226,11 @@
               Looks up a localized string similar to Block Time.
             </summary>
         </member>
+        <member name="P:VOI.SISAC.Web.Resources.Resource.Boarding">
+            <summary>
+              Looks up a localized string similar to Boarding.
+            </summary>
+        </member>
         <member name="P:VOI.SISAC.Web.Resources.Resource.BothOfThem">
             <summary>
               Looks up a localized string similar to Both Of Them.
@@ -20203,6 +21329,16 @@
         <member name="P:VOI.SISAC.Web.Resources.Resource.ChargeFactorTypeName">
             <summary>
               Looks up a localized string similar to Charge Factor Type Name.
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Web.Resources.Resource.ChargeKgs">
+            <summary>
+              Looks up a localized string similar to Charge (Kgs).
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Web.Resources.Resource.ChargeQuantity">
+            <summary>
+              Looks up a localized string similar to Charge Quantity.
             </summary>
         </member>
         <member name="P:VOI.SISAC.Web.Resources.Resource.CheckAndApprove">
@@ -20558,6 +21694,21 @@
         <member name="P:VOI.SISAC.Web.Resources.Resource.DelayCode">
             <summary>
               Looks up a localized string similar to Delay Code.
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Web.Resources.Resource.DelayDescription1">
+            <summary>
+              Looks up a localized string similar to Delay Description 1.
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Web.Resources.Resource.DelayDescription2">
+            <summary>
+              Looks up a localized string similar to Delay Description 2.
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Web.Resources.Resource.DelayDescription3">
+            <summary>
+              Looks up a localized string similar to Delay Description 3.
             </summary>
         </member>
         <member name="P:VOI.SISAC.Web.Resources.Resource.DelayMenu">
@@ -20983,6 +22134,11 @@
         <member name="P:VOI.SISAC.Web.Resources.Resource.ExtraCrew">
             <summary>
               Looks up a localized string similar to Extra Crew.
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Web.Resources.Resource.ExtraCrews">
+            <summary>
+              Looks up a localized string similar to ExtraCrews.
             </summary>
         </member>
         <member name="P:VOI.SISAC.Web.Resources.Resource.FederalTaxCode">
@@ -21840,6 +22996,16 @@
               Looks up a localized string similar to Luggage.
             </summary>
         </member>
+        <member name="P:VOI.SISAC.Web.Resources.Resource.LuggageKgs">
+            <summary>
+              Looks up a localized string similar to Luggage (Kgs).
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Web.Resources.Resource.LuggageQuantity">
+            <summary>
+              Looks up a localized string similar to Luggage Quantity.
+            </summary>
+        </member>
         <member name="P:VOI.SISAC.Web.Resources.Resource.Magnitude">
             <summary>
               Looks up a localized string similar to Wingspan (Mts).
@@ -21850,6 +23016,16 @@
               Looks up a localized string similar to Mail.
             </summary>
         </member>
+        <member name="P:VOI.SISAC.Web.Resources.Resource.MailKgs">
+            <summary>
+              Looks up a localized string similar to Mail (Kgs).
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Web.Resources.Resource.MailQuantity">
+            <summary>
+              Looks up a localized string similar to Mail Quantity.
+            </summary>
+        </member>
         <member name="P:VOI.SISAC.Web.Resources.Resource.Manage">
             <summary>
               Looks up a localized string similar to Manage.
@@ -21858,6 +23034,11 @@
         <member name="P:VOI.SISAC.Web.Resources.Resource.ManageInvoices">
             <summary>
               Looks up a localized string similar to Manage Invoices.
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Web.Resources.Resource.ManeuverStartTime">
+            <summary>
+              Looks up a localized string similar to Maneuver Start Time.
             </summary>
         </member>
         <member name="P:VOI.SISAC.Web.Resources.Resource.ManifestArrival">
@@ -21928,6 +23109,11 @@
         <member name="P:VOI.SISAC.Web.Resources.Resource.MiddleName">
             <summary>
               Looks up a localized string similar to Middle Name.
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Web.Resources.Resource.Minor">
+            <summary>
+              Looks up a localized string similar to Minor.
             </summary>
         </member>
         <member name="P:VOI.SISAC.Web.Resources.Resource.ModuleCode">
@@ -22255,6 +23441,11 @@
               Looks up a localized string similar to Other Exempt.
             </summary>
         </member>
+        <member name="P:VOI.SISAC.Web.Resources.Resource.OvernightEndTime">
+            <summary>
+              Looks up a localized string similar to Overnight End Time.
+            </summary>
+        </member>
         <member name="P:VOI.SISAC.Web.Resources.Resource.PageNotFound">
             <summary>
               Looks up a localized string similar to Page Not Found.
@@ -22380,6 +23571,11 @@
               Looks up a localized string similar to Permission Catalog.
             </summary>
         </member>
+        <member name="P:VOI.SISAC.Web.Resources.Resource.Pilots">
+            <summary>
+              Looks up a localized string similar to Pilots.
+            </summary>
+        </member>
         <member name="P:VOI.SISAC.Web.Resources.Resource.PlaceBirthCity">
             <summary>
               Looks up a localized string similar to Place Birth City.
@@ -22403,6 +23599,11 @@
         <member name="P:VOI.SISAC.Web.Resources.Resource.Position">
             <summary>
               Looks up a localized string similar to Position.
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Web.Resources.Resource.PositionOutputTime">
+            <summary>
+              Looks up a localized string similar to Position Output Time.
             </summary>
         </member>
         <member name="P:VOI.SISAC.Web.Resources.Resource.PostingDate">
@@ -22980,6 +24181,16 @@
               Looks up a localized string similar to SISAC - Integrated System of Airport Services and Fuel.
             </summary>
         </member>
+        <member name="P:VOI.SISAC.Web.Resources.Resource.SlotAllocatedTime">
+            <summary>
+              Looks up a localized string similar to Slot Allocated Time.
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Web.Resources.Resource.SlotCoordinatedTime">
+            <summary>
+              Looks up a localized string similar to Slot Coordinated Time.
+            </summary>
+        </member>
         <member name="P:VOI.SISAC.Web.Resources.Resource.Society">
             <summary>
               Looks up a localized string similar to Society.
@@ -23155,6 +24366,11 @@
               Looks up a localized string similar to Supplier Responsible.
             </summary>
         </member>
+        <member name="P:VOI.SISAC.Web.Resources.Resource.Surcharges">
+            <summary>
+              Looks up a localized string similar to Surcharges.
+            </summary>
+        </member>
         <member name="P:VOI.SISAC.Web.Resources.Resource.TakeoffWeightInTonnes">
             <summary>
               Looks up a localized string similar to Takeoff Weight (Tons).
@@ -23318,6 +24534,11 @@
         <member name="P:VOI.SISAC.Web.Resources.Resource.TransitoryPassenger">
             <summary>
               Looks up a localized string similar to TTO&apos;s.
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Web.Resources.Resource.TypeFlight">
+            <summary>
+              Looks up a localized string similar to Type Flight.
             </summary>
         </member>
         <member name="P:VOI.SISAC.Web.Resources.Resource.Unauthorized">
@@ -23876,6 +25097,21 @@
             </summary>
         </member>
         <member name="M:VOI.SISAC.Web.MapConfiguration.ItineraryWebMaps.Map">
+            <summary>
+            Configures the mappers between clases.
+            </summary>
+        </member>
+        <member name="M:VOI.SISAC.Web.MapConfiguration.ItineraryWebMaps.GendecMap">
+            <summary>
+            Configures the mappers between clases.
+            </summary>
+        </member>
+        <member name="M:VOI.SISAC.Web.MapConfiguration.ItineraryWebMaps.ManifesDepartureMap">
+            <summary>
+            Configures the mappers between clases.
+            </summary>
+        </member>
+        <member name="M:VOI.SISAC.Web.MapConfiguration.ItineraryWebMaps.ManifesArrivalMap">
             <summary>
             Configures the mappers between clases.
             </summary>

@@ -11,7 +11,6 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
     using System.Diagnostics;
     using System.Linq;
     using System.Net;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
     using AutoMapper;
     using Business.Dto.Catalogs;
@@ -31,7 +30,7 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
     using Web.Controllers;
 
     /// <summary>
-    /// Class Gendec Arrival
+    /// Arrival general document controller
     /// </summary>
     [CustomAuthorize]
     public class GendecArrivalController : BaseController
@@ -52,14 +51,9 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
         private readonly string userInfo;
 
         /// <summary>
-        /// The gendec departure business/
+        /// The general document arrival business/
         /// </summary>
-        private readonly IGendecDepartureBusiness gendecDepartureBusiness;
-
-        /// <summary>
-        /// The gendec arrival business/
-        /// </summary>
-        private IGendecArrivalBusiness gendecArrivalBusiness;
+        private readonly IGendecArrivalBusiness gendecArrivalBusiness;
 
         /// <summary>
         /// The crew business
@@ -87,72 +81,69 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
         private readonly IPageReportBusiness pageReportBusiness;
 
         /// <summary>
-        /// The airport business
+        /// The airplane business
         /// </summary>
-        private readonly IAirportBusiness airportBusiness;
+        private readonly IAirplaneBusiness airplaneBusiness;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GendecArrivalController" /> class.
         /// </summary>
-        /// <param name="gendecDepartureBusiness">The gendec departure business.</param>
-        /// <param name="gendecArrivalBusiness">The gendec arrival business.</param>
+        /// <param name="gendecArrivalBusiness">The general document arrival business.</param>
         /// <param name="crewBusiness">The crew business.</param>
         /// <param name="itineraryBusiness">The itinerary business.</param>
         /// <param name="genericCatalogBusiness">The generic catalog business.</param>
         /// <param name="userBusiness">The user business.</param>
         /// <param name="pageReportBusiness">The page report business.</param>
-        /// <param name="airportBusiness">The airport business.</param>
+        /// <param name="airplaneBusiness">The airplane business.</param>
         public GendecArrivalController(
-            IGendecDepartureBusiness gendecDepartureBusiness,
             IGendecArrivalBusiness gendecArrivalBusiness,
             ICrewBusiness crewBusiness,
             IItineraryBusiness itineraryBusiness,
             IGenericCatalogBusiness genericCatalogBusiness,
             IUserBusiness userBusiness,
             IPageReportBusiness pageReportBusiness,
-            IAirportBusiness airportBusiness)
+            IAirplaneBusiness airplaneBusiness)
         {
             this.userInfo = string.Format(
                 LogMessages.UserInfo,
                 System.Environment.UserDomainName,
                 System.Environment.UserName,
                 System.Environment.MachineName);
-            this.gendecDepartureBusiness = gendecDepartureBusiness;
+
             this.gendecArrivalBusiness = gendecArrivalBusiness;
             this.crewBusiness = crewBusiness;
             this.itineraryBusiness = itineraryBusiness;
             this.genericCatalogBusiness = genericCatalogBusiness;
             this.userBusiness = userBusiness;
             this.pageReportBusiness = pageReportBusiness;
-            this.airportBusiness = airportBusiness;
+            this.airplaneBusiness = airplaneBusiness;
         }
 
         /// <summary>
-        /// Creates the specified sequence.
+        /// Main view.
         /// </summary>
-        /// <param name="Sequence">The sequence.</param>
-        /// <param name="AirlineCode">The airline code.</param>
-        /// <param name="FlightNumber">The flight number.</param>
-        /// <param name="ItineraryKey">The itinerary key.</param>
-        /// <param name="DepartureStation">The departure station.</param>
-        /// <param name="ArrivalStation">The arrival station.</param>
-        /// <param name="EquipmentNumber">The equipment number.</param>
-        /// <param name="DepartureDate">The departure date.</param>
+        /// <param name="sequence">The sequence.</param>
+        /// <param name="airlineCode">The airline code.</param>
+        /// <param name="flightNumber">The flight number.</param>
+        /// <param name="itineraryKey">The itinerary key.</param>
+        /// <param name="departureStation">The departure station.</param>
+        /// <param name="arrivalStation">The arrival station.</param>
+        /// <param name="equipmentNumber">The equipment number.</param>
+        /// <param name="departureDate">The departure date.</param>
         /// <returns>Action result.</returns>
-        [CustomAuthorize(Roles = "GENDECARR-UPD")]
-        public ActionResult Create(
-            int Sequence, 
-            string AirlineCode, 
-            string FlightNumber, 
-            string ItineraryKey,
-            string DepartureStation, 
-            string ArrivalStation,
-            string EquipmentNumber, 
-            string DepartureDate)
+        public ActionResult Index(
+            int sequence,
+            string airlineCode,
+            string flightNumber,
+            string itineraryKey,
+            string departureStation,
+            string arrivalStation,
+            string equipmentNumber,
+            string departureDate)
         {
-            if (string.IsNullOrWhiteSpace(AirlineCode)
-                || string.IsNullOrWhiteSpace(FlightNumber)
-                || string.IsNullOrWhiteSpace(ItineraryKey))
+            if (string.IsNullOrWhiteSpace(airlineCode)
+                || string.IsNullOrWhiteSpace(flightNumber)
+                || string.IsNullOrWhiteSpace(itineraryKey))
             {
                 Logger.Error(string.Format(LogMessages.ErrorNullObject, this.catalogName));
                 Trace.TraceError(string.Format(LogMessages.ErrorNullObject, this.catalogName));
@@ -166,51 +157,23 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
 
             try
             {
-                // Busca el aeropuerto para obtener el Código del Pais, solo  mostrará Gendec cuando el aeropuerto es Internacional
-                airportDto = this.airportBusiness.FindAirportById(ArrivalStation);
-
-                if (airportDto.CountryCode != "MEX")
+                // Checks if the user is allowed to enter the GENDEC
+                if (this.NotContainsAirport(arrivalStation))
                 {
-                    this.LoadCatalog(ArrivalStation);
-
-                    //Sino tiene permiso para editar aeropuerto
-                    if (NotContainsAirport(ArrivalStation))
-                    {
-                        return RedirectToAction("Unauthorized", "Home", new { area = "" });
-                    }
-
-                    // Vamos a la DB para obtener la información de Gendec y poder pintarla.
-                    gendecArrivalDto = this.gendecArrivalBusiness.GetGendecArrival(Sequence, AirlineCode, FlightNumber, ItineraryKey);
-                    if (gendecArrivalDto == null)
-                    {
-                        // Comienza proceso para obtener información de SISAC anterior
-                        gendecArrivalVO = this.GetInformationManifiest(
-                            Sequence,
-                            AirlineCode,
-                            FlightNumber,
-                            ItineraryKey,
-                            DepartureStation,
-                            ArrivalStation,
-                            EquipmentNumber,
-                            DepartureDate);
-
-                        // Obtenemos el itinerario
-                        gendecArrivalVO.Itinerary = this.GetItinerary(Sequence, AirlineCode, FlightNumber, ItineraryKey);
-                        return this.View(gendecArrivalVO);
-                    }
-
-                    gendecArrivalVO = Mapper.Map<GendecArrivalDto, GendecArrivalVO>(gendecArrivalDto);
-
-                    // Obtenemos el itinerario
-                    gendecArrivalVO.Itinerary = this.GetItinerary(Sequence, AirlineCode, FlightNumber, ItineraryKey);
-                    this.ViewBag.DepartureDate = DepartureDate;
-                    return this.View(gendecArrivalVO);
+                    return this.RedirectToAction("Unauthorized", "Home", new { area = string.Empty });
                 }
-                else
-                {
-                    this.TempData["OperationSuccess"] = "El Gendec solo se muestra para vuelos a la llegada Internacionales";
-                    return RedirectToAction("Index", "Itinerary");
-                }
+
+                // Loads catalog's data
+                this.LoadCatalog(arrivalStation);
+
+                // Gets the GENDEC information
+                gendecArrivalDto = this.gendecArrivalBusiness.GetGendecArrival(sequence, airlineCode, flightNumber, itineraryKey);
+                AirplaneDto airplaneInfo = this.airplaneBusiness.FindAirplaneById(equipmentNumber);
+
+                // Gets the airplane information for client validations
+                gendecArrivalDto.Itinerary.Airplane = airplaneInfo != null ? airplaneInfo : new AirplaneDto();
+                gendecArrivalVO = Mapper.Map<GendecArrivalDto, GendecArrivalVO>(gendecArrivalDto);
+                return this.View("Create", gendecArrivalVO);
             }
             catch (BusinessException exception)
             {
@@ -218,170 +181,72 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
                 Logger.Error(exception.Message, exception);
                 System.Diagnostics.Trace.TraceError(exception.InnerException.ToString());
                 this.ViewBag.ErrorMessage = FrontMessage.GetExceptionErrorMessage(exception.Number);
-                return this.View();
+                return this.View("Create");
             }
         }
 
         /// <summary>
-        /// Creates the specified gendec arrival vo.
+        /// Performs the action.
         /// </summary>
-        /// <param name="gendecArrivalVO">The gendec arrival vo.</param>
-        /// <returns></returns>
+        /// <param name="gendecArrivalVo">The general document information.</param>
+        /// <returns>
+        /// Action result.
+        /// </returns>
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [CustomAuthorize(Roles = "GENDECARR-UPD")]
-        public ActionResult Create(GendecArrivalVO gendecArrivalVO)
-        {
-            IList<string> errors = new List<string>();
-            GendecArrivalDto gendecArrivalDto = new GendecArrivalDto();
-
-            if (gendecArrivalVO == null)
-            {
-                Logger.Error(string.Format(LogMessages.ErrorNullObject, catalogName));
-                Trace.TraceError(string.Format(LogMessages.ErrorNullObject, catalogName));
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            try
-            {
-                this.LoadCatalog(gendecArrivalVO.ArrivalStation);
-                gendecArrivalVO = this.GetCrewsByID(gendecArrivalVO);
-                gendecArrivalDto = Mapper.Map<GendecArrivalVO, GendecArrivalDto>(gendecArrivalVO);
-                errors = this.gendecArrivalBusiness.ValidateGendecArrivalInformation(gendecArrivalDto);
-                if (errors.Count == 0)
-                {
-                    this.TempData["OperationSuccess"] = Resource.SuccessEdit;
-                }
-                else
-                {
-                    this.ViewBag.ListErrorMessage = errors;
-                }
-
-
-            }
-            catch (BusinessException exception)
-            {
-                Logger.Error(string.Format(LogMessages.ErrorUpdate, catalogName, this.userInfo));
-                Logger.Error(exception.Message, exception);
-                Trace.TraceError(string.Format(LogMessages.ErrorUpdate, catalogName, this.userInfo));
-                Trace.TraceError(exception.Message, exception);
-                this.ViewBag.ErrorMessage = FrontMessage.GetExceptionErrorMessage(exception.Number);
-            }
-
-            // Una ves guardada la información, obtenemos para volver a mostrar 
-            gendecArrivalDto = this.gendecArrivalBusiness.GetGendecArrival(gendecArrivalVO.Sequence, gendecArrivalVO.AirlineCode, gendecArrivalVO.FlightNumber, gendecArrivalVO.Itinerarykey);
-            gendecArrivalVO = Mapper.Map<GendecArrivalDto, GendecArrivalVO>(gendecArrivalDto);
-            
-            // Obtenemos el itinerario
-            gendecArrivalVO.Itinerary = this.GetItinerary(gendecArrivalVO.Sequence, gendecArrivalVO.AirlineCode, gendecArrivalVO.FlightNumber, gendecArrivalVO.Itinerarykey);
-            return this.View(gendecArrivalVO);
-        }
-
-        /// <summary>
-        /// Closes the gendec.
-        /// </summary>
-        /// <param name="gendecArrivalVO">The gendec arrival vo.</param>
-        /// <returns></returns>
-        [HttpPost]
-        [CustomAuthorize(Roles = "GENDECARR-CLOSE")]
-        public ActionResult CloseGendec(GendecArrivalVO gendecArrivalVO)
-        {
-            GendecArrivalDto gendecArrivalDto = new GendecArrivalDto();
-            GendecArrivalDto gendecDepartDto = new GendecArrivalDto();
-
-            if (gendecArrivalVO == null)
-            {
-                Logger.Error(string.Format(LogMessages.ErrorNullObject, catalogName));
-                Trace.TraceError(string.Format(LogMessages.ErrorNullObject, catalogName));
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            try
-            {
-                gendecDepartDto = Mapper.Map<GendecArrivalVO, GendecArrivalDto>(gendecArrivalVO);
-                this.gendecArrivalBusiness.CloseGendecArrival(gendecDepartDto);
-            
-                // Se obtiene lo que se actualizó
-                gendecArrivalDto = this.gendecArrivalBusiness.GetGendecArrival(
-                    gendecArrivalVO.Sequence, 
-                    gendecArrivalVO.AirlineCode,
-                    gendecArrivalVO.FlightNumber, 
-                    gendecArrivalVO.Itinerarykey);
-                gendecArrivalVO = Mapper.Map<GendecArrivalDto, GendecArrivalVO>(gendecArrivalDto);
-                
-                // Obtenemos el itinerario
-                gendecArrivalVO.Itinerary = this.GetItinerary(gendecArrivalVO.Sequence, gendecArrivalVO.AirlineCode, gendecArrivalVO.FlightNumber, gendecArrivalVO.Itinerarykey);
-                this.LoadCatalog(gendecArrivalVO.ArrivalStation);
-                this.TempData["OperationSuccess"] = VOI.SISAC.Web.Resources.Resource.SuccessInactive;
-                return this.View("Create", gendecArrivalVO);
-            }
-            catch (BusinessException exception)
-            {
-                Logger.Error(string.Format(LogMessages.ErrorDelete, catalogName, this.userInfo));
-                Logger.Error(exception.Message, exception);
-                Trace.TraceError(string.Format(LogMessages.ErrorDelete, catalogName, this.userInfo));
-                Trace.TraceError(exception.Message, exception);
-                this.ViewBag.ErrorMessage = FrontMessage.GetExceptionErrorMessage(exception.Number);
-            }
-
-            LoadCatalog(gendecArrivalVO.ArrivalStation);
-            return this.View(gendecArrivalVO);
-        }
-
-        /// <summary>
-        /// Opens the gendec.
-        /// </summary>
-        /// <param name="gendecArrivalVO">The gendec arrival vo.</param>
-        /// <returns>Action result.</returns>
-        [HttpPost]
         [CustomAuthorize(Roles = "GENDECARR-OPEN")]
-        public ActionResult OpenGendec(GendecArrivalVO gendecArrivalVO)
+        [CustomAuthorize(Roles = "GENDECARR-CLOSE")]
+        public ActionResult PerformAction(GendecArrivalVO gendecArrivalVo)
         {
-            GendecArrivalDto gendecArrivalDto = new GendecArrivalDto();
-            GendecArrivalDto gendecDepartDto = new GendecArrivalDto();
-
-            if (gendecArrivalVO == null)
+            if (gendecArrivalVo == null
+                || string.IsNullOrWhiteSpace(gendecArrivalVo.AirlineCode)
+                || string.IsNullOrWhiteSpace(gendecArrivalVo.FlightNumber)
+                || string.IsNullOrWhiteSpace(gendecArrivalVo.Itinerarykey)
+                || gendecArrivalVo.Action < 1
+                || gendecArrivalVo.Action > 3)
             {
-                Logger.Error(string.Format(LogMessages.ErrorNullObject, catalogName));
-                Trace.TraceError(string.Format(LogMessages.ErrorNullObject, catalogName));
+                Logger.Error(string.Format(LogMessages.ErrorNullObject, this.catalogName));
+                Trace.TraceError(string.Format(LogMessages.ErrorNullObject, this.catalogName));
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            try
+            switch (gendecArrivalVo.Action)
             {
-                gendecDepartDto = Mapper.Map<GendecArrivalVO, GendecArrivalDto>(gendecArrivalVO);
-                this.gendecArrivalBusiness.OpenGendecArrival(gendecDepartDto);
+                case 1:
 
-                // Se obtiene lo que se actualizó
-                gendecArrivalDto = this.gendecArrivalBusiness.GetGendecArrival(
-                    gendecArrivalVO.Sequence,
-                    gendecArrivalVO.AirlineCode,
-                    gendecArrivalVO.FlightNumber,
-                    gendecArrivalVO.Itinerarykey);
-                gendecArrivalVO = Mapper.Map<GendecArrivalDto, GendecArrivalVO>(gendecArrivalDto);
+                    // Saves the manifest
+                    this.Save(gendecArrivalVo);
+                    break;
+                case 2:
 
-                // Obtenemos el itinerario
-                gendecArrivalVO.Itinerary = this.GetItinerary(gendecArrivalVO.Sequence, gendecArrivalVO.AirlineCode, gendecArrivalVO.FlightNumber, gendecArrivalVO.Itinerarykey);
-                this.LoadCatalog(gendecArrivalVO.ArrivalStation);
-                this.TempData["OperationSuccess"] = VOI.SISAC.Web.Resources.Resource.SuccessInactive;
-                return this.View("Create", gendecArrivalVO);
-            }
-            catch (BusinessException exception)
-            {
-                Logger.Error(string.Format(LogMessages.ErrorDelete, catalogName, this.userInfo));
-                Logger.Error(exception.Message, exception);
-                Trace.TraceError(string.Format(LogMessages.ErrorDelete, catalogName, this.userInfo));
-                Trace.TraceError(exception.Message, exception);
-                this.ViewBag.ErrorMessage = FrontMessage.GetExceptionErrorMessage(exception.Number);
+                    // Closes the manifest
+                    this.Close(gendecArrivalVo);
+                    break;
+                case 3:
+
+                    // Opens the manifest
+                    this.Open(gendecArrivalVo);
+                    break;
             }
 
-            this.LoadCatalog(gendecArrivalVO.ArrivalStation);
-            return this.View(gendecArrivalVO);
+            var routeValues = new
+            {
+                Sequence = gendecArrivalVo.Sequence,
+                AirlineCode = gendecArrivalVo.AirlineCode,
+                FlightNumber = gendecArrivalVo.FlightNumber,
+                ItineraryKey = gendecArrivalVo.Itinerarykey,
+                departureStation = gendecArrivalVo.DepartureStation,
+                arrivalStation = gendecArrivalVo.ArrivalStation,
+                equipmentNumber = gendecArrivalVo.EquipmentNumber
+            };
+            return this.RedirectToAction("Index", routeValues);
         }
 
         /// <summary>
         /// Gets the warning message configuration.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Json result.</returns>
         public JsonResult GetWarningMessageConfiguration()
         {
             Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -401,68 +266,68 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
             dictionary.Add("NotCloseGendec", Resource.NotCloseGendec);
             dictionary.Add("NotEditGendec", Resource.NotEditGendec);
 
-            return Json(dictionary, JsonRequestBehavior.AllowGet);
+            return this.Json(dictionary, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
         /// Prints the specified sequence.
         /// </summary>
-        /// <param name="Sequence">The sequence.</param>
-        /// <param name="AirlineCode">The airline code.</param>
-        /// <param name="FlightNumber">The flight number.</param>
-        /// <param name="ItineraryKey">The itinerary key.</param>
-        /// <param name="DepartureStation">The departure station.</param>
-        /// <param name="ArrivalStation">The arrival station.</param>
-        /// <param name="EquipmentNumber">The equipment number.</param>
-        /// <param name="DepartureDate">The departure date.</param>
+        /// <param name="sequence">The sequence.</param>
+        /// <param name="airlineCode">The airline code.</param>
+        /// <param name="flightNumber">The flight number.</param>
+        /// <param name="itineraryKey">The itinerary key.</param>
+        /// <param name="departureStation">The departure station.</param>
+        /// <param name="arrivalStation">The arrival station.</param>
+        /// <param name="equipmentNumber">The equipment number.</param>
+        /// <param name="departureDate">The departure date.</param>
         /// <returns>Action result.</returns>
         [CustomAuthorize(Roles = "GENDECARR-PRINTREP")]
         public ActionResult Print(
-            int Sequence, 
-            string AirlineCode, 
-            string FlightNumber, 
-            string ItineraryKey,
-            string DepartureStation,
-            string ArrivalStation,
-            string EquipmentNumber,
-            string DepartureDate)
+            int sequence,
+            string airlineCode,
+            string flightNumber,
+            string itineraryKey,
+            string departureStation,
+            string arrivalStation,
+            string equipmentNumber,
+            string departureDate)
         {
             GendecArrivalDto gendecArrivalDto = new GendecArrivalDto();
             GendecArrivalVO gendecArrivalVO = new GendecArrivalVO();
             try
             {
-                string reportPath = "";
+                string reportPath = string.Empty;
                 PageReportDto pageReportDto = new PageReportDto();
                 pageReportDto = this.pageReportBusiness.GetPageReportByPageName("GendecArrival");
-                SetSiteMapValues(Sequence, AirlineCode, FlightNumber, ItineraryKey, DepartureStation, ArrivalStation, EquipmentNumber, DepartureDate);
+                SetSiteMapValues(sequence, airlineCode, flightNumber, itineraryKey, departureStation, arrivalStation, equipmentNumber, departureDate);
 
                 if (pageReportDto != null)
                 {
                     reportPath = pageReportDto.PathReport;
                 }
 
-                if (!string.IsNullOrEmpty(reportPath) 
-                    && !string.IsNullOrEmpty(AirlineCode.ToString()) 
-                    && !string.IsNullOrEmpty(FlightNumber.ToString()) 
-                    && !string.IsNullOrEmpty(ItineraryKey.ToString()) 
-                    && Sequence != 0)
+                if (!string.IsNullOrEmpty(reportPath)
+                    && !string.IsNullOrEmpty(airlineCode.ToString())
+                    && !string.IsNullOrEmpty(flightNumber.ToString())
+                    && !string.IsNullOrEmpty(itineraryKey.ToString())
+                    && sequence != 0)
                 {
                     ReportingServiceViewModel reportServicelModel = new ReportingServiceViewModel(
                         reportPath,
                         new List<Microsoft.Reporting.WebForms.ReportParameter>()
                         {
-                            new Microsoft.Reporting.WebForms.ReportParameter("Sequence", Sequence.ToString(),false),
-                            new Microsoft.Reporting.WebForms.ReportParameter("AirlineCode", AirlineCode, false),
-                            new Microsoft.Reporting.WebForms.ReportParameter("FlightNumber", FlightNumber, false),
-                            new Microsoft.Reporting.WebForms.ReportParameter("ItineraryKey", ItineraryKey, false)
+                            new Microsoft.Reporting.WebForms.ReportParameter("Sequence", sequence.ToString(), false),
+                            new Microsoft.Reporting.WebForms.ReportParameter("AirlineCode", airlineCode, false),
+                            new Microsoft.Reporting.WebForms.ReportParameter("FlightNumber", flightNumber, false),
+                            new Microsoft.Reporting.WebForms.ReportParameter("ItineraryKey", itineraryKey, false)
                         });
 
                     reportServicelModel.PageSourceUrl = SiteMaps.Current.FindSiteMapNodeFromKey("Gendec_Arrival").Url;
-                    return View("Report/ViewReport", reportServicelModel);
+                    return this.View("Report/ViewReport", reportServicelModel);
                 }
                 else
                 {
-                    gendecArrivalDto = this.gendecArrivalBusiness.GetGendecArrival(Sequence, AirlineCode, FlightNumber, ItineraryKey);
+                    gendecArrivalDto = this.gendecArrivalBusiness.GetGendecArrival(sequence, airlineCode, flightNumber, itineraryKey);
                     gendecArrivalVO = Mapper.Map<GendecArrivalDto, GendecArrivalVO>(gendecArrivalDto);
                 }
             }
@@ -475,121 +340,167 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
                 this.ViewBag.ErrorMessage = FrontMessage.GetExceptionErrorMessage(exception.Number);
             }
 
-            return this.RedirectToAction("Create", new
+            return this.RedirectToAction(
+                "Create", 
+                new
+                {
+                    Sequence = gendecArrivalVO.Sequence,
+                    AirlineCode = gendecArrivalVO.AirlineCode,
+                    FlightNumber = gendecArrivalVO.FlightNumber,
+                    ItineraryKey = gendecArrivalVO.Itinerarykey
+                });
+        }
+
+        /// <summary>
+        /// Set Site Map Values.
+        /// </summary>
+        /// <param name="sequence">The sequence.</param>
+        /// <param name="airlineCode">The airline code.</param>
+        /// <param name="flightNumber">The flight number.</param>
+        /// <param name="itineraryKey">The itinerary key.</param>
+        /// <param name="departureStation">The departure station.</param>
+        /// <param name="arrivalStation">The arrival station.</param>
+        /// <param name="equipmentNumber">The equipment number.</param>
+        /// <param name="departureDate">The departure date.</param>
+        private static void SetSiteMapValues(
+            int sequence,
+            string airlineCode,
+            string flightNumber,
+            string itineraryKey,
+            string departureStation,
+            string arrivalStation,
+            string equipmentNumber,
+            string departureDate)
+        {
+            try
             {
-                Sequence = gendecArrivalVO.Sequence,
-                AirlineCode = gendecArrivalVO.AirlineCode,
-                FlightNumber = gendecArrivalVO.FlightNumber,
-                ItineraryKey = gendecArrivalVO.Itinerarykey
-            });
+                var node = SiteMaps.Current.FindSiteMapNodeFromKey("Gendec_Arrival");
+                if (node != null)
+                {
+                    node.RouteValues["Sequence"] = sequence;
+                    node.RouteValues["AirlineCode"] = airlineCode;
+                    node.RouteValues["FlightNumber"] = flightNumber;
+                    node.RouteValues["ItineraryKey"] = itineraryKey;
+                    node.RouteValues["ArrivalStation"] = arrivalStation;
+                    node.RouteValues["DepartureStation"] = departureStation;
+                    node.RouteValues["EquipmentNumber"] = equipmentNumber;
+                    node.RouteValues["DepartureDate"] = departureDate;
+                }
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception.Message, exception);
+                Trace.TraceError(exception.Message, exception);
+            }
         }
 
         /// <summary>
         /// Load ComboBox
         /// </summary>
-        private void LoadCatalog(string ArrivalStation)
+        /// <param name="arrivalStation">The arrival station.</param>
+        private void LoadCatalog(string arrivalStation)
         {
             // USUARIOS ASC
             IList<GenericCatalogDto> userListFinal = new List<GenericCatalogDto>();
-            
+
             // Asignamos a combo los proveedores viables
-            userListFinal = this.genericCatalogBusiness.GetUserCatalog(ArrivalStation, "ASC");
+            userListFinal = this.genericCatalogBusiness.GetUserCatalog(arrivalStation, "ASC");
             this.ViewBag.Users = userListFinal;
         }
 
-        /// <summary>
-        /// Gets the information manifiest.
-        /// </summary>
-        /// <param name="Sequence">The sequence.</param>
-        /// <param name="AirlineCode">The airline code.</param>
-        /// <param name="FlightNumber">The flight number.</param>
-        /// <param name="ItineraryKey">The itinerary key.</param>
-        /// <param name="DepartureStation">The departure station.</param>
-        /// <param name="ArrivalStation">The arrival station.</param>
-        /// <param name="EquipmentNumber">The equipment number.</param>
-        /// <param name="DepartureDate">The departure date.</param>
-        /// <returns></returns>
-        private GendecArrivalVO GetInformationManifiest(
-            int Sequence, 
-            string AirlineCode, 
-            string FlightNumber,
-            string ItineraryKey,
-            string DepartureStation, 
-            string ArrivalStation,
-            string EquipmentNumber, 
-            string DepartureDate)
-        {
-            CrewDto crewDto = new CrewDto();
-            CrewVO crewVO = new CrewVO();
-            GendecArrivalVO gendecArrivalVO = new GendecArrivalVO();
-            gendecArrivalVO.Crews = new List<CrewVO>();
+        /////// <summary>
+        /////// Gets the information manifiest.
+        /////// </summary>
+        /////// <param name="Sequence">The sequence.</param>
+        /////// <param name="AirlineCode">The airline code.</param>
+        /////// <param name="FlightNumber">The flight number.</param>
+        /////// <param name="ItineraryKey">The itinerary key.</param>
+        /////// <param name="DepartureStation">The departure station.</param>
+        /////// <param name="ArrivalStation">The arrival station.</param>
+        /////// <param name="EquipmentNumber">The equipment number.</param>
+        /////// <param name="DepartureDate">The departure date.</param>
+        /////// <returns></returns>
+        ////private GendecArrivalVO GetInformationManifiest(
+        ////    int Sequence,
+        ////    string AirlineCode,
+        ////    string FlightNumber,
+        ////    string ItineraryKey,
+        ////    string DepartureStation,
+        ////    string ArrivalStation,
+        ////    string EquipmentNumber,
+        ////    string DepartureDate)
+        ////{
+        ////    CrewDto crewDto = new CrewDto();
+        ////    CrewVO crewVO = new CrewVO();
+        ////    GendecArrivalVO gendecArrivalVO = new GendecArrivalVO();
+        ////    gendecArrivalVO.Crews = new List<CrewVO>();
 
-            WebServiceSisaRequestVO webServiceSisaRequestVO = new WebServiceSisaRequestVO();
-            webServiceSisaRequestVO.DepartureStation = DepartureStation;
-            webServiceSisaRequestVO.ArrivalStation = ArrivalStation;
-            webServiceSisaRequestVO.FlightNumber = FlightNumber;
-            webServiceSisaRequestVO.MaticulaAeronave = EquipmentNumber;
-            webServiceSisaRequestVO.DepartureDate = Convert.ToDateTime(DepartureDate).ToString("yyyyMMdd");
+        ////    WebServiceSisaRequestVO webServiceSisaRequestVO = new WebServiceSisaRequestVO();
+        ////    webServiceSisaRequestVO.DepartureStation = DepartureStation;
+        ////    webServiceSisaRequestVO.ArrivalStation = ArrivalStation;
+        ////    webServiceSisaRequestVO.FlightNumber = FlightNumber;
+        ////    webServiceSisaRequestVO.MaticulaAeronave = EquipmentNumber;
+        ////    webServiceSisaRequestVO.DepartureDate = Convert.ToDateTime(DepartureDate).ToString("yyyyMMdd");
 
-            ResponseWebServiceSisaVO responseWebServiceSisaVO = ManifiestNationalSisa.ManifiestNationalGet(webServiceSisaRequestVO);
+        ////    ResponseWebServiceSisaVO responseWebServiceSisaVO = ManifiestNationalSisa.ManifiestNationalGet(webServiceSisaRequestVO);
 
-            if (responseWebServiceSisaVO.Result == "OK")
-            {
-                gendecArrivalVO.TotalPax = responseWebServiceSisaVO.Data.PassengerAdultNumber + responseWebServiceSisaVO.Data.PassengerChildrenNumber + responseWebServiceSisaVO.Data.PassengerInfantNumber;
-                gendecArrivalVO.TotalCrew = responseWebServiceSisaVO.Data.CommandConf + responseWebServiceSisaVO.Data.StewarsConf;
-                gendecArrivalVO.Sequence = Sequence;
-                gendecArrivalVO.AirlineCode = AirlineCode;
-                gendecArrivalVO.FlightNumber = FlightNumber;
-                gendecArrivalVO.Itinerarykey = ItineraryKey;
+        ////    if (responseWebServiceSisaVO.Result == "OK")
+        ////    {
+        ////        gendecArrivalVO.TotalPax = responseWebServiceSisaVO.Data.PassengerAdultNumber + responseWebServiceSisaVO.Data.PassengerChildrenNumber + responseWebServiceSisaVO.Data.PassengerInfantNumber;
+        ////        gendecArrivalVO.TotalCrew = responseWebServiceSisaVO.Data.CommandConf + responseWebServiceSisaVO.Data.StewarsConf;
+        ////        gendecArrivalVO.Sequence = Sequence;
+        ////        gendecArrivalVO.AirlineCode = AirlineCode;
+        ////        gendecArrivalVO.FlightNumber = FlightNumber;
+        ////        gendecArrivalVO.Itinerarykey = ItineraryKey;
 
-                string[] crewArray = responseWebServiceSisaVO.Data.TripulacionesID.Split(',');
-                string[] stewarsArray = responseWebServiceSisaVO.Data.SobrecargosID.Split(',');
+        ////        string[] crewArray = responseWebServiceSisaVO.Data.TripulacionesID.Split(',');
+        ////        string[] stewarsArray = responseWebServiceSisaVO.Data.SobrecargosID.Split(',');
 
-                foreach (string crewNumberEmployee in crewArray)
-                {
-                    crewDto = this.crewBusiness.FindCrewByEmployeeNumber(crewNumberEmployee);
-                    crewVO = Mapper.Map<CrewDto, CrewVO>(crewDto);
+        ////        foreach (string crewNumberEmployee in crewArray)
+        ////        {
+        ////            crewDto = this.crewBusiness.FindCrewByEmployeeNumber(crewNumberEmployee);
+        ////            crewVO = Mapper.Map<CrewDto, CrewVO>(crewDto);
 
-                    gendecArrivalVO.Crews.Add(crewVO);
-                }
+        ////            gendecArrivalVO.Crews.Add(crewVO);
+        ////        }
 
-                foreach (string stewarNumberEmployee in stewarsArray)
-                {
-                    crewDto = this.crewBusiness.FindCrewByEmployeeNumber(stewarNumberEmployee);
-                    crewVO = Mapper.Map<CrewDto, CrewVO>(crewDto);
+        ////        foreach (string stewarNumberEmployee in stewarsArray)
+        ////        {
+        ////            crewDto = this.crewBusiness.FindCrewByEmployeeNumber(stewarNumberEmployee);
+        ////            crewVO = Mapper.Map<CrewDto, CrewVO>(crewDto);
 
-                    gendecArrivalVO.Crews.Add(crewVO);
-                }
-            }
+        ////            gendecArrivalVO.Crews.Add(crewVO);
+        ////        }
+        ////    }
 
-            gendecArrivalVO.Itinerary = GetItinerary(Sequence, AirlineCode, FlightNumber, ItineraryKey);
-            return gendecArrivalVO;
-        }
+        ////    gendecArrivalVO.Itinerary = GetItinerary(Sequence, AirlineCode, FlightNumber, ItineraryKey);
+        ////    return gendecArrivalVO;
+        ////}
 
-        /// <summary>
-        /// Gets the itinerary.
-        /// </summary>
-        /// <param name="Sequence">The sequence.</param>
-        /// <param name="AirlineCode">The airline code.</param>
-        /// <param name="FlightNumber">The flight number.</param>
-        /// <param name="ItineraryKey">The itinerary key.</param>
-        /// <returns>Itinerary view object.</returns>
-        private ItineraryVO GetItinerary(int Sequence, string AirlineCode, string FlightNumber, string ItineraryKey)
-        {
-            ItineraryDto itineraryDto = new ItineraryDto();
-            ItineraryVO itineraryVO = new ItineraryVO();
+        /////// <summary>
+        /////// Gets the itinerary.
+        /////// </summary>
+        /////// <param name="Sequence">The sequence.</param>
+        /////// <param name="AirlineCode">The airline code.</param>
+        /////// <param name="FlightNumber">The flight number.</param>
+        /////// <param name="ItineraryKey">The itinerary key.</param>
+        /////// <returns>Itinerary view object.</returns>
+        ////private ItineraryVO GetItinerary(int Sequence, string AirlineCode, string FlightNumber, string ItineraryKey)
+        ////{
+        ////    ItineraryDto itineraryDto = new ItineraryDto();
+        ////    ItineraryVO itineraryVO = new ItineraryVO();
 
-            itineraryDto = this.itineraryBusiness.FindFlightById(Sequence, AirlineCode, FlightNumber, ItineraryKey);
-            itineraryVO = Mapper.Map<ItineraryDto, ItineraryVO>(itineraryDto);
+        ////    itineraryDto = this.itineraryBusiness.FindFlightById(Sequence, AirlineCode, FlightNumber, ItineraryKey);
+        ////    itineraryVO = Mapper.Map<ItineraryDto, ItineraryVO>(itineraryDto);
 
-            return itineraryVO;
-        }
+        ////    return itineraryVO;
+        ////}
 
         /// <summary>
         /// Gets the crews by identifier.
         /// </summary>
-        /// <param name="gendecArrivalVO">The gendec arrival vo.</param>
-        /// <returns>Gendec Arrival View Object.</returns>
+        /// <param name="gendecArrivalVO">The general document arrival vo.</param>
+        /// <returns>General Arrival View Object.</returns>
         private GendecArrivalVO GetCrewsByID(GendecArrivalVO gendecArrivalVO)
         {
             CrewVO crewVO = new CrewVO();
@@ -604,92 +515,91 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
                     gendecArrivalVO.Crews.Add(crewVO);
                 }
             }
+
             return gendecArrivalVO;
         }
 
         /// <summary>
-        /// Sends the email.
+        /// Creates the specified general document arrival.
         /// </summary>
-        /// <param name="gendecArrivalVO">The gendec arrival vo.</param>
-        /// <returns></returns>
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [CustomAuthorize(Roles = "GENDECARR-OPEN")]
-        public async Task<ActionResult> SendEmail(GendecArrivalVO gendecArrivalVO)
-        {
-            System.Diagnostics.Trace.TraceInformation("Beginning Sending Email");
-            IList<string> errors = new List<string>();
-            GendecArrivalVO gendecVO = new GendecArrivalVO();
-            ItineraryDto itineraryDto;
-            bool btnCerrar = false;
-
-            GendecArrivalDto gendecArrivalDto = new GendecArrivalDto();
-            ///gendecArrivalDto = this.gendecArrivalBusiness.GetGendecArrival(gendecArrivalVO.Sequence, gendecArrivalVO.AirlineCode, gendecArrivalVO.FlightNumber, gendecArrivalVO.Itinerarykey);
-            gendecVO = Mapper.Map<GendecArrivalDto, GendecArrivalVO>(gendecArrivalDto);
-            itineraryDto = this.itineraryBusiness.FindFlightById(gendecArrivalDto.Sequence, gendecArrivalDto.AirlineCode, gendecArrivalDto.FlightNumber, gendecArrivalDto.Itinerarykey);
-            gendecArrivalVO.Itinerary = Mapper.Map<ItineraryDto, ItineraryVO>(itineraryDto);
-            
-            // LoadCatalog(gendecVO);
-            errors = this.gendecArrivalBusiness.SendingEmail(gendecArrivalDto);
-            if (errors.Count == 0)
-            {
-                errors.Add("El correo se ha enviado al jefe de estación para la reapertura del manifiesto de salida");
-                this.ViewBag.ListErrorMessage = errors;
-            }
-            else
-            {
-                this.ViewBag.ListErrorMessage = errors;
-            }
-
-            this.ViewBag.btnCerrar = btnCerrar;
-            return this.View("Create", gendecVO);
-        }
-
-        /// <summary>
-        /// Set Site Map Values.
-        /// </summary>
-        /// <param name="Sequence">The sequence.</param>
-        /// <param name="AirlineCode">The airline code.</param>
-        /// <param name="FlightNumber">The flight number.</param>
-        /// <param name="ItineraryKey">The itinerary key.</param>
-        /// <param name="DepartureStation">The departure station.</param>
-        /// <param name="ArrivalStation">The arrival station.</param>
-        /// <param name="EquipmentNumber">The equipment number.</param>
-        /// <param name="DepartureDate">The departure date.</param>
-        private static void SetSiteMapValues(
-            int Sequence, 
-            string AirlineCode, 
-            string FlightNumber, 
-            string ItineraryKey,
-            string DepartureStation,
-            string ArrivalStation,
-            string EquipmentNumber,
-            string DepartureDate)
+        /// <param name="gendecArrivalVO">The general document arrival view object.</param>
+        private void Save(GendecArrivalVO gendecArrivalVO)
         {
             try
             {
-                var node = SiteMaps.Current.FindSiteMapNodeFromKey("Gendec_Arrival");
-                if (node != null)
+                IList<string> errors = new List<string>();
+                GendecArrivalDto gendecArrivalDto = new GendecArrivalDto();
+
+                gendecArrivalVO = this.GetCrewsByID(gendecArrivalVO);
+                gendecArrivalDto = Mapper.Map<GendecArrivalVO, GendecArrivalDto>(gendecArrivalVO);
+                errors = this.gendecArrivalBusiness.ValidateGendecArrivalInformation(gendecArrivalDto);
+                if (errors.Count == 0)
                 {
-                    node.RouteValues["Sequence"] = Sequence;
-                    node.RouteValues["AirlineCode"] = AirlineCode;
-                    node.RouteValues["FlightNumber"] = FlightNumber;
-                    node.RouteValues["ItineraryKey"] = ItineraryKey;
-                    node.RouteValues["ArrivalStation"] = ArrivalStation;
-                    node.RouteValues["DepartureStation"] = DepartureStation;
-                    node.RouteValues["EquipmentNumber"] = EquipmentNumber;
-                    node.RouteValues["DepartureDate"] = DepartureDate;
+                    this.TempData["OperationSuccess"] = Resource.SuccessEdit;
+                }
+                else
+                {
+                    this.TempData["ListErrorMessage"] = errors;
                 }
             }
-            catch (Exception exception)
+            catch (BusinessException exception)
             {
+                Logger.Error(string.Format(LogMessages.ErrorUpdate, this.catalogName, this.userInfo));
                 Logger.Error(exception.Message, exception);
+                Trace.TraceError(string.Format(LogMessages.ErrorUpdate, this.catalogName, this.userInfo));
                 Trace.TraceError(exception.Message, exception);
+                this.TempData["ErrorMessage"] = FrontMessage.GetExceptionErrorMessage(exception.Number);
             }
         }
 
         /// <summary>
-        /// Nots the contains airport.
+        /// Closes the general document.
+        /// </summary>
+        /// <param name="gendecArrivalVO">The general document arrival.</param>
+        private void Close(GendecArrivalVO gendecArrivalVO)
+        {
+            try
+            {
+                GendecArrivalDto gendecArrivalDto = new GendecArrivalDto();
+                gendecArrivalDto = Mapper.Map<GendecArrivalVO, GendecArrivalDto>(gendecArrivalVO);
+                this.gendecArrivalBusiness.CloseGendecArrival(gendecArrivalDto);
+                this.TempData["OperationSuccess"] = Resource.SuccessInactive;
+            }
+            catch (BusinessException exception)
+            {
+                Logger.Error(string.Format(LogMessages.ErrorDelete, this.catalogName, this.userInfo));
+                Logger.Error(exception.Message, exception);
+                Trace.TraceError(string.Format(LogMessages.ErrorDelete, this.catalogName, this.userInfo));
+                Trace.TraceError(exception.Message, exception);
+                this.TempData["ErrorMessage"] = FrontMessage.GetExceptionErrorMessage(exception.Number);
+            }
+        }
+
+        /// <summary>
+        /// Opens the general document.
+        /// </summary>
+        /// <param name="gendecArrivalVO">The general document arrival vo.</param>
+        private void Open(GendecArrivalVO gendecArrivalVO)
+        {
+            try
+            {
+                GendecArrivalDto gendecArrivalDto = new GendecArrivalDto();
+                gendecArrivalDto = Mapper.Map<GendecArrivalVO, GendecArrivalDto>(gendecArrivalVO);
+                this.gendecArrivalBusiness.OpenGendecArrival(gendecArrivalDto);
+                this.TempData["OperationSuccess"] = VOI.SISAC.Web.Resources.Resource.SuccessInactive;
+            }
+            catch (BusinessException exception)
+            {
+                Logger.Error(string.Format(LogMessages.ErrorDelete, this.catalogName, this.userInfo));
+                Logger.Error(exception.Message, exception);
+                Trace.TraceError(string.Format(LogMessages.ErrorDelete, this.catalogName, this.userInfo));
+                Trace.TraceError(exception.Message, exception);
+                this.TempData["ErrorMessage"] = FrontMessage.GetExceptionErrorMessage(exception.Number);
+            }
+        }
+
+        /// <summary>
+        /// Verify if the user has permission to enter the airport.
         /// </summary>
         /// <param name="stationCode">The station code.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
@@ -702,6 +612,7 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
             {
                 airports = userDto.UserAirports.Select(c => c.StationCode).ToList();
             }
+
             if (!airports.Contains(stationCode))
             {
                 return true;

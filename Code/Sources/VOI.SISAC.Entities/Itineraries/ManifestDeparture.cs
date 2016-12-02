@@ -336,11 +336,27 @@ namespace VOI.SISAC.Entities.Itineraries
         public virtual Itinerary Itinerary { get; set; }
 
         /// <summary>
+        /// Gets or sets the additional departure information.
+        /// </summary>
+        /// <value>
+        /// The additional departure information.
+        /// </value>
+        public virtual AdditionalDepartureInformation AdditionalDepartureInformation { get; set; }
+
+        /// <summary>
         /// Gets or sets the delays.
         /// </summary>
         /// <value>
         /// The delays.
         /// </value>
         public virtual IList<Delay> Delays { get; set; }
+
+        /// <summary>
+        /// Gets or sets the manifest departure boardings.
+        /// </summary>
+        /// <value>
+        /// The manifest departure boardings.
+        /// </value>
+        public virtual ICollection<ManifestDepartureBoarding> ManifestDepartureBoardings { get; set; }
     }
 }

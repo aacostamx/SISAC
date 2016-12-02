@@ -2401,4 +2401,67 @@ Ej. 01-15 (primeros quince días)</comment>
   <data name="SuccessfulLoadFileManual" xml:space="preserve">
     <value>File has been processed. Check loading log</value>
   </data>
+  <data name="ChargeKgs" xml:space="preserve">
+    <value>Charge (Kgs)</value>
+  </data>
+  <data name="ChargeQuantity" xml:space="preserve">
+    <value>Charge Quantity</value>
+  </data>
+  <data name="LuggageKgs" xml:space="preserve">
+    <value>Luggage (Kgs)</value>
+  </data>
+  <data name="LuggageQuantity" xml:space="preserve">
+    <value>Luggage Quantity</value>
+  </data>
+  <data name="MailKgs" xml:space="preserve">
+    <value>Mail (Kgs)</value>
+  </data>
+  <data name="MailQuantity" xml:space="preserve">
+    <value>Mail Quantity</value>
+  </data>
+  <data name="Minor" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="Boarding" xml:space="preserve">
+    <value>Boarding</value>
+  </data>
+  <data name="DelayDescription1" xml:space="preserve">
+    <value>Delay Description 1</value>
+  </data>
+  <data name="DelayDescription2" xml:space="preserve">
+    <value>Delay Description 2</value>
+  </data>
+  <data name="DelayDescription3" xml:space="preserve">
+    <value>Delay Description 3</value>
+  </data>
+  <data name="ExtraCrews" xml:space="preserve">
+    <value>ExtraCrews</value>
+  </data>
+  <data name="ManeuverStartTime" xml:space="preserve">
+    <value>Maneuver Start Time</value>
+  </data>
+  <data name="OvernightEndTime" xml:space="preserve">
+    <value>Overnight End Time</value>
+  </data>
+  <data name="Pilots" xml:space="preserve">
+    <value>Pilots</value>
+  </data>
+  <data name="PositionOutputTime" xml:space="preserve">
+    <value>Position Output Time</value>
+  </data>
+  <data name="SlotAllocatedTime" xml:space="preserve">
+    <value>Slot Allocated Time</value>
+  </data>
+  <data name="SlotCoordinatedTime" xml:space="preserve">
+    <value>Slot Coordinated Time</value>
+  </data>
+  <data name="Surcharges" xml:space="preserve">
+    <value>Surcharges</value>
+  </data>
+  <data name="TypeFlight" xml:space="preserve">
+    <value>Type Flight</value>
+  </data>
+  <data name="AdditionalInformation" xml:space="preserve">
+    <value>Additional Information</value>
+  </data>
 </root>

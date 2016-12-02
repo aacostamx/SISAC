@@ -4272,6 +4272,171 @@
             Note that the ContainerBuilder parameter is unique to this module.
             </remarks>
         </member>
+        <member name="T:VOI.SISAC.Business.Dto.Airports.AdditionalPassengerInformationDto">
+            <summary>
+            Additional passenger information data transfer object
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Airports.AdditionalPassengerInformationDto.Sequence">
+            <summary>
+            Gets or sets the sequence.
+            </summary>
+            <value>
+            The sequence.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Airports.AdditionalPassengerInformationDto.AirlineCode">
+            <summary>
+            Gets or sets the airline code.
+            </summary>
+            <value>
+            The airline code.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Airports.AdditionalPassengerInformationDto.FlightNumber">
+            <summary>
+            Gets or sets the flight number.
+            </summary>
+            <value>
+            The flight number.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Airports.AdditionalPassengerInformationDto.ItineraryKey">
+            <summary>
+            Gets or sets the itinerary key.
+            </summary>
+            <value>
+            The itinerary key.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Airports.AdditionalPassengerInformationDto.AdultNational">
+            <summary>
+            Gets or sets the adult national.
+            </summary>
+            <value>
+            The adult national.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Airports.AdditionalPassengerInformationDto.AdultInternational">
+            <summary>
+            Gets or sets the adult international.
+            </summary>
+            <value>
+            The adult international.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Airports.AdditionalPassengerInformationDto.MinorNational">
+            <summary>
+            Gets or sets the minor national.
+            </summary>
+            <value>
+            The minor national.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Airports.AdditionalPassengerInformationDto.MinorInternational">
+            <summary>
+            Gets or sets the minor international.
+            </summary>
+            <value>
+            The minor international.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Airports.AdditionalPassengerInformationDto.DiplomaticNational">
+            <summary>
+            Gets or sets the diplomatic national.
+            </summary>
+            <value>
+            The diplomatic national.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Airports.AdditionalPassengerInformationDto.DiplomaticInternational">
+            <summary>
+            Gets or sets the diplomatic international.
+            </summary>
+            <value>
+            The diplomatic international.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Airports.AdditionalPassengerInformationDto.CommissionNational">
+            <summary>
+            Gets or sets the commission national.
+            </summary>
+            <value>
+            The commission national.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Airports.AdditionalPassengerInformationDto.CommissionInternational">
+            <summary>
+            Gets or sets the commission international.
+            </summary>
+            <value>
+            The commission international.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Airports.AdditionalPassengerInformationDto.InfantNational">
+            <summary>
+            Gets or sets the infant national.
+            </summary>
+            <value>
+            The infant national.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Airports.AdditionalPassengerInformationDto.InfantInternational">
+            <summary>
+            Gets or sets the infant international.
+            </summary>
+            <value>
+            The infant international.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Airports.AdditionalPassengerInformationDto.TransitoryNational">
+            <summary>
+            Gets or sets the transitory national.
+            </summary>
+            <value>
+            The transitory national.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Airports.AdditionalPassengerInformationDto.TransitoryInternational">
+            <summary>
+            Gets or sets the transitory international.
+            </summary>
+            <value>
+            The transitory international.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Airports.AdditionalPassengerInformationDto.ConnectionNational">
+            <summary>
+            Gets or sets the connection national.
+            </summary>
+            <value>
+            The connection national.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Airports.AdditionalPassengerInformationDto.ConnectionInternational">
+            <summary>
+            Gets or sets the connection international.
+            </summary>
+            <value>
+            The connection international.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Airports.AdditionalPassengerInformationDto.OtherNational">
+            <summary>
+            Gets or sets the other national.
+            </summary>
+            <value>
+            The other national.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Airports.AdditionalPassengerInformationDto.OtherInternational">
+            <summary>
+            Gets or sets the other international.
+            </summary>
+            <value>
+            The other international.
+            </value>
+        </member>
         <member name="T:VOI.SISAC.Business.Dto.Airports.AirlineDto">
             <summary>
             Class Dto Airline
@@ -6111,6 +6276,14 @@
             Gets or sets Users information
             </summary>
         </member>
+        <member name="P:VOI.SISAC.Business.Dto.Airports.PassengerInformationDto.AdditonalInformation">
+            <summary>
+            Gets or sets the additional information.
+            </summary>
+            <value>
+            The additional information.
+            </value>
+        </member>
         <member name="T:VOI.SISAC.Business.Dto.Airports.ServiceDto">
             <summary>
             Data Transfer Objet for Services
@@ -6337,6 +6510,35 @@
             </summary>
             <value>
             The code + description.
+            </value>
+        </member>
+        <member name="T:VOI.SISAC.Business.Dto.Catalogs.MovementTypeDto">
+            <summary>
+            Movement TypeDto Class
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Catalogs.MovementTypeDto.MovementTypeCode">
+            <summary>
+            Gets or sets the movement type code.
+            </summary>
+            <value>
+            The movement type code.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Catalogs.MovementTypeDto.MovementDescription">
+            <summary>
+            Gets or sets the movement description.
+            </summary>
+            <value>
+            The movement description.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Catalogs.MovementTypeDto.Status">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:VOI.SISAC.Business.Dto.Catalogs.MovementTypeDto"/> is status.
+            </summary>
+            <value>
+              <c>true</c> if status; otherwise, <c>false</c>.
             </value>
         </member>
         <member name="T:VOI.SISAC.Business.Dto.Catalogs.OperationTypeDto">
@@ -6628,6 +6830,262 @@
             <summary>
             Jet Fuel Process Revert
             </summary>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalArrivalInformationDto.Sequence">
+            <summary>
+            Gets or sets the sequence.
+            </summary>
+            <value>
+            The sequence.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalArrivalInformationDto.AirlineCode">
+            <summary>
+            Gets or sets the airline code.
+            </summary>
+            <value>
+            The airline code.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalArrivalInformationDto.FlightNumber">
+            <summary>
+            Gets or sets the flight number.
+            </summary>
+            <value>
+            The flight number.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalArrivalInformationDto.ItineraryKey">
+            <summary>
+            Gets or sets the itinerary key.
+            </summary>
+            <value>
+            The itinerary key.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalArrivalInformationDto.Pilot">
+            <summary>
+            Gets or sets the pilot.
+            </summary>
+            <value>
+            The pilot.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalArrivalInformationDto.Surcharge">
+            <summary>
+            Gets or sets the surcharge.
+            </summary>
+            <value>
+            The surcharge.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalArrivalInformationDto.ExtraCrew">
+            <summary>
+            Gets or sets the extra crew.
+            </summary>
+            <value>
+            The extra crew.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalArrivalInformationDto.TypeFlight">
+            <summary>
+            Gets or sets the type flight.
+            </summary>
+            <value>
+            The type flight.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalArrivalInformationDto.SlotAllocatedTime">
+            <summary>
+            Gets or sets the slot allocated time.
+            </summary>
+            <value>
+            The slot allocated time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalArrivalInformationDto.SlotCoordinatedTime">
+            <summary>
+            Gets or sets the slot coordinated time.
+            </summary>
+            <value>
+            The slot coordinated time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalArrivalInformationDto.OvernightEndTime">
+            <summary>
+            Gets or sets the overnight end time.
+            </summary>
+            <value>
+            The overnight end time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalArrivalInformationDto.ManeuverStartTime">
+            <summary>
+            Gets or sets the maneuver start time.
+            </summary>
+            <value>
+            The maneuver start time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalArrivalInformationDto.PositionOutputTime">
+            <summary>
+            Gets or sets the position output time.
+            </summary>
+            <value>
+            The position output time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalArrivalInformationDto.DelayDescription1">
+            <summary>
+            Gets or sets the delay description1.
+            </summary>
+            <value>
+            The delay description1.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalArrivalInformationDto.DelayDescription2">
+            <summary>
+            Gets or sets the delay description2.
+            </summary>
+            <value>
+            The delay description2.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalArrivalInformationDto.DelayDescription3">
+            <summary>
+            Gets or sets the delay description3.
+            </summary>
+            <value>
+            The delay description3.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalDepartureInformationDto.Sequence">
+            <summary>
+            Gets or sets the sequence.
+            </summary>
+            <value>
+            The sequence.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalDepartureInformationDto.AirlineCode">
+            <summary>
+            Gets or sets the airline code.
+            </summary>
+            <value>
+            The airline code.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalDepartureInformationDto.FlightNumber">
+            <summary>
+            Gets or sets the flight number.
+            </summary>
+            <value>
+            The flight number.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalDepartureInformationDto.ItineraryKey">
+            <summary>
+            Gets or sets the itinerary key.
+            </summary>
+            <value>
+            The itinerary key.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalDepartureInformationDto.Pilot">
+            <summary>
+            Gets or sets the pilot.
+            </summary>
+            <value>
+            The pilot.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalDepartureInformationDto.Surcharge">
+            <summary>
+            Gets or sets the surcharge.
+            </summary>
+            <value>
+            The surcharge.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalDepartureInformationDto.ExtraCrew">
+            <summary>
+            Gets or sets the extra crew.
+            </summary>
+            <value>
+            The extra crew.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalDepartureInformationDto.TypeFlight">
+            <summary>
+            Gets or sets the type flight.
+            </summary>
+            <value>
+            The type flight.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalDepartureInformationDto.SlotAllocatedTime">
+            <summary>
+            Gets or sets the slot allocated time.
+            </summary>
+            <value>
+            The slot allocated time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalDepartureInformationDto.SlotCoordinatedTime">
+            <summary>
+            Gets or sets the slot coordinated time.
+            </summary>
+            <value>
+            The slot coordinated time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalDepartureInformationDto.OvernightEndTime">
+            <summary>
+            Gets or sets the overnight end time.
+            </summary>
+            <value>
+            The overnight end time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalDepartureInformationDto.ManeuverStartTime">
+            <summary>
+            Gets or sets the maneuver start time.
+            </summary>
+            <value>
+            The maneuver start time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalDepartureInformationDto.PositionOutputTime">
+            <summary>
+            Gets or sets the position output time.
+            </summary>
+            <value>
+            The position output time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalDepartureInformationDto.DelayDescription1">
+            <summary>
+            Gets or sets the delay description1.
+            </summary>
+            <value>
+            The delay description1.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalDepartureInformationDto.DelayDescription2">
+            <summary>
+            Gets or sets the delay description2.
+            </summary>
+            <value>
+            The delay description2.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AdditionalDepartureInformationDto.DelayDescription3">
+            <summary>
+            Gets or sets the delay description3.
+            </summary>
+            <value>
+            The delay description3.
+            </value>
         </member>
         <member name="T:VOI.SISAC.Business.Dto.Itineraries.ManifestArrivalDto">
             <summary>
@@ -6986,6 +7444,14 @@
             The itinerary.
             </value>
         </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestArrivalDto.AdditionalArrivalInformation">
+            <summary>
+            Gets or sets the additional arrival information.
+            </summary>
+            <value>
+            The additional arrival information.
+            </value>
+        </member>
         <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestArrivalDto.Delays">
             <summary>
             Gets or sets the delays.
@@ -7301,6 +7767,14 @@
             ItineraryDto Contructor
             </summary>
         </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ItineraryDto.Line">
+            <summary>
+            Gets or sets the line.
+            </summary>
+            <value>
+            The line.
+            </value>
+        </member>
         <member name="P:VOI.SISAC.Business.Dto.Itineraries.ItineraryDto.Sequence">
             <summary>
             Data of the flight sequence
@@ -7581,6 +8055,325 @@
             <summary>
             AirlineCodeCombobox
             </summary>
+        </member>
+        <member name="T:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDetailDto">
+            <summary>
+            ManifestDepartureBoardingDetailDto
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDetailDto.BoardingDetailID">
+            <summary>
+            Gets or sets the boarding detail identifier.
+            </summary>
+            <value>
+            The boarding detail identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDetailDto.BoardingID">
+            <summary>
+            Gets or sets the boarding identifier.
+            </summary>
+            <value>
+            The boarding identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDetailDto.CompartmentTypeID">
+            <summary>
+            Gets or sets the compartment type identifier.
+            </summary>
+            <value>
+            The compartment type identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDetailDto.LuggageQuantity">
+            <summary>
+            Gets or sets the luggage quantity.
+            </summary>
+            <value>
+            The luggage quantity.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDetailDto.LuggageKgs">
+            <summary>
+            Gets or sets the luggage KGS.
+            </summary>
+            <value>
+            The luggage KGS.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDetailDto.ChargeQuantity">
+            <summary>
+            Gets or sets the charge quantity.
+            </summary>
+            <value>
+            The charge quantity.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDetailDto.ChargeKgs">
+            <summary>
+            Gets or sets the charge KGS.
+            </summary>
+            <value>
+            The charge KGS.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDetailDto.Remarks">
+            <summary>
+            Gets or sets the remarks.
+            </summary>
+            <value>
+            The remarks.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDetailDto.RampResponsible">
+            <summary>
+            Gets or sets the ramp responsible.
+            </summary>
+            <value>
+            The ramp responsible.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDetailDto.AorUserID">
+            <summary>
+            Gets or sets the aor user identifier.
+            </summary>
+            <value>
+            The aor user identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDetailDto.CreationDate">
+            <summary>
+            Gets or sets the creation date.
+            </summary>
+            <value>
+            The creation date.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDetailDto.CompartmentTypeName">
+            <summary>
+            Gets or sets the name of the compartment type.
+            </summary>
+            <value>
+            The name of the compartment type.
+            </value>
+        </member>
+        <member name="T:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDto">
+            <summary>
+            ManifestDepartureBoardingDto
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDto.BoardingID">
+            <summary>
+            Gets or sets the boarding identifier.
+            </summary>
+            <value>
+            The boarding identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDto.Sequence">
+            <summary>
+            Gets or sets the sequence.
+            </summary>
+            <value>
+            The sequence.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDto.AirlineCode">
+            <summary>
+            Gets or sets the airline code.
+            </summary>
+            <value>
+            The airline code.
+            </value>        
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDto.FlightNumber">
+            <summary>
+            Gets or sets the flight number.
+            </summary>
+            <value>
+            The flight number.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDto.ItineraryKey">
+            <summary>
+            Gets or sets the itinerary key.
+            </summary>
+            <value>
+            The itinerary key.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDto.Position">
+            <summary>
+            Gets or sets the position.
+            </summary>
+            <value>
+            The position.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDto.Station">
+            <summary>
+            Gets or sets the station.
+            </summary>
+            <value>
+            The station.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDto.PassengerAdult">
+            <summary>
+            Gets or sets the passenger adult.
+            </summary>
+            <value>
+            The passenger adult.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDto.PassengerMinor">
+            <summary>
+            Gets or sets the passenger minor.
+            </summary>
+            <value>
+            The passenger minor.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDto.PassengerInfant">
+            <summary>
+            Gets or sets the passenger infant.
+            </summary>
+            <value>
+            The passenger infant.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDto.LuggageQuantity">
+            <summary>
+            Gets or sets the luggage quantity.
+            </summary>
+            <value>
+            The luggage quantity.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDto.LuggageKgs">
+            <summary>
+            Gets or sets the luggage KGS.
+            </summary>
+            <value>
+            The luggage KGS.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDto.ChargeQuantity">
+            <summary>
+            Gets or sets the charge quantity.
+            </summary>
+            <value>
+            The charge quantity.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDto.ChargeKgs">
+            <summary>
+            Gets or sets the charge KGS.
+            </summary>
+            <value>
+            The charge KGS.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDto.MailQuantity">
+            <summary>
+            Gets or sets the mail quantity.
+            </summary>
+            <value>
+            The mail quantity.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDto.MailKgs">
+            <summary>
+            Gets or sets the mail KGS.
+            </summary>
+            <value>
+            The mail KGS.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDto.ManifestDeparture">
+            <summary>
+            Gets or sets the manifest departure.
+            </summary>
+            <value>
+            The manifest departure.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDto.ManifestDepartureBoardingInformationDtos">
+            <summary>
+            Gets or sets the manifest departure boarding information dtos.
+            </summary>
+            <value>
+            The manifest departure boarding information dtos.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDto.ManifestDepartureBoardingDetailDtos">
+            <summary>
+            Gets or sets the manifest departure boarding detail dtos.
+            </summary>
+            <value>
+            The manifest departure boarding detail dtos.
+            </value>
+        </member>
+        <member name="T:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingInformationDto">
+            <summary>
+            ManifestDepartureBoardingInformationDto
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingInformationDto.BoardingInformationID">
+            <summary>
+            Gets or sets the boarding information identifier.
+            </summary>
+            <value>
+            The boarding information identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingInformationDto.BoardingID">
+            <summary>
+            Gets or sets the boarding identifier.
+            </summary>
+            <value>
+            The boarding identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingInformationDto.CompartmentTypeID">
+            <summary>
+            Gets or sets the compartment type identifier.
+            </summary>
+            <value>
+            The compartment type identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingInformationDto.CompartmentTypeInformationID">
+            <summary>
+            Gets or sets the compartment type information identifier.
+            </summary>
+            <value>
+            The compartment type information identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingInformationDto.Checked">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="!:ManifestDepartureBoardingInformation"/> is checked.
+            </summary>
+            <value>
+              <c>true</c> if checked; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingInformationDto.CompartmentTypeInformationName">
+            <summary>
+            Gets or sets the name of the compartment type information.
+            </summary>
+            <value>
+            The name of the compartment type information.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingInformationDto.CompartmentTypeName">
+            <summary>
+            Gets or sets the name of the compartment type.
+            </summary>
+            <value>
+            The name of the compartment type.
+            </value>
         </member>
         <member name="T:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureDto">
             <summary>
@@ -7955,12 +8748,368 @@
             The itinerary.
             </value>
         </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureDto.AdditionalDepartureInformation">
+            <summary>
+            Gets or sets the AdditionalDepartureInformation.
+            </summary>
+            <value>
+            The Additional Departure Information.
+            </value>
+        </member>
         <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureDto.Delays">
             <summary>
             Gets or sets the delays.
             </summary>
             <value>
             The delays.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureDto.ManifestDepartureBoardings">
+            <summary>
+            Gets or sets the manifest departure boardings.
+            </summary>
+            <value>
+            The manifest departure boardings.
+            </value>
+        </member>
+        <member name="T:VOI.SISAC.Business.Dto.Itineraries.AircraftMovementMessageDto">
+            <summary>
+            Aircraft movement message structure
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AircraftMovementMessageDto.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+            <value>
+            The title.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AircraftMovementMessageDto.DepartureInformation">
+            <summary>
+            Gets or sets the departure information.
+            </summary>
+            <value>
+            The departure information.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AircraftMovementMessageDto.ArrivalInformation">
+            <summary>
+            Gets or sets the arrival information.
+            </summary>
+            <value>
+            The arrival information.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AircraftMovementMessageDto.JetFuelInformation">
+            <summary>
+            Gets or sets the jet fuel information.
+            </summary>
+            <value>
+            The jet fuel information.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AircraftMovementMessageDto.DelaysInformation">
+            <summary>
+            Gets or sets the delays information.
+            </summary>
+            <value>
+            The delays information.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AircraftMovementMessageDto.CaptainsInformation">
+            <summary>
+            Gets or sets the captains information.
+            </summary>
+            <value>
+            The captains information.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AircraftMovementMessageDto.StewardessInformation">
+            <summary>
+            Gets or sets the stewardess information.
+            </summary>
+            <value>
+            The stewardess information.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AircraftMovementMessageDto.ChargeInformationTitle">
+            <summary>
+            Gets or sets the charge information title.
+            </summary>
+            <value>
+            The charge information title.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.AircraftMovementMessageDto.ChargeInformation">
+            <summary>
+            Gets or sets the charge information.
+            </summary>
+            <value>
+            The charge information.
+            </value>
+        </member>
+        <member name="T:VOI.SISAC.Business.Dto.Itineraries.TimelineMovementDto">
+            <summary>
+            TimelineMovementDto class
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineMovementDto.ID">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineMovementDto.Sequence">
+            <summary>
+            Gets or sets the sequence.
+            </summary>
+            <value>
+            The sequence.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineMovementDto.AirlineCode">
+            <summary>
+            Gets or sets the airline code.
+            </summary>
+            <value>
+            The airline code.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineMovementDto.FlightNumber">
+            <summary>
+            Gets or sets the flight number.
+            </summary>
+            <value>
+            The flight number.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineMovementDto.ItineraryKey">
+            <summary>
+            Gets or sets the itinerary key.
+            </summary>
+            <value>
+            The itinerary key.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineMovementDto.OperationTypeID">
+            <summary>
+            Gets or sets the operation type identifier.
+            </summary>
+            <value>
+            The operation type identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineMovementDto.MovementTypeCode">
+            <summary>
+            Gets or sets the movement type code.
+            </summary>
+            <value>
+            The movement type code.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineMovementDto.MovementDate">
+            <summary>
+            Gets or sets the movement date.
+            </summary>
+            <value>
+            The movement date.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineMovementDto.Position">
+            <summary>
+            Gets or sets the position.
+            </summary>
+            <value>
+            The position.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineMovementDto.ProviderNumber">
+            <summary>
+            Gets or sets the provider number.
+            </summary>
+            <value>
+            The provider number.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineMovementDto.RemainingFuel">
+            <summary>
+            Gets or sets the remaining fuel.
+            </summary>
+            <value>
+            The remaining fuel.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineMovementDto.Remarks">
+            <summary>
+            Gets or sets the remarks.
+            </summary>
+            <value>
+            The remarks.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineMovementDto.MovementType">
+            <summary>
+            Gets or sets the type of the movement.
+            </summary>
+            <value>
+            The type of the movement.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineMovementDto.OperationType">
+            <summary>
+            Gets or sets the type of the operation.
+            </summary>
+            <value>
+            The type of the operation.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineMovementDto.Provider">
+            <summary>
+            Gets or sets the provider.
+            </summary>
+            <value>
+            The provider.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineMovementDto.Timeline">
+            <summary>
+            Gets or sets the timeline.
+            </summary>
+            <value>
+            The timeline.
+            </value>
+        </member>
+        <member name="T:VOI.SISAC.Business.Dto.Itineraries.TimelineDto">
+            <summary>
+            TimelineDto class
+            </summary>
+        </member>
+        <member name="M:VOI.SISAC.Business.Dto.Itineraries.TimelineDto.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:VOI.SISAC.Business.Dto.Itineraries.TimelineDto"/> class.
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineDto.Sequence">
+            <summary>
+            Gets or sets the sequence.
+            </summary>
+            <value>
+            The sequence.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineDto.AirlineCode">
+            <summary>
+            Gets or sets the airline code.
+            </summary>
+            <value>
+            The airline code.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineDto.FlightNumber">
+            <summary>
+            Gets or sets the flight number.
+            </summary>
+            <value>
+            The flight number.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineDto.ItineraryKey">
+            <summary>
+            Gets or sets the itinerary key.
+            </summary>
+            <value>
+            The itinerary key.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineDto.PreviousSequence">
+            <summary>
+            Gets or sets the previous sequence.
+            </summary>
+            <value>
+            The previous sequence.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineDto.PreviousAirlineCode">
+            <summary>
+            Gets or sets the previous airline code.
+            </summary>
+            <value>
+            The previous airline code.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineDto.PreviousFlightNumber">
+            <summary>
+            Gets or sets the previous flight number.
+            </summary>
+            <value>
+            The previous flight number.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineDto.PreviousItineraryKey">
+            <summary>
+            Gets or sets the previous itinerary key.
+            </summary>
+            <value>
+            The previous itinerary key.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineDto.NextSequence">
+            <summary>
+            Gets or sets the next sequence.
+            </summary>
+            <value>
+            The next sequence.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineDto.NextAirlineCode">
+            <summary>
+            Gets or sets the next airline code.
+            </summary>
+            <value>
+            The next airline code.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineDto.NextFlightNumber">
+            <summary>
+            Gets or sets the next flight number.
+            </summary>
+            <value>
+            The next flight number.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineDto.NextItineraryKey">
+            <summary>
+            Gets or sets the next itinerary key.
+            </summary>
+            <value>
+            The next itinerary key.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineDto.SpecialCase">
+            <summary>
+            Gets or sets a value indicating whether [special case].
+            </summary>
+            <value>
+              <c>true</c> if [special case]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineDto.Itinerary">
+            <summary>
+            Gets or sets the itinerary.
+            </summary>
+            <value>
+            The itinerary.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineDto.TimelineMovements">
+            <summary>
+            Gets or sets the timeline movements.
+            </summary>
+            <value>
+            The timeline movements.
             </value>
         </member>
         <member name="T:VOI.SISAC.Business.Dto.Finances.AirportServiceContractDto">
@@ -16865,6 +18014,139 @@
             <param name="dto">The entity.</param>
             <returns>true if was updated else false</returns>
         </member>
+        <member name="T:VOI.SISAC.Business.Itineraries.AircraftMovementMessageBusiness">
+            <summary>
+            Implementation for the aircraft movement message
+            </summary>
+        </member>
+        <member name="F:VOI.SISAC.Business.Itineraries.AircraftMovementMessageBusiness.itineraryRepository">
+            <summary>
+            The Itinerary repository
+            </summary>
+        </member>
+        <member name="F:VOI.SISAC.Business.Itineraries.AircraftMovementMessageBusiness.nationalJetFuelRepository">
+            <summary>
+            The national jet fuel repository
+            </summary>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.AircraftMovementMessageBusiness.#ctor(VOI.SISAC.Dal.Repository.Itineraries.IItineraryRepository,VOI.SISAC.Dal.Repository.Airports.INationalJetFuelTicketRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:VOI.SISAC.Business.Itineraries.AircraftMovementMessageBusiness"/> class.
+            </summary>
+            <param name="itineraryRepository">The itinerary repository.</param>
+            <param name="nationalJetFuelRepository">The national jet fuel repository.</param>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.AircraftMovementMessageBusiness.GetAircraftMovementMessage(System.Int32,System.String,System.String,System.String)">
+            <summary>
+            Gets the information for the MTV message.
+            </summary>
+            <param name="sequence">The sequence.</param>
+            <param name="airlineCode">The airline code.</param>
+            <param name="flightNumber">The flight number.</param>
+            <param name="itineraryKey">The itinerary key.</param>
+            <returns>
+            Returns the information for the MVT message.
+            </returns>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.AircraftMovementMessageBusiness.SetCrewInformation(VOI.SISAC.Entities.Itineraries.Itinerary,System.String@,System.String@,System.Boolean)">
+            <summary>
+            Sets the crew information.
+            </summary>
+            <param name="itinerary">The itinerary.</param>
+            <param name="commanderInfo">The commander information.</param>
+            <param name="stewardessInfo">The stewardess information.</param>
+            <param name="isAirportFromMex">if set to <c>true</c> the airport is from Mexico.</param>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.AircraftMovementMessageBusiness.SetChargeInformation(VOI.SISAC.Entities.Itineraries.Itinerary,System.Boolean)">
+            <summary>
+            Sets the boarding and charge information.
+            </summary>
+            <param name="itinerary">The itinerary.</param>
+            <param name="isAirportFromMex">if set to <c>true</c> the airport is from Mexico.</param>
+            <returns>List of boarding and charge information.</returns>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.AircraftMovementMessageBusiness.SetDelaysInformationForMvt(VOI.SISAC.Entities.Itineraries.Itinerary,System.Boolean)">
+            <summary>
+            Sets the delays information for MVT. {For each delay: DL 00:1 AT ABASTECIMIENTO TARDIO DE COMISARIATO}
+            </summary>
+            <param name="itinerary">The itinerary.</param>
+            <param name="isAirportFromMex">if set to <c>true</c> the airport is from Mexico.</param>
+            <returns>List of delays.</returns>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.AircraftMovementMessageBusiness.SetDelayDescription(System.Double,System.String)">
+            <summary>
+            Sets the delay description.
+            </summary>
+            <param name="difference">The difference.</param>
+            <param name="description">The description.</param>
+            <returns>List with the delays.</returns>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.AircraftMovementMessageBusiness.SetArrivalInformationForMvt(VOI.SISAC.Entities.Itineraries.Itinerary,System.Boolean)">
+            <summary>
+            Sets the arrival information for MVT. { AD 0641/0705 EA 0742 CUL }
+            </summary>
+            <param name="itinerary">The itinerary.</param>
+            <param name="isAirportFromMex">if set to <c>true</c> the airport is from Mexico.</param>
+            <returns>The text for the arrival information.</returns>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.AircraftMovementMessageBusiness.SetJetFuelInformationForMvt(VOI.SISAC.Entities.Itineraries.Itinerary,System.Boolean)">
+            <summary>
+            Sets the jet fuel information for MVT. { FI 7500/5711LTS    Rem. 1520199302 }
+            </summary>
+            <param name="itinerary">The itinerary.</param>
+            <param name="isAirportFromMex">if set to <c>true</c> the airport is from Mexico.</param>
+            <returns>Text for the jet fuel information.</returns>
+        </member>
+        <member name="T:VOI.SISAC.Business.Itineraries.IAircraftMovementMessageBusiness">
+            <summary>
+            Interface for the aircraft movement message.
+            </summary>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.IAircraftMovementMessageBusiness.GetAircraftMovementMessage(System.Int32,System.String,System.String,System.String)">
+            <summary>
+            Gets the information for the MTV message.
+            </summary>
+            <param name="sequence">The sequence.</param>
+            <param name="airlineCode">The airline code.</param>
+            <param name="flightNumber">The flight number.</param>
+            <param name="itineraryKey">The itinerary key.</param>
+            <returns>
+            Returns the information for the MVT message.
+            </returns>
+        </member>
+        <member name="T:VOI.SISAC.Business.Itineraries.ITimelineMovementBusiness">
+            <summary>
+            ITimelineMovementBusiness interface
+            </summary>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.ITimelineMovementBusiness.AddTimelineMovement(VOI.SISAC.Business.Dto.Itineraries.TimelineMovementDto)">
+            <summary>
+            Adds the timeline movement.
+            </summary>
+            <param name="movement">The movement.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.ITimelineMovementBusiness.UpdateTimelineMovement(VOI.SISAC.Business.Dto.Itineraries.TimelineMovementDto)">
+            <summary>
+            Updates the timeline movement.
+            </summary>
+            <param name="movement">The movement.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.ITimelineMovementBusiness.DeleteTimelineMovement(VOI.SISAC.Business.Dto.Itineraries.TimelineMovementDto)">
+            <summary>
+            Deletes the timeline movement.
+            </summary>
+            <param name="movement">The movement.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.ITimelineMovementBusiness.GetTimelineMovement(VOI.SISAC.Business.Dto.Itineraries.TimelineMovementDto)">
+            <summary>
+            Gets the timeline movement.
+            </summary>
+            <param name="movementDto">The movement dto.</param>
+            <returns></returns>
+        </member>
         <member name="T:VOI.SISAC.Business.Itineraries.ManifestArrivalBusiness">
             <summary>
             Business logic operations
@@ -16885,6 +18167,11 @@
             The airport repository
             </summary>
         </member>
+        <member name="F:VOI.SISAC.Business.Itineraries.ManifestArrivalBusiness.additionalArrivalInformationRepository">
+            <summary>
+            The additional arrival information repository
+            </summary>
+        </member>
         <member name="F:VOI.SISAC.Business.Itineraries.ManifestArrivalBusiness.timeConfigRepository">
             <summary>
             The time configuration repository
@@ -16895,7 +18182,12 @@
             The itinerary repository
             </summary>
         </member>
-        <member name="M:VOI.SISAC.Business.Itineraries.ManifestArrivalBusiness.#ctor(VOI.SISAC.Dal.Infrastructure.IUnitOfWork,VOI.SISAC.Dal.Repository.Itineraries.IManifestArrivalRepository,VOI.SISAC.Dal.Repository.Airports.IAirportRepository,VOI.SISAC.Dal.Repository.Itineraries.IItineraryRepository,VOI.SISAC.Dal.Repository.Airports.IManifestTimeConfigRepository)">
+        <member name="F:VOI.SISAC.Business.Itineraries.ManifestArrivalBusiness.gendecDeparture">
+            <summary>
+            The departure general declaration
+            </summary>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.ManifestArrivalBusiness.#ctor(VOI.SISAC.Dal.Infrastructure.IUnitOfWork,VOI.SISAC.Dal.Repository.Itineraries.IManifestArrivalRepository,VOI.SISAC.Dal.Repository.Airports.IAirportRepository,VOI.SISAC.Dal.Repository.Itineraries.IItineraryRepository,VOI.SISAC.Dal.Repository.Airports.IManifestTimeConfigRepository,VOI.SISAC.Dal.Repository.Itineraries.IAdditionalArrivalInformationRepository,VOI.SISAC.Dal.Repository.Itineraries.IGendecDepartureRepository)">
             <summary>
             Initializes a new instance of the <see cref="T:VOI.SISAC.Business.Itineraries.ManifestArrivalBusiness" /> class.
             </summary>
@@ -16904,6 +18196,8 @@
             <param name="airportRepository">The airport repository.</param>
             <param name="itineraryRepository">The itinerary repository.</param>
             <param name="timeConfigRepository">The time configuration repository.</param>
+            <param name="additionalArrivalInformationRepository">The additional arrival information repository.</param>
+            <param name="gendecDeparture">The general declaration departure.</param>
         </member>
         <member name="M:VOI.SISAC.Business.Itineraries.ManifestArrivalBusiness.GetManifestArrivalForFlight(System.Int32,System.String,System.String,System.String)">
             <summary>
@@ -16921,7 +18215,7 @@
             <summary>
             Saves the arrival manifest.
             </summary>
-            <param name="manifestArrival"></param>
+            <param name="manifestArrival">Manifest arrival</param>
             <returns>
               <c>true</c> if success otherwise <c>false</c>.
             </returns>
@@ -16951,19 +18245,17 @@
             <summary>
             Opens the manifest.
             </summary>
-            <param name="manifestDeparture">The manifest departure.</param>
+            <param name="manifestArrival">The manifest departure.</param>
             <returns>
               <c>true</c> if the operation was success otherwise <c>false</c>.
             </returns>
         </member>
-        <member name="M:VOI.SISAC.Business.Itineraries.ManifestArrivalBusiness.SetPassengerInformation(VOI.SISAC.Business.Dto.Itineraries.ManifestArrivalDto,VOI.SISAC.Business.Dto.Airports.PassengerInformationDto,System.Boolean)">
+        <member name="M:VOI.SISAC.Business.Itineraries.ManifestArrivalBusiness.SetPassengerInformation(VOI.SISAC.Business.Dto.Itineraries.ManifestArrivalDto,VOI.SISAC.Business.Dto.Airports.PassengerInformationDto)">
             <summary>
             Sets the passenger information in the manifest.
             </summary>
             <param name="manifest">The manifest.</param>
             <param name="passengerInformation">The passenger information.</param>
-            <param name="isNational">if set to <c>true</c> [is national].</param>
-            <returns>Returns the arrival manifest with the passenger information from the itinerary.</returns>
         </member>
         <member name="M:VOI.SISAC.Business.Itineraries.ManifestArrivalBusiness.SetInformationInEntity(VOI.SISAC.Entities.Itineraries.ManifestArrival,VOI.SISAC.Business.Dto.Itineraries.ManifestArrivalDto)">
             <summary>
@@ -16972,12 +18264,26 @@
             <param name="entity">The entity.</param>
             <param name="dto">The data transfer object.</param>
         </member>
-        <member name="M:VOI.SISAC.Business.Itineraries.ManifestArrivalBusiness.SetDepartureInformation(VOI.SISAC.Business.Dto.Itineraries.ManifestArrivalDto,VOI.SISAC.Entities.Itineraries.Itinerary)">
+        <member name="M:VOI.SISAC.Business.Itineraries.ManifestArrivalBusiness.SetManifestDepartureInformation(VOI.SISAC.Business.Dto.Itineraries.ManifestArrivalDto,VOI.SISAC.Entities.Itineraries.Itinerary)">
             <summary>
             Sets the departure information.
             </summary>
-            <param name="manifestDto">The manifest dto.</param>
+            <param name="manifestDto">The manifest data transfer object.</param>
             <param name="itinerary">The itinerary.</param>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.ManifestArrivalBusiness.SetGendecDepartureInformation(VOI.SISAC.Business.Dto.Itineraries.ManifestArrivalDto,VOI.SISAC.Entities.Itineraries.Itinerary)">
+            <summary>
+            Sets the general declaration departure information.
+            </summary>
+            <param name="manifestDto">The manifest data transfer object.</param>
+            <param name="itinerary">The itinerary.</param>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.ManifestArrivalBusiness.UpdateAdditional(VOI.SISAC.Entities.Itineraries.ManifestArrival,VOI.SISAC.Entities.Itineraries.AdditionalArrivalInformation)">
+            <summary>
+            Updates the additional.
+            </summary>
+            <param name="entity">The entity.</param>
+            <param name="additional">The additional.</param>
         </member>
         <member name="T:VOI.SISAC.Business.Itineraries.IManifestArrivalBusiness">
             <summary>
@@ -16998,7 +18304,7 @@
             <summary>
             Saves the arrival manifest.
             </summary>
-            <param name="manifestDeparture">The arrival manifest.</param>
+            <param name="manifestArrival">The arrival manifest.</param>
             <returns><c>true</c> if success otherwise <c>false</c>.</returns>
         </member>
         <member name="M:VOI.SISAC.Business.Itineraries.IManifestArrivalBusiness.CloseManifest(VOI.SISAC.Business.Dto.Itineraries.ManifestArrivalDto)">
@@ -17012,7 +18318,7 @@
             <summary>
             Opens the manifest.
             </summary>
-            <param name="manifestDeparture">The arrival manifest.</param>
+            <param name="manifestArrival">The arrival manifest.</param>
             <returns><c>true</c> if the operation was success otherwise <c>false</c>.</returns>
         </member>
         <member name="M:VOI.SISAC.Business.Itineraries.IManifestArrivalBusiness.GetDelaysForManifest(System.Int32,System.String,System.String,System.String)">
@@ -17029,6 +18335,34 @@
             <summary>
             ITimelineBusiness
             </summary>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.ITimelineBusiness.GetTimelineByFlight(VOI.SISAC.Business.Dto.Itineraries.TimelineDto)">
+            <summary>
+            Gets the timeline by flight.
+            </summary>
+            <param name="flight">The flight.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.ITimelineBusiness.GetFullTimeline">
+            <summary>
+            Gets the full timeline.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.ITimelineBusiness.GetTimelineByEquipmentNumber(VOI.SISAC.Business.Dto.Itineraries.TimelineDto)">
+            <summary>
+            Gets the timeline by equipment number.
+            </summary>
+            <param name="flight">The flight.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.ITimelineBusiness.TimelineStartProcress(System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Timelines the start procress.
+            </summary>
+            <param name="startDate">The start date.</param>
+            <param name="endDate">The end date.</param>
+            <returns></returns>
         </member>
         <member name="T:VOI.SISAC.Business.Itineraries.IManifestDepartureBusiness">
             <summary>
@@ -17076,6 +18410,88 @@
             <param name="itineraryKey">The itinerary key.</param>
             <returns>List of delays in the manifest departure.</returns>
         </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.IManifestDepartureBusiness.GetBoardingForManifest(System.Int32,System.String,System.String,System.String)">
+            <summary>
+            Gets the boarding for manifest.
+            </summary>
+            <param name="sequence">The sequence.</param>
+            <param name="airlineCode">The airline code.</param>
+            <param name="flightNumber">The flight number.</param>
+            <param name="itineraryKey">The itinerary key.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.IManifestDepartureBusiness.GetBoardingInformationForManifest(System.Int64,System.String)">
+            <summary>
+            Gets the boarding information for manifest.
+            </summary>
+            <param name="boardingID">The boarding identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.IManifestDepartureBusiness.GetBoardingDetailForManifest(System.Int64,System.String)">
+            <summary>
+            Gets the boarding detail for manifest.
+            </summary>
+            <param name="boardingID">The boarding identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="T:VOI.SISAC.Business.Itineraries.TimelineMovementBusiness">
+            <summary>
+            TimelineMovementBusiness class
+            </summary>
+            <seealso cref="T:VOI.SISAC.Business.Itineraries.ITimelineMovementBusiness" />
+        </member>
+        <member name="F:VOI.SISAC.Business.Itineraries.TimelineMovementBusiness.unitOfWork">
+            <summary>
+            Unit of Work
+            </summary>
+        </member>
+        <member name="F:VOI.SISAC.Business.Itineraries.TimelineMovementBusiness.movementRepository">
+            <summary>
+            The timeline repository
+            </summary>
+        </member>
+        <member name="F:VOI.SISAC.Business.Itineraries.TimelineMovementBusiness.timelineRepository">
+            <summary>
+            The timeline repository
+            </summary>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.TimelineMovementBusiness.#ctor(VOI.SISAC.Dal.Infrastructure.IUnitOfWork,VOI.SISAC.Dal.Repository.Itineraries.ITimelineMovementRepository,VOI.SISAC.Dal.Repository.Itineraries.ITimelineRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:VOI.SISAC.Business.Itineraries.TimelineMovementBusiness"/> class.
+            </summary>
+            <param name="unitOfWork">The unit of work.</param>
+            <param name="movementRepository">The movement repository.</param>
+            <param name="timelineRepository">The timeline repository.</param>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.TimelineMovementBusiness.AddTimelineMovement(VOI.SISAC.Business.Dto.Itineraries.TimelineMovementDto)">
+            <summary>
+            Adds the timeline movement.
+            </summary>
+            <param name="movement">The movement.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.TimelineMovementBusiness.UpdateTimelineMovement(VOI.SISAC.Business.Dto.Itineraries.TimelineMovementDto)">
+            <summary>
+            Updates the timeline movement.
+            </summary>
+            <param name="movement">The movement.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.TimelineMovementBusiness.DeleteTimelineMovement(VOI.SISAC.Business.Dto.Itineraries.TimelineMovementDto)">
+            <summary>
+            Deletes the timeline movement.
+            </summary>
+            <param name="movement">The movement.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.TimelineMovementBusiness.GetTimelineMovement(VOI.SISAC.Business.Dto.Itineraries.TimelineMovementDto)">
+            <summary>
+            Gets the timeline movement.
+            </summary>
+            <param name="movement">The movement dto.</param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
         <member name="T:VOI.SISAC.Business.Itineraries.TimelineBusiness">
             <summary>
             TimelineBusiness class
@@ -17087,11 +18503,49 @@
             Unit of Work
             </summary>
         </member>
-        <member name="M:VOI.SISAC.Business.Itineraries.TimelineBusiness.#ctor(VOI.SISAC.Dal.Infrastructure.IUnitOfWork)">
+        <member name="F:VOI.SISAC.Business.Itineraries.TimelineBusiness.timelineRepository">
             <summary>
-            Initializes a new instance of the <see cref="T:VOI.SISAC.Business.Itineraries.TimelineBusiness" /> class.
+            The timeline repository
+            </summary>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.TimelineBusiness.#ctor(VOI.SISAC.Dal.Infrastructure.IUnitOfWork,VOI.SISAC.Dal.Repository.Itineraries.ITimelineRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:VOI.SISAC.Business.Itineraries.TimelineBusiness"/> class.
             </summary>
             <param name="unitOfWork">The unit of work.</param>
+            <param name="timelineRepository">The timeline repository.</param>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.TimelineBusiness.GetTimelineByFlight(VOI.SISAC.Business.Dto.Itineraries.TimelineDto)">
+            <summary>
+            Gets the timeline by flight.
+            </summary>
+            <param name="flight">The flight.</param>
+            <returns></returns>
+            <exception cref="T:VOI.SISAC.Business.ExceptionBusiness.BusinessException"></exception>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.TimelineBusiness.GetFullTimeline">
+            <summary>
+            Gets the full timeline.
+            </summary>
+            <returns></returns>
+            <exception cref="T:VOI.SISAC.Business.ExceptionBusiness.BusinessException"></exception>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.TimelineBusiness.GetTimelineByEquipmentNumber(VOI.SISAC.Business.Dto.Itineraries.TimelineDto)">
+            <summary>
+            Gets the timeline by equipment number.
+            </summary>
+            <param name="flight">The flight.</param>
+            <returns></returns>
+            <exception cref="T:VOI.SISAC.Business.ExceptionBusiness.BusinessException"></exception>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.TimelineBusiness.TimelineStartProcress(System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Timelines the start procress.
+            </summary>
+            <param name="startDate">The start date.</param>
+            <param name="endDate">The end date.</param>
+            <returns></returns>
+            <exception cref="T:VOI.SISAC.Business.ExceptionBusiness.BusinessException"></exception>
         </member>
         <member name="T:VOI.SISAC.Business.Itineraries.ManifestDepartureBusiness">
             <summary>
@@ -17106,6 +18560,26 @@
         <member name="F:VOI.SISAC.Business.Itineraries.ManifestDepartureBusiness.manifestRepository">
             <summary>
             The manifest repository
+            </summary>
+        </member>
+        <member name="F:VOI.SISAC.Business.Itineraries.ManifestDepartureBusiness.manifestBoardingRepository">
+            <summary>
+            The manifest boarding repository
+            </summary>
+        </member>
+        <member name="F:VOI.SISAC.Business.Itineraries.ManifestDepartureBusiness.manifestBoardingInformationRepository">
+            <summary>
+            The manifest boarding repository
+            </summary>
+        </member>
+        <member name="F:VOI.SISAC.Business.Itineraries.ManifestDepartureBusiness.manifestBoardingDetailRepository">
+            <summary>
+            The manifest boarding detail repository
+            </summary>
+        </member>
+        <member name="F:VOI.SISAC.Business.Itineraries.ManifestDepartureBusiness.additionalDepartureInformationRepository">
+            <summary>
+            The additional departure information repository
             </summary>
         </member>
         <member name="F:VOI.SISAC.Business.Itineraries.ManifestDepartureBusiness.airportRepository">
@@ -17123,15 +18597,19 @@
             The time configuration repository
             </summary>
         </member>
-        <member name="M:VOI.SISAC.Business.Itineraries.ManifestDepartureBusiness.#ctor(VOI.SISAC.Dal.Infrastructure.IUnitOfWork,VOI.SISAC.Dal.Repository.Itineraries.IManifestDepartureRepository,VOI.SISAC.Dal.Repository.Airports.IAirportRepository,VOI.SISAC.Dal.Repository.Itineraries.IItineraryRepository,VOI.SISAC.Dal.Repository.Airports.IManifestTimeConfigRepository)">
+        <member name="M:VOI.SISAC.Business.Itineraries.ManifestDepartureBusiness.#ctor(VOI.SISAC.Dal.Infrastructure.IUnitOfWork,VOI.SISAC.Dal.Repository.Itineraries.IManifestDepartureRepository,VOI.SISAC.Dal.Repository.Airports.IAirportRepository,VOI.SISAC.Dal.Repository.Itineraries.IItineraryRepository,VOI.SISAC.Dal.Repository.Airports.IManifestTimeConfigRepository,VOI.SISAC.Dal.Repository.Itineraries.IManifestDepartureBoardingRepository,VOI.SISAC.Dal.Repository.Itineraries.IAdditionalDepartureInformationRepository,VOI.SISAC.Dal.Repository.Itineraries.IManifestDepartureBoardingInformationRepository,VOI.SISAC.Dal.Repository.Itineraries.IManifestDepartureBoardingDetailRepository)">
             <summary>
-            Initializes a new instance of the <see cref="T:VOI.SISAC.Business.Itineraries.ManifestDepartureBusiness" /> class.
+            Initializes a new instance of the <see cref="T:VOI.SISAC.Business.Itineraries.ManifestDepartureBusiness"/> class.
             </summary>
             <param name="unitOfWork">The unit of work.</param>
             <param name="manifestRepository">The manifest repository.</param>
             <param name="airportRepository">The airport repository.</param>
             <param name="itineraryRepository">The itinerary repository.</param>
             <param name="timeConfigRepository">The time configuration repository.</param>
+            <param name="manifestBoardingRepository">The manifest boarding repository.</param>
+            <param name="additionalDepartureInformationRepository">The additional departure information repository.</param>
+            <param name="manifestBoardingInformationRepository">The manifest boarding information repository.</param>
+            <param name="manifestBoardingDetailRepository">The manifest boarding detail repository.</param>
         </member>
         <member name="M:VOI.SISAC.Business.Itineraries.ManifestDepartureBusiness.GetManifestDepartureForFlight(System.Int32,System.String,System.String,System.String)">
             <summary>
@@ -17164,6 +18642,32 @@
             <param name="itineraryKey">The itinerary key.</param>
             <returns>List of delays in the manifest departure.</returns>
         </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.ManifestDepartureBusiness.GetBoardingForManifest(System.Int32,System.String,System.String,System.String)">
+            <summary>
+            Gets the boarding for manifest.
+            </summary>
+            <param name="sequence">The sequence.</param>
+            <param name="airlineCode">The airline code.</param>
+            <param name="flightNumber">The flight number.</param>
+            <param name="itineraryKey">The itinerary key.</param>
+            <returns>Information about boarding in the manifest.</returns>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.ManifestDepartureBusiness.GetBoardingInformationForManifest(System.Int64,System.String)">
+            <summary>
+            Gets the boarding information for manifest.
+            </summary>
+            <param name="boardingID">The boarding identifier.</param>
+            <returns></returns>
+            <exception cref="T:VOI.SISAC.Business.ExceptionBusiness.BusinessException"></exception>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.ManifestDepartureBusiness.GetBoardingDetailForManifest(System.Int64,System.String)">
+            <summary>
+            Gets the boarding detail for manifest.
+            </summary>
+            <param name="boardingID">The boarding identifier.</param>
+            <returns></returns>
+            <exception cref="T:VOI.SISAC.Business.ExceptionBusiness.BusinessException"></exception>
+        </member>
         <member name="M:VOI.SISAC.Business.Itineraries.ManifestDepartureBusiness.CloseManifest(VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureDto)">
             <summary>
             Closes the manifest.
@@ -17182,6 +18686,20 @@
               <c>true</c> if the operation was success otherwise <c>false</c>.
             </returns>
         </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.ManifestDepartureBusiness.UpdateAdditional(VOI.SISAC.Entities.Itineraries.ManifestDeparture,VOI.SISAC.Entities.Itineraries.AdditionalDepartureInformation)">
+            <summary>
+            Updates the additional.
+            </summary>
+            <param name="entity">The entity.</param>
+            <param name="additional">The additional.</param>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.ManifestDepartureBusiness.UpdateBoarding(VOI.SISAC.Entities.Itineraries.ManifestDeparture,System.Collections.Generic.IList{VOI.SISAC.Entities.Itineraries.ManifestDepartureBoarding})">
+            <summary>
+            Updates the boarding.
+            </summary>
+            <param name="manifestDeparture">The manifest departure.</param>
+            <param name="boardings">The boarding.</param>
+        </member>
         <member name="M:VOI.SISAC.Business.Itineraries.ManifestDepartureBusiness.SetPassengerInformation(VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureDto,VOI.SISAC.Business.Dto.Airports.PassengerInformationDto,System.Boolean)">
             <summary>
             Sets the passenger information in the manifest.
@@ -17198,6 +18716,11 @@
             <param name="entity">The entity.</param>
             <param name="dto">The data transfer object.</param>
         </member>
+        <member name="T:VOI.SISAC.Business.Itineraries.GendecArrivalBusiness">
+            <summary>
+            General document business
+            </summary>
+        </member>
         <member name="F:VOI.SISAC.Business.Itineraries.GendecArrivalBusiness.unitOfWork">
             <summary>
             unit Of Work
@@ -17205,7 +18728,7 @@
         </member>
         <member name="F:VOI.SISAC.Business.Itineraries.GendecArrivalBusiness.gendecArrivalRepository">
             <summary>
-            Gendec Arrival Repository
+            General document Arrival Repository
             </summary>
         </member>
         <member name="F:VOI.SISAC.Business.Itineraries.GendecArrivalBusiness.itineraryRepository">
@@ -17213,93 +18736,150 @@
             The itinerary repository
             </summary>
         </member>
-        <member name="M:VOI.SISAC.Business.Itineraries.GendecArrivalBusiness.#ctor(VOI.SISAC.Dal.Infrastructure.IUnitOfWork,VOI.SISAC.Dal.Repository.Itineraries.IGendecArrivalRepository,VOI.SISAC.Dal.Repository.Itineraries.IItineraryRepository)">
+        <member name="F:VOI.SISAC.Business.Itineraries.GendecArrivalBusiness.crewRepository">
             <summary>
-            Get the methods of each repository
+            The crew repository
             </summary>
-            <param name="unitOfWork">unit of work</param>
-            <param name="gendecArrivalRepository">gendec arrival repository</param>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.GendecArrivalBusiness.#ctor(VOI.SISAC.Dal.Infrastructure.IUnitOfWork,VOI.SISAC.Dal.Repository.Itineraries.IGendecArrivalRepository,VOI.SISAC.Dal.Repository.Itineraries.IItineraryRepository,VOI.SISAC.Dal.Repository.Airports.ICrewRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:VOI.SISAC.Business.Itineraries.GendecArrivalBusiness" /> class.
+            </summary>
+            <param name="unitOfWork">The unit of work.</param>
+            <param name="gendecArrivalRepository">The general document arrival repository.</param>
+            <param name="itineraryRepository">The itinerary repository.</param>
+            <param name="crewRepository">The crew repository.</param>
         </member>
         <member name="M:VOI.SISAC.Business.Itineraries.GendecArrivalBusiness.GetGendecArrival(System.Int32,System.String,System.String,System.String)">
             <summary>
-            Get Gendec Arrvial of a Flight
+            Gets the general document arrival.
             </summary>
-            <param name="sequence">sequence</param>
-            <param name="airlinecode">airline code</param>
-            <param name="flightnumber">flight number</param>
-            <param name="itinerarykey">itinerary key</param>
-            <returns></returns>
-        </member>
-        <member name="M:VOI.SISAC.Business.Itineraries.GendecArrivalBusiness.SendingEmail(VOI.SISAC.Business.Dto.Itineraries.GendecArrivalDto)">
-            <summary>
-            Sendings the email.
-            </summary>
-            <param name="gendecArrivalDto">The gendec arrival dto.</param>
-            <returns></returns>
+            <param name="sequence">The sequence.</param>
+            <param name="airlineCode">The airline code.</param>
+            <param name="flightNumber">The flight number.</param>
+            <param name="itineraryKey">The itinerary key.</param>
+            <returns>
+            Arrival General Document data transfer object.
+            </returns>
         </member>
         <member name="M:VOI.SISAC.Business.Itineraries.GendecArrivalBusiness.ValidateGendecArrivalInformation(VOI.SISAC.Business.Dto.Itineraries.GendecArrivalDto)">
             <summary>
-            Validates the gendec arrival information.
+            Validates the general document arrival information.
             </summary>
-            <param name="gendecArrivalDto">The gendec arrival dto.</param>
-            <returns></returns>
+            <param name="gendecArrivalDto">The general document arrival.</param>
+            <returns>
+            List of possible errors. If the list is empty the operation was success.
+            </returns>
         </member>
         <member name="M:VOI.SISAC.Business.Itineraries.GendecArrivalBusiness.AddGendecArrival(VOI.SISAC.Business.Dto.Itineraries.GendecArrivalDto)">
             <summary>
-            Adds the gendec arrival.
+            Adds the general document arrival.
             </summary>
-            <param name="gendecArrivalDto">The gendec arrival dto.</param>
-            <returns></returns>
-            <exception cref="T:VOI.SISAC.Business.ExceptionBusiness.BusinessException"></exception>
+            <param name="gendecArrivalDto">The general document arrival.</param>
+            <returns>
+              <c>true</c> if success, otherwise <c>false</c>.
+            </returns>
         </member>
         <member name="M:VOI.SISAC.Business.Itineraries.GendecArrivalBusiness.UpdateGendecArrival(VOI.SISAC.Business.Dto.Itineraries.GendecArrivalDto)">
             <summary>
-            Updates the gendec arrival.
+            Updates the general document arrival.
             </summary>
-            <param name="gendecArrivalDto">The gendec arrival dto.</param>
-            <returns></returns>
-            <exception cref="T:VOI.SISAC.Business.ExceptionBusiness.BusinessException"></exception>
+            <param name="gendecArrivalDto">The general document arrival.</param>
+            <returns>
+              <c>true</c> if success, otherwise <c>false</c>.
+            </returns>
         </member>
         <member name="M:VOI.SISAC.Business.Itineraries.GendecArrivalBusiness.CloseGendecArrival(VOI.SISAC.Business.Dto.Itineraries.GendecArrivalDto)">
             <summary>
-            Closes the gendec arrival.
+            Closes the general document arrival.
             </summary>
-            <param name="gendecArrivalDto">The gendec arrival dto.</param>
-            <returns></returns>
-            <exception cref="T:VOI.SISAC.Business.ExceptionBusiness.BusinessException"></exception>
+            <param name="gendecArrivalDto">The general document arrival.</param>
+            <returns>
+              <c>true</c> if success, otherwise <c>false</c>.
+            </returns>
         </member>
         <member name="M:VOI.SISAC.Business.Itineraries.GendecArrivalBusiness.OpenGendecArrival(VOI.SISAC.Business.Dto.Itineraries.GendecArrivalDto)">
             <summary>
-            Opens the gendec arrival.
+            Opens the general document arrival.
             </summary>
-            <param name="gendecArrivalDto">The gendec arrival dto.</param>
-            <returns></returns>
-            <exception cref="T:VOI.SISAC.Business.ExceptionBusiness.BusinessException"></exception>
+            <param name="gendecArrivalDto">The general document arrival.</param>
+            <returns>
+              <c>true</c> if success, otherwise <c>false</c>.
+            </returns>
         </member>
-        <member name="M:VOI.SISAC.Business.Itineraries.GendecArrivalBusiness.MailConfiguration(VOI.SISAC.Business.Dto.Itineraries.GendecArrivalDto)">
+        <member name="M:VOI.SISAC.Business.Itineraries.GendecArrivalBusiness.SetGendecDepartureInformation(VOI.SISAC.Entities.Itineraries.GendecArrival,VOI.SISAC.Entities.Itineraries.GendecDeparture)">
             <summary>
-            Mails the configuration.
+            Sets the departure general document information into GENDEC.
             </summary>
-            <param name="gendecArrivalDto">The gendec arrival dto.</param>
-            <returns></returns>
+            <param name="arrival">The arrival general document.</param>
+            <param name="departure">The departure general document.</param>
         </member>
-        <member name="M:VOI.SISAC.Business.Itineraries.GendecArrivalBusiness.ConfigMailManifiesto(System.String)">
+        <member name="M:VOI.SISAC.Business.Itineraries.GendecArrivalBusiness.SetManifestDepartureInformation(VOI.SISAC.Entities.Itineraries.GendecArrival,VOI.SISAC.Entities.Itineraries.ManifestDeparture)">
             <summary>
-            Configurations the mail manifiesto.
+            Sets the departure manifest information into GENDEC.
             </summary>
-            <param name="sitio">The sitio.</param>
-            <returns></returns>
+            <param name="arrival">The arrival general document.</param>
+            <param name="departure">The departure manifest.</param>
         </member>
         <member name="T:VOI.SISAC.Business.Itineraries.IGendecArrivalBusiness">
             <summary>
-            Gendec Arrival Business Interface
+            General document Arrival Business Interface
             </summary>
         </member>
         <member name="M:VOI.SISAC.Business.Itineraries.IGendecArrivalBusiness.GetGendecArrival(System.Int32,System.String,System.String,System.String)">
             <summary>
             Obtain the Arrival Departure of a Departure Flight.
             </summary>
-            <returns></returns>
+            <param name="sequence">The sequence.</param>
+            <param name="airlineCode">The airline code.</param>
+            <param name="flightNumber">The flight number.</param>
+            <param name="itineraryKey">The itinerary key.</param>
+            <returns>
+            The information of the general document.
+            </returns>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.IGendecArrivalBusiness.ValidateGendecArrivalInformation(VOI.SISAC.Business.Dto.Itineraries.GendecArrivalDto)">
+            <summary>
+            Validates the general document arrival information.
+            </summary>
+            <param name="gendecArrivalDto">The general document arrival.</param>
+            <returns>
+            List of possible errors. If the list is empty the operation was success.
+            </returns>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.IGendecArrivalBusiness.AddGendecArrival(VOI.SISAC.Business.Dto.Itineraries.GendecArrivalDto)">
+            <summary>
+            Adds the general document arrival.
+            </summary>
+            <param name="gendecArrivalDto">The general document arrival.</param>
+            <returns>
+              <c>true</c> if success, otherwise <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.IGendecArrivalBusiness.UpdateGendecArrival(VOI.SISAC.Business.Dto.Itineraries.GendecArrivalDto)">
+            <summary>
+            Updates the general document document arrival.
+            </summary>
+            <param name="gendecArrivalDto">The general document document arrival.</param>
+            <returns>
+              <c>true</c> if success, otherwise <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.IGendecArrivalBusiness.CloseGendecArrival(VOI.SISAC.Business.Dto.Itineraries.GendecArrivalDto)">
+            <summary>
+            Closes the general document arrival.
+            </summary>
+            <param name="gendecArrivalDto">The general document arrival.</param>
+            <returns>
+              <c>true</c> if success, otherwise <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.IGendecArrivalBusiness.OpenGendecArrival(VOI.SISAC.Business.Dto.Itineraries.GendecArrivalDto)">
+            <summary>
+            Opens the general document arrival.
+            </summary>
+            <param name="gendecArrivalDto">The general document arrival.</param>
+            <returns><c>true</c> if success, otherwise <c>false</c>.</returns>
         </member>
         <member name="T:VOI.SISAC.Business.Itineraries.GendecDepartureBusiness">
             <summary>

@@ -245,7 +245,7 @@ var commonFunctions = {
     },
 
     validateNumeric: function (e) {
-        commonFunctions.Uppercase(Control);
+        //commonFunctions.Uppercase(Control);
         var tecla = e.which || e.keyCode;
         if (tecla == 8 || tecla == 9) return true;
 
@@ -270,8 +270,8 @@ var commonFunctions = {
 
 $(document).ready(commonFunctions.initDoc);
 
-window.onerror = function (message, url, linenumber) {
-    console.log('Message: ' + message);
-    console.log('URL: ' + url);
-    console.log('Line: ' + linenumber);
-}
+//window.onerror = function (message, url, linenumber) {
+//    console.log('Message: ' + message);
+//    console.log('URL: ' + url);
+//    console.log('Line: ' + linenumber);
+//}

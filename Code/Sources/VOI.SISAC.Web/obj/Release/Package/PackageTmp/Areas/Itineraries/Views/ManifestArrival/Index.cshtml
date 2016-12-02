@@ -6,7 +6,6 @@
 }
 
 @Styles.Render("~/Content/bootstraptablecss")
-@Styles.Render("~/Content/bootstraptablecss")
 @Styles.Render("~/bundles/CSSbootstrapCombobox")
 @Styles.Render("~/Content/bootstrapdtimecss")
 @Styles.Render("~/bundles/SweetAlertCSS")
@@ -621,19 +620,47 @@
                 </div>
             </div>
         </div>
+        if (Model.ArrivalStationCode == "MEX")
+        {
+            @Html.Partial("Partial/_AdditionalInformation")
+            <input type="hidden" name="Pilot" id="Pilot" value="@Model.Pilot" />
+            <input type="hidden" name="Surcharge" id="Surcharge" value="@Model.Surcharge" />
+            <input type="hidden" name="ExtraCrew" id="ExtraCrew" value="@Model.ExtraCrew" />
+            <input type="hidden" name="TypeFlight" id="TypeFlight" value="@Model.TypeFlight" />
+            <input type="hidden" name="SlotAllocatedTime" id="SlotAllocatedTime" value="@Model.SlotAllocatedTime" />
+            <input type="hidden" name="SlotCoordinatedTime" id="SlotCoordinatedTime" value="@Model.SlotCoordinatedTime" />
+            <input type="hidden" name="ManeuverStartTime" id="ManeuverStartTime" value="@Model.ManeuverStartTime" />
+            <input type="hidden" name="OvernightEndTime" id="OvernightEndTime" value="@Model.OvernightEndTime" />
+            <input type="hidden" name="PositionOutputTime" id="PositionOutputTime" value="@Model.PositionOutputTime" />
+            <input type="hidden" name="FirstDelayDescription" id="FirstDelayDescription" value="@Model.FirstDelayDescription" />
+            <input type="hidden" name="SecondDelayDescription" id="SecondDelayDescription" value="@Model.SecondDelayDescription" />
+            <input type="hidden" name="ThirdDelayDescription" id="ThirdDelayDescription" value="@Model.ThirdDelayDescription" />
+        }
         <div class="row">
             <button type="button" class="btn btn-default" name="back-btn" title="@Resource.Back" onclick="location.href='@Url.Action("Index", "Itinerary")'" tabindex="36">
                 <i class="fa fa-arrow-left fa-fw"></i>&nbsp;@Resource.Back
             </button>
-            <button type="submit" class="btn btn-default btn-green" name="report-btn" title="@Resource.Report"  onclick="location.href='@Url.Action("ViewReport", "ManifestArrival", new { Sequence = Model.Sequence, AirlineCode = Model.AirlineCode, FlightNumber = Model.FlightNumber, ItineraryKey = Model.ItineraryKey })'" tabindex="35">
-                <i class="fa-fw glyphicon glyphicon-export icon-share"></i>&nbsp;@Resource.Report
-            </button>
-            <button type="submit" class="btn btn-default btn-green" name="close-btn" title="@Resource.Close" onclick="ManifestArrivalController.postForm(2)" tabindex="34">
-                <i class="fa fa-lock fa-fw"></i>&nbsp;@Resource.Close
-            </button>
-            <button type="submit" class="btn btn-default btn-green" name="save-btn" title="@Resource.Save" onclick="ManifestArrivalController.postForm(1)" tabindex="33">
-                <i class="fa fa-floppy-o fa-fw"></i>&nbsp;@Resource.Save
-            </button>
+            @if (User.IsInRole("MANIFARR-PRINTREP")) { 
+                <button type="submit" class="btn btn-default btn-green" name="report-btn" title="@Resource.Report"  onclick="location.href='@Url.Action("ViewReport", "ManifestArrival", new { Sequence = Model.Sequence, AirlineCode = Model.AirlineCode, FlightNumber = Model.FlightNumber, ItineraryKey = Model.ItineraryKey })'" tabindex="35">
+                    <i class="fa-fw glyphicon glyphicon-export icon-share"></i>&nbsp;@Resource.Report
+                </button>
+            }
+            @if (User.IsInRole("MANIFARR-CLOSE")) { 
+                <button type="submit" class="btn btn-default btn-green" name="close-btn" title="@Resource.Close" onclick="ManifestArrivalController.postForm(2)" tabindex="34">
+                    <i class="fa fa-lock fa-fw"></i>&nbsp;@Resource.Close
+                </button>
+            }
+            @if (User.IsInRole("MANIFARR-UPD")) { 
+                <button type="submit" class="btn btn-default btn-green" name="save-btn" title="@Resource.Save" onclick="ManifestArrivalController.postForm(1)" tabindex="33">
+                    <i class="fa fa-floppy-o fa-fw"></i>&nbsp;@Resource.Save
+                </button>
+            }
+            @if (Model.ArrivalStationCode == "MEX")
+            {
+                <button type="button" class="btn btn-default btn-black aright" name="add-info-btn" title="@Resource.AdditionalInformation" onclick="" tabindex="28" data-toggle="modal" data-target="#add-info-arr-modal">
+                    <i class="fa fa-plus fa-fw"></i>&nbsp;@Resource.AdditionalInformation
+                </button>
+            }
         </div>
     }
 </div>
@@ -659,7 +686,7 @@
 
         var tolerance = '@Model.ToleranceTime';
     </script>
-    @Scripts.Render("~/bundles/jquery")
+
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrapTable")
     @Scripts.Render("~/bundles/JSbootstrapCombobox")

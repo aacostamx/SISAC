@@ -6,13 +6,14 @@
 
 namespace VOI.SISAC.Dal.Repository.Itineraries
 {
+    using Entities.Itineraries;
+    using Infrastructure;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Diagnostics;
     using System.Linq;
-    using VOI.SISAC.Dal.Infrastructure;
-    using VOI.SISAC.Entities.Itineraries;
+
 
     /// <summary>
     /// Itinerary Repository
@@ -249,21 +250,113 @@ namespace VOI.SISAC.Dal.Repository.Itineraries
 
 
         /// <summary>
-        /// Gets the details of a flight with only the passenger information.
+        /// Gets the details of a flight with the passenger information, manifests and general declarations.
         /// </summary>
         /// <param name="sequence">The sequence of flight.</param>
         /// <param name="airlineCode">The airline code.</param>
         /// <param name="flightNumber">The flight Number of the airplane.</param>
         /// <param name="itineraryKey">The itinerary identifier.</param>
         /// <returns>
-        /// The information of a flight with the passenger information object.
+        /// The information of a flight with the passenger information, manifests and general declarations.
         /// </returns>
-        public Itinerary GetItineraryWithManifestsInformation(int sequence, string airlineCode, string flightNumber, string itineraryKey)
+        public Itinerary GetItineraryWithDeclarationsAndPassengerInformation(int sequence, string airlineCode, string flightNumber, string itineraryKey)
         {
             Itinerary itinerary = this.DbContext.Itineraries
                 .Include(p => p.PassengerInformation)
                 .Include(p => p.ManifestDeparture)
                 .Include(p => p.ManifestArrival)
+                .Include(p => p.GendecDepartures)
+                .Include(p => p.GendecDepartures.Crews)
+                .Include(p => p.GendecArrivals)
+                .Include(p => p.GendecArrivals.Crews)
+                .FirstOrDefault(c => c.Sequence == sequence
+                    && c.AirlineCode == airlineCode
+                    && c.FlightNumber == flightNumber
+                    && c.ItineraryKey == itineraryKey);
+
+            return itinerary;
+        }
+
+        /// <summary>
+        /// Determines whether the departure station is from Mexico.
+        /// </summary>
+        /// <param name="sequence">The sequence.</param>
+        /// <param name="airlineCode">The airline code.</param>
+        /// <param name="flightNumber">The flight number.</param>
+        /// <param name="itineraryKey">The itinerary key.</param>
+        /// <returns>
+        ///   <c>true</c> if the departure station is from Mexico otherwise <c>false</c>.
+        /// </returns>
+        public bool IsDepartureStationFromMexico(int sequence, string airlineCode, string flightNumber, string itineraryKey)
+        {
+            Itinerary itinerary = this.DbContext.Itineraries.FirstOrDefault(c =>
+                c.Sequence == sequence
+                && c.AirlineCode == airlineCode
+                && c.FlightNumber == flightNumber
+                && c.ItineraryKey == itineraryKey);
+
+            if (itinerary != null)
+            {
+                var airport = this.DbContext.Airports.FirstOrDefault(c => c.StationCode == itinerary.DepartureStation);
+                if (airport != null)
+                {
+                    return airport.CountryCode == "MEX";
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Determines whether the arrival station is from Mexico.
+        /// </summary>
+        /// <param name="sequence">The sequence.</param>
+        /// <param name="airlineCode">The airline code.</param>
+        /// <param name="flightNumber">The flight number.</param>
+        /// <param name="itineraryKey">The itinerary key.</param>
+        /// <returns>
+        ///   <c>true</c> if the arrival station is from Mexico otherwise <c>false</c>.
+        /// </returns>
+        public bool IsArrivalStationFromMexico(int sequence, string airlineCode, string flightNumber, string itineraryKey)
+        {
+            Itinerary itinerary = this.DbContext.Itineraries.FirstOrDefault(c =>
+                c.Sequence == sequence
+                && c.AirlineCode == airlineCode
+                && c.FlightNumber == flightNumber
+                && c.ItineraryKey == itineraryKey);
+
+            if (itinerary != null)
+            {
+                var airport = this.DbContext.Airports.FirstOrDefault(c => c.StationCode == itinerary.ArrivalStation);
+                if (airport != null)
+                {
+                    return airport.CountryCode == "MEX";
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Gets the details of a flight with the departure manifest and its children and Jet fuel tickets.
+        /// </summary>
+        /// <param name="sequence">The sequence of flight.</param>
+        /// <param name="airlineCode">The airline code.</param>
+        /// <param name="flightNumber">The flight Number of the airplane.</param>
+        /// <param name="itineraryKey">The itinerary identifier.</param>
+        /// <returns>
+        /// The information of a flight with the departure manifest and its children Jet fuel tickets.
+        /// </returns>
+        public Itinerary GetItineraryInformationForMessageMVT(int sequence, string airlineCode, string flightNumber, string itineraryKey)
+        {
+            Itinerary itinerary = this.DbContext.Itineraries
+                .Include(p => p.ManifestDeparture)
+                .Include(p => p.ManifestDeparture.AdditionalDepartureInformation)
+                .Include(p => p.ManifestDeparture.ManifestDepartureBoardings)
+                .Include(p => p.ManifestDeparture.Delays)
+                .Include(p => p.GendecDepartures)
+                .Include(p => p.GendecDepartures.Crews)
+                .Include(p => p.JetFuelTickets)
                 .FirstOrDefault(c => c.Sequence == sequence
                     && c.AirlineCode == airlineCode
                     && c.FlightNumber == flightNumber

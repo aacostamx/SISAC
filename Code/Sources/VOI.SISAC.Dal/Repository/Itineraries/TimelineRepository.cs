@@ -8,10 +8,11 @@ namespace VOI.SISAC.Dal.Repository.Itineraries
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.Entity;
+    using System.Diagnostics;
+    using System.Linq;
     using Entities.Itineraries;
     using Infrastructure;
-
-
 
     /// <summary>
     /// class Timeline Repository
@@ -25,33 +26,32 @@ namespace VOI.SISAC.Dal.Repository.Itineraries
         public TimelineRepository(IDbFactory factory) : base(factory) { }
 
         /// <summary>
-        /// Adds the timeline movement.
+        /// Gets the timeline by equipment number.
         /// </summary>
         /// <param name="flight">The flight.</param>
         /// <returns></returns>
-        public bool AddTimelineMovement(Timeline flight)
+        public List<Timeline> GetTimelineByEquipmentNumber(Timeline flight)
         {
-            throw new NotImplementedException();
-        }
+            var timeline = new List<Timeline>();
 
-        /// <summary>
-        /// Deletes the timeline movement.
-        /// </summary>
-        /// <param name="flight">The flight.</param>
-        /// <returns></returns>
-        public bool DeleteTimelineMovement(Timeline flight)
-        {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                timeline = this.DbContext.Timeline
+                    .Include(c => c.Itinerary)
+                    .Include(c => c.TimelineMovements.Select(d => d.MovementType))
+                    .Include(c => c.TimelineMovements.Select(d => d.OperationType))
+                    .Include(c => c.TimelineMovements.Select(d => d.Provider))
+                    .Where(c => c.Itinerary.EquipmentNumber == flight.Itinerary.EquipmentNumber)
+                    .OrderBy(or => or.Itinerary.DepartureDate)
+                    .Take(20)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message, ex);
+            }
 
-        /// <summary>
-        /// Gets the full timeline.
-        /// </summary>
-        /// <param name="flight">The flight.</param>
-        /// <returns></returns>
-        public IList<Timeline> GetFullTimeline(Timeline flight)
-        {
-            throw new NotImplementedException();
+            return timeline;
         }
 
         /// <summary>
@@ -59,19 +59,49 @@ namespace VOI.SISAC.Dal.Repository.Itineraries
         /// </summary>
         /// <param name="flight">The flight.</param>
         /// <returns></returns>
-        public IList<Timeline> GetTimelineByFlight(Timeline flight)
+        public Timeline GetTimelineByFlight(Timeline flight)
         {
-            throw new NotImplementedException();
+            var timeline = new Timeline();
+
+            try
+            {
+                timeline = this.DbContext.Timeline
+                    .Include(c => c.Itinerary)
+                    .Include(c => c.TimelineMovements)
+                    .Where(c => c.Sequence == flight.Sequence &&
+                    c.AirlineCode == flight.AirlineCode &&
+                    c.FlightNumber == flight.FlightNumber &&
+                    c.ItineraryKey == flight.ItineraryKey)
+                    .FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message, ex);
+            }
+
+            return timeline;
         }
 
         /// <summary>
-        /// Updates the timeline movement.
+        /// Timelines the start process.
         /// </summary>
-        /// <param name="flight">The flight.</param>
+        /// <param name="startDate">The start date.</param>
+        /// <param name="endDate">The end date.</param>
         /// <returns></returns>
-        public bool UpdateTimelineMovement(Timeline flight)
+        public bool TimelineStartProcess(DateTime? startDate, DateTime? endDate)
         {
-            throw new NotImplementedException();
+            var sucess = false;
+
+            try
+            {
+                sucess = this.DbContext.AutomaticTimeline(startDate, endDate);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message, ex);
+            }
+
+            return sucess;
         }
     }
 }

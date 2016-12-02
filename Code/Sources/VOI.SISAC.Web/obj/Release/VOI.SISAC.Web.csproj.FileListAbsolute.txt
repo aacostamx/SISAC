@@ -80,3 +80,9 @@ C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Web\obj\Rel
 C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Web\obj\Release\VOI.SISAC.Web.dll
 C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Web\obj\Release\VOI.SISAC.Web.pdb
 C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Web\obj\Release\VOI.SISAC.Web.XmlSerializers.dll
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Web\bin\RestSharp.dll
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Web\bin\RestSharp.pdb
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Web\bin\RestSharp.xml
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Web\bin\LumenWorks.Framework.IO.dll
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Web\bin\LumenWorks.Framework.IO.pdb
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Web\bin\LumenWorks.Framework.IO.xml

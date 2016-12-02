@@ -1,26 +1,83 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using VOI.SISAC.Web.Models.VO.Airport;
+﻿//------------------------------------------------------------------------
+// <copyright file="GendecArrivalVO.cs" company="Volaris">
+//     Copyright (c) Volaris. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace VOI.SISAC.Web.Models.VO.Itineraries
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using VOI.SISAC.Web.Models.VO.Airport;
+
+    /// <summary>
+    /// Arrival general document view object
+    /// </summary>
     public class GendecArrivalVO
     {
+        /// <summary>
+        /// Gets or sets the departure date.
+        /// </summary>
+        /// <value>
+        /// The departure date.
+        /// </value>
+        public string DepartureDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the arrival date.
+        /// </summary>
+        /// <value>
+        /// The arrival date.
+        /// </value>
         public string ArrivalDate { get; set; }
 
+        /// <summary>
+        /// Gets or sets the time arrival.
+        /// </summary>
+        /// <value>
+        /// The time arrival.
+        /// </value>
         public string TimeArrival { get; set; }
 
+        /// <summary>
+        /// Gets or sets the airplane model.
+        /// </summary>
+        /// <value>
+        /// The airplane model.
+        /// </value>
         public string AirplaneModel { get; set; }
 
+        /// <summary>
+        /// Gets or sets the equipment number.
+        /// </summary>
+        /// <value>
+        /// The equipment number.
+        /// </value>
         public string EquipmentNumber { get; set; }
 
+        /// <summary>
+        /// Gets or sets the departure station.
+        /// </summary>
+        /// <value>
+        /// The departure station.
+        /// </value>
         public string DepartureStation { get; set; }
 
+        /// <summary>
+        /// Gets or sets the arrival station.
+        /// </summary>
+        /// <value>
+        /// The arrival station.
+        /// </value>
         public string ArrivalStation { get; set; }
 
+        /// <summary>
+        /// Gets the flight.
+        /// </summary>
+        /// <value>
+        /// The flight.
+        /// </value>
         public string Flight
         {
             get
@@ -135,8 +192,28 @@ namespace VOI.SISAC.Web.Models.VO.Itineraries
         /// </summary>
         public bool Closed { get; set; }
 
+        /// <summary>
+        /// Gets or sets the action.
+        /// </summary>
+        /// <value>
+        /// The action.
+        /// </value>
+        public byte Action { get; set; }
+
+        /// <summary>
+        /// Gets or sets the crews.
+        /// </summary>
+        /// <value>
+        /// The crews.
+        /// </value>
         public ICollection<CrewVO> Crews { get; set; }
 
+        /// <summary>
+        /// Gets or sets the itinerary.
+        /// </summary>
+        /// <value>
+        /// The itinerary.
+        /// </value>
         public ItineraryVO Itinerary { get; set; }
     }
 }

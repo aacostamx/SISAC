@@ -108,6 +108,10 @@
       <HintPath>..\..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="LumenWorks.Framework.IO, Version=3.9.1.0, Culture=neutral, PublicKeyToken=5ad3ea2f85776344, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\LumenWorksCsvReader.3.9.1\lib\net20\LumenWorks.Framework.IO.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -149,6 +153,10 @@
     <Reference Include="NPOI.OpenXmlFormats, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NPOI.2.2.1\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=100.0.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Binaries\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -197,7 +205,7 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\WebActivatorEx.2.1.0\lib\net40\WebActivatorEx.dll</HintPath>
+      <HintPath>..\..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="WebGrease">
@@ -393,11 +401,6 @@
     <Content Include="Areas\Process\Views\NationalJetFuelReconcileInvoice\NationalJetFuelReconcileManualProcess.cshtml" />
     <Content Include="Areas\Process\Views\NationalJetFuelReconcileInvoice\Partial\_UploadReconciliationManualFile.cshtml" />
     <Content Include="Areas\Itineraries\Views\ManifestArrival\Index.cshtml" />
-    <Content Include="fonts\FontAwesome.otf" />
-    <Content Include="fonts\fontawesome-webfont.woff2" />
-    <Content Include="fonts\fontawesome-webfont.woff" />
-    <Content Include="fonts\fontawesome-webfont.ttf" />
-    <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -411,11 +414,26 @@
     <Content Include="Areas\Itineraries\Views\Timeline\Index.cshtml" />
     <Content Include="Areas\Itineraries\Views\ManifestArrival\Partial\_DelaysTable.cshtml" />
     <Content Include="Areas\Itineraries\Views\ManifestArrival\Closed.cshtml" />
+    <Content Include="Areas\Itineraries\Views\ManifestDeparture\Partial\_BoardingTable.cshtml" />
+    <Content Include="Areas\Itineraries\Views\Timeline\Partial\_ModalMovements.cshtml" />
+    <Content Include="Areas\Itineraries\Views\ManifestDeparture\Partial\_BoardingTableReadOnly.cshtml" />
+    <Content Include="Areas\Itineraries\Views\ManifestDeparture\Partial\_AdditionalInformation.cshtml" />
+    <Content Include="Areas\Itineraries\Views\ManifestArrival\Partial\_AdditionalInformation.cshtml" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="Areas\Itineraries\Views\ManifestDeparture\Partial\_BoardingInformation.cshtml" />
+    <Content Include="Areas\Itineraries\Views\Itinerary\Partial\_AircraftMovementMessageModal.cshtml" />
+    <Content Include="Areas\Airport\Views\PassengerInformation\Partial\_AdditionalInformation.cshtml" />
     <None Include="Properties\PublishProfiles\SISAC_CERT.pubxml" />
     <None Include="Properties\PublishProfiles\SISAC_DEV.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
+    <Content Include="Scripts\bootstrap3-editable\js\bootstrap-editable.js" />
+    <Content Include="Scripts\bootstrap3-editable\js\bootstrap-editable.min.js" />
     <Content Include="Scripts\circleMenu.js" />
     <Content Include="Scripts\fixing-skip.js" />
     <Content Include="Scripts\jquery-2.2.4.js" />
@@ -440,6 +458,7 @@
     <Content Include="Scripts\SISAC\Itinerary\GendecArrival.js" />
     <Content Include="Scripts\SISAC\Itinerary\ManifestArrival.js" />
     <Content Include="Scripts\SISAC\Itinerary\ManifestDeparture.js" />
+    <Content Include="Scripts\SISAC\Itinerary\Timeline.js" />
     <Content Include="Scripts\SISAC\Process\ConfirmNationalPeriod.js" />
     <Content Include="Scripts\SISAC\Process\ConfirmPeriod.js" />
     <Content Include="Scripts\SISAC\Process\NationalJetFuelInvoice.js" />
@@ -655,6 +674,7 @@
     <Compile Include="Areas\Finance\Controllers\NationalFuelContractController.cs" />
     <Compile Include="Areas\Finance\Controllers\NationalFuelRateController.cs" />
     <Compile Include="Areas\Finance\Controllers\UploadNationalFuelContractController.cs" />
+    <Compile Include="Areas\Itineraries\Controllers\AircraftMovementMessageController.cs" />
     <Compile Include="Areas\Itineraries\Controllers\ManifestArrivalController.cs" />
     <Compile Include="Areas\Itineraries\Controllers\ManifestDepartureController.cs" />
     <Compile Include="Areas\Itineraries\Controllers\TimelineController.cs" />
@@ -726,15 +746,23 @@
     <Compile Include="Models\Files\NationalJetFuelInvoiceDetailFile.cs" />
     <Compile Include="Models\Files\NationalJetFuelManualReconcileFile.cs" />
     <Compile Include="Models\VO\Airport\AirportScheduleVO.cs" />
+    <Compile Include="Models\VO\Airport\AdditionalPassengerInformationVO.cs" />
     <Compile Include="Models\VO\Airport\NationalJetFuelTicketVO.cs" />
+    <Compile Include="Models\VO\Catalog\MovementTypeVO.cs" />
     <Compile Include="Models\VO\Catalog\ReconciliationToleranceVO.cs" />
     <Compile Include="Models\VO\Catalog\ScheduleTypeVO.cs" />
     <Compile Include="Models\VO\Catalog\ToleranceTypeVO.cs" />
     <Compile Include="Models\VO\Finance\NationalFuelContractConceptVO.cs" />
     <Compile Include="Models\VO\Finance\NationalFuelContractSearchVO.cs" />
     <Compile Include="Models\VO\Finance\NationalFuelContractVO.cs" />
+    <Compile Include="Models\VO\Itineraries\ManifestDepartureBoardingDetailVO.cs" />
+    <Compile Include="Models\VO\Itineraries\ManifestDepartureBoardingInformationVO.cs" />
+    <Compile Include="Models\VO\Itineraries\TimelineMovementVO.cs" />
+    <Compile Include="Models\VO\Itineraries\TimelineVO.cs" />
     <Compile Include="Models\VO\Itineraries\ManifestArrivalVO.cs" />
+    <Compile Include="Models\VO\Itineraries\ManifestDepartureBoardingVO.cs" />
     <Compile Include="Models\VO\Itineraries\ManifestDepartureVO.cs" />
+    <Compile Include="Models\VO\Itineraries\TimelineMovementMock.cs" />
     <Compile Include="Models\VO\Paged\PagedVO.cs" />
     <Compile Include="Models\VO\Process\DocumentStatusVO.cs" />
     <Compile Include="Models\VO\Process\NationalFuelInvoiceControlVO.cs" />
@@ -1148,6 +1176,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Itineraries\Views\AircraftMovementMessage\" />
     <Folder Include="Areas\Process\Views\UploadNationalJetFuelInvoice\" />
     <Folder Include="Areas\Process\Views\UploadNationalJetFuelManualReconcile\" />
   </ItemGroup>

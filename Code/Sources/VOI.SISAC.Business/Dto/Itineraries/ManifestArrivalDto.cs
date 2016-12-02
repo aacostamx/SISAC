@@ -368,6 +368,14 @@ namespace VOI.SISAC.Business.Dto.Itineraries
         public ItineraryDto Itinerary { get; set; }
 
         /// <summary>
+        /// Gets or sets the additional arrival information.
+        /// </summary>
+        /// <value>
+        /// The additional arrival information.
+        /// </value>
+        public AdditionalArrivalInformationDto AdditionalArrivalInformation { get; set; }
+
+        /// <summary>
         /// Gets or sets the delays.
         /// </summary>
         /// <value>

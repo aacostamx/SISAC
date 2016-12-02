@@ -39,6 +39,15 @@ namespace VOI.SISAC.Entities.Itineraries
         }
 
         /// <summary>
+        /// Gets or sets the line.
+        /// </summary>
+        /// <value>
+        /// The line.
+        /// </value>
+        [NotMapped]
+        public int Line { get; set; }
+
+        /// <summary>
         /// Data of the flight sequence
         /// </summary>
         [Key]

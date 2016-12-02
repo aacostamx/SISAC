@@ -6,6 +6,8 @@
 
 namespace VOI.SISAC.Entities.Paged
 {
+    using System.ComponentModel.DataAnnotations.Schema;
+
     /// <summary>
     /// Paged Class
     /// </summary>
@@ -17,6 +19,7 @@ namespace VOI.SISAC.Entities.Paged
         /// <value>
         /// The page number.
         /// </value>
+        [NotMapped]
         public int pageNumber { get; set; }
 
         /// <summary>
@@ -25,6 +28,7 @@ namespace VOI.SISAC.Entities.Paged
         /// <value>
         /// The size of the page.
         /// </value>
+        [NotMapped]
         public int pageSize { get; set; }
 
         /// <summary>
@@ -33,6 +37,7 @@ namespace VOI.SISAC.Entities.Paged
         /// <value>
         /// The offset.
         /// </value>
+        [NotMapped]
         public int offset { get; set; }
 
         /// <summary>
@@ -41,6 +46,7 @@ namespace VOI.SISAC.Entities.Paged
         /// <value>
         /// The limit.
         /// </value>
+        [NotMapped]
         public int limit { get; set; }
 
         /// <summary>
@@ -49,6 +55,7 @@ namespace VOI.SISAC.Entities.Paged
         /// <value>
         /// The search.
         /// </value>
+        [NotMapped]
         public string search { get; set; }
 
         /// <summary>
@@ -57,6 +64,7 @@ namespace VOI.SISAC.Entities.Paged
         /// <value>
         /// The sort.
         /// </value>
+        [NotMapped]
         public string sort { get; set; }
 
         /// <summary>
@@ -65,6 +73,7 @@ namespace VOI.SISAC.Entities.Paged
         /// <value>
         /// The order.
         /// </value>
+        [NotMapped]
         public string order { get; set; }
     }
 }

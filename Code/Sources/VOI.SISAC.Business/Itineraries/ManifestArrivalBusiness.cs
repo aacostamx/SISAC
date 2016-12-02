@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------
 
 namespace VOI.SISAC.Business.Itineraries
-{    
+{
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -41,6 +41,11 @@ namespace VOI.SISAC.Business.Itineraries
         private readonly IAirportRepository airportRepository;
 
         /// <summary>
+        /// The additional arrival information repository
+        /// </summary>
+        private readonly IAdditionalArrivalInformationRepository additionalArrivalInformationRepository;
+
+        /// <summary>
         /// The time configuration repository
         /// </summary>
         private readonly IManifestTimeConfigRepository timeConfigRepository;
@@ -51,6 +56,11 @@ namespace VOI.SISAC.Business.Itineraries
         private readonly IItineraryRepository itineraryRepository;
 
         /// <summary>
+        /// The departure general declaration
+        /// </summary>
+        private readonly IGendecDepartureRepository gendecDeparture;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ManifestArrivalBusiness" /> class.
         /// </summary>
         /// <param name="unitOfWork">The unit of work.</param>
@@ -58,18 +68,24 @@ namespace VOI.SISAC.Business.Itineraries
         /// <param name="airportRepository">The airport repository.</param>
         /// <param name="itineraryRepository">The itinerary repository.</param>
         /// <param name="timeConfigRepository">The time configuration repository.</param>
+        /// <param name="additionalArrivalInformationRepository">The additional arrival information repository.</param>
+        /// <param name="gendecDeparture">The general declaration departure.</param>
         public ManifestArrivalBusiness(
             IUnitOfWork unitOfWork,
             IManifestArrivalRepository manifestRepository,
             IAirportRepository airportRepository,
             IItineraryRepository itineraryRepository,
-            IManifestTimeConfigRepository timeConfigRepository)
+            IManifestTimeConfigRepository timeConfigRepository,
+            IAdditionalArrivalInformationRepository additionalArrivalInformationRepository,
+            IGendecDepartureRepository gendecDeparture)
         {
             this.unitOfWork = unitOfWork;
             this.manifestRepository = manifestRepository;
             this.airportRepository = airportRepository;
             this.itineraryRepository = itineraryRepository;
             this.timeConfigRepository = timeConfigRepository;
+            this.additionalArrivalInformationRepository = additionalArrivalInformationRepository;
+            this.gendecDeparture = gendecDeparture;
         }
 
         /// <summary>
@@ -99,10 +115,20 @@ namespace VOI.SISAC.Business.Itineraries
                 if (entity == null)
                 {
                     // Gets the itinerary information
-                    Itinerary itinerary = this.itineraryRepository.GetItineraryWithManifestsInformation(sequence, airlineCode, flightNumber, itineraryKey);
+                    Itinerary itinerary = this.itineraryRepository.GetItineraryWithDeclarationsAndPassengerInformation(sequence, airlineCode, flightNumber, itineraryKey);
                     if (itinerary != null)
                     {
-                        bool isNational;
+                        // Finds if the arrival station is from Mexico
+                        if (this.itineraryRepository.IsDepartureStationFromMexico(sequence, airlineCode, flightNumber, itineraryKey))
+                        {
+                            // If the airport is from Mexico, gets the departure manifest information
+                            SetManifestDepartureInformation(manifestDto, itinerary);
+                        }
+                        else
+                        {
+                            // If the airport is not from Mexico, gets the departure GENDEC information
+                            SetGendecDepartureInformation(manifestDto, itinerary);
+                        }
 
                         // Sets information from the itinerary
                         ItineraryDto itineraryDto = Mapper.Map<ItineraryDto>(itinerary);
@@ -117,14 +143,9 @@ namespace VOI.SISAC.Business.Itineraries
                         manifestDto.ScheduledArrivalTime = itinerary.ArrivalDate.TimeOfDay.ToString(@"hh\:mm");
                         manifestDto.ScheduledArrivalDate = itinerary.ArrivalDate.ToString("yyyy/MM/dd");
 
-                        SetDepartureInformation(manifestDto, itinerary);
-
-                        // Finds if the airport is from Mexico or not.
-                        isNational = this.airportRepository.FindById(itinerary.DepartureStation).Country.CountryCode == "MEX";
-
                         // Sets the passenger information
-                        SetPassengerInformation(manifestDto, itineraryDto.PassengerInformation, isNational);
-                        
+                        SetPassengerInformation(manifestDto, itineraryDto.PassengerInformation);
+
                         // Sets the itinerary information
                         manifestDto.Itinerary = itineraryDto;
                     }
@@ -165,7 +186,7 @@ namespace VOI.SISAC.Business.Itineraries
         /// <summary>
         /// Saves the arrival manifest.
         /// </summary>
-        /// <param name="manifestArrival"></param>
+        /// <param name="manifestArrival">Manifest arrival</param>
         /// <returns>
         ///   <c>true</c> if success otherwise <c>false</c>.
         /// </returns>
@@ -183,6 +204,7 @@ namespace VOI.SISAC.Business.Itineraries
                     manifestArrival.AirlineCode,
                     manifestArrival.FlightNumber,
                     manifestArrival.ItineraryKey);
+                AdditionalArrivalInformation additional = new AdditionalArrivalInformation();
 
                 // Manifest does not exist and create a new one for the itinerary
                 if (entity == null)
@@ -202,11 +224,18 @@ namespace VOI.SISAC.Business.Itineraries
                     // The manifest exists and proceed to update it.
                     DateTime actualArrivalDate;
                     IList<Delay> delays = Mapper.Map<IList<Delay>>(manifestArrival.Delays);
+
+                    if (manifestArrival.AdditionalArrivalInformation != null)
+                    {
+                        additional = Mapper.Map<AdditionalArrivalInformation>(manifestArrival.AdditionalArrivalInformation);
+                    }
+
                     SetInformationInEntity(entity, manifestArrival);
                     DateTime.TryParse(manifestArrival.ActualArrivalDate + " " + manifestArrival.ActualArrivalTime, out actualArrivalDate);
                     entity.ActualArrivalDate = actualArrivalDate != default(DateTime) ? actualArrivalDate : new DateTime();
                     this.manifestRepository.RemoveAllDelaysFromManifest(entity);
                     this.manifestRepository.Update(entity, delays);
+                    this.UpdateAdditional(entity, additional);
                 }
 
                 this.unitOfWork.Commit();
@@ -257,7 +286,7 @@ namespace VOI.SISAC.Business.Itineraries
         /// </returns>
         public bool CloseManifest(ManifestArrivalDto manifestArrival)
         {
-            if (manifestArrival == null 
+            if (manifestArrival == null
                 || string.IsNullOrWhiteSpace(manifestArrival.AirlineCode)
                 || string.IsNullOrWhiteSpace(manifestArrival.FlightNumber)
                 || string.IsNullOrWhiteSpace(manifestArrival.ItineraryKey))
@@ -304,7 +333,7 @@ namespace VOI.SISAC.Business.Itineraries
         /// <summary>
         /// Opens the manifest.
         /// </summary>
-        /// <param name="manifestDeparture">The manifest departure.</param>
+        /// <param name="manifestArrival">The manifest departure.</param>
         /// <returns>
         ///   <c>true</c> if the operation was success otherwise <c>false</c>.
         /// </returns>
@@ -347,9 +376,7 @@ namespace VOI.SISAC.Business.Itineraries
         /// </summary>
         /// <param name="manifest">The manifest.</param>
         /// <param name="passengerInformation">The passenger information.</param>
-        /// <param name="isNational">if set to <c>true</c> [is national].</param>
-        /// <returns>Returns the arrival manifest with the passenger information from the itinerary.</returns>
-        private static void SetPassengerInformation(ManifestArrivalDto manifest, PassengerInformationDto passengerInformation, bool isNational)
+        private static void SetPassengerInformation(ManifestArrivalDto manifest, PassengerInformationDto passengerInformation)
         {
             if (passengerInformation != null)
             {
@@ -369,7 +396,7 @@ namespace VOI.SISAC.Business.Itineraries
                     + passengerInformation.ConnectionBaggageWeight
                     + passengerInformation.DiplomaticBaggageWeight
                     + passengerInformation.ExtraCrewBaggageWeight
-                    + passengerInformation.OtherBaggageWeight;   
+                    + passengerInformation.OtherBaggageWeight;
             }
         }
 
@@ -399,12 +426,12 @@ namespace VOI.SISAC.Business.Itineraries
             entity.ArrivalStation = dto.ArrivalStationCode;
             entity.LastScaleStation = dto.LastScaleStationCode;
             entity.DelayRemarks = dto.DelayRemarks;
-            
+
             entity.UserAuthorizeId = dto.UserIdAuthorize;
             entity.UserSignatureId = dto.UserIdSignature;
             entity.LicenceNumberAuthorize = dto.LicenceNumberAuthorize;
             entity.LicenceNumberSignature = dto.LicenceNumberSignature;
-            
+
             entity.Position = dto.Position;
             entity.JetFuelArrival = dto.JetFuelArrival;
             entity.Remarks = dto.Remarks;
@@ -413,9 +440,9 @@ namespace VOI.SISAC.Business.Itineraries
         /// <summary>
         /// Sets the departure information.
         /// </summary>
-        /// <param name="manifestDto">The manifest dto.</param>
+        /// <param name="manifestDto">The manifest data transfer object.</param>
         /// <param name="itinerary">The itinerary.</param>
-        private static void SetDepartureInformation(ManifestArrivalDto manifestDto, Itinerary itinerary)
+        private static void SetManifestDepartureInformation(ManifestArrivalDto manifestDto, Itinerary itinerary)
         {
             if (itinerary != null && itinerary.ManifestDeparture != null)
             {
@@ -428,6 +455,121 @@ namespace VOI.SISAC.Business.Itineraries
                 manifestDto.NickNameSecondSupercargo = itinerary.ManifestDeparture.NickNameSecondSupercargo;
                 manifestDto.NickNameThirdOfficial = itinerary.ManifestDeparture.NickNameThirdOfficial;
                 manifestDto.NickNameThirdSupercargo = itinerary.ManifestDeparture.NickNameThirdSupercargo;
+
+                manifestDto.SupercargoRemarks = itinerary.ManifestDeparture.SupercargoRemarks;
+            }
+        }
+
+        /// <summary>
+        /// Sets the general declaration departure information.
+        /// </summary>
+        /// <param name="manifestDto">The manifest data transfer object.</param>
+        /// <param name="itinerary">The itinerary.</param>
+        private static void SetGendecDepartureInformation(ManifestArrivalDto manifestDto, Itinerary itinerary)
+        {
+            if (itinerary != null && itinerary.GendecDepartures != null && itinerary.GendecDepartures.Crews != null)
+            {
+                List<Crew> captains = new List<Crew>();
+                List<Crew> stewardess = new List<Crew>();
+                string remarks = string.Empty;
+
+                captains.AddRange(itinerary.GendecDepartures.Crews.Where(c => c.CrewTypeID == "CAP" || c.CrewTypeID == "COP").OrderBy(c => c.CrewTypeID));
+                stewardess.AddRange(itinerary.GendecDepartures.Crews.Where(c => c.CrewTypeID == "JDC" || c.CrewTypeID == "SOB").OrderBy(c => c.CrewTypeID));
+
+                // Sets the commander and officials
+                if (captains != null)
+                {
+                    for (byte i = 0; i < captains.Count; i++)
+                    {
+                        switch (i)
+                        {
+                            case 0:
+                                manifestDto.NickNameCommander = captains[i].NickName ?? string.Empty;
+                                break;
+                            case 1:
+                                manifestDto.NickNameFirstOfficial = captains[i].NickName ?? string.Empty;
+                                break;
+                            case 2:
+                                manifestDto.NickNameSecondOfficial = captains[i].NickName ?? string.Empty;
+                                break;
+                            case 3:
+                                manifestDto.NickNameThirdOfficial = captains[i].NickName ?? string.Empty;
+                                break;
+                        }
+                    }
+                }
+
+                // Sets the chief cabinet and stewardess
+                if (stewardess != null)
+                {
+                    for (byte i = 0; i < stewardess.Count; i++)
+                    {
+                        switch (i)
+                        {
+                            case 0:
+                                manifestDto.NickNameChiefCabinet = stewardess[i].NickName ?? string.Empty;
+                                break;
+                            case 1:
+                                manifestDto.NickNameFirstSupercargo = stewardess[i].NickName ?? string.Empty;
+                                break;
+                            case 2:
+                                manifestDto.NickNameSecondSupercargo = stewardess[i].NickName ?? string.Empty;
+                                break;
+                            case 3:
+                                manifestDto.NickNameThirdSupercargo = stewardess[i].NickName ?? string.Empty;
+                                break;
+                            default:
+                                remarks += string.Format(@"{0} ({1}) / ", stewardess[i].NickName, stewardess[i].LicenceNumber);
+                                break;
+                        }
+                    }
+
+                    manifestDto.SupercargoRemarks = remarks.Trim();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Updates the additional.
+        /// </summary>
+        /// <param name="entity">The entity.</param>
+        /// <param name="additional">The additional.</param>
+        private void UpdateAdditional(ManifestArrival entity, AdditionalArrivalInformation additional)
+        {
+            AdditionalArrivalInformation additionalDB = this.additionalArrivalInformationRepository.FindById(entity.Sequence, entity.AirlineCode, entity.FlightNumber, entity.ItineraryKey);
+
+            // update
+            if (additionalDB != null)
+            {
+                if (string.IsNullOrEmpty(additional.AirlineCode))
+                {
+                    // delete
+                    this.additionalArrivalInformationRepository.Delete(additionalDB);
+                }
+                else
+                {
+                    additionalDB.Pilot = additional.Pilot;
+                    additionalDB.Surcharge = additional.Surcharge;
+                    additionalDB.ExtraCrew = additional.ExtraCrew;
+                    additionalDB.TypeFlight = additional.TypeFlight;
+                    additionalDB.SlotAllocatedTime = additional.SlotAllocatedTime;
+                    additionalDB.SlotCoordinatedTime = additional.SlotCoordinatedTime;
+                    additionalDB.OvernightEndTime = additional.OvernightEndTime;
+                    additionalDB.ManeuverStartTime = additional.ManeuverStartTime;
+                    additionalDB.PositionOutputTime = additional.PositionOutputTime;
+                    additionalDB.DelayDescription1 = additional.DelayDescription1;
+                    additionalDB.DelayDescription2 = additional.DelayDescription2;
+                    additionalDB.DelayDescription3 = additional.DelayDescription3;
+                    this.additionalArrivalInformationRepository.Update(additionalDB);
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(additional.AirlineCode))
+                {
+                    // insert
+                    this.additionalArrivalInformationRepository.Add(additional);
+                }
             }
         }
     }

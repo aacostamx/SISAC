@@ -39,6 +39,7 @@ namespace VOI.SISAC.Dal.Repository.Itineraries
         /// <returns>List of delays in the manifest departure.</returns>
         IList<Delay> GetDelaysForManifest(int sequence, string airlineCode, string flightNumber, string itineraryKey);
 
+
         /// <summary>
         /// Adds the specified manifest departure.
         /// </summary>

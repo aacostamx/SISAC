@@ -97,6 +97,9 @@ namespace VOI.SISAC.Web.MapConfiguration
 
             Mapper.CreateMap<PagedDto, PagedVO>()
             .ReverseMap();
+
+            Mapper.CreateMap<MovementTypeDto, MovementTypeVO>()
+            .ReverseMap();
         }
     }
 }

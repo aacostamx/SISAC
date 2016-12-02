@@ -8,7 +8,7 @@ namespace VOI.SISAC.Services.AutoMapper
 {
     using global::AutoMapper;
     using Business.MapConfiguration;
-    using Web.MapConfiguration;
+    using MapConfig;
 
     /// <summary>
     /// MapperConfig class
@@ -22,12 +22,8 @@ namespace VOI.SISAC.Services.AutoMapper
         {
             Mapper.Initialize(c =>
             {
-                //Web Configuration
-                c.AddProfile<AirportWebMaps>();
-                c.AddProfile<CatalogWebMaps>();
-                c.AddProfile<FinanceWebMaps>();
-                c.AddProfile<ItineraryWebMaps>();
-                c.AddProfile<SecurityWebMaps>();
+                ///API Config
+                //c.AddProfile<ItineraryAPIMaps>();
 
                 // Business Configuration
                 c.AddProfile<AirportMaps>();

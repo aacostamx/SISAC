@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Airport\AdditionalPassengerInformation.cs" />
     <Compile Include="Airport\AirportSchedule.cs" />
     <Compile Include="Airport\AirportService.cs" />
     <Compile Include="Airport\CompartmentType.cs" />
@@ -118,6 +119,11 @@
     <Compile Include="Finance\NationalFuelContractConcept.cs" />
     <Compile Include="Finance\Provider.cs" />
     <Compile Include="Finance\Tax.cs" />
+    <Compile Include="Itineraries\AdditionalArrivalInformation.cs" />
+    <Compile Include="Itineraries\AdditionalDepartureInformation.cs" />
+    <Compile Include="Itineraries\ManifestDepartureBoarding.cs" />
+    <Compile Include="Itineraries\ManifestDepartureBoardingDetail.cs" />
+    <Compile Include="Itineraries\ManifestDepartureBoardingInformation.cs" />
     <Compile Include="Itineraries\TimelineMovement.cs" />
     <Compile Include="Itineraries\Timeline.cs" />
     <Compile Include="Itineraries\ManifestArrival.cs" />

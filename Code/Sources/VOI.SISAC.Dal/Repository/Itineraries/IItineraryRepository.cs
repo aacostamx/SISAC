@@ -85,15 +85,51 @@ namespace VOI.SISAC.Dal.Repository.Itineraries
         void AddRangeItinerary(IList<Itinerary> itineraries);
 
         /// <summary>
-        /// Gets the details of a flight with only the passenger information.
+        /// Gets the details of a flight with the passenger information, manifests and general declarations.
         /// </summary>
         /// <param name="sequence">The sequence of flight.</param>
         /// <param name="airlineCode">The airline code.</param>
         /// <param name="flightNumber">The flight Number of the airplane.</param>
         /// <param name="itineraryKey">The itinerary identifier.</param>
         /// <returns>
-        /// The information of a flight with the passenger information object.
+        /// The information of a flight with the passenger information, manifests and general declarations.
         /// </returns>
-        Itinerary GetItineraryWithManifestsInformation(int sequence, string airlineCode, string flightNumber, string itineraryKey);
+        Itinerary GetItineraryWithDeclarationsAndPassengerInformation(int sequence, string airlineCode, string flightNumber, string itineraryKey);
+
+        /// <summary>
+        /// Determines whether the departure station is from Mexico.
+        /// </summary>
+        /// <param name="sequence">The sequence.</param>
+        /// <param name="airlineCode">The airline code.</param>
+        /// <param name="flightNumber">The flight number.</param>
+        /// <param name="itineraryKey">The itinerary key.</param>
+        /// <returns>
+        ///   <c>true</c> if the departure station is from Mexico otherwise <c>false</c>.
+        /// </returns>
+        bool IsDepartureStationFromMexico(int sequence, string airlineCode, string flightNumber, string itineraryKey);
+
+        /// <summary>
+        /// Determines whether the arrival station is from Mexico.
+        /// </summary>
+        /// <param name="sequence">The sequence.</param>
+        /// <param name="airlineCode">The airline code.</param>
+        /// <param name="flightNumber">The flight number.</param>
+        /// <param name="itineraryKey">The itinerary key.</param>
+        /// <returns>
+        ///   <c>true</c> if the arrival station is from Mexico otherwise <c>false</c>.
+        /// </returns>
+        bool IsArrivalStationFromMexico(int sequence, string airlineCode, string flightNumber, string itineraryKey);
+
+        /// <summary>
+        /// Gets the details of a flight with the departure manifest and its children and Jet fuel tickets.
+        /// </summary>
+        /// <param name="sequence">The sequence of flight.</param>
+        /// <param name="airlineCode">The airline code.</param>
+        /// <param name="flightNumber">The flight Number of the airplane.</param>
+        /// <param name="itineraryKey">The itinerary identifier.</param>
+        /// <returns>
+        /// The information of a flight with the departure manifest and its children Jet fuel tickets.
+        /// </returns>
+        Itinerary GetItineraryInformationForMessageMVT(int sequence, string airlineCode, string flightNumber, string itineraryKey);
     }
 }

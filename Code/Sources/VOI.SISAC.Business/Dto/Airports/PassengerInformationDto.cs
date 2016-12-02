@@ -363,5 +363,13 @@ namespace VOI.SISAC.Business.Dto.Airports
         /// Gets or sets Users information
         /// </summary>
         public UserDto User { get; set; }
+
+        /// <summary>
+        /// Gets or sets the additional information.
+        /// </summary>
+        /// <value>
+        /// The additional information.
+        /// </value>
+        public AdditionalPassengerInformationDto AdditonalInformation { get; set; }
     }
 }

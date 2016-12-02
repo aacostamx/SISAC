@@ -56,7 +56,16 @@ namespace VOI.SISAC.Dal.Infrastructure
         /// Finds the specified predicate.
         /// </summary>
         /// <param name="predicate">The predicate.</param>
+        /// <param name="tracking">if set to <c>true</c> [tracking].</param>
         /// <returns></returns>
-        IList<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
+        TEntity Find(Expression<Func<TEntity, bool>> predicate, bool tracking = false);
+
+        /// <summary>
+        /// Finds the list.
+        /// </summary>
+        /// <param name="predicate">The predicate.</param>
+        /// <param name="tracking">if set to <c>true</c> [tracking].</param>
+        /// <returns></returns>
+        IList<TEntity> FindList(Expression<Func<TEntity, bool>> predicate, bool tracking = false);
     }
 }

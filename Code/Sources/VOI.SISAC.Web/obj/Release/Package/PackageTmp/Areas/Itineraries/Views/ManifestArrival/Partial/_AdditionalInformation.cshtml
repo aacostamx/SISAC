@@ -1,0 +1,98 @@
+﻿<div id="add-info-arr-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="subtitle_h3_black">@Resource.AdditionalInformation</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <label class="subtitle_h5 control-label required-field">@Resource.Pilots</label>
+                        <input type="number" min="1" max="2" id="ai-pilots" class="inputForm form-control"
+                            onkeypress = "return commonFunctions.validateNumeric(event)"
+                            onkeyup = "return commonFunctions.validateNumeric(event)" />
+                        <span id="ai-pilots-err" class="text-danger text-danger-error"></span>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <label class="subtitle_h5 control-label required-field">@Resource.Surcharges</label>
+                        <input type="number" min="1" max="6" id="ai-stewar" class="inputForm form-control"
+                            onkeypress = "return commonFunctions.validateNumeric(event)"
+                            onkeyup = "return commonFunctions.validateNumeric(event)" />
+                        <span id="ai-stewar-err" class="text-danger text-danger-error"></span>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <label class="subtitle_h5 control-label required-field">@Resource.ExtraCrews</label>
+                        <input type="number" min="1" max="4" id="ai-extra" class="inputForm form-control"
+                            onkeypress = "return commonFunctions.validateNumeric(event)"
+                            onkeyup = "return commonFunctions.validateNumeric(event)" />
+                        <span id="ai-extra-err" class="text-danger text-danger-error"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <label class="subtitle_h5 control-label">@Resource.SlotAllocatedTime</label>
+                        <input type="text" id="hr-assig" class="inputForm form-control ClassDate"/>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <label class="subtitle_h5 control-label">@Resource.SlotCoordinatedTime</label>
+                        <input type="text" id="hr-coord" class="inputForm form-control ClassDate"/>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <label class="subtitle_h5 control-label">@Resource.OvernightEndTime</label>
+                        <input type="text" id="hr-end" class="inputForm form-control ClassDate"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <label class="subtitle_h5 control-label">@Resource.ManeuverStartTime</label>
+                        <input type="text" id="hr-beign" class="inputForm form-control ClassDate"/>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <label class="subtitle_h5 control-label">@Resource.PositionOutputTime</label>
+                        <input type="text" id="hr-exit" class="inputForm form-control ClassDate"/>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <label class="subtitle_h5 control-label">@Resource.TypeFlight</label>
+                        <input type="text" id="type" class="inputForm form-control"
+                            onkeypress = "return commonFunctions.validarAlfanumericoLlaves(event, this, 10)"
+                            onkeyup = "return commonFunctions.validarAlfanumericoLlaves(event, this, 10)" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <label class="subtitle_h5 control-label">@Resource.DelayDescription1</label>
+                        <textarea id="remark-dly-1" class="inputForm form-control" cols="120" rows="1" maxlength="250"
+                            onkeypress = "return commonFunctions.validarComentarios(event, this)"
+                            onkeyup = "return commonFunctions.validarComentarios(event, this)"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <label class="subtitle_h5 control-label">@Resource.DelayDescription2</label>
+                        <textarea id="remark-dly-2" class="inputForm form-control" cols="120" rows="1" maxlength="250"
+                            onkeypress = "return commonFunctions.validarComentarios(event, this)"
+                            onkeyup = "return commonFunctions.validarComentarios(event, this)"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <label class="subtitle_h5 control-label">@Resource.DelayDescription3</label>
+                        <textarea id="remark-dly-3" class="inputForm form-control" cols="120" rows="1" maxlength="250"
+                            onkeypress = "return commonFunctions.validarComentarios(event, this)"
+                            onkeyup = "return commonFunctions.validarComentarios(event, this)"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" name="save-btn" title="@Resource.Close" data-dismiss="modal">
+                    <i class="fa fa-times fa-fw"></i>&nbsp;@Resource.Close
+                </button>
+                <button type="button" class="btn btn-default btn-green" name="save-btn" title="@Resource.Save" onclick="ManifestArrivalController.validateAddInfo()">
+                    <i class="fa fa-floppy-o fa-fw"></i>&nbsp;@Resource.Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

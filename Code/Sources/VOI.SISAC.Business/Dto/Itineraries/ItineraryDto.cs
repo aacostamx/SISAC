@@ -25,6 +25,14 @@ namespace VOI.SISAC.Business.Dto.Itineraries
         }
 
         /// <summary>
+        /// Gets or sets the line.
+        /// </summary>
+        /// <value>
+        /// The line.
+        /// </value>
+        public int Line { get; set; }
+
+        /// <summary>
         /// Data of the flight sequence
         /// </summary>
         public int Sequence { get; set; }

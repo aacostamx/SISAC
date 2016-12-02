@@ -14,6 +14,7 @@ namespace VOI.SISAC.Business.Itineraries
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Globalization;
     using System.Linq;
     using VOI.SISAC.Business.Common;
     using VOI.SISAC.Business.Dto.Itineraries;
@@ -59,11 +60,12 @@ namespace VOI.SISAC.Business.Itineraries
         /// <param name="airportRepository">airport repository</param>
         /// <param name="airplaneRepository">airplane repository</param>
         /// <param name="itineraryLogRepository">airport repository</param>
-        public ItineraryBusiness(IUnitOfWork unitOfWork,
-                                 IItineraryRepository itineraryRepository,
-                                 IAirportRepository airportRepository,
-                                 IAirplaneRepository airplaneRepository,
-                                 IItineraryLogRepository itineraryLogRepository)
+        public ItineraryBusiness(
+            IUnitOfWork unitOfWork,
+            IItineraryRepository itineraryRepository,
+            IAirportRepository airportRepository,
+            IAirplaneRepository airplaneRepository,
+            IItineraryLogRepository itineraryLogRepository)
         {
             this.unitOfWork = unitOfWork;
             this.itineraryRepository = itineraryRepository;
@@ -877,7 +879,7 @@ namespace VOI.SISAC.Business.Itineraries
             //AirlineCode NULL
             //ArrivalStation Debe ser DepartureStation de Vuelo Actual pues buscare conexiones anteriores
             //ArrivarDate Debe ser menor o igual que DepartureDate de Vuelo Actual pues buscare conexiones anteriores
-        
+
             if (!string.IsNullOrEmpty(search.FlightNumber))
                 entities = entities.Where(c => c.FlightNumber == search.FlightNumber).ToList();
 
@@ -956,6 +958,11 @@ namespace VOI.SISAC.Business.Itineraries
             {
                 Trace.TraceError(string.Format("Error {0}", DateTime.Now.ToString("dd MMMM yyyy hh:mm:ss")));
                 Trace.TraceError(ex.Message, ex);
+                if (ex.InnerException != null)
+                {
+                    Trace.TraceError(ex.Message, ex.InnerException);
+                }
+
                 throw new BusinessException(Messages.FailedInsertRecord + Messages.SeeInnerException, ex);
             }
 
@@ -984,7 +991,7 @@ namespace VOI.SISAC.Business.Itineraries
 
             try
             {
-                Itinerary itinerary = this.itineraryRepository.GetItineraryWithManifestsInformation(sequence, airlineCode, flightNumber, itineraryKey);
+                Itinerary itinerary = this.itineraryRepository.GetItineraryWithDeclarationsAndPassengerInformation(sequence, airlineCode, flightNumber, itineraryKey);
                 ItineraryDto itineraryDto = new ItineraryDto();
                 itineraryDto = Mapper.Map<Itinerary, ItineraryDto>(itinerary);
                 return itineraryDto;

@@ -1,0 +1,166 @@
+﻿<div class="modal fade" id="movementModal" tabindex="-1" role="dialog" aria-labelledby="modalAdd">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <p id="modalTitle" class="subtitle_h3_black">Add Movements</p>
+            </div>
+            <div class="modal-body">
+                <form id="frmMovement" name="frmMovement">
+                    <input id="IDMovement" name="IDMovement" value="0" hidden>
+                    <div class="form-group">
+                        <label class="subtitle_h5 control-label required-field">@Resource.OperationTypeName</label>
+                        <div class="styled-select">
+                            <select data-val="true" htmlattributes="{ class = inputForm form-control }" id="OperationTypeID" name="OperationTypeID">
+                                <option value="1">SALIDA</option>
+                                <option value="2">LLEGADA</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="subtitle_h5 control-label required-field">Movement Type</label>
+                        <div class="styled-select">
+                            <select data-val="true" htmlattributes="{ class = inputForm form-control }" id="MovementTypeCode" name="MovementTypeCode">
+                                <option value="AR">ARRIVAL</option>
+                                <option value="DE">DEPARTURE</option>
+                                <option value="HA">HANGAR OUT</option>
+                                <option value="HI">HANGAR IN</option>
+                                <option value="LAN">LANDING</option>
+                                <option value="PI">POSITION IN</option>
+                                <option value="PO">POSITION OUT</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="subtitle_h5 control-label required-field">Movement Date</label>
+                        <div class='input-group date' id='MovementDate' name='MovementDate'>
+                            <input type='text' class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="subtitle_h5 control-label">@Resource.Position</label>
+                        <input type="text" class="form-control" id="Position" name="Position">
+                    </div>
+                    <div class="form-group">
+                        <label class="subtitle_h5 control-label">@Resource.ProviderName</label>
+                        <div class="styled-select">
+                            <select class="inputForm form-control" data-val="true" id="ProviderNumber" name="ProviderNumber">
+                                <option value="">Seleccionar..</option>
+                                <option value="4000000">ADMINISTRADORA MEXIQUENSE DEL AEROPUERTO INTERNACI - 4000000</option>
+                                <option value="4000002">AEROPUERTO DE ACAPULCO, S.A. DE C.V. - 4000002</option>
+                                <option value="4000003">AEROPUERTO DE AGUASCALIENTES, S.A. DE C.V. - 4000003</option>
+                                <option value="4000004">AEROPUERTO DE CANCUN, S.A. DE C.V. - 4000004</option>
+                                <option value="4000005">AEROPUERTO DE CHIHUAHUA, S.A. DE C.V. - 4000005</option>
+                                <option value="4000155">AEROPUERTO DE CIUDAD JUAREZ, S.A. DE C.V. - 4000155</option>
+                                <option value="4000006">AEROPUERTO DE COZUMEL,  S. - 4000006</option>
+                                <option value="4000007">AEROPUERTO DE CULIACAN, S.A. DE C.V. - 4000007</option>
+                                <option value="4000230">AEROPUERTO DE DURANGO S.A DE C.V. - 4000230</option>
+                                <option value="4000008">AEROPUERTO DE GUADALAJARA, S.A. DE C.V. - 4000008</option>
+                                <option value="4000009">AEROPUERTO DE HERMOSILLO, S.A. DE C.V. - 4000009</option>
+                                <option value="4000075">AEROPUERTO DE HUATULCO, S.A. DE C.V. - 4000075</option>
+                                <option value="4000010">AEROPUERTO DE LA PAZ, S.A. DE C.V. - 4000010</option>
+                                <option value="4000078">AEROPUERTO DE LOS MOCHIS, S.A. DE C.V. - 4000078</option>
+                                <option value="4000036">AEROPUERTO DE MAZATLAN, S.A. DE C.V. - 4000036</option>
+                                <option value="4000011">AEROPUERTO DE MERIDA, S.A. DE C.V. - 4000011</option>
+                                <option value="4000012">AEROPUERTO DE MEXICALI, S.A. DE C.V. - 4000012</option>
+                                <option value="4000013">AEROPUERTO DE MONTERREY, S.A. DE C.V. - 4000013</option>
+                                <option value="4000014">AEROPUERTO DE MORELIA MICHOACAN, S.A. DE C.V. - 4000014</option>
+                                <option value="4000015">AEROPUERTO DE OAXACA, S.A. DE C.V. - 4000015</option>
+                                <option value="4000016">AEROPUERTO DE PUERTO VALLARTA, S.A. DE C.V. - 4000016</option>
+                                <option value="4000017">AEROPUERTO DE REYNOSA,  S. - 4000017</option>
+                                <option value="4000018">AEROPUERTO DE SAN JOSÉ DEL CABO S.A. DE C.V. - 4000018</option>
+                                <option value="4000170">AEROPUERTO DE SAN LUIS POTOSI SA. DE C.V. - 4000170</option>
+                                <option value="4000210">AEROPUERTO DE TAMPICO, S.A. DE C.V. - 4000210</option>
+                                <option value="4000019">AEROPUERTO DE TAPACHULA - 4000019</option>
+                                <option value="4000020">AEROPUERTO DE TIJUANA, S.A. DE C.V. - 4000020</option>
+                                <option value="4000171 ">AEROPUERTO DE VERACRUZ S.A. DE C.V. - 4000171 </option>
+                                <option value="4000021">AEROPUERTO DE VILLAHERMOS - 4000021</option>
+                                <option value="4000047">AEROPUERTO DE ZACATECAS, S.A. DE C.V. - 4000047</option>
+                                <option value="4000073">AEROPUERTO DE ZIHUATANEJO - 4000073</option>
+                                <option value="4000022">AEROPUERTO DEL BAJIO, S.A. DE C.V. - 4000022</option>
+                                <option value="4000151">AEROPUERTO INTERCONTINENTAL DE QUERÉTARO S.A. DE C - 4000151</option>
+                                <option value="4000062">AEROPUERTO INTERNACIONAL DE LA CIUDAD DE MÉXICO, S - 4000062</option>
+                                <option value="4000160">AEROPUERTO INTERNACIONAL PLAYA DE ORO - 4000160</option>
+                                <option value="45000000">AEROPUERTO Y SERVICIOS AUXILIARES SA DE CV - 45000000</option>
+                                <option value="2400000">AEROPUERTOS Y SERVICIOS AUXILIARES CEN - 2400000</option>
+                                <option value="4000025">AGN AVIATION SERVICES, S. - 4000025</option>
+                                <option value="4000023">AGN AVIATION SERVICES, S.A. DE C.V. - 4000023</option>
+                                <option value="4000077">ALL SEASONAL - 4000077</option>
+                                <option value="4000152">ANGEL ALBINO CORZO INTERNATIONAL - 4000152</option>
+                                <option value="2700374">ASSISTANCE CAREFULNESS, S.C. - 2700374</option>
+                                <option value="2400025">ASSOCIATED ENERGY GROUP LIC - 2400025</option>
+                                <option value="4000038">AVESSPRESS, S. A. DE C. V. - 4000038</option>
+                                <option value="4000051">AVIATION PORT SERVICES - 4000051</option>
+                                <option value="4000068">AVIATION PORT SERVICES - 4000068</option>
+                                <option value="4000044">AVIATION PORT SERVICES,  L - 4000044</option>
+                                <option value="4000067">AVIATION SAFEGUARDS - 4000067</option>
+                                <option value="2400015">BP PRODUCTS NORTH AMERICA INC. - 2400015</option>
+                                <option value="2400005">CHEMOIL SAT - 2400005</option>
+                                <option value="2400040">CHEVRON PRODUCTS COMPANY - 2400040</option>
+                                <option value="4000100">CITY OF CHICAGO - 4000100</option>
+                                <option value="4000072">CITY OF SAN JOSE - 4000072</option>
+                                <option value="4000097">CLARK COUNTY - 4000097</option>
+                                <option value="4000070">EAGLE AVIATION SERVICES S - 4000070</option>
+                                <option value="4000095">FLIGHT SERVICES &amp; SYSTEMS - 4000095</option>
+                                <option value="0001">FLIGHT SERVICES AND SYSTEMS - 0001</option>
+                                <option value="4000098">FRESNO YOSEMITE - 4000098</option>
+                                <option value="4000140">GDL GROUND HANDLING, S.A. DE C - 4000140</option>
+                                <option value="4000071">GLOBALIA HANDLING DE MÉXI - 4000071</option>
+                                <option value="4000060">GRUPO REMACONST,  S.A. DE - 4000060</option>
+                                <option value="4000027">IGS GROUND SERVICES - 4000027</option>
+                                <option value="4000103">INMOBILIARIA  FUMISA S.A. DE C.V. - 4000103</option>
+                                <option value="4000142">INTEGRATED AIRLINE SERVICES, INC. - 4000142</option>
+                                <option value="2400001">LAPSACO, S.A. DE C.V. - 2400001</option>
+                                <option value="4000053">LSG SKY CHEFS INC. - 4000053</option>
+                                <option value="4000054">LSG SKY CHEFS,  INC. - 4000054</option>
+                                <option value="4000055">LSG SKY CHEFS,  INC. - 4000055</option>
+                                <option value="4000042">MATRIX AVIATION SERVICES - 4000042</option>
+                                <option value="4000043">MATRIX AVIATION SERVICES - 4000043</option>
+                                <option value="MATRIX">MATRIX AVIATION SERVICES - MATRIX</option>
+                                <option value="4000030">MENZIES AVIATION MÉXICO, S.A. DE C.V. - 4000030</option>
+                                <option value="4000031">NACIONAL FINANCIERA SNC F - 4000031</option>
+                                <option value="4000032">OPERADORA ESTATAL DE AERO - 4000032</option>
+                                <option value="2400002">ORVI COMBUSTIBLES, S.A. D - 2400002</option>
+                                <option value="4000052">PORT OF OAKLAND - 4000052</option>
+                                <option value="4000041">SERECA SECURITY CORP - 4000041</option>
+                                <option value="445000050">SERVISAIR LLC. - 445000050</option>
+                                <option value="4000050">SERVISAIR,  LLC. - 4000050</option>
+                                <option value="2400041">SHELL OIL PRODUCTS US - 2400041</option>
+                                <option value="4000065">SISTEMAS INTEGRALES PARA EL TRANSPORTE S.A. DE C.V. - 4000065</option>
+                                <option value="2700311">UNION MEXICANA DE TRANSPORTADORES - 2700311</option>
+                                <option value="2400030">UNO GUATEMALA, SOCIEDAD ANONIMA - 2400030</option>
+                                <option value="0000001">VOLARIS - 0000001</option>
+                                <option value="4000">WORLD FUEL SERVICES - 4000</option>
+                                <option value="40000">WORLD FUEL SERVICES - 40000</option>
+                                <option value="2400003">WORLD FUEL SERVICES EUROP - 2400003</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="subtitle_h5 control-label">Remaining Fuel</label>
+                        <input type="text" class="form-control" id="RemainingFuel" name="RemainingFuel">
+                    </div>
+                    <div class="form-group">
+                        <label class="subtitle_h5 control-label" for="Remarks">@Resource.Remarks</label>
+                        <textarea class="form-control" cols="100" data-val="true" data-val-length="Longitud Máxima de 250caracteres" data-val-length-max="250" id="Remarks" name="Remarks" onkeypress="return commonFunctions.validarComentarios(event, this);" onkeyup="return commonFunctions.validarComentarios(event, this)" rows="5" style="resize: none;"></textarea>
+                        <span class="field-validation-valid text-danger text-danger-error" data-valmsg-for="Remarks" data-valmsg-replace="true"></span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="btnAddMove" name="btnAddMove" type="button" class="btn btn-primary" onclick="TimelineController.AddTimelineMovement()" hidden>Save</button>
+                <button id="btnEditMove" name="btnEditMove" type="button" class="btn btn-primary" onclick="TimelineController.EditTimelineMovement()" hidden>Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#MovementDate').datetimepicker();
+    });
+</script>

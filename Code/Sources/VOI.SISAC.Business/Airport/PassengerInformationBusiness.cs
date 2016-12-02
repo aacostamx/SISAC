@@ -6,11 +6,11 @@
 
 namespace VOI.SISAC.Business.Airport
 {
-    using AutoMapper;
-    using ExceptionBusiness;
-    using Resources;
     using System;
     using System.Collections.Generic;
+    using AutoMapper;
+    using ExceptionBusiness;
+    using Resources;    
     using VOI.SISAC.Business.Dto.Airports;
     using VOI.SISAC.Dal.Infrastructure;
     using VOI.SISAC.Dal.Repository.Airports;
@@ -81,6 +81,12 @@ namespace VOI.SISAC.Business.Airport
             {
                 PassengerInformation passengerInformation = this.passengerInformationRepository.FindById(sequence, airlineCode, flightNumber, itinerayKey);
                 PassengerInformationDto passengerInformationDto = Mapper.Map<PassengerInformation, PassengerInformationDto>(passengerInformation);
+
+                if (passengerInformation != null && passengerInformation.AdditionalPassengerInformation != null)
+                {
+                    passengerInformationDto.AdditonalInformation = Mapper.Map<AdditionalPassengerInformationDto>(passengerInformation.AdditionalPassengerInformation);
+                }
+
                 return passengerInformationDto;
             }
             catch (Exception ex)
@@ -103,11 +109,20 @@ namespace VOI.SISAC.Business.Airport
 
             try
             { 
-                    PassengerInformation passengerInformation = new PassengerInformation();
-                    passengerInformation = Mapper.Map<PassengerInformationDto, PassengerInformation>(passengerInformationDto);
-                    this.passengerInformationRepository.Add(passengerInformation);
-                    this.unitOfWork.Commit();
-                    return true;
+                PassengerInformation passengerInformation = new PassengerInformation();
+                passengerInformation = Mapper.Map<PassengerInformationDto, PassengerInformation>(passengerInformationDto);
+                if (passengerInformationDto.AdditonalInformation != null)
+                {
+                    passengerInformation.AdditionalPassengerInformation = Mapper.Map<AdditionalPassengerInformation>(passengerInformationDto.AdditonalInformation);
+                    passengerInformation.AdditionalPassengerInformation.Sequence = passengerInformation.Sequence;
+                    passengerInformation.AdditionalPassengerInformation.AirlineCode = passengerInformation.AirlineCode;
+                    passengerInformation.AdditionalPassengerInformation.FlightNumber = passengerInformation.FlightNumber;
+                    passengerInformation.AdditionalPassengerInformation.ItineraryKey = passengerInformation.ItineraryKey;
+                }
+
+                this.passengerInformationRepository.Add(passengerInformation);
+                this.unitOfWork.Commit();
+                return true;
             }
             catch (Exception ex)
             {
@@ -165,6 +180,11 @@ namespace VOI.SISAC.Business.Airport
                 passengerInformation.PreviousFlightNumber = passengerInformationDto.PreviousFlightNumber;
                 passengerInformation.PreviousItineraryKey = passengerInformationDto.PreviousItineraryKey;
 
+                if (passengerInformationDto.AdditonalInformation != null)
+                {
+                    passengerInformation.AdditionalPassengerInformation = Mapper.Map<AdditionalPassengerInformation>(passengerInformationDto.AdditonalInformation);
+                }
+
                 this.passengerInformationRepository.Update(passengerInformation);
                 this.unitOfWork.Commit();
                 return true;
@@ -186,22 +206,22 @@ namespace VOI.SISAC.Business.Airport
         public IList<string> ValidatePassengerInformation(PassengerInformationDto passengerInformationDto, bool isMexicanAirport, bool isInternationalAirport)
         {
             IList<string> errors = new List<string>();
-            PassengerInformationDto passengerInformationDtoDB = new PassengerInformationDto();
+            PassengerInformation passengerInformation = new PassengerInformation();
 
             // Finds if a Passenger information already exists
-            passengerInformationDtoDB = Mapper.Map<PassengerInformation,PassengerInformationDto>(this.passengerInformationRepository.FindById(
+            passengerInformation = this.passengerInformationRepository.FindById(
                 passengerInformationDto.Sequence, 
                 passengerInformationDto.AirlineCode, 
                 passengerInformationDto.FlightNumber, 
-                passengerInformationDto.ItineraryKey));
+                passengerInformationDto.ItineraryKey);
 
             // If not exist, create a new one
-            if (passengerInformationDtoDB == null)
+            if (passengerInformation == null)
             {
                 // If is a national airport, validates that the Totals match
                 if (isMexicanAirport)
                 {
-                    errors = this.ValidateTotals(passengerInformationDto);
+                    errors = ValidateTotals(passengerInformationDto);
 
                     if (errors.Count > 0)
                     {
@@ -217,22 +237,22 @@ namespace VOI.SISAC.Business.Airport
                 if (isMexicanAirport)
                 {
                     // If is a national airport, validates that the Totals match
-                    errors = this.ValidateTotals(passengerInformationDto);
+                    errors = ValidateTotals(passengerInformationDto);
 
                     //Cuando Aplique destino internacional y origen nacional, se debe validar que otros exentos debe ser mayor o igual que TUA internacional de vuelo anterior
                     if (isInternationalAirport)
                     {
-                        int sequenceDefault = passengerInformationDtoDB.PreviousSequence ?? 0;
+                        int sequenceDefault = passengerInformation.PreviousSequence ?? 0;
 
-                        if (!string.IsNullOrEmpty(passengerInformationDtoDB.PreviousAirlineCode)
-                         && !string.IsNullOrEmpty(passengerInformationDtoDB.PreviousFlightNumber)
-                         && !string.IsNullOrEmpty(passengerInformationDtoDB.PreviousItineraryKey))
+                        if (!string.IsNullOrEmpty(passengerInformation.PreviousAirlineCode)
+                         && !string.IsNullOrEmpty(passengerInformation.PreviousFlightNumber)
+                         && !string.IsNullOrEmpty(passengerInformation.PreviousItineraryKey))
                         {
                             PassengerInformationDto passengerPreviousDto = new PassengerInformationDto();
                             passengerPreviousDto = this.FindById(sequenceDefault,
-                                passengerInformationDtoDB.PreviousAirlineCode,
-                                passengerInformationDtoDB.PreviousFlightNumber,
-                                passengerInformationDtoDB.PreviousItineraryKey);
+                                passengerInformation.PreviousAirlineCode,
+                                passengerInformation.PreviousFlightNumber,
+                                passengerInformation.PreviousItineraryKey);
                             if (passengerPreviousDto != null)
                             {
                                 if (passengerInformationDto.Other < passengerPreviousDto.InternationalTua)
@@ -260,7 +280,7 @@ namespace VOI.SISAC.Business.Airport
         /// </summary>
         /// <param name="passengerInformationDto">The passenger information dto.</param>
         /// <returns>List of erros.</returns>
-        private IList<string> ValidateTotals(PassengerInformationDto passengerInformationDto)
+        private static IList<string> ValidateTotals(PassengerInformationDto passengerInformationDto)
         {
             IList<string> errors = new List<string>();
             int SumCabinAdults = 0;

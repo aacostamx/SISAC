@@ -154,6 +154,9 @@ namespace VOI.SISAC.Web.MapConfiguration
                 .ForMember(p => p.Departure, r => r.MapFrom(s => s.Itinerary.DepartureStation))
                 .ForMember(p => p.Arrival, r => r.MapFrom(s => s.Itinerary.ArrivalStation))
                 .ReverseMap();
+
+            Mapper.CreateMap<AdditionalPassengerInformationDto, AdditionalPassengerInformationVO>()
+                .ReverseMap();
         }
 
         /// <summary>

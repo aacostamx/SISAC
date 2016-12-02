@@ -312,6 +312,14 @@ namespace VOI.SISAC.Entities.Itineraries
         public virtual Itinerary Itinerary { get; set; }
 
         /// <summary>
+        /// Gets or sets the additional arrival information.
+        /// </summary>
+        /// <value>
+        /// The additional arrival information.
+        /// </value>
+        public virtual AdditionalArrivalInformation AdditionalArrivalInformation { get; set; }
+
+        /// <summary>
         /// Gets or sets the delays.
         /// </summary>
         /// <value>

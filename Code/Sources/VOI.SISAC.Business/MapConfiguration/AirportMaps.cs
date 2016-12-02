@@ -72,6 +72,8 @@ namespace VOI.SISAC.Business.MapConfiguration
         {
             Mapper.CreateMap<PassengerInformation, PassengerInformationDto>()
                 .ReverseMap();
+            Mapper.CreateMap<AdditionalPassengerInformation, AdditionalPassengerInformationDto>()
+                .ReverseMap();
         }
 
         /// <summary>

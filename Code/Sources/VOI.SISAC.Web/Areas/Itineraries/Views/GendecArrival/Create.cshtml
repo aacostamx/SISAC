@@ -27,7 +27,7 @@
     }
     <br />
 
-    @using (Html.BeginForm("OpenGendec", "GendecArrival", FormMethod.Post, new { name = "formGendec", id = "formGendec" }))
+    @using (Html.BeginForm("PerformAction", "GendecArrival", FormMethod.Post, new { name = "formGendec", id = "formGendec" }))
     {
         @Html.AntiForgeryToken()
 
@@ -35,11 +35,15 @@
             <div class="form-horizontal">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @{ Html.EnableClientValidation(false); }
-                <br />
                 @Html.HiddenFor(model => model.Sequence)
                 @Html.HiddenFor(model => model.AirlineCode)
                 @Html.HiddenFor(model => model.FlightNumber)
                 @Html.HiddenFor(model => model.Itinerarykey)
+                @Html.HiddenFor(model => model.DepartureStation)
+                @Html.HiddenFor(model => model.ArrivalStation)
+                @Html.HiddenFor(model => model.EquipmentNumber)
+                @Html.HiddenFor(model => model.DepartureDate)
+                @Html.HiddenFor(model => model.Action)
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingTwo">
@@ -49,10 +53,10 @@
                         </div>
                         @*Comienza el Grid para Tripulación*@
                         <table id="tbCrew"
-                               class="table"
-                               data-unique-id="CrewID"
-                               data-toggle="table"
-                               data-mobile-responsive="true">
+                            class="table"
+                            data-unique-id="CrewID"
+                            data-toggle="table"
+                            data-mobile-responsive="true">
 
                             <thead>
                                 <tr>
@@ -94,35 +98,35 @@
                                         {
                                             if (item.CrewTypeID == "CAP" || item.CrewTypeID == "COP")
                                             {
-                                                <tr>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.CrewID)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.CrewTypeID)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.NickName)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.FirstName)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.LastName)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.PassportNumber)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.DateOfBird, "ToShortDate")
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Gender)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Citizenship)
-                                                    </td>
-                                                </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CrewID)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CrewTypeID)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NickName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FirstName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.LastName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.PassportNumber)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DateOfBird, "ToShortDate")
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Gender)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Citizenship)
+                                        </td>
+                                    </tr>
                                             }
                                         }
                                     }
@@ -141,10 +145,10 @@
                     </div>
                     @*Comienza el Grid para Tripulación*@
                     <table id="tbCrewSob"
-                           data-unique-id="CrewID"
-                           class="table"
-                           data-toggle="table"
-                           data-mobile-responsive="true">
+                        data-unique-id="CrewID"
+                        class="table"
+                        data-toggle="table"
+                        data-mobile-responsive="true">
 
                         <thead>
                             <tr>
@@ -186,35 +190,35 @@
                                     {
                                         if (item.CrewTypeID == "SOB" || item.CrewTypeID == "JDC")
                                         {
-                                            <tr>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.CrewID)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.CrewTypeID)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.NickName)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.FirstName)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.LastName)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.PassportNumber)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.DateOfBird, "ToShortDate")
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.Gender)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.Citizenship)
-                                                </td>
-                                            </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CrewID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CrewTypeID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NickName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FirstName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LastName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PassportNumber)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DateOfBird, "ToShortDate")
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Gender)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Citizenship)
+                                    </td>
+                                </tr>
                                         }
                                     }
                                 }
@@ -299,34 +303,40 @@
 
                     <br />
                     <br />
-                    <div class="col-md-12 col-lg-12 text-center">
+                    <div class="col-md-12 col-lg-12">
                         <button id="btnBack" type="button" class="btn btn-default" name="Back" title="@Resource.Back" onclick="location.href='@Url.Action("Index", "Itinerary", new { area = "Itineraries" })'">
-                            &nbsp;@Resource.Back
+                            <i class="fa fa-arrow-left fa-fw"></i>&nbsp;@Resource.Back
                         </button>
                         @if (User.IsInRole("GENDECARR-OPEN"))
                         {
                             if (isClose)
                             {
-                                <input class="btn btn-default" type="submit" value="@Resource.Open" name="Open" />
+                                <button type="submit" class="btn btn-default btn-green" name="Open" title="@Resource.Open" id="Open">
+                                    <i class="fa fa-unlock fa-fw"></i>&nbsp;@Resource.Open
+                                </button>
                             }
                         }
                         @if (User.IsInRole("GENDECARR-UPD"))
                         {
                             if (!isClose)
                             {
-                                <input id="Save" class="btn btn-default" type="submit" value="@Resource.Save" name="Save" />
+                                <button type="submit" class="btn btn-default btn-green" name="Save" title="@Resource.Save" id="Save">
+                                    <i class="fa fa-floppy-o fa-fw"></i>&nbsp;@Resource.Save
+                                </button>
                             }
                         }
                         @if (User.IsInRole("GENDECARR-CLOSE"))
                         {
                             if (!isClose)
                             {
-                                <input id="Close" class="btn btn-default" type="submit" value="@Resource.Close" name="Close" />
+                                <button type="submit" class="btn btn-default btn-green" name="Close" title="@Resource.Close" id="Close">
+                                    <i class="fa fa-lock fa-fw"></i>&nbsp;@Resource.Close
+                                </button>
                             }
                         }
                         @if (User.IsInRole("GENDECARR-PRINTREP") && Model.FlightNumber != null)
                         {
-                            <button id="Print" type="button" class="btn btn-default" name="Print" title="@Resource.Print" onclick="location.href='@Url.Action("Print", "GendecArrival",
+                            <button id="Print" type="button" class="btn btn-default" name="Print" title="@Resource.Export" onclick="location.href='@Url.Action("Print", "GendecArrival",
                                 new
                                 {
                                     Sequence = Model.Sequence,
@@ -336,9 +346,9 @@
                                     DepartureStation = Model.DepartureStation,
                                     ArrivalStation = Model.ArrivalStation,
                                     EquipmentNumber = Model.EquipmentNumber,
-                                    DepartureDate = this.ViewBag.DepartureDate
+                                    DepartureDate = Model.DepartureDate
                                 })'">
-                                &nbsp;@Resource.Export
+                                <i class="fa-fw glyphicon glyphicon-export icon-share"></i>&nbsp;@Resource.Export
                             </button>
                         }
                     </div>
@@ -346,7 +356,7 @@
                 @{ Html.EnableClientValidation(true); }
             </div>
         </div>
-                    }
+    }
 </div>
 
 @section Scripts {

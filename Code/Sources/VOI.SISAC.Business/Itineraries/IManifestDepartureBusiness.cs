@@ -56,5 +56,29 @@ namespace VOI.SISAC.Business.Itineraries
         /// <param name="itineraryKey">The itinerary key.</param>
         /// <returns>List of delays in the manifest departure.</returns>
         IList<DelayDto> GetDelaysForManifest(int sequence, string airlineCode, string flightNumber, string itineraryKey);
+
+        /// <summary>
+        /// Gets the boarding for manifest.
+        /// </summary>
+        /// <param name="sequence">The sequence.</param>
+        /// <param name="airlineCode">The airline code.</param>
+        /// <param name="flightNumber">The flight number.</param>
+        /// <param name="itineraryKey">The itinerary key.</param>
+        /// <returns></returns>
+        IList<ManifestDepartureBoardingDto> GetBoardingForManifest(int sequence, string airlineCode, string flightNumber, string itineraryKey);
+
+        /// <summary>
+        /// Gets the boarding information for manifest.
+        /// </summary>
+        /// <param name="boardingID">The boarding identifier.</param>
+        /// <returns></returns>
+        IList<ManifestDepartureBoardingInformationDto> GetBoardingInformationForManifest(long boardingID, string airplaneModel);
+
+        /// <summary>
+        /// Gets the boarding detail for manifest.
+        /// </summary>
+        /// <param name="boardingID">The boarding identifier.</param>
+        /// <returns></returns>
+        IList<ManifestDepartureBoardingDetailDto> GetBoardingDetailForManifest(long boardingID, string airplaneModel);
     }
 }

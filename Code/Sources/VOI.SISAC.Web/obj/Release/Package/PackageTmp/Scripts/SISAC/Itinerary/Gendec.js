@@ -170,7 +170,70 @@ var GendecController = {
         itemsSob = $tableSob.bootstrapTable('getData');
 
         if (items.length > 0) {
+            var hasCaptain = false;
+            $.each(items, function (index, value) {
+                if (value.CrewTypeId.trim() == 'CAP') {
+                    hasCaptain = true;
+                }
+            });
+
+            if (!hasCaptain) {
+                if (currentLang.includes('es')) {
+                    swal({
+                        title: 'Advertencia',
+                        text: 'Debe de colocar por lo menos un Capitan en la tripulación.',
+                        type: 'warning',
+                        confirmButtonColor: '#83217a',
+                        html: true,
+                        timer: 12000
+                    });
+                }
+                else {
+                    swal({
+                        title: 'Warning',
+                        text: 'There must be at least a Captain in the crew.',
+                        type: 'warning',
+                        confirmButtonColor: '#83217a',
+                        html: true,
+                        timer: 12000
+                    });
+                }
+                return;
+            }
+           
             if (itemsSob.length > 0) {
+
+                var hasChief = false;
+                $.each(itemsSob, function (index, value) {
+                    if (value.CrewTypeId.trim() == 'JDC') {
+                        hasChief = true;
+                    }
+                });
+
+                if (!hasChief) {
+                    if (currentLang.includes('es')) {
+                        swal({
+                            title: 'Advertencia',
+                            text: 'Debe de colocar por lo menos un Jefe de Cabina en la tripulación.',
+                            type: 'warning',
+                            confirmButtonColor: '#83217a',
+                            html: true,
+                            timer: 12000
+                        });
+                    }
+                    else {
+                        swal({
+                            title: 'Warning',
+                            text: 'There must be at least a Chief Cabinet in the crew.',
+                            type: 'warning',
+                            confirmButtonColor: '#83217a',
+                            html: true,
+                            timer: 12000
+                        });
+                    }
+                    return;
+                }
+
                 $table.bootstrapTable('showColumn', 'CrewID');
                 $tableSob.bootstrapTable('showColumn', 'CrewID');
 
@@ -188,7 +251,7 @@ var GendecController = {
                             return;
                         }
                     }
-                })
+                });
                 location.reload();
             }
             else {

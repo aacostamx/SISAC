@@ -6,8 +6,12 @@
 
 namespace VOI.SISAC.Dal.Repository.Itineraries
 {
+    using System;
     using Entities.Itineraries;
     using VOI.SISAC.Dal.Infrastructure;
+    using System.Diagnostics;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
 
     /// <summary>
     /// Timeline Movement Repository
@@ -19,5 +23,7 @@ namespace VOI.SISAC.Dal.Repository.Itineraries
         /// </summary>
         /// <param name="factory">The factory.</param>
         public TimelineMovementRepository(IDbFactory factory) : base(factory) { }
+
+
     }
 }

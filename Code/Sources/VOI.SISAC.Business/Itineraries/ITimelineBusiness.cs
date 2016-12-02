@@ -7,6 +7,7 @@
 namespace VOI.SISAC.Business.Itineraries
 {
     using Dto.Itineraries;
+    using System;
     using System.Collections.Generic;
 
 
@@ -20,34 +21,27 @@ namespace VOI.SISAC.Business.Itineraries
         /// </summary>
         /// <param name="flight">The flight.</param>
         /// <returns></returns>
-        IList<TimelineDto> GetTimelineByFlight(TimelineDto flight);
+        TimelineDto GetTimelineByFlight(TimelineDto flight);
 
         /// <summary>
         /// Gets the full timeline.
         /// </summary>
-        /// <param name="flight">The flight.</param>
         /// <returns></returns>
-        IList<TimelineDto> GetFullTimeline(TimelineDto flight);
+        IList<TimelineDto> GetFullTimeline();
 
         /// <summary>
-        /// Adds the timeline movement.
+        /// Gets the timeline by equipment number.
         /// </summary>
         /// <param name="flight">The flight.</param>
         /// <returns></returns>
-        bool AddTimelineMovement(TimelineDto flight);
+        IList<TimelineDto> GetTimelineByEquipmentNumber(TimelineDto flight);
 
         /// <summary>
-        /// Updates the timeline movement.
+        /// Timelines the start procress.
         /// </summary>
-        /// <param name="flight">The flight.</param>
+        /// <param name="startDate">The start date.</param>
+        /// <param name="endDate">The end date.</param>
         /// <returns></returns>
-        bool UpdateTimelineMovement(TimelineDto flight);
-
-        /// <summary>
-        /// Deletes the timeline movement.
-        /// </summary>
-        /// <param name="flight">The flight.</param>
-        /// <returns></returns>
-        bool DeleteTimelineMovement(TimelineDto flight);
+        bool TimelineStartProcress(DateTime? startDate, DateTime? endDate);
     }
 }

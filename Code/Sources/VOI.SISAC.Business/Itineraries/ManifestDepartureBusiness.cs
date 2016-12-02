@@ -36,6 +36,26 @@ namespace VOI.SISAC.Business.Itineraries
         private readonly IManifestDepartureRepository manifestRepository;
 
         /// <summary>
+        /// The manifest boarding repository
+        /// </summary>
+        private readonly IManifestDepartureBoardingRepository manifestBoardingRepository;
+
+        /// <summary>
+        /// The manifest boarding repository
+        /// </summary>
+        private readonly IManifestDepartureBoardingInformationRepository manifestBoardingInformationRepository;
+
+        /// <summary>
+        /// The manifest boarding detail repository
+        /// </summary>
+        private readonly IManifestDepartureBoardingDetailRepository manifestBoardingDetailRepository;
+
+        /// <summary>
+        /// The additional departure information repository
+        /// </summary>
+        private readonly IAdditionalDepartureInformationRepository additionalDepartureInformationRepository;
+
+        /// <summary>
         /// The airport repository
         /// </summary>
         private readonly IAirportRepository airportRepository;
@@ -51,25 +71,37 @@ namespace VOI.SISAC.Business.Itineraries
         private readonly IManifestTimeConfigRepository timeConfigRepository;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ManifestDepartureBusiness" /> class.
+        /// Initializes a new instance of the <see cref="ManifestDepartureBusiness"/> class.
         /// </summary>
         /// <param name="unitOfWork">The unit of work.</param>
         /// <param name="manifestRepository">The manifest repository.</param>
         /// <param name="airportRepository">The airport repository.</param>
         /// <param name="itineraryRepository">The itinerary repository.</param>
         /// <param name="timeConfigRepository">The time configuration repository.</param>
+        /// <param name="manifestBoardingRepository">The manifest boarding repository.</param>
+        /// <param name="additionalDepartureInformationRepository">The additional departure information repository.</param>
+        /// <param name="manifestBoardingInformationRepository">The manifest boarding information repository.</param>
+        /// <param name="manifestBoardingDetailRepository">The manifest boarding detail repository.</param>
         public ManifestDepartureBusiness(
             IUnitOfWork unitOfWork,
             IManifestDepartureRepository manifestRepository,
             IAirportRepository airportRepository,
             IItineraryRepository itineraryRepository,
-            IManifestTimeConfigRepository timeConfigRepository)
+            IManifestTimeConfigRepository timeConfigRepository,
+            IManifestDepartureBoardingRepository manifestBoardingRepository,
+            IAdditionalDepartureInformationRepository additionalDepartureInformationRepository,
+            IManifestDepartureBoardingInformationRepository manifestBoardingInformationRepository,
+            IManifestDepartureBoardingDetailRepository manifestBoardingDetailRepository)
         {
             this.unitOfWork = unitOfWork;
             this.manifestRepository = manifestRepository;
             this.airportRepository = airportRepository;
             this.itineraryRepository = itineraryRepository;
             this.timeConfigRepository = timeConfigRepository;
+            this.manifestBoardingRepository = manifestBoardingRepository;
+            this.additionalDepartureInformationRepository = additionalDepartureInformationRepository;
+            this.manifestBoardingInformationRepository = manifestBoardingInformationRepository;
+            this.manifestBoardingDetailRepository = manifestBoardingDetailRepository;
         }
 
         /// <summary>
@@ -99,7 +131,7 @@ namespace VOI.SISAC.Business.Itineraries
                 if (entity == null)
                 {
                     // Gets the itinerary information
-                    Itinerary itinerary = this.itineraryRepository.GetItineraryWithManifestsInformation(sequence, airlineCode, flightNumber, itineraryKey);
+                    Itinerary itinerary = this.itineraryRepository.GetItineraryWithDeclarationsAndPassengerInformation(sequence, airlineCode, flightNumber, itineraryKey);
                     if (itinerary != null)
                     {
                         bool isNational;
@@ -182,6 +214,8 @@ namespace VOI.SISAC.Business.Itineraries
                     manifestDeparture.AirlineCode,
                     manifestDeparture.FlightNumber,
                     manifestDeparture.ItineraryKey);
+                IList<ManifestDepartureBoarding> boardings = new List<ManifestDepartureBoarding>();
+                AdditionalDepartureInformation additional = new AdditionalDepartureInformation();
 
                 // Manifest does not exist and create a new one for the itinerary
                 if (entity == null)
@@ -202,11 +236,40 @@ namespace VOI.SISAC.Business.Itineraries
                     // The manifest exists and proceed to update it.
                     DateTime actualDepartureDate;
                     IList<Delay> delays = Mapper.Map<IList<Delay>>(manifestDeparture.Delays);
+                    
+                    //Boarding
+                    boardings = Mapper.Map<IList<ManifestDepartureBoarding>>(manifestDeparture.ManifestDepartureBoardings);
+                    
+                    //Informacion de Carga  Boarding
+                    foreach (var item in boardings)
+                    {
+                        var boardingInfo = manifestDeparture.ManifestDepartureBoardings.Where(c => c.Position == item.Position).Select(c => c.ManifestDepartureBoardingInformationDtos).ToList();
+                        var boardingDetailInfo = manifestDeparture.ManifestDepartureBoardings.Where(c => c.Position == item.Position).Select(c => c.ManifestDepartureBoardingDetailDtos).ToList();
+
+                        if (boardingInfo != null)
+                        {
+                            item.ManifestDepartureBoardingInformations = Mapper.Map<IList<ManifestDepartureBoardingInformation>>(boardingInfo[0]);
+                        }
+
+                        if (boardingDetailInfo != null)
+                        {
+                            item.ManifestDepartureBoardingDetails = Mapper.Map<IList<ManifestDepartureBoardingDetail>>(boardingDetailInfo[0]);
+                        }
+                    }
+
+                    //Additional Information
+                    if (manifestDeparture.AdditionalDepartureInformation != null)
+                    {
+                        additional = Mapper.Map<AdditionalDepartureInformation>(manifestDeparture.AdditionalDepartureInformation);
+                    }
+
                     this.SetInformationInEntity(entity, manifestDeparture);
                     DateTime.TryParse(manifestDeparture.ActualDepartureDate + " " + manifestDeparture.ActualDepartureTime, out actualDepartureDate);
                     entity.ActualDepartureDate = actualDepartureDate != default(DateTime) ? actualDepartureDate : new DateTime();
                     this.manifestRepository.RemoveAllDelaysFromManifest(entity);
                     this.manifestRepository.Update(entity, delays);
+                    this.UpdateBoarding(entity, boardings);
+                    this.UpdateAdditional(entity, additional);
                 }
 
                 this.unitOfWork.Commit();
@@ -247,6 +310,82 @@ namespace VOI.SISAC.Business.Itineraries
         }
 
         /// <summary>
+        /// Gets the boarding for manifest.
+        /// </summary>
+        /// <param name="sequence">The sequence.</param>
+        /// <param name="airlineCode">The airline code.</param>
+        /// <param name="flightNumber">The flight number.</param>
+        /// <param name="itineraryKey">The itinerary key.</param>
+        /// <returns>Information about boarding in the manifest.</returns>
+        public IList<ManifestDepartureBoardingDto> GetBoardingForManifest(int sequence, string airlineCode, string flightNumber, string itineraryKey)
+        {
+            if (string.IsNullOrWhiteSpace(airlineCode)
+                || string.IsNullOrWhiteSpace(flightNumber)
+                || string.IsNullOrWhiteSpace(itineraryKey))
+            {
+                return null;
+            }
+
+            try
+            {
+                List<ManifestDepartureBoarding> boardings = this.manifestBoardingRepository.GetBoardingsForManifest(sequence, airlineCode, flightNumber, itineraryKey).ToList();
+                return Mapper.Map<List<ManifestDepartureBoardingDto>>(boardings);
+            }
+            catch (Exception exception)
+            {
+                throw new BusinessException(Messages.FailedRetrievedRecords + Messages.SeeInnerException, exception);
+            }
+        }
+
+        /// <summary>
+        /// Gets the boarding information for manifest.
+        /// </summary>
+        /// <param name="boardingID">The boarding identifier.</param>
+        /// <returns></returns>
+        /// <exception cref="BusinessException"></exception>
+        public IList<ManifestDepartureBoardingInformationDto> GetBoardingInformationForManifest(long boardingID, string airplaneModel)
+        {
+            if (string.IsNullOrWhiteSpace(boardingID.ToString()))
+            {
+                return null;
+            }
+
+            try
+            {
+                List<ManifestDepartureBoardingInformation> boardings = this.manifestBoardingInformationRepository.GetInformationByBoardingID(boardingID, airplaneModel).ToList();
+                return Mapper.Map<List<ManifestDepartureBoardingInformationDto>>(boardings);
+            }
+            catch (Exception exception)
+            {
+                throw new BusinessException(Messages.FailedRetrievedRecords + Messages.SeeInnerException, exception);
+            }
+        }
+
+        /// <summary>
+        /// Gets the boarding detail for manifest.
+        /// </summary>
+        /// <param name="boardingID">The boarding identifier.</param>
+        /// <returns></returns>
+        /// <exception cref="BusinessException"></exception>
+        public IList<ManifestDepartureBoardingDetailDto> GetBoardingDetailForManifest(long boardingID, string airplaneModel)
+        {
+            if (string.IsNullOrWhiteSpace(boardingID.ToString()))
+            {
+                return null;
+            }
+
+            try
+            {
+                List<ManifestDepartureBoardingDetail> boardings = this.manifestBoardingDetailRepository.GetDetailByBoardingID(boardingID, airplaneModel).ToList();
+                return Mapper.Map<List<ManifestDepartureBoardingDetailDto>>(boardings);
+            }
+            catch (Exception exception)
+            {
+                throw new BusinessException(Messages.FailedRetrievedRecords + Messages.SeeInnerException, exception);
+            }
+        }
+
+        /// <summary>
         /// Closes the manifest.
         /// </summary>
         /// <param name="manifestDeparture">The manifest departure.</param>
@@ -255,7 +394,7 @@ namespace VOI.SISAC.Business.Itineraries
         /// </returns>
         public bool CloseManifest(ManifestDepartureDto manifestDeparture)
         {
-            if (manifestDeparture == null 
+            if (manifestDeparture == null
                 || string.IsNullOrWhiteSpace(manifestDeparture.AirlineCode)
                 || string.IsNullOrWhiteSpace(manifestDeparture.FlightNumber)
                 || string.IsNullOrWhiteSpace(manifestDeparture.ItineraryKey))
@@ -270,6 +409,8 @@ namespace VOI.SISAC.Business.Itineraries
                     manifestDeparture.AirlineCode,
                     manifestDeparture.FlightNumber,
                     manifestDeparture.ItineraryKey);
+                ////IList<ManifestDepartureBoarding> boardings = new List<ManifestDepartureBoarding>();
+                ////AdditionalDepartureInformation additional = new AdditionalDepartureInformation();
 
                 if (entity == null)
                 {
@@ -288,7 +429,17 @@ namespace VOI.SISAC.Business.Itineraries
                 else
                 {
                     entity.Closed = true;
+
+                    ////boardings = Mapper.Map<IList<ManifestDepartureBoarding>>(manifestDeparture.ManifestDepartureBoardings);
+
+                    ////if (manifestDeparture.AdditionalDepartureInformation != null)
+                    ////{
+                    ////    additional = Mapper.Map<AdditionalDepartureInformation>(manifestDeparture.AdditionalDepartureInformation);
+                    ////}
+
                     this.manifestRepository.Update(entity);
+                    ////this.UpdateBoarding(entity, boardings);
+                    ////this.UpdateAdditional(entity, additional);
                 }
 
                 this.unitOfWork.Commit();
@@ -338,6 +489,166 @@ namespace VOI.SISAC.Business.Itineraries
             catch (Exception exception)
             {
                 throw new BusinessException(Messages.FailedUpdateRecord + Messages.SeeInnerException, exception);
+            }
+        }
+
+        /// <summary>
+        /// Updates the additional.
+        /// </summary>
+        /// <param name="entity">The entity.</param>
+        /// <param name="additional">The additional.</param>
+        private void UpdateAdditional(ManifestDeparture entity, AdditionalDepartureInformation additional)
+        {
+            AdditionalDepartureInformation additionalDB = this.additionalDepartureInformationRepository.FindById(entity.Sequence, entity.AirlineCode, entity.FlightNumber, entity.ItineraryKey);
+
+            if (additionalDB != null)
+            {
+                if (string.IsNullOrEmpty(additional.AirlineCode))
+                {
+                    // delete
+                    this.additionalDepartureInformationRepository.Delete(additionalDB);
+                }
+                else
+                {
+                    // update
+                    additionalDB.Pilot = additional.Pilot;
+                    additionalDB.Surcharge = additional.Surcharge;
+                    additionalDB.ExtraCrew = additional.ExtraCrew;
+                    additionalDB.TypeFlight = additional.TypeFlight;
+                    additionalDB.SlotAllocatedTime = additional.SlotAllocatedTime;
+                    additionalDB.SlotCoordinatedTime = additional.SlotCoordinatedTime;
+                    additionalDB.OvernightEndTime = additional.OvernightEndTime;
+                    additionalDB.ManeuverStartTime = additional.ManeuverStartTime;
+                    additionalDB.PositionOutputTime = additional.PositionOutputTime;
+                    additionalDB.DelayDescription1 = additional.DelayDescription1;
+                    additionalDB.DelayDescription2 = additional.DelayDescription2;
+                    additionalDB.DelayDescription3 = additional.DelayDescription3;
+                    this.additionalDepartureInformationRepository.Update(additionalDB);
+                }
+            }
+            else
+            {
+                // insert
+                if (!string.IsNullOrEmpty(additional.AirlineCode))
+                {
+                    this.additionalDepartureInformationRepository.Add(additional);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Updates the boarding.
+        /// </summary>
+        /// <param name="manifestDeparture">The manifest departure.</param>
+        /// <param name="boardings">The boarding.</param>
+        private void UpdateBoarding(ManifestDeparture manifestDeparture, IList<ManifestDepartureBoarding> boardings)
+        {
+            // 5 Stations
+            List<int> positionsAll = new List<int>() { 1, 2, 3, 4, 5 }; 
+            List<int> positionsBD = new List<int>();
+            List<int> positionsRes = new List<int>();
+
+            // Lista de Position en DB
+            positionsBD = boardings.Select(c => c.Position).ToList();
+
+            // Lista Restante de ALL - BD
+            positionsRes = positionsAll.Except(positionsBD).ToList();
+
+            foreach (var item in positionsRes)
+            {
+                boardings.Add(new ManifestDepartureBoarding
+                {
+                    Sequence = manifestDeparture.Sequence,
+                    AirlineCode = manifestDeparture.AirlineCode,
+                    FlightNumber = manifestDeparture.FlightNumber,
+                    ItineraryKey = manifestDeparture.ItineraryKey,
+                    Position = item
+                });
+            }
+
+            foreach (ManifestDepartureBoarding item in boardings)
+            {
+                ManifestDepartureBoarding boardingEntity = this.manifestBoardingRepository.FindById(item.Sequence, item.AirlineCode, item.FlightNumber, item.ItineraryKey, item.Position);
+
+                // update
+                if (boardingEntity != null)
+                {
+                    // delete
+                    if (string.IsNullOrEmpty(item.Station))
+                    {
+                        this.manifestBoardingRepository.Delete(boardingEntity);
+                    }
+                    else
+                    {
+                        //Update de campos de Boarding
+                        boardingEntity.Station = item.Station;
+                        boardingEntity.PassengerAdult = item.PassengerAdult;
+                        boardingEntity.PassengerInfant = item.PassengerInfant;
+                        boardingEntity.PassengerMinor = item.PassengerMinor;
+                        boardingEntity.LuggageQuantity = item.LuggageQuantity;
+                        boardingEntity.LuggageKgs = item.LuggageKgs;
+                        boardingEntity.ChargeQuantity = item.ChargeQuantity;
+                        boardingEntity.ChargeKgs = item.ChargeKgs;
+                        boardingEntity.MailQuantity = item.MailQuantity;
+                        boardingEntity.MailKgs = item.MailKgs;
+
+                        //Update Information (Si hay datos en BD y se edita en front los check)
+                        if (boardingEntity.ManifestDepartureBoardingInformations.Count > 0 
+                         && item.ManifestDepartureBoardingInformations.Count > 0)
+                        {
+                            foreach (var info in boardingEntity.ManifestDepartureBoardingInformations)
+                            {
+                                if (info.BoardingInformationID > 0)
+                                    info.Checked = item.ManifestDepartureBoardingInformations.FirstOrDefault(c => c.BoardingInformationID == info.BoardingInformationID).Checked;
+                            }
+                        }
+
+                        //Insert Information (Si no hay datos en BD y se edita en front los check)
+                        if (boardingEntity.ManifestDepartureBoardingInformations.Count == 0
+                         && item.ManifestDepartureBoardingInformations.Count > 0)
+                        {
+                            boardingEntity.ManifestDepartureBoardingInformations = item.ManifestDepartureBoardingInformations;
+                        }
+
+                        //Update Detail Information (Si hay datos en BD y se edita en front los input)
+                        if (boardingEntity.ManifestDepartureBoardingDetails.Count > 0 
+                         && item.ManifestDepartureBoardingDetails.Count > 0)
+                        {
+                            foreach (var info in boardingEntity.ManifestDepartureBoardingDetails)
+                            {
+                                if (info.BoardingDetailID > 0)
+                                {
+                                    info.LuggageQuantity = item.ManifestDepartureBoardingDetails.FirstOrDefault(c => c.BoardingDetailID == info.BoardingDetailID).LuggageQuantity;
+                                    info.LuggageKgs = item.ManifestDepartureBoardingDetails.FirstOrDefault(c => c.BoardingDetailID == info.BoardingDetailID).LuggageKgs;
+                                    info.ChargeQuantity = item.ManifestDepartureBoardingDetails.FirstOrDefault(c => c.BoardingDetailID == info.BoardingDetailID).ChargeQuantity;
+                                    info.ChargeKgs = item.ManifestDepartureBoardingDetails.FirstOrDefault(c => c.BoardingDetailID == info.BoardingDetailID).ChargeKgs;
+                                    info.Remarks = item.ManifestDepartureBoardingDetails.FirstOrDefault(c => c.BoardingDetailID == info.BoardingDetailID).Remarks;
+                                    info.RampResponsible = item.ManifestDepartureBoardingDetails.FirstOrDefault(c => c.BoardingDetailID == info.BoardingDetailID).RampResponsible;
+                                    info.AorUserID = item.ManifestDepartureBoardingDetails.FirstOrDefault(c => c.BoardingDetailID == info.BoardingDetailID).AorUserID;
+                                    info.CreationDate = item.ManifestDepartureBoardingDetails.FirstOrDefault(c => c.BoardingDetailID == info.BoardingDetailID).CreationDate;
+                                }
+                            }
+                        }
+
+                        //Insert Detail Information (Si no hay datos en BD y se edita en front los input)
+                        if (boardingEntity.ManifestDepartureBoardingDetails.Count == 0
+                         && item.ManifestDepartureBoardingDetails.Count > 0)
+                        {
+                            boardingEntity.ManifestDepartureBoardingDetails = item.ManifestDepartureBoardingDetails;
+                        }
+
+                        
+                        this.manifestBoardingRepository.Update(boardingEntity);
+                    }
+                }
+                else 
+                {
+                    // insert
+                    if (!string.IsNullOrEmpty(item.Station))
+                    {
+                        this.manifestBoardingRepository.Add(item);
+                    }
+                }
             }
         }
 

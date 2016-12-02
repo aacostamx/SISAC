@@ -46,6 +46,7 @@ namespace VOI.SISAC.Dal.Repository.Itineraries
             return this.DbContext.ManifestsDeparture
                 .Include(c => c.Itinerary)
                 .Include(c => c.Itinerary.PassengerInformation)
+                .Include(c => c.AdditionalDepartureInformation)
                 .FirstOrDefault(c => c.Sequence == sequence && c.AirlineCode == airlineCode && c.FlightNumber == flightNumber && c.ItineraryKey == itineraryKey);
         }
 
@@ -68,6 +69,23 @@ namespace VOI.SISAC.Dal.Repository.Itineraries
 
             return delay;
         }
+
+        /// <summary>
+        /// Gets the boardings for manifest.
+        /// </summary>
+        /// <param name="sequence">The sequence.</param>
+        /// <param name="airlineCode">The airline code.</param>
+        /// <param name="flightNumber">The flight number.</param>
+        /// <param name="itineraryKey">The itinerary key.</param>
+        /// <returns></returns>
+        //public IList<ManifestDepartureBoarding> GetBoardingsForManifest(int sequence, string airlineCode, string flightNumber, string itineraryKey)
+        //{
+        //    return this.DbContext.ManifestDepartureBoardings
+        //        .Include(c => c.ManifestDepartureBoardingInformations)
+        //        .Include(c => c.ManifestDepartureBoardingDetails)
+        //        .Where(c => c.Sequence == sequence && c.AirlineCode == airlineCode && c.FlightNumber == flightNumber && c.ItineraryKey == itineraryKey)
+        //        .ToList();
+        //}
 
         /// <summary>
         /// Adds the specified manifest departure.
@@ -108,12 +126,12 @@ namespace VOI.SISAC.Dal.Repository.Itineraries
             }
 
             this.DbContext.Entry(manifestDeparture).State = EntityState.Modified;
-        }
+        }        
 
-        /// <summary>
-        /// Removes all delays.
-        /// </summary>
-        /// <param name="manifestDeparture">The manifest departure.</param>
+        ///// <summary>
+        ///// Removes all delays.
+        ///// </summary>
+        ///// <param name="manifestDeparture">The manifest departure.</param>
         public void RemoveAllDelaysFromManifest(ManifestDeparture manifestDeparture)
         {
             List<Delay> delaysInManifest = this.DbContext.ManifestsDeparture
@@ -137,6 +155,12 @@ namespace VOI.SISAC.Dal.Repository.Itineraries
                 Delay delay = this.DbContext.Delay.FirstOrDefault(c => c.DelayCode == item.DelayCode);
                 manifest.Delays.Remove(item);
             }
-        }
+        }        
+
+        #region IManifestDepartureRepository Members
+
+
+
+        #endregion
     }
 }

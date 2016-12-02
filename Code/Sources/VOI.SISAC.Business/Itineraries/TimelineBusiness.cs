@@ -13,6 +13,9 @@ namespace VOI.SISAC.Business.Itineraries
     using Dto.Itineraries;
     using ExceptionBusiness;
     using Resources;
+    using Entities.Itineraries;
+    using AutoMapper;
+    using System.Linq;
 
 
     /// <summary>
@@ -27,17 +30,19 @@ namespace VOI.SISAC.Business.Itineraries
         private readonly IUnitOfWork unitOfWork;
 
         /// <summary>
-        /// The Itinerary repository
+        /// The timeline repository
         /// </summary>
         private readonly ITimelineRepository timelineRepository;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TimelineBusiness" /> class.
+        /// Initializes a new instance of the <see cref="TimelineBusiness"/> class.
         /// </summary>
         /// <param name="unitOfWork">The unit of work.</param>
-        public TimelineBusiness(IUnitOfWork unitOfWork)
+        /// <param name="timelineRepository">The timeline repository.</param>
+        public TimelineBusiness(IUnitOfWork unitOfWork, ITimelineRepository timelineRepository)
         {
             this.unitOfWork = unitOfWork;
+            this.timelineRepository = timelineRepository;
         }
 
         /// <summary>
@@ -46,13 +51,19 @@ namespace VOI.SISAC.Business.Itineraries
         /// <param name="flight">The flight.</param>
         /// <returns></returns>
         /// <exception cref="BusinessException"></exception>
-        public IList<TimelineDto> GetTimelineByFlight(TimelineDto flight)
+        public TimelineDto GetTimelineByFlight(TimelineDto flight)
         {
-            var timeline = new List<TimelineDto>();
+            var timeline = new TimelineDto();
 
             try
             {
-
+                timeline = Mapper.Map<TimelineDto>(this.timelineRepository.GetTimelineByFlight(new Timeline()
+                {
+                    Sequence = flight.Sequence,
+                    AirlineCode = flight.AirlineCode,
+                    FlightNumber = flight.FlightNumber,
+                    ItineraryKey = flight.ItineraryKey
+                }));
             }
             catch (Exception ex)
             {
@@ -65,16 +76,15 @@ namespace VOI.SISAC.Business.Itineraries
         /// <summary>
         /// Gets the full timeline.
         /// </summary>
-        /// <param name="flight">The flight.</param>
         /// <returns></returns>
         /// <exception cref="BusinessException"></exception>
-        public IList<TimelineDto> GetFullTimeline(TimelineDto flight)
+        public IList<TimelineDto> GetFullTimeline()
         {
             var timeline = new List<TimelineDto>();
 
             try
             {
-
+                timeline = Mapper.Map<List<TimelineDto>>(this.timelineRepository.GetAll());
             }
             catch (Exception ex)
             {
@@ -85,69 +95,48 @@ namespace VOI.SISAC.Business.Itineraries
         }
 
         /// <summary>
-        /// Adds the timeline movement.
+        /// Gets the timeline by equipment number.
         /// </summary>
         /// <param name="flight">The flight.</param>
         /// <returns></returns>
         /// <exception cref="BusinessException"></exception>
-        public bool AddTimelineMovement(TimelineDto flight)
+        public IList<TimelineDto> GetTimelineByEquipmentNumber(TimelineDto flight)
         {
-            var added = false;
+            var timeline = new List<TimelineDto>();
 
             try
             {
-
+                timeline = Mapper.Map<List<TimelineDto>>(this.timelineRepository.GetTimelineByEquipmentNumber(Mapper.Map<Timeline>(flight)));
             }
             catch (Exception ex)
             {
-                throw new BusinessException(Messages.FailedInsertRecord + Messages.SeeInnerException, ex);
+                throw new BusinessException(Messages.FailedRetrievedRecords + Messages.SeeInnerException, ex);
             }
 
-            return added;
+            return timeline;
         }
 
         /// <summary>
-        /// Updates the timeline movement.
+        /// Timelines the start procress.
         /// </summary>
-        /// <param name="flight">The flight.</param>
+        /// <param name="startDate">The start date.</param>
+        /// <param name="endDate">The end date.</param>
         /// <returns></returns>
         /// <exception cref="BusinessException"></exception>
-        public bool UpdateTimelineMovement(TimelineDto flight)
+        public bool TimelineStartProcress(DateTime? startDate, DateTime? endDate)
         {
-            var updated = false;
+            var sucess = false;
 
             try
             {
-
+                sucess = this.timelineRepository.TimelineStartProcess(startDate, endDate);
             }
             catch (Exception ex)
             {
-                throw new BusinessException(Messages.FailedUpdateRecord + Messages.SeeInnerException, ex);
+                throw new BusinessException(Messages.FailedRetrievedRecords + Messages.SeeInnerException, ex);
             }
 
-            return updated;
-        }
-
-        /// <summary>
-        /// Deletes the timeline movement.
-        /// </summary>
-        /// <param name="flight">The flight.</param>
-        /// <returns></returns>
-        /// <exception cref="BusinessException"></exception>
-        public bool DeleteTimelineMovement(TimelineDto flight)
-        {
-            var deleted = false;
-
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-                throw new BusinessException(Messages.FailedDeleteRecord + Messages.SeeInnerException, ex);
-            }
-
-            return deleted;
+            return sucess;
         }
     }
 }

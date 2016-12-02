@@ -97,6 +97,10 @@ namespace VOI.SISAC.Web
                 "~/Scripts/bootstrap-table-es-ES.js",
                 "~/Scripts/FileSaver.js"));
 
+            /*--JS Bootstrap Table Script --*/
+            bundles.Add(new ScriptBundle("~/bundles/bootstrapEditableTablejs").Include(
+                "~/Scripts/bootstrap3-editable/js/bootstrap-editable.min.js"));
+
             /*--JS Bootstrap Table Plugins Script --*/
             bundles.Add(new ScriptBundle("~/bundles/bootstrapTablePlugins").Include(
                 "~/Scripts/bootstrap-table-contextmenu",

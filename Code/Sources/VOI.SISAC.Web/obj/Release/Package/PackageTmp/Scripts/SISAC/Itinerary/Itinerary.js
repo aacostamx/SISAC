@@ -276,7 +276,31 @@ var ItineraryController = {
             event.returnValue = false;
             return false;
         }
-    }
+    },
+    showSweetAlert: function (messageEn, messageEs, alertType, titleEn, tittleEs) {
+        //"warning", "error", "success" and "info".
+        alertType = alertType || "warning";
+        if (currentLang.includes("es")) {
+            swal({
+                title: tittleEs,
+                text: messageEs,
+                type: alertType,
+                confirmButtonColor: "#83217a",
+                animation: "slide-from-top",
+                timer: 12000
+            })
+        }
+        else {
+            swal({
+                title: titleEn,
+                text: messageEn,
+                type: alertType,
+                confirmButtonColor: "#83217a",
+                animation: "slide-from-top",
+                timer: 12000
+            })
+        }
+    },
 }
 
 $(document).ready(ItineraryController.iniciar);

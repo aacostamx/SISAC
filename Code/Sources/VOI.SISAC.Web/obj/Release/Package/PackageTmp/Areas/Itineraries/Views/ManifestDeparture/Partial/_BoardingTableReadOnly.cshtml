@@ -1,0 +1,48 @@
+﻿@{
+    var cultureForm = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
+}
+<div id="divHidden"></div>
+<table
+    id="table-boarding"
+    class="table"
+    data-toolbar="#toolbar"
+    data-toggle="table"
+    data-locale="@cultureForm.ToString()"
+    data-id-field="Position"
+    data-mobile-responsive="true"
+    data-query-params-type=""
+    data-url="@Url.Action("GetBoardingForManifest", "ManifestDeparture")"
+    data-query-params="queryParams"
+    data-cache="false"
+    data-side-pagination="server"
+    data-check-on-init="true">
+    <thead>
+        <tr>
+            <th data-field="Position" data-align="center" data-halign="center"><strong>@Resource.Position</strong></th>
+            <th data-field="Station" data-align="center" data-halign="center"><strong>@Resource.StationCode</strong></th>
+            <th data-field="PassengerAdult" data-align="center" data-halign="center"><strong>@Resource.Adults</strong></th>
+            <th data-field="PassengerMinor" data-align="center" data-halign="center"><strong>@Resource.Minor</strong></th>
+            <th data-field="PassengerInfant" data-align="center" data-halign="center"><strong>@Resource.Infant</strong></th>
+
+            <th data-field="LuggageQuantity" data-align="center" data-halign="center"><strong>@Resource.LuggageQuantity</strong></th>
+            <th data-field="LuggageKgs" data-align="center" data-halign="center"><strong>@Resource.LuggageKgs</strong></th>
+            <th data-field="ChargeQuantity" data-align="center" data-halign="center"><strong>@Resource.ChargeQuantity</strong></th>
+            <th data-field="ChargeKgs" data-align="center" data-halign="center"><strong>@Resource.ChargeKgs</strong></th>
+
+            <th data-field="MailQuantity" data-align="center" data-halign="center"><strong>@Resource.MailQuantity</strong></th>
+            <th data-field="MailKgs" data-align="center" data-halign="center"><strong>@Resource.MailKgs</strong></th>            
+        </tr>
+    </thead>
+</table>
+
+<script>
+    //Take querystrings and send back to server REST
+    function queryParams(params) {
+        return {
+            Sequence: $('#Sequence').val(),
+            AirlineCode: $('#AirlineCode').val(),
+            FlightNumber: $('#FlightNumber').val(),
+            ItineraryKey: $('#ItineraryKey').val()
+        };
+    }
+</script>

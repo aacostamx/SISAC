@@ -8,6 +8,7 @@ namespace VOI.SISAC.Dal.Repository.Airports
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.Entity;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace VOI.SISAC.Dal.Repository.Airports
         /// </summary>
         /// <param name="factory">factory parameter</param>
         public PassengerInformationRepository(IDbFactory factory)
-        : base(factory)
+            : base(factory)
         {
         }
 
@@ -38,10 +39,14 @@ namespace VOI.SISAC.Dal.Repository.Airports
         /// <returns></returns>
         public PassengerInformation FindById(int sequence, string airlinecode, string flightnumber, string itinerarykey)
         {
-            var passengerInformation = this.DbContext.PassengerInformation.Where(c => c.Sequence == sequence
-                                                                                   && c.AirlineCode == airlinecode
-                                                                                   && c.FlightNumber == flightnumber
-                                                                                   && c.ItineraryKey == itinerarykey).FirstOrDefault();
+            var passengerInformation = this.DbContext.PassengerInformation
+                .Include(c => c.Itinerary)
+                .Include(c => c.AdditionalPassengerInformation)
+                .Where(c => c.Sequence == sequence
+                    && c.AirlineCode == airlinecode
+                    && c.FlightNumber == flightnumber
+                    && c.ItineraryKey == itinerarykey).FirstOrDefault();
+
             return passengerInformation;
         }
     }

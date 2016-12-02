@@ -2,11 +2,12 @@
 @{
     ViewBag.Title = Resource.PassengerInformation;
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var additionalInformation = Model.AdditionalInformation ?? new VOI.SISAC.Web.Models.VO.Airport.AdditionalPassengerInformationVO();
     var cultureForm = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
-    var users = this.ViewBag.Users as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
+    var users = this.ViewBag.Users as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto> ?? new List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>();
     bool isClose = (bool)this.ViewBag.IsClose;
-    bool isMexicanAirport = (bool)this.ViewBag.IsMexicanAirport;
-    var itinerary = this.ViewBag.Itinerary != null ? this.ViewBag.Itinerary : new VOI.SISAC.Business.Dto.Itineraries.ItineraryDto();
+    bool isMexicanAirport = (bool)this.ViewBag.IsMexicanAirport;    
+    //var itinerary = this.ViewBag.Itinerary != null ? this.ViewBag.Itinerary : new VOI.SISAC.Business.Dto.Itineraries.ItineraryDto();
 }
 
 @Styles.Render("~/Content/bootstraptablecss")
@@ -46,12 +47,12 @@
             
             if (Model.AppliesPreviousFlight)
             {
-                <div id="prev-flight-section">
-                    <div class="row">
-                        @Html.Partial("Partial/_SelectPrevFlightModal")
-                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                            <label class="subtitle_h5 control-label">@Resource.ApplyPrevFlight</label>
-                            <input
+            <div id="prev-flight-section">
+                <div class="row">
+                    @Html.Partial("Partial/_SelectPrevFlightModal")
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <label class="subtitle_h5 control-label">@Resource.ApplyPrevFlight</label>
+                        <input
                                 class="checkVolaris top-padding"
                                 type="checkbox"
                                 id="has-prev-flight"
@@ -59,16 +60,16 @@
                                 value="true"
                                 checked="@Model.AppliesPreviousFlight"
                                 onclick="PassengerController.showSelectFlightModal()" />
-                            <label for="has-prev-flight" class="control_gris"><span></span></label>
-                        </div>
-                        <div class="col-xs-3 col-sm-3 col-md-7 col-lg-7" id="btn-refresh" data-toggle="modal" data-target="#prev-flight">
-                            <button type="button" class="btn btn-default aright"><i class="fa fa-fw fa-exchange"></i>&nbsp;@Resource.ChangeFlight</button>
-                        </div>
+                        <label for="has-prev-flight" class="control_gris"><span></span></label>
                     </div>
-                    <div class="row" id="flight-information">
-                        @Html.Partial("Partial/_PrevFlightInformation")
+                    <div class="col-xs-3 col-sm-3 col-md-7 col-lg-7" id="btn-refresh" data-toggle="modal" data-target="#prev-flight">
+                        <button type="button" class="btn btn-default aright"><i class="fa fa-fw fa-exchange"></i>&nbsp;@Resource.ChangeFlight</button>
                     </div>
                 </div>
+                <div class="row" id="flight-information">
+                    @Html.Partial("Partial/_PrevFlightInformation")
+                </div>
+            </div>
             }
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                 <br />
@@ -81,21 +82,21 @@
 
                     <div class="row">
                         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
-                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 overflow_hidden">
                             <br />
-                            <span class="subtitle_h5 control-label overflow_hidden centerTex required-field">
+                            <span class="subtitle_h5 control-label centerTex required-field">
                                 @Resource.Adults
                             </span>
                         </div>
-                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 overflow_hidden">
                             <br />
-                            <span class="subtitle_h5 control-label overflow_hidden centerTex required-field">
+                            <span class="subtitle_h5 control-label centerTex required-field">
                                 @Resource.Teenage
                             </span>
                         </div>
-                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 overflow_hidden">
                             <br />
-                            <span class="subtitle_h5 control-label overflow_hidden centerTex required-field">
+                            <span class="subtitle_h5 control-label centerTex required-field">
                                 @Resource.Children
                             </span>
                         </div>
@@ -103,41 +104,41 @@
 
                     <div class="row">
 
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 overflow_hidden">
                             @if (isMexicanAirport)
                             {
-                                <span class="subtitle_h5 control-label aright overflow_hidden">
+                                <span class="subtitle_h5 control-label aright">
                                     @Resource.CabinA
                                 </span>
                             }
                         </div>
 
                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                            @Html.EditorFor(model => model.AdultsCabinA, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                            @Html.EditorFor(model => model.AdultsCabinA, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                         </div>
                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                            @Html.EditorFor(model => model.TeenageCabinA, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                            @Html.EditorFor(model => model.TeenageCabinA, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                         </div>
                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                            @Html.EditorFor(model => model.ChildrenCabinA, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                            @Html.EditorFor(model => model.ChildrenCabinA, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                         </div>
                     </div>
                     @if (isMexicanAirport)
                     {
                         <div class="row">
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                <span class="subtitle_h5 control-label aright overflow_hidden">
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 overflow_hidden">
+                                <span class="subtitle_h5 control-label aright">
                                     @Resource.CAbinB
                                 </span>
                             </div>
                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                @Html.EditorFor(model => model.AdultsCabinB, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                                @Html.EditorFor(model => model.AdultsCabinB, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                             </div>
                             <div class="col-xs-3 col-sm- col-md-3 col-lg-3">
-                                @Html.EditorFor(model => model.TeenageCabinB, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                                @Html.EditorFor(model => model.TeenageCabinB, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                             </div>
                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                @Html.EditorFor(model => model.ChildrenCabinB, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                                @Html.EditorFor(model => model.ChildrenCabinB, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                             </div>
                         </div>
                     }
@@ -145,9 +146,9 @@
                 @if (isMexicanAirport)
                 {
                     <div class="row bgGray">
-                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                            <span class="subtitle_h5 control-label overflow_hidden" id="IdTotal">
-                                @Resource.Total
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 overflow_hidden">
+                            <span class="subtitle_h5 control-label" id="IdTotal">
+                                <strong>@Resource.Total</strong>
                             </span>
                         </div>
                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -168,130 +169,130 @@
                     </div>
                     <div class="panel panel-default">
                         <div class="row">
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 overflow_hidden">
                                 <br />
-                                <span class="subtitle_h5 control-label aright overflow_hidden">
+                                <span class="subtitle_h5 control-label aright">
                                     @Resource.LocalPassenger
                                 </span>
                             </div>
                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                 <br />
-                                @Html.EditorFor(model => model.LocalAdults, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                                @Html.EditorFor(model => model.LocalAdults, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                             </div>
                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                 <br />
-                                @Html.EditorFor(model => model.LocalTeenage, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                                @Html.EditorFor(model => model.LocalTeenage, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                             </div>
                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                 <br />
-                                @Html.EditorFor(model => model.LocalChildren, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                                @Html.EditorFor(model => model.LocalChildren, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 overflow_hidden">
                                 <br />
-                                <span class="subtitle_h5 control-label aright overflow_hidden">
+                                <span class="subtitle_h5 control-label aright">
                                     @Resource.TransitoryPassenger
                                 </span>
                             </div>
                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                 <br />
-                                @Html.EditorFor(model => model.TransitoryAdults, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                                @Html.EditorFor(model => model.TransitoryAdults, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                             </div>
                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                 <br />
-                                @Html.EditorFor(model => model.TransitoryTeenage, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                                @Html.EditorFor(model => model.TransitoryTeenage, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                             </div>
                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                 <br />
-                                @Html.EditorFor(model => model.TransitoryChildren, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                                @Html.EditorFor(model => model.TransitoryChildren, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 overflow_hidden">
                                 <br />
-                                <span class="subtitle_h5 control-label aright overflow_hidden">
+                                <span class="subtitle_h5 control-label aright">
                                     @Resource.ConnectionPassenger
                                 </span>
                             </div>
                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                 <br />
-                                @Html.EditorFor(model => model.ConnectionAdults, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                                @Html.EditorFor(model => model.ConnectionAdults, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                             </div>
                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                 <br />
-                                @Html.EditorFor(model => model.ConnectionTeenage, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                                @Html.EditorFor(model => model.ConnectionTeenage, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                             </div>
                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                 <br />
-                                @Html.EditorFor(model => model.ConnectionChildren, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                                @Html.EditorFor(model => model.ConnectionChildren, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 overflow_hidden">
                                 <br />
-                                <span class="subtitle_h5 control-label aright overflow_hidden">
+                                <span class="subtitle_h5 control-label aright">
                                     @Resource.DiplomaticPassenger
                                 </span>
                             </div>
                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                 <br />
-                                @Html.EditorFor(model => model.Diplomatic, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                                @Html.EditorFor(model => model.Diplomatic, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 overflow_hidden">
                                 <br />
-                                <span class="subtitle_h5 control-label aright overflow_hidden">
+                                <span class="subtitle_h5 control-label aright">
                                     @Resource.ExtraCrew
                                 </span>
                             </div>
                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                 <br />
-                                @Html.EditorFor(model => model.ExtraCrew, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                                @Html.EditorFor(model => model.ExtraCrew, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 overflow_hidden">
                                 <br />
-                                <span class="subtitle_h5 control-label aright overflow_hidden">
+                                <span class="subtitle_h5 control-label aright">
                                     @Resource.OtherExempt
                                 </span>
                             </div>
                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                 <br />
-                                @Html.EditorFor(model => model.Other, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                                @Html.EditorFor(model => model.Other, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                             </div>
                         </div>
                     </div>
                     <div class="row bgGray">
-                        <div class="col-xs-3 col-sm-3 col-md-2 col-lg-3">
-                            <span class="subtitle_h5 control-label overflow_hidden">
-                                @Resource.TotalAdultTeen
+                        <div class="col-xs-3 col-sm-3 col-md-2 col-lg-3 overflow_hidden">
+                            <span class="subtitle_h5 control-label">
+                                <strong>@Resource.TotalAdultTeen:&nbsp;&nbsp;&nbsp;</strong>
                             </span>
                             <span>
                                 <strong id="IdTotalAT">&nbsp;0</strong>
                             </span>
                         </div>
-                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                            <span class="subtitle_h5 control-label overflow_hidden">
-                                @Resource.TotalChildren
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 overflow_hidden">
+                            <span class="subtitle_h5 control-label">
+                                <strong> @Resource.TotalChildren:&nbsp;&nbsp;&nbsp;</strong>
                             </span>
                             <span>
                                 <strong id="IdTotalInfants">&nbsp;0</strong>
                             </span>
                         </div>
-                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                            <span class="subtitle_h5 control-label overflow_hidden">
-                                @Resource.TotalTransitoryPassenger
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 overflow_hidden">
+                            <span class="subtitle_h5 control-label">
+                                <strong>@Resource.TotalTransitoryPassenger:&nbsp;&nbsp;&nbsp;</strong>
                             </span>
                             <span>
                                 <strong id="IdTotalTTOs">&nbsp;0</strong>
                             </span>
                         </div>
-                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                            <span class="subtitle_h5 control-label overflow_hidden">
-                                @Resource.TotalConnectionPassenger
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 overflow_hidden">
+                            <span class="subtitle_h5 control-label">
+                                <strong>@Resource.TotalConnectionPassenger:&nbsp;&nbsp;&nbsp;</strong>
                             </span>
                             <span>
                                 <strong id="IdTotalCNXs">&nbsp;0</strong>
@@ -307,112 +308,112 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
-                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 overflow_hidden">
                                 <br />
-                                <span class="subtitle_h5 control-label overflow_hidden centerTex">
+                                <span class="subtitle_h5 control-label centerTex">
                                     @Resource.QuantityLabel
                                 </span>
                             </div>
-                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 overflow_hidden">
                                 <br />
-                                <span class="subtitle_h5 control-label overflow_hidden centerTex">
+                                <span class="subtitle_h5 control-label centerTex">
                                     @Resource.Kilogrammes
                                 </span>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                <span class="subtitle_h5 control-label aright overflow_hidden">
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 overflow_hidden">
+                                <span class="subtitle_h5 control-label aright">
                                     @Resource.LocalPassenger
                                 </span>
                             </div>
                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                @Html.EditorFor(model => model.LocalBaggageQuantity, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                                @Html.EditorFor(model => model.LocalBaggageQuantity, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                             </div>
                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                @Html.EditorFor(model => model.LocalBaggageWeight, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                                @Html.EditorFor(model => model.LocalBaggageWeight, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                <span class="subtitle_h5 control-label aright overflow_hidden">
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 overflow_hidden">
+                                <span class="subtitle_h5 control-label aright">
                                     @Resource.TransitoryPassenger
                                 </span>
                             </div>
                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                 <br />
-                                @Html.EditorFor(model => model.TransitoryBaggageQuantity, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                                @Html.EditorFor(model => model.TransitoryBaggageQuantity, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                             </div>
                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                 <br />
-                                @Html.EditorFor(model => model.TransitoryBaggageWeight, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                                @Html.EditorFor(model => model.TransitoryBaggageWeight, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                <span class="subtitle_h5 control-label aright overflow_hidden">
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 overflow_hidden">
+                                <span class="subtitle_h5 control-label aright">
                                     @Resource.ConnectionPassenger
                                 </span>
                             </div>
                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                 <br />
-                                @Html.EditorFor(model => model.ConnectionBaggageQuantity, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                                @Html.EditorFor(model => model.ConnectionBaggageQuantity, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                             </div>
                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                 <br />
-                                @Html.EditorFor(model => model.ConnectionBaggageWeight, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                                @Html.EditorFor(model => model.ConnectionBaggageWeight, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                <span class="subtitle_h5 control-label aright overflow_hidden">
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 overflow_hidden">
+                                <span class="subtitle_h5 control-label aright">
                                     @Resource.DiplomaticPassenger
                                 </span>
                             </div>
                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                 <br />
-                                @Html.EditorFor(model => model.DiplomaticBaggageQuantity, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                                @Html.EditorFor(model => model.DiplomaticBaggageQuantity, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                             </div>
                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                 <br />
-                                @Html.EditorFor(model => model.DiplomaticBaggageWeight, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                                @Html.EditorFor(model => model.DiplomaticBaggageWeight, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                <span class="subtitle_h5 control-label aright overflow_hidden">
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 overflow_hidden">
+                                <span class="subtitle_h5 control-label aright">
                                     @Resource.ExtraCrew
                                 </span>
                             </div>
                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                 <br />
-                                @Html.EditorFor(model => model.ExtraCrewBaggageQuantity, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                                @Html.EditorFor(model => model.ExtraCrewBaggageQuantity, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                             </div>
                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                 <br />
-                                @Html.EditorFor(model => model.ExtraCrewBaggageWeight, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                                @Html.EditorFor(model => model.ExtraCrewBaggageWeight, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                <span class="subtitle_h5 control-label aright overflow_hidden">
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 overflow_hidden">
+                                <span class="subtitle_h5 control-label aright">
                                     @Resource.OtherExempt
                                 </span>
                             </div>
                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                 <br />
-                                @Html.EditorFor(model => model.OtherBaggageQuantity, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                                @Html.EditorFor(model => model.OtherBaggageQuantity, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                             </div>
                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                 <br />
-                                @Html.EditorFor(model => model.OtherBaggageWeight, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                                @Html.EditorFor(model => model.OtherBaggageWeight, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                             </div>
                         </div>
                     </div>
                     <div class="row bgGray">
-                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                            <span class="subtitle_h5 control-label overflow_hidden" id="idTotalBaggage">
-                                @Resource.TotalBaggage
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 overflow_hidden">
+                            <span class="subtitle_h5 control-label" id="idTotalBaggage">
+                                <strong>@Resource.TotalBaggage:</strong>
                             </span>
                         </div>
                         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -434,10 +435,10 @@
                             </h4>
                         </div>
                         <div class="row">
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 overflow_hidden">
                                 <br />
-                                <span class="subtitle_h5 control-label overflow_hidden">
-                                    @Resource.NationalTUA
+                                <span class="subtitle_h5 control-label">
+                                    <strong>@Resource.NationalTUA:</strong>
                                 </span>
                             </div>
                             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
@@ -446,20 +447,20 @@
                                     <strong id="IdTUANational">0</strong>
                                 </span>
                             </div>
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 overflow_hidden">
                                 <br />
-                                <span class="subtitle_h5 control-label overflow_hidden">
-                                    @Resource.InternationalTUA
+                                <span class="subtitle_h5 control-label">
+                                    <strong>@Resource.InternationalTUA:</strong>
                                 </span>
                             </div>
                             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                                 <br />
-                                @Html.EditorFor(model => model.InternationalTua, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
+                                @Html.EditorFor(model => model.InternationalTua, new { htmlAttributes = new { @class = "form-control total-value", @onkeypress = "return commonFunctions.validarNumeros(event);", @onkeyup = "return commonFunctions.validarNumeros(event)", @max = "10000", @min = "0", @onchange = "PassengerController.getSum();" } })
                             </div>
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 overflow_hidden">
                                 <br />
-                                <span class="subtitle_h5 control-label overflow_hidden">
-                                    @Resource.TotalTUA
+                                <span class="subtitle_h5 control-label">
+                                    <strong>@Resource.TotalTUA:</strong>
                                 </span>
                             </div>
                             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
@@ -480,42 +481,72 @@
                         </h4>
                     </div>
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "subtitle_h5 control-label required-field" })
                             <div class="styled-select">
                                 @Html.DropDownListFor(model => model.UserId, users.Select(h => new SelectListItem
-                           {
-                               Text = h.Description,
-                               Value = h.Id
-                           }), @VOI.SISAC.Web.Resources.Resource.SelectItem, new { htmlAttributes = new { @class = "inputForm form-control" } })
+                                {
+                                    Text = h.Description,
+                                    Value = h.Id
+                                }), @VOI.SISAC.Web.Resources.Resource.SelectItem, new { htmlAttributes = new { @class = "inputForm form-control" } })
                             </div>
                         </div>
-                        <div class="col-xs-3 col-sm-12 col-md-3 col-lg-2">
-                            <br />
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            @*<br />*@
                             @Html.LabelFor(model => model.Observation, new { @class = "subtitle_h5 control-label required-field overflow_hidden" })
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
+                        @*</div>*@
+                        @*<div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">*@
                             <br />
-                            @Html.TextAreaFor(model => model.Observation, 5, 100, new { @id = "Observation", @name = "Observation", @class = "form-control", @style = "resize: none;" })
+                            @Html.TextAreaFor(model => model.Observation, 3, 100, new { @id = "Observation", @name = "Observation", @class = "form-control", @style = "resize: none;" })
                         </div>
                     </div>
                 </div>
+                @if (Model.ItineraryVo.DepartureStation == "MEX")
+                {
+                    @Html.Partial("Partial/_AdditionalInformation", additionalInformation)
+                    
+                    <input type="hidden" name="AdditionalInformation.AdultInternational" id="AdditionalInformation_AdultInternational" value="@additionalInformation.AdultInternational"/>
+                    <input type="hidden" name="AdditionalInformation.AdultNational" id="AdditionalInformation_AdultNational" value="@additionalInformation.AdultNational"/>
+                    <input type="hidden" name="AdditionalInformation.MinorInternational" id="AdditionalInformation_MinorInternational" value="@additionalInformation.MinorInternational"/>
+                    <input type="hidden" name="AdditionalInformation.MinorNational" id="AdditionalInformation_MinorNational" value="@additionalInformation.MinorNational"/>
+                    <input type="hidden" name="AdditionalInformation.CommissionInternational" id="AdditionalInformation_CommissionInternational" value="@additionalInformation.CommissionInternational"/>
+                    <input type="hidden" name="AdditionalInformation.CommissionNational" id="AdditionalInformation_CommissionNational" value="@additionalInformation.CommissionNational"/>
+                    <input type="hidden" name="AdditionalInformation.ConnectionInternational" id="AdditionalInformation_ConnectionInternational" value="@additionalInformation.ConnectionInternational"/>
+                    <input type="hidden" name="AdditionalInformation.ConnectionNational" id="AdditionalInformation_ConnectionNational" value="@additionalInformation.ConnectionNational"/>
+                    
+                    <input type="hidden" name="AdditionalInformation.DiplomaticInternational" id="AdditionalInformation_DiplomaticInternational" value="@additionalInformation.DiplomaticInternational"/>
+                    <input type="hidden" name="AdditionalInformation.DiplomaticNational" id="AdditionalInformation_DiplomaticNational" value="@additionalInformation.DiplomaticNational"/>
+                    <input type="hidden" name="AdditionalInformation.InfantInternational" id="AdditionalInformation_InfantInternational" value="@additionalInformation.InfantInternational"/>
+                    <input type="hidden" name="AdditionalInformation.InfantNational" id="AdditionalInformation_InfantNational" value="@additionalInformation.InfantNational"/>
+                    <input type="hidden" name="AdditionalInformation.OtherInternational" id="AdditionalInformation_OtherInternational" value="@additionalInformation.OtherInternational"/>
+                    <input type="hidden" name="AdditionalInformation.OtherNational" id="AdditionalInformation_OtherNational" value="@additionalInformation.OtherNational"/>
+                    <input type="hidden" name="AdditionalInformation.TransitoryInternational" id="AdditionalInformation_TransitoryInternational" value="@additionalInformation.TransitoryInternational"/>
+                    <input type="hidden" name="AdditionalInformation.TransitoryNational" id="AdditionalInformation_TransitoryNational" value="@additionalInformation.TransitoryNational"/>
+                    <input type="hidden" name="AdditionalInformation.PaxDni" id="AdditionalInformation_PaxDni" value="@additionalInformation.PaxDni"/>
+                }
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                        <br />
-                        <input onclick="@("location.href='" + @Url.Action("Index", "Itinerary", new { area = "Itineraries" }) + "'")" type="reset" class="btn btn-default" value="@Resource.Back" />
-                        @if (User.IsInRole("PASSINFO-PRINTREP"))
-                        {
-                            <button id="btnPrint" type="button" class="btn btn-default" name="Print" title="@Resource.Export" onclick="location.href='@Url.Action("Print", "PassengerInformation", new { Sequence = Model.Sequence, AirlineCode = Model.AirlineCode, FlightNumber = Model.FlightNumber, ItineraryKey = Model.ItineraryKey, IsNational = (bool)this.ViewBag.IsNationalFlag, Model.Departure })'">
-                                &nbsp;@Resource.Export
-                            </button>
-                        }
-                        @if (User.IsInRole("PASSINFO-UPD"))
-                        {
-                            <input type="submit" name="Edit" value="@VOI.SISAC.Web.Resources.Resource.Save" class="btn btn-default" />
-                        }
-                        <br />
-                    </div>
+                    <br />
+                    <button type="button" class="btn btn-default" name="back-btn" title="@Resource.Back" onclick="location.href='@Url.Action("Index", "Itinerary", new { Area = "Itineraries" })'">
+                        <i class="fa fa-arrow-left fa-fw"></i>&nbsp;@Resource.Back
+                    </button>
+                    @if (User.IsInRole("PASSINFO-PRINTREP"))
+                    {
+                        <button id="btnPrint" type="button" class="btn btn-default" name="Print" title="@Resource.Export" onclick="location.href='@Url.Action("Print", "PassengerInformation", new { Sequence = Model.Sequence, AirlineCode = Model.AirlineCode, FlightNumber = Model.FlightNumber, ItineraryKey = Model.ItineraryKey, IsNational = (bool)this.ViewBag.IsNationalFlag, Model.Departure })'">
+                            <i class="fa-fw glyphicon glyphicon-export icon-share"></i>&nbsp;@Resource.Export
+                        </button>
+                    }
+                    @if (User.IsInRole("PASSINFO-UPD"))
+                    {
+                        <button type="submit" class="btn btn-default btn-green" name="save-btn" title="@Resource.Save">
+                            <i class="fa fa-floppy-o fa-fw"></i>&nbsp;@Resource.Save
+                        </button>
+                    }
+                    @if (Model.ItineraryVo.DepartureStation == "MEX")
+                    {
+                        <button type="button" class="btn btn-default btn-black aright" name="add-info-btn" title="@Resource.AdditionalInformation" data-toggle="modal" data-target="#add-info-modal">
+                            <i class="fa fa-plus fa-fw"></i>&nbsp;@Resource.AdditionalInformation
+                        </button>
+                    }
                 </div>
             </div>
         }

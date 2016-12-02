@@ -2,7 +2,7 @@
 // <copyright file="MapperConfig.cs" company="Volaris">
 //     Copyright (c) Volaris. All rights reserved.
 // </copyright>
-//---------------------------------------------------------------
+//------------------------------------------------------------------------
 
 namespace VOI.SISAC.Web.App_Start
 {

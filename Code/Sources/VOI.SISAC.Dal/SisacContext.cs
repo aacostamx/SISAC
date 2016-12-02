@@ -164,7 +164,7 @@ namespace VOI.SISAC.Dal
         /// <value>
         /// The jet fuel tickets.
         /// </value>
-        public virtual DbSet<JetFuelTicket> JetFuelTickets { get; set; }
+        public DbSet<JetFuelTicket> JetFuelTickets { get; set; }
 
         /// <summary>
         /// Gets or sets the airport services.
@@ -172,7 +172,7 @@ namespace VOI.SISAC.Dal
         /// <value>
         /// The airport services.
         /// </value>
-        public virtual DbSet<AirportService> AirportServices { get; set; }
+        public DbSet<AirportService> AirportServices { get; set; }
 
         /// <summary>
         /// Gets or sets the FuelConceptType.
@@ -180,7 +180,7 @@ namespace VOI.SISAC.Dal
         /// <value>
         /// The airports.
         /// </value>
-        public virtual DbSet<FuelConceptType> FuelConceptType { get; set; }
+        public DbSet<FuelConceptType> FuelConceptType { get; set; }
 
         /// <summary>
         /// Gets or sets the airports.
@@ -188,7 +188,7 @@ namespace VOI.SISAC.Dal
         /// <value>
         /// The airports.
         /// </value>
-        public virtual DbSet<Airport> Airports { get; set; }
+        public DbSet<Airport> Airports { get; set; }
 
         /// <summary>
         /// Gets or sets the airlines.
@@ -220,7 +220,7 @@ namespace VOI.SISAC.Dal
         /// <value>
         /// The airport groups.
         /// </value>
-        public virtual DbSet<AirportGroup> AirportGroups { get; set; }
+        public DbSet<AirportGroup> AirportGroups { get; set; }
 
         /// <summary>
         /// Gets or sets the compartment types.
@@ -260,7 +260,7 @@ namespace VOI.SISAC.Dal
         /// <value>
         /// The gpus.
         /// </value>
-        public virtual DbSet<Gpu> Gpus { get; set; }
+        public DbSet<Gpu> Gpus { get; set; }
 
         /// <summary>
         /// Gets or sets the services.
@@ -276,7 +276,7 @@ namespace VOI.SISAC.Dal
         /// <value>
         /// The Gpu Observations.
         /// </value>
-        public virtual DbSet<GpuObservation> GpuObservations { get; set; }
+        public DbSet<GpuObservation> GpuObservations { get; set; }
 
         /// <summary>
         /// Gets or sets the drinking waters.
@@ -312,12 +312,12 @@ namespace VOI.SISAC.Dal
         /// <summary>
         /// Gets or sets the type of the Delay
         /// </summary>
-        public virtual DbSet<Delay> Delay { get; set; }
+        public DbSet<Delay> Delay { get; set; }
 
         /// <summary>
         /// Gets or sets the type of the Manifest Time Config
         /// </summary>
-        public virtual DbSet<ManifestTimeConfig> ManifestTimeConfig { get; set; }
+        public DbSet<ManifestTimeConfig> ManifestTimeConfig { get; set; }
 
         /// <summary>
         /// Gets or sets the passenger information.
@@ -334,6 +334,14 @@ namespace VOI.SISAC.Dal
         /// The national jet fuel ticket.
         /// </value>
         public DbSet<NationalJetFuelTicket> NationalJetFuelTicket { get; set; }
+
+        /// <summary>
+        /// Gets or sets the additional passenger information.
+        /// </summary>
+        /// <value>
+        /// The additional passenger information.
+        /// </value>
+        public DbSet<AdditionalPassengerInformation> AdditionalPassengerInformation { get; set; }
         #endregion
 
         #region Catalogs
@@ -569,6 +577,46 @@ namespace VOI.SISAC.Dal
         /// The manifests departure.
         /// </value>
         public DbSet<ManifestDeparture> ManifestsDeparture { get; set; }
+
+        /// <summary>
+        /// Gets or sets the additional departure information.
+        /// </summary>
+        /// <value>
+        /// The additional departure information.
+        /// </value>
+        public DbSet<AdditionalDepartureInformation> AdditionalDepartureInformation { get; set; }
+
+        /// <summary>
+        /// Gets or sets the additional arrival information.
+        /// </summary>
+        /// <value>
+        /// The additional arrival information.
+        /// </value>
+        public DbSet<AdditionalArrivalInformation> AdditionalArrivalInformation { get; set; }
+
+        /// <summary>
+        /// Gets or sets the manifest departure boardings.
+        /// </summary>
+        /// <value>
+        /// The manifest departure boardings.
+        /// </value>
+        public DbSet<ManifestDepartureBoarding> ManifestDepartureBoardings { get; set; }
+
+        /// <summary>
+        /// Gets or sets the manifest departure boarding details.
+        /// </summary>
+        /// <value>
+        /// The manifest departure boarding details.
+        /// </value>
+        public DbSet<ManifestDepartureBoardingDetail> ManifestDepartureBoardingDetails { get; set; }
+
+        /// <summary>
+        /// Gets or sets the manifest departure boarding informations.
+        /// </summary>
+        /// <value>
+        /// The manifest departure boarding informations.
+        /// </value>
+        public DbSet<ManifestDepartureBoardingInformation> ManifestDepartureBoardingInformations { get; set; }
 
         /// <summary>
         /// Gets or sets the manifests arrival.
@@ -1658,6 +1706,11 @@ namespace VOI.SISAC.Dal
             return reconciled;
         }
 
+        /// <summary>
+        /// Jets the fuel revert manual reconcile.
+        /// </summary>
+        /// <param name="rec">The record.</param>
+        /// <returns></returns>
         public virtual int JetFuelRevertManualReconcile(NationalJetFuelInvoiceControl rec)
         {
             var reconciled = 0;
@@ -1686,6 +1739,41 @@ namespace VOI.SISAC.Dal
             }
 
             return reconciled;
+        }
+
+        /// <summary>
+        /// Automatics the timeline.
+        /// </summary>
+        /// <param name="startDateParam">The start date parameter.</param>
+        /// <param name="endDateParam">The end date parameter.</param>
+        /// <returns></returns>
+        public virtual bool AutomaticTimeline(DateTime? startDateParam, DateTime? endDateParam)
+        {
+            var sucess = false;
+            var sqlParams = new object[0];
+            var result = new object();
+
+            try
+            {
+
+                var startDateParamParameter = startDateParam != null ?
+                    new SqlParameter("@StartDateParam", startDateParam) :
+                    new SqlParameter("@StartDateParam", string.Empty);
+
+                var endDateParamParameter = endDateParam != null ?
+                    new SqlParameter("@EndDateParam", endDateParam) :
+                    new SqlParameter("@EndDateParam", string.Empty);
+
+                sqlParams = new object[] { startDateParamParameter, endDateParamParameter };
+                result = this.Database.SqlQuery<object>("[Itinerary].[AutomaticTimeline] @StartDateParam, @EndDateParam", sqlParams).SingleOrDefault();
+                sucess = true;
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message, ex);
+            }
+
+            return sucess;
         }
         #endregion
 
@@ -1805,13 +1893,20 @@ namespace VOI.SISAC.Dal
 
             modelBuilder.Configurations.Add(new ReconciliationToleranceConfiguration());
             modelBuilder.Configurations.Add(new ToleranceTypeConfiguration());
-
+            
             modelBuilder.Configurations.Add(new ManifestDepartureConfiguration());
             modelBuilder.Configurations.Add(new ManifestArrivalConfiguration());
+            modelBuilder.Configurations.Add(new AdditionalDepartureInformationConfiguration());
+            modelBuilder.Configurations.Add(new AdditionalArrivalInformationConfiguration());
+            modelBuilder.Configurations.Add(new ManifestDepartureBoardingConfiguration());
+            modelBuilder.Configurations.Add(new ManifestDepartureBoardingInformationConfiguration());
+            modelBuilder.Configurations.Add(new ManifestDepartureBoardingDetailConfiguration());
 
             modelBuilder.Configurations.Add(new TimelineConfiguration());
             modelBuilder.Configurations.Add(new TimelineMovementConfiguration());
             modelBuilder.Configurations.Add(new MovementTypeConfiguration());
+
+            modelBuilder.Configurations.Add(new AdditionalPassengerInformationConfiguration());
         }
     }
 }

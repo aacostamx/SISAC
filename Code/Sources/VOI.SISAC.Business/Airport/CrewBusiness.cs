@@ -359,7 +359,7 @@ namespace VOI.SISAC.Business.Airport
         {
             try
             {
-                List<CrewDto> dto = Mapper.Map<List<CrewDto>>(this.crewRepository.GetActivePilots().ToList());
+                List<CrewDto> dto = Mapper.Map<List<CrewDto>>(this.crewRepository.GetActivePilots().ToList()); //new List<CrewDto>();//
                 return dto;
             }
             catch (Exception exception)
@@ -376,7 +376,7 @@ namespace VOI.SISAC.Business.Airport
         {
             try
             {
-                List<CrewDto> dto = Mapper.Map<List<CrewDto>>(this.crewRepository.GetActiveStewardess().ToList());
+                List<CrewDto> dto = Mapper.Map<List<CrewDto>>(this.crewRepository.GetActiveStewardess().ToList()); //new List<CrewDto>();//
                 return dto;
             }
             catch (Exception exception)

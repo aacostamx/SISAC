@@ -1,0 +1,42 @@
+﻿<div id="add-boarding-info-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="subtitle_h3_black">@Resource.AdditionalInformation</h4>
+            </div>
+            
+            <div class="modal-body">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div id="InformationSection1">
+                                    @* This setion will be dinamically set in JavaScriipt *@
+                        </div>
+                        <div id="InformationSection2">
+                                    @* This setion will be dinamically set in JavaScriipt *@
+                        </div>
+                        <div id="InformationSection3">
+                                    @* This setion will be dinamically set in JavaScriipt *@
+                        </div>
+                        <div id="InformationSection4">
+                                    @* This setion will be dinamically set in JavaScriipt *@
+                        </div>
+                        <div id="InformationSection5">
+                                    @* This setion will be dinamically set in JavaScriipt *@
+                        </div>
+                    </div>
+                </div>                                
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" name="save-btn" title="@Resource.Close" data-dismiss="modal">
+                    <i class="fa fa-times fa-fw"></i>&nbsp;@Resource.Close
+                </button>
+                <button type="button" class="btn btn-default btn-green" name="save-btn" title="@Resource.Save" onclick="ManifestDepartureController.validateAddBoardingInfo()">
+                    <i class="fa fa-floppy-o fa-fw"></i>&nbsp;@Resource.Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -4,11 +4,11 @@
 // </copyright>
 //------------------------------------------------------------------------
 
-using VOI.SISAC.Entities.Itineraries;
-using VOI.SISAC.Entities.Security;
-
 namespace VOI.SISAC.Entities.Airport
 {
+    using VOI.SISAC.Entities.Itineraries;
+    using VOI.SISAC.Entities.Security;
+
     /// <summary>
     /// Passenger information entity
     /// </summary>
@@ -357,6 +357,12 @@ namespace VOI.SISAC.Entities.Airport
         /// </summary>
         public virtual User User { get; set; }
 
-        
+        /// <summary>
+        /// Gets or sets the additional passenger information.
+        /// </summary>
+        /// <value>
+        /// The additional passenger information.
+        /// </value>
+        public virtual AdditionalPassengerInformation AdditionalPassengerInformation { get; set; }
     }
 }

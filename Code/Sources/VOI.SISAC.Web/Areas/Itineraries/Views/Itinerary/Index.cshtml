@@ -15,9 +15,10 @@
     @Html.Partial("Partial/_SearchParams")
     @Html.Partial("Partial/_UploadFileItinerary")
     @Html.Partial("Partial/_AdvanceSearchItinerary")
+    @Html.Partial("Partial/_AircraftMovementMessageModal")
     <div id="toolbar">
         @if (User.IsInRole("ITINERARY-ADD"))
-        { 
+        {
             <button id="btnAddItineary" type="button" class="btn btn-default" name="@Resource.Add" title="@Resource.Add" onclick="location.href='@Url.Action("Create", "Itinerary")'">
                 <i class="fa fa-plus fa-fw"></i>
                 &nbsp;@Resource.Add
@@ -25,12 +26,12 @@
         }
 
         @if (User.IsInRole("ITINERARY-UPLF"))
-        { 
+        {
             <button id="btnUploadItinerary" type="button"
-                class="btn btn-default"
-                data-toggle="modal"
-                data-target="#modalTableItinterary"
-                onclick="ItineraryController.getAirlinesCombo()">
+                    class="btn btn-default"
+                    data-toggle="modal"
+                    data-target="#modalTableItinterary"
+                    onclick="ItineraryController.getAirlinesCombo()">
                 <i class="fa fa-cloud-upload fa-fw"></i>&nbsp;@Resource.UploadFile
             </button>
         }
@@ -72,13 +73,13 @@
             <thead>
                 <tr>
                     @if (User.IsInRole("ITINERARY-UPD")
-                        || User.IsInRole("ITINERARY-DEL")
-                        || User.IsInRole("PASSINFO-IDX")
-                        || User.IsInRole("GENDECDEP-UPD")
-                        || User.IsInRole("GENDECARR-UPD")
-                        || User.IsInRole("JETFUELTIC-IDX")
-                        || User.IsInRole("AIRPSERV-IDX"))
-                    { 
+            || User.IsInRole("ITINERARY-DEL")
+            || User.IsInRole("PASSINFO-IDX")
+            || User.IsInRole("GENDECDEP-UPD")
+            || User.IsInRole("GENDECARR-UPD")
+            || User.IsInRole("JETFUELTIC-IDX")
+            || User.IsInRole("AIRPSERV-IDX"))
+                    {
                         <th data-field="Actions" data-align="center" data-halign="center"
                             data-formatter="ItineraryController.actionsButtons">
                             <strong>@Resource.Actions</strong>
@@ -131,37 +132,37 @@
 <!-- context menu -->
 <ul id="context-menu" class="dropdown-menu">
     @if (User.IsInRole("ITINERARY-UPD"))
-    { 
+    {
         <li data-item="Edit"><a><i class="fa fa-pencil fa-fw"></i>&nbsp;@Resource.Edit</a></li>
     }
 
     @if (User.IsInRole("ITINERARY-DEL"))
-    { 
+    {
         <li data-item="Delete"><a><i class="fa fa-trash-o fa-fw"></i>&nbsp;@Resource.Delete</a></li>
     }
 
     @if (User.IsInRole("PASSINFO-IDX"))
-    { 
+    {
         <li data-item="PassengerInformation"><a><i class="fa fa-users fa-fw"></i>&nbsp;@Resource.PassengerInformation</a></li>
     }
 
     @if (User.IsInRole("GENDECDEP-UPD") || User.IsInRole("MANIFDEP-IDX"))
-    { 
+    {
         <li data-item="GendecDeparture"><a><i class="fa fa-file-text fa-fw"></i>&nbsp;@Resource.GendecDepartureTitle</a></li>
     }
 
     @if (User.IsInRole("GENDECARR-UPD") || User.IsInRole("MANIFARR-IDX"))
-    { 
+    {
         <li data-item="GendecArrival"><a><i class="fa fa-file-text fa-fw"></i>&nbsp;@Resource.GendecArrivalTitle</a></li>
     }
 
     @if (User.IsInRole("JETFUELTIC-IDX"))
-    { 
+    {
         <li data-item="JetFuelTicketDeparture"><a><i class="fa fa-ticket fa-fw"></i>&nbsp;@Resource.JetFuelTicketDeparture</a></li>
     }
 
     @if (User.IsInRole("AIRPSERV-IDX"))
-    { 
+    {
         <li data-item="AirportServicesDeparture"><a><i class="fa fa-wrench fa-fw"></i>&nbsp;@Resource.AirportServicesDeparture</a></li>
         <li data-item="AirportServicesArrive"><a><i class="fa fa-wrench fa-fw"></i>&nbsp;@Resource.AirportServicesArrive</a></li>
     }
@@ -169,6 +170,7 @@
     {
         <li data-item="Timeline"><a><i class="fa fa-paper-plane fa-fw"></i>&nbsp;@Resource.Timeline</a></li>
     }
+    <li data-item="MVT"><a><i class="fa fa-envelope fa-fw"></i>&nbsp;MVT</a></li>
 </ul>
 
 @section Scripts {
@@ -251,14 +253,6 @@
                     url = url.concat('&Departure=' + row.DepartureStation);
                     window.location = url;
                 }
-                @*if ($el.data("item") == 'GendecDeparture') {
-                    var url = '@Url.Action("Create", "GendecDeparture", new { area = "Itineraries" })'
-                    url = url.concat('?Sequence=' + row.Sequence);
-                    url = url.concat('&AirlineCode=' + row.AirlineCode);
-                    url = url.concat('&FlightNumber=' + row.FlightNumber);
-                    url = url.concat('&ItineraryKey=' + row.ItineraryKey);
-                    window.location = url;
-                }*@
                 if ($el.data("item") == 'GendecDeparture') {
                     var url = '@Url.Action("OfficialDocumentDeparture", "DetectCountry", new { area = "" })'
                     url = url.concat('?Sequence=' + row.Sequence);
@@ -269,19 +263,6 @@
                     url = url.concat('&ArrivalStation=' + row.ArrivalStation);
                     window.location = url;
                 }
-                // Modificado Iracema 26 Enero 2016
-                @*if ($el.data("item") == 'GendecArrival') {
-                    var url = '@Url.Action("Create", "GendecArrival", new { area = "Itineraries" })'
-                    url = url.concat('?Sequence=' + row.Sequence);
-                    url = url.concat('&AirlineCode=' + row.AirlineCode);
-                    url = url.concat('&FlightNumber=' + row.FlightNumber);
-                    url = url.concat('&ItineraryKey=' + row.ItineraryKey);
-                    url = url.concat('&DepartureStation=' + row.DepartureStation);
-                    url = url.concat('&ArrivalStation=' + row.ArrivalStation);
-                    url = url.concat('&EquipmentNumber=' + row.EquipmentNumber);
-                    url = url.concat('&DepartureDate=' + row.DepartureDate);
-                    window.location = url;
-                }*@
                 if ($el.data("item") == 'GendecArrival') {
                     var url = '@Url.Action("OfficialDocumentArrival", "DetectCountry", new { area = "" })'
                     url = url.concat('?Sequence=' + row.Sequence);
@@ -308,8 +289,30 @@
                     window.location = url;
                 }
                 if ($el.data("item") == 'Timeline') {
-                    var url = '@Url.Action("Index", "Timeline", new { area = "Itineraries" })'
-                    window.location = url;
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '../Timeline/ItinearyURL',
+                        data: JSON.stringify(row),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            if (response) {
+                                var url = '@Url.Action("Index", "Timeline", new { area = "Itineraries" })';
+                                window.open(url);
+                                //window.location = url;
+                            }
+                            else {
+                                ItineraryController.showSweetAlert("There was an error in Timeline, please consult support", "Hubo un error al consultar Línea de Tiempo, favor de consultar a soporte", "error", "Error", "Error");
+                                console.log("Error en Controller : Timeline - Method: ItinearyURL");
+                            }
+                        }
+
+                    });
+                }
+
+                if ($el.data("item") == 'MVT') {
+                    ItineraryController.getMtvMessage(row);
                 }
             }
         });

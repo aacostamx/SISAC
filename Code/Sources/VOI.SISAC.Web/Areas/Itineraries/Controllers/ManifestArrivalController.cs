@@ -384,6 +384,13 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
                     manifest.ArrivalStationName = arrivalAirport.Substring(2);
 
                     ManifestArrivalDto manifestDto = Mapper.Map<ManifestArrivalDto>(manifest);
+                    
+                    if (manifest.ArrivalStationCode == "MEX")
+                    {
+                        manifestDto.AdditionalArrivalInformation = new AdditionalArrivalInformationDto();
+                        manifestDto.AdditionalArrivalInformation = Mapper.Map<AdditionalArrivalInformationDto>(manifest);
+                    }
+
                     return this.manifestArrivalBusiness.SaveManifestArrival(manifestDto);
                 }
 

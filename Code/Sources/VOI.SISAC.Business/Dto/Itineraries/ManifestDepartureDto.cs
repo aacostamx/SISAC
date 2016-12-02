@@ -382,6 +382,14 @@ namespace VOI.SISAC.Business.Dto.Itineraries
         /// The itinerary.
         /// </value>
         public ItineraryDto Itinerary { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the AdditionalDepartureInformation.
+        /// </summary>
+        /// <value>
+        /// The Additional Departure Information.
+        /// </value>
+        public AdditionalDepartureInformationDto AdditionalDepartureInformation { get; set; }
 
         /// <summary>
         /// Gets or sets the delays.
@@ -390,5 +398,13 @@ namespace VOI.SISAC.Business.Dto.Itineraries
         /// The delays.
         /// </value>
         public IList<DelayDto> Delays { get; set; }
+
+        /// <summary>
+        /// Gets or sets the manifest departure boardings.
+        /// </summary>
+        /// <value>
+        /// The manifest departure boardings.
+        /// </value>
+        public ICollection<ManifestDepartureBoardingDto> ManifestDepartureBoardings { get; set; }
     }
 }

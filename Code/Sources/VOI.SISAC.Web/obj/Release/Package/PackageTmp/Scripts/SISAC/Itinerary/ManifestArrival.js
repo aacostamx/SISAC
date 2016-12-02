@@ -372,6 +372,39 @@ var ManifestArrivalController = {
             tt.value = parseInt(a) + parseInt(t) + parseInt(i);
         }
     },
+    validateAddInfo: function () {
+        if (!$('#ai-extra').val() || !$('#ai-stewar').val() || !$('#ai-pilots').val()) {
+            var message;
+            if (currentLang.includes('es')) {
+                message = "Campo Requerido";
+            }
+            else {
+                message = "Required Field";
+            }
+            $('#ai-extra-err').html($('#ai-extra').val() ? '' : message);
+            $('#ai-stewar-err').html($('#ai-stewar').val() ? '' : message);
+            $('#ai-pilots-err').html($('#ai-pilots').val() ? '' : message);
+            return;
+        }
+
+        $('#Pilot').val($('#ai-pilots').val());
+        $('#Surcharge').val($('#ai-stewar').val());
+        $('#ExtraCrew').val($('#ai-extra').val());
+        $('#TypeFlight').val($('#type').val());
+        $('#SlotAllocatedTime').val($('#hr-assig').val());
+        $('#SlotCoordinatedTime').val($('#hr-coord').val());
+        $('#OvernightEndTime').val($('#hr-end').val());
+        $('#ManeuverStartTime').val($('#hr-beign').val());
+        $('#PositionOutputTime').val($('#hr-exit').val());
+        $('#FirstDelayDescription').val($('#remark-dly-1').val());
+        $('#SecondDelayDescription').val($('#remark-dly-2').val());
+        $('#ThirdDelayDescription').val($('#remark-dly-3').val());
+
+        $('#ai-extra-err').html('');
+        $('#ai-stewar-err').html('');
+        $('#ai-pilots-err').html('');
+        $('#add-info-arr-modal').modal('hide');
+    },
     postForm: function (action) {
         document.getElementById('Action').value = action ? action : 1;
         ManifestArrivalController.addAttrToDelayTable();
@@ -379,6 +412,22 @@ var ManifestArrivalController = {
         form = document.getElementById('form-manifest');
         if (form) {
             form.submit();
+        }
+    },
+    setAddInfoInit: function () {
+        if ($('#add-info-modal')) {
+            $('#ai-pilots').val($('#Pilot').val());
+            $('#ai-stewar').val($('#Surcharge').val());
+            $('#ai-extra').val($('#ExtraCrew').val());
+            $('#type').val($('#TypeFlight').val());
+            $('#hr-assig').val($('#SlotAllocatedTime').val());
+            $('#hr-coord').val($('#SlotCoordinatedTime').val());
+            $('#hr-end').val($('#OvernightEndTime').val());
+            $('#hr-beign').val($('#ManeuverStartTime').val());
+            $('#hr-exit').val($('#PositionOutputTime').val());
+            $('#remark-dly-1').html($('#FirstDelayDescription').val());
+            $('#remark-dly-2').html($('#SecondDelayDescription').val());
+            $('#remark-dly-3').html($('#ThirdDelayDescription').val());
         }
     },
     initialize: function () {
@@ -403,6 +452,22 @@ var ManifestArrivalController = {
             format: 'HH:mm'
         });
 
+        $('#hr-assig').datetimepicker({
+            format: 'HH:mm'
+        });
+        $('#hr-coord').datetimepicker({
+            format: 'HH:mm'
+        });
+        $('#hr-end').datetimepicker({
+            format: 'HH:mm'
+        });
+        $('#hr-beign').datetimepicker({
+            format: 'HH:mm'
+        });
+        $('#hr-exit').datetimepicker({
+            format: 'HH:mm'
+        });
+
         ManifestArrivalController.setInfoOnCombos();
 
         $("#real-time").on("dp.change", function (e) {
@@ -414,6 +479,7 @@ var ManifestArrivalController = {
 
         ManifestArrivalController.calculatedDelay();
         ManifestArrivalController.calculatedTotalPassengers();
+        ManifestArrivalController.setAddInfoInit();
     }
 }
 

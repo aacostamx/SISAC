@@ -61,7 +61,7 @@ namespace VOI.SISAC.Business.MapConfiguration
                 .ReverseMap();
 
             Mapper.CreateMap<ItinerarySearch, ItinerarySearchDto>()
-                .ReverseMap();
+                .ReverseMap();            
 
             Mapper.CreateMap<ManifestDeparture, ManifestDepartureDto>()
                 .ForMember(c => c.ArrivalStationCode, f => f.MapFrom(w => w.ArrivalStation))
@@ -81,6 +81,24 @@ namespace VOI.SISAC.Business.MapConfiguration
                 .ForMember(c => c.InfantsTickets, f => f.MapFrom(w => w.InfantTickets))
                 .ReverseMap();
 
+            Mapper.CreateMap<AdditionalDepartureInformation, AdditionalDepartureInformationDto>()
+                .ReverseMap();
+
+            Mapper.CreateMap<AdditionalArrivalInformation, AdditionalArrivalInformationDto>()
+                .ReverseMap();
+
+            Mapper.CreateMap<ManifestDepartureBoarding, ManifestDepartureBoardingDto>()
+                .ReverseMap();
+
+            Mapper.CreateMap<ManifestDepartureBoardingDetail, ManifestDepartureBoardingDetailDto>()
+                .ForMember(c => c.CompartmentTypeName, f => f.MapFrom(r => r.CompartmentTypeConfig.CompartmentTypeName))
+                .ReverseMap();
+
+            Mapper.CreateMap<ManifestDepartureBoardingInformation, ManifestDepartureBoardingInformationDto>()
+                .ForMember(c => c.CompartmentTypeInformationName, f => f.MapFrom(r => r.CompartmentTypeInformation.CompartmentTypeInformationName))
+                .ForMember(c => c.CompartmentTypeName, f => f.MapFrom(r => r.CompartmentTypeConfig.CompartmentTypeName))
+                .ReverseMap();
+
             Mapper.CreateMap<ManifestArrival, ManifestArrivalDto>()
                 .ForMember(c => c.ArrivalStationCode, f => f.MapFrom(w => w.ArrivalStation))
                 .ForMember(c => c.DepartureStationCode, f => f.MapFrom(w => w.DepartureStation))
@@ -95,6 +113,12 @@ namespace VOI.SISAC.Business.MapConfiguration
                 .ForMember(c => c.LastScaleStation, f => f.MapFrom(w => w.LastScaleStationCode))
                 .ForMember(c => c.UserAuthorizeId, f => f.MapFrom(w => w.UserIdAuthorize))
                 .ForMember(c => c.UserSignatureId, f => f.MapFrom(w => w.UserIdSignature))
+                .ReverseMap();
+
+            Mapper.CreateMap<TimelineDto, Timeline>()
+                .ReverseMap();
+
+            Mapper.CreateMap<TimelineMovementDto, TimelineMovement>()
                 .ReverseMap();
         }
     }

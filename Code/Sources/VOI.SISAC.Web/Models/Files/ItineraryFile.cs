@@ -4,10 +4,10 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System;
-
 namespace VOI.SISAC.Web.Models.Files
 {
+    using System;
+
     /// <summary>
     /// ItineraryFile.cs
     /// </summary>
@@ -59,19 +59,17 @@ namespace VOI.SISAC.Web.Models.Files
         public string STALT { get; set; }
 
         /// <summary>
+        /// Gets or sets the flttype.
+        /// </summary>
+        /// <value>
+        /// The flttype.
+        /// </value>
+        public string FLTTYPE { get; set; }
+
+        /// <summary>
         /// Airline Code
         /// </summary>
         public string AirlineCode { get; set; }
-
-        /// <summary>
-        /// Departure Station
-        /// </summary>
-        public string DepartureStation { get; set; }
-
-        /// <summary>
-        /// Arrival Station
-        /// </summary>
-        public string ArrivalStation { get; set; }
 
         /// <summary>
         /// Departure Date

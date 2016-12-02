@@ -524,5 +524,13 @@ namespace VOI.SISAC.Web.Models.VO.Airport
         /// The itinerary.
         /// </value>
         public ItineraryVO ItineraryVo { get; set; }
+
+        /// <summary>
+        /// Gets or sets the additional information.
+        /// </summary>
+        /// <value>
+        /// The additional information.
+        /// </value>
+        public AdditionalPassengerInformationVO AdditionalInformation { get; set; }
     }
 }

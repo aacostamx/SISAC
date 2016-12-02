@@ -6,23 +6,29 @@
 
 namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Dynamic;
-    using System.IO;
-    using System.Linq;
-    using System.Net;
-    using System.Text;
-    using System.Web.Mvc;
     using AutoMapper;
     using Business.Common;
     using Business.Dto.Catalogs;
     using Business.Dto.Itineraries;
     using Helpers;
+    using LumenWorks.Framework.IO.Csv;
+    using Models.Enums;
     using Models.Files;
     using Newtonsoft.Json;
     using Resources;
+    using RestSharp;
+    using System;
+    using System.Collections.Generic;
+    using System.Configuration;
+    using System.Diagnostics;
+    using System.Dynamic;
+    using System.Globalization;
+    using System.IO;
+    using System.Linq;
+    using System.Net;
+    using System.Text;
+    using System.Web;
+    using System.Web.Mvc;
     using VOI.SISAC.Business.Airport;
     using VOI.SISAC.Business.Dto.Airports;
     using VOI.SISAC.Business.Dto.Security;
@@ -638,100 +644,90 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
             return Json(airports, JsonRequestBehavior.AllowGet);
         }
 
+
         /// <summary>
-        /// Read Text File
+        /// Uploads the file itinerary.
         /// </summary>
-        /// <param name="input">input file</param>
-        /// <returns>true or false</returns>
+        /// <param name="input">The input.</param>
+        /// <param name="file">The file.</param>
+        /// <returns></returns>
         [HttpPost]
         [CustomAuthorize(Roles = "ITINERARY-UPLF")]
-        public ActionResult UploadFileItinerary(ItineraryUploadVO input)
+        public ActionResult UploadFileItinerary(ItineraryUploadVO input, HttpPostedFileBase file)
         {
-            IDictionary<string, string> colNamesLength = new Dictionary<string, string>();
-            List<ItineraryFile> itinerariesFile = new List<ItineraryFile>();
-            List<ItineraryFile> itinerariesFileError = new List<ItineraryFile>();
-            IList<ItineraryDto> itinerariesDto = new List<ItineraryDto>();
-            var errors = new List<string>();
-            var lines = new List<string>();
-            var columnsLength = new List<string>();
-            bool record = false, dayBefore = false, dayAfter = false;
-            int countErrors = 0;
+            var extension = string.Empty;
+            var url = string.Empty;
+            var action = string.Empty;
+            var restClient = new RestClient();
+            var request = new RestRequest();
+            var csvList = new List<string[]>();
+            var json = string.Empty;
 
             try
             {
-                if (string.IsNullOrEmpty(input.AirlineCodeCombobox))
-                {
-                    this.ViewBag.ErrorMessage = Resource.SelectAirline;
-                    return this.View("Index");
-                }
-                if (input.file == null || !input.file.ContentType.Equals("text/plain") || input.file.ContentLength <= 0)
-                {
-                    this.ViewBag.ErrorMessage = Resource.FileValidation;
-                    return this.View("Index");
-                }
-                streamToList(input, lines);
+                extension = ConfigurationManager.AppSettings["Extension"];
 
-                //Loop for each line on the txt file
-                for (int i = 0; i < lines.Count; i++)
+                if (file == null || file.ContentLength <= 0 || !file.ContentType.Equals(extension))
                 {
-                    //Validate flag
-                    record = string.IsNullOrEmpty(lines[i]) ? false : record;
+                    this.TempData["ErrorMessage"] = Resource.FileValidation;
+                    return this.RedirectToAction("Index");
+                }
 
-                    //If record flag is on, begins recording info
-                    if (record)
+                using (var csv = new CachedCsvReader(new StreamReader(file.InputStream, Encoding.Default), true))
+                {
+                    csvList = csv.ToList();
+                }
+
+                if (csvList != null && csvList.Count > 0)
+                {
+                    for (int i = 0; i < csvList.Count; i++)
                     {
-                        getFileInfo(colNamesLength, itinerariesFile, lines, input.AirlineCodeCombobox, i);
+                        var Jeppesen = new ItineraryFile();
+                        Jeppesen.Line = i + 2;
+                        Jeppesen.AirlineCode = csvList[i][0];
+                        Jeppesen.FLTNUM = csvList[i][1];
+                        Jeppesen.ACREGNUMBER = csvList[i][2];
+                        Jeppesen.FLTORGDATELT = csvList[i][3];
+                        Jeppesen.DEP = csvList[i][4];
+                        Jeppesen.DST = csvList[i][10];
+                        Jeppesen.SKDDST = csvList[i][9];
+                        Jeppesen.STDLT = csvList[i][32];
+                        Jeppesen.STALT = csvList[i][46];
+                        Jeppesen.FLTTYPE = csvList[i][44];
+                        setDates(Jeppesen);
+                        input.itineraries.Add(Jeppesen);
                     }
-
-                    //Search Delimiter and start flag
-                    searchDelimite(ref colNamesLength, lines, ref columnsLength, ref record, i);
                 }
 
-                //Valida que exitan el día anterior y el día posterior a la selección en el archivo
-                dayBefore = itinerariesFile.Exists(c => c.DepartureDate.Date == input.StartDate.AddDays(-1).Date);
-                dayAfter = itinerariesFile.Exists(c => c.DepartureDate.Date == input.EndDate.AddDays(1).Date);
-
-                if (dayBefore && dayAfter)
+                if ((input.StartDate != null || input.StartDate != DateTime.MinValue) || (input.EndDate == null || input.EndDate == DateTime.MinValue))
                 {
-                    //Get al itineraries between StartDate - 1 day and EndDate + 1 apply to DepartureDate
-                    itinerariesFile = itinerariesFile.Where(c => c.DepartureDate.Date >= input.StartDate.AddDays(-1).Date && c.DepartureDate <= input.EndDate.AddDays(1).Date).ToList();
+                    input.itineraries = input.itineraries.Where(c => c.DepartureDate.Date >= input.StartDate.Value.Date && c.DepartureDate < input.EndDate.Value.AddDays(1).Date).ToList();
+                }
 
-                    //Validate all file errors
-                    countErrors = validateFileErrors(itinerariesFile, itinerariesFileError, errors, countErrors);
+                if (input.itineraries.Count < 0)
+                {
+                    this.TempData["OperationSuccess"] = Resource.InvalidDates;
+                }
 
-                    //Eliminando los que tienen error 
-                    itinerariesFile.RemoveAll(c => itinerariesFileError.Contains(c));
+                input.readServerFile = false;
+                input.email = true;
+                url = ConfigurationManager.AppSettings["Url"];
+                action = ConfigurationManager.AppSettings["Action"];
+                restClient = new RestClient(url);
+                request = new RestRequest(action, Method.POST);
+                json = JsonConvert.SerializeObject(input, Formatting.None, new JsonSerializerSettings());
+                request.AddParameter("application/json; charset=utf-8", json, ParameterType.RequestBody);
+                var response = restClient.Execute(request);
 
-                    //Informa errores
-                    if (errors.Count > 0)
-                    {
-                        this.ViewBag.ListErrorMessage = errors;
-                    }
-
-                    //Elimina los duplicados agruparlo por vuelo, llave, salida y llegada (toma el último)
-                    itinerariesFile = itinerariesFile.GroupBy(c => new { c.FLTNUM, c.ItineraryKey, c.DepartureStation, c.ArrivalStation }).Select(c => c.Last()).ToList();
-
-                    //Elimina los duplicados agruparlo por vuelo, llave y salida (toma el último)
-                    itinerariesFile = itinerariesFile.GroupBy(c => new { c.FLTNUM, c.ItineraryKey, c.DepartureStation }).Select(c => c.Last()).ToList();
-
-                    //Validate columns 
-                    itinerariesDto = Mapper.Map<List<ItineraryDto>>(itinerariesFile);
-                    itineraryBusiness.AddOrUpdateItinerary(itinerariesDto);
-
+                var sucess = response != null && response.StatusCode.ToString() == "OK" ? true : false;
+                if (!sucess)
+                {
                     this.TempData["OperationSuccess"] = Resource.SuccessfulLoadFile;
                 }
                 else
                 {
-                    this.ViewBag.ErrorMessage = Resource.InvalidDates;
+                    this.TempData["OperationSuccess"] = Resource.SuccessfulLoadFile;
                 }
-            }
-            catch (BusinessException ex)
-            {
-                Logger.Error(string.Format(LogMessages.FindRecord, this.moduleName, this.userInfo));
-                Logger.Error(ex.Message, ex);
-                Trace.TraceError(string.Format(LogMessages.FindRecord, this.moduleName, this.userInfo));
-                Trace.TraceError(ex.Message, ex);
-                this.ViewBag.ErrorMessage = FrontMessage.GetExceptionErrorMessage(ex.Number);
             }
             catch (Exception ex)
             {
@@ -739,321 +735,62 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
                 Logger.Error(ex.Message, ex);
                 Trace.TraceError(string.Format(LogMessages.ErrorDelete, this.moduleName, this.userInfo));
                 Trace.TraceError(ex.Message, ex);
-                this.ViewBag.ErrorMessage = ex.ToString();
+                this.TempData["ErrorMessage"] = ex.ToString();
             }
-            return this.View("Index");
+
+            return this.RedirectToAction("Index");
         }
 
+
         /// <summary>
-        /// Validate File Errors
+        /// Sets the dates.
         /// </summary>
-        /// <param name="itinerariesFile"></param>
-        /// <param name="itinerariesFileError"></param>
-        /// <param name="errors"></param>
-        /// <param name="countErrors"></param>
-        /// <returns></returns>
-        private int validateFileErrors(List<ItineraryFile> itinerariesFile, List<ItineraryFile> itinerariesFileError, List<string> errors, int countErrors)
+        /// <param name="fileRow">The file row.</param>
+        private void setDates(ItineraryFile fileRow)
         {
-            //Validate actives records
-            var validEquipmentNumbers = airplaneBusiness.GetActivesAirplane().Select(c => c.EquipmentNumber).ToList();
-            var validStations = airportBusiness.GetActivesAirports().Select(c => c.StationCode).ToList();
+            var date = new DateTime();
 
-            //string para informar errores
-            string equipmentNumberText = Resource.EquipmentNumber;
-            string departureAirportText = Resource.DepartureAirport;
-            string arrivalAirportText = Resource.ArrivalAirport;
-            string requiredText = Resource.RequiredField;
-            string notFoundDBText = Resource.NotFoundDB;
-            string lineText = Resource.Line;
-
-            string fltNumText = Resource.FlightNumber;
-            string airlineText = Resource.Airline;
-            string departureDate = Resource.DepartureDate;
-            string hourDeparture = Resource.DepartureTime;
-            string hourArrival = Resource.ArriveTime;
-
-            foreach (ItineraryFile item in itinerariesFile)
+            try
             {
-                var exitsEquipment = validEquipmentNumbers.Contains(item.ACREGNUMBER);
-                var exitsDepStation = validStations.Contains(item.DEP);
-                var exitsDetStation = validStations.Contains(item.DST);
-
-                //Validacion de campos no null or espacios
-                Dictionary<int, string> fields;
-                Dictionary<int, string> fieldsErrorMessenge;
-                LoadDictionaries(equipmentNumberText, departureAirportText, arrivalAirportText, fltNumText, airlineText, departureDate, hourDeparture, hourArrival, item, out fields, out fieldsErrorMessenge);
-
-                foreach (var stringItem in fields)
+                if (DateTime.TryParseExact(fileRow.FLTORGDATELT, "dd-MM-yy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
                 {
-                    if (string.IsNullOrEmpty(stringItem.Value))
+                    fileRow.DepartureDate = date;
+                    fileRow.ArrivalDate = date;
+                    TimeSpan time;
+                    if (!string.IsNullOrEmpty(fileRow.STDLT)
+                        && fileRow.STDLT.Length > 2
+                        && TimeSpan.TryParse(fileRow.STDLT, out time))
                     {
-                        errors.Add(fieldsErrorMessenge[stringItem.Key] + " " + requiredText + " " + lineText + item.Line);
-                        countErrors++;
+                        fileRow.DepartureDate = fileRow.DepartureDate.Add(time);
+                    }
+
+                    if (!string.IsNullOrEmpty(fileRow.STALT)
+                        && fileRow.STALT.Length > 2
+                        && TimeSpan.TryParse(fileRow.STALT, out time))
+                    {
+                        fileRow.ArrivalDate = fileRow.ArrivalDate.Add(time);
+                    }
+
+                    if (fileRow.DepartureDate > fileRow.ArrivalDate)
+                    {
+                        fileRow.ArrivalDate = fileRow.ArrivalDate.AddDays(1);
+                    }
+
+                    if (fileRow.DepartureDate != DateTime.MinValue)
+                    {
+                        fileRow.ItineraryKey = fileRow.DepartureDate.ToString("yyyyMMdd");
                     }
                 }
-
-                //Validacion de campos que deben estar en catalogos de la BD
-                if (!exitsEquipment)
+                else
                 {
-                    errors.Add(equipmentNumberText + ": '" + item.ACREGNUMBER + "' " + notFoundDBText + " " + lineText + item.Line);
-                    countErrors++;
-                }
-                if (!exitsDepStation)
-                {
-                    errors.Add(departureAirportText + ": '" + item.DEP + "' " + notFoundDBText + " " + lineText + item.Line);
-                    countErrors++;
-                }
-                if (!exitsDetStation)
-                {
-                    errors.Add(arrivalAirportText + ": '" + item.DST + "' " + notFoundDBText + " " + lineText + item.Line);
-                    countErrors++;
-                }
-
-                //Validacion de departure y arrival iguales
-                if (item.DepartureStation == item.ArrivalStation)
-                {
-                    errors.Add(departureAirportText + "-" + arrivalAirportText + ": " + item.DepartureStation + "-" + item.ArrivalStation + " " + lineText + item.Line);
-                    countErrors++;
-                }
-
-                //Validacion de vuelo con Z como ultimo caracter, se debe ignorar
-                if (Right(item.FLTNUM, 1) == "Z")
-                {
-                    errors.Add(fltNumText + ": " + item.FLTNUM + " " + lineText + item.Line);
-                    countErrors++;
-                }
-
-                //remove from collection
-                if (countErrors > 0)
-                {
-                    itinerariesFileError.Add(item);
-                }
-
-                countErrors = 0;
-            }
-
-            return countErrors;
-        }
-
-        /// <summary>
-        /// Rights the specified value.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <param name="length">The length.</param>
-        /// <returns></returns>
-        private static string Right(string value, int length)
-        {
-            if (String.IsNullOrEmpty(value)) return string.Empty;
-
-            return value.Length <= length ? value : value.Substring(value.Length - length);
-        }
-
-        /// <summary>
-        /// Loads the dictionaries.
-        /// </summary>
-        /// <param name="equipmentNumberText">The equipment number text.</param>
-        /// <param name="departureAirportText">The departure airport text.</param>
-        /// <param name="arrivalAirportText">The arrival airport text.</param>
-        /// <param name="fltNumText">The FLT number text.</param>
-        /// <param name="airlineText">The airline text.</param>
-        /// <param name="departureDate">The departure date.</param>
-        /// <param name="hourDeparture">The hour departure.</param>
-        /// <param name="hourArrival">The hour arrival.</param>
-        /// <param name="item">The item.</param>
-        /// <param name="fields">The fields.</param>
-        /// <param name="fieldsErrorMessenge">The fields error messenge.</param>
-        private static void LoadDictionaries(string equipmentNumberText, string departureAirportText, string arrivalAirportText, string fltNumText, string airlineText, string departureDate, string hourDeparture, string hourArrival, ItineraryFile item, out Dictionary<int, string> fields, out Dictionary<int, string> fieldsErrorMessenge)
-        {
-            fields = new Dictionary<int, string>();
-            fields.Add(1, item.FLTNUM);
-            fields.Add(2, item.AirlineCode);
-            fields.Add(3, item.ACREGNUMBER);
-            fields.Add(4, item.FLTORGDATELT);
-            fields.Add(5, item.DepartureStation);
-            fields.Add(6, item.ArrivalStation);
-            fields.Add(7, item.STDLT);
-            fields.Add(8, item.STALT);
-
-            fieldsErrorMessenge = new Dictionary<int, string>();
-            fieldsErrorMessenge.Add(1, fltNumText);
-            fieldsErrorMessenge.Add(2, airlineText);
-            fieldsErrorMessenge.Add(3, equipmentNumberText);
-            fieldsErrorMessenge.Add(4, departureDate);
-            fieldsErrorMessenge.Add(5, departureAirportText);
-            fieldsErrorMessenge.Add(6, arrivalAirportText);
-            fieldsErrorMessenge.Add(7, hourDeparture);
-            fieldsErrorMessenge.Add(8, hourArrival);
-        }
-
-        /// <summary>
-        /// Stream File to List
-        /// </summary>
-        /// <param name="input"></param>
-        /// <param name="lines"></param>
-        private static void streamToList(ItineraryUploadVO input, List<string> lines)
-        {
-            using (StreamReader sr = new StreamReader(input.file.InputStream, Encoding.Default))
-            {
-                while (!sr.EndOfStream)
-                {
-                    lines.Add(sr.ReadLine());
+                    Logger.Error(string.Format("Invalid Date Format: {0} - " + Resource.Line + ": {1}", fileRow.FLTORGDATELT, fileRow.Line));
+                    Trace.TraceError(string.Format("Invalid Date Format: {0} - " + Resource.Line + ": {1}", fileRow.FLTORGDATELT, fileRow.Line));
                 }
             }
-        }
-
-        /// <summary>
-        /// Get File Information from the TXT
-        /// </summary>
-        /// <param name="colNamesLength"></param>
-        /// <param name="itinerariesFile"></param>
-        /// <param name="lines"></param>
-        /// <param name="airline"></param>
-        /// <param name="i"></param>
-        private static void getFileInfo(IDictionary<string, string> colNamesLength, List<ItineraryFile> itinerariesFile, List<string> lines, string airline, int i)
-        {
-            ItineraryFile fileRow = new ItineraryFile();
-
-            fileRow.Line = i + 1;
-            fileRow.AirlineCode = airline;
-
-            var coords = colNamesLength.Where(c => c.Key == "FLTNUM").Select(c => c.Value).FirstOrDefault();
-            if (!string.IsNullOrEmpty(coords))
+            catch (Exception ex)
             {
-                var index = coords.Split(' ');
-                fileRow.FLTNUM = lines[i].Substring(Convert.ToInt32(index[0]), Convert.ToInt32(index[1])).Trim();
-            }
-
-            coords = colNamesLength.Where(c => c.Key == "ACREGNUMBER").Select(c => c.Value).FirstOrDefault().Trim();
-            if (!string.IsNullOrEmpty(coords))
-            {
-                var index = coords.Split(' ');
-                fileRow.ACREGNUMBER = lines[i].Substring(Convert.ToInt32(index[0]), Convert.ToInt32(index[1])).Trim();
-            }
-
-            coords = colNamesLength.Where(c => c.Key == "FLTORGDATELT").Select(c => c.Value).FirstOrDefault().Trim();
-            if (!string.IsNullOrEmpty(coords))
-            {
-                var index = coords.Split(' ');
-                fileRow.FLTORGDATELT = lines[i].Substring(Convert.ToInt32(index[0]), Convert.ToInt32(index[1])).Trim();
-            }
-
-            coords = colNamesLength.Where(c => c.Key == "DEP").Select(c => c.Value).FirstOrDefault();
-            if (!string.IsNullOrEmpty(coords))
-            {
-                var index = coords.Split(' ');
-                fileRow.DEP = lines[i].Substring(Convert.ToInt32(index[0]), Convert.ToInt32(index[1])).Trim();
-            }
-
-            coords = colNamesLength.Where(c => c.Key == "DST").Select(c => c.Value).FirstOrDefault();
-            if (!string.IsNullOrEmpty(coords))
-            {
-                var index = coords.Split(' ');
-                fileRow.DST = lines[i].Substring(Convert.ToInt32(index[0]), Convert.ToInt32(index[1])).Trim();
-            }
-
-            coords = colNamesLength.Where(c => c.Key == "SKDDST").Select(c => c.Value).FirstOrDefault();
-            if (!string.IsNullOrEmpty(coords))
-            {
-                var index = coords.Split(' ');
-                fileRow.SKDDST = lines[i].Substring(Convert.ToInt32(index[0]), Convert.ToInt32(index[1])).Trim();
-            }
-
-            coords = colNamesLength.Where(c => c.Key == "STDLT").Select(c => c.Value).FirstOrDefault();
-            if (!string.IsNullOrEmpty(coords))
-            {
-                var index = coords.Split(' ');
-                fileRow.STDLT = lines[i].Substring(Convert.ToInt32(index[0]), Convert.ToInt32(index[1])).Trim();
-            }
-
-            coords = colNamesLength.Where(c => c.Key == "STALT").Select(c => c.Value).FirstOrDefault();
-            if (!string.IsNullOrEmpty(coords))
-            {
-                var index = coords.Split(' ');
-                fileRow.STALT = lines[i].Substring(Convert.ToInt32(index[0]), Convert.ToInt32(index[1])).Trim();
-            }
-
-            fileRow.DepartureStation = fileRow.DEP;
-            fileRow.ArrivalStation = fileRow.DST;
-            setDates(fileRow);
-
-            itinerariesFile.Add(fileRow);
-        }
-
-        /// <summary>
-        /// Set Arrival and Departure Dates
-        /// </summary>
-        /// <param name="fileRow"></param>
-        private static void setDates(ItineraryFile fileRow)
-        {
-            DateTime date = new DateTime();
-            if (DateTime.TryParse(fileRow.FLTORGDATELT, out date))
-            {
-                fileRow.DepartureDate = date;
-                fileRow.ArrivalDate = date;
-                TimeSpan time;
-                if (!string.IsNullOrEmpty(fileRow.STDLT)
-                    && fileRow.STDLT.Length > 2
-                    && TimeSpan.TryParse(fileRow.STDLT.Insert(2, ":"), out time))
-                {
-                    fileRow.DepartureDate = fileRow.DepartureDate.Add(time);
-                }
-
-                if (!string.IsNullOrEmpty(fileRow.STALT)
-                    && fileRow.STALT.Length > 2
-                    && TimeSpan.TryParse(fileRow.STALT.Insert(2, ":"), out time))
-                {
-                    fileRow.ArrivalDate = fileRow.ArrivalDate.Add(time);
-                }
-
-                if (fileRow.DepartureDate > fileRow.ArrivalDate)
-                {
-                    fileRow.ArrivalDate = fileRow.ArrivalDate.AddDays(1);
-                }
-
-                if (fileRow.DepartureDate != DateTime.MinValue)
-                {
-                    fileRow.ItineraryKey = fileRow.DepartureDate.ToString("yyyyMMdd");
-                }
-
-            }
-        }
-
-        /// <summary>
-        /// Search Delimited row 
-        /// </summary>
-        /// <param name="colNamesLength"></param>
-        /// <param name="lines"></param>
-        /// <param name="columnsLength"></param>
-        /// <param name="record"></param>
-        /// <param name="i"></param>
-        private static void searchDelimite(ref IDictionary<string, string> colNamesLength, List<string> lines, ref List<string> columnsLength, ref bool record, int i)
-        {
-            var delimiter = "---";
-
-            if (lines[i].Contains(delimiter))
-            {
-                var lastHeader = lines[i - 1];
-                var firstHeader = lines[i - 2];
-                columnsLength = lines[i].Split(' ').ToList();
-                if (columnsLength != null && columnsLength.Count > 0)
-                {
-                    record = true;
-                    columnsLength.RemoveAt(0);
-                    columnsLength.RemoveAt(columnsLength.Count - 1);
-                    var initialPos = 0;
-                    colNamesLength = new Dictionary<string, string>();
-                    for (int j = 0; j < columnsLength.Count; j++)
-                    {
-                        var column = columnsLength[j].Length + 1;
-                        var columnName = string.Empty;
-                        columnName = firstHeader.Substring(initialPos, column).Trim();
-                        columnName += lastHeader.Substring(initialPos, column).Trim();
-                        columnName = columnName.Replace(" ", "");
-                        var coords = initialPos.ToString() + " " + column.ToString();
-                        colNamesLength.Add(columnName, coords);
-                        initialPos += column;
-                    }
-                }
+                Logger.Error(ex.Message, ex);
+                Trace.TraceError(ex.Message, ex);
             }
         }
 

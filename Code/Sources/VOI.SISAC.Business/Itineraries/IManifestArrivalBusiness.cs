@@ -29,7 +29,7 @@ namespace VOI.SISAC.Business.Itineraries
         /// <summary>
         /// Saves the arrival manifest.
         /// </summary>
-        /// <param name="manifestDeparture">The arrival manifest.</param>
+        /// <param name="manifestArrival">The arrival manifest.</param>
         /// <returns><c>true</c> if success otherwise <c>false</c>.</returns>
         bool SaveManifestArrival(ManifestArrivalDto manifestArrival);
 
@@ -43,7 +43,7 @@ namespace VOI.SISAC.Business.Itineraries
         /// <summary>
         /// Opens the manifest.
         /// </summary>
-        /// <param name="manifestDeparture">The arrival manifest.</param>
+        /// <param name="manifestArrival">The arrival manifest.</param>
         /// <returns><c>true</c> if the operation was success otherwise <c>false</c>.</returns>
         bool OpenManifest(ManifestArrivalDto manifestArrival);
 

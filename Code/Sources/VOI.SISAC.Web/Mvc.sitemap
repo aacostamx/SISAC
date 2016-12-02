@@ -104,7 +104,7 @@
         <mvcSiteMapNode title="Report" controller="GendecDeparture" area="Itineraries" action="Print" />
       </mvcSiteMapNode>
 
-      <mvcSiteMapNode title="Gendec Arrival" controller="GendecArrival" area="Itineraries" action="Create" key="Gendec_Arrival" preservedRouteParameters="Sequence,AirlineCode,FlightNumber,ItineraryKey,DepartureStation,ArrivalStation,EquipmentNumber,DepartureDate">
+      <mvcSiteMapNode title="Arrival Gendec" controller="GendecArrival" area="Itineraries" action="Index" key="Gendec_Arrival" preservedRouteParameters="Sequence,AirlineCode,FlightNumber,ItineraryKey,DepartureStation,ArrivalStation,EquipmentNumber,DepartureDate">
         <mvcSiteMapNode title="Report" controller="GendecArrival" area="Itineraries" action="Print"/>
       </mvcSiteMapNode>
       

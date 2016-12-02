@@ -162,22 +162,11 @@ namespace VOI.SISAC.Business.MapConfiguration
 
         private void CountryMap()
         {
-            // Para convertir de un Country a un CountryDto,
-            // se hará de la siguiente manera:
             Mapper.CreateMap<Country, CountryDto>()
-
-                // t: Entidad destino (CountryDto).
-                // f: Entidad origen (Country).
-                // r: Entidad origen (Country).
-                // La propiedad CountryCode de la entidad destino,
-                // sera igual a la propiedad CountryCode de la entidad origen.
-                // Y así para cada una de las propiedades.
                 .ForMember(t => t.CountryCode, f => f.MapFrom(r => r.CountryCode))
                 .ForMember(t => t.CountryName, f => f.MapFrom(r => r.CountryName))
                 .ForMember(t => t.CountryCodeShort, f => f.MapFrom(r => r.CountryCodeShort))
                 .ForMember(t => t.Status, f => f.MapFrom(r => r.Status))
-
-                // La conversión sera también en doble vía de CountryDto a Country.
                 .ReverseMap();
         }
 
@@ -186,45 +175,17 @@ namespace VOI.SISAC.Business.MapConfiguration
         /// </summary>
         private static void Map()
         {
-            /*
-            * En esta sección se registran las conversiones que realizará Automapper.
-            * 
-            * Automapper convierte de manera automática las conversiones
-            * entre objetos que sus propiedades tienen el mismo nombre
-            * y tipo de dato. Para las propiedades que no coinciden,
-            * es necesario hacer la conversión de manera explícita.
-            * 
-            * El siguiente código ilustra la manera de hacer las conversiones
-            * de manera explísita.
-           */
-
-            // Para convertir de un FunctionalArea a un FunctionalAreaDto,
-            // se hará de la siguiente manera:
             Mapper.CreateMap<FunctionalArea, FunctionalAreaDto>()
-
-                // t: Entidad destino (CountryDto).
-                // f: Entidad origen (Country).
-                // r: Entidad origen (Country).
-                // La propiedad CountryCode de la entidad destino,
-                // sera igual a la propiedad CountryCode de la entidad origen.
-                // Y así para cada una de las propiedades.
                 .ForMember(t => t.FunctionalAreaID, f => f.MapFrom(r => r.FunctionalAreaID))
                 .ForMember(t => t.FunctionalAreaName, f => f.MapFrom(r => r.FunctionalAreaName))
                 .ForMember(t => t.FunctionalAreaDescription, f => f.MapFrom(r => r.FunctionalAreaDescription))
                 .ForMember(t => t.Status, f => f.MapFrom(r => r.Status))
-
-                // La conversión sera también en doble vía de CountryDto a Country.
                 .ReverseMap();
 
-            /*
-             * En caso que se tengan colecciones dentro de nuestras entidades
-             * que se necesiten mapear entre ellas y ya se ha especificado 
-             * su conversión, se puede realizar la conversión de la siguiente manera:
-             *   
-             *  .ForMember(t => t.Requisitos, f => f.MapFrom(c => c.Requisitos))
-             */
-
             Mapper.CreateMap<Paged, PagedDto>()
+                .ReverseMap();
+
+            Mapper.CreateMap<MovementType, MovementTypeDto>()
                 .ReverseMap();
         }
     }

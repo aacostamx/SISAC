@@ -6,8 +6,9 @@
 
 namespace VOI.SISAC.Dal.Repository.Itineraries
 {
-    using VOI.SISAC.Dal.Infrastructure;
-    using VOI.SISAC.Entities.Itineraries;
+    using Entities.Itineraries;
+    using Infrastructure;
+
 
     /// <summary>
     /// Interface Timeline Movement

@@ -2311,4 +2311,67 @@ Ej. 01-15 (primeros quince días)</comment>
   <data name="UserSignature" xml:space="preserve">
     <value>Formulado por</value>
   </data>
+  <data name="ChargeKgs" xml:space="preserve">
+    <value>Carga (Kgs)</value>
+  </data>
+  <data name="ChargeQuantity" xml:space="preserve">
+    <value>Carga</value>
+  </data>
+  <data name="LuggageKgs" xml:space="preserve">
+    <value>Equipaje (Kgs)</value>
+  </data>
+  <data name="LuggageQuantity" xml:space="preserve">
+    <value>Equipaje</value>
+  </data>
+  <data name="MailKgs" xml:space="preserve">
+    <value>Correo (Kgs)</value>
+  </data>
+  <data name="MailQuantity" xml:space="preserve">
+    <value>Correo</value>
+  </data>
+  <data name="Minor" xml:space="preserve">
+    <value>Menores</value>
+  </data>
+  <data name="Boarding" xml:space="preserve">
+    <value>Embarque</value>
+  </data>
+  <data name="DelayDescription1" xml:space="preserve">
+    <value>Descripción Demora 1</value>
+  </data>
+  <data name="DelayDescription2" xml:space="preserve">
+    <value>Descripción Demora 2</value>
+  </data>
+  <data name="DelayDescription3" xml:space="preserve">
+    <value>Descripción Demora 3</value>
+  </data>
+  <data name="ExtraCrews" xml:space="preserve">
+    <value>Tripulación extra</value>
+  </data>
+  <data name="ManeuverStartTime" xml:space="preserve">
+    <value>Inicio de Maniobras</value>
+  </data>
+  <data name="OvernightEndTime" xml:space="preserve">
+    <value>Hora de Termino de Pernocta</value>
+  </data>
+  <data name="Pilots" xml:space="preserve">
+    <value>Pilotos</value>
+  </data>
+  <data name="PositionOutputTime" xml:space="preserve">
+    <value>Salida de Posición</value>
+  </data>
+  <data name="SlotAllocatedTime" xml:space="preserve">
+    <value>Hora de Slot Asignado</value>
+  </data>
+  <data name="SlotCoordinatedTime" xml:space="preserve">
+    <value>Hora de Slot Coordinado</value>
+  </data>
+  <data name="Surcharges" xml:space="preserve">
+    <value>Sobrecargos</value>
+  </data>
+  <data name="TypeFlight" xml:space="preserve">
+    <value>Tipo de Vuelo</value>
+  </data>
+  <data name="AdditionalInformation" xml:space="preserve">
+    <value>Información Adcional</value>
+  </data>
 </root>

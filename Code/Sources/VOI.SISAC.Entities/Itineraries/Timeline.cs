@@ -9,13 +9,14 @@ namespace VOI.SISAC.Entities.Itineraries
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using Paged;
 
 
     /// <summary>
     /// Timeline Entity
     /// </summary>
     [Table("Itinerary.Timeline")]
-    public partial class Timeline
+    public partial class Timeline : Paged
     {
 
         /// <summary>
@@ -139,6 +140,14 @@ namespace VOI.SISAC.Entities.Itineraries
         /// </value>
         [StringLength(8)]
         public string NextItineraryKey { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [special case].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [special case]; otherwise, <c>false</c>.
+        /// </value>
+        public bool SpecialCase { get; set; }
 
         /// <summary>
         /// Gets or sets the itinerary.

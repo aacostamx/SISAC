@@ -45,6 +45,7 @@ namespace VOI.SISAC.Dal.Repository.Itineraries
                 .Include(c => c.Itinerary)
                 .Include(c => c.Itinerary.PassengerInformation)
                 .Include(c => c.Itinerary.ManifestDeparture)
+                .Include(c => c.AdditionalArrivalInformation)
                 .FirstOrDefault(c => c.Sequence == sequence && c.AirlineCode == airlineCode && c.FlightNumber == flightNumber && c.ItineraryKey == itineraryKey);
         }
 

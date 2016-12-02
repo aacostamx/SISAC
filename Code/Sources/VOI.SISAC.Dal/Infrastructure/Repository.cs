@@ -27,7 +27,7 @@ namespace VOI.SISAC.Dal.Infrastructure
         /// The data context.
         /// </summary>
         private SisacContext dataContext;
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Repository{TEntity}"/> class.
         /// </summary>
@@ -63,7 +63,7 @@ namespace VOI.SISAC.Dal.Infrastructure
         /// <param name="entity">The entity.</param>
         public virtual void Add(TEntity entity)
         {
-            this.dbSet.Add(entity);                          
+            this.dbSet.Add(entity);
         }
 
         /// <summary>
@@ -91,17 +91,47 @@ namespace VOI.SISAC.Dal.Infrastructure
         /// <returns>All the entity's records.</returns>
         public virtual IList<TEntity> GetAll()
         {
-            return this.dbSet.ToList();            
+            return this.dbSet.ToList();
+        }
+
+        /// <summary>
+        /// Finds the list.
+        /// </summary>
+        /// <param name="predicate">The predicate.</param>
+        /// <param name="tracking">if set to <c>true</c> [tracking].</param>
+        /// <returns></returns>
+        public virtual IList<TEntity> FindList(Expression<Func<TEntity, bool>> predicate, bool tracking = false)
+        {
+            var find = new List<TEntity>();
+
+            if (tracking)
+            {
+                find = this.dbSet.Where(predicate).ToList();
+            }
+            else
+            {
+                find = this.dbSet.AsNoTracking().Where(predicate).ToList();
+            }
+
+            return find;
         }
 
         /// <summary>
         /// Finds the specified predicate.
         /// </summary>
         /// <param name="predicate">The predicate.</param>
+        /// <param name="tracking">if set to <c>true</c> [tracking].</param>
         /// <returns></returns>
-        public virtual IList<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
+        public virtual TEntity Find(Expression<Func<TEntity, bool>> predicate, bool tracking = false)
         {
-            return this.dbSet.Where(predicate).ToList();
+            if (tracking)
+            {
+                return this.dbSet.Where(predicate).FirstOrDefault();
+            }
+            else
+            {
+                return this.dbSet.AsNoTracking().Where(predicate).FirstOrDefault();
+            }
         }
 
         /// <summary>

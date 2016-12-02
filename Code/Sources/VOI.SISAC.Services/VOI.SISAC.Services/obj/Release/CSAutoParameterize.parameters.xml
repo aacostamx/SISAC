@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
-  <parameter name="SisacDBConnectionString-Web.config Connection String" description="SisacDBConnectionString Connection String used in web.config by the application to access the database." defaultValue="Data Source=10.10.32.62;Initial Catalog=SISAC_DEV;Persist Security Info=True;User ID=appdbsisa;Password=ks?F1Tqi;MultipleActiveResultSets=True;Application Name=EntityFramework" tags="SqlConnectionString">
+  <parameter name="SisacDBConnectionString-Web.config Connection String" description="SisacDBConnectionString Connection String used in web.config by the application to access the database." defaultValue="Data Source=10.10.32.62;Initial Catalog=SISAC_CERT;Persist Security Info=True;User ID=appdbsisa;Password=ks?F1Tqi;MultipleActiveResultSets=True;Application Name=EntityFramework" tags="SqlConnectionString">
     <parameterEntry kind="XmlFile" scope="C:\\Users\\Linko\\Source\\Workspaces\\Finanzas\\Dev\\Code\\Sources\\VOI\.SISAC\.Services\\VOI\.SISAC\.Services\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='SisacDBConnectionString']/@connectionString" />
   </parameter>
 </parameters>

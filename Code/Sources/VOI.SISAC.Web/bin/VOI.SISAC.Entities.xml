@@ -4,6 +4,179 @@
         <name>VOI.SISAC.Entities</name>
     </assembly>
     <members>
+        <member name="T:VOI.SISAC.Entities.Airport.AdditionalPassengerInformation">
+            <summary>
+            Additional passenger information
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Airport.AdditionalPassengerInformation.Sequence">
+            <summary>
+            Gets or sets the sequence.
+            </summary>
+            <value>
+            The sequence.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Airport.AdditionalPassengerInformation.AirlineCode">
+            <summary>
+            Gets or sets the airline code.
+            </summary>
+            <value>
+            The airline code.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Airport.AdditionalPassengerInformation.FlightNumber">
+            <summary>
+            Gets or sets the flight number.
+            </summary>
+            <value>
+            The flight number.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Airport.AdditionalPassengerInformation.ItineraryKey">
+            <summary>
+            Gets or sets the itinerary key.
+            </summary>
+            <value>
+            The itinerary key.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Airport.AdditionalPassengerInformation.AdultNational">
+            <summary>
+            Gets or sets the adult national.
+            </summary>
+            <value>
+            The adult national.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Airport.AdditionalPassengerInformation.AdultInternational">
+            <summary>
+            Gets or sets the adult international.
+            </summary>
+            <value>
+            The adult international.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Airport.AdditionalPassengerInformation.MinorNational">
+            <summary>
+            Gets or sets the minor national.
+            </summary>
+            <value>
+            The minor national.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Airport.AdditionalPassengerInformation.MinorInternational">
+            <summary>
+            Gets or sets the minor international.
+            </summary>
+            <value>
+            The minor international.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Airport.AdditionalPassengerInformation.DiplomaticNational">
+            <summary>
+            Gets or sets the diplomatic national.
+            </summary>
+            <value>
+            The diplomatic national.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Airport.AdditionalPassengerInformation.DiplomaticInternational">
+            <summary>
+            Gets or sets the diplomatic international.
+            </summary>
+            <value>
+            The diplomatic international.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Airport.AdditionalPassengerInformation.CommissionNational">
+            <summary>
+            Gets or sets the commission national.
+            </summary>
+            <value>
+            The commission national.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Airport.AdditionalPassengerInformation.CommissionInternational">
+            <summary>
+            Gets or sets the commission international.
+            </summary>
+            <value>
+            The commission international.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Airport.AdditionalPassengerInformation.InfantNational">
+            <summary>
+            Gets or sets the infant national.
+            </summary>
+            <value>
+            The infant national.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Airport.AdditionalPassengerInformation.InfantInternational">
+            <summary>
+            Gets or sets the infant international.
+            </summary>
+            <value>
+            The infant international.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Airport.AdditionalPassengerInformation.TransitoryNational">
+            <summary>
+            Gets or sets the transitory national.
+            </summary>
+            <value>
+            The transitory national.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Airport.AdditionalPassengerInformation.TransitoryInternational">
+            <summary>
+            Gets or sets the transitory international.
+            </summary>
+            <value>
+            The transitory international.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Airport.AdditionalPassengerInformation.ConnectionNational">
+            <summary>
+            Gets or sets the connection national.
+            </summary>
+            <value>
+            The connection national.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Airport.AdditionalPassengerInformation.ConnectionInternational">
+            <summary>
+            Gets or sets the connection international.
+            </summary>
+            <value>
+            The connection international.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Airport.AdditionalPassengerInformation.OtherNational">
+            <summary>
+            Gets or sets the other national.
+            </summary>
+            <value>
+            The other national.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Airport.AdditionalPassengerInformation.OtherInternational">
+            <summary>
+            Gets or sets the other international.
+            </summary>
+            <value>
+            The other international.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Airport.AdditionalPassengerInformation.PassengerInformation">
+            <summary>
+            Gets or sets the passenger information.
+            </summary>
+            <value>
+            The passenger information.
+            </value>
+        </member>
         <member name="T:VOI.SISAC.Entities.Airport.AirportSchedule">
             <summary>
             Class AirportSchedule.
@@ -1066,6 +1239,14 @@
             <summary>
             User Information
             </summary>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Airport.PassengerInformation.AdditionalPassengerInformation">
+            <summary>
+            Gets or sets the additional passenger information.
+            </summary>
+            <value>
+            The additional passenger information.
+            </value>
         </member>
         <member name="T:VOI.SISAC.Entities.Airport.Crew">
             <summary>
@@ -4446,6 +4627,623 @@
             The national fuel contracts.
             </value>
         </member>
+        <member name="T:VOI.SISAC.Entities.Itineraries.AdditionalArrivalInformation">
+            <summary>
+            AdditionalArrivalInformation
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalArrivalInformation.Sequence">
+            <summary>
+            Gets or sets the sequence.
+            </summary>
+            <value>
+            The sequence.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalArrivalInformation.AirlineCode">
+            <summary>
+            Gets or sets the airline code.
+            </summary>
+            <value>
+            The airline code.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalArrivalInformation.FlightNumber">
+            <summary>
+            Gets or sets the flight number.
+            </summary>
+            <value>
+            The flight number.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalArrivalInformation.ItineraryKey">
+            <summary>
+            Gets or sets the itinerary key.
+            </summary>
+            <value>
+            The itinerary key.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalArrivalInformation.Pilot">
+            <summary>
+            Gets or sets the pilot.
+            </summary>
+            <value>
+            The pilot.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalArrivalInformation.Surcharge">
+            <summary>
+            Gets or sets the surcharge.
+            </summary>
+            <value>
+            The surcharge.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalArrivalInformation.ExtraCrew">
+            <summary>
+            Gets or sets the extra crew.
+            </summary>
+            <value>
+            The extra crew.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalArrivalInformation.TypeFlight">
+            <summary>
+            Gets or sets the type flight.
+            </summary>
+            <value>
+            The type flight.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalArrivalInformation.SlotAllocatedTime">
+            <summary>
+            Gets or sets the slot allocated time.
+            </summary>
+            <value>
+            The slot allocated time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalArrivalInformation.SlotCoordinatedTime">
+            <summary>
+            Gets or sets the slot coordinated time.
+            </summary>
+            <value>
+            The slot coordinated time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalArrivalInformation.OvernightEndTime">
+            <summary>
+            Gets or sets the overnight end time.
+            </summary>
+            <value>
+            The overnight end time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalArrivalInformation.ManeuverStartTime">
+            <summary>
+            Gets or sets the maneuver start time.
+            </summary>
+            <value>
+            The maneuver start time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalArrivalInformation.PositionOutputTime">
+            <summary>
+            Gets or sets the position output time.
+            </summary>
+            <value>
+            The position output time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalArrivalInformation.DelayDescription1">
+            <summary>
+            Gets or sets the delay description1.
+            </summary>
+            <value>
+            The delay description1.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalArrivalInformation.DelayDescription2">
+            <summary>
+            Gets or sets the delay description2.
+            </summary>
+            <value>
+            The delay description2.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalArrivalInformation.DelayDescription3">
+            <summary>
+            Gets or sets the delay description3.
+            </summary>
+            <value>
+            The delay description3.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalArrivalInformation.ManifestArrival">
+            <summary>
+            Gets or sets the manifest departure.
+            </summary>
+            <value>
+            The manifest departure.
+            </value>
+        </member>
+        <member name="T:VOI.SISAC.Entities.Itineraries.AdditionalDepartureInformation">
+            <summary>
+            AdditionalDepartureInformation
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalDepartureInformation.Sequence">
+            <summary>
+            Gets or sets the sequence.
+            </summary>
+            <value>
+            The sequence.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalDepartureInformation.AirlineCode">
+            <summary>
+            Gets or sets the airline code.
+            </summary>
+            <value>
+            The airline code.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalDepartureInformation.FlightNumber">
+            <summary>
+            Gets or sets the flight number.
+            </summary>
+            <value>
+            The flight number.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalDepartureInformation.ItineraryKey">
+            <summary>
+            Gets or sets the itinerary key.
+            </summary>
+            <value>
+            The itinerary key.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalDepartureInformation.Pilot">
+            <summary>
+            Gets or sets the pilot.
+            </summary>
+            <value>
+            The pilot.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalDepartureInformation.Surcharge">
+            <summary>
+            Gets or sets the surcharge.
+            </summary>
+            <value>
+            The surcharge.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalDepartureInformation.ExtraCrew">
+            <summary>
+            Gets or sets the extra crew.
+            </summary>
+            <value>
+            The extra crew.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalDepartureInformation.TypeFlight">
+            <summary>
+            Gets or sets the type flight.
+            </summary>
+            <value>
+            The type flight.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalDepartureInformation.SlotAllocatedTime">
+            <summary>
+            Gets or sets the slot allocated time.
+            </summary>
+            <value>
+            The slot allocated time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalDepartureInformation.SlotCoordinatedTime">
+            <summary>
+            Gets or sets the slot coordinated time.
+            </summary>
+            <value>
+            The slot coordinated time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalDepartureInformation.OvernightEndTime">
+            <summary>
+            Gets or sets the overnight end time.
+            </summary>
+            <value>
+            The overnight end time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalDepartureInformation.ManeuverStartTime">
+            <summary>
+            Gets or sets the maneuver start time.
+            </summary>
+            <value>
+            The maneuver start time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalDepartureInformation.PositionOutputTime">
+            <summary>
+            Gets or sets the position output time.
+            </summary>
+            <value>
+            The position output time.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalDepartureInformation.DelayDescription1">
+            <summary>
+            Gets or sets the delay description1.
+            </summary>
+            <value>
+            The delay description1.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalDepartureInformation.DelayDescription2">
+            <summary>
+            Gets or sets the delay description2.
+            </summary>
+            <value>
+            The delay description2.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalDepartureInformation.DelayDescription3">
+            <summary>
+            Gets or sets the delay description3.
+            </summary>
+            <value>
+            The delay description3.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.AdditionalDepartureInformation.ManifestDeparture">
+            <summary>
+            Gets or sets the manifest departure.
+            </summary>
+            <value>
+            The manifest departure.
+            </value>
+        </member>
+        <member name="T:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoarding">
+            <summary>
+            ManifestDepartureBoarding
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoarding.BoardingID">
+            <summary>
+            Gets or sets the boarding identifier.
+            </summary>
+            <value>
+            The boarding identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoarding.Sequence">
+            <summary>
+            Gets or sets the sequence.
+            </summary>
+            <value>
+            The sequence.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoarding.AirlineCode">
+            <summary>
+            Gets or sets the airline code.
+            </summary>
+            <value>
+            The airline code.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoarding.FlightNumber">
+            <summary>
+            Gets or sets the flight number.
+            </summary>
+            <value>
+            The flight number.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoarding.ItineraryKey">
+            <summary>
+            Gets or sets the itinerary key.
+            </summary>
+            <value>
+            The itinerary key.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoarding.Position">
+            <summary>
+            Gets or sets the position.
+            </summary>
+            <value>
+            The position.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoarding.Station">
+            <summary>
+            Gets or sets the station.
+            </summary>
+            <value>
+            The station.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoarding.PassengerAdult">
+            <summary>
+            Gets or sets the passenger adult.
+            </summary>
+            <value>
+            The passenger adult.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoarding.PassengerMinor">
+            <summary>
+            Gets or sets the passenger minor.
+            </summary>
+            <value>
+            The passenger minor.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoarding.PassengerInfant">
+            <summary>
+            Gets or sets the passenger infant.
+            </summary>
+            <value>
+            The passenger infant.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoarding.LuggageQuantity">
+            <summary>
+            Gets or sets the luggage quantity.
+            </summary>
+            <value>
+            The luggage quantity.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoarding.LuggageKgs">
+            <summary>
+            Gets or sets the luggage KGS.
+            </summary>
+            <value>
+            The luggage KGS.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoarding.ChargeQuantity">
+            <summary>
+            Gets or sets the charge quantity.
+            </summary>
+            <value>
+            The charge quantity.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoarding.ChargeKgs">
+            <summary>
+            Gets or sets the charge KGS.
+            </summary>
+            <value>
+            The charge KGS.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoarding.MailQuantity">
+            <summary>
+            Gets or sets the mail quantity.
+            </summary>
+            <value>
+            The mail quantity.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoarding.MailKgs">
+            <summary>
+            Gets or sets the mail KGS.
+            </summary>
+            <value>
+            The mail KGS.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoarding.ManifestDeparture">
+            <summary>
+            Gets or sets the manifest departure.
+            </summary>
+            <value>
+            The manifest departure.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoarding.ManifestDepartureBoardingInformations">
+            <summary>
+            Gets or sets the manifest departure boarding informations.
+            </summary>
+            <value>
+            The manifest departure boarding informations.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoarding.ManifestDepartureBoardingDetails">
+            <summary>
+            Gets or sets the manifest departure boarding details.
+            </summary>
+            <value>
+            The manifest departure boarding details.
+            </value>
+        </member>
+        <member name="T:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingDetail">
+            <summary>
+            Manifest Departure Boarding Detail
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingDetail.BoardingDetailID">
+            <summary>
+            Gets or sets the boarding detail identifier.
+            </summary>
+            <value>
+            The boarding detail identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingDetail.BoardingID">
+            <summary>
+            Gets or sets the boarding identifier.
+            </summary>
+            <value>
+            The boarding identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingDetail.CompartmentTypeID">
+            <summary>
+            Gets or sets the compartment type identifier.
+            </summary>
+            <value>
+            The compartment type identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingDetail.LuggageQuantity">
+            <summary>
+            Gets or sets the luggage quantity.
+            </summary>
+            <value>
+            The luggage quantity.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingDetail.LuggageKgs">
+            <summary>
+            Gets or sets the luggage KGS.
+            </summary>
+            <value>
+            The luggage KGS.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingDetail.ChargeQuantity">
+            <summary>
+            Gets or sets the charge quantity.
+            </summary>
+            <value>
+            The charge quantity.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingDetail.ChargeKgs">
+            <summary>
+            Gets or sets the charge KGS.
+            </summary>
+            <value>
+            The charge KGS.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingDetail.Remarks">
+            <summary>
+            Gets or sets the remarks.
+            </summary>
+            <value>
+            The remarks.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingDetail.RampResponsible">
+            <summary>
+            Gets or sets the ramp responsible.
+            </summary>
+            <value>
+            The ramp responsible.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingDetail.AorUserID">
+            <summary>
+            Gets or sets the aor user identifier.
+            </summary>
+            <value>
+            The aor user identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingDetail.CreationDate">
+            <summary>
+            Gets or sets the creation date.
+            </summary>
+            <value>
+            The creation date.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingDetail.ManifestDepartureBoarding">
+            <summary>
+            Gets or sets the manifest departure boarding.
+            </summary>
+            <value>
+            The manifest departure boarding.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingDetail.CompartmentTypeConfig">
+            <summary>
+            Gets or sets the compartment type configuration.
+            </summary>
+            <value>
+            The compartment type configuration.
+            </value>
+        </member>
+        <member name="T:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingInformation">
+            <summary>
+            Manifest Departure Boarding Information
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingInformation.BoardingInformationID">
+            <summary>
+            Gets or sets the boarding information identifier.
+            </summary>
+            <value>
+            The boarding information identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingInformation.BoardingID">
+            <summary>
+            Gets or sets the boarding identifier.
+            </summary>
+            <value>
+            The boarding identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingInformation.CompartmentTypeID">
+            <summary>
+            Gets or sets the compartment type identifier.
+            </summary>
+            <value>
+            The compartment type identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingInformation.CompartmentTypeInformationID">
+            <summary>
+            Gets or sets the compartment type information identifier.
+            </summary>
+            <value>
+            The compartment type information identifier.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingInformation.Checked">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingInformation"/> is checked.
+            </summary>
+            <value>
+              <c>true</c> if checked; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingInformation.ManifestDepartureBoarding">
+            <summary>
+            Gets or sets the manifest departure boarding.
+            </summary>
+            <value>
+            The manifest departure boarding.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingInformation.CompartmentTypeInformation">
+            <summary>
+            Gets or sets the compartment type information.
+            </summary>
+            <value>
+            The compartment type information.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingInformation.CompartmentTypeConfig">
+            <summary>
+            Gets or sets the compartment type configuration.
+            </summary>
+            <value>
+            The compartment type configuration.
+            </value>
+        </member>
         <member name="T:VOI.SISAC.Entities.Itineraries.TimelineMovement">
             <summary>
             TimelineMovement Entity
@@ -4688,6 +5486,14 @@
             </summary>
             <value>
             The next itinerary key.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.Timeline.SpecialCase">
+            <summary>
+            Gets or sets a value indicating whether [special case].
+            </summary>
+            <value>
+              <c>true</c> if [special case]; otherwise, <c>false</c>.
             </value>
         </member>
         <member name="P:VOI.SISAC.Entities.Itineraries.Timeline.Itinerary">
@@ -5007,6 +5813,14 @@
             The itinerary.
             </value>
         </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestArrival.AdditionalArrivalInformation">
+            <summary>
+            Gets or sets the additional arrival information.
+            </summary>
+            <value>
+            The additional arrival information.
+            </value>
+        </member>
         <member name="P:VOI.SISAC.Entities.Itineraries.ManifestArrival.Delays">
             <summary>
             Gets or sets the delays.
@@ -5239,6 +6053,14 @@
             <param name="AirlineCode">The airline code.</param>
             <param name="FlightNumber">The flight number.</param>
             <param name="ItineraryKey">The itinerary key.</param>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.Itinerary.Line">
+            <summary>
+            Gets or sets the line.
+            </summary>
+            <value>
+            The line.
+            </value>
         </member>
         <member name="P:VOI.SISAC.Entities.Itineraries.Itinerary.Sequence">
             <summary>
@@ -5812,12 +6634,28 @@
             The itinerary.
             </value>
         </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDeparture.AdditionalDepartureInformation">
+            <summary>
+            Gets or sets the additional departure information.
+            </summary>
+            <value>
+            The additional departure information.
+            </value>
+        </member>
         <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDeparture.Delays">
             <summary>
             Gets or sets the delays.
             </summary>
             <value>
             The delays.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDeparture.ManifestDepartureBoardings">
+            <summary>
+            Gets or sets the manifest departure boardings.
+            </summary>
+            <value>
+            The manifest departure boardings.
             </value>
         </member>
         <member name="T:VOI.SISAC.Entities.Paged.Paged">

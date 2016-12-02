@@ -75,6 +75,7 @@
     <Compile Include="Configuration\Airport\CompartmentTypeConfiguration.cs" />
     <Compile Include="Configuration\Airport\CompartmentTypeConfigConfiguration.cs" />
     <Compile Include="Configuration\Airport\CompartmentTypeInformationConfiguration.cs" />
+    <Compile Include="Configuration\Airport\AdditionalPassengerInformationConfiguration.cs" />
     <Compile Include="Configuration\Airport\CrewConfiguration.cs" />
     <Compile Include="Configuration\Airport\CrewTypeConfiguration.cs" />
     <Compile Include="Configuration\Airport\DelayConfiguration.cs" />
@@ -115,6 +116,11 @@
     <Compile Include="Configuration\Finance\ProviderConfiguration.cs" />
     <Compile Include="Configuration\Catalog\ServiceTypeConfiguration.cs" />
     <Compile Include="Configuration\Finance\TaxConfiguration.cs" />
+    <Compile Include="Configuration\Itineraries\AdditionalArrivalInformationConfiguration.cs" />
+    <Compile Include="Configuration\Itineraries\AdditionalDepartureInformationConfiguration.cs" />
+    <Compile Include="Configuration\Itineraries\ManifestDepartureBoardingConfiguration.cs" />
+    <Compile Include="Configuration\Itineraries\ManifestDepartureBoardingDetailConfiguration.cs" />
+    <Compile Include="Configuration\Itineraries\ManifestDepartureBoardingInformationConfiguration.cs" />
     <Compile Include="Configuration\Itineraries\TimelineMovementConfiguration.cs" />
     <Compile Include="Configuration\Itineraries\TimelineConfiguration.cs" />
     <Compile Include="Configuration\Itineraries\ManifestArrivalConfiguration.cs" />
@@ -163,6 +169,7 @@
     </Compile>
     <Compile Include="Infrastructure\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Airports\AdditionalPassengerInformationRepository.cs" />
     <Compile Include="Repository\Airports\AirlineRepository.cs" />
     <Compile Include="Repository\Airports\AirplaneRepository.cs" />
     <Compile Include="Repository\Airports\AirplaneTypeRepository.cs" />
@@ -261,8 +268,18 @@
     <Compile Include="Repository\Finance\NationalFuelRateRepository.cs" />
     <Compile Include="Repository\Finance\ProviderRepository.cs" />
     <Compile Include="Repository\Finance\TaxRepository.cs" />
+    <Compile Include="Repository\Itineraries\AdditionalArrivalInformationRepository.cs" />
+    <Compile Include="Repository\Itineraries\AdditionalDepartureInformationRepository.cs" />
+    <Compile Include="Repository\Itineraries\IAdditionalArrivalInformationRepository.cs" />
+    <Compile Include="Repository\Itineraries\IAdditionalDepartureInformationRepository.cs" />
+    <Compile Include="Repository\Itineraries\IManifestDepartureBoardingDetailRepository.cs" />
+    <Compile Include="Repository\Itineraries\IManifestDepartureBoardingInformationRepository.cs" />
+    <Compile Include="Repository\Itineraries\IManifestDepartureBoardingRepository.cs" />
     <Compile Include="Repository\Itineraries\ITimelineMovementRepository.cs" />
     <Compile Include="Repository\Itineraries\ITimelineRepository.cs" />
+    <Compile Include="Repository\Itineraries\ManifestDepartureBoardingDetailRepository.cs" />
+    <Compile Include="Repository\Itineraries\ManifestDepartureBoardingInformationRepository.cs" />
+    <Compile Include="Repository\Itineraries\ManifestDepartureBoardingRepository.cs" />
     <Compile Include="Repository\Itineraries\TimelineMovementRepository.cs" />
     <Compile Include="Repository\Itineraries\TimelineRepository.cs" />
     <Compile Include="Repository\Itineraries\ManifestArrivalRepository.cs" />

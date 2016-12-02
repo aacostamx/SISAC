@@ -1,6 +1,3 @@
-C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Business\obj\Debug\VOI.SISAC.Business.csprojResolveAssemblyReference.cache
-C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Business\obj\Debug\VOI.SISAC.Business.Resources.Messages.resources
-C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Business\obj\Debug\VOI.SISAC.Business.csproj.GenerateResource.Cache
 C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Business\bin\Debug\VOI.SISAC.Business.dll.config
 C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Business\bin\Debug\VOI.SISAC.Business.XML
 C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Business\bin\Debug\VOI.SISAC.Business.dll
@@ -17,5 +14,8 @@ C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Business\bi
 C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Business\bin\Debug\Autofac.xml
 C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Business\bin\Debug\AutoMapper.xml
 C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Business\bin\Debug\EntityFramework.xml
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Business\obj\Debug\VOI.SISAC.Business.csprojResolveAssemblyReference.cache
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Business\obj\Debug\VOI.SISAC.Business.Resources.Messages.resources
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Business\obj\Debug\VOI.SISAC.Business.csproj.GenerateResource.Cache
 C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Business\obj\Debug\VOI.SISAC.Business.dll
 C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Business\obj\Debug\VOI.SISAC.Business.pdb

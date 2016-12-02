@@ -501,6 +501,128 @@ namespace VOI.SISAC.Web.Models.VO.Itineraries
         public decimal ToleranceTime { get; set; }
 
         /// <summary>
+        /// Gets or sets the pilot.
+        /// </summary>
+        /// <value>
+        /// The pilot.
+        /// </value>
+        [Display(Name = "Pilots", ResourceType = typeof(Resources.Resource))]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resource),
+                  ErrorMessageResourceName = "RequiredField")]
+        public int Pilot { get; set; }
+
+        /// <summary>
+        /// Gets or sets the surcharge.
+        /// </summary>
+        /// <value>
+        /// The surcharge.
+        /// </value>
+        [Display(Name = "Surcharges", ResourceType = typeof(Resources.Resource))]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resource),
+                  ErrorMessageResourceName = "RequiredField")]
+        public int Surcharge { get; set; }
+
+        /// <summary>
+        /// Gets or sets the extra crew.
+        /// </summary>
+        /// <value>
+        /// The extra crew.
+        /// </value>
+        [Display(Name = "ExtraCrews", ResourceType = typeof(Resources.Resource))]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resource),
+                  ErrorMessageResourceName = "RequiredField")]
+        public int ExtraCrew { get; set; }
+
+        /// <summary>
+        /// Gets or sets the type flight.
+        /// </summary>
+        /// <value>
+        /// The type flight.
+        /// </value>
+        [Display(Name = "TypeFlight", ResourceType = typeof(Resources.Resource))]
+        [StringLength(10, ErrorMessageResourceType = typeof(Resources.Resource),
+            ErrorMessageResourceName = "LengthMax10")]
+        public string TypeFlight { get; set; }
+
+        /// <summary>
+        /// Gets or sets the slot allocated time.
+        /// </summary>
+        /// <value>
+        /// The slot allocated time.
+        /// </value>
+        [Display(Name = "SlotAllocatedTime", ResourceType = typeof(Resources.Resource))]
+        public string SlotAllocatedTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets the slot coordinated time.
+        /// </summary>
+        /// <value>
+        /// The slot coordinated time.
+        /// </value>
+        [Display(Name = "SlotCoordinatedTime", ResourceType = typeof(Resources.Resource))]
+        public string SlotCoordinatedTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets the overnight end time.
+        /// </summary>
+        /// <value>
+        /// The overnight end time.
+        /// </value>
+        [Display(Name = "OvernightEndTime", ResourceType = typeof(Resources.Resource))]
+        public string OvernightEndTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets the maneuver start time.
+        /// </summary>
+        /// <value>
+        /// The maneuver start time.
+        /// </value>
+        [Display(Name = "ManeuverStartTime", ResourceType = typeof(Resources.Resource))]
+        public string ManeuverStartTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets the position output time.
+        /// </summary>
+        /// <value>
+        /// The position output time.
+        /// </value>
+        [Display(Name = "PositionOutputTime", ResourceType = typeof(Resources.Resource))]
+        public string PositionOutputTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets the delay description.
+        /// </summary>
+        /// <value>
+        /// The delay description.
+        /// </value>
+        [Display(Name = "DelayDescription1", ResourceType = typeof(Resources.Resource))]
+        [StringLength(200, ErrorMessageResourceType = typeof(Resources.Resource),
+            ErrorMessageResourceName = "LengthMax200")]
+        public string FirstDelayDescription { get; set; }
+
+        /// <summary>
+        /// Gets or sets the delay description.
+        /// </summary>
+        /// <value>
+        /// The delay description.
+        /// </value>
+        [Display(Name = "DelayDescription2", ResourceType = typeof(Resources.Resource))]
+        [StringLength(200, ErrorMessageResourceType = typeof(Resources.Resource),
+            ErrorMessageResourceName = "LengthMax200")]
+        public string SecondDelayDescription { get; set; }
+
+        /// <summary>
+        /// Gets or sets the delay description.
+        /// </summary>
+        /// <value>
+        /// The delay description.
+        /// </value>
+        [Display(Name = "DelayDescription3", ResourceType = typeof(Resources.Resource))]
+        [StringLength(200, ErrorMessageResourceType = typeof(Resources.Resource),
+            ErrorMessageResourceName = "LengthMax200")]
+        public string ThirdDelayDescription { get; set; }
+
+        /// <summary>
         /// Gets or sets the itinerary.
         /// </summary>
         /// <value>
@@ -515,5 +637,13 @@ namespace VOI.SISAC.Web.Models.VO.Itineraries
         /// The delays.
         /// </value>
         public IList<DelayVO> Delays { get; set; }
+
+        /// <summary>
+        /// Gets or sets the manifest departure boardings.
+        /// </summary>
+        /// <value>
+        /// The manifest departure boardings.
+        /// </value>
+        public ICollection<ManifestDepartureBoardingVO> ManifestDepartureBoardings { get; set; }
     }
 }
