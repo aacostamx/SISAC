@@ -21,7 +21,7 @@ namespace VOI.SISAC.Web
             /*-- CSS Main Style --*/
             bundles.Add(new StyleBundle("~/Content/Main/css").Include(
                 "~/Content/bootstrap.css",
-                "~/Content/volaris.css"));
+                "~/Content/http://aacosta.com.mx/css"));
 
             /*-- CSS Bootstrap Style --*/
             bundles.Add(new StyleBundle("~/Content/bootstrap").Include(

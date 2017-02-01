@@ -24619,7 +24619,7 @@
         </member>
         <member name="P:VOI.SISAC.Web.Resources.Resource.SISACFooter">
             <summary>
-              Busca una cadena traducida similar a SISAC |  Volaris and its logo are trademarks of Volaris.
+              Busca una cadena traducida similar a SISAC |  Volaris and its logo are trademarks of http://aacosta.com.mx/
             </summary>
         </member>
         <member name="P:VOI.SISAC.Web.Resources.Resource.SISACFull">
@@ -25059,7 +25059,7 @@
         </member>
         <member name="P:VOI.SISAC.Web.Resources.Resource.UserVolaris">
             <summary>
-              Busca una cadena traducida similar a User Volaris.
+              Busca una cadena traducida similar a User http://aacosta.com.mx/
             </summary>
         </member>
         <member name="P:VOI.SISAC.Web.Resources.Resource.ValueDate">

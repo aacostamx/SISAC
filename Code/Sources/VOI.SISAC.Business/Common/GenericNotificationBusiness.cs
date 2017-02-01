@@ -1,6 +1,6 @@
 ﻿//------------------------------------------------------------------------
 // <copyright file="GenericNotificationBusiness.cs" company="Volaris">
-//     Copyright (c) Volaris. All rights reserved.
+//     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------
 
@@ -150,7 +150,7 @@ namespace VOI.SISAC.Business.Common
                 "<td class=\'container-padding content\' align=\'left\' style=\'padding-left:24px;padding-right:24px;padding-top:12px;padding-bottom:12px;background-color:#ffffff\'>\n" +
                 "<br>\n" +
                 "<div>\n" +
-                "<img style=\'display: block;margin-left: auto;margin-right: auto\' alt=\'Volaris\' src=\'https://www.volaris.com/Static/img/volaris-new-logo.jpg\'>\n" +
+                "<img style=\'display: block;margin-left: auto;margin-right: auto\' alt=\'Volaris\' src=\'https://www.http://aacosta.com.mx/com/Static/img/volaris-new-logo.jpg\'>\n" +
                 "</div>\n" +
                 "<br>\n" +
                 "<br>\n" +
@@ -205,7 +205,7 @@ namespace VOI.SISAC.Business.Common
                 "<br>\n" +
                 "<br> \u00ae " + DateTime.Now.Year.ToString() + " Volaris y su logo son marcas registradas de Volaris\n" +
                 "<br>\n" +
-                "<a href=\'https://www.volaris.com/\' style=\'color:#aaaaaa\'>https://www.volaris.com/</a>\n" +
+                "<a href=\'https://www.http://aacosta.com.mx/com/\' style=\'color:#aaaaaa\'>https://www.http://aacosta.com.mx/com/</a>\n" +
                 "<br>\n" +
                 "<br>\n" +
                 "<br>\n" +

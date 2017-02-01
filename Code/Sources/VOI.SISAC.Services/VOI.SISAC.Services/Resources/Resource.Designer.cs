@@ -6181,7 +6181,7 @@ namespace VOI.SISAC.Services.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SISAC |  Volaris and its logo are trademarks of Volaris.
+        ///   Looks up a localized string similar to SISAC |  Volaris and its logo are trademarks of http://aacosta.com.mx/
         /// </summary>
         public static string SISACFooter {
             get {
@@ -6973,7 +6973,7 @@ namespace VOI.SISAC.Services.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User Volaris.
+        ///   Looks up a localized string similar to User http://aacosta.com.mx/
         /// </summary>
         public static string UserVolaris {
             get {

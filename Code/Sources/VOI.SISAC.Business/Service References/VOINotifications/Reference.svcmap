@@ -19,14 +19,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://api.volaris.com.mx/WCFVOINotifications/ServiceNotifications.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://api.http://aacosta.com.mx/com.mx/WCFVOINotifications/ServiceNotifications.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ServiceNotifications.disco" MetadataType="Disco" ID="5d46f58f-b4e9-49e4-997c-41e03454a1fd" SourceId="1" SourceUrl="http://api.volaris.com.mx/WCFVOINotifications/ServiceNotifications.svc?disco" />
-    <MetadataFile FileName="ServiceNotifications.xsd" MetadataType="Schema" ID="ef8caf82-b003-4747-a7e7-c6935cb566aa" SourceId="1" SourceUrl="http://api.volaris.com.mx/WCFVOINotifications/ServiceNotifications.svc?xsd=xsd0" />
-    <MetadataFile FileName="ServiceNotifications1.xsd" MetadataType="Schema" ID="9147dff4-797e-4eb3-a243-379febc90feb" SourceId="1" SourceUrl="http://api.volaris.com.mx/WCFVOINotifications/ServiceNotifications.svc?xsd=xsd2" />
-    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="68edd559-8594-4367-884c-2453420a7f14" SourceId="1" SourceUrl="http://api.volaris.com.mx/WCFVOINotifications/ServiceNotifications.svc?wsdl" />
-    <MetadataFile FileName="ServiceNotifications2.xsd" MetadataType="Schema" ID="69f9faf9-5450-4318-bd91-c879a7fbe718" SourceId="1" SourceUrl="http://api.volaris.com.mx/WCFVOINotifications/ServiceNotifications.svc?xsd=xsd1" />
+    <MetadataFile FileName="ServiceNotifications.disco" MetadataType="Disco" ID="5d46f58f-b4e9-49e4-997c-41e03454a1fd" SourceId="1" SourceUrl="http://api.http://aacosta.com.mx/com.mx/WCFVOINotifications/ServiceNotifications.svc?disco" />
+    <MetadataFile FileName="ServiceNotifications.xsd" MetadataType="Schema" ID="ef8caf82-b003-4747-a7e7-c6935cb566aa" SourceId="1" SourceUrl="http://api.http://aacosta.com.mx/com.mx/WCFVOINotifications/ServiceNotifications.svc?xsd=xsd0" />
+    <MetadataFile FileName="ServiceNotifications1.xsd" MetadataType="Schema" ID="9147dff4-797e-4eb3-a243-379febc90feb" SourceId="1" SourceUrl="http://api.http://aacosta.com.mx/com.mx/WCFVOINotifications/ServiceNotifications.svc?xsd=xsd2" />
+    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="68edd559-8594-4367-884c-2453420a7f14" SourceId="1" SourceUrl="http://api.http://aacosta.com.mx/com.mx/WCFVOINotifications/ServiceNotifications.svc?wsdl" />
+    <MetadataFile FileName="ServiceNotifications2.xsd" MetadataType="Schema" ID="69f9faf9-5450-4318-bd91-c879a7fbe718" SourceId="1" SourceUrl="http://api.http://aacosta.com.mx/com.mx/WCFVOINotifications/ServiceNotifications.svc?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

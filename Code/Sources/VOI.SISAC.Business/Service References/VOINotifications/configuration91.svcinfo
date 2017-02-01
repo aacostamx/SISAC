@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_IServiceNotifications" contract="VOINotifications.IServiceNotifications" bindingType="basicHttpBinding" address="http://api.volaris.com.mx/WCFVOINotifications/ServiceNotifications.svc" bindingConfiguration="BasicHttpBinding_IServiceNotifications">
+    <endpoint name="BasicHttpBinding_IServiceNotifications" contract="VOINotifications.IServiceNotifications" bindingType="basicHttpBinding" address="http://api.http://aacosta.com.mx/com.mx/WCFVOINotifications/ServiceNotifications.svc" bindingConfiguration="BasicHttpBinding_IServiceNotifications">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://api.volaris.com.mx/WCFVOINotifications/ServiceNotifications.svc</serializedValue>
+          <serializedValue>http://api.http://aacosta.com.mx/com.mx/WCFVOINotifications/ServiceNotifications.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

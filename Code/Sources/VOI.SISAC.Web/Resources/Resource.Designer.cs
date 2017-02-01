@@ -6352,7 +6352,7 @@ namespace VOI.SISAC.Web.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a SISAC |  Volaris and its logo are trademarks of Volaris.
+        ///   Busca una cadena traducida similar a SISAC |  Volaris and its logo are trademarks of http://aacosta.com.mx/
         /// </summary>
         public static string SISACFooter {
             get {
@@ -7144,7 +7144,7 @@ namespace VOI.SISAC.Web.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a User Volaris.
+        ///   Busca una cadena traducida similar a User http://aacosta.com.mx/
         /// </summary>
         public static string UserVolaris {
             get {

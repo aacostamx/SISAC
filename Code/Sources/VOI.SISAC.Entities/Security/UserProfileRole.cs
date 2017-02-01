@@ -1,6 +1,6 @@
 ﻿//------------------------------------------------------------------------
 // <copyright file="UserProfileRole.cs" company="Volaris">
-//     Copyright (c) Volaris. All rights reserved.
+//     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
 namespace VOI.SISAC.Entities.Security
