@@ -93,16 +93,12 @@ namespace VOI.SISAC.Web.Areas.Finance.Controllers
         [CustomAuthorize(Roles = "AIRPSERVCN-IDX")]
         public ActionResult Index()
         {
-            Trace.TraceInformation("Cargando Index de AirportServiceContract");
             IList<AirportServiceContractDto> contracts = new List<AirportServiceContractDto>();
             IList<AirportServiceContractVO> contractsVo = new List<AirportServiceContractVO>();
             try
             {
-                Trace.TraceInformation("Ida a la base de datos de AirportServiceContract");
                 contracts = this.contractService.GetEffectiveContracts();
-                Trace.TraceInformation("Regreso de la base de datos de AirportServiceContract");
                 contractsVo = Mapper.Map<IList<AirportServiceContractDto>, IList<AirportServiceContractVO>>(contracts);
-                Trace.TraceInformation("Realizando Mapeos AirportServiceContract");
             }
             catch (BusinessException exception)
             {
@@ -473,13 +469,13 @@ namespace VOI.SISAC.Web.Areas.Finance.Controllers
                     return this.RedirectToAction("Index");
                 }
             }
-            catch (BusinessException ex)
+            catch (BusinessException exception)
             {
                 Logger.Error(string.Format(LogMessages.ErrorDelete, this.catalogName, this.userInfo));
-                Logger.Error(ex.Message, ex);
+                Logger.Error(exception.Message, exception);
                 Trace.TraceError(string.Format(LogMessages.ErrorDelete, this.catalogName, this.userInfo));
-                Trace.TraceError(ex.Message, ex);
-                this.ViewBag.ErrorMessage = FrontMessage.GetExceptionErrorMessage(ex.Number);
+                Trace.TraceError(exception.Message, exception);
+                this.ViewBag.ErrorMessage = FrontMessage.GetExceptionErrorMessage(exception.Number);
             }
 
             if (airportServiceContractVO != null)

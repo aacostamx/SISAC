@@ -13,6 +13,7 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
     using Helpers;
     using Models.VO.Itineraries;
     using Newtonsoft.Json;
+    using NotFoundMvc;
     using Resources;
     using System;
     using System.Collections.Generic;
@@ -73,18 +74,36 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
         #endregion
 
         #region Controllers
+
         /// <summary>
-        /// Indexes this instance.
+        /// Indexes the specified timeline.
         /// </summary>
+        /// <param name="timeline">The timeline.</param>
         /// <returns></returns>
         [CustomAuthorize(Roles = "TIMELINE-IDX")]
-        public ActionResult Index()
+        public ActionResult Index(TimelineVO timeline)
         {
-            var timelineURL = new ItineraryVO();
+            var timelinesVO = new List<TimelineVO>();
+            var validObj = false;
+
             try
             {
-                //Cookie Timeline URL
-                timelineURL = this.GetTimelineURL();
+                validObj = validateParams(timeline);
+
+                if (validObj)
+                {
+                    timelinesVO = Mapper.Map<List<TimelineVO>>(this.timelineBusiness.GetTimelinePaged(Mapper.Map<TimelineDto>(timeline)));
+                    SetCurrentTimeline(timeline, timelinesVO);
+                }
+                else
+                {
+                    return new NotFoundViewResult();
+                }
+
+                if (timelinesVO.Count() <= 0)
+                {
+                    return new NotFoundViewResult();
+                }
             }
             catch (BusinessException ex)
             {
@@ -95,7 +114,7 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
                 this.ViewBag.ErrorMessage = FrontMessage.GetExceptionErrorMessage(ex.Number);
             }
 
-            return this.View(timelineURL);
+            return this.View(timelinesVO);
         }
         #endregion
 
@@ -106,23 +125,9 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
         /// <param name="movement">The movement.</param>
         /// <returns></returns>
         [HttpPost]
+        [CustomAuthorize(Roles = "TIMELINE-ADD")]
         public JsonResult AddTimelineMovement(TimelineMovementVO movement)
         {
-
-            //ADD Movement
-            //var response = this.movementBusiness.AddTimelineMovement(new TimelineMovementDto()
-            //{
-            //    *Sequence = 1,
-            //    *AirlineCode = "Y4",
-            //    *FlightNumber = "111",
-            //    *ItineraryKey = "20160226",
-            //    *OperationTypeID = 2,
-            //    *MovementTypeCode = "AR",
-            //    *MovementDate = DateTime.Now,
-            //    Position = "1",
-            //    Remarks = "INSERT TEST - 1 Y4 111 20160226 2 AR NOW 1"
-            //});
-
             var sucess = false;
 
             if (movement == null || string.IsNullOrEmpty(movement.ItineraryKey))
@@ -154,21 +159,6 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
         [HttpPost]
         public JsonResult UpdateTimelineMovement(TimelineMovementVO movement)
         {
-            //Update Movement
-            //var response = this.movementBusiness.UpdateTimelineMovement(new TimelineMovementDto()
-            //{
-            //    *ID = 46,
-            //    *Sequence = 1,
-            //    *AirlineCode = "Y4",
-            //    *FlightNumber = "111",
-            //    *ItineraryKey = "20160226",
-            //    OperationTypeID = 1,
-            //    MovementTypeCode = "SC",
-            //    MovementDate = new DateTime(2016, 10, 1),
-            //    Position = "A1",
-            //    Remarks = "Update2 example ID 46, MovementTypeCode was HA,  MovementDate was 2016-10-26 00:00:00.000"
-            //});
-
             var sucess = false;
 
             if (movement == null || string.IsNullOrEmpty(movement.ItineraryKey))
@@ -200,12 +190,6 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
         [HttpPost]
         public JsonResult DeleteTimelineMovement(TimelineMovementVO movement)
         {
-            //Delete Movement
-            //var response = this.movementBusiness.DeleteTimelineMovement(new TimelineMovementDto()
-            //{
-            //    ID = 50
-            //});
-
             var sucess = false;
 
             if (movement == null || movement.ID < 0)
@@ -263,15 +247,6 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
         [HttpPost]
         public JsonResult GetTimelineByFlight(TimelineVO timeline)
         {
-            //GetTimelineByFlight
-            var response = this.timelineBusiness.GetTimelineByFlight(new TimelineDto()
-            {
-                Sequence = 1,
-                AirlineCode = "Y4",
-                FlightNumber = "826",
-                ItineraryKey = "20160809"
-            });
-
             var flights = new TimelineDto();
             var json = string.Empty;
 
@@ -301,6 +276,114 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
         }
 
         /// <summary>
+        /// Gets the timeline by flight paged.
+        /// </summary>
+        /// <param name="timeline">The timeline.</param>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult GetTimelineByFlightPaged(TimelineVO timeline)
+        {
+            var flights = new List<TimelineDto>();
+            var json = string.Empty;
+
+            if (timeline == null || string.IsNullOrEmpty(timeline.ItineraryKey))
+            {
+                return Json(json);
+            }
+
+            try
+            {
+                flights = this.timelineBusiness.GetTimelinePaged(Mapper.Map<TimelineDto>(timeline)).ToList();
+                json = JsonConvert.SerializeObject(flights, Formatting.Indented, new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+            }
+            catch (BusinessException ex)
+            {
+                Logger.Error(string.Format(LogMessages.ErrorRetrieveInfo, this.moduleName, this.userInfo));
+                Logger.Error(ex.Message, ex);
+                Trace.TraceError(string.Format(LogMessages.ErrorRetrieveInfo, this.moduleName, this.userInfo));
+                Trace.TraceError(ex.Message, ex);
+                this.ViewBag.ErrorMessage = FrontMessage.GetExceptionErrorMessage(ex.Number);
+            }
+
+            return Json(json);
+        }
+
+        /// <summary>
+        /// Gets the timeline for flight previous.
+        /// </summary>
+        /// <param name="timeline">The timeline.</param>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult GetTimelineForFlightPrev(TimelineVO timeline)
+        {
+            var flights = new List<TimelineDto>();
+            var json = string.Empty;
+
+            if (timeline == null || string.IsNullOrEmpty(timeline.ItineraryKey))
+            {
+                return Json(json);
+            }
+
+            try
+            {
+                flights = this.timelineBusiness.GetTimelinePaged(Mapper.Map<TimelineDto>(timeline)).ToList();
+                json = JsonConvert.SerializeObject(flights, Formatting.Indented, new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+            }
+            catch (BusinessException ex)
+            {
+                Logger.Error(string.Format(LogMessages.ErrorRetrieveInfo, this.moduleName, this.userInfo));
+                Logger.Error(ex.Message, ex);
+                Trace.TraceError(string.Format(LogMessages.ErrorRetrieveInfo, this.moduleName, this.userInfo));
+                Trace.TraceError(ex.Message, ex);
+                this.ViewBag.ErrorMessage = FrontMessage.GetExceptionErrorMessage(ex.Number);
+            }
+
+            return Json(json);
+        }
+
+        /// <summary>
+        /// Gets the timeline for flight previous.
+        /// </summary>
+        /// <param name="timeline">The timeline.</param>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult GetTimelinePreviousFlight(TimelineVO timeline)
+        {
+            var flights = new List<TimelineDto>();
+            var json = string.Empty;
+
+            if (timeline == null || string.IsNullOrEmpty(timeline.ItineraryKey))
+            {
+                return Json(json);
+            }
+
+            try
+            {
+                flights = this.timelineBusiness.GetTimelinePaged(Mapper.Map<TimelineDto>(timeline)).ToList();
+                json = JsonConvert.SerializeObject(flights, Formatting.Indented, new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+            }
+            catch (BusinessException ex)
+            {
+                Logger.Error(string.Format(LogMessages.ErrorRetrieveInfo, this.moduleName, this.userInfo));
+                Logger.Error(ex.Message, ex);
+                Trace.TraceError(string.Format(LogMessages.ErrorRetrieveInfo, this.moduleName, this.userInfo));
+                Trace.TraceError(ex.Message, ex);
+                this.ViewBag.ErrorMessage = FrontMessage.GetExceptionErrorMessage(ex.Number);
+            }
+
+            return Json(json);
+        }
+
+        /// <summary>
         /// Gets the timeline by equipment number.
         /// </summary>
         /// <param name="itinerary">The itinerary.</param>
@@ -308,9 +391,6 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
         [HttpPost]
         public JsonResult GetTimelineByEquipmentNumber(ItineraryVO itinerary)
         {
-            //Get by Equiment Number
-            //var timeline = this.timelineBusiness.GetTimelineByEquipmentNumber(new TimelineDto() { Itinerary = new ItineraryDto { EquipmentNumber = "N513VL" } });
-
             var flights = new List<TimelineDto>();
             var json = string.Empty;
 
@@ -359,7 +439,6 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
             try
             {
                 json = JsonConvert.SerializeObject(itineary, Formatting.None);
-                //encrypt = EncryptHelper.EncryptString(json);
                 this.RemoveCookie("TimelineURL");
                 var cookie = new HttpCookie("TimelineURL", json)
                 {
@@ -391,7 +470,6 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
             if (HttpContext.Request.Cookies["TimelineURL"] != null)
             {
                 var TimelineURL = HttpContext.Request.Cookies["TimelineURL"];
-                //var decrypt = EncryptHelper.DecryptString(TimelineURL.Value);
                 itinearyURL = JsonConvert.DeserializeObject<ItineraryVO>(TimelineURL.Value);
             }
 
@@ -456,6 +534,53 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
             }
             return Json(json);
         }
+
+        /// <summary>
+        /// Sets the current timeline.
+        /// </summary>
+        /// <param name="timeline">The timeline.</param>
+        /// <param name="timelinesVO">The timelines vo.</param>
+        private static void SetCurrentTimeline(TimelineVO timeline, List<TimelineVO> timelinesVO)
+        {
+            foreach (var item in timelinesVO)
+            {
+                if (item.Sequence == timeline.Sequence &&
+                    item.AirlineCode == timeline.AirlineCode &&
+                    item.FlightNumber == timeline.FlightNumber &&
+                    item.ItineraryKey == timeline.ItineraryKey)
+                {
+                    item.CurrentTimeline = true;
+                }
+
+                else
+                {
+                    item.CurrentTimeline = false;
+                }
+
+                if(item.TimelineMovements != null && item.TimelineMovements.Count > 0)
+                {
+                    item.TimelineMovements =  item.TimelineMovements.OrderBy(c => c.MovementDate).ToList();
+                }
+
+                item.NextTimeline = item.MaxRow - item.Row > 0 ? true : false;
+                item.NextTimeline = item.MinRow - item.Row > 0 ? false : true;
+            }
+        }
+
+        /// <summary>
+        /// Validates the parameters.
+        /// </summary>
+        /// <param name="timeline">The timeline.</param>
+        /// <returns></returns>
+        private static bool validateParams(TimelineVO timeline)
+        {
+            return timeline != null ||
+                !string.IsNullOrEmpty(timeline.AirlineCode) ||
+                !string.IsNullOrEmpty(timeline.ItineraryKey) ||
+                !string.IsNullOrEmpty(timeline.FlightNumber) ||
+                timeline.Sequence > 0;
+        }
+
         #endregion
     }
 }

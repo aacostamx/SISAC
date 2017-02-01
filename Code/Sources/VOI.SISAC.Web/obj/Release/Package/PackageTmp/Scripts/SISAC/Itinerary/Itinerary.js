@@ -301,6 +301,87 @@ var ItineraryController = {
             })
         }
     },
+    getMtvMessage: function (row) {
+        $.ajax({
+            type: 'GET',
+            url: '../AircraftMovementMessage/GetAircraftMovementMessage',
+            data: { sequence: row.Sequence, airlineCode: row.AirlineCode, flightNumber: row.FlightNumber, itineraryKey: row.ItineraryKey }, //JSON.stringify(row),
+            //contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            success: function (data, textStatus, jqXHR) {
+                if (data) {
+                    var msg = JSON.parse(data);
+                    var html = '<p>' + msg.Title + '</p><br />' +
+                        '<p>' + msg.DepartureInformation + '</p><br />' +
+                        '<p>' + msg.ArrivalInformation + '</p><br />' +
+                        '<p>' + msg.JetFuelInformation + '</p><br />';
+
+                    $.each(msg.DelaysInformation, function (index, item) {
+                        html += '<p>' + item + '</p><br />';
+                    });
+
+                    html += '<p>' + msg.CaptainsInformation + '</p><br />' +
+                        '<p>' + msg.StewardessInformation + '</p><br />' +
+                        '<p>' + msg.ChargeInformationTitle + '</p><br />';
+
+                    $.each(msg.ChargeInformation, function (index, item) {
+                        html += '<p>' + item + '</p><br />';
+                    });
+                    $('#mvt-modal-body').html(html);
+                    $('#mvt-modal').modal('show');
+                }
+                else {
+                    swal({
+                        title: "Advertencia.",
+                        text: "No se encontró información del mensaje MVT, vuelva a intentar. Si el problema persiste consulte al administrador",
+                        type: "warning",
+                        confirmButtonColor: "#83217a",
+                        animation: "slide-from-top",
+                        timer: 12000
+                    });
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(textStatus);
+                alert(errorThrown);
+            }
+        });
+    },
+    ConfirmDelete: function () {
+        if (currentLang.includes("es")) {
+            messageEmptyFields = "Todas las relaciones con Itinerario serán eliminadas. Línea de Tiempo, Movimientos de Línea de Tiempo, Tickets de combustible, Gendec, Manifiestos, Servicios, Información de Pasajeros";
+            typeOfAlert = "¿Estás seguro?";
+            confirmButton = "Si";
+            cancelButton = "No";
+        }
+        else {
+
+            messageEmptyFields = "All relationships with Itinerary will be removed. Timeline, Timeline Movements, Jet Fuel Tickets, Gendec, Manifest, Airport Services, Passenger Information";
+            typeOfAlert = "Are you sure?";
+            confirmButton = "Yes, delete it!";
+            cancelButton = "No, cancel plx!";
+        }
+        swal({
+            title: typeOfAlert,
+            text: messageEmptyFields,
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: confirmButton,
+            confirmButtonColor: "#83217a",
+            cancelButtonText: cancelButton,
+            closeOnConfirm: false
+        },
+        function () {
+            ItineraryController.postForm();
+        });
+        return;
+    },
+    postForm: function () {
+        var form = document.getElementById('deleteForm');
+        if (form) {
+            form.submit();
+        }
+    }
 }
 
 $(document).ready(ItineraryController.iniciar);

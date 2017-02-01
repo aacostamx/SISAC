@@ -37,18 +37,18 @@
         <thead>
 
             <tr>
+                @if (User.IsInRole("AIRPORTGRP-UPD") || User.IsInRole("AIRPORTGRP-DEL"))
+                {
+                    <th data-field="@Resource.Actions" data-halign="center" data-align="center">
+                        @Resource.Actions
+                    </th>
+                }
                 <th data-field="AirportGroupCode" data-halign="center" data-align="center" data-sortable="true">
                     @Html.DisplayNameFor(model => model.AirportGroupCode)
                 </th>
                 <th data-field="AirportGroupName" data-halign="left" data-align="left" data-sortable="true">
                     @Html.DisplayNameFor(model => model.AirportGroupName)
                 </th>
-                @if (User.IsInRole("AIRPORTGRP-UPD") || User.IsInRole("AIRPORTGRP-DEL"))
-                { 
-                    <th data-field="@Resource.Actions" data-halign="center" data-align="center">
-                        @Resource.Actions
-                    </th>
-                }
             </tr>
         </thead>
         <tbody>
@@ -57,25 +57,25 @@
                 foreach (var item in Model)
                 {
                 <tr>
+                    @if (User.IsInRole("AIRPORTGRP-UPD") || User.IsInRole("AIRPORTGRP-DEL"))
+                    {
+                        <td>
+                            @if (User.IsInRole("AIRPORTGRP-UPD"))
+                            {
+                                <button class="btn btn-default" type="button" name="Edit" title=@Resource.Edit onclick="location.href='@Url.Action("Edit", "AirportGroup", new { id = item.AirportGroupCode.Trim() })'"><i class="fa fa-pencil fa-fw"></i></button>
+                            }
+                            @if (User.IsInRole("AIRPORTGRP-DEL"))
+                            {
+                                <button class="btn btn-default" type="button" name="Delete" title=@Resource.Delete onclick="location.href='@Url.Action("Delete", "AirportGroup", new { id = item.AirportGroupCode.Trim() })'"><i class="fa fa-trash-o fa-fw"></i></button>
+                            }
+                        </td>
+                    }
                     <td>
                         @Html.DisplayFor(modelItem => item.AirportGroupCode)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.AirportGroupName)
                     </td>
-                     @if (User.IsInRole("AIRPORTGRP-UPD") || User.IsInRole("AIRPORTGRP-DEL"))
-                    {
-                        <td>
-                            @if (User.IsInRole("AIRPORTGRP-UPD"))
-                            { 
-                                <button class="btn btn-default" type="button" name="Edit" title=@Resource.Edit onclick="location.href='@Url.Action("Edit", "AirportGroup", new { id = item.AirportGroupCode.Trim() })'"><i class="fa fa-pencil fa-fw"></i></button>
-                            }
-                            @if (User.IsInRole("AIRPORTGRP-DEL"))
-                            { 
-                                <button class="btn btn-default" type="button" name="Delete" title=@Resource.Delete onclick="location.href='@Url.Action("Delete", "AirportGroup", new { id = item.AirportGroupCode.Trim() })'"><i class="fa fa-trash-o fa-fw"></i></button>
-                            }
-                        </td>
-                    }
                 </tr>
                 }
 

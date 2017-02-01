@@ -11,9 +11,11 @@ namespace VOI.SISAC.Business.MapConfiguration
     using VOI.SISAC.Business.Dto.Catalogs;
     using VOI.SISAC.Entities.Catalog;
     using Entities.Paged;
-    using Dto.Paged;    /// <summary>
-                        /// Catalog maps
-                        /// </summary>
+    using Dto.Paged;
+
+    /// <summary>
+    /// Catalog maps
+    /// </summary>
     public class CatalogMaps : Profile
     {
         /// <summary>
@@ -52,13 +54,18 @@ namespace VOI.SISAC.Business.MapConfiguration
             this.ToleranceTypeMap();
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogMaps"/> class.
+        /// </summary>
+        public CatalogMaps()
+        { }
 
         /// <summary>
         /// Reconciliations the tolerance map.
         /// </summary>
         private void ReconciliationToleranceMap()
         {
-            Mapper.CreateMap<ReconciliationTolerance, ReconciliationToleranceDto>()
+            CreateMap<ReconciliationTolerance, ReconciliationToleranceDto>()
                 .ReverseMap();
         }
 
@@ -67,7 +74,7 @@ namespace VOI.SISAC.Business.MapConfiguration
         /// </summary>
         private void ToleranceTypeMap()
         {
-            Mapper.CreateMap<ToleranceType, ToleranceTypeDto>()
+            CreateMap<ToleranceType, ToleranceTypeDto>()
                 .ReverseMap();
         }
 
@@ -77,7 +84,7 @@ namespace VOI.SISAC.Business.MapConfiguration
         /// </summary>
         private void ScheduleTypeMap()
         {
-            Mapper.CreateMap<ScheduleType, ScheduleTypeDto>()
+            CreateMap<ScheduleType, ScheduleTypeDto>()
                 .ReverseMap();
         }
 
@@ -86,7 +93,7 @@ namespace VOI.SISAC.Business.MapConfiguration
         /// </summary>
         private void ChargeFactorTypeMap()
         {
-            Mapper.CreateMap<ChargeFactorType, ChargeFactorTypeDto>()
+            CreateMap<ChargeFactorType, ChargeFactorTypeDto>()
                 .ForMember(t => t.ChargeFactorTypeID, f => f.MapFrom(r => r.ChargeFactorTypeID))
                 .ForMember(t => t.ChargeFactorTypeName, f => f.MapFrom(r => r.ChargeFactorTypeName))
                 .ForMember(t => t.InternationalFuelContractConcept, f => f.MapFrom(r => r.InternationalFuelContractConcept))
@@ -98,7 +105,7 @@ namespace VOI.SISAC.Business.MapConfiguration
         /// </summary>
         public void AirplaneWeightMeasureTypeMap()
         {
-            Mapper.CreateMap<AirplaneWeightMeasureType, AirplaneWeightMeasureTypeDto>()
+            CreateMap<AirplaneWeightMeasureType, AirplaneWeightMeasureTypeDto>()
             .ForMember(t => t.AirplaneWeightMeasureId, f => f.MapFrom(r => r.AirplaneWeightMeasureId))
             .ForMember(t => t.AirplaneWeightMeasureName, f => f.MapFrom(r => r.AirplaneWeightMeasureName))
             .ReverseMap();
@@ -110,7 +117,7 @@ namespace VOI.SISAC.Business.MapConfiguration
         /// </summary>
         public void AirplaneWeightTypeMap()
         {
-            Mapper.CreateMap<AirplaneWeightType, AirplaneWeightTypeDto>()
+            CreateMap<AirplaneWeightType, AirplaneWeightTypeDto>()
             .ForMember(t => t.AirplaneWeightCode, f => f.MapFrom(r => r.AirplaneWeightCode))
             .ForMember(t => t.AirplaneWeightName, f => f.MapFrom(r => r.AirplaneWeightName))
             .ReverseMap();
@@ -121,7 +128,7 @@ namespace VOI.SISAC.Business.MapConfiguration
         /// </summary>
         public void OperationTypeMap()
         {
-            Mapper.CreateMap<OperationType, OperationTypeDto>()
+            CreateMap<OperationType, OperationTypeDto>()
             .ForMember(t => t.OperationTypeId, f => f.MapFrom(r => r.OperationTypeId))
             .ForMember(t => t.OperationName, f => f.MapFrom(r => r.OperationName))
             .ReverseMap();
@@ -132,7 +139,7 @@ namespace VOI.SISAC.Business.MapConfiguration
         /// </summary>
         public void ServiceCalculationTypeMap()
         {
-            Mapper.CreateMap<ServiceCalculationType, ServiceCalculationTypeDto>()
+            CreateMap<ServiceCalculationType, ServiceCalculationTypeDto>()
             .ForMember(t => t.CalculationTypeId, f => f.MapFrom(r => r.CalculationTypeId))
             .ForMember(t => t.CalculationTypeName, f => f.MapFrom(r => r.CalculationTypeName))
             .ReverseMap();
@@ -143,7 +150,7 @@ namespace VOI.SISAC.Business.MapConfiguration
         /// </summary>
         public void ServiceTypeMap()
         {
-            Mapper.CreateMap<ServiceType, ServiceTypeDto>()
+            CreateMap<ServiceType, ServiceTypeDto>()
             .ForMember(t => t.ServiceTypeCode, f => f.MapFrom(r => r.ServiceTypeCode))
             .ForMember(t => t.ServiceTypeName, f => f.MapFrom(r => r.ServiceTypeName))
             .ReverseMap();
@@ -154,7 +161,7 @@ namespace VOI.SISAC.Business.MapConfiguration
         /// </summary>
         public void StatusOnBoardMap()
         {
-            Mapper.CreateMap<StatusOnBoard, StatusOnBoardDto>()
+            CreateMap<StatusOnBoard, StatusOnBoardDto>()
            .ForMember(t => t.StatusOnBoardCode, f => f.MapFrom(r => r.StatusOnBoardCode))
            .ForMember(t => t.StatusOnBoardName, f => f.MapFrom(r => r.StatusOnBoardName))
            .ReverseMap();
@@ -162,7 +169,7 @@ namespace VOI.SISAC.Business.MapConfiguration
 
         private void CountryMap()
         {
-            Mapper.CreateMap<Country, CountryDto>()
+            CreateMap<Country, CountryDto>()
                 .ForMember(t => t.CountryCode, f => f.MapFrom(r => r.CountryCode))
                 .ForMember(t => t.CountryName, f => f.MapFrom(r => r.CountryName))
                 .ForMember(t => t.CountryCodeShort, f => f.MapFrom(r => r.CountryCodeShort))
@@ -173,19 +180,22 @@ namespace VOI.SISAC.Business.MapConfiguration
         /// <summary>
         /// Maps this instance.
         /// </summary>
-        private static void Map()
+        private void Map()
         {
-            Mapper.CreateMap<FunctionalArea, FunctionalAreaDto>()
+            CreateMap<FunctionalArea, FunctionalAreaDto>()
                 .ForMember(t => t.FunctionalAreaID, f => f.MapFrom(r => r.FunctionalAreaID))
                 .ForMember(t => t.FunctionalAreaName, f => f.MapFrom(r => r.FunctionalAreaName))
                 .ForMember(t => t.FunctionalAreaDescription, f => f.MapFrom(r => r.FunctionalAreaDescription))
                 .ForMember(t => t.Status, f => f.MapFrom(r => r.Status))
                 .ReverseMap();
 
-            Mapper.CreateMap<Paged, PagedDto>()
+            CreateMap<Paged, PagedDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<MovementType, MovementTypeDto>()
+            CreateMap<MovementType, MovementTypeDto>()
+                .ReverseMap();
+
+            CreateMap<ProcedureCalculation, ProcedureCalculationDto>()
                 .ReverseMap();
         }
     }

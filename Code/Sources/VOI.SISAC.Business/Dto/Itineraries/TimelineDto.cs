@@ -27,6 +27,30 @@ namespace VOI.SISAC.Business.Dto.Itineraries
         }
 
         /// <summary>
+        /// Gets or sets the row.
+        /// </summary>
+        /// <value>
+        /// The row.
+        /// </value>
+        public long? Row { get; set; }
+
+        /// <summary>
+        /// Gets or sets the maximum row.
+        /// </summary>
+        /// <value>
+        /// The maximum row.
+        /// </value>
+        public long? MaxRow { get; set; }
+
+        /// <summary>
+        /// Gets or sets the minimum row.
+        /// </summary>
+        /// <value>
+        /// The minimum row.
+        /// </value>
+        public long? MinRow { get; set; }
+
+        /// <summary>
         /// Gets or sets the sequence.
         /// </summary>
         /// <value>

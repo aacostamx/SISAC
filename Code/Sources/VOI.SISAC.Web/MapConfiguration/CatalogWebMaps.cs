@@ -8,12 +8,14 @@ namespace VOI.SISAC.Web.MapConfiguration
 {
     using System;
     using AutoMapper;
+    using Business.Dto.Paged;
+    using Models.VO.Paged;
     using VOI.SISAC.Business.Dto.Catalogs;
     using VOI.SISAC.Web.Models.VO.Catalog;
-    using Business.Dto.Paged;
-    using Models.VO.Paged;    /// <summary>
-                              /// Class Country Web Maps
-                              /// </summary>
+
+    /// <summary>
+    /// Class Country Web Maps
+    /// </summary>
     public class CatalogWebMaps : Profile
     {
         /// <summary>
@@ -30,10 +32,6 @@ namespace VOI.SISAC.Web.MapConfiguration
             }
         }
 
-        /// <summary>
-        /// Override this method in a derived class and call the CreateMap method to associate that map with this profile.
-        /// Avoid calling the <see cref="T:AutoMapper.Mapper" /> class from this method.
-        /// </summary>
         protected override void Configure()
         {
             this.Map();
@@ -42,21 +40,27 @@ namespace VOI.SISAC.Web.MapConfiguration
             this.ToleranceTypeWebMap();
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogWebMaps"/> class.
+        /// </summary>
+        public CatalogWebMaps()
+        { }
+
         private void ScheduleTypeWebMap()
         {
-            Mapper.CreateMap<ScheduleTypeDto, ScheduleTypeVO>()
+            CreateMap<ScheduleTypeDto, ScheduleTypeVO>()
                 .ReverseMap();
         }
 
         private void ToleranceTypeWebMap()
         {
-            Mapper.CreateMap<ToleranceTypeDto, ToleranceTypeVO>()
+            CreateMap<ToleranceTypeDto, ToleranceTypeVO>()
                 .ReverseMap();
         }
 
         private void ChargeFactorTypeWebMap()
         {
-            Mapper.CreateMap<ChargeFactorTypeDto, ChargeFactorTypeVO>()
+            CreateMap<ChargeFactorTypeDto, ChargeFactorTypeVO>()
                 .ReverseMap();
         }
 
@@ -65,41 +69,44 @@ namespace VOI.SISAC.Web.MapConfiguration
         /// </summary>
         private void Map()
         {
-            Mapper.CreateMap<ReconciliationToleranceDto, ReconciliationToleranceVO>()
+            CreateMap<ReconciliationToleranceDto, ReconciliationToleranceVO>()
                 .ReverseMap();
 
-            Mapper.CreateMap<CountryDto, CountryVO>()
+            CreateMap<CountryDto, CountryVO>()
                 .ReverseMap();
 
-            Mapper.CreateMap<FunctionalAreaDto, FunctionalAreaVO>()
+            CreateMap<FunctionalAreaDto, FunctionalAreaVO>()
                 .ReverseMap();
 
-            Mapper.CreateMap<GenderDto, GenderVO>()
+            CreateMap<GenderDto, GenderVO>()
                .ReverseMap();
 
-            Mapper.CreateMap<AirplaneWeightMeasureTypeDto, AirplaneWeightMeasureTypeVO>()
+            CreateMap<AirplaneWeightMeasureTypeDto, AirplaneWeightMeasureTypeVO>()
                .ReverseMap();
 
-            Mapper.CreateMap<AirplaneWeightTypeDto, AirplaneWeightTypeVO>()
-            .ReverseMap();
+            CreateMap<AirplaneWeightTypeDto, AirplaneWeightTypeVO>()
+                .ReverseMap();
 
-            Mapper.CreateMap<OperationTypeDto, OperationTypeVO>()
-            .ReverseMap();
+            CreateMap<OperationTypeDto, OperationTypeVO>()
+              .ReverseMap();
 
-            Mapper.CreateMap<ServiceCalculationTypeDto, ServiceCalculationTypeVO>()
-            .ReverseMap();
+            CreateMap<ServiceCalculationTypeDto, ServiceCalculationTypeVO>()
+              .ReverseMap();
 
-            Mapper.CreateMap<ServiceTypeDto, ServiceTypeVO>()
-            .ReverseMap();
+            CreateMap<ServiceTypeDto, ServiceTypeVO>()
+              .ReverseMap();
 
-            Mapper.CreateMap<StatusOnBoardDto, StatusOnBoardVO>()
-            .ReverseMap();
+            CreateMap<StatusOnBoardDto, StatusOnBoardVO>()
+              .ReverseMap();
 
-            Mapper.CreateMap<PagedDto, PagedVO>()
-            .ReverseMap();
+            CreateMap<PagedDto, PagedVO>()
+              .ReverseMap();
 
-            Mapper.CreateMap<MovementTypeDto, MovementTypeVO>()
-            .ReverseMap();
+            CreateMap<MovementTypeDto, MovementTypeVO>()
+              .ReverseMap();
+
+            CreateMap<ProcedureCalculationDto, ProcedureCalculationVO>()
+              .ReverseMap();
         }
     }
 }

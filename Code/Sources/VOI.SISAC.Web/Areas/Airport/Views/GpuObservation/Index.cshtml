@@ -34,32 +34,26 @@
         data-page-size="10">
         <thead>
             <tr>
+                @if (User.IsInRole("GPUOBS-UPD") || User.IsInRole("GPUOBS-DEL"))
+                {
+                    <th data-halign="center" data-align="center">
+                        <strong>@Resource.Actions</strong>
+                    </th>
+                }
                 <th data-field="GpuObservationCode" data-halign="center" data-align="center" data-sortable="true">
                     <strong>@Html.DisplayNameFor(model => model.GpuObservationCode)</strong>
                 </th>
                 <th data-field="GpuObservationCodeName" data-halign="left" data-align="left" data-sortable="true">
                     <strong>@Html.DisplayNameFor(model => model.GpuObservationCodeName)</strong>
                 </th>
-                @if (User.IsInRole("GPUOBS-UPD") || User.IsInRole("GPUOBS-DEL")) 
-                { 
-                    <th data-halign="center" data-align="center">
-                        <strong>@Resource.Actions</strong>
-                    </th>
-                 }
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.GpuObservationCode)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.GpuObservationCodeName)
-                    </td>
-                    @if (User.IsInRole("GPUOBS-UPD") || User.IsInRole("GPUOBS-DEL")) 
-                    { 
+                    @if (User.IsInRole("GPUOBS-UPD") || User.IsInRole("GPUOBS-DEL"))
+                    {
                         <td>
                             @if (User.IsInRole("GPUOBS-UPD"))
                             {
@@ -71,6 +65,12 @@
                             }
                         </td>
                     }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GpuObservationCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GpuObservationCodeName)
+                    </td>
                 </tr>
             }
         </tbody>

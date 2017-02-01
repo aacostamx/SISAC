@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------
 
 namespace VOI.SISAC.Business.Itineraries
-{    
+{
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -236,10 +236,10 @@ namespace VOI.SISAC.Business.Itineraries
                     // The manifest exists and proceed to update it.
                     DateTime actualDepartureDate;
                     IList<Delay> delays = Mapper.Map<IList<Delay>>(manifestDeparture.Delays);
-                    
+
                     //Boarding
                     boardings = Mapper.Map<IList<ManifestDepartureBoarding>>(manifestDeparture.ManifestDepartureBoardings);
-                    
+
                     //Informacion de Carga  Boarding
                     foreach (var item in boardings)
                     {
@@ -257,7 +257,7 @@ namespace VOI.SISAC.Business.Itineraries
                         }
                     }
 
-                    //Additional Information
+                    // Additional Information
                     if (manifestDeparture.AdditionalDepartureInformation != null)
                     {
                         additional = Mapper.Map<AdditionalDepartureInformation>(manifestDeparture.AdditionalDepartureInformation);
@@ -544,9 +544,10 @@ namespace VOI.SISAC.Business.Itineraries
         private void UpdateBoarding(ManifestDeparture manifestDeparture, IList<ManifestDepartureBoarding> boardings)
         {
             // 5 Stations
-            List<int> positionsAll = new List<int>() { 1, 2, 3, 4, 5 }; 
+            List<int> positionsAll = new List<int>() { 1, 2, 3, 4, 5 };
             List<int> positionsBD = new List<int>();
             List<int> positionsRes = new List<int>();
+            DateTime creationDate = DateTime.Now;
 
             // Lista de Position en DB
             positionsBD = boardings.Select(c => c.Position).ToList();
@@ -580,7 +581,7 @@ namespace VOI.SISAC.Business.Itineraries
                     }
                     else
                     {
-                        //Update de campos de Boarding
+                        // Update de campos de Boarding
                         boardingEntity.Station = item.Station;
                         boardingEntity.PassengerAdult = item.PassengerAdult;
                         boardingEntity.PassengerInfant = item.PassengerInfant;
@@ -592,27 +593,29 @@ namespace VOI.SISAC.Business.Itineraries
                         boardingEntity.MailQuantity = item.MailQuantity;
                         boardingEntity.MailKgs = item.MailKgs;
 
-                        //Update Information (Si hay datos en BD y se edita en front los check)
-                        if (boardingEntity.ManifestDepartureBoardingInformations.Count > 0 
-                         && item.ManifestDepartureBoardingInformations.Count > 0)
+                        // Update Information (Si hay datos en BD y se edita en front los check)
+                        if ((boardingEntity.ManifestDepartureBoardingInformations != null && boardingEntity.ManifestDepartureBoardingInformations.Count > 0)
+                            && (item.ManifestDepartureBoardingInformations != null && item.ManifestDepartureBoardingInformations.Count > 0))
                         {
                             foreach (var info in boardingEntity.ManifestDepartureBoardingInformations)
                             {
                                 if (info.BoardingInformationID > 0)
+                                {
                                     info.Checked = item.ManifestDepartureBoardingInformations.FirstOrDefault(c => c.BoardingInformationID == info.BoardingInformationID).Checked;
+                                }
                             }
                         }
 
-                        //Insert Information (Si no hay datos en BD y se edita en front los check)
-                        if (boardingEntity.ManifestDepartureBoardingInformations.Count == 0
-                         && item.ManifestDepartureBoardingInformations.Count > 0)
+                        // Insert Information (Si no hay datos en BD y se edita en front los check)
+                        if ((boardingEntity.ManifestDepartureBoardingInformations != null && boardingEntity.ManifestDepartureBoardingInformations.Count == 0)
+                            && (item.ManifestDepartureBoardingInformations != null && item.ManifestDepartureBoardingInformations.Count > 0))
                         {
                             boardingEntity.ManifestDepartureBoardingInformations = item.ManifestDepartureBoardingInformations;
                         }
 
-                        //Update Detail Information (Si hay datos en BD y se edita en front los input)
-                        if (boardingEntity.ManifestDepartureBoardingDetails.Count > 0 
-                         && item.ManifestDepartureBoardingDetails.Count > 0)
+                        // Update Detail Information (Si hay datos en BD y se edita en front los input)
+                        if ((boardingEntity.ManifestDepartureBoardingDetails != null && boardingEntity.ManifestDepartureBoardingDetails.Count > 0)
+                            && (item.ManifestDepartureBoardingDetails != null && item.ManifestDepartureBoardingDetails.Count > 0))
                         {
                             foreach (var info in boardingEntity.ManifestDepartureBoardingDetails)
                             {
@@ -625,23 +628,21 @@ namespace VOI.SISAC.Business.Itineraries
                                     info.Remarks = item.ManifestDepartureBoardingDetails.FirstOrDefault(c => c.BoardingDetailID == info.BoardingDetailID).Remarks;
                                     info.RampResponsible = item.ManifestDepartureBoardingDetails.FirstOrDefault(c => c.BoardingDetailID == info.BoardingDetailID).RampResponsible;
                                     info.AorUserID = item.ManifestDepartureBoardingDetails.FirstOrDefault(c => c.BoardingDetailID == info.BoardingDetailID).AorUserID;
-                                    info.CreationDate = item.ManifestDepartureBoardingDetails.FirstOrDefault(c => c.BoardingDetailID == info.BoardingDetailID).CreationDate;
                                 }
                             }
                         }
 
-                        //Insert Detail Information (Si no hay datos en BD y se edita en front los input)
-                        if (boardingEntity.ManifestDepartureBoardingDetails.Count == 0
-                         && item.ManifestDepartureBoardingDetails.Count > 0)
+                        // Insert Detail Information (Si no hay datos en BD y se edita en front los input)
+                        if ((boardingEntity.ManifestDepartureBoardingDetails != null && boardingEntity.ManifestDepartureBoardingDetails.Count == 0)
+                            && (item.ManifestDepartureBoardingDetails != null && item.ManifestDepartureBoardingDetails.Count > 0))
                         {
                             boardingEntity.ManifestDepartureBoardingDetails = item.ManifestDepartureBoardingDetails;
                         }
 
-                        
                         this.manifestBoardingRepository.Update(boardingEntity);
                     }
                 }
-                else 
+                else
                 {
                     // insert
                     if (!string.IsNullOrEmpty(item.Station))
@@ -672,11 +673,11 @@ namespace VOI.SISAC.Business.Itineraries
 
             innerSection = passengerInformation.LocalTeenage + passengerInformation.LocalAdults - passengerInformation.InternationalTua;
             transit = passengerInformation.TransitoryAdults + passengerInformation.TransitoryChildren + passengerInformation.TransitoryTeenage;
-            exempt = passengerInformation.ConnectionAdults 
-                + passengerInformation.ConnectionChildren 
+            exempt = passengerInformation.ConnectionAdults
+                + passengerInformation.ConnectionChildren
                 + passengerInformation.ConnectionTeenage
                 + passengerInformation.Diplomatic
-                + passengerInformation.ExtraCrew 
+                + passengerInformation.ExtraCrew
                 + passengerInformation.Other;
 
             manifest.Infant = passengerInformation.LocalChildren;

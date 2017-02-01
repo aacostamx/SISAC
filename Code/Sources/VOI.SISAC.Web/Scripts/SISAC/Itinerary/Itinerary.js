@@ -346,6 +346,41 @@ var ItineraryController = {
                 alert(errorThrown);
             }
         });
+    },
+    ConfirmDelete: function () {
+        if (currentLang.includes("es")) {
+            messageEmptyFields = "Todas las relaciones con Itinerario serán eliminadas. Línea de Tiempo, Movimientos de Línea de Tiempo, Tickets de combustible, Gendec, Manifiestos, Servicios, Información de Pasajeros";
+            typeOfAlert = "¿Estás seguro?";
+            confirmButton = "Si";
+            cancelButton = "No";
+        }
+        else {
+
+            messageEmptyFields = "All relationships with Itinerary will be removed. Timeline, Timeline Movements, Jet Fuel Tickets, Gendec, Manifest, Airport Services, Passenger Information";
+            typeOfAlert = "Are you sure?";
+            confirmButton = "Yes, delete it!";
+            cancelButton = "No, cancel plx!";
+        }
+        swal({
+            title: typeOfAlert,
+            text: messageEmptyFields,
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: confirmButton,
+            confirmButtonColor: "#83217a",
+            cancelButtonText: cancelButton,
+            closeOnConfirm: false
+        },
+        function () {
+            ItineraryController.postForm();
+        });
+        return;
+    },
+    postForm: function () {
+        var form = document.getElementById('deleteForm');
+        if (form) {
+            form.submit();
+        }
     }
 }
 

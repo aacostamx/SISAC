@@ -33,10 +33,6 @@ namespace VOI.SISAC.Web.MapConfiguration
             }
         }
 
-        /// <summary>
-        /// Override this method in a derived class and call the CreateMap method to associate that map with this profile.
-        /// Avoid calling the <see cref="T:AutoMapper.Mapper" /> class from this method.
-        /// </summary>
         protected override void Configure()
         {
             Map();
@@ -46,33 +42,41 @@ namespace VOI.SISAC.Web.MapConfiguration
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="ItineraryWebMaps"/> class.
+        /// </summary>
+        public ItineraryWebMaps()
+        {
+            
+        }
+
+        /// <summary>
         /// Configures the mappers between clases.
         /// </summary>
-        private static void Map()
+        private void Map()
         {
-            Mapper.CreateMap<ItineraryDto, ItineraryVO>()
+            CreateMap<ItineraryDto, ItineraryVO>()
                 .ReverseMap();
 
-            Mapper.CreateMap<ItineraryLogDto, ItineraryLogVO>()
+            CreateMap<ItineraryLogDto, ItineraryLogVO>()
                 .ReverseMap();
 
-            Mapper.CreateMap<ItineraryFile, ItineraryDto>()
+            CreateMap<ItineraryFile, ItineraryDto>()
                 .ReverseMap();
 
 
-            Mapper.CreateMap<ItinerarySearchDto, ItinerarySearchVO>()
+            CreateMap<ItinerarySearchDto, ItinerarySearchVO>()
                 .ReverseMap();
 
-            Mapper.CreateMap<ItineraryUploadDto, ItineraryUploadVO>()
+            CreateMap<ItineraryUploadDto, ItineraryUploadVO>()
                 .ReverseMap();
 
-            Mapper.CreateMap<TimelineDto, TimelineVO>()
+            CreateMap<TimelineDto, TimelineVO>()
                 .ForMember(c => c.StationCode, f => f.MapFrom(w => w.Itinerary.DepartureStation))
                 .ForMember(c => c.EquipmentNumber, f => f.MapFrom(w => w.Itinerary.EquipmentNumber))
                 .ForMember(c => c.TimelineMovements, f => f.MapFrom(w => w.TimelineMovements.Where(c => c.AirlineCode == w.AirlineCode && c.Sequence == w.Sequence && c.FlightNumber == w.FlightNumber && c.ItineraryKey == w.ItineraryKey)))
                 .ReverseMap();
 
-            Mapper.CreateMap<TimelineMovementDto, TimelineMovementVO>()
+            CreateMap<TimelineMovementDto, TimelineMovementVO>()
                 .ForMember(c => c.OperationDescription, f => f.MapFrom(w => w.OperationType.OperationName))
                 .ForMember(c => c.MovementTypeDescription, f => f.MapFrom(w => w.MovementType.MovementDescription))
                 .ForMember(c => c.ProviderName, f => f.MapFrom(w => w.Provider.ProviderName))
@@ -82,9 +86,9 @@ namespace VOI.SISAC.Web.MapConfiguration
         /// <summary>
         /// Configures the mappers between clases.
         /// </summary>
-        private static void GendecMap()
+        private void GendecMap()
         {
-            Mapper.CreateMap<GendecDepartureDto, GendecDepartureVO>()
+            CreateMap<GendecDepartureDto, GendecDepartureVO>()
                .ForMember(p => p.EquipmentNumber, r => r.MapFrom(s => s.Itinerary.EquipmentNumber))
                .ForMember(p => p.DepartureDate, r => r.MapFrom(s => s.Itinerary.DepartureDate.ToShortDateString()))
                .ForMember(p => p.TimeDeparture, r => r.MapFrom(s => s.Itinerary.DepartureDate.Hour + ":" + s.Itinerary.DepartureDate.Minute))
@@ -93,7 +97,7 @@ namespace VOI.SISAC.Web.MapConfiguration
                .ForMember(p => p.ArrivalStation, r => r.MapFrom(s => s.Itinerary.ArrivalStation))
                .ReverseMap();
 
-            Mapper.CreateMap<GendecArrivalDto, GendecArrivalVO>()
+            CreateMap<GendecArrivalDto, GendecArrivalVO>()
                .ForMember(p => p.EquipmentNumber, r => r.MapFrom(s => s.Itinerary.EquipmentNumber))
                .ForMember(p => p.ArrivalDate, r => r.MapFrom(s => s.Itinerary.ArrivalDate.ToShortDateString()))
                .ForMember(p => p.TimeArrival, r => r.MapFrom(s => s.Itinerary.ArrivalDate.Hour + ":" + s.Itinerary.ArrivalDate.Minute))
@@ -102,16 +106,16 @@ namespace VOI.SISAC.Web.MapConfiguration
                .ForMember(p => p.ArrivalStation, r => r.MapFrom(s => s.Itinerary.ArrivalStation))
                .ReverseMap();
 
-            Mapper.CreateMap<GendecDepartureDto, GendecArrivalVO>()
+            CreateMap<GendecDepartureDto, GendecArrivalVO>()
                 .ReverseMap();
         }
 
         /// <summary>
         /// Configures the mappers between clases.
         /// </summary>
-        private static void ManifesDepartureMap()
+        private void ManifesDepartureMap()
         {
-            Mapper.CreateMap<ManifestDepartureDto, ManifestDepartureVO>()
+            CreateMap<ManifestDepartureDto, ManifestDepartureVO>()
                 .ForMember(p => p.Pilot, r => r.MapFrom(s => s.AdditionalDepartureInformation.Pilot))
                 .ForMember(p => p.Surcharge, r => r.MapFrom(s => s.AdditionalDepartureInformation.Surcharge))
                 .ForMember(p => p.ExtraCrew, r => r.MapFrom(s => s.AdditionalDepartureInformation.ExtraCrew))
@@ -126,7 +130,7 @@ namespace VOI.SISAC.Web.MapConfiguration
                 .ForMember(p => p.ThirdDelayDescription, r => r.MapFrom(s => s.AdditionalDepartureInformation.DelayDescription3))
                 .ReverseMap();
 
-            Mapper.CreateMap<ManifestDepartureVO, AdditionalDepartureInformationDto>()
+            CreateMap<ManifestDepartureVO, AdditionalDepartureInformationDto>()
                 .ForMember(p => p.Pilot, r => r.MapFrom(s => s.Pilot))
                 .ForMember(p => p.Surcharge, r => r.MapFrom(s => s.Surcharge))
                 .ForMember(p => p.ExtraCrew, r => r.MapFrom(s => s.ExtraCrew))
@@ -141,22 +145,22 @@ namespace VOI.SISAC.Web.MapConfiguration
                 .ForMember(p => p.DelayDescription3, r => r.MapFrom(s => s.ThirdDelayDescription))
                 .ReverseMap();
 
-            Mapper.CreateMap<ManifestDepartureBoardingDto, ManifestDepartureBoardingVO>()
+            CreateMap<ManifestDepartureBoardingDto, ManifestDepartureBoardingVO>()
                 .ReverseMap();
 
-            Mapper.CreateMap<ManifestDepartureBoardingDetailDto, ManifestDepartureBoardingDetailVO>()
+            CreateMap<ManifestDepartureBoardingDetailDto, ManifestDepartureBoardingDetailVO>()
                 .ReverseMap();
 
-            Mapper.CreateMap<ManifestDepartureBoardingInformationDto, ManifestDepartureBoardingInformationVO>()
+            CreateMap<ManifestDepartureBoardingInformationDto, ManifestDepartureBoardingInformationVO>()
                 .ReverseMap();
         }
 
         /// <summary>
         /// Configures the mappers between clases.
         /// </summary>
-        private static void ManifesArrivalMap()
+        private void ManifesArrivalMap()
         {
-            Mapper.CreateMap<ManifestArrivalVO, AdditionalArrivalInformationDto>()
+            CreateMap<ManifestArrivalVO, AdditionalArrivalInformationDto>()
                 .ForMember(p => p.Pilot, r => r.MapFrom(s => s.Pilot))
                 .ForMember(p => p.Surcharge, r => r.MapFrom(s => s.Surcharge))
                 .ForMember(p => p.ExtraCrew, r => r.MapFrom(s => s.ExtraCrew))
@@ -171,7 +175,7 @@ namespace VOI.SISAC.Web.MapConfiguration
                 .ForMember(p => p.DelayDescription3, r => r.MapFrom(s => s.ThirdDelayDescription))
                 .ReverseMap();
 
-            Mapper.CreateMap<ManifestArrivalDto, ManifestArrivalVO>()
+            CreateMap<ManifestArrivalDto, ManifestArrivalVO>()
                 .ForMember(c => c.LastStationCode, f => f.MapFrom(w => w.LastScaleStationCode))
                 .ForMember(p => p.Pilot, r => r.MapFrom(s => s.AdditionalArrivalInformation.Pilot))
                 .ForMember(p => p.Surcharge, r => r.MapFrom(s => s.AdditionalArrivalInformation.Surcharge))
@@ -187,7 +191,7 @@ namespace VOI.SISAC.Web.MapConfiguration
                 .ForMember(p => p.ThirdDelayDescription, r => r.MapFrom(s => s.AdditionalArrivalInformation.DelayDescription3))
                 .ReverseMap();
 
-            Mapper.CreateMap<ManifestArrivalVO, ManifestArrivalDto>()
+            CreateMap<ManifestArrivalVO, ManifestArrivalDto>()
                 .ForMember(c => c.LastScaleStationCode, f => f.MapFrom(w => w.LastStationCode))
                 .ReverseMap();
         }

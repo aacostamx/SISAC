@@ -1,0 +1,259 @@
+﻿@model VOI.SISAC.Web.Models.VO.Process.NationalJetFuelReconcileControlVO
+
+@{
+    ViewBag.Title = VOI.SISAC.Web.Resources.Resource.ManageNonconformities;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cultureForm = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
+}
+
+@Styles.Render("~/bundles/SweetAlertCSS")
+
+<div class="container">
+    @Html.Partial("_AlertView")
+
+    <h2 class="subtitle_h3_black">@VOI.SISAC.Web.Resources.Resource.ManageInvoiceRemittanceNonconformities</h2>
+
+    @Html.Partial("Partial/_UploadNonconformityFile")
+    @Html.Partial("Partial/_NonconformityDocument")
+        
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <br />
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                @Html.Label(VOI.SISAC.Web.Resources.Resource.RemittanceId, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.RemittanceID, new { htmlAttributes = new { @class = "form-control", @style = "width: auto;", @disabled = "" } })
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                @Html.Label(VOI.SISAC.Web.Resources.Resource.MonthYear, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.MonthYear, new { htmlAttributes = new { @class = "form-control", @style = "width: auto;", @disabled = "" } })
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                @Html.Label(VOI.SISAC.Web.Resources.Resource.Period, htmlAttributes: new { @class = "subtitle_h5 control-label" })
+                @Html.EditorFor(model => model.Period, new { htmlAttributes = new { @class = "form-control", @style = "width: auto;", @disabled = "" } })
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+        @if (Model.NonconformityStatusCode == "CLOSED")
+        {
+            if (User.IsInRole("NTLJETREC-NONCONFOR"))
+            {
+            <button id="btnUpload" data-toggle="modal"
+                    data-target="#UploadFile"
+                    type="button"
+                    class="btn btn-default"
+                    name="@VOI.SISAC.Web.Resources.Resource.UploadFile"
+                    title="@VOI.SISAC.Web.Resources.Resource.UploadFile" disabled>
+                <i class="fa fa-cloud-upload fa-fw"></i>
+                &nbsp;@VOI.SISAC.Web.Resources.Resource.UploadFile
+            </button>
+            }
+            if (User.IsInRole("NTLJETREC-REVERT"))
+            { 
+            <button class="btn btn-default btn-green" type="button" name="Revert" title="@VOI.SISAC.Web.Resources.Resource.Revert" onclick="NonconformityProcessController.revertReconcileProcess()" disabled>
+                    <i class="fa fa-refresh fa-fw"></i>
+                    &nbsp;@VOI.SISAC.Web.Resources.Resource.Revert
+            </button>
+        }               
+        }
+        else
+        {
+            if (User.IsInRole("NTLJETREC-NONCONFOR"))
+            {
+            <button id="btnUpload" data-toggle="modal"
+                    data-target="#UploadFile"
+                    type="button"
+                    class="btn btn-default"
+                    name="@VOI.SISAC.Web.Resources.Resource.UploadFile"
+                    title="@VOI.SISAC.Web.Resources.Resource.UploadFile">
+                <i class="fa fa-cloud-upload fa-fw"></i>
+                &nbsp;@VOI.SISAC.Web.Resources.Resource.UploadFile
+            </button>
+            }
+            if (User.IsInRole("NTLJETREC-REVERT"))
+            { 
+            <button class="btn btn-default btn-green" type="button" name="Revert" title="@VOI.SISAC.Web.Resources.Resource.Revert" onclick="NonconformityProcessController.revertReconcileProcess()">
+                    <i class="fa fa-refresh fa-fw"></i>
+                    &nbsp;@VOI.SISAC.Web.Resources.Resource.Revert
+            </button>
+            }                
+        }
+
+        
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                @if (Model.NonconformityStatusCode == "CLOSED")
+                {
+                    <button class="btn btn-default btn-green" type="button" name="VerReporte" title="@VOI.SISAC.Web.Resources.Resource.DownloadCanditateInvoiceRecords" onclick="location.href='@Url.Action("ExportCanditateInvoiceRecords", "NationalJetFuelReconcileInvoice", new { RemittanceID = Model.RemittanceID, MonthYear = Model.MonthYear, Period = Model.Period })'" disabled>
+                        <i class="fa-fw glyphicon glyphicon-export icon-share"></i>
+                        &nbsp;@VOI.SISAC.Web.Resources.Resource.DownloadCanditateInvoiceRecords
+                    </button>
+                }
+                else { 
+                    <button class="btn btn-default btn-green" type="button" name="VerReporte" title="@VOI.SISAC.Web.Resources.Resource.DownloadCanditateInvoiceRecords" onclick="location.href='@Url.Action("ExportCanditateInvoiceRecords", "NationalJetFuelReconcileInvoice", new { RemittanceID = Model.RemittanceID, MonthYear = Model.MonthYear, Period = Model.Period })'">
+                        <i class="fa-fw glyphicon glyphicon-export icon-share"></i>
+                        &nbsp;@VOI.SISAC.Web.Resources.Resource.DownloadCanditateInvoiceRecords
+                    </button>
+                }
+
+                @if (Model.NonconformityStatusCode == "CLOSED"){
+                <button class="btn btn-default btn-green" type="button" name="VerReporte" title="@VOI.SISAC.Web.Resources.Resource.GenerateNonconformityPDF" data-toggle="modal" data-target="#nonconformityDocument" disabled>
+                    <i class="fa-fw glyphicon glyphicon-export icon-share"></i>
+                    &nbsp;@VOI.SISAC.Web.Resources.Resource.GenerateNonconformityPDF
+                </button>
+                }
+                else { 
+                <button class="btn btn-default btn-green" type="button" name="VerReporte" title="@VOI.SISAC.Web.Resources.Resource.GenerateNonconformityPDF" data-toggle="modal" data-target="#nonconformityDocument">
+                    <i class="fa-fw glyphicon glyphicon-export icon-share"></i>
+                    &nbsp;@VOI.SISAC.Web.Resources.Resource.GenerateNonconformityPDF
+                </button>
+                }
+
+                @if (Model.NonconformityStatusCode == "CLOSED")
+                {
+                    <button class="btn btn-default btn-green" type="button" name="VerReporte" title="@VOI.SISAC.Web.Resources.Resource.LoadLog" onclick="location.href='@Url.Action("ExportNonconformityLoadLog", "NationalJetFuelReconcileInvoice", new { RemittanceID = Model.RemittanceID, MonthYear = Model.MonthYear, Period = Model.Period })'" disabled>
+                        <i class="fa-fw glyphicon glyphicon-export icon-share"></i>
+                        &nbsp;@VOI.SISAC.Web.Resources.Resource.LoadLog
+                    </button>
+                }
+                else
+                { 
+                    <button class="btn btn-default btn-green" type="button" name="VerReporte" title="@VOI.SISAC.Web.Resources.Resource.LoadLog" onclick="location.href='@Url.Action("ExportNonconformityLoadLog", "NationalJetFuelReconcileInvoice", new { RemittanceID = Model.RemittanceID, MonthYear = Model.MonthYear, Period = Model.Period })'">
+                        <i class="fa-fw glyphicon glyphicon-export icon-share"></i>
+                        &nbsp;@VOI.SISAC.Web.Resources.Resource.LoadLog
+                    </button>                                     
+                }
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                @if (Model.NonconformityStatusCode == "CLOSED")
+                {
+                    if (User.IsInRole("NTLJETREC-NONCONFOR"))
+                    {
+                    <button id="btnOpen" 
+                            type="button"
+                            class="btn btn-default btn-green"
+                            onclick="location.href='@Url.Action("OpenNonconformity", "NationalJetFuelReconcileInvoice", new { RemittanceID = Model.RemittanceID, MonthYear = Model.MonthYear, Period = Model.Period })'"
+                            name="@VOI.SISAC.Web.Resources.Resource.Open"
+                            title="@VOI.SISAC.Web.Resources.Resource.Open">
+                        @VOI.SISAC.Web.Resources.Resource.Open
+                    </button>
+                    }                             
+                }
+                else
+                {
+                    if (User.IsInRole("NTLJETREC-NONCONFOR"))
+                    {
+                    <button id="btnClose"
+                            type="button"
+                            class="btn btn-default btn-green"
+                            onclick="location.href='@Url.Action("CloseNonconformity", "NationalJetFuelReconcileInvoice", new { RemittanceID = Model.RemittanceID, MonthYear = Model.MonthYear, Period = Model.Period })'"
+                            name="@VOI.SISAC.Web.Resources.Resource.Close"
+                            title="@VOI.SISAC.Web.Resources.Resource.Close">
+                        @VOI.SISAC.Web.Resources.Resource.Close
+                    </button>
+                    }                                
+                }        
+            </div>
+        </div>                    
+    </div>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/BootstrapInputFile")
+    @Scripts.Render("~/bundles/CommonFunctions")
+    @Scripts.Render("~/bundles/SweetAlertJS")
+    @Scripts.Render("~/bundles/bootstrapdtimejs")
+
+     <script>
+         var currentLang = '@cultureForm.ToString()';
+    </script>
+
+    <script>
+        var NonconformityProcessController = {            
+            revertReconcileProcess: function () {
+                var remittanceID = $("#RemittanceID").val();
+                var monthYear = $("#MonthYear").val();
+                var period = $("#Period").val();
+
+                var url = "../NationalJetFuelReconcileInvoice/RevertNonconformityProcess";
+                var post;
+
+                if (remittanceID && monthYear && period) {
+                    //ReconcileProcessController.blankTable();
+                    //ReconcileProcessController.initialProcessType();
+
+                    // Send the data using post
+                    post = $.post(url, { RemittanceID: remittanceID, MonthYear: monthYear, Period: period });
+
+                    // Put the results in a div
+                    post.done(function (data) {
+                        if (data === '0') {
+                            NonconformityProcessController.showAlert('The reconcilation process has been reversed', 'El proceso de conciliación ha sido revertido', 'success', 'Success', 'Éxito');
+                        }
+                        if (data === '1') {
+                            NonconformityProcessController.showAlert('Remittance is closed', 'La remesa se encuentra cerrada', 'error', 'Error', 'Error');
+                        }
+                        if (data === '2') {
+                            NonconformityProcessController.showAlert('Different errors to invalid Equipment Number', 'Errores diferentes de matrículas no válidas', 'error', 'Error', 'Error');
+                        }
+
+                    });
+                }
+            },
+            showAlert: function (messageEn, messageEs, alertType, titleEn, tittleEs) {
+                //"warning", "error", "success" and "info".
+                alertType = alertType || "warning";
+                if (currentLang.includes("es")) {
+                    swal({
+                        title: tittleEs,
+                        text: messageEs,
+                        type: alertType,
+                        confirmButtonColor: "#83217a",
+                        animation: "slide-from-top",
+                        closeOnConfirm: false
+                    },
+                    function (isConfirm) {
+                        if (isConfirm) { location.reload(); }
+                    })
+                }
+                else {
+                    swal({
+                        title: titleEn,
+                        text: messageEn,
+                        type: alertType,
+                        confirmButtonColor: "#83217a",
+                        animation: "slide-from-top",
+                        timer: 12000
+                    })
+                }
+            },
+            setupAjax: function () {
+                $.ajaxSetup({ cache: false, async: false });
+            },
+            startDoc: function () {
+                if (!String.prototype.includes) {
+                    String.prototype.includes = function () {
+                        'use strict';
+                        return String.prototype.indexOf.apply(this, arguments) !== -1;
+                    };
+                }
+                NonconformityProcessController.setupAjax();
+                //ReconcileProcessController.initialProcessType();
+            }
+        }
+        $(document).ready(NonconformityProcessController.startDoc);
+    </script>
+}

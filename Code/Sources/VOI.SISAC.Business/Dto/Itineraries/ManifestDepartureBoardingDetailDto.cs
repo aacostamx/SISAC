@@ -112,6 +112,14 @@ namespace VOI.SISAC.Business.Dto.Itineraries
         public string CompartmentTypeName { get; set; }
 
         /// <summary>
+        /// Gets or sets the maximum weight.
+        /// </summary>
+        /// <value>
+        /// The maximum weight.
+        /// </value>
+        public decimal MaximumWeight { get; set; }
+
+        /// <summary>
         /// Gets or sets the manifest departure boarding.
         /// </summary>
         /// <value>

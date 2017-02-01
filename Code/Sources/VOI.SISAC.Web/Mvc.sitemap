@@ -111,6 +111,7 @@
       <!--Manifest Departure Site Map-->
       <mvcSiteMapNode title="Departure Manifest" controller="ManifestDeparture" area="Itineraries" action="Index" key="Manifest_Departure" preservedRouteParameters="Sequence,AirlineCode,FlightNumber,ItineraryKey">
         <mvcSiteMapNode title="Report" controller="ManifestDeparture" area="Itineraries" action="ViewReport" />
+        <mvcSiteMapNode title="ReportInformation" controller="ManifestDeparture" area="Itineraries" action="ReportInformation" />
       </mvcSiteMapNode>
       
         <!--Manifest Arrival Site Map-->
@@ -390,6 +391,12 @@
         <mvcSiteMapNode title="Download Invoice Detail" controller="NationalJetFuelReconcileInvoice" area="Process" action="ExportInvoiceDetail" preservedRouteParameters="RemittanceID,MonthYear,Period"/>
         <mvcSiteMapNode title="Download Cost Detail" controller="NationalJetFuelReconcileInvoice" area="Process" action="ExportCostDetail" preservedRouteParameters="RemittanceID,MonthYear,Period"/>
         <mvcSiteMapNode title="Load Log" controller="NationalJetFuelReconcileInvoice" area="Process" action="ExportLoadLog" preservedRouteParameters="RemittanceID,MonthYear,Period"/>
+      </mvcSiteMapNode>
+
+      <mvcSiteMapNode title="National JetFuel Nonconformity Process" controller="NationalJetFuelReconcileInvoice" area="Process" action="NationalJetFuelNonconformityProcess" key="JetFuelNonconformityInvoice" preservedRouteParameters="RemittanceID,MonthYear,Period">
+        <mvcSiteMapNode title="Download Canditate Invoice Records" controller="NationalJetFuelReconcileInvoice" area="Process" action="ExportCanditateInvoiceRecords" preservedRouteParameters="RemittanceID,MonthYear,Period,DocumentDate,Month"/>
+        <mvcSiteMapNode title="Download Cost Detail" controller="NationalJetFuelReconcileInvoice" area="Process" action="NonconformityDocumentPDF" preservedRouteParameters="RemittanceID,MonthYear,Period"/>
+        <mvcSiteMapNode title="Load Log" controller="NationalJetFuelReconcileInvoice" area="Process" action="ExportNonconformityLoadLog" preservedRouteParameters="RemittanceID,MonthYear,Period"/>
       </mvcSiteMapNode>
     </mvcSiteMapNode>
     

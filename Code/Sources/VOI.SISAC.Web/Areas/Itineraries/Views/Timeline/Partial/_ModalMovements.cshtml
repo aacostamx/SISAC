@@ -3,7 +3,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <p id="modalTitle" class="subtitle_h3_black">Add Movements</p>
+                <p id="modalTitleAdd" class="subtitle_h3_black">@Resource.Add @Resource.Movement</p>
+                <p id="modalTitleEdit" class="subtitle_h3_black">@Resource.Edit @Resource.Movement</p>
             </div>
             <div class="modal-body">
                 <form id="frmMovement" name="frmMovement">
@@ -18,7 +19,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="subtitle_h5 control-label required-field">Movement Type</label>
+                        <label class="subtitle_h5 control-label required-field">@Resource.MovementType</label>
                         <div class="styled-select">
                             <select data-val="true" htmlattributes="{ class = inputForm form-control }" id="MovementTypeCode" name="MovementTypeCode">
                                 <option value="AR">ARRIVAL</option>
@@ -32,7 +33,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="subtitle_h5 control-label required-field">Movement Date</label>
+                        <label class="subtitle_h5 control-label required-field">@Resource.MovementDate</label>
                         <div class='input-group date' id='MovementDate' name='MovementDate'>
                             <input type='text' class="form-control" />
                             <span class="input-group-addon">
@@ -42,7 +43,7 @@
                     </div>
                     <div class="form-group">
                         <label class="subtitle_h5 control-label">@Resource.Position</label>
-                        <input type="text" class="form-control" id="Position" name="Position">
+                        <input type="text" class="form-control" id="Position" name="Position" onkeypress="return commonFunctions.validarMaxLengthAlfanumericoCaracteresEspeciales(event, this, 25);" onkeyup="return commonFunctions.validarMaxLengthAlfanumericoCaracteresEspeciales(event, this, 25)">
                     </div>
                     <div class="form-group">
                         <label class="subtitle_h5 control-label">@Resource.ProviderName</label>
@@ -140,20 +141,20 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="subtitle_h5 control-label">Remaining Fuel</label>
-                        <input type="text" class="form-control" id="RemainingFuel" name="RemainingFuel">
+                        <label class="subtitle_h5 control-label">@Resource.RemainingFuel</label>
+                        <input type="text" class="form-control" data-val-regex-pattern="^([0-9]{1,8})+([\.\,])?([0-9]{1,2})?$" onkeypress="return commonFunctions.validarNumeroDecimal(event, this, 10, 2);" onkeyup="return commonFunctions.validarNumeroDecimal(event, this, 10, 2)" id="RemainingFuel" name="RemainingFuel">
                     </div>
                     <div class="form-group">
                         <label class="subtitle_h5 control-label" for="Remarks">@Resource.Remarks</label>
-                        <textarea class="form-control" cols="100" data-val="true" data-val-length="Longitud Máxima de 250caracteres" data-val-length-max="250" id="Remarks" name="Remarks" onkeypress="return commonFunctions.validarComentarios(event, this);" onkeyup="return commonFunctions.validarComentarios(event, this)" rows="5" style="resize: none;"></textarea>
+                        <textarea class="form-control" cols="100" data-val="true" data-val-length="@Resource.LengthMax250" data-val-length-max="250" id="Remarks" name="Remarks" rows="5" style="resize: none;" onkeypress = "return commonFunctions.validarComentarios(event, this);" onkeyup = "return commonFunctions.validarComentarios(event, this)"></textarea>
                         <span class="field-validation-valid text-danger text-danger-error" data-valmsg-for="Remarks" data-valmsg-replace="true"></span>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button id="btnAddMove" name="btnAddMove" type="button" class="btn btn-primary" onclick="TimelineController.AddTimelineMovement()" hidden>Save</button>
-                <button id="btnEditMove" name="btnEditMove" type="button" class="btn btn-primary" onclick="TimelineController.EditTimelineMovement()" hidden>Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Resource.Close</button>
+                <button id="btnAddMove" name="btnAddMove" type="button" class="btn btn-primary" onclick="TimelineController.AddTimelineMovement()" hidden>@Resource.Save</button>
+                <button id="btnEditMove" name="btnEditMove" type="button" class="btn btn-primary" onclick="TimelineController.EditTimelineMovement()" hidden>@Resource.Save</button>
             </div>
         </div>
     </div>

@@ -87,6 +87,17 @@ namespace VOI.SISAC.Web.Models.VO.Airport
             ErrorMessageResourceName = "LengthMax10")]
         public string Division { get; set; }
 
+        /// </summary>
+        /// <value>
+        /// The division.
+        /// </value>
+        [Display(Name = "BusinessName", ResourceType = typeof(Resources.Resource))]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resource),
+                  ErrorMessageResourceName = "RequiredField")]
+        [StringLength(100, ErrorMessageResourceType = typeof(Resources.Resource),
+            ErrorMessageResourceName = "LengthMax100")]
+        public string BusinessName { get; set; }
+
         /// <summary>
         /// Gets or sets the cost centers.
         /// </summary>

@@ -282,7 +282,7 @@ namespace VOI.SISAC.Business.Security
                 UserDto userDto = new UserDto();
                 if (user != null)
                 {
-                    userDto = Mapper.Map<User, UserDto>(user);
+                   userDto = Mapper.Map<User, UserDto>(user);
                 }
 
                 return userDto;

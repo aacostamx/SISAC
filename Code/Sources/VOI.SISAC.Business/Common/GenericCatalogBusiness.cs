@@ -1062,7 +1062,7 @@ namespace VOI.SISAC.Business.Common
             try
             {
                 //Lista completa de proveedores
-                IList<GenericCatalogDto> userListComplete = new List<GenericCatalogDto>();
+                //IList<GenericCatalogDto> userListComplete = new List<GenericCatalogDto>();
 
                 //Lista completa de proveedores
                 IList<UserDto> userListCustom = new List<UserDto>();
@@ -1073,16 +1073,19 @@ namespace VOI.SISAC.Business.Common
                 IList<GenericCatalogDto> userListFinal = new List<GenericCatalogDto>();
 
                 //LLenamos lista completa
-                userListComplete = this.GetUserCatalog();
+                //userListComplete = this.GetUserCatalog();
 
                 //Buscamos los compatibles en lista completa
-                GenericCatalogDto find = new GenericCatalogDto();
-                find = new GenericCatalogDto();
+                GenericCatalogDto find;
+                
                 foreach (UserDto item in userListCustom)
                 {
+                    find = new GenericCatalogDto();
                     if (item.UserProfileRoles.Any(c => c.ProfileRoles.Role.RoleName.Contains(roleName) && c.Principal == true))
                     {
-                        find = userListComplete.Where(x => x.Id == item.UserID.ToString()).FirstOrDefault();
+                        string lastName = string.IsNullOrEmpty(item.LastName) ? string.Empty : item.LastName;
+                        find.Description = item.Name + " " + item.FirstName + " " + item.LastName;
+                        find.Id = item.UserID.ToString();
                     }
                     else
                     {
@@ -1097,7 +1100,7 @@ namespace VOI.SISAC.Business.Common
 
                 return userListFinal;
             }
-            catch (Exception)
+            catch (Exception excetion)
             {
                 return new List<GenericCatalogDto>();
             }

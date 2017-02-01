@@ -29,7 +29,10 @@
         data-page-size="10">
         <thead>
             <tr>
-
+                @if (User.IsInRole("COUNTRY-UPD") || User.IsInRole("COUNTRY-DEL"))
+                {
+                    <th data-field="Acctions" data-align="center" data-halign="center"><strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong></th>
+                }
                 <th data-field="CountryCode" data-halign="center" data-align="center" data-sortable="true">
                     <strong>@Html.DisplayNameFor(model => model.CountryCode)</strong>
                 </th>
@@ -39,10 +42,6 @@
                 <th data-field="CountryCodeShort" data-halign="center" data-align="center" data-sortable="true">
                     <strong>@Html.DisplayNameFor(model => model.CountryCodeShort)</strong>
                 </th>
-                @if (User.IsInRole("COUNTRY-UPD") || User.IsInRole("COUNTRY-DEL"))
-                { 
-                    <th data-field="Acctions" data-align="center" data-halign="center"><strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong></th>
-                }
             </tr>
         </thead>
         <tbody>
@@ -51,6 +50,20 @@
                 foreach (var item in Model)
                 {
                 <tr>
+                    @if (User.IsInRole("COUNTRY-UPD") || User.IsInRole("COUNTRY-DEL"))
+                    {
+                        <td>
+                            @if (User.IsInRole("COUNTRY-UPD"))
+                            {
+                                <button class="btn btn-default" type="button" name="Edit" title="@VOI.SISAC.Web.Resources.Resource.Edit" onclick="location.href='@Url.Action("Edit", "Country", new { id = item.CountryCode })'"><i class="fa fa-pencil fa-fw"></i></button>
+                            }
+                            @if (User.IsInRole("COUNTRY-DEL"))
+                            {
+
+                                <button class="btn btn-default" type="button" name="Delete" title="@VOI.SISAC.Web.Resources.Resource.Delete" onclick="location.href='@Url.Action("Delete", "Country", new { id = item.CountryCode })'"><i class="fa fa-trash-o fa-fw"></i></button>
+                            }
+                        </td>
+                    }
                     <td>
                         @Html.DisplayFor(modelItem => item.CountryCode)
                     </td>
@@ -60,20 +73,6 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.CountryCodeShort)
                     </td>
-                    @if (User.IsInRole("COUNTRY-UPD") || User.IsInRole("COUNTRY-DEL"))
-                    { 
-                        <td>
-                            @if (User.IsInRole("COUNTRY-UPD"))
-                            {
-                                <button class="btn btn-default" type="button" name="Edit" title="@VOI.SISAC.Web.Resources.Resource.Edit" onclick="location.href='@Url.Action("Edit", "Country", new { id = item.CountryCode })'"><i class="fa fa-pencil fa-fw"></i></button>
-                            }
-                            @if (User.IsInRole("COUNTRY-DEL"))
-                            {
-         
-                                <button class="btn btn-default" type="button" name="Delete" title="@VOI.SISAC.Web.Resources.Resource.Delete" onclick="location.href='@Url.Action("Delete", "Country", new { id = item.CountryCode })'"><i class="fa fa-trash-o fa-fw"></i></button>
-                            }
-                        </td>
-                    }
                 </tr>
                 }
             }

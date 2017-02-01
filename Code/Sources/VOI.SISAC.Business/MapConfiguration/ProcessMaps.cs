@@ -6,12 +6,13 @@
 
 namespace VOI.SISAC.Business.MapConfiguration
 {
+    using System.Linq;
+    using System;
     using AutoMapper;
     using Dto.Enums;
     using Dto.Process;
     using Entities.Enums;
     using Entities.Process;
-    using System.Linq;
 
     /// <summary>
     /// ProcessMaps
@@ -43,32 +44,40 @@ namespace VOI.SISAC.Business.MapConfiguration
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="ProcessMaps"/> class.
+        /// </summary>
+        public ProcessMaps()
+        {
+            
+        }
+
+        /// <summary>
         /// Configures the mappers between clases.
         /// </summary>
         private void Map()
         {
-            Mapper.CreateMap<CalculationStatus, CalculationStatusDto>()
+            CreateMap<CalculationStatus, CalculationStatusDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<ConfirmationStatus, ConfirmationStatusDto>()
+            CreateMap<ConfirmationStatus, ConfirmationStatusDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<StatusProcess, StatusProcessDto>()
+            CreateMap<StatusProcess, StatusProcessDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<JetFuelProvision, JetFuelProvisionDto>()
+            CreateMap<JetFuelProvision, JetFuelProvisionDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<JetFuelLogError, JetFuelLogErrorDto>()
+            CreateMap<JetFuelLogError, JetFuelLogErrorDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<JetFuelProcess, JetFuelProcessDto>()
+            CreateMap<JetFuelProcess, JetFuelProcessDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<JetFuelPolicy, JetFuelPolicyDto>()
+            CreateMap<JetFuelPolicy, JetFuelPolicyDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<JetFuelPolicyControl, JetFuelPolicyControlDto>()
+            CreateMap<JetFuelPolicyControl, JetFuelPolicyControlDto>()
                 .ReverseMap();
         }
 
@@ -77,43 +86,43 @@ namespace VOI.SISAC.Business.MapConfiguration
         /// </summary>
         private void NationalMaps()
         {
-            Mapper.CreateMap<NationalJetFuelProcess, NationalJetFuelProcessDto>()
+            CreateMap<NationalJetFuelProcess, NationalJetFuelProcessDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<NationalJetFuelLogError, NationalJetFuelLogErrorDto>()
+            CreateMap<NationalJetFuelLogError, NationalJetFuelLogErrorDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<NationalJetFuelCost, NationalJetFuelCostDto>()
+            CreateMap<NationalJetFuelCost, NationalJetFuelCostDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<NationalJetFuelPolicy, NationalJetFuelPolicyDto>()
+            CreateMap<NationalJetFuelPolicy, NationalJetFuelPolicyDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<NationalJetFuelPolicyControl, NationalJetFuelPolicyControlDto>()
+            CreateMap<NationalJetFuelPolicyControl, NationalJetFuelPolicyControlDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<NationalJetFuelInvoiceControl, NationalJetFuelInvoiceControlDto>()
+            CreateMap<NationalJetFuelInvoiceControl, NationalJetFuelInvoiceControlDto>()
             .ForMember(c => c.DocumentStatusName, r => r.MapFrom(f => f.DocumentStatus.DocumentStatusName))
             .ForMember(c => c.RemittanceStatusName, r => r.MapFrom(f => f.RemittanceStatus.RemittanceStatusName))
             .ForMember(c => c.InvoiceCount, r => r.MapFrom(f => f.NationalJetFuelInvoiceDetails.Select(c => c.ElectronicInvoiceNumber).Distinct().Count()))
                 .ReverseMap();
 
-            Mapper.CreateMap<NationalJetFuelInvoiceDetail, NationalJetFuelInvoiceDetailDto>()
+            CreateMap<NationalJetFuelInvoiceDetail, NationalJetFuelInvoiceDetailDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<NationalJetFuelInvoicePolicy, NationalJetFuelInvoicePolicyDto>()
+            CreateMap<NationalJetFuelInvoicePolicy, NationalJetFuelInvoicePolicyDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<NationalJetFuelInvoiceDetail, NationalJetFuelInvoiceDetailDto>()
+            CreateMap<NationalJetFuelInvoiceDetail, NationalJetFuelInvoiceDetailDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<DocumentStatus, DocumentStatusDto>()
+            CreateMap<DocumentStatus, DocumentStatusDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<RemittanceStatus, RemittanceStatusDto>()
+            CreateMap<RemittanceStatus, RemittanceStatusDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<RemittanceSearch, RemittanceSearchDto>()
+            CreateMap<RemittanceSearch, RemittanceSearchDto>()
                 .ReverseMap();
         }
     }

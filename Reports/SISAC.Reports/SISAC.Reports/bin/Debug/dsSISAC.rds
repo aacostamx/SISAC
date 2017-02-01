@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="dsSISAC">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=10.10.51.14\Y4DEVSERV;Initial Catalog=SISAC_DEV</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>ca9ec16a-a914-4a82-acf6-93f8c169b9cb</DataSourceID>
+</RptDataSource>

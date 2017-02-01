@@ -7,6 +7,7 @@
 
 namespace VOI.SISAC.Business.MapConfiguration
 {
+    using System;
     using AutoMapper;
     using VOI.SISAC.Business.Dto;
     using VOI.SISAC.Business.Dto.Itineraries;
@@ -42,54 +43,63 @@ namespace VOI.SISAC.Business.MapConfiguration
             this.Map();
         }
 
+        /// <summary>
+        /// Override this method in a derived class and call the CreateMap method to associate that map with this profile.
+        /// Avoid calling the <see cref="T:AutoMapper" /> class from this method.
+        /// </summary>
+        public SecurityMaps()
+        {
+            
+        }
+
         private void Map()
         {
-            Mapper.CreateMap<User, UserDto>()
+            CreateMap<User, UserDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<UserAirport, UserAirportDto>()
+            CreateMap<UserAirport, UserAirportDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<UserProfileRole, UserProfileRoleDto>()
+            CreateMap<UserProfileRole, UserProfileRoleDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<Department, DepartmentDto>()
+            CreateMap<Department, DepartmentDto>()
                 .ReverseMap();
 
-            //Mapper.CreateMap<UserType, UserTypeDto>()
-            //    .ReverseMap();
+            //CreateMap<UserType, UserTypeDto>()
+            //    ..ReverseMap();
 
-            Mapper.CreateMap<PageReport, PageReportDto>()
+            CreateMap<PageReport, PageReportDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<ModulePermission, ModulePermissionDto>()
+            CreateMap<ModulePermission, ModulePermissionDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<Role, RoleDto>()
+            CreateMap<Role, RoleDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<UserAirport, UserAirportDto>()
+            CreateMap<UserAirport, UserAirportDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<Permission, PermissionDto>()
+            CreateMap<Permission, PermissionDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<Module, ModuleDto>()
+            CreateMap<Module, ModuleDto>()
                .ReverseMap();
 
-            Mapper.CreateMap<Entities.Security.Profile, ProfileDto>()
+            CreateMap<Entities.Security.Profile, ProfileDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<ProfileRole, ProfileRoleDto>()
+            CreateMap<ProfileRole, ProfileRoleDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<Menu, MenuDto>()
+            CreateMap<Menu, MenuDto>()
                .ReverseMap();
 
-            Mapper.CreateMap<Department, DepartmentDto>()
+            CreateMap<Department, DepartmentDto>()
                .ReverseMap();
 
-            Mapper.CreateMap<UserProfileRole, UserProfileRoleDto>()
+            CreateMap<UserProfileRole, UserProfileRoleDto>()
                .ReverseMap();
 
         }

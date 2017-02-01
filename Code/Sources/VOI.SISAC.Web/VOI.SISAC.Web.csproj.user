@@ -2,7 +2,7 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectView>ProjectFiles</ProjectView>
-    <NameOfLastUsedPublishProfile>SISAC_CERT</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>SISAC_PRODUCTION</NameOfLastUsedPublishProfile>
     <UseIISExpress>false</UseIISExpress>
     <WebStackScaffolding_ViewDialogWidth>600</WebStackScaffolding_ViewDialogWidth>
     <WebStackScaffolding_IsLayoutPageSelected>False</WebStackScaffolding_IsLayoutPageSelected>

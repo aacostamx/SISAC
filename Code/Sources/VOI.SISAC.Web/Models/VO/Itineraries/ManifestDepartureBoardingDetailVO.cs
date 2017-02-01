@@ -45,7 +45,7 @@ namespace VOI.SISAC.Web.Models.VO.Itineraries
         /// <value>
         /// The luggage quantity.
         /// </value>
-        public int? LuggageQuantity { get; set; }
+        public int LuggageQuantity { get; set; }
 
         /// <summary>
         /// Gets or sets the luggage KGS.
@@ -53,7 +53,7 @@ namespace VOI.SISAC.Web.Models.VO.Itineraries
         /// <value>
         /// The luggage KGS.
         /// </value>
-        public decimal? LuggageKgs { get; set; }
+        public decimal LuggageKgs { get; set; }
 
         /// <summary>
         /// Gets or sets the charge quantity.
@@ -61,7 +61,7 @@ namespace VOI.SISAC.Web.Models.VO.Itineraries
         /// <value>
         /// The charge quantity.
         /// </value>
-        public int? ChargeQuantity { get; set; }
+        public int ChargeQuantity { get; set; }
 
         /// <summary>
         /// Gets or sets the charge KGS.
@@ -69,7 +69,7 @@ namespace VOI.SISAC.Web.Models.VO.Itineraries
         /// <value>
         /// The charge KGS.
         /// </value>
-        public decimal? ChargeKgs { get; set; }
+        public decimal ChargeKgs { get; set; }
 
         /// <summary>
         /// Gets or sets the remarks.

@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="log4net.dll" size="304640">
-      <assemblyIdentity name="log4net" version="1.2.15.0" publicKeyToken="669E0DDF0BB1AA2A" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="log4net.dll" size="275968">
+      <assemblyIdentity name="log4net" version="2.0.6.0" publicKeyToken="669E0DDF0BB1AA2A" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Z2OH/G3Np/KCcKz6vWX3mAW7f2In5+tcvgojRgIx0rc=</dsig:DigestValue>
+        <dsig:DigestValue>97Ig1mFObNsUpywo6kwh0hBAIxepslXkr1VRFsuXjYo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -74,7 +74,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>MlnwoRf6K14maLU9XIJNRv/iYuGNGYzk7USYL0b16xI=</dsig:DigestValue>
+        <dsig:DigestValue>ytbz2diUed9PXgLTI4cZ5PdVnlPW/s9T77FewGSSIhY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

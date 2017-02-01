@@ -40,6 +40,12 @@
                data-export-data-type="all">
             <thead>
                 <tr>
+                    @if (User.IsInRole("DRINKWATER-UPD") || User.IsInRole("DRINKWATER-DEL"))
+                    {
+                        <th data-field="Acctions" data-align="center" data-halign="center">
+                            <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
+                        </th>
+                    }
                     <th data-field="EquipmentNumber" data-halign="center" data-align="center" data-sortable="true">
                         <strong>@Html.DisplayNameFor(model => model.EquipmentNumber)</strong>
                     </th>
@@ -49,27 +55,12 @@
                     <th data-field="MaximumTakeoffWeight" data-halign="center" data-align="center" data-sortable="true">
                         <strong>@Html.DisplayNameFor(model => model.Value)</strong>
                     </th>
-                    @if (User.IsInRole("DRINKWATER-UPD") || User.IsInRole("DRINKWATER-DEL"))
-                    {
-                        <th data-field="Acctions" data-align="center" data-halign="center">
-                            <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
-                        </th>
-                    }
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.EquipmentNumber)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DrinkingWaterName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Value)
-                        </td>
                         @if (User.IsInRole("DRINKWATER-UPD") || User.IsInRole("DRINKWATER-DEL"))
                         {
                             <td>
@@ -83,6 +74,15 @@
                                 }
                             </td>
                         }
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EquipmentNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DrinkingWaterName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Value)
+                        </td>
                     </tr>
                 }
             </tbody>

@@ -43,5 +43,13 @@ namespace VOI.SISAC.Business.Itineraries
         /// <param name="endDate">The end date.</param>
         /// <returns></returns>
         bool TimelineStartProcress(DateTime? startDate, DateTime? endDate);
+
+
+        /// <summary>
+        /// Gets the timeline paged.
+        /// </summary>
+        /// <param name="flight">The flight.</param>
+        /// <returns></returns>
+        IList<TimelineDto> GetTimelinePaged(TimelineDto flight);
     }
 }

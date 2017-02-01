@@ -61,7 +61,7 @@ namespace VOI.SISAC.Dal.Repository.Airports
         /// <param name="nickName">Name of the nick.</param>
         /// <param name="nickNameSabre">The nick name sabre.</param>
         /// <returns>number integer</returns>
-        int ValidateFields(string employeNumber, string nickName, string nickNameSabre);
+        List<string> ValidateFields(string employeNumber, string nickName, string nickNameSabre);
 
         /// <summary>
         /// Adds the range.

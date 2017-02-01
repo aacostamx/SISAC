@@ -21,6 +21,7 @@ namespace VOI.SISAC.Business.Itineraries
     using VOI.SISAC.Dal.Infrastructure;
     using VOI.SISAC.Dal.Repository.Itineraries;
     using VOI.SISAC.Entities.Itineraries;
+    using VOI.SISAC.Entities.Airport;
 
     /// <summary>
     /// Itinerary Business Logic
@@ -53,25 +54,90 @@ namespace VOI.SISAC.Business.Itineraries
         private readonly IAirplaneRepository airplaneRepository;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ItineraryBusiness" /> class.
+        /// The timeline repository
         /// </summary>
-        /// <param name="unitOfWork">Unit of Work</param>
-        /// <param name="itineraryRepository">Itinerary Repository</param>
-        /// <param name="airportRepository">airport repository</param>
-        /// <param name="airplaneRepository">airplane repository</param>
-        /// <param name="itineraryLogRepository">airport repository</param>
+        private readonly ITimelineRepository timelineRepository;
+
+        /// <summary>
+        /// The manifest arrival repository
+        /// </summary>
+        private readonly IManifestArrivalRepository manifestArrivalRepository;
+
+        /// <summary>
+        /// The manifest departure repository
+        /// </summary>
+        private readonly IManifestDepartureRepository manifestDepartureRepository;
+
+        /// <summary>
+        /// The passenger information repository
+        /// </summary>
+        private readonly IPassengerInformationRepository passengerInformationRepository;
+
+        /// <summary>
+        /// The manifest departure boarding repository
+        /// </summary>
+        private readonly IManifestDepartureBoardingRepository manifestDepartureBoardingRepository;
+
+        /// <summary>
+        /// The airport service repository
+        /// </summary>
+        private readonly IAirportServiceRepository airportServiceRepository;        
+
+        /// <summary>
+        /// The national jet fuel ticket repository
+        /// </summary>
+        private readonly INationalJetFuelTicketRepository nationalJetFuelTicketRepository;
+
+        /// <summary>
+        /// The jet fuel ticket repository
+        /// </summary>
+        private readonly IJetFuelTicketRepository jetFuelTicketRepository;
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ItineraryBusiness"/> class.
+        /// </summary>
+        /// <param name="unitOfWork">The unit of work.</param>
+        /// <param name="itineraryRepository">The itinerary repository.</param>
+        /// <param name="airportRepository">The airport repository.</param>
+        /// <param name="airplaneRepository">The airplane repository.</param>
+        /// <param name="itineraryLogRepository">The itinerary log repository.</param>
+        /// <param name="timelineRepository">The timeline repository.</param>
+        /// <param name="nationalJetFuelTicketRepository">The national jet fuel ticket repository.</param>
+        /// <param name="jetFuelTicketRepository">The jet fuel ticket repository.</param>
+        /// <param name="manifestArrivalRepository">The manifest arrival repository.</param>
+        /// <param name="manifestDepartureRepository">The manifest departure repository.</param>
+        /// <param name="manifestDepartureBoardingRepository">The manifest departure boarding repository.</param>
+        /// <param name="airportServiceRepository">The airport service repository.</param>
+        /// <param name="passengerInformationRepository">The passenger information repository.</param>
         public ItineraryBusiness(
             IUnitOfWork unitOfWork,
             IItineraryRepository itineraryRepository,
             IAirportRepository airportRepository,
             IAirplaneRepository airplaneRepository,
-            IItineraryLogRepository itineraryLogRepository)
+            IItineraryLogRepository itineraryLogRepository,
+            ITimelineRepository timelineRepository,
+            INationalJetFuelTicketRepository nationalJetFuelTicketRepository,
+            IJetFuelTicketRepository jetFuelTicketRepository,
+            IManifestArrivalRepository manifestArrivalRepository,
+            IManifestDepartureRepository manifestDepartureRepository,
+            IManifestDepartureBoardingRepository manifestDepartureBoardingRepository,
+            IAirportServiceRepository airportServiceRepository,
+            IPassengerInformationRepository passengerInformationRepository)
         {
             this.unitOfWork = unitOfWork;
             this.itineraryRepository = itineraryRepository;
             this.airplaneRepository = airplaneRepository;
             this.airportRepository = airportRepository;
             this.itineraryLogRepository = itineraryLogRepository;
+            this.timelineRepository = timelineRepository;
+            this.nationalJetFuelTicketRepository = nationalJetFuelTicketRepository;
+            this.jetFuelTicketRepository = jetFuelTicketRepository;
+            this.manifestArrivalRepository = manifestArrivalRepository;
+            this.manifestDepartureRepository = manifestDepartureRepository;
+            this.manifestDepartureBoardingRepository = manifestDepartureBoardingRepository;
+            this.airportServiceRepository = airportServiceRepository;
+            this.passengerInformationRepository = passengerInformationRepository;
         }
 
         /// <summary>
@@ -206,7 +272,15 @@ namespace VOI.SISAC.Business.Itineraries
                     Itinerary itinerary = this.itineraryRepository.FindById(itineraryDto.Sequence, itineraryDto.AirlineCode, itineraryDto.FlightNumber, itineraryDto.ItineraryKey);
                     //Validar logica para insertar el registro en ItineraryLog
                     AddItemToItineraryLog(itinerary, remarks);
-                    //Borrara en cascada
+                    
+                    //Borrar dependencias de Itinerario
+                    DeleteTimeline(itinerary);
+                    DeleteNationalJetFuelTicket(itinerary);
+                    DeleteJetFuelTicket(itinerary);
+                    DeleteManifestArrival(itinerary);
+                    DeleteManifestDeparture(itinerary);
+                    DeleteAirportService(itinerary);
+                    DeletePassengerInformation(itinerary);
 
                     this.itineraryRepository.Delete(itinerary);
                     this.unitOfWork.Commit();
@@ -221,6 +295,90 @@ namespace VOI.SISAC.Business.Itineraries
             else
             {
                 return false;
+            }
+        }
+
+        private void DeletePassengerInformation(Itinerary itinerary)
+        {
+            var passengerInformation = this.passengerInformationRepository.FindById(itinerary.Sequence, itinerary.AirlineCode, itinerary.FlightNumber, itinerary.ItineraryKey);
+
+            if (passengerInformation != null)
+            {
+                //Delete Manifest Arrival
+                this.passengerInformationRepository.Delete(passengerInformation);
+            }
+        }
+
+        private void DeleteAirportService(Itinerary itinerary)
+        {
+            var arrivalServicesList = this.airportServiceRepository.GetArrivalServicesByItinerary(itinerary.Sequence, itinerary.AirlineCode, itinerary.FlightNumber, itinerary.ItineraryKey);
+            var departureServicesList = this.airportServiceRepository.GetDepartureServicesByItinerary(itinerary.Sequence, itinerary.AirlineCode, itinerary.FlightNumber, itinerary.ItineraryKey);
+            foreach (var item in arrivalServicesList)
+            {
+                this.airportServiceRepository.Delete(item);
+            }
+            foreach (var item in departureServicesList)
+            {
+                this.airportServiceRepository.Delete(item);
+            }
+        }
+
+        private void DeleteManifestDeparture(Itinerary itinerary)
+        {
+            var manifestDeparture = this.manifestDepartureRepository.GetManifestDepartureForItinerary(itinerary.Sequence, itinerary.AirlineCode, itinerary.FlightNumber, itinerary.ItineraryKey);
+
+            if (manifestDeparture != null)
+            {
+                //Delete All Dalays
+                this.manifestDepartureRepository.RemoveAllDelaysFromManifest(manifestDeparture);
+                //Delete Boarding
+                var manifestDepartureBoardingList = this.manifestDepartureBoardingRepository.GetBoardingsForManifest(itinerary.Sequence, itinerary.AirlineCode, itinerary.FlightNumber, itinerary.ItineraryKey);
+                foreach (var item in manifestDepartureBoardingList)
+                {
+                    this.manifestDepartureBoardingRepository.Delete(item);
+                }
+                //Delete Manifest Arrival
+                this.manifestDepartureRepository.Delete(manifestDeparture);
+            }
+        }
+
+        private void DeleteManifestArrival(Itinerary itinerary)
+        {
+            var manifestArrival = this.manifestArrivalRepository.GetManifestArrivalForItinerary(itinerary.Sequence, itinerary.AirlineCode, itinerary.FlightNumber, itinerary.ItineraryKey);
+
+            if (manifestArrival != null)
+            {
+                //Delete All Dalays
+                this.manifestArrivalRepository.RemoveAllDelaysFromManifest(manifestArrival);
+                //Delete Manifest Arrival
+                this.manifestArrivalRepository.Delete(manifestArrival);
+            }
+        }
+
+        private void DeleteJetFuelTicket(Itinerary itinerary)
+        {
+            var jetFuelTicketList = this.jetFuelTicketRepository.GetJetFuelTickets(itinerary, "SALIDA");
+            foreach (var item in jetFuelTicketList)
+            {
+                this.jetFuelTicketRepository.Delete(item);
+            }
+        }
+
+        private void DeleteNationalJetFuelTicket(Itinerary itinerary)
+        {
+            var nationalJetFuelTicketList = this.nationalJetFuelTicketRepository.GetNationalJetFuelTickets(new NationalJetFuelTicket { Sequence = itinerary.Sequence, AirlineCode = itinerary.AirlineCode, FlightNumber = itinerary.FlightNumber, ItineraryKey = itinerary.ItineraryKey, OperationTypeName = "SALIDA" });
+            foreach (var item in nationalJetFuelTicketList)
+            {
+                this.nationalJetFuelTicketRepository.Delete(item);
+            }
+        }
+
+        private void DeleteTimeline(Itinerary itinerary)
+        {
+            var timeline = this.timelineRepository.GetTimelineByFlight(new Timeline { Sequence = itinerary.Sequence, AirlineCode = itinerary.AirlineCode, FlightNumber = itinerary.FlightNumber, ItineraryKey = itinerary.ItineraryKey });
+            if (timeline != null)
+            {
+                this.timelineRepository.Delete(timeline);
             }
         }
 
@@ -241,6 +399,7 @@ namespace VOI.SISAC.Business.Itineraries
 
                 if (this.isFlightItineraryIncorrectArrivalDate(itineraryDto))
                 {
+
                     throw new BusinessException(Messages.FailedInsertRecord, 22);
                 }
 

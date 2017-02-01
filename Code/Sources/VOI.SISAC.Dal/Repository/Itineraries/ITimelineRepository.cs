@@ -38,5 +38,12 @@ namespace VOI.SISAC.Dal.Repository.Itineraries
         /// <param name="endDate">The end date.</param>
         /// <returns></returns>
         bool TimelineStartProcess(DateTime? startDate, DateTime? endDate);
+
+        /// <summary>
+        /// Gets the timeline paged.
+        /// </summary>
+        /// <param name="timeline">The timeline.</param>
+        /// <returns></returns>
+        List<Timeline> GetTimelinePaged(Timeline timeline);
     }
 }

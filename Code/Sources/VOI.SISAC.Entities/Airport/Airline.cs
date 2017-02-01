@@ -75,6 +75,12 @@ namespace VOI.SISAC.Entities.Airport
         /// </value>
         public string Division { get; set; }
 
+        /// </summary>
+        /// <value>
+        /// The division.
+        /// </value>
+        public string BusinessName { get; set; }
+
         /// <summary>
         /// Gets or sets the cost centers.
         /// </summary>

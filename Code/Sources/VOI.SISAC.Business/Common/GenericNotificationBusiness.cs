@@ -46,14 +46,13 @@ namespace VOI.SISAC.Business.Common
                 MailMessage mail = new MailMessage();
                 mail.IsBodyHtml = true;
                 SmtpClient smtp = new SmtpClient(myModel.SmtpClient);
-                Notifications.ServiceNotificationsClient wcf = new Notifications.ServiceNotificationsClient();
+                VOINotifications.ServiceNotificationsClient wcf = new VOINotifications.ServiceNotificationsClient();
 
                 try
                 {
-                    string token = string.Empty;
+                    var token = string.Empty;
                     token = wcf.GetAuthenticationToken(myModel.UserToken, myModel.PasswordToken);
-                    wcf.SendEmailAttachedFile(myModel.To, myModel.Subject, myModel.Body, true, GetBytes(string.Join("\n", myModel.Errors)), myModel.AttachedFileName, token);
-
+                    wcf.SendEmailSubject(myModel.Subject, myModel.To, myModel.Body, true, token);
                 }
                 catch (SmtpException ex)
                 {
@@ -204,7 +203,7 @@ namespace VOI.SISAC.Business.Common
                 "<tr>\n" +
                 "<td class=\'container-padding footer-text\' align=\'left\' style=\'font-family:Helvetica, Arial, sans-serif;font-size:12px;line-height:16px;color:#aaaaaa;padding-left:24px;padding-right:24px\'>\n" +
                 "<br>\n" +
-                "<br> \u00ae 2016 Volaris y su logo son marcas registradas de Volaris\n" +
+                "<br> \u00ae " + DateTime.Now.Year.ToString() + " Volaris y su logo son marcas registradas de Volaris\n" +
                 "<br>\n" +
                 "<a href=\'https://www.volaris.com/\' style=\'color:#aaaaaa\'>https://www.volaris.com/</a>\n" +
                 "<br>\n" +

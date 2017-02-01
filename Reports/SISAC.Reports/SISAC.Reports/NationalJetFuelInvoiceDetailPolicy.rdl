@@ -6955,7 +6955,7 @@
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="dsSISAC">
-      <DataSourceReference>dsSISAC</DataSourceReference>
+      <DataSourceReference>DS_SISAC</DataSourceReference>
       <rd:SecurityType>None</rd:SecurityType>
       <rd:DataSourceID>9f03db1f-019f-4509-bc5f-20c5181daff1</rd:DataSourceID>
     </DataSource>

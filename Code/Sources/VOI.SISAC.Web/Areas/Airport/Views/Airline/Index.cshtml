@@ -31,6 +31,10 @@
         data-page-size="10">
         <thead>
             <tr>
+                @if (User.IsInRole("AIRLINE-UPD") || User.IsInRole("AIRLINE-DEL"))
+                {
+                    <th data-field="Acctions" data-align="center" data-halign="center"><strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong></th>
+                }
                 <th data-field="AirlineCode" data-halign="center" data-align="center" data-sortable="true">
                     <strong>@Html.DisplayNameFor(model => model.AirlineCode)</strong>
                 </th>
@@ -46,10 +50,9 @@
                 <th data-field="Division" data-halign="center" data-align="center" data-sortable="true">
                     <strong>@Html.DisplayNameFor(model => model.Division)</strong>
                 </th>
-                @if (User.IsInRole("AIRLINE-UPD") || User.IsInRole("AIRLINE-DEL"))
-                { 
-                    <th data-field="Acctions" data-align="center" data-halign="center"><strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong></th>
-                }
+                <th data-field="BusinessName" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.BusinessName)</strong>
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -58,6 +61,19 @@
                 foreach (var item in Model)
                 {
                 <tr>
+                    @if (User.IsInRole("AIRLINE-UPD") || User.IsInRole("AIRLINE-DEL"))
+                    {
+                        <td>
+                            @if (User.IsInRole("AIRLINE-UPD"))
+                            {
+                                <button class="btn btn-default" type="button" name="Edit" title="@VOI.SISAC.Web.Resources.Resource.Edit" onclick="location.href='@Url.Action("Edit", "Airline", new { id = item.AirlineCode })'"><i class="fa fa-pencil fa-fw"></i></button>
+                            }
+                            @if (User.IsInRole("AIRLINE-DEL"))
+                            {
+                                <button class="btn btn-default" type="button" name="Delete" title="@VOI.SISAC.Web.Resources.Resource.Delete" onclick="location.href='@Url.Action("Delete", "Airline", new { id = item.AirlineCode })'"><i class="fa fa-trash-o fa-fw"></i></button>
+                            }
+                        </td>
+                    }
                     <td>
                         @Html.DisplayFor(modelItem => item.AirlineCode)
                     </td>
@@ -73,20 +89,9 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Division)
                     </td>
-
-                    @if (User.IsInRole("AIRLINE-UPD") || User.IsInRole("AIRLINE-DEL"))
-                    { 
-                        <td>
-                            @if (User.IsInRole("AIRLINE-UPD"))
-                            {
-                                <button class="btn btn-default" type="button" name="Edit" title="@VOI.SISAC.Web.Resources.Resource.Edit" onclick="location.href='@Url.Action("Edit", "Airline", new { id = item.AirlineCode })'"><i class="fa fa-pencil fa-fw"></i></button>
-                            }
-                            @if (User.IsInRole("AIRLINE-DEL"))
-                            { 
-                                <button class="btn btn-default" type="button" name="Delete" title="@VOI.SISAC.Web.Resources.Resource.Delete" onclick="location.href='@Url.Action("Delete", "Airline", new { id = item.AirlineCode })'"><i class="fa fa-trash-o fa-fw"></i></button>
-                            }
-                        </td>
-                    }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BusinessName)
+                    </td>
                 </tr>
                 }
             }

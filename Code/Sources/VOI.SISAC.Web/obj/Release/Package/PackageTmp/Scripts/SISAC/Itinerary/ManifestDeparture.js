@@ -1,5 +1,6 @@
 ﻿var dt;
-var $table = $('#table-boarding');
+var $tableBoarding = $('#table-boarding');
+var us = [];
 
 var ManifestDepartureController = {
     checkDataOperation: function () {
@@ -20,8 +21,7 @@ var ManifestDepartureController = {
                     var json = JSON.parse(data);
                     if (jetFuel > json.FuelInKg
                         || realTakeoffWeight > json.MaximumTakeoffWeight
-                        || operatingWeight > json.EmptyOperatingWeight)
-                    {
+                        || operatingWeight > json.EmptyOperatingWeight) {
                         result = jetFuel > json.FuelInKg ? 1 : (realTakeoffWeight > json.MaximumTakeoffWeight ? 2 : (operatingWeight > json.EmptyOperatingWeight ? 3 : 0));
                     }
                     else {
@@ -280,11 +280,11 @@ var ManifestDepartureController = {
     deleteButtonFormat: function (value, row, index) {
         var code = '';
         var str = row.DelayCode;
-        var inputValue = str.substr(str.indexOf('>')+1, str.length);
+        var inputValue = str.substr(str.indexOf('>') + 1, str.length);
         if (str.indexOf('>') > 0) {
             code = inputValue;
         }
-        else if (row) {             
+        else if (row) {
             code = row.DelayCode;
         }
         return '<button class=\"btn btn-default\" type=\"button\" title=\"remove\" onclick=\"ManifestDepartureController.removeDelay(\'' + code + '\')\"><i class=\"fa fa-minus\"></i></button>'
@@ -295,7 +295,6 @@ var ManifestDepartureController = {
         }
     },
     getUsersCombo: function () {
-
         $('#user-1').html("");
         $('#user-2').html("");
         var stationCode = $('#DepartureStationCode').val();
@@ -307,6 +306,7 @@ var ManifestDepartureController = {
             async: false,
             success: function (data) {
                 if (data) {
+                    us[0] = data;
                     var user_1 = document.getElementById("user-1");
                     var user_2 = document.getElementById("user-2");
                     $.each(data, function (index, item) {
@@ -394,10 +394,9 @@ var ManifestDepartureController = {
             });
         }
     },
-
     //Boarding Inicio   
     addAttrToBoardingTable: function () {
-        var items = $table.bootstrapTable('getData');
+        var items = $tableBoarding.bootstrapTable('getData');
         $('#divHidden').html('');
 
         if (items.length > 0) {
@@ -415,10 +414,10 @@ var ManifestDepartureController = {
                     inputHidden = inputHidden + '<input name=\'ManifestDepartureBoardings[' + index + '].PassengerMinor\' type=\'hidden\' value=\'' + ManifestDepartureController.tryParseInt(document.getElementById('PassengerMinor' + item.Position).innerHTML, 0) + '\'>';
                     inputHidden = inputHidden + '<input name=\'ManifestDepartureBoardings[' + index + '].PassengerInfant\' type=\'hidden\' value=\'' + ManifestDepartureController.tryParseInt(document.getElementById('PassengerInfant' + item.Position).innerHTML, 0) + '\'>';
 
-                    inputHidden = inputHidden + '<input name=\'ManifestDepartureBoardings[' + index + '].LuggageQuantity\' type=\'hidden\' value=\'' + ManifestDepartureController.tryParseInt(document.getElementById('LuggageQuantity' + item.Position).innerHTML, 0) + '\'>';
-                    inputHidden = inputHidden + '<input name=\'ManifestDepartureBoardings[' + index + '].LuggageKgs\' type=\'hidden\' value=\'' + ManifestDepartureController.tryParseFloat(document.getElementById('LuggageKgs' + item.Position).innerHTML, 0) + '\'>';
-                    inputHidden = inputHidden + '<input name=\'ManifestDepartureBoardings[' + index + '].ChargeQuantity\' type=\'hidden\' value=\'' + ManifestDepartureController.tryParseInt(document.getElementById('ChargeQuantity' + item.Position).innerHTML, 0) + '\'>';
-                    inputHidden = inputHidden + '<input name=\'ManifestDepartureBoardings[' + index + '].ChargeKgs\' type=\'hidden\' value=\'' + ManifestDepartureController.tryParseFloat(document.getElementById('ChargeKgs' + item.Position).innerHTML, 0) + '\'>';
+                    inputHidden = inputHidden + '<input name=\'ManifestDepartureBoardings[' + index + '].LuggageQuantity\' type=\'hidden\' value=\'' + ManifestDepartureController.tryParseInt(item.LuggageQuantity, 0) + '\'>';
+                    inputHidden = inputHidden + '<input name=\'ManifestDepartureBoardings[' + index + '].LuggageKgs\' type=\'hidden\' value=\'' + ManifestDepartureController.tryParseFloat(item.LuggageKgs, 0) + '\'>';
+                    inputHidden = inputHidden + '<input name=\'ManifestDepartureBoardings[' + index + '].ChargeQuantity\' type=\'hidden\' value=\'' + ManifestDepartureController.tryParseInt(item.ChargeQuantity, 0) + '\'>';
+                    inputHidden = inputHidden + '<input name=\'ManifestDepartureBoardings[' + index + '].ChargeKgs\' type=\'hidden\' value=\'' + ManifestDepartureController.tryParseFloat(item.ChargeKgs, 0) + '\'>';
 
                     inputHidden = inputHidden + '<input name=\'ManifestDepartureBoardings[' + index + '].MailQuantity\' type=\'hidden\' value=\'' + ManifestDepartureController.tryParseInt(document.getElementById('MailQuantity' + item.Position).innerHTML, 0) + '\'>';
                     inputHidden = inputHidden + '<input name=\'ManifestDepartureBoardings[' + index + '].MailKgs\' type=\'hidden\' value=\'' + ManifestDepartureController.tryParseFloat(document.getElementById('MailKgs' + item.Position).innerHTML, 0) + '\'>';
@@ -428,11 +427,10 @@ var ManifestDepartureController = {
             });
         }
     },
-
-    tryParseInt: function(str,defaultValue) {
+    tryParseInt: function (str, defaultValue) {
         var retValue = defaultValue;
-        if(str !== null) {
-            if(str.length > 0) {
+        if (str !== null) {
+            if (str.length > 0) {
                 if (!isNaN(str)) {
                     retValue = parseInt(str);
                 }
@@ -440,7 +438,6 @@ var ManifestDepartureController = {
         }
         return retValue;
     },
-
     tryParseFloat: function (str, defaultValue) {
         var retValue = defaultValue;
         if (str !== null) {
@@ -452,7 +449,6 @@ var ManifestDepartureController = {
         }
         return retValue;
     },
-
     validatesPrevious: function (value) {
         if (value > 1 && $('#Station' + (value - 1)).html() == 'Empty') {
             if (currentLang.includes("es")) {
@@ -474,31 +470,172 @@ var ManifestDepartureController = {
             return;
         }
     },
-
     //Boarding information Inicio
+    addBoardingInfo: function (BoardingID, Position) {
+        if ($('#charge-info-modal')) { // If the modal exists
 
-    addBoardingInfo: function (BoardingID, Position) {        
-        //ManifestDepartureController.setAddBoardingDetailInit(BoardingID, Position);
-        ManifestDepartureController.setAddBoardingInfoInit(BoardingID, Position);       
+            // hides the boarding info sections
+            var pos = $('div[id^="detail-section-"]').length;
+            for (var i = 1; i <= pos; i++) {
+                $('#detail-section-' + i).hide();
+            }
+
+            // If the section does not have information then sets the structure and gets the information
+            if ($('#detail-section-' + Position).html() == '') {
+                var html = '<div id="comp-section-' + Position + '" class="row"></div><br />' +
+                           '<div id="totals-section-' + Position + '" class="show-group-border row"></div><br />' +
+                           '<div id="info-section-' + Position + '" class="show-group-border row"></div><br />' +
+                           '<div id="aor-section-' + Position + '" class="show-group-border row"></div>';
+                $('#detail-section-' + Position).append(html);
+
+                // draws the total sections
+                ManifestDepartureController.setTotalSectionInit(Position);
+
+                // gets and sets the table section
+                ManifestDepartureController.setAddBoardingDetailInit(BoardingID, Position);
+
+                // gets and sets the innformation section (checkbox)
+                ManifestDepartureController.setAddBoardingInfoInit(BoardingID, Position);
+
+                // gets and sets the aor section
+                ManifestDepartureController.setAorSection(Position);
+            }
+
+            // shows the selected DIV
+            $('#tb-selected').val(Position);
+            $('#detail-section-' + Position).show();
+        }
     },
+    setAorSection: function (position) {
+        var html = '<div id="aor-section-' + position + '" class="show-group-border row">' +
+                        '<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">' +
+                            '<label class="subtitle_h5 control-label required-field">Responsable en Rampa</label>' +
+                            '<input type="text" class="inputForm form-control" id="comp-ramp-' + position + '"' +
+                                ' name="ManifestDepartureBoardings[' + (position - 1) + '].ManifestDepartureBoardingDetails[0].RampResponsible"' +
+                                ' value="' + us[1].RampResponsible + '"/>' +
+                            '<span id="comp-ramp-' + position + '-err" class="text-danger text-danger-error"></span>' +
+                        '</div>' +
+                        '<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">' +
+                            '<label class="subtitle_h5 control-label required-field">AOR</label>' +
+                            '<select class="inputForm form-control combobox remove-ms-clear"' +
+                                ' id="aor-select-' + position + '"' +
+                                ' name="ManifestDepartureBoardings[' + (position - 1) + '].ManifestDepartureBoardingDetails[0].AorUserID">' +
+                            '</select>' +
+                            '<span id="aor-select-' + position + '-err" class="text-danger text-danger-error"></span>' +
+                        '</div>' +
+                        '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">' +
+                            '<label class="subtitle_h5 control-label">Observaciones</label>' +
+                            '<textarea class="inputForm form-control" id="comp-remark-' + position + '" cols="120"' +
+                                ' name="ManifestDepartureBoardings[' + (position - 1) + '].ManifestDepartureBoardingDetails[0].Remarks">' +
+                                us[1].Remarks +
+                            '</textarea>' +
+                        '</div>' +
+                    '</div>';
+        $('#aor-section-' + position).append(html);
 
+        if (us[0]) {
+            $.each(us[0], function (index, item) {
+                if (index === 0) {
+                    $('#aor-select-' + position).append(ManifestDepartureController.createOptionTag('', ''));
+                }
+
+                $('#aor-select-' + position).append(ManifestDepartureController.createOptionTag(item.Id, item.Description, '', '', ''));
+            });
+        }
+        $('#aor-select-' + position).combobox();
+        $('#aor-select-' + position).val(us[1].AorUserID);
+        $('#aor-select-' + position).data('combobox').refresh();
+    },
+    setTotalSectionInit: function (position) {
+        var html = '<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">' +
+                        '<span>' +
+                            '<strong>' +
+                                'Total Carga:&nbsp;&nbsp;' +
+                                '<span id="comp-' + position + '-total-ch-pc"></span>' +
+                                '&nbsp;pzas' +
+                                '&nbsp;/&nbsp;' +
+                                '<span id="comp-' + position + '-total-ch-wg"></span>' +
+                                '&nbsp;Kg' +
+                            '</strong>' +
+                        '</span>' +
+                    '</div>' +
+                    '<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">' +
+                        '<span>' +
+                            '<strong>' +
+                                'Total Equipaje:&nbsp;&nbsp' +
+                                '<span id="comp-' + position + '-total-eq-pc"></span>' +
+                                '&nbsp;pzas' +
+                                '&nbsp;/&nbsp;' +
+                                '<span id="comp-' + position + '-total-eq-wg"></span>' +
+                                '&nbsp;Kg' +
+                            '</strong>' +
+                        '</span>' +
+                    '</div>' +
+                    '<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">' +
+                        '<span>' +
+                            '<strong>' +
+                                'Total:&nbsp;&nbsp;' +
+                                '<span id="comp-' + position + '-total"></span>' +
+                            '</strong>' +
+                        '</span>' +
+                    '</div>';
+
+        $('#totals-section-' + position).append(html);
+    },
     setAddBoardingInfoInit: function (BoardingID, Position) {
-        if ($('#add-boarding-info-modal')) {
+        var $divDetail = $('#detail-section-' + Position.toString()); // Finds the the DIV's that will contain the information for the selected position
+        var $divInfo = $('#info-section-' + Position.toString());
+        if ($divDetail && !$divInfo.html()) {
+            $.ajax({
+                url: '../ManifestDeparture/GetBoardingInformationForManifest',
+                type: "POST",
+                dataType: "JSON",
+                data: {
+                    boardingID: BoardingID,
+                    Sequence: $('#Sequence').val(),
+                    AirlineCode: $('#AirlineCode').val(),
+                    FlightNumber: $('#FlightNumber').val(),
+                    ItineraryKey: $('#ItineraryKey').val()
+                },
+                async: false,
+                success: function (data) {
+                    $('#info-section-' + Position.toString()).empty();
+                    if (data) {
+                        $.each(data, function (index, item) {
+                            var checked = item.Checked ? 'checked="' + item.Checked + '"' : '';
+                            var id = item.CompartmentTypeInformationID.toString() + item.CompartmentTypeID.toString() + Position.toString();
+                            var html = '<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">' +
+                                            '<input name="ManifestDepartureBoardings[' + (Position - 1) + '].ManifestDepartureBoardingInformations[' + index + '].Checked"' +
+                                                'class="checkVolaris top-padding" id="' + id + '" type="checkbox" ' + checked + ' value="true" />' +
+                                            '<label class="control_gris" for="' + id + '" name="ManifestDepartureBoardings[' + (Position - 1) + '].ManifestDepartureBoardingInformations[' + index + '].Checked" ' +
+                                                'value="' + id + '"><span></span></label>' +
+                                            '<input name="ManifestDepartureBoardings[' + (Position - 1) + '].ManifestDepartureBoardingInformations[' + index + '].CompartmentTypeInformationID" ' +
+                                                'type="hidden" value="' + item.CompartmentTypeInformationID + '" />' +
+                                            '<input name="ManifestDepartureBoardings[' + (Position - 1) + '].ManifestDepartureBoardingInformations[' + index + '].CompartmentTypeID" ' +
+                                                'type="hidden" value="' + item.CompartmentTypeID + '">' +
+                                            '<input name="ManifestDepartureBoardings[' + (Position - 1) + '].ManifestDepartureBoardingInformations[' + index + '].BoardingID" ' +
+                                                'type="hidden" value="' + item.BoardingID + '">' +
+                                            '<input name="ManifestDepartureBoardings[' + (Position - 1) + '].ManifestDepartureBoardingInformations[' + index + '].BoardingInformationID" ' +
+                                                'type="hidden" value="' + item.BoardingInformationID + '">' +
+                                            '<label class="subtitle_h6_blue">' + item.CompartmentTypeInformationName.toString() + ' (' + item.CompartmentTypeName.toString() + ')</label>' +
+                                        '</div>';
 
-            //ocultar 5 divs de las posiciones
-            $('#InformationSection1').hide();
-            $('#InformationSection2').hide();
-            $('#InformationSection3').hide();
-            $('#InformationSection4').hide();
-            $('#InformationSection5').hide();           
-
-            $('#InformationSection' + Position.toString()).show();
-            var divText = $('#InformationSection' + Position.toString()).html().toString();
-
-            if (!(divText.indexOf('ManifestDepartureBoardings') > 0)) {
-
+                            $('#info-section-' + Position.toString()).append(html);
+                        });
+                    }
+                },
+                error: function (result) {
+                    console.log('ERROR ' + result.status + ' ' + result.statusText);
+                }
+            });
+        }
+    },
+    setAddBoardingDetailInit: function (BoardingID, Position) {
+        if ($('#charge-info-modal')) { // If the modal exists
+            var $divText = $('#detail-section-' + Position.toString()); // Finds the the DIV that will contain the information for the selected position
+            if ($divText && $divText.html() != '') { // TODO: Modificar esta validación
                 $.ajax({
-                    url: '../ManifestDeparture/GetBoardingInformationForManifest',
+                    url: '../ManifestDeparture/GetBoardingDetailForManifest',
                     type: "POST",
                     dataType: "JSON",
                     data: {
@@ -510,197 +647,215 @@ var ManifestDepartureController = {
                     },
                     async: false,
                     success: function (data) {
-                        $('#InformationSection' + Position.toString()).empty();
+                        $('#comp-section-' + Position.toString()).empty();
                         if (data) {
+                            var columns = [[], []];
+                            var info = [{}, {}, {}, {}];
+                            var upHeader = 1, lowHeader = 0, ind = 100;
+                            var table = '<table id="tb-comp-' + Position.toString() + '"></table>'; // creates the table
+                            var numComp = data.length;
+
+                            $('#comp-section-' + Position.toString()).append(table);
+                            columns[0][0] = { field: 'tb-comp-' + Position + '-lb', rowspan: 2, align: 'left', valign: 'middle', halign: "center" };
+
+                            info[0]['tb-comp-' + Position + '-lb'] = "Piezas";
+                            info[1]['tb-comp-' + Position + '-lb'] = "Peso";
+                            info[2]['tb-comp-' + Position + '-lb'] = "Total Peso";
+                            info[3]['tb-comp-' + Position + '-lb'] = "Total Máximo";
+
                             $.each(data, function (index, item) {
-                                var divCheckBox = $(document.createElement('div'));
-                                divCheckBox.addClass('col-xs-12 col-sm-12 col-md-3 col-lg-3');
+                                // Sets the upper header
+                                columns[0][upHeader++] = { title: item.CompartmentTypeName, colspan: 2, align: 'center', valign: 'middle' };
 
-                                var inputCheckBox = $(document.createElement('input')).attr({
-                                    id: item.CompartmentTypeInformationID.toString() + item.CompartmentTypeID.toString() + Position.toString(),
-                                    name: 'ManifestDepartureBoardings[' + (Position - 1) + '].ManifestDepartureBoardingInformations[' + index + '].Checked',
-                                    type: 'checkbox',
-                                    checked: item.Checked,
-                                    value: true
-                                });
-                                inputCheckBox.addClass('checkVolaris top-padding');
+                                // Sets the lower headers
+                                columns[1][lowHeader++] = {
+                                    field: 'tb-comp-' + Position + '-ch-' + (index + 1),
+                                    title: 'Carga',
+                                    align: 'center',
+                                    valign: 'middle'
+                                };
+                                columns[1][lowHeader++] = {
+                                    field: 'tb-comp-' + Position + '-eq-' + (index + 1),
+                                    title: 'Equipo',
+                                    align: 'center',
+                                    valign: 'middle'
+                                };
 
-                                var labelInput = $(document.createElement('label')).attr({
-                                    'for': item.CompartmentTypeInformationID.toString()  + item.CompartmentTypeID.toString() + Position.toString(),
-                                    name: 'ManifestDepartureBoardings[' + (Position - 1) + '].ManifestDepartureBoardingInformations[' + index + '].Checked',
-                                    value: item.CompartmentTypeInformationID.toString() + item.CompartmentTypeID.toString() + Position.toString()
-                                });
-                                labelInput.addClass('control_gris');
-                                labelInput.append('<span></span>');
+                                // Hidden info 
+                                var hidden = '<input value="' + item.BoardingDetailID + '" name="ManifestDepartureBoardings[' + (Position - 1) + '].ManifestDepartureBoardingDetails[' + index + '].BoardingDetailID" type="hidden" />' +
+                                             '<input value="' + item.BoardingID + '" name="ManifestDepartureBoardings[' + (Position - 1) + '].ManifestDepartureBoardingDetails[' + index + '].BoardingID" type="hidden" />' +
+                                             '<input value="' + item.CompartmentTypeID + '" name="ManifestDepartureBoardings[' + (Position - 1) + '].ManifestDepartureBoardingDetails[' + index + '].CompartmentTypeID" type="hidden" />'
 
-                                var inputHiddenCheckBox = $(document.createElement('input')).attr({
-                                    name: 'ManifestDepartureBoardings[' + (Position - 1) + '].ManifestDepartureBoardingInformations[' + index + '].CompartmentTypeInformationID',
-                                    type: 'hidden',
-                                    value: item.CompartmentTypeInformationID,
-                                });
+                                // Sets the information
+                                // First row
+                                var element = 'ch-pc';
+                                info[0]['tb-comp-' + Position + '-ch-' + (index + 1)] = '<input value="' + item.ChargeQuantity + '" name="ManifestDepartureBoardings[' + (Position - 1) + '].ManifestDepartureBoardingDetails[' + index + '].ChargeQuantity"' +
+                                                                                            ' type="number" class="form-control total-value remove-ms-clear" onkeypress="return commonFunctions.validarNumeroDecimal(event, this, 18, 5);"' +
+                                                                                            ' onchange="ManifestDepartureController.sumTotals(' + Position + ',' + numComp + ',\'' + element + '\')"' +
+                                                                                            ' onkeyup="return commonFunctions.validarNumeroDecimal(event, this, 18, 5);" tabindex="' + ind++ + '" id="tb-comp-' + Position + '-ch-pc-' + index + '" />';
 
-                                var inputHiddenCheckBox2 = $(document.createElement('input')).attr({
-                                    name: 'ManifestDepartureBoardings[' + (Position - 1) + '].ManifestDepartureBoardingInformations[' + index + '].CompartmentTypeID',
-                                    type: 'hidden',
-                                    value: item.CompartmentTypeID,
-                                });
+                                element = 'eq-pc';
+                                info[0]['tb-comp-' + Position + '-eq-' + (index + 1)] = '<input value="' + item.LuggageQuantity + '" name="ManifestDepartureBoardings[' + (Position - 1) + '].ManifestDepartureBoardingDetails[' + index + '].LuggageQuantity"' +
+                                                                                            ' type="number" class="form-control total-value remove-ms-clear" onkeypress="return commonFunctions.validarNumeroDecimal(event, this, 18, 5);"' +
+                                                                                            ' onchange="ManifestDepartureController.sumTotals(' + Position + ',' + numComp + ',\'' + element + '\')"' +
+                                                                                            ' onkeyup="return commonFunctions.validarNumeroDecimal(event, this, 18, 5);" tabindex="' + ind++ + '" id="tb-comp-' + Position + '-eq-pc-' + index + '" />' +
+                                                                                            hidden;
 
-                                var inputHiddenCheckBox3 = $(document.createElement('input')).attr({
-                                    name: 'ManifestDepartureBoardings[' + (Position - 1) + '].ManifestDepartureBoardingInformations[' + index + '].BoardingID',
-                                    type: 'hidden',
-                                    value: item.BoardingID,
-                                });
+                                // Second row
+                                element = 'ch-wg';
+                                info[1]['tb-comp-' + Position + '-ch-' + (index + 1)] = '<input value="' + item.ChargeKgs + '" name="ManifestDepartureBoardings[' + (Position - 1) + '].ManifestDepartureBoardingDetails[' + index + '].ChargeKgs"' +
+                                                                                            ' type="number" class="form-control total-value remove-ms-clear" onkeypress="return commonFunctions.validarNumeroDecimal(event, this, 18, 5);"' +
+                                                                                            ' onchange="ManifestDepartureController.sumWeight(' + Position + ',' + index + '); ManifestDepartureController.sumTotals(' + Position + ',' + numComp + ',\'' + element + '\')";' +
+                                                                                            ' onkeyup="return commonFunctions.validarNumeroDecimal(event, this, 18, 5);" tabindex="' + ind++ + '" id="tb-comp-' + Position + '-ch-wg-' + index + '" />';
 
-                                var inputHiddenCheckBox4 = $(document.createElement('input')).attr({
-                                    name: 'ManifestDepartureBoardings[' + (Position - 1) + '].ManifestDepartureBoardingInformations[' + index + '].BoardingInformationID',
-                                    type: 'hidden',
-                                    value: item.BoardingInformationID,
-                                });
+                                element = 'eq-wg';
+                                info[1]['tb-comp-' + Position + '-eq-' + (index + 1)] = '<input value="' + item.LuggageKgs + '" name="ManifestDepartureBoardings[' + (Position - 1) + '].ManifestDepartureBoardingDetails[' + index + '].LuggageKgs"' +
+                                                                                            ' type="number" class="form-control total-value remove-ms-clear" onkeypress="return commonFunctions.validarNumeroDecimal(event, this, 18, 5);"' +
+                                                                                            ' onchange="ManifestDepartureController.sumWeight(' + Position + ',' + index + '); ManifestDepartureController.sumTotals(' + Position + ',' + numComp + ',\'' + element + '\')";' +
+                                                                                            ' onkeyup="return commonFunctions.validarNumeroDecimal(event, this, 18, 5);" tabindex="' + ind++ + '" id="tb-comp-' + Position + '-eq-wg-' + index + '" />';
 
-                                var labelDescription = $(document.createElement('label')).text(item.CompartmentTypeInformationName.toString() + " (" + item.CompartmentTypeName.toString() + ")");
-                                labelDescription.addClass('subtitle_h6_blue');
+                                info[2]['tb-comp-' + Position + '-ch-' + (index + 1)] = '<span id="tb-comp-' + Position + '-total-wg-' + index + '">' + (item.ChargeKgs + item.LuggageKgs) + ' Kg' + '</span>';
+                                info[3]['tb-comp-' + Position + '-ch-' + (index + 1)] = '<span id="tb-comp-' + Position + '-total-wg-' + index + '">' + item.MaximumWeight + '</span>';
 
-                                divCheckBox.append(inputCheckBox);
-                                divCheckBox.append(labelInput);
-                                divCheckBox.append(inputHiddenCheckBox);
-                                divCheckBox.append(inputHiddenCheckBox2);
-                                divCheckBox.append(inputHiddenCheckBox3);
-                                divCheckBox.append(inputHiddenCheckBox4);
-                                divCheckBox.append(labelDescription);
-
-                                $('#InformationSection' + Position.toString()).append(divCheckBox);
+                                if (index == 0) {
+                                    us[1] = {
+                                        RampResponsible: item.RampResponsible != null ? item.RampResponsible : '',
+                                        AorUserID: item.AorUserID,
+                                        Remarks: item.Remarks != null ? item.Remarks : ''
+                                    };
+                                }
                             });
+
+                            $('#tb-comp-' + Position).bootstrapTable({
+                                columns: columns,
+                                data: info
+                            });
+
+                            for (var i = 1; i <= numComp; i++) {
+                                $('#tb-comp-' + Position).bootstrapTable('mergeCells', {
+                                    index: 2,
+                                    field: 'tb-comp-' + Position + '-ch-' + i,
+                                    colspan: 2,
+                                    rowspan: 1
+                                })
+                                $('#tb-comp-' + Position).bootstrapTable('mergeCells', {
+                                    index: 3,
+                                    field: 'tb-comp-' + Position + '-ch-' + i,
+                                    colspan: 2,
+                                    rowspan: 1
+                                })
+                            }
+
+                            ManifestDepartureController.sumTotals(Position, numComp, 'ch-pc');
+                            ManifestDepartureController.sumTotals(Position, numComp, 'eq-pc');
+                            ManifestDepartureController.sumTotals(Position, numComp, 'ch-wg');
+                            ManifestDepartureController.sumTotals(Position, numComp, 'eq-wg');
                         }
                     },
                     error: function (result) {
                         console.log('ERROR ' + result.status + ' ' + result.statusText);
                     }
                 });
-            }            
+            }
         }
     },
+    sumWeight: function (pos, idx) {
+        var $chargeWg = $('#tb-comp-' + pos + '-ch-wg-' + idx);
+        var $equipmentWg = $('#tb-comp-' + pos + '-eq-wg-' + idx);
 
-    setAddBoardingDetailInit: function (BoardingID, Position) {
-        if ($('#add-boarding-info-modal')) {
+        if ($chargeWg && $equipmentWg) {
+            var eq, ch;
+            if (!isNaN($equipmentWg.val()) && $equipmentWg.val()) {
+                eq = $equipmentWg.val();
+            }
+            else {
+                $equipmentWg.val(0)
+                eq = $equipmentWg.val();
+            }
 
-            ////ocultar 5 divs de las posiciones
-            //$('#InformationSection1').hide();
-            //$('#InformationSection2').hide();
-            //$('#InformationSection3').hide();
-            //$('#InformationSection4').hide();
-            //$('#InformationSection5').hide();
+            if (!isNaN($chargeWg.val()) && $chargeWg.val()) {
+                ch = $chargeWg.val();
+            }
+            else {
+                $chargeWg.val(0);
+                ch = $chargeWg.val();
+            }
 
-            //$('#InformationSection' + Position.toString()).show();
-            //var divText = $('#InformationSection' + Position.toString()).html().toString();
-
-            //if (!(divText.indexOf('ManifestDepartureBoardings') > 0)) {
-
-                $.ajax({
-                    url: '../ManifestDeparture/GetBoardingDetailForManifest',
-                    type: "POST",
-                    dataType: "JSON",
-                    data: { boardingID: BoardingID },
-                    async: false,
-                    success: function (data) {
-                        //$('#InformationSection' + Position.toString()).empty();
-                        if (data) {
-                            $.each(data, function (index, item) {
-                                var divCheckBox = $(document.createElement('div'));
-                                divCheckBox.addClass('col-xs-12 col-sm-12 col-md-3 col-lg-3');
-
-                                var inputCheckBox = $(document.createElement('input')).attr({
-                                    id: item.CompartmentTypeInformationID.toString() + "/" + item.CompartmentTypeID.toString() + Position.toString(),
-                                    name: 'ManifestDepartureBoardings[' + (Position - 1) + '].ManifestDepartureBoardingInformations[' + index + '].Checked',
-                                    type: 'checkbox',
-                                    checked: item.Checked,
-                                    value: true
-                                });
-                                inputCheckBox.addClass('checkVolaris top-padding');
-
-                                var labelInput = $(document.createElement('label')).attr({
-                                    'for': item.CompartmentTypeInformationID.toString() + "/" + item.CompartmentTypeID.toString() + Position.toString(),
-                                    name: 'ManifestDepartureBoardings[' + (Position - 1) + '].ManifestDepartureBoardingInformations[' + index + '].Checked',
-                                    value: item.CompartmentTypeInformationID.toString() + "/" + item.CompartmentTypeID.toString() + Position.toString()
-                                });
-                                labelInput.addClass('control_gris');
-                                labelInput.append('<span></span>');
-
-                                var inputHiddenCheckBox = $(document.createElement('input')).attr({
-                                    name: 'ManifestDepartureBoardings[' + (Position - 1) + '].ManifestDepartureBoardingInformations[' + index + '].CompartmentTypeInformationID',
-                                    type: 'hidden',
-                                    value: item.CompartmentTypeInformationID,
-                                });
-
-                                var inputHiddenCheckBox2 = $(document.createElement('input')).attr({
-                                    name: 'ManifestDepartureBoardings[' + (Position - 1) + '].ManifestDepartureBoardingInformations[' + index + '].CompartmentTypeID',
-                                    type: 'hidden',
-                                    value: item.CompartmentTypeID,
-                                });
-
-                                var inputHiddenCheckBox3 = $(document.createElement('input')).attr({
-                                    name: 'ManifestDepartureBoardings[' + (Position - 1) + '].ManifestDepartureBoardingInformations[' + index + '].BoardingID',
-                                    type: 'hidden',
-                                    value: item.BoardingID,
-                                });
-
-                                var labelDescription = $(document.createElement('label')).text(item.CompartmentTypeInformationName.toString() + " (" + item.CompartmentTypeName.toString() + ")");
-                                labelDescription.addClass('subtitle_h6_blue');
-
-                                divCheckBox.append(inputCheckBox);
-                                divCheckBox.append(labelInput);
-                                divCheckBox.append(inputHiddenCheckBox);
-                                divCheckBox.append(inputHiddenCheckBox2);
-                                divCheckBox.append(inputHiddenCheckBox3);
-                                divCheckBox.append(labelDescription);
-
-                                $('#InformationSection' + Position.toString()).append(divCheckBox);
-                            });
-                        }
-                    },
-                    error: function (result) {
-                        console.log('ERROR ' + result.status + ' ' + result.statusText);
-                    }
-                });
-            //}
+            var total = parseFloat(ch) + parseFloat(eq);
+            $('#tb-comp-' + pos + '-total-wg-' + idx).html(total + ' <strong>&nbsp;Kg</strong>');
         }
     },
+    sumTotals: function (pos, totalCompartments, element) {
+        var total = 0, inputId, totalId;
+        switch (element) {
+            case 'ch-pc':
+                inputId = '#tb-comp-' + pos + '-ch-pc-';
+                totalId = '#comp-' + pos + '-total-ch-pc';
+                break;
+            case 'eq-pc':
+                inputId = '#tb-comp-' + pos + '-eq-pc-';
+                totalId = '#comp-' + pos + '-total-eq-pc';
+                break;
+            case 'ch-wg':
+                inputId = '#tb-comp-' + pos + '-ch-wg-';
+                totalId = '#comp-' + pos + '-total-ch-wg';
+                break;
+            case 'eq-wg':
+                inputId = '#tb-comp-' + pos + '-eq-wg-';
+                totalId = '#comp-' + pos + '-total-eq-wg';
+                break;
+        }
 
+        if (inputId && totalId) {
+            for (var i = 0; i < totalCompartments; i++) {
+                var value = $(inputId + i.toString()).val();
+                total += !isNaN(value) && value ? parseFloat(value) : 0;
+            }
+
+            if (element == 'ch-pc' || element == 'eq-pc') {
+                total = total;
+            }
+
+            if (element == 'ch-wg' || element == 'eq-wg') {
+                total = total.toFixed(4);
+            }
+
+            $(totalId).html(total);
+            $('#comp-' + pos + '-total').html(
+                parseFloat($('#comp-' + pos + '-total-ch-wg').html()) + parseFloat($('#comp-' + pos + '-total-eq-wg').html()));
+        }
+    },
     validateAddBoardingInfo: function () {
-        //if (!$('#ai-extra').val() || !$('#ai-stewar').val() || !$('#ai-pilots').val()) {
-        //    var message;
-        //    if (currentLang.includes('es')) {
-        //        message = "Campo Requerido";
-        //    }
-        //    else {
-        //        message = "Required Field";
-        //    }
-        //    $('#ai-extra-err').html($('#ai-extra').val() ? '' : message);
-        //    $('#ai-stewar-err').html($('#ai-stewar').val() ? '' : message);
-        //    $('#ai-pilots-err').html($('#ai-pilots').val() ? '' : message);
-        //    return;
-        //}
+        var pos = $('#tb-selected').val();
+        var ramp = $('#comp-ramp-' + pos).val(), aor = $('#aor-select-' + pos).val();
+        if (!ramp || !aor) {
+            var message;
+            if (currentLang.includes('es')) {
+                message = "Campo Requerido";
+            }
+            else {
+                message = "Required Field";
+            }
+            $('#comp-ramp-' + pos + '-err').html(ramp ? '' : message);
+            $('#aor-select-' + pos + '-err').html(aor ? '' : message);
+            return;
+        }
 
-        //$('#Pilot').val($('#ai-pilots').val());
-        //$('#Surcharge').val($('#ai-stewar').val());
-        //$('#ExtraCrew').val($('#ai-extra').val());
-        //$('#TypeFlight').val($('#type').val());
-        //$('#SlotAllocatedTime').val($('#hr-assig').val());
-        //$('#SlotCoordinatedTime').val($('#hr-coord').val());
-        //$('#OvernightEndTime').val($('#hr-end').val());
-        //$('#ManeuverStartTime').val($('#hr-beign').val());
-        //$('#PositionOutputTime').val($('#hr-exit').val());
-        //$('#FirstDelayDescription').val($('#remark-dly-1').val());
-        //$('#SecondDelayDescription').val($('#remark-dly-2').val());
-        //$('#ThirdDelayDescription').val($('#remark-dly-3').val());
+        $('#table-boarding').bootstrapTable(
+            'updateRow',
+            {
+                index: (pos - 1),
+                row: {
+                    LuggageQuantity: $('#comp-' + pos + '-total-eq-pc').html(),
+                    LuggageKgs: $('#comp-' + pos + '-total-eq-wg').html(),
+                    ChargeQuantity: $('#comp-' + pos + '-total-ch-pc').html(),
+                    ChargeKgs: $('#comp-' + pos + '-total-ch-wg').html()
+                }
+            });
 
-        //$('#ai-extra-err').html('');
-        //$('#ai-stewar-err').html('');
-        //$('#ai-pilots-err').html('');
-        $('#add-boarding-info-modal').modal('hide');
+        $('#charge-info-modal').modal('hide');
     },
-
     //Boarding information End
-
     linkFormatterStation: function (value, row, index) {
         var item = value == null ? '' : value;
         return "<a href='#' id='Station" + row.Position + "' onclick='return ManifestDepartureController.validatesPrevious(" + row.Position + ");'>" + item + "</a>";
@@ -717,22 +872,22 @@ var ManifestDepartureController = {
         var item = value == null ? '' : value;
         return "<a href='#' id='PassengerInfant" + row.Position + "' onclick='return ManifestDepartureController.validatesPrevious(" + row.Position + ");'>" + item + "</a>";
     },
-    linkFormatterLuggageQuantity: function (value, row, index) {
-        var item = value == null ? '' : value;
-        return "<a href='#' id='LuggageQuantity" + row.Position + "' onclick='return ManifestDepartureController.validatesPrevious(" + row.Position + ");'>" + item + "</a>";
-    },
-    linkFormatterLuggageKgs: function (value, row, index) {
-        var item = value == null ? '' : value;
-        return "<a href='#' id='LuggageKgs" + row.Position + "' onclick='return ManifestDepartureController.validatesPrevious(" + row.Position + ");'>" + item + "</a>";
-    },
-    linkFormatterChargeQuantity: function (value, row, index) {
-        var item = value == null ? '' : value;
-        return "<a href='#' id='ChargeQuantity" + row.Position + "' onclick='return ManifestDepartureController.validatesPrevious(" + row.Position + ");'>" + item + "</a>";
-    },
-    linkFormatterChargeKgs: function (value, row, index) {
-        var item = value == null ? '' : value;
-        return "<a href='#' id='ChargeKgs" + row.Position + "' onclick='return ManifestDepartureController.validatesPrevious(" + row.Position + ");'>" + item + "</a>";
-    },
+    //linkFormatterLuggageQuantity: function (value, row, index) {
+    //    var item = value == null ? '' : value;
+    //    return "<a href='#' id='LuggageQuantity" + row.Position + "' onclick='return ManifestDepartureController.validatesPrevious(" + row.Position + ");'>" + item + "</a>";
+    //},
+    //linkFormatterLuggageKgs: function (value, row, index) {
+    //    var item = value == null ? '' : value;
+    //    return "<a href='#' id='LuggageKgs" + row.Position + "' onclick='return ManifestDepartureController.validatesPrevious(" + row.Position + ");'>" + item + "</a>";
+    //},
+    //linkFormatterChargeQuantity: function (value, row, index) {
+    //    var item = value == null ? '' : value;
+    //    return "<a href='#' id='ChargeQuantity" + row.Position + "' onclick='return ManifestDepartureController.validatesPrevious(" + row.Position + ");'>" + item + "</a>";
+    //},
+    //linkFormatterChargeKgs: function (value, row, index) {
+    //    var item = value == null ? '' : value;
+    //    return "<a href='#' id='ChargeKgs" + row.Position + "' onclick='return ManifestDepartureController.validatesPrevious(" + row.Position + ");'>" + item + "</a>";
+    //},
     linkFormatterMailQuantity: function (value, row, index) {
         var item = value == null ? '' : value;
         return "<a href='#' id='MailQuantity" + row.Position + "' onclick='return ManifestDepartureController.validatesPrevious(" + row.Position + ");'>" + item + "</a>";
@@ -741,8 +896,23 @@ var ManifestDepartureController = {
         var item = value == null ? '' : value;
         return "<a href='#' id='MailKgs" + row.Position + "' onclick='return ManifestDepartureController.validatesPrevious(" + row.Position + ");'>" + item + "</a>";
     },
-    linkFormatterAction: function (value, row, index) {        
-        return '<button class=\"btn btn-default\" type=\"button\" title=\"Add Information\" data-toggle=\"modal\" data-target=\"#add-boarding-info-modal\" onclick=\"ManifestDepartureController.addBoardingInfo(' + row.BoardingID + ','+ row.Position +')\"><i class=\"fa fa-plus fa-fw\"></i></button>'
+    linkFormatterAction: function (value, row, index) {
+        var html =
+            '<button class=\"btn btn-default\" type=\"button\" title=\"Add Information\" data-toggle=\"modal\" data-target=\"#charge-info-modal\" onclick=\"ManifestDepartureController.addBoardingInfo(' + row.BoardingID + ',' + row.Position + ')\">'
+                + '<i class=\"fa fa-plus fa-fw\"></i>'
+            + '</button>';
+        if (row.BoardingID > 0) {
+            html = html +
+                '<button class=\"btn btn-default\" type=\"button\" title=\"Report\" onclick=\"ReportInformation(' + row.BoardingID + ')\">'
+                    + '<i class=\"fa fa-print fa-fw\"></i>'
+                + '</button>';
+        } else {
+            html = html +
+                '<button class=\"btn btn-default\" type=\"button\" title=\"Report\" disabled onclick=\"ReportInformation(' + row.BoardingID + ')\">'
+                    + '<i class=\"fa fa-print fa-fw\"></i>'
+                + '</button>';
+        }
+        return html;
     },
     getStationCombo: function () {
         return $.ajax({
@@ -795,10 +965,10 @@ var ManifestDepartureController = {
                             $('#PassengerAdult' + i).html('Empty');
                             $('#PassengerMinor' + i).html('Empty');
                             $('#PassengerInfant' + i).html('Empty');
-                            $('#LuggageQuantity' + i).html('Empty');
-                            $('#LuggageKgs' + i).html('Empty');
-                            $('#ChargeQuantity' + i).html('Empty');
-                            $('#ChargeKgs' + i).html('Empty');
+                            //$('#LuggageQuantity' + i).html('Empty');
+                            //$('#LuggageKgs' + i).html('Empty');
+                            //$('#ChargeQuantity' + i).html('Empty');
+                            //$('#ChargeKgs' + i).html('Empty');
                             $('#MailQuantity' + i).html('Empty');
                             $('#MailKgs' + i).html('Empty');
                         }
@@ -819,7 +989,7 @@ var ManifestDepartureController = {
                 });
 
                 //Para Mostrar y ocultar editable
-                $('#PassengerAdult'+ item.Position).on('shown', function () {
+                $('#PassengerAdult' + item.Position).on('shown', function () {
                     var $innerForm = $(this).data('editable').input.$input.closest('form');
                     var $outerForm = $innerForm.parents('form').eq(0);
                     $innerForm.data('validator', $outerForm.data('validator'));
@@ -870,7 +1040,6 @@ var ManifestDepartureController = {
             });
         }
     },
-
     luggageQuantityEditable: function (data) {
         if (data.length > 0) {
             $.each(data, function (index, item) {
@@ -956,7 +1125,6 @@ var ManifestDepartureController = {
             });
         }
     },
-
     mailQuantityEditable: function (data) {
         if (data.length > 0) {
             $.each(data, function (index, item) {
@@ -1000,42 +1168,56 @@ var ManifestDepartureController = {
             });
         }
     },
+    initChargeModal: function (numSection) {
+        if ($('#charge-info-modal')) {
+            $('#charge-info-body').empty();
+            $('#charge-info-body').append('<input id="tb-selected" type="hidden" />');
+            var position = 1;
+            while (position <= numSection) {
+                $('#charge-info-body').append('<div id="detail-section-' + position + '">');
+                position++;
+            }
+        }
+    },
     boardingTableEditable: function () {
-        $.fn.editable.defaults.mode = 'popup';        
+        $.fn.editable.defaults.mode = 'popup';
 
         //Ya que cargo los datos de la tabla 
-        $table.on('load-success.bs.table', function () {            
-
-            var items = $table.bootstrapTable('getData');
-
+        $tableBoarding.on('load-success.bs.table', function () {
+            var items = $tableBoarding.bootstrapTable('getData');
             //Station 
             ManifestDepartureController.stationEditable(items);
-
             //Adult
             ManifestDepartureController.adultEditable(items);
-
             //Minor
             ManifestDepartureController.minorEditable(items);
-
             //Infant
             ManifestDepartureController.infantEditable(items);
-
-            //Temporal
-            ManifestDepartureController.luggageQuantityEditable(items);
-            ManifestDepartureController.luggageKgsEditable(items);
-            ManifestDepartureController.chargeQuantityEditable(items);
-            ManifestDepartureController.chargeKgsEditable(items);
-
             //MailQuantity
             ManifestDepartureController.mailQuantityEditable(items);
-
             //MailKgs
             ManifestDepartureController.mailKgsEditable(items);
-        })
+            // sets the strucure for the charge information
+            ManifestDepartureController.initChargeModal(items.length);
+        });
 
+        $tableBoarding.on('reset-view.bs.table', function () {
+            var items = $tableBoarding.bootstrapTable('getData');
+            //Station 
+            ManifestDepartureController.stationEditable(items);
+            //Adult
+            ManifestDepartureController.adultEditable(items);
+            //Minor
+            ManifestDepartureController.minorEditable(items);
+            //Infant
+            ManifestDepartureController.infantEditable(items);
+            //MailQuantity
+            ManifestDepartureController.mailQuantityEditable(items);
+            //MailKgs
+            ManifestDepartureController.mailKgsEditable(items);
+        });
     },
     //Boarding Fin
-    
     validateAddInfo: function () {
         if (!$('#ai-extra').val() || !$('#ai-stewar').val() || !$('#ai-pilots').val()) {
             var message;
@@ -1088,7 +1270,7 @@ var ManifestDepartureController = {
             $('#remark-dly-3').html($('#ThirdDelayDescription').val());
         }
     },
-    initialize: function () {    
+    initialize: function () {
         if (!String.prototype.includes) {
             String.prototype.includes = function () {
                 'use strict';
@@ -1139,7 +1321,6 @@ var ManifestDepartureController = {
 
         ManifestDepartureController.calculatedDelay();
         ManifestDepartureController.setAddInfoInit();
-        //ManifestDepartureController.setAddBoardingInfoInit();
     }
 }
 
@@ -1150,7 +1331,7 @@ $(document).on('submit', '#form-manifest', function (e) {
     //e.preventDefault();
     //return false;
     //document.getElementById('Action').value = action ? action : 1;
-    
+
     var doPost = ManifestDepartureController.checkDataOperation();
     form = document.getElementById('form-manifest');
     if (form && doPost == 0) {

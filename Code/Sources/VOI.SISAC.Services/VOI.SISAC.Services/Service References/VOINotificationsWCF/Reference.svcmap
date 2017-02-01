@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="75e0548d-6b5d-42e8-adf0-590f2f5cac09" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://api.volaris.com.mx/WCFVOINotifications/ServiceNotifications.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ServiceNotifications.disco" MetadataType="Disco" ID="bbc28030-0ffa-4930-af12-b0a891eff484" SourceId="1" SourceUrl="http://api.volaris.com.mx/WCFVOINotifications/ServiceNotifications.svc?disco" />
+    <MetadataFile FileName="ServiceNotifications.xsd" MetadataType="Schema" ID="8477d9c6-cbbd-4796-801e-f2f707da9b8d" SourceId="1" SourceUrl="http://api.volaris.com.mx/WCFVOINotifications/ServiceNotifications.svc?xsd=xsd0" />
+    <MetadataFile FileName="ServiceNotifications1.xsd" MetadataType="Schema" ID="3fb0a7ab-063a-443d-bff9-8da4b7134d57" SourceId="1" SourceUrl="http://api.volaris.com.mx/WCFVOINotifications/ServiceNotifications.svc?xsd=xsd2" />
+    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="f6d49825-9948-4b66-8def-dd2ca5836ce0" SourceId="1" SourceUrl="http://api.volaris.com.mx/WCFVOINotifications/ServiceNotifications.svc?wsdl" />
+    <MetadataFile FileName="ServiceNotifications2.xsd" MetadataType="Schema" ID="21891fac-e44c-41d8-a1e9-c7380fa4176d" SourceId="1" SourceUrl="http://api.volaris.com.mx/WCFVOINotifications/ServiceNotifications.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

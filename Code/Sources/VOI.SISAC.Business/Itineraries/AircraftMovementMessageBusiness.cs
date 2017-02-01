@@ -103,7 +103,7 @@ namespace VOI.SISAC.Business.Itineraries
                     message.ChargeInformationTitle = "LDM";
 
                     // Set boarding and charge information
-                    message.ChargeInformation = SetChargeInformation(itinerary, isAirportFromMex);
+                    //message.ChargeInformation = SetChargeInformation(itinerary, isAirportFromMex);
                 }
             }
             catch (Exception exception)
@@ -197,7 +197,9 @@ namespace VOI.SISAC.Business.Itineraries
                 {
                     string luggage = string.Empty;
                     string charge = string.Empty;
-                    List<ManifestDepartureBoardingDetail> details = boardings[i].ManifestDepartureBoardingDetails.ToList();
+
+                    var details = boardings[i].ManifestDepartureBoardingDetails.ToList();
+                    //List<ManifestDepartureBoardingDetail> details = boardings[i].ManifestDepartureBoardingDetails.ToList();
                     for (byte j = 0; j < details.Count; j++)
                     {
                         luggage += details[j].LuggageQuantity + "-" + details[j].LuggageKgs + " ";

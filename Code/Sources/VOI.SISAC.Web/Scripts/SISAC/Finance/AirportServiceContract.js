@@ -170,7 +170,7 @@ var AirportServiceContract = {
     ,
     actionsButtons: function (value, row, index) {
         return '<div class="btn-group btn-group-sm">' +
-                    '<button type="button" class="btn btn-default dropdown-toggle menuButton"' + 
+                    '<button type="button" class="btn btn-default dropdown-toggle menuButton"' +
                         'data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
                             '<span class="caret"></span> <span class="sr-only">Toggle Dropdown</span>' +
                     '</button>' +
@@ -183,5 +183,17 @@ var AirportServiceContract = {
 
         // Shows modal for set the end contract date
         $('#ShowEndDate').modal('show');
+    }
+    ,
+    toggleRateParams: function () {
+        if ($('#MultiRateFlag') && $('#rate-params')) {
+            var $rp = $('#rate-params');
+            var $mrf = $('#MultiRateFlag');
+            $rp[0].style.display = (!$mrf[0].checked) ? 'block' : 'none';
+            if ($rp[0].style.display == 'none') {
+                $("#Rate").val('');
+                $("#CurrencyCode").val('');
+            }
+        }
     }
 }

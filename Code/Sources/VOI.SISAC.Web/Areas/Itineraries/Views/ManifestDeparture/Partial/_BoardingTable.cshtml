@@ -25,10 +25,10 @@
             <th data-field="PassengerMinor" data-align="center" data-halign="center" data-formatter="ManifestDepartureController.linkFormatterPassengerMinor"><strong>@Resource.Minor</strong></th>
             <th data-field="PassengerInfant" data-align="center" data-halign="center" data-formatter="ManifestDepartureController.linkFormatterPassengerInfant"><strong>@Resource.Infant</strong></th>
 
-            <th data-field="LuggageQuantity" data-align="center" data-halign="center" data-formatter="ManifestDepartureController.linkFormatterLuggageQuantity"><strong>@Resource.LuggageQuantity</strong></th>
-            <th data-field="LuggageKgs" data-align="center" data-halign="center" data-formatter="ManifestDepartureController.linkFormatterLuggageKgs"><strong>@Resource.LuggageKgs</strong></th>
-            <th data-field="ChargeQuantity" data-align="center" data-halign="center" data-formatter="ManifestDepartureController.linkFormatterChargeQuantity"><strong>@Resource.ChargeQuantity</strong></th>
-            <th data-field="ChargeKgs" data-align="center" data-halign="center" data-formatter="ManifestDepartureController.linkFormatterChargeKgs"><strong>@Resource.ChargeKgs</strong></th>
+            <th data-field="LuggageQuantity" data-align="center" data-halign="center"><strong>@Resource.LuggageQuantity</strong></th>
+            <th data-field="LuggageKgs" data-align="center" data-halign="center"><strong>@Resource.LuggageKgs</strong></th>
+            <th data-field="ChargeQuantity" data-align="center" data-halign="center"><strong>@Resource.ChargeQuantity</strong></th>
+            <th data-field="ChargeKgs" data-align="center" data-halign="center"><strong>@Resource.ChargeKgs</strong></th>
 
             <th data-field="MailQuantity" data-align="center" data-halign="center" data-formatter="ManifestDepartureController.linkFormatterMailQuantity"><strong>@Resource.MailQuantity</strong></th>
             <th data-field="MailKgs" data-align="center" data-halign="center" data-formatter="ManifestDepartureController.linkFormatterMailKgs"><strong>@Resource.MailKgs</strong></th>            
@@ -47,5 +47,11 @@
             FlightNumber: $('#FlightNumber').val(),
             ItineraryKey: $('#ItineraryKey').val()
         };
+    }
+
+    function ReportInformation(BoardingID) {
+        var url = '@Url.Action("ReportInformation", "ManifestDeparture")';
+        url = url.concat('?boardingID=' + BoardingID + "&Sequence=" + $('#Sequence').val() + "&AirlineCode=" + $('#AirlineCode').val() + "&FlightNumber=" + $('#FlightNumber').val() + "&ItineraryKey=" + $('#ItineraryKey').val());
+        window.location = url;
     }
 </script>

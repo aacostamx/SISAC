@@ -3,7 +3,7 @@
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="dsSISAC">
-      <DataSourceReference>dsSISAC</DataSourceReference>
+      <DataSourceReference>DS_SISAC</DataSourceReference>
       <rd:SecurityType>None</rd:SecurityType>
       <rd:DataSourceID>c14d90d5-e2b7-458a-9fd8-ec1036b36c74</rd:DataSourceID>
     </DataSource>

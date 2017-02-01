@@ -64,6 +64,11 @@ namespace VOI.SISAC.Dal.Configuration.Airport
                 .IsRequired()
                 .HasColumnName("Division");
 
+            this.Property(a => a.BusinessName)
+                .HasMaxLength(100)
+                .IsRequired()
+                .HasColumnName("BusinessName");
+
             this.HasMany(a => a.Airplanes)
                 .WithRequired(b => b.Airline);
         }

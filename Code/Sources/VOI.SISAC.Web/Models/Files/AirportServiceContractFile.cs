@@ -274,9 +274,9 @@ namespace VOI.SISAC.Web.Models.Files
         /// <value>
         /// The rate.
         /// </value>
-        [FieldNotEmpty]
+        //[FieldNotEmpty]
         [FieldConverter(ConverterKind.Decimal)]
-        public decimal Rate;
+        public decimal? Rate;
 
         /// <summary>
         /// Gets or sets the currency code.
@@ -285,7 +285,7 @@ namespace VOI.SISAC.Web.Models.Files
         /// <value>
         /// The currency code.
         /// </value>
-        [FieldNotEmpty]
+        //[FieldNotEmpty]
         [FieldConverter(typeof(UpperStringHelper))]
         public string CurrencyCode;
 
@@ -309,5 +309,8 @@ namespace VOI.SISAC.Web.Models.Files
         [FieldNotEmpty]
         ////[FieldConverter(typeof(UpperStringHelper))]
         public string CalculationTypeName;
+
+        //[FieldNotEmpty]
+        public string ProcedureName;
     }
 }

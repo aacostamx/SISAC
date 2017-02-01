@@ -180,6 +180,7 @@ namespace VOI.SISAC.Business.Airport
                 airline.AirlineShortName = entity.AirlineShortName;
                 airline.CompanyCode = entity.CompanyCode;
                 airline.Division = entity.Division;
+                airline.BusinessName = entity.BusinessName;
                 this.airlineRepository.Update(airline);
                 this.unitOfWork.Commit();
                 return true;

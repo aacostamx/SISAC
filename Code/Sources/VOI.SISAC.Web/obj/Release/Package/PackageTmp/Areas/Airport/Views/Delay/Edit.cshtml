@@ -56,8 +56,12 @@
         <br />
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                <input onclick="location.href='@Url.Action("Index","Delay")'" type="reset" class="btnVolaris" value=@Resource.Back>
-                <input type="submit" value=@Resource.Save class="btnVolaris">
+                <button type="button" class="btn btn-default" name="back-btn" title="@Resource.Back" onclick="location.href='@Url.Action("Index", "Delay")'">
+                    <i class="fa fa-arrow-left fa-fw"></i>&nbsp;@Resource.Back
+                </button>
+                <button type="submit" class="btn btn-default btn-green" name="back-btn" title="@Resource.Save">
+                    <i class="fa fa-floppy-o fa-fw"></i>&nbsp;@Resource.Save
+                </button>
             </div>
         </div>
     }

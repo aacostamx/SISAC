@@ -58,11 +58,10 @@ namespace VOI.SISAC.Business.Airport
         {
             try
             {
-                IList<JetFuelTicket> jetFuelTickets =
-                    this.jetFuelTicketRepository.GetJetFuelTickets(Mapper.Map<ItineraryDto, Itinerary>(itineraryDto), operationTypeName).ToList();
+                var ticket = Mapper.Map<ItineraryDto, Itinerary>(itineraryDto);
+                var jetfuelTickets = this.jetFuelTicketRepository.GetJetFuelTickets(ticket, operationTypeName);
                 IList<JetFuelTicketDto> jetFuelTicketsDto = new List<JetFuelTicketDto>();
-
-                jetFuelTicketsDto = Mapper.Map<IList<JetFuelTicket>, IList<JetFuelTicketDto>>(jetFuelTickets);
+                jetFuelTicketsDto = Mapper.Map<IList<JetFuelTicket>, IList<JetFuelTicketDto>>(jetfuelTickets);
                 return jetFuelTicketsDto;
             }
             catch (Exception ex)

@@ -15,6 +15,7 @@
     @Html.Partial("Partial/_SearchParams")
     @Html.Partial("Partial/_UploadFileItinerary")
     @Html.Partial("Partial/_AdvanceSearchItinerary")
+    @Html.Partial("Partial/_AircraftMovementMessageModal")
     <div id="toolbar">
         @if (User.IsInRole("ITINERARY-ADD"))
         {
@@ -88,16 +89,20 @@
                         <strong>@Resource.Sequence</strong>
                     </th>
                     <th data-field="AirlineCode" data-halign="center" data-align="center">
-                        <strong>@Resource.AirlineCode</strong>
+                        <strong>@Resource.Airline</strong>
                     </th>
                     <th data-field="FlightNumber" data-halign="center" data-align="center">
-                        <strong>@Resource.FlightNumber</strong>
+                        <strong>@Resource.Flight</strong>
                     </th>
                     <th data-field="ItineraryKey" data-halign="center" data-align="center" data-visible="false">
                         <strong>@Resource.ItineraryKey</strong>
                     </th>
                     <th data-field="EquipmentNumber" data-halign="center" data-align="center">
                         <strong>@Resource.EquipmentNumber</strong>
+                    </th>
+
+                    <th data-field="DepartureStation" data-halign="center" data-align="center">
+                        <strong>@Resource.Departure</strong>
                     </th>
                     <th data-field="DepartureDate" data-halign="center" data-align="center"
                         data-formatter="ItineraryController.formatDate">
@@ -107,8 +112,9 @@
                         data-formatter="ItineraryController.formatTime">
                         <strong>@Resource.DepartureTime</strong>
                     </th>
-                    <th data-field="DepartureStation" data-halign="center" data-align="center">
-                        <strong>@Resource.DepartureAirport</strong>
+                    
+                    <th data-field="ArrivalStation" data-halign="center" data-align="center">
+                        <strong>@Resource.Arrival</strong>
                     </th>
                     <th data-field="ArrivalDate" data-halign="center" data-align="center"
                         data-formatter="ItineraryController.formatDate">
@@ -118,9 +124,7 @@
                         data-formatter="ItineraryController.formatTime">
                         <strong>@Resource.ArriveTime</strong>
                     </th>
-                    <th data-field="ArrivalStation" data-halign="center" data-align="center">
-                        <strong>@Resource.ArrivalAirport</strong>
-                    </th>
+                    
                 </tr>
             </thead>
         </table>
@@ -169,6 +173,7 @@
     {
         <li data-item="Timeline"><a><i class="fa fa-paper-plane fa-fw"></i>&nbsp;@Resource.Timeline</a></li>
     }
+    <li data-item="MVT"><a><i class="fa fa-envelope fa-fw"></i>&nbsp;MVT</a></li>
 </ul>
 
 @section Scripts {
@@ -287,26 +292,17 @@
                     window.location = url;
                 }
                 if ($el.data("item") == 'Timeline') {
+                    var url = '@Url.Action("Index", "Timeline", new { area = "Itineraries" })'
+                    url = url.concat('?Sequence=' + row.Sequence);
+                    url = url.concat('&AirlineCode=' + row.AirlineCode);
+                    url = url.concat('&FlightNumber=' + row.FlightNumber);
+                    url = url.concat('&ItineraryKey=' + row.ItineraryKey);
+                    window.location = url;
 
-                    $.ajax({
-                        type: 'POST',
-                        url: '../Timeline/ItinearyURL',
-                        data: JSON.stringify(row),
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (response) {
-                            if (response) {
-                                var url = '@Url.Action("Index", "Timeline", new { area = "Itineraries" })';
-                                window.open(url);
-                                //window.location = url;
-                            }
-                            else {
-                                ItineraryController.showSweetAlert("There was an error in Timeline, please consult support", "Hubo un error al consultar Línea de Tiempo, favor de consultar a soporte", "error", "Error", "Error");
-                                console.log("Error en Controller : Timeline - Method: ItinearyURL");
-                            }
-                        }
+                }
 
-                    });
+                if ($el.data("item") == 'MVT') {
+                    ItineraryController.getMtvMessage(row);
                 }
             }
         });

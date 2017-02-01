@@ -88,6 +88,12 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
         private readonly IPageReportBusiness pageReportBusiness;
 
         /// <summary>
+        /// The airplane type business
+        /// </summary>
+        private readonly IAirplaneTypeBusiness airplaneTypeBusiness;
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ManifestDepartureController"/> class.
         /// </summary>
         /// <param name="crewBusiness">The crew business.</param>
@@ -97,6 +103,7 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
         /// <param name="airportBusiness">The airport business.</param>
         /// <param name="airplaneBusiness">The airplane business.</param>
         /// <param name="pageReportBusiness">The page report business.</param>
+        /// <param name="airplaneTypeBusiness">The airplane type business.</param>
         public ManifestDepartureController(
             ICrewBusiness crewBusiness,
             IGenericCatalogBusiness genericBusiness,
@@ -104,7 +111,8 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
             IItineraryBusiness itineraryBusiness,
             IAirportBusiness airportBusiness,
             IAirplaneBusiness airplaneBusiness,
-            IPageReportBusiness pageReportBusiness)
+            IPageReportBusiness pageReportBusiness,
+            IAirplaneTypeBusiness airplaneTypeBusiness)
         {
             this.crewBusiness = crewBusiness;
             this.genericBusiness = genericBusiness;
@@ -112,6 +120,7 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
             this.manifestDepartureBusiness = manifestDepartureBusiness;
             this.airportBusiness = airportBusiness;
             this.airplaneBusiness = airplaneBusiness;
+            this.airplaneTypeBusiness = airplaneTypeBusiness;
             this.userInfo = string.Format(
                 LogMessages.UserInfo,
                 Environment.UserDomainName,
@@ -294,7 +303,7 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
             string json = string.Empty;
             IList<ManifestDepartureBoardingDto> boardingsDto = new List<ManifestDepartureBoardingDto>();
             IList<ManifestDepartureBoardingVO> boardingsVO = new List<ManifestDepartureBoardingVO>();
-            List<int> PositionsAll = new List<int>() { 1,2,3,4,5 }; //5 Stations
+            List<int> PositionsAll = new List<int>() { 1, 2, 3, 4, 5 }; //5 Stations
             List<int> PositionsBD = new List<int>();
             List<int> PositionsRes = new List<int>();
 
@@ -310,11 +319,14 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
 
                 foreach (var item in PositionsRes)
                 {
-                    boardingsVO.Add(new ManifestDepartureBoardingVO { Sequence = manifest.Sequence, 
-                                                                      AirlineCode = manifest.AirlineCode, 
-                                                                      FlightNumber = manifest.FlightNumber, 
-                                                                      ItineraryKey = manifest.ItineraryKey, 
-                                                                      Position = item });
+                    boardingsVO.Add(new ManifestDepartureBoardingVO
+                    {
+                        Sequence = manifest.Sequence,
+                        AirlineCode = manifest.AirlineCode,
+                        FlightNumber = manifest.FlightNumber,
+                        ItineraryKey = manifest.ItineraryKey,
+                        Position = item
+                    });
                 }
 
                 jsonConvert.total = boardingsVO != null ? boardingsVO.Count : 0;
@@ -391,7 +403,7 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
             {
                 var itinerary = this.itineraryBusiness.FindFlightById(manifest.Sequence, manifest.AirlineCode, manifest.FlightNumber, manifest.ItineraryKey);
 
-                if (itinerary.Airplane != null)
+                if (itinerary != null && itinerary.Airplane != null)
                 {
                     boardingDetail = this.manifestDepartureBusiness.GetBoardingDetailForManifest(boardingID, itinerary.Airplane.AirplaneModel).ToList();
                 }
@@ -402,7 +414,7 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
             }
 
             return Json(boardingDetail, JsonRequestBehavior.AllowGet);
-        }        
+        }
 
         /// <summary>
         /// Gets the users of type AOR.
@@ -443,10 +455,12 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
         {
             string reportPath = string.Empty;
             PageReportDto pageReportDto = new PageReportDto();
+            var reportName = string.Empty;
 
             try
             {
-                pageReportDto = this.pageReportBusiness.GetPageReportByPageName("ManifestDeparture");
+                reportName = manifest.DepartureStationCode == "MEX" ? "ManifestDepartureMex" : "ManifestDeparture";
+                pageReportDto = this.pageReportBusiness.GetPageReportByPageName(reportName);
                 SetSiteMapValues(manifest);
 
                 if (pageReportDto != null)
@@ -468,6 +482,68 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
                             new Microsoft.Reporting.WebForms.ReportParameter("AirlineCode", manifest.AirlineCode.ToString(), false),
                             new Microsoft.Reporting.WebForms.ReportParameter("FlightNumber", manifest.FlightNumber.ToString(), false),
                             new Microsoft.Reporting.WebForms.ReportParameter("ItineraryKey", manifest.ItineraryKey.ToString(), false)
+                        });
+
+                    model.PageSourceUrl = SiteMaps.Current.FindSiteMapNodeFromKey("Manifest_Departure").Url;
+                    return this.View("Report/ViewReport", model);
+                }
+            }
+            catch (BusinessException exception)
+            {
+                Logger.Error(string.Format(LogMessages.ErrorRetrieveInfo, this.moduleName, this.userInfo));
+                Logger.Error(exception.Message, exception);
+                Trace.TraceError(string.Format(LogMessages.ErrorRetrieveInfo, this.moduleName, this.userInfo));
+                Trace.TraceError(exception.Message, exception);
+                this.ViewBag.ErrorMessage = FrontMessage.GetExceptionErrorMessage(exception.Number);
+            }
+
+            return this.RedirectToAction("Index", manifest);
+        }
+
+        /// <summary>
+        /// Reports the information.
+        /// </summary>
+        /// <param name="boardingID">The boarding identifier.</param>
+        /// <param name="manifest">The manifest.</param>
+        /// <returns></returns>
+        [CustomAuthorize(Roles = "MANIFDEP-PRINTREP")]
+        public ActionResult ReportInformation(long boardingID, ManifestDepartureVO manifest)
+        {
+            string reportPath = string.Empty;
+            PageReportDto pageReportDto = new PageReportDto();
+            var reportName = string.Empty;
+            AirplaneTypeDto airplaneTypeDto = new AirplaneTypeDto();
+
+            try
+            {
+                //informacion de Modelo de Avion
+                var itinerary = this.itineraryBusiness.FindFlightById(manifest.Sequence, manifest.AirlineCode, manifest.FlightNumber, manifest.ItineraryKey);
+
+                if (itinerary != null && itinerary.Airplane != null)
+                {
+                    airplaneTypeDto = this.airplaneTypeBusiness.FindAirplaneTypeById(itinerary.Airplane.AirplaneModel);
+                }
+
+                if(airplaneTypeDto != null)
+                {
+                    reportName = airplaneTypeDto.CompartmentTypeCode;
+                }
+                pageReportDto = this.pageReportBusiness.GetPageReportByPageName(reportName);
+                SetSiteMapValues(manifest);
+
+                if (pageReportDto != null)
+                {
+                    reportPath = pageReportDto.PathReport;
+                }
+
+                if (!string.IsNullOrEmpty(reportPath)
+                    && !string.IsNullOrEmpty(boardingID.ToString()))
+                {
+                    ReportingServiceViewModel model = new ReportingServiceViewModel(
+                        reportPath,
+                        new List<Microsoft.Reporting.WebForms.ReportParameter>()
+                        { 
+                            new Microsoft.Reporting.WebForms.ReportParameter("BoardingID", boardingID.ToString(), false)
                         });
 
                     model.PageSourceUrl = SiteMaps.Current.FindSiteMapNodeFromKey("Manifest_Departure").Url;

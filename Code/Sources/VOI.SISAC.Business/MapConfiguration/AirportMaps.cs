@@ -59,47 +59,53 @@ namespace VOI.SISAC.Business.MapConfiguration
             NationalJetFuelTicketMaps();
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AirportMaps"/> class.
+        /// </summary>
+        public AirportMaps()
+        { }
+
         private void NationalJetFuelTicketMaps()
         {
-            Mapper.CreateMap<NationalJetFuelTicket, NationalJetFuelTicketDto>()
+            CreateMap<NationalJetFuelTicket, NationalJetFuelTicketDto>()
                 .ReverseMap();
         }
 
         /// <summary>
         /// Airport Service Maps
         /// </summary>
-        private static void PassengerInformationMaps()
+        private void PassengerInformationMaps()
         {
-            Mapper.CreateMap<PassengerInformation, PassengerInformationDto>()
+            CreateMap<PassengerInformation, PassengerInformationDto>()
                 .ReverseMap();
-            Mapper.CreateMap<AdditionalPassengerInformation, AdditionalPassengerInformationDto>()
-                .ReverseMap();
-        }
-
-        /// <summary>
-        /// Airport Service Maps
-        /// </summary>
-        private static void JetFuelTicketMaps()
-        {
-            Mapper.CreateMap<JetFuelTicket, JetFuelTicketDto>()
+            CreateMap<AdditionalPassengerInformation, AdditionalPassengerInformationDto>()
                 .ReverseMap();
         }
 
         /// <summary>
         /// Airport Service Maps
         /// </summary>
-        private static void AirportServiceMaps()
+        private void JetFuelTicketMaps()
         {
-            Mapper.CreateMap<AirportService, AirportServiceDto>()
+            CreateMap<JetFuelTicket, JetFuelTicketDto>()                
+                .ReverseMap();
+        }
+
+        /// <summary>
+        /// Airport Service Maps
+        /// </summary>
+        private void AirportServiceMaps()
+        {
+            CreateMap<AirportService, AirportServiceDto>()
                 .ReverseMap();
         }
 
         /// <summary>
         /// Maps Fuels concept type object.
         /// </summary>
-        private static void FuelConceptTypeMaps()
+        private void FuelConceptTypeMaps()
         {
-            Mapper.CreateMap<FuelConceptType, FuelConceptTypeDto>()
+            CreateMap<FuelConceptType, FuelConceptTypeDto>()
                 .ForMember(t => t.FuelConceptTypeCode, f => f.MapFrom(r => r.FuelConceptTypeCode))
                 .ForMember(t => t.FuelConceptTypeName, f => f.MapFrom(r => r.FuelConceptTypeName))
                 .ForMember(t => t.InternationalFuelContractConcept, f => f.MapFrom(r => r.InternationalFuelContractConcept))
@@ -109,9 +115,9 @@ namespace VOI.SISAC.Business.MapConfiguration
         /// <summary>
         /// Configures the ManifestTimeConfig class
         /// </summary>
-        private static void ManifestTimeConfigMaps()
+        private void ManifestTimeConfigMaps()
         {
-            Mapper.CreateMap<ManifestTimeConfig, ManifestTimeConfigDto>()
+            CreateMap<ManifestTimeConfig, ManifestTimeConfigDto>()
                 .ForMember(t => t.ManifestTimeConfigID, f => f.MapFrom(r => r.ManifestTimeConfigID))
                 .ForMember(t => t.AirlineCode, f => f.MapFrom(r => r.AirlineCode))
                 .ForMember(t => t.ArrivalMinutesMin, f => f.MapFrom(r => r.ArrivalMinutesMin))
@@ -125,9 +131,9 @@ namespace VOI.SISAC.Business.MapConfiguration
         /// <summary>
         /// Configures the Delay class
         /// </summary>
-        private static void DelayMaps()
+        private void DelayMaps()
         {
-            Mapper.CreateMap<Delay, DelayDto>()
+            CreateMap<Delay, DelayDto>()
                     .ForMember(t => t.DelayCode, f => f.MapFrom(r => r.DelayCode))
                     .ForMember(t => t.DelayName, f => f.MapFrom(r => r.DelayName))
                     .ForMember(t => t.FunctionalAreaID, f => f.MapFrom(r => r.FunctionalAreaID))
@@ -139,9 +145,9 @@ namespace VOI.SISAC.Business.MapConfiguration
         /// <summary>
         /// Configures the Gpu Observation class
         /// </summary>
-        private static void GpuObservationMapping()
+        private void GpuObservationMapping()
         {
-            Mapper.CreateMap<GpuObservation, GpuObservationDto>()
+            CreateMap<GpuObservation, GpuObservationDto>()
                     .ForMember(t => t.GpuObservationCode, f => f.MapFrom(r => r.GpuObservationCode))
                     .ForMember(t => t.GpuObservationCodeName, f => f.MapFrom(r => r.GpuObservationCodeName))
                     .ForMember(t => t.Status, f => f.MapFrom(r => r.Status))
@@ -151,9 +157,9 @@ namespace VOI.SISAC.Business.MapConfiguration
         /// <summary>
         /// Configures the Airport Group Class
         /// </summary>
-        private static void AirportGroupMapping()
+        private void AirportGroupMapping()
         {
-            Mapper.CreateMap<AirportGroup, AirportGroupDto>()
+            CreateMap<AirportGroup, AirportGroupDto>()
                 .ForMember(t => t.AirportGroupCode, f => f.MapFrom(r => r.AirportGroupCode))
                 .ForMember(t => t.AirportGroupName, f => f.MapFrom(r => r.AirportGroupName))
                 .ReverseMap();
@@ -162,9 +168,9 @@ namespace VOI.SISAC.Business.MapConfiguration
         /// <summary>
         /// Configure the Airport Mapping Class
         /// </summary>
-        private static void AirportMapping()
+        private void AirportMapping()
         {
-            Mapper.CreateMap<Airport, AirportDto>()
+            CreateMap<Airport, AirportDto>()
                     .ForMember(t => t.StationCode, f => f.MapFrom(r => r.StationCode))
                     .ForMember(t => t.CountryCode, f => f.MapFrom(r => r.CountryCode))
                     .ForMember(t => t.OpeningTime, f => f.MapFrom(r => r.OpeningTime))
@@ -181,9 +187,9 @@ namespace VOI.SISAC.Business.MapConfiguration
         /// <summary>
         /// Configures the Gpu classes
         /// </summary>
-        private static void GpuMapping()
+        private void GpuMapping()
         {
-            Mapper.CreateMap<Gpu, GpuDto>()
+            CreateMap<Gpu, GpuDto>()
                 .ForMember(t => t.GpuCode, f => f.MapFrom(r => r.GpuCode))
                 .ForMember(t => t.GpuName, f => f.MapFrom(r => r.GpuName))
                 .ForMember(t => t.StationCode, f => f.MapFrom(r => r.StationCode))
@@ -195,10 +201,10 @@ namespace VOI.SISAC.Business.MapConfiguration
         /// <summary>
         /// Configures the mappers between classes.
         /// </summary>
-        private static void Map()
+        private void Map()
         {
             /*
-             * En esta sección se registran las conversiones que realizará Automapper.
+             * En esta sección se registran las conversiones que realizará Auto
              * 
              * Automapper convierte de manera automática las conversiones
              * entre objetos que sus propiedades tienen el mismo nombre
@@ -210,22 +216,22 @@ namespace VOI.SISAC.Business.MapConfiguration
             */
 
             // ********* Seccion de Servicios ************ //
-            Mapper.CreateMap<Service, ServiceDto>()
+            CreateMap<Service, ServiceDto>()
                 .ForMember(s => s.ServiceCode, f => f.MapFrom(r => r.ServiceCode))
                 .ForMember(s => s.ServiceName, f => f.MapFrom(r => r.ServiceName))
                 .ForMember(s => s.Status, f => f.MapFrom(r => r.Status))
                 .ReverseMap();
 
-            Mapper.CreateMap<AirportService, AirportServiceDto>()
+            CreateMap<AirportService, AirportServiceDto>()
                 .ReverseMap();
         }
 
         /// <summary>
         /// Compartment types maps.
         /// </summary>
-        private static void CompartmentTypesMaps()
+        private void CompartmentTypesMaps()
         {
-            Mapper.CreateMap<CompartmentType, CompartmentTypeDto>()
+            CreateMap<CompartmentType, CompartmentTypeDto>()
                 .ForMember(t => t.CompartmentTypeCode, f => f.MapFrom(r => r.CompartmentTypeCode))
                 .ForMember(t => t.Status, f => f.MapFrom(r => r.Status))
                 .ForMember(t => t.AirplaneTypes, f => f.MapFrom(r => r.AirplaneTypes))
@@ -235,7 +241,7 @@ namespace VOI.SISAC.Business.MapConfiguration
         /// <summary>
         /// Airplanes maps.
         /// </summary>
-        private static void AirplaneMaps()
+        private void AirplaneMaps()
         {
             /*
              * En caso que se tengan colecciones dentro de nuestras entidades
@@ -245,7 +251,7 @@ namespace VOI.SISAC.Business.MapConfiguration
              *  .ForMember(t => t.Requisitos, f => f.MapFrom(c => c.Requisitos))
              */
 
-            Mapper.CreateMap<Airplane, AirplaneDto>()
+            CreateMap<Airplane, AirplaneDto>()
                 .ForMember(t => t.EquipmentNumber, f => f.MapFrom(r => r.EquipmentNumber))
                 .ForMember(t => t.AirplaneModel, f => f.MapFrom(r => r.AirplaneModel))
                 .ForMember(t => t.MaximumTakeoffWeight, f => f.MapFrom(r => r.MaximumTakeoffWeight))
@@ -268,11 +274,11 @@ namespace VOI.SISAC.Business.MapConfiguration
         /// <summary>
         /// Airplane types maps.
         /// </summary>
-        private static void AirplaneTypeMaps()
+        private void AirplaneTypeMaps()
         {
             // Para convertir de un AirplaneType a un AirplaneTypeDto,
             // se hará de la siguiente manera:
-            Mapper.CreateMap<AirplaneType, AirplaneTypeDto>()
+            CreateMap<AirplaneType, AirplaneTypeDto>()
 
                 // t: Entidad destino (AirplaneTypeDto).
                 // f: Etindad origen (AirplaneType).
@@ -308,9 +314,9 @@ namespace VOI.SISAC.Business.MapConfiguration
         /// <summary>
         /// Crews the map.
         /// </summary>
-        private static void CrewMap()
+        private void CrewMap()
         {
-            Mapper.CreateMap<Crew, CrewDto>()
+            CreateMap<Crew, CrewDto>()
                 .ForMember(t => t.CrewID, f => f.MapFrom(r => r.CrewID))
                 .ForMember(t => t.CrewTypeID, f => f.MapFrom(r => r.CrewTypeID))
                 .ForMember(t => t.LastName, f => f.MapFrom(r => r.LastName))
@@ -347,10 +353,10 @@ namespace VOI.SISAC.Business.MapConfiguration
         /// <summary>
         /// Airlines the map.
         /// </summary>
-        private static void AirlineMap()
+        private void AirlineMap()
         {
             // Se realiza el mapeo de Airline a AirlineDto             
-            Mapper.CreateMap<Airline, AirlineDto>()
+            CreateMap<Airline, AirlineDto>()
 
                 // t: Entidad destino (AirlineDto).
                 // f: Entidad origen (Airline).
@@ -369,10 +375,10 @@ namespace VOI.SISAC.Business.MapConfiguration
         /// <summary>
         /// Crews the type map.
         /// </summary>
-        private static void CrewTypeMap()
+        private void CrewTypeMap()
         {
             // Se realiza el mapeo de Airline a AirlineDto             
-            Mapper.CreateMap<CrewType, CrewTypeDto>()
+            CreateMap<CrewType, CrewTypeDto>()
 
                 // t: Entidad destino (CrewTypeDto).
                 // f: Entidad origen (CrewType).
@@ -389,9 +395,9 @@ namespace VOI.SISAC.Business.MapConfiguration
         /// <summary>
         /// Maps Drinking water objects.
         /// </summary>
-        private static void DrinkingWaterMaps()
+        private void DrinkingWaterMaps()
         {
-            Mapper.CreateMap<DrinkingWater, DrinkingWaterDto>()
+            CreateMap<DrinkingWater, DrinkingWaterDto>()
                 .ForMember(t => t.DrinkingWaterId, f => f.MapFrom(r => r.DrinkingWaterId))
                 .ForMember(t => t.EquipmentNumber, f => f.MapFrom(r => r.EquipmentNumber))
                 .ForMember(t => t.DrinkingWaterName, f => f.MapFrom(r => r.DrinkingWaterName))
@@ -400,18 +406,18 @@ namespace VOI.SISAC.Business.MapConfiguration
                 .ReverseMap();
         }
 
-        private static void AirportScheduleMaps()
+        private void AirportScheduleMaps()
         {
-            Mapper.CreateMap<AirportSchedule, AirportScheduleDto>()
+            CreateMap<AirportSchedule, AirportScheduleDto>()
                 .ReverseMap();
         }
 
         /// <summary>
         /// Maps Fuel concept objects.
         /// </summary>
-        private static void FuelConceptMaps()
+        private void FuelConceptMaps()
         {
-            Mapper.CreateMap<FuelConcept, FuelConceptDto>()
+            CreateMap<FuelConcept, FuelConceptDto>()
                 .ForMember(t => t.FuelConceptID, f => f.MapFrom(r => r.FuelConceptID))
                 .ForMember(t => t.FuelConceptName, f => f.MapFrom(r => r.FuelConceptName))
                 .ForMember(t => t.Status, f => f.MapFrom(r => r.Status))

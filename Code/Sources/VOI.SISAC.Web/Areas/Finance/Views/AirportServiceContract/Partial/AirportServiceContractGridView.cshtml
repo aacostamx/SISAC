@@ -202,12 +202,26 @@
                 </td>
                 @*Rate*@
                 <td>
-                    <span>$</span>
-                    @Html.DisplayFor(modelItem => item.Rate)
+                    @if (item.Rate != null)
+                    {
+                        <span>$</span>
+                        @Html.DisplayFor(modelItem => item.Rate)
+                    }
+                    else
+                    {
+                        <span>N/A</span>
+                    }
                 </td>
                 @*Currency*@
                 <td>
-                    @Html.DisplayFor(modelItem => item.CurrencyName)
+                    @if (item.CurrencyName != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.CurrencyName)
+                    }
+                    else
+                    {
+                        <span>N/A</span>
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.AccountingAccountName)

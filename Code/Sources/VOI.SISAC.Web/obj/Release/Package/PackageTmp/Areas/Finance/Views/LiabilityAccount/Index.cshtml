@@ -33,16 +33,16 @@
         data-page-size="10">
         <thead>
             <tr>
+                @if (User.IsInRole("LIAACC-UPD") || User.IsInRole("LIAACC-DEL"))
+                {
+                    <th data-field="Acctions" data-align="center" data-halign="center"><strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong></th>
+                }
                 <th data-field="AccountingAccountNumber" data-halign="center" data-align="center" data-sortable="true">
                     <strong>@Html.DisplayNameFor(model => model.LiabilityAccountNumber)</strong>
                 </th>
                 <th data-field="AccountingAccountName" data-halign="left" data-align="left" data-sortable="true">
                     <strong>@Html.DisplayNameFor(model => model.LiabilityAccountName)</strong>
                 </th>
-                @if (User.IsInRole("LIAACC-UPD") || User.IsInRole("LIAACC-DEL"))
-                {
-                    <th data-field="Acctions" data-align="center" data-halign="center"><strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong></th>
-                }
             </tr>
         </thead>
         <tbody>
@@ -51,13 +51,7 @@
                 foreach (var item in Model)
                 {
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LiabilityAccountNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LiabilityAccountName)
-                    </td>
-                     @if (User.IsInRole("LIAACC-UPD") || User.IsInRole("LIAACC-DEL"))
+                    @if (User.IsInRole("LIAACC-UPD") || User.IsInRole("LIAACC-DEL"))
                     {
                         <td>
                             @if (User.IsInRole("LIAACC-UPD"))
@@ -69,7 +63,13 @@
                                 <button class="btn btn-default" type="button" name="Delete" title="@VOI.SISAC.Web.Resources.Resource.Delete" onclick="location.href='@Url.Action("Delete", "LiabilityAccount", new { id = item.LiabilityAccountNumber })'"><i class="fa fa-trash-o fa-fw"></i></button>
                             }
                         </td>
-                     }
+                    }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LiabilityAccountNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LiabilityAccountName)
+                    </td>
                 </tr>
 
                 }

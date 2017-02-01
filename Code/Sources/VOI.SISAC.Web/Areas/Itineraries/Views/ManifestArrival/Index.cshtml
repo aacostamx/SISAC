@@ -641,7 +641,7 @@
                 <i class="fa fa-arrow-left fa-fw"></i>&nbsp;@Resource.Back
             </button>
             @if (User.IsInRole("MANIFARR-PRINTREP")) { 
-                <button type="submit" class="btn btn-default btn-green" name="report-btn" title="@Resource.Report"  onclick="location.href='@Url.Action("ViewReport", "ManifestArrival", new { Sequence = Model.Sequence, AirlineCode = Model.AirlineCode, FlightNumber = Model.FlightNumber, ItineraryKey = Model.ItineraryKey })'" tabindex="35">
+                <button type="button" class="btn btn-default btn-green" name="report-btn" title="@Resource.Report" onclick="location.href='@Url.Action("ViewReport", "ManifestArrival", new { Sequence = Model.Sequence, AirlineCode = Model.AirlineCode, FlightNumber = Model.FlightNumber, ItineraryKey = Model.ItineraryKey, ArrivalStationCode = Model.ArrivalStationCode })'" tabindex="30">
                     <i class="fa-fw glyphicon glyphicon-export icon-share"></i>&nbsp;@Resource.Report
                 </button>
             }

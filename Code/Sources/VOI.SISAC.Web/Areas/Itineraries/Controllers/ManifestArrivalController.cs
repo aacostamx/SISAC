@@ -256,12 +256,14 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
         [CustomAuthorize(Roles = "MANIFARR-PRINTREP")]
         public ActionResult ViewReport(ManifestArrivalVO manifest)
         {
+            var reportName = string.Empty;
             string reportPath = string.Empty;
             PageReportDto pageReportDto = new PageReportDto();
 
             try
             {
-                pageReportDto = this.pageReportBusiness.GetPageReportByPageName("ManifestArrival");
+                reportName = manifest.ArrivalStationCode == "MEX" ? "ManifestArrivalMex" : "ManifestArrival";
+                pageReportDto = this.pageReportBusiness.GetPageReportByPageName(reportName);
                 SetSiteMapValues(manifest);
 
                 if (pageReportDto != null)

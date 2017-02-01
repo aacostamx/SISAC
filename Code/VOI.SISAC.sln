@@ -36,8 +36,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VOI.SISAC.WinServices", "Sources\VOI.SISAC.WinServices\VOI.SISAC.WinServices.csproj", "{952C9D08-1C5B-4D67-BFC0-079DCEEA3553}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VOI.SISAC.TaskScheduler", "Sources\VOI.SISAC.TaskScheduler\VOI.SISAC.TaskScheduler\VOI.SISAC.TaskScheduler.csproj", "{24F1388A-9BC5-4A3A-8D5F-C4212A670668}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,14 +90,6 @@ Global
 		{952C9D08-1C5B-4D67-BFC0-079DCEEA3553}.Release|Any CPU.ActiveCfg = Release|x86
 		{952C9D08-1C5B-4D67-BFC0-079DCEEA3553}.Release|x86.ActiveCfg = Release|x86
 		{952C9D08-1C5B-4D67-BFC0-079DCEEA3553}.Release|x86.Build.0 = Release|x86
-		{24F1388A-9BC5-4A3A-8D5F-C4212A670668}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{24F1388A-9BC5-4A3A-8D5F-C4212A670668}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{24F1388A-9BC5-4A3A-8D5F-C4212A670668}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{24F1388A-9BC5-4A3A-8D5F-C4212A670668}.Debug|x86.Build.0 = Debug|Any CPU
-		{24F1388A-9BC5-4A3A-8D5F-C4212A670668}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{24F1388A-9BC5-4A3A-8D5F-C4212A670668}.Release|Any CPU.Build.0 = Release|Any CPU
-		{24F1388A-9BC5-4A3A-8D5F-C4212A670668}.Release|x86.ActiveCfg = Release|Any CPU
-		{24F1388A-9BC5-4A3A-8D5F-C4212A670668}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -111,10 +101,9 @@ Global
 		{DAFCEEDF-DF9E-424A-9B69-858EB36CA0F7} = {40E5618A-4BB4-431E-8C3D-6907DF49C5F5}
 		{14E5A7C9-D76F-47D3-AB10-94E66896C9BA} = {514E389C-2863-4778-ABD3-DA356370BD16}
 		{952C9D08-1C5B-4D67-BFC0-079DCEEA3553} = {37C7937B-518E-40C8-96E5-226064D57313}
-		{24F1388A-9BC5-4A3A-8D5F-C4212A670668} = {37C7937B-518E-40C8-96E5-226064D57313}
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
+		SccNumberOfProjects = 7
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://10.10.32.43:8080/tfs/defaultcollection
 		SccLocalPath0 = .
@@ -142,9 +131,5 @@ Global
 		SccProjectTopLevelParentUniqueName6 = VOI.SISAC.sln
 		SccProjectName6 = Sources/VOI.SISAC.WinServices
 		SccLocalPath6 = Sources\\VOI.SISAC.WinServices
-		SccProjectUniqueName7 = Sources\\VOI.SISAC.TaskScheduler\\VOI.SISAC.TaskScheduler\\VOI.SISAC.TaskScheduler.csproj
-		SccProjectTopLevelParentUniqueName7 = VOI.SISAC.sln
-		SccProjectName7 = Sources/VOI.SISAC.TaskScheduler/VOI.SISAC.TaskScheduler
-		SccLocalPath7 = Sources\\VOI.SISAC.TaskScheduler\\VOI.SISAC.TaskScheduler
 	EndGlobalSection
 EndGlobal

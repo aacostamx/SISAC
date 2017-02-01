@@ -6,12 +6,12 @@
 
 namespace VOI.SISAC.Dal.Repository.Itineraries
 {
-    using System;
     using Entities.Itineraries;
-    using VOI.SISAC.Dal.Infrastructure;
+    using System;
+    using System.Data.Entity;
     using System.Diagnostics;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
+    using System.Linq;
+    using VOI.SISAC.Dal.Infrastructure;
 
     /// <summary>
     /// Timeline Movement Repository
@@ -24,6 +24,30 @@ namespace VOI.SISAC.Dal.Repository.Itineraries
         /// <param name="factory">The factory.</param>
         public TimelineMovementRepository(IDbFactory factory) : base(factory) { }
 
+        /// <summary>
+        /// Gets the timeline movement.
+        /// </summary>
+        /// <param name="move">The move.</param>
+        /// <returns></returns>
+        public TimelineMovement GetTimelineMovement(TimelineMovement move)
+        {
+            var movement = new TimelineMovement();
 
+            try
+            {
+                movement = this.DbContext.TimelineMovement
+                    .Include(c => c.MovementType)
+                    .Include(c => c.OperationType)
+                    .Include(c => c.Provider)
+                    .Where(c => c.ID == move.ID)
+                    .FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message, ex);
+            }
+
+            return movement;
+        }
     }
 }

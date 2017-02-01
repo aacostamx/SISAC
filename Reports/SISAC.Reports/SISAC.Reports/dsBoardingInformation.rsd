@@ -1,0 +1,377 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition">
+  <DataSet Name="">
+    <Query>
+      <DataSourceReference>DS_SISAC</DataSourceReference>
+      <DataSetParameters>
+        <DataSetParameter Name="@BoardingID">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Object</rd:DbType>
+        </DataSetParameter>
+      </DataSetParameters>
+      <CommandText>
+DECLARE @Information AS TABLE (R INT, C INT, Checked BIT)
+
+INSERT @Information
+        ( R, C, Checked )
+SELECT G.CompartmentTypeInformationLevel
+	  ,F.CompartmentTypeLevel
+      ,[Checked]
+  FROM [Itinerary].[ManifestDepartureBoardingInformation] E LEFT JOIN
+	   [Airport].[CompartmentTypeConfig] F ON (F.CompartmentTypeID = E.CompartmentTypeID) LEFT JOIN
+	   [Airport].[CompartmentTypeInformation] G ON (G.CompartmentTypeInformationID = E.CompartmentTypeInformationID)
+  WHERE BoardingID = @BoardingID
+
+SELECT TOP 1 Detail.BoardingID
+      ,Detail.FlightNumber
+	  ,Detail.Station
+	  ,Detail.EquipmentNumber
+	  ,MAX(Detail.PZC1) PZC1
+	  ,MAX(Detail.PZE1) PZE1
+	  ,MAX(Detail.PC1) PC1
+	  ,MAX(Detail.PE1) PE1
+	  ,MAX(Detail.PC1) + MAX(Detail.PE1) TP1
+
+	  ,MAX(Detail.PZC2) PZC2
+	  ,MAX(Detail.PZE2) PZE2
+	  ,MAX(Detail.PC2) PC2
+	  ,MAX(Detail.PE2) PE2
+	  ,MAX(Detail.PC2) + MAX(Detail.PE2) TP2
+
+	  ,MAX(Detail.PZC3) PZC3
+	  ,MAX(Detail.PZE3) PZE3
+	  ,MAX(Detail.PC3) PC3
+	  ,MAX(Detail.PE3) PE3
+	  ,MAX(Detail.PC3) + MAX(Detail.PE3) TP3
+
+	  ,MAX(Detail.PZC4) PZC4
+	  ,MAX(Detail.PZE4) PZE4
+	  ,MAX(Detail.PC4) PC4
+	  ,MAX(Detail.PE4) PE4
+	  ,MAX(Detail.PC4) + MAX(Detail.PE4) TP4
+
+	  ,MAX(Detail.PZC5) PZC5
+	  ,MAX(Detail.PZE5) PZE5
+	  ,MAX(Detail.PC5) PC5
+	  ,MAX(Detail.PE5) PE5
+	  ,MAX(Detail.PC5) + MAX(Detail.PE5) TP5
+
+	  ,CASE WHEN (SELECT SUM(CAST(ISNULL(Checked,0) AS INT)) FROM @Information WHERE R = 1) &gt; 0 THEN 'SI' ELSE 'NO' END SINO1
+	  ,(SELECT (CASE WHEN Checked = 1 THEN 'X' ELSE ' ' END) FROM @Information WHERE R = 1 AND C = 1) C11
+	  ,(SELECT (CASE WHEN Checked = 1 THEN 'X' ELSE ' ' END) FROM @Information WHERE R = 1 AND C = 2) C12
+	  ,(SELECT (CASE WHEN Checked = 1 THEN 'X' ELSE ' ' END) FROM @Information WHERE R = 1 AND C = 3) C13
+	  ,(SELECT (CASE WHEN Checked = 1 THEN 'X' ELSE ' ' END) FROM @Information WHERE R = 1 AND C = 4) C14
+	  ,(SELECT (CASE WHEN Checked = 1 THEN 'X' ELSE ' ' END) FROM @Information WHERE R = 1 AND C = 5) C15
+
+	  ,CASE WHEN (SELECT SUM(CAST(ISNULL(Checked,0) AS INT)) FROM @Information WHERE R = 2) &gt; 0 THEN 'SI' ELSE 'NO' END SINO2
+	  ,(SELECT (CASE WHEN Checked = 1 THEN 'X' ELSE ' ' END) FROM @Information WHERE R = 2 AND C = 1) C21
+	  ,(SELECT (CASE WHEN Checked = 1 THEN 'X' ELSE ' ' END) FROM @Information WHERE R = 2 AND C = 2) C22
+	  ,(SELECT (CASE WHEN Checked = 1 THEN 'X' ELSE ' ' END) FROM @Information WHERE R = 2 AND C = 3) C23
+	  ,(SELECT (CASE WHEN Checked = 1 THEN 'X' ELSE ' ' END) FROM @Information WHERE R = 2 AND C = 4) C24
+	  ,(SELECT (CASE WHEN Checked = 1 THEN 'X' ELSE ' ' END) FROM @Information WHERE R = 2 AND C = 5) C25
+
+	  ,CASE WHEN (SELECT SUM(CAST(ISNULL(Checked,0) AS INT)) FROM @Information WHERE R = 3) &gt; 0 THEN 'SI' ELSE 'NO' END SINO3
+	  ,(SELECT (CASE WHEN Checked = 1 THEN 'X' ELSE ' ' END) FROM @Information WHERE R = 3 AND C = 1) C31
+	  ,(SELECT (CASE WHEN Checked = 1 THEN 'X' ELSE ' ' END) FROM @Information WHERE R = 3 AND C = 2) C32
+	  ,(SELECT (CASE WHEN Checked = 1 THEN 'X' ELSE ' ' END) FROM @Information WHERE R = 3 AND C = 3) C33
+	  ,(SELECT (CASE WHEN Checked = 1 THEN 'X' ELSE ' ' END) FROM @Information WHERE R = 3 AND C = 4) C34
+	  ,(SELECT (CASE WHEN Checked = 1 THEN 'X' ELSE ' ' END) FROM @Information WHERE R = 3 AND C = 5) C35
+
+	  ,CASE WHEN (SELECT SUM(CAST(ISNULL(Checked,0) AS INT)) FROM @Information WHERE R = 4) &gt; 0 THEN 'SI' ELSE 'NO' END SINO4
+	  ,(SELECT (CASE WHEN Checked = 1 THEN 'X' ELSE ' ' END) FROM @Information WHERE R = 4 AND C = 1) C41
+	  ,(SELECT (CASE WHEN Checked = 1 THEN 'X' ELSE ' ' END) FROM @Information WHERE R = 4 AND C = 2) C42
+	  ,(SELECT (CASE WHEN Checked = 1 THEN 'X' ELSE ' ' END) FROM @Information WHERE R = 4 AND C = 3) C43
+	  ,(SELECT (CASE WHEN Checked = 1 THEN 'X' ELSE ' ' END) FROM @Information WHERE R = 4 AND C = 4) C44
+	  ,(SELECT (CASE WHEN Checked = 1 THEN 'X' ELSE ' ' END) FROM @Information WHERE R = 4 AND C = 5) C45
+	  ,MAX(Detail.RampResponsible) RampResponsible
+	  ,MAX(Detail.AorUser) AorUser  
+	  ,MAX(Detail.Remarks) Remarks
+  FROM
+  (
+SELECT A.[BoardingID]
+      ,A.[Sequence]
+      ,A.[AirlineCode]
+      ,A.[FlightNumber]
+      ,A.[ItineraryKey]  
+	  ,A.[Station]
+	  ,B.[EquipmentNumber]
+	  ,D.[CompartmentTypeLevel]
+	  ,(CASE WHEN D.CompartmentTypeLevel = 1 THEN MAX(C.ChargeQuantity) ELSE 0 END) PZC1
+	  ,(CASE WHEN D.CompartmentTypeLevel = 1 THEN MAX(C.LuggageQuantity) ELSE 0 END) PZE1 
+	  ,(CASE WHEN D.CompartmentTypeLevel = 1 THEN MAX(C.ChargeKgs) ELSE 0 END) PC1
+	  ,(CASE WHEN D.CompartmentTypeLevel = 1 THEN MAX(C.LuggageKgs) ELSE 0 END) PE1
+
+	  ,(CASE WHEN D.CompartmentTypeLevel = 2 THEN MAX(C.ChargeQuantity) ELSE 0 END) PZC2
+	  ,(CASE WHEN D.CompartmentTypeLevel = 2 THEN MAX(C.LuggageQuantity) ELSE 0 END) PZE2 
+	  ,(CASE WHEN D.CompartmentTypeLevel = 2 THEN MAX(C.ChargeKgs) ELSE 0 END) PC2
+	  ,(CASE WHEN D.CompartmentTypeLevel = 2 THEN MAX(C.LuggageKgs) ELSE 0 END) PE2
+
+	  ,(CASE WHEN D.CompartmentTypeLevel = 3 THEN MAX(C.ChargeQuantity) ELSE 0 END) PZC3
+	  ,(CASE WHEN D.CompartmentTypeLevel = 3 THEN MAX(C.LuggageQuantity) ELSE 0 END) PZE3 
+	  ,(CASE WHEN D.CompartmentTypeLevel = 3 THEN MAX(C.ChargeKgs) ELSE 0 END) PC3
+	  ,(CASE WHEN D.CompartmentTypeLevel = 3 THEN MAX(C.LuggageKgs) ELSE 0 END) PE3
+
+	  ,(CASE WHEN D.CompartmentTypeLevel = 4 THEN MAX(C.ChargeQuantity) ELSE 0 END) PZC4
+	  ,(CASE WHEN D.CompartmentTypeLevel = 4 THEN MAX(C.LuggageQuantity) ELSE 0 END) PZE4 
+	  ,(CASE WHEN D.CompartmentTypeLevel = 4 THEN MAX(C.ChargeKgs) ELSE 0 END) PC4
+	  ,(CASE WHEN D.CompartmentTypeLevel = 4 THEN MAX(C.LuggageKgs) ELSE 0 END) PE4
+
+	  ,(CASE WHEN D.CompartmentTypeLevel = 5 THEN MAX(C.ChargeQuantity) ELSE 0 END) PZC5
+	  ,(CASE WHEN D.CompartmentTypeLevel = 5 THEN MAX(C.LuggageQuantity) ELSE 0 END) PZE5 
+	  ,(CASE WHEN D.CompartmentTypeLevel = 5 THEN MAX(C.ChargeKgs) ELSE 0 END) PC5
+	  ,(CASE WHEN D.CompartmentTypeLevel = 5 THEN MAX(C.LuggageKgs) ELSE 0 END) PE5	 
+	  ,MAX(C.RampResponsible) RampResponsible
+	  ,ISNULL(MAX(E.Name),'') + ' ' + ISNULL(MAX(E.FirstName),'') + ' ' + ISNULL(MAX(E.LastName),'') AorUser
+	  ,MAX(C.Remarks) Remarks
+  FROM [Itinerary].[ManifestDepartureBoarding] A LEFT JOIN
+       [Itinerary].[Itinerary] B ON (B.Sequence = A.Sequence AND B.AirlineCode = A.AirlineCode AND B.FlightNumber = A.FlightNumber AND B.ItineraryKey = A.ItineraryKey) LEFT JOIN
+	   [Itinerary].[ManifestDepartureBoardingDetail] C ON (C.BoardingID = A.BoardingID) LEFT JOIN
+	   [Airport].[CompartmentTypeConfig] D ON (D.CompartmentTypeID = C.CompartmentTypeID) LEFT JOIN
+       [Security].[User] E ON (C.AorUserID = E.UserID)
+ WHERE A.[BoardingID] = @BoardingID
+ GROUP BY 
+       A.[BoardingID]
+      ,A.[Sequence]
+      ,A.[AirlineCode]
+      ,A.[FlightNumber]
+      ,A.[ItineraryKey]   
+	  ,B.[FlightNumber]
+	  ,A.[Station]
+	  ,B.[EquipmentNumber]
+	  ,D.[CompartmentTypeLevel]
+	  ) AS Detail
+GROUP BY Detail.BoardingID
+      ,Detail.FlightNumber
+	  ,Detail.Station
+	  ,Detail.EquipmentNumber</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="BoardingID">
+        <DataField>BoardingID</DataField>
+        <rd:TypeName>System.Int64</rd:TypeName>
+      </Field>
+      <Field Name="FlightNumber">
+        <DataField>FlightNumber</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="Station">
+        <DataField>Station</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="EquipmentNumber">
+        <DataField>EquipmentNumber</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="PZC1">
+        <DataField>PZC1</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="PZE1">
+        <DataField>PZE1</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="PC1">
+        <DataField>PC1</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="PE1">
+        <DataField>PE1</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="TP1">
+        <DataField>TP1</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="PZC2">
+        <DataField>PZC2</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="PZE2">
+        <DataField>PZE2</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="PC2">
+        <DataField>PC2</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="PE2">
+        <DataField>PE2</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="TP2">
+        <DataField>TP2</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="PZC3">
+        <DataField>PZC3</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="PZE3">
+        <DataField>PZE3</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="PC3">
+        <DataField>PC3</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="PE3">
+        <DataField>PE3</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="TP3">
+        <DataField>TP3</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="PZC4">
+        <DataField>PZC4</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="PZE4">
+        <DataField>PZE4</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="PC4">
+        <DataField>PC4</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="PE4">
+        <DataField>PE4</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="TP4">
+        <DataField>TP4</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="PZC5">
+        <DataField>PZC5</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="SINO1">
+        <DataField>SINO1</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="PZE5">
+        <DataField>PZE5</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="C11">
+        <DataField>C11</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="PC5">
+        <DataField>PC5</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="C12">
+        <DataField>C12</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="C13">
+        <DataField>C13</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="PE5">
+        <DataField>PE5</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="C14">
+        <DataField>C14</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="TP5">
+        <DataField>TP5</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="C15">
+        <DataField>C15</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="SINO2">
+        <DataField>SINO2</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="C21">
+        <DataField>C21</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="C22">
+        <DataField>C22</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="C23">
+        <DataField>C23</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="C24">
+        <DataField>C24</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="C25">
+        <DataField>C25</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="SINO3">
+        <DataField>SINO3</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="C31">
+        <DataField>C31</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="C32">
+        <DataField>C32</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="C33">
+        <DataField>C33</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="C34">
+        <DataField>C34</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="C35">
+        <DataField>C35</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="SINO4">
+        <DataField>SINO4</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="C41">
+        <DataField>C41</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="C42">
+        <DataField>C42</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="C43">
+        <DataField>C43</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="C44">
+        <DataField>C44</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="C45">
+        <DataField>C45</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="RampResponsible">
+        <DataField>RampResponsible</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="AorUser">
+        <DataField>AorUser</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="Remarks">
+        <DataField>Remarks</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

@@ -246,17 +246,19 @@ namespace VOI.SISAC.Business.Airport
         /// </summary>
         /// <param name="crewDto">The crew dto.</param>
         /// <returns>number of integer matches</returns>
-        public int ValidateFields(CrewDto crewDto)
+        public List<string> ValidateFields(CrewDto crewDto)
         {
+            List<string> errors = new List<string>();
+
             if (crewDto == null)
             {
-                return 0;
+                return errors;
             }
 
             try
             {
-                int result = this.crewRepository.ValidateFields(crewDto.EmployeeNumber, crewDto.NickName, crewDto.NickNameSabre);
-                return result;
+                errors.AddRange(this.crewRepository.ValidateFields(crewDto.EmployeeNumber, crewDto.NickName, crewDto.NickNameSabre));
+                return errors;
             }
             catch(Exception exception)
             {

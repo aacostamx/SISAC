@@ -6,6 +6,6 @@ C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Entities\bi
 C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Entities\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Entities\bin\Debug\EntityFramework.xml
 C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Entities\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Entities\obj\Debug\VOI.SISAC.Entities.csprojResolveAssemblyReference.cache
 C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Entities\obj\Debug\VOI.SISAC.Entities.dll
 C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Entities\obj\Debug\VOI.SISAC.Entities.pdb
-C:\Users\Linko\Source\Workspaces\Finanzas\Dev\Code\Sources\VOI.SISAC.Entities\obj\Debug\VOI.SISAC.Entities.csprojResolveAssemblyReference.cache

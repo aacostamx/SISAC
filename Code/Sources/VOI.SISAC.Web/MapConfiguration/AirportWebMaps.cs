@@ -51,12 +51,21 @@ namespace VOI.SISAC.Web.MapConfiguration
             this.NationalJetFuelTicketMap();
         }
 
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AirportWebMaps"/> class.
+        /// </summary>
+        public AirportWebMaps()
+        {
+            
+        }
+
         /// <summary>
         /// Nationals the jet fuel ticket map.
         /// </summary>
         private void NationalJetFuelTicketMap()
         {
-            Mapper.CreateMap<NationalJetFuelTicketDto, NationalJetFuelTicketVO>()
+            CreateMap<NationalJetFuelTicketDto, NationalJetFuelTicketVO>()
                 .ReverseMap();
         }
 
@@ -65,7 +74,7 @@ namespace VOI.SISAC.Web.MapConfiguration
         /// </summary>
         private void JetFuelTicketMap()
         {
-            Mapper.CreateMap<JetFuelTicketDto, JetFuelTicketVO>()
+            CreateMap<JetFuelTicketDto, JetFuelTicketVO>()
                 .ReverseMap();
         }
 
@@ -74,7 +83,7 @@ namespace VOI.SISAC.Web.MapConfiguration
         /// </summary>
         private void AirportServiceMap()
         {
-            Mapper.CreateMap<AirportServiceDto, AirportServiceVO>()
+            CreateMap<AirportServiceDto, AirportServiceVO>()
                 .ReverseMap();
         }
 
@@ -83,7 +92,7 @@ namespace VOI.SISAC.Web.MapConfiguration
         /// </summary>
         private void FuelConceptTypeWebMap()
         {
-            Mapper.CreateMap<FuelConceptTypeDto, FuelConceptTypeVO>()
+            CreateMap<FuelConceptTypeDto, FuelConceptTypeVO>()
                 .ReverseMap();
         }
 
@@ -92,7 +101,7 @@ namespace VOI.SISAC.Web.MapConfiguration
         /// </summary>
         private void ManifestTimeConfigMap()
         {
-            Mapper.CreateMap<ManifestTimeConfigDto, ManifestTimeConfigVO>()
+            CreateMap<ManifestTimeConfigDto, ManifestTimeConfigVO>()
                 .ReverseMap();
         }
 
@@ -101,7 +110,7 @@ namespace VOI.SISAC.Web.MapConfiguration
         /// </summary>
         private void DelayMap()
         {
-            Mapper.CreateMap<DelayDto, DelayVO>()
+            CreateMap<DelayDto, DelayVO>()
                 .ReverseMap();
         }
 
@@ -110,7 +119,7 @@ namespace VOI.SISAC.Web.MapConfiguration
         /// </summary>
         private void GpuObservationMap()
         {
-            Mapper.CreateMap<GpuObservationDto, GpuObservationVO>()
+            CreateMap<GpuObservationDto, GpuObservationVO>()
                 .ReverseMap();
         }
 
@@ -119,7 +128,7 @@ namespace VOI.SISAC.Web.MapConfiguration
         /// </summary>
         private void GpuMap()
         {
-            Mapper.CreateMap<GpuDto, GpuVO>()
+            CreateMap<GpuDto, GpuVO>()
                 .ReverseMap();
         }
 
@@ -128,7 +137,7 @@ namespace VOI.SISAC.Web.MapConfiguration
         /// </summary>
         private void AirportGroupMap()
         {
-            Mapper.CreateMap<AirportGroupDto, AirportGroupVO>()
+            CreateMap<AirportGroupDto, AirportGroupVO>()
                 .ReverseMap();
         }
 
@@ -137,7 +146,7 @@ namespace VOI.SISAC.Web.MapConfiguration
         /// </summary>
         private void AirportMap()
         {
-            Mapper.CreateMap<AirportDto, AirportVO>()
+            CreateMap<AirportDto, AirportVO>()
                 .ReverseMap();
         }
 
@@ -146,16 +155,16 @@ namespace VOI.SISAC.Web.MapConfiguration
         /// </summary>
         private void PassengerInformationMap()
         {
-            Mapper.CreateMap<PassengerInformationDto, PassengerInformationVO>()
-                .ForMember(p => p.EquipmentNumber, r => r.MapFrom(s => s.Itinerary.EquipmentNumber ))
+            CreateMap<PassengerInformationDto, PassengerInformationVO>()
+                .ForMember(p => p.EquipmentNumber, r => r.MapFrom(s => s.Itinerary.EquipmentNumber))
                 .ForMember(p => p.DepartureDate, r => r.MapFrom(s => s.Itinerary.DepartureDate.ToShortDateString()))
-                .ForMember(p => p.TimeDeparture, r => r.MapFrom(s => s.Itinerary.DepartureDate.Hour + ":"+ s.Itinerary.DepartureDate.Minute ))
+                .ForMember(p => p.TimeDeparture, r => r.MapFrom(s => s.Itinerary.DepartureDate.Hour + ":" + s.Itinerary.DepartureDate.Minute))
                 .ForMember(p => p.AirplaneModel, r => r.MapFrom(s => s.Itinerary.Airplane.AirplaneModel))
                 .ForMember(p => p.Departure, r => r.MapFrom(s => s.Itinerary.DepartureStation))
                 .ForMember(p => p.Arrival, r => r.MapFrom(s => s.Itinerary.ArrivalStation))
                 .ReverseMap();
 
-            Mapper.CreateMap<AdditionalPassengerInformationDto, AdditionalPassengerInformationVO>()
+            CreateMap<AdditionalPassengerInformationDto, AdditionalPassengerInformationVO>()
                 .ReverseMap();
         }
 
@@ -164,34 +173,34 @@ namespace VOI.SISAC.Web.MapConfiguration
         /// </summary>
         private void Map()
         {
-            Mapper.CreateMap<CrewDto, CrewVO>()
+            CreateMap<CrewDto, CrewVO>()
                 .ReverseMap();
 
-            Mapper.CreateMap<AirlineDto, AirlineVO>()
+            CreateMap<AirlineDto, AirlineVO>()
                 .ReverseMap();
 
-            Mapper.CreateMap<FuelConceptDto, FuelConceptVO>()
+            CreateMap<FuelConceptDto, FuelConceptVO>()
                 .ReverseMap();
 
-            Mapper.CreateMap<ServiceDto, ServiceVO>()
+            CreateMap<ServiceDto, ServiceVO>()
                 .ReverseMap();
 
-            Mapper.CreateMap<AirplaneDto, AirplaneVO>()
+            CreateMap<AirplaneDto, AirplaneVO>()
                 .ReverseMap();
 
-            Mapper.CreateMap<AirplaneTypeDto, AirplaneTypeVO>()
+            CreateMap<AirplaneTypeDto, AirplaneTypeVO>()
                 .ReverseMap();
 
-            Mapper.CreateMap<DrinkingWaterDto, DrinkingWaterVO>()
+            CreateMap<DrinkingWaterDto, DrinkingWaterVO>()
                 .ReverseMap();
 
-            Mapper.CreateMap<AirportScheduleDto, AirportScheduleVO>()
+            CreateMap<AirportScheduleDto, AirportScheduleVO>()
                 .ReverseMap();
 
-            Mapper.CreateMap<CrewTypeDto, CrewTypeVO>()
+            CreateMap<CrewTypeDto, CrewTypeVO>()
                 .ReverseMap();
 
-            Mapper.CreateMap<CrewFile, CrewDto>()
+            CreateMap<CrewFile, CrewDto>()
                 .ReverseMap();
         }
     }

@@ -50,7 +50,7 @@ namespace VOI.SISAC.Dal.Configuration.Itineraries
             this.HasMany(e => e.TimelineMovements)
             .WithRequired(e => e.Timeline)
             .HasForeignKey(e => new { e.Sequence, e.AirlineCode, e.FlightNumber, e.ItineraryKey })
-            .WillCascadeOnDelete(false);
+            .WillCascadeOnDelete(true);
         }
     }
 }

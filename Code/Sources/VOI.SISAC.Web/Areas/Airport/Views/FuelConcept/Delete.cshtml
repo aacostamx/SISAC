@@ -30,8 +30,12 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <br />
-                    <input type="reset" class="btnVolaris" value="@VOI.SISAC.Web.Resources.Resource.Back" onclick="@("location.href='" + @Url.Action("Index", "FuelConcept") + "'")">
-                    <input type="submit" value="@VOI.SISAC.Web.Resources.Resource.Delete" class="btnVolaris">
+                    <button type="button" class="btn btn-default" name="back-btn" title="@Resource.Back" onclick="location.href='@Url.Action("Index", "FuelConcept")'">
+                        <i class="fa fa-arrow-left fa-fw"></i>&nbsp;@Resource.Back
+                    </button>
+                    <button type="submit" class="btn btn-default btn-green" name="back-btn" title="@Resource.Delete">
+                        <i class="fa fa-trash fa-fw"></i>&nbsp;@Resource.Delete
+                    </button>
                     <br />
                 </div>
             </div>

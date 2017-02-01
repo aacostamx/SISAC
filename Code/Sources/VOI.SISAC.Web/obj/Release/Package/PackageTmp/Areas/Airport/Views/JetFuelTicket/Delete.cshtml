@@ -138,8 +138,20 @@
                     <br />
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <input onclick="@("location.href='" + @Url.Action("Index", "JetFuelTicket", new { Sequence = Sequence, AirlineCode = AirlineCode, FlightNumber = FlightNumber, ItineraryKey = ItineraryKey, OperationTypeName = OperationTypeName}) + "'")" type="reset" class="btnVolaris" value="@Resource.Back" />
-                            <input type="submit" value=@Resource.Delete class="btnVolaris" />
+                            <button type="button" class="btn btn-default" name="back-btn" title="@Resource.Back"
+                                     onclick="location.href='@Url.Action("Index", "JetFuelTicket", new {
+                                        Sequence = Sequence,
+                                        AirlineCode = AirlineCode,
+                                        FlightNumber = FlightNumber,
+                                        ItineraryKey = ItineraryKey,
+                                        OperationTypeName = OperationTypeName })'">
+                                <i class="fa fa-arrow-left fa-fw"></i>&nbsp;@Resource.Back
+                            </button>
+                            <button type="submit" class="btn btn-default btn-green" name="back-btn" title="@Resource.Delete">
+                                <i class="fa fa-trash fa-fw"></i>&nbsp;@Resource.Delete
+                            </button>
+                            @*<input onclick="@("location.href='" + @Url.Action("Index", "JetFuelTicket", new { Sequence = Sequence, AirlineCode = AirlineCode, FlightNumber = FlightNumber, ItineraryKey = ItineraryKey, OperationTypeName = OperationTypeName}) + "'")" type="reset" class="btnVolaris" value="@Resource.Back" />
+                            <input type="submit" value=@Resource.Delete class="btnVolaris" />*@
                         </div>
                     </div>
                 </div>

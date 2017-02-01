@@ -72,6 +72,18 @@ namespace VOI.SISAC.Dal.Repository.Process
         }
 
         /// <summary>
+        /// Validates the nonconformity.
+        /// </summary>
+        /// <param name="reconcileInfo">The reconcile information.</param>
+        /// <returns></returns>
+        public IList<RemittanceIDValidate> ValidateNonconformity(DataTable reconcileInfo)
+        {
+            IList<RemittanceIDValidate> remittanceID = this.DbContext.UploadNonconformity(reconcileInfo);
+
+            return remittanceID;
+        }
+
+        /// <summary>
         /// Gets the paginated data.
         /// </summary>
         /// <param name="take">The number of elements to get.</param>
@@ -250,6 +262,25 @@ namespace VOI.SISAC.Dal.Repository.Process
             try
             {
                 sucess = this.DbContext.JetFuelRevertManualReconcile(process);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message, ex);
+            }
+            return sucess;
+        }
+
+        /// <summary>
+        /// Reverts the nonconformity process.
+        /// </summary>
+        /// <param name="process">The process.</param>
+        /// <returns></returns>
+        public int RevertNonconformityProcess(NationalJetFuelInvoiceControl process)
+        {
+            var sucess = 0;
+            try
+            {
+                sucess = this.DbContext.JetFuelRevertNonconformity(process);
             }
             catch (Exception ex)
             {

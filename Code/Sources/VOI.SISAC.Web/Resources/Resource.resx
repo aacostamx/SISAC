@@ -148,7 +148,7 @@
     <value>Airline Name</value>
   </data>
   <data name="AirlineShortName" xml:space="preserve">
-    <value>Airline Short Name</value>
+    <value>Short Name</value>
   </data>
   <data name="AirlineTitle" xml:space="preserve">
     <value>Airline Catalog</value>
@@ -969,7 +969,7 @@
     <value>Jet Fuel Ticket</value>
   </data>
   <data name="OperationTypeName" xml:space="preserve">
-    <value>Operation Type Name</value>
+    <value>Operation Type</value>
   </data>
   <data name="RemainingQry" xml:space="preserve">
     <value>Remaining Qry (Kgs)</value>
@@ -2231,10 +2231,10 @@ Ej. 01-15 (primeros quince días)</comment>
     <value>The manifest has been updated succesfully.</value>
   </data>
   <data name="ActualDepartureDate" xml:space="preserve">
-    <value>Actual Departure Date</value>
+    <value>Actual Date</value>
   </data>
   <data name="ActualDepartureTime" xml:space="preserve">
-    <value>Actual Departure Time</value>
+    <value>Actual Time</value>
   </data>
   <data name="DelayRemarks" xml:space="preserve">
     <value>Delay Remarks</value>
@@ -2273,10 +2273,10 @@ Ej. 01-15 (primeros quince días)</comment>
     <value>Scale Station</value>
   </data>
   <data name="ScheduledDepartureDate" xml:space="preserve">
-    <value>Scheduled Departure Date</value>
+    <value>Scheduled Date</value>
   </data>
   <data name="ScheduledDepartureTime" xml:space="preserve">
-    <value>Scheduled Departure Time</value>
+    <value>Scheduled Time</value>
   </data>
   <data name="StructuralTakeoffWeightKg" xml:space="preserve">
     <value>Structural Takeoff Weight (Kg)</value>
@@ -2463,5 +2463,77 @@ Ej. 01-15 (primeros quince días)</comment>
   </data>
   <data name="AdditionalInformation" xml:space="preserve">
     <value>Additional Information</value>
+  </data>
+  <data name="PaxDni" xml:space="preserve">
+    <value>Pax DNI</value>
+  </data>
+  <data name="PayTua" xml:space="preserve">
+    <value>Pay TUA</value>
+  </data>
+  <data name="ShowPreviousInformation" xml:space="preserve">
+    <value>Show Previous Information</value>
+  </data>
+  <data name="CountNonconformityRecords" xml:space="preserve">
+    <value>#Non-conforming records</value>
+  </data>
+  <data name="DateNonconformity" xml:space="preserve">
+    <value>Nonconformity Date/Time</value>
+  </data>
+  <data name="NonconformityReference" xml:space="preserve">
+    <value>Nonconformity Reference</value>
+  </data>
+  <data name="NonconformitySubtotalAmount" xml:space="preserve">
+    <value>Nonconformity Amount</value>
+  </data>
+  <data name="ManageInvoiceRemittanceNonconformities" xml:space="preserve">
+    <value>Manage Invoice Remittance Nonconformities</value>
+  </data>
+  <data name="ManageNonconformities" xml:space="preserve">
+    <value>Manage Nonconformities </value>
+  </data>
+  <data name="NonconfirmityStatusCode" xml:space="preserve">
+    <value>Nonconfirmity Status</value>
+  </data>
+  <data name="DownloadCanditateInvoiceRecords" xml:space="preserve">
+    <value>Download Canditate Invoice Records</value>
+  </data>
+  <data name="Movement" xml:space="preserve">
+    <value>Movement</value>
+  </data>
+  <data name="MovementDetail" xml:space="preserve">
+    <value>Movement Detail</value>
+  </data>
+  <data name="MovementDate" xml:space="preserve">
+    <value>Movement Date</value>
+  </data>
+  <data name="MovementDescription" xml:space="preserve">
+    <value>Movement Description</value>
+  </data>
+  <data name="MovementType" xml:space="preserve">
+    <value>Movement Type</value>
+  </data>
+  <data name="DocumentDate" xml:space="preserve">
+    <value>Document Date</value>
+  </data>
+  <data name="GeneratePDF" xml:space="preserve">
+    <value>Generate PDF</value>
+  </data>
+  <data name="GenerateNonconformityPDF" xml:space="preserve">
+    <value>Generate Nonconformity PDF</value>
+  </data>
+  <data name="CloseNonconformity" xml:space="preserve">
+    <value>Closed for Nonconformity</value>
+  </data>
+  <data name="OpenNonconformity" xml:space="preserve">
+    <value>Opened for Nonconformity</value>
+  </data>
+  <data name="RemainingFuel" xml:space="preserve">
+    <value>Remaining Fuel</value>
+  </data>
+  <data name="BusinessName" xml:space="preserve">
+    <value>Business Name</value>
+  </data>
+  <data name="NonconformityFilePath" xml:space="preserve">
+    <value>~/Files/Templates/CanditateInvoiceRecords.txt</value>
   </data>
 </root>

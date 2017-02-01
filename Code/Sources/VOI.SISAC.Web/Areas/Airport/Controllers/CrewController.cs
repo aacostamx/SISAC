@@ -223,6 +223,7 @@ namespace VOI.SISAC.Web.Areas.Airport.Controllers
         public ActionResult Create(CrewModelVO crewViewModel)
         {
             CrewDto crewDto = new CrewDto();
+            List<string> errorResult = new List<string>();
             if (crewViewModel == null)
             {
                 Logger.Error(string.Format(LogMessages.ErrorNullObject, this.catalogName));
@@ -238,10 +239,12 @@ namespace VOI.SISAC.Web.Areas.Airport.Controllers
                     crewDto = Mapper.Map<CrewVO, CrewDto>(crewViewModel.CrewVO);
 
                     // Valida si Numero de Empleado, NickName o NickName Sabre ya existen en la base de datos
-                    if (this.crewBusiness.ValidateFields(crewDto) > 0)
+                    errorResult = this.crewBusiness.ValidateFields(crewDto);
+                    if (errorResult != null && errorResult.Count > 0)
                     {
                         crewViewModel = this.LoadCatalogs(crewViewModel.CrewVO);
-                        this.ViewBag.ErrorMessage = "Employe Number/NickName or NickNameSabre already exist";
+                        this.ViewBag.ListErrorMessage = errorResult;
+
                         return this.View("Create", crewViewModel);
                     }
 

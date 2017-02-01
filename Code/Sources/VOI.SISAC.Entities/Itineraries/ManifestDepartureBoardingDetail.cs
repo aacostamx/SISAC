@@ -101,14 +101,6 @@ namespace VOI.SISAC.Entities.Itineraries
         public int AorUserID { get; set; }
 
         /// <summary>
-        /// Gets or sets the creation date.
-        /// </summary>
-        /// <value>
-        /// The creation date.
-        /// </value>
-        public DateTime CreationDate { get; set; }
-
-        /// <summary>
         /// Gets or sets the manifest departure boarding.
         /// </summary>
         /// <value>

@@ -26,6 +26,7 @@ namespace VOI.SISAC.Dal
     using Entities.Itineraries;
     using Entities.Process;
     using Entities.Security;
+    using Entities.Views;
 
     /// <summary>
     /// Context class
@@ -447,6 +448,14 @@ namespace VOI.SISAC.Dal
         /// The type of the movement.
         /// </value>
         public DbSet<MovementType> MovementType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the procedure calculations.
+        /// </summary>
+        /// <value>
+        /// The procedure calculations.
+        /// </value>
+        public DbSet<ProcedureCalculation> ProcedureCalculations { get; set; }
         #endregion
 
         #region Security
@@ -641,6 +650,14 @@ namespace VOI.SISAC.Dal
         /// The timeline movement.
         /// </value>
         public DbSet<TimelineMovement> TimelineMovement { get; set; }
+
+        /// <summary>
+        /// Gets or sets the vw timeline order.
+        /// </summary>
+        /// <value>
+        /// The vw timeline order.
+        /// </value>
+        public virtual DbSet<VW_TimelineOrder> VW_TimelineOrder { get; set; }
         #endregion
 
         #region Process
@@ -1467,6 +1484,31 @@ namespace VOI.SISAC.Dal
                 sqlParams).ToList();
         }
 
+        /// <summary>
+        /// Uploads the nonconformity.
+        /// </summary>
+        /// <param name="reconcileInfo">The reconcile information.</param>
+        /// <returns></returns>
+        public virtual IList<RemittanceIDValidate> UploadNonconformity(DataTable reconcileInfo)
+        {
+            var sqlParams = new object[0];
+
+            SqlParameter remittanceInfoParameter = new SqlParameter();
+            remittanceInfoParameter.ParameterName = "@ReconcileInfo";
+            remittanceInfoParameter.Value = reconcileInfo;
+            remittanceInfoParameter.SqlDbType = SqlDbType.Structured;
+            remittanceInfoParameter.TypeName = "[Process].[NationalJetFuelNonconformityType]";
+
+            sqlParams = new object[]
+                {
+                    remittanceInfoParameter
+                };
+
+            return this.Database.SqlQuery<RemittanceIDValidate>(
+                "[Process].[UploadNonconformity] "
+                + "@ReconcileInfo",
+                sqlParams).ToList();
+        }
 
         /// <summary>
         /// Deletes the national invoice.
@@ -1732,6 +1774,36 @@ namespace VOI.SISAC.Dal
 
                 sqlParams = new object[] { remittanceIDParameter, monthYearParameter, periodParameter };
                 reconciled = this.Database.SqlQuery<int>("[Process].[JetFuelReconciliationManualRevert] @RemittanceID, @MonthYear, @Period", sqlParams).SingleOrDefault();
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message, ex);
+            }
+
+            return reconciled;
+        }
+
+        public virtual int JetFuelRevertNonconformity(NationalJetFuelInvoiceControl rec)
+        {
+            var reconciled = 0;
+            var sqlParams = new object[0];
+
+            try
+            {
+                var remittanceIDParameter = rec.RemittanceID != null ?
+                    new SqlParameter("@RemittanceID", rec.RemittanceID) :
+                    new SqlParameter("@RemittanceID", string.Empty);
+
+                var monthYearParameter = rec.MonthYear != null ?
+                    new SqlParameter("@MonthYear", rec.MonthYear) :
+                    new SqlParameter("@MonthYear", string.Empty);
+
+                var periodParameter = rec.Period != null ?
+                    new SqlParameter("@Period", rec.Period) :
+                    new SqlParameter("@Period", string.Empty);
+
+                sqlParams = new object[] { remittanceIDParameter, monthYearParameter, periodParameter };
+                reconciled = this.Database.SqlQuery<int>("[Process].[JetFuelNonconformityRevert] @RemittanceID, @MonthYear, @Period", sqlParams).SingleOrDefault();
             }
             catch (Exception ex)
             {

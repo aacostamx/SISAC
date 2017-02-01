@@ -36,6 +36,10 @@
         data-page-size="10">
         <thead>
             <tr>
+                @if (User.IsInRole("AIRPORT-DEL") || User.IsInRole("AIRPORT-UPD"))
+                {
+                    <th data-field="@Resource.Actions" data-align="center" data-halign="center"><strong>@Resource.Actions</strong></th>
+                }
                 <th data-field="StationCode" data-halign="center" data-align="center" data-sortable="true">
                     <strong>@Html.DisplayNameFor(model => model.StationCode)</strong>
                 </th>
@@ -54,10 +58,6 @@
                 <th data-field="AirportGroupCode" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
                     <strong>@Html.DisplayNameFor(model => model.AirportGroupCode)</strong>
                 </th>
-                @if (User.IsInRole("AIRPORT-DEL") || User.IsInRole("AIRPORT-UPD"))
-                { 
-                    <th data-field="@Resource.Actions" data-align="center" data-halign="center"><strong>@Resource.Actions</strong></th>
-                }
             </tr>
         </thead>
         <tbody>
@@ -66,6 +66,19 @@
                 foreach (var item in Model)
                 {
                 <tr>
+                    @if (User.IsInRole("AIRPORT-DEL") || User.IsInRole("AIRPORT-UPD"))
+                    {
+                        <td>
+                            @if (User.IsInRole("AIRPORT-UPD"))
+                            {
+                                <button class="btn btn-default" type="button" name="Edit" title="@Resource.Edit" onclick="location.href='@Url.Action("Edit", "Airport", new { id = item.StationCode })'"><i class="fa fa-pencil fa-fw"></i></button>
+                            }
+                            @if (User.IsInRole("AIRPORT-DEL"))
+                            {
+                                <button class="btn btn-default" type="button" name="Delete" title="@Resource.Delete" onclick="location.href='@Url.Action("Delete", "Airport", new { id = item.StationCode })'"><i class="fa fa-trash-o fa-fw"></i></button>
+                            }
+                        </td>
+                    }
                     <td>
                         @Html.DisplayFor(modelItem => item.StationCode)
                     </td>
@@ -84,19 +97,6 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.AirportGroupCode)
                     </td>
-                    @if (User.IsInRole("AIRPORT-DEL") || User.IsInRole("AIRPORT-UPD"))
-                    {
-                        <td>
-                            @if (User.IsInRole("AIRPORT-UPD"))
-                            { 
-                                <button class="btn btn-default" type="button" name="Edit" title="@Resource.Edit" onclick="location.href='@Url.Action("Edit", "Airport", new { id = item.StationCode })'"><i class="fa fa-pencil fa-fw"></i></button>
-                            }
-                            @if (User.IsInRole("AIRPORT-DEL"))
-                            { 
-                                <button class="btn btn-default" type="button" name="Delete" title="@Resource.Delete" onclick="location.href='@Url.Action("Delete", "Airport", new { id = item.StationCode })'"><i class="fa fa-trash-o fa-fw"></i></button>
-                            }
-                        </td>
-                    }
                 </tr>
                 }
             }

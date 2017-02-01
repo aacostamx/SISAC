@@ -31,7 +31,7 @@ namespace VOI.SISAC.Web.Models.VO.Finance
         [Display(Name = "ProviderName", ResourceType = typeof(Resources.Resource))]
         [Required(ErrorMessageResourceType = typeof(Resources.Resource),
                   ErrorMessageResourceName = "RequiredField")]
-        [StringLength(150, MinimumLength = 5, ErrorMessageResourceType = typeof(Resources.Resource),
+        [StringLength(150, MinimumLength = 2, ErrorMessageResourceType = typeof(Resources.Resource),
                           ErrorMessageResourceName = "ProviderNameMaxLong")]        
         public string ProviderName { get; set; }
 
@@ -41,7 +41,7 @@ namespace VOI.SISAC.Web.Models.VO.Finance
         [Display(Name = "ShortNameProvider", ResourceType = typeof(Resources.Resource))]
         [Required(ErrorMessageResourceType = typeof(Resources.Resource),
                   ErrorMessageResourceName = "RequiredField")]
-        [StringLength(15, MinimumLength = 5, ErrorMessageResourceType = typeof(Resources.Resource),
+        [StringLength(15, MinimumLength = 2, ErrorMessageResourceType = typeof(Resources.Resource),
                           ErrorMessageResourceName = "ShortNameProviderMaxLong")]
         public string ProviderShortName { get; set; }
 

@@ -3,9 +3,11 @@
 @{
     ViewBag.Title = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var cultureForm = VOI.SISAC.Web.Helpers.CultureHelper.GetCurrentCulture();
 }
 
 
+@Styles.Render("~/bundles/SweetAlertCSS")
 @Html.Partial("_AlertView")
 <h2>Delete</h2>
 
@@ -104,12 +106,19 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm("Delete", "Itinerary", new { area = "Itinerary", Sequence = Model.Sequence, AirlineCode = Model.AirlineCode, FlightNumber = Model.FlightNumber, ItineraryKey = Model.ItineraryKey}, FormMethod.Post, new { id = "deleteForm" }))
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input onclick="@("location.href='" + @Url.Action("Index", "Itinerary") + "'")" type="reset" value="@Resource.Back"/>            
-            <input type="submit" value="Delete" class="btn btn-default" />    
+            <input onclick="@("location.href='" + @Url.Action("Index", "Itinerary") + "'")" type="reset"  class="btnVolaris" value="@Resource.Back"/>            
+            <input  onclick="ItineraryController.ConfirmDelete()" type="reset" value="@VOI.SISAC.Web.Resources.Resource.Delete" title ="@VOI.SISAC.Web.Resources.Resource.Delete" class="btnVolaris"/>
         </div>
     }
 </div>
+
+@Scripts.Render("~/bundles/SweetAlertJS")
+@Scripts.Render("~/bundles/ItineraryJS")
+<script type="text/javascript">
+    var currentLang = '@cultureForm.ToString()';
+</script>

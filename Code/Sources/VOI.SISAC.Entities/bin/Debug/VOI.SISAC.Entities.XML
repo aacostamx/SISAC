@@ -169,6 +169,14 @@
             The other international.
             </value>
         </member>
+        <member name="P:VOI.SISAC.Entities.Airport.AdditionalPassengerInformation.PaxDni">
+            <summary>
+            Gets or sets the pax dni.
+            </summary>
+            <value>
+            The pax dni.
+            </value>
+        </member>
         <member name="P:VOI.SISAC.Entities.Airport.AdditionalPassengerInformation.PassengerInformation">
             <summary>
             Gets or sets the passenger information.
@@ -1908,6 +1916,7 @@
             The division.
             </value>
         </member>
+        <!-- Badly formed XML comment ignored for member "P:VOI.SISAC.Entities.Airport.Airline.BusinessName" -->
         <member name="P:VOI.SISAC.Entities.Airport.Airline.CostCenters">
             <summary>
             Gets or sets the cost centers.
@@ -2417,6 +2426,35 @@
             <summary>
             AirportGroup
             </summary>
+        </member>
+        <member name="T:VOI.SISAC.Entities.Catalog.ProcedureCalculation">
+            <summary>
+            ProcedureCalculation class
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Catalog.ProcedureCalculation.ProcedureCode">
+            <summary>
+            Gets or sets the procedure code.
+            </summary>
+            <value>
+            The procedure code.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Catalog.ProcedureCalculation.ProcedureName">
+            <summary>
+            Gets or sets the name of the procedure.
+            </summary>
+            <value>
+            The name of the procedure.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Catalog.ProcedureCalculation.ProcedureDBName">
+            <summary>
+            Gets or sets the name of the procedure database.
+            </summary>
+            <value>
+            The name of the procedure database.
+            </value>
         </member>
         <member name="T:VOI.SISAC.Entities.Catalog.ReconciliationTolerance">
             <summary>
@@ -5151,14 +5189,6 @@
             The aor user identifier.
             </value>
         </member>
-        <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingDetail.CreationDate">
-            <summary>
-            Gets or sets the creation date.
-            </summary>
-            <value>
-            The creation date.
-            </value>
-        </member>
         <member name="P:VOI.SISAC.Entities.Itineraries.ManifestDepartureBoardingDetail.ManifestDepartureBoarding">
             <summary>
             Gets or sets the manifest departure boarding.
@@ -5391,6 +5421,30 @@
             <summary>
             Initializes a new instance of the <see cref="T:VOI.SISAC.Entities.Itineraries.Timeline"/> class.
             </summary>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.Timeline.Row">
+            <summary>
+            Gets or sets the row.
+            </summary>
+            <value>
+            The row.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.Timeline.MaxRow">
+            <summary>
+            Gets or sets the maximum row.
+            </summary>
+            <value>
+            The maximum row.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Itineraries.Timeline.MinRow">
+            <summary>
+            Gets or sets the minimum row.
+            </summary>
+            <value>
+            The minimum row.
+            </value>
         </member>
         <member name="P:VOI.SISAC.Entities.Itineraries.Timeline.Sequence">
             <summary>
@@ -8698,6 +8752,14 @@
             The reconciliation status.
             </value>
         </member>
+        <member name="P:VOI.SISAC.Entities.Process.NationalJetFuelInvoiceDetail.NonconformityFlag">
+            <summary>
+            Gets or sets the nonconformity flag.
+            </summary>
+            <value>
+            The nonconformity flag.
+            </value>
+        </member>
         <member name="P:VOI.SISAC.Entities.Process.NationalJetFuelInvoiceDetail.NationalJetFuelInvoiceControl">
             <summary>
             Gets or sets the national jet fuel invoice control.
@@ -9692,6 +9754,46 @@
             </summary>
             <value>
             The records processed.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Process.NationalJetFuelInvoiceControl.CountNonconformityRecords">
+            <summary>
+            Gets or sets the count nonconformity records.
+            </summary>
+            <value>
+            The count nonconformity records.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Process.NationalJetFuelInvoiceControl.NonconformitySubtotalAmount">
+            <summary>
+            Gets or sets the nonconformity subtotal amount.
+            </summary>
+            <value>
+            The nonconformity subtotal amount.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Process.NationalJetFuelInvoiceControl.DateNonconformity">
+            <summary>
+            Gets or sets the date nonconformity.
+            </summary>
+            <value>
+            The date nonconformity.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Process.NationalJetFuelInvoiceControl.NonconformityReference">
+            <summary>
+            Gets or sets the nonconformity reference.
+            </summary>
+            <value>
+            The nonconformity reference.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Process.NationalJetFuelInvoiceControl.NonconformityStatusCode">
+            <summary>
+            Gets or sets the nonconfirmity status code.
+            </summary>
+            <value>
+            The nonconfirmity status code.
             </value>
         </member>
         <member name="P:VOI.SISAC.Entities.Process.NationalJetFuelInvoiceControl.TotalRows">
@@ -11178,6 +11280,163 @@
             </summary>
             <value>
             The users.
+            </value>
+        </member>
+        <member name="T:VOI.SISAC.Entities.Views.VW_TimelineOrder">
+            <summary>
+            VW_TimelineOrder class
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Views.VW_TimelineOrder.Row">
+            <summary>
+            Gets or sets the row.
+            </summary>
+            <value>
+            The row.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Views.VW_TimelineOrder.Sequence">
+            <summary>
+            Gets or sets the sequence.
+            </summary>
+            <value>
+            The sequence.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Views.VW_TimelineOrder.AirlineCode">
+            <summary>
+            Gets or sets the airline code.
+            </summary>
+            <value>
+            The airline code.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Views.VW_TimelineOrder.FlightNumber">
+            <summary>
+            Gets or sets the flight number.
+            </summary>
+            <value>
+            The flight number.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Views.VW_TimelineOrder.ItineraryKey">
+            <summary>
+            Gets or sets the itinerary key.
+            </summary>
+            <value>
+            The itinerary key.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Views.VW_TimelineOrder.EquipmentNumber">
+            <summary>
+            Gets or sets the equipment number.
+            </summary>
+            <value>
+            The equipment number.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Views.VW_TimelineOrder.DepartureDate">
+            <summary>
+            Gets or sets the departure date.
+            </summary>
+            <value>
+            The departure date.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Views.VW_TimelineOrder.DepartureStation">
+            <summary>
+            Gets or sets the departure station.
+            </summary>
+            <value>
+            The departure station.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Views.VW_TimelineOrder.ArrivalDate">
+            <summary>
+            Gets or sets the arrival date.
+            </summary>
+            <value>
+            The arrival date.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Views.VW_TimelineOrder.ArrivalStation">
+            <summary>
+            Gets or sets the arrival station.
+            </summary>
+            <value>
+            The arrival station.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Views.VW_TimelineOrder.PreviousSequence">
+            <summary>
+            Gets or sets the previous sequence.
+            </summary>
+            <value>
+            The previous sequence.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Views.VW_TimelineOrder.PreviousAirlineCode">
+            <summary>
+            Gets or sets the previous airline code.
+            </summary>
+            <value>
+            The previous airline code.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Views.VW_TimelineOrder.PreviousFlightNumber">
+            <summary>
+            Gets or sets the previous flight number.
+            </summary>
+            <value>
+            The previous flight number.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Views.VW_TimelineOrder.PreviousItineraryKey">
+            <summary>
+            Gets or sets the previous itinerary key.
+            </summary>
+            <value>
+            The previous itinerary key.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Views.VW_TimelineOrder.NextSequence">
+            <summary>
+            Gets or sets the next sequence.
+            </summary>
+            <value>
+            The next sequence.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Views.VW_TimelineOrder.NextAirlineCode">
+            <summary>
+            Gets or sets the next airline code.
+            </summary>
+            <value>
+            The next airline code.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Views.VW_TimelineOrder.NextFlightNumber">
+            <summary>
+            Gets or sets the next flight number.
+            </summary>
+            <value>
+            The next flight number.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Views.VW_TimelineOrder.NextItineraryKey">
+            <summary>
+            Gets or sets the next itinerary key.
+            </summary>
+            <value>
+            The next itinerary key.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Entities.Views.VW_TimelineOrder.SpecialCase">
+            <summary>
+            Gets or sets a value indicating whether [special case].
+            </summary>
+            <value>
+              <c>true</c> if [special case]; otherwise, <c>false</c>.
             </value>
         </member>
     </members>

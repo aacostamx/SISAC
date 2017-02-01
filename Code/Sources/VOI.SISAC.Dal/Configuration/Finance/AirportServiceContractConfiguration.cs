@@ -165,12 +165,12 @@ namespace VOI.SISAC.Dal.Configuration.Finance
             this.Property(c => c.Rate)
                 .HasColumnName("Rate")
                 .HasPrecision(18, 5)
-                .IsRequired();
+                .IsOptional();
 
             this.Property(c => c.CurrencyCode)
                 .HasColumnName("CurrencyCode")
                 .HasMaxLength(3)
-                .IsRequired();
+                .IsOptional();
 
             this.Property(c => c.ServiceRecordFlag)
                 .HasColumnName("ServiceRecordFlag")
@@ -195,10 +195,6 @@ namespace VOI.SISAC.Dal.Configuration.Finance
         /// </summary>
         private void RegisterRequiredRelationships()
         {
-            this.HasRequired(c => c.Currency)
-                .WithMany(s => s.AirportServiceContracts)
-                .HasForeignKey(c => c.CurrencyCode);
-
             this.HasRequired(c => c.Airline)
                 .WithMany(s => s.AirportServiceContracts)
                 .HasForeignKey(c => c.AirlineCode);
@@ -255,6 +251,10 @@ namespace VOI.SISAC.Dal.Configuration.Finance
         /// </summary>
         private void RegisterCatalogRelationships()
         {
+            this.HasOptional(c => c.Currency)
+                .WithMany(s => s.AirportServiceContracts)
+                .HasForeignKey(c => c.CurrencyCode);
+
             this.HasOptional(c => c.AirplaneWeightType)
                 .WithMany(s => s.AirportServiceContracts)
                 .HasForeignKey(c => c.AirplaneWeightCode);

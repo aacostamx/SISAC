@@ -108,17 +108,34 @@ namespace VOI.SISAC.Dal.Repository.Airports
         /// <param name="nickName">Name of the nick.</param>
         /// <param name="nickNameSabre">The nick name sabre.</param>
         /// <returns>return the number of matches</returns>
-        public int ValidateFields(string employeNumber, string nickName, string nickNameSabre)
+        public List<string> ValidateFields(string employeNumber, string nickName, string nickNameSabre)
         {
+            List<string> errors = new List<string>();
             List<Crew> crews = this.DbContext.Crews.Where(c => c.Status && (c.EmployeeNumber == employeNumber ||
                                                           c.NickName == nickName ||
                                                           c.NickNameSabre == nickNameSabre)).ToList();
             if (crews.Count > 0)
             {
-                return crews.Count;
+                if (crews.FirstOrDefault().EmployeeNumber != null && crews.FirstOrDefault().EmployeeNumber == employeNumber)
+                {
+                    errors.Add("Employe Number alredy exist");
+                    errors.Add(employeNumber);
+                }
+
+                if (crews.FirstOrDefault().NickName != null && crews.FirstOrDefault().NickName == nickName)
+                {
+                    errors.Add("NickName alredy exist");
+                    errors.Add(nickName);
+                }
+
+                if (crews.FirstOrDefault().NickNameSabre != null && crews.FirstOrDefault().NickNameSabre == nickNameSabre)
+                {
+                    errors.Add("NickNameSabre Number alredy exist");
+                    errors.Add(nickNameSabre);
+                }
             }
 
-            return crews.Count;
+            return errors;
         }
 
         /// <summary>

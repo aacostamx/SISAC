@@ -308,7 +308,7 @@ namespace VOI.SISAC.Entities.Process
         /// </value>
         [StringLength(5)]
         public string ConfirmationStatusCode { get; set; }
-
+        
         /// <summary>
         /// Gets or sets the confirmation date.
         /// </summary>
@@ -341,6 +341,48 @@ namespace VOI.SISAC.Entities.Process
         /// The records processed.
         /// </value>
         public int? RecordsProcessed { get; set; }
+
+        /// <summary>
+        /// Gets or sets the count nonconformity records.
+        /// </summary>
+        /// <value>
+        /// The count nonconformity records.
+        /// </value>
+        public int? CountNonconformityRecords { get; set; }
+
+        /// <summary>
+        /// Gets or sets the nonconformity subtotal amount.
+        /// </summary>
+        /// <value>
+        /// The nonconformity subtotal amount.
+        /// </value>
+        public decimal? NonconformitySubtotalAmount { get; set; }
+
+        /// <summary>
+        /// Gets or sets the date nonconformity.
+        /// </summary>
+        /// <value>
+        /// The date nonconformity.
+        /// </value>
+        public DateTime? DateNonconformity { get; set; }
+
+        /// <summary>
+        /// Gets or sets the nonconformity reference.
+        /// </summary>
+        /// <value>
+        /// The nonconformity reference.
+        /// </value>
+        [StringLength(15)]
+        public string NonconformityReference { get; set; }
+
+        /// <summary>
+        /// Gets or sets the nonconfirmity status code.
+        /// </summary>
+        /// <value>
+        /// The nonconfirmity status code.
+        /// </value>
+        [StringLength(6)]
+        public string NonconformityStatusCode { get; set; }
 
         /// <summary>
         /// Gets or sets the total rows.

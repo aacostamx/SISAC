@@ -683,7 +683,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -3507,7 +3506,7 @@
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="dsSISAC">
-      <DataSourceReference>dsSISAC</DataSourceReference>
+      <DataSourceReference>DS_SISAC</DataSourceReference>
       <rd:SecurityType>None</rd:SecurityType>
       <rd:DataSourceID>9f03db1f-019f-4509-bc5f-20c5181daff1</rd:DataSourceID>
     </DataSource>
@@ -3526,7 +3525,7 @@
                          A.ElectronicInvoiceNumber, A.ElectronicInvoiceDate, A.TicketNumber AS InvoiceTicketNumber, A.FlightNumber AS InvoiceFlightNumber, 
                          A.EquipmentNumber AS InvoiceEquipmentNumber, A.VolumeM3 AS InvoiceVolumeM3, A.SubtotalAmount AS InvoiceSubtotalAmount, 
                          B.PeriodCode, B.CostTicketNumber, B.CostDepartureDate, B.CostFlightNumber, B.CostEquipmentNumber, B.DepartureStation, B.ArrivalStation, B.CostFueledQtyLts, 
-                         B.CostConceptAmount, B.InvoiceCostVariance, B.ReconciliationType, B.ReconciliationStatus AS ReconciliationStatus
+                         B.CostConceptAmount, B.InvoiceCostVariance, B.ReconciliationType, A.ReconciliationStatus AS ReconciliationStatus
 FROM            Process.NationalJetFuelInvoiceDetail AS A LEFT JOIN
                          Process.NationalJetFuelReconciliationDetail AS B ON A.ID = B.InvoiceDetailID</CommandText>
       </Query>

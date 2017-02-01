@@ -318,6 +318,14 @@ namespace VOI.SISAC.Business.Dto.Process
         public string ReconciliationStatus { get; set; }
 
         /// <summary>
+        /// Gets or sets the nonconformity flag.
+        /// </summary>
+        /// <value>
+        /// The nonconformity flag.
+        /// </value>
+        public bool? NonconformityFlag { get; set; }
+
+        /// <summary>
         /// Gets or sets the national jet fuel invoice control.
         /// </summary>
         /// <value>

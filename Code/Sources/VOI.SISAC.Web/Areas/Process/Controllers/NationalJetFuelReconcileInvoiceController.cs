@@ -50,6 +50,11 @@ namespace VOI.SISAC.Web.Areas.Process.Controllers
         private readonly string moduleName = Resource.ReconcileInvoices;
 
         /// <summary>
+        /// The controller name
+        /// </summary>
+        private readonly string controllerName = VOI.SISAC.Web.Resources.Resource.Reconcile;
+
+        /// <summary>
         /// The national invoice control business
         /// </summary>
         private readonly INationalJetFuelInvoiceControlBusiness invoiceControlBusiness;
@@ -84,6 +89,7 @@ namespace VOI.SISAC.Web.Areas.Process.Controllers
             this.invoiceControlBusiness = invoiceControlBusiness;
             this.pageReportBusiness = pageReportBusiness;
             this.invoiceDetailBusiness = invoiceDetailBusiness;
+            this.controllerName = "NationalJetFuelReconcileInvoiceController";
         }
 
         /// <summary>
@@ -255,6 +261,35 @@ namespace VOI.SISAC.Web.Areas.Process.Controllers
         }
 
 
+        /// <summary>
+        /// Nationals the jet fuel nonconformity process.
+        /// </summary>
+        /// <param name="process">The process.</param>
+        /// <returns></returns>
+        [CustomAuthorize(Roles = "NTLJETREC-NONCONFOR")]
+        public ActionResult NationalJetFuelNonconformityProcess(NationalJetFuelReconcileControlVO process)
+        {
+            var reconcileVO = new NationalJetFuelReconcileControlVO();
+
+            try
+            {
+                if (string.IsNullOrEmpty(process.RemittanceID) || string.IsNullOrEmpty(process.MonthYear) || string.IsNullOrEmpty(process.Period))
+                {
+                    return this.View("NotFound");
+                }
+                reconcileVO = Mapper.Map<NationalJetFuelReconcileControlVO>(this.invoiceControlBusiness.GetInvoiceControl(new NationalJetFuelInvoiceControlDto { RemittanceID = process.RemittanceID, MonthYear = process.MonthYear, Period = process.Period }));
+            }
+            catch (BusinessException ex)
+            {
+                Logger.Error(string.Format(LogMessages.ErrorRetrieveInfo, this.moduleName, this.userInfo));
+                Logger.Error(ex.Message, ex);
+                Trace.TraceError(string.Format(LogMessages.ErrorRetrieveInfo, this.moduleName, this.userInfo));
+                Trace.TraceError(ex.Message, ex);
+                this.ViewBag.ErrorMessage = FrontMessage.GetExceptionErrorMessage(ex.Number);
+            }
+
+            return this.View(reconcileVO);
+        }
 
         /// <summary>
         /// Starts the process.
@@ -347,6 +382,41 @@ namespace VOI.SISAC.Web.Areas.Process.Controllers
 
                 var processDto = new NationalJetFuelInvoiceControlDto { RemittanceID = RemittanceID, MonthYear = MonthYear, Period = Period };
                 revert = this.invoiceControlBusiness.RevertManualReconcileProcess(processDto);
+            }
+            catch (BusinessException ex)
+            {
+                Logger.Error(string.Format(LogMessages.ErrorRetrieveInfo, this.moduleName, this.userInfo));
+                Logger.Error(ex.Message, ex);
+                Trace.TraceError(string.Format(LogMessages.ErrorRetrieveInfo, this.moduleName, this.userInfo));
+                Trace.TraceError(ex.Message, ex);
+                this.ViewBag.ErrorMessage = FrontMessage.GetExceptionErrorMessage(ex.Number);
+            }
+
+            return revert;
+        }
+
+        /// <summary>
+        /// Reverts the nonconformity process.
+        /// </summary>
+        /// <param name="RemittanceID">The remittance identifier.</param>
+        /// <param name="MonthYear">The month year.</param>
+        /// <param name="Period">The period.</param>
+        /// <returns></returns>
+        [HttpPost]
+        [CustomAuthorize(Roles = "NTLJETREC-REVERT")]
+        public int RevertNonconformityProcess(string RemittanceID, string MonthYear, string Period)
+        {
+            int revert = 0;
+
+            try
+            {
+                if (string.IsNullOrEmpty(RemittanceID) || string.IsNullOrEmpty(MonthYear) || string.IsNullOrEmpty(Period))
+                {
+                    return 0;// this.View("NotFound");
+                }
+
+                var processDto = new NationalJetFuelInvoiceControlDto { RemittanceID = RemittanceID, MonthYear = MonthYear, Period = Period };
+                revert = this.invoiceControlBusiness.RevertNonconformityProcess(processDto);
             }
             catch (BusinessException ex)
             {
@@ -568,6 +638,284 @@ namespace VOI.SISAC.Web.Areas.Process.Controllers
                 MonthYear = MonthYear,
                 Period = Period
             });
+        }
+
+        /// <summary>
+        /// Exports the canditate invoice records.
+        /// </summary>
+        /// <param name="RemittanceID">The remittance identifier.</param>
+        /// <param name="MonthYear">The month year.</param>
+        /// <param name="Period">The period.</param>
+        /// <returns></returns>
+        [CustomAuthorize(Roles = "NTLJETREC-PRINTREP")]
+        public ActionResult ExportCanditateInvoiceRecords(string RemittanceID, string MonthYear, string Period)
+        {
+            string reportPath = string.Empty;
+            PageReportDto pageReportDto = new PageReportDto();
+            try
+            {
+                pageReportDto = this.pageReportBusiness.GetPageReportByPageName("DownloadCanditateInvoiceRecords");
+
+                if (pageReportDto != null)
+                {
+                    reportPath = pageReportDto.PathReport;
+                }
+
+                if (!string.IsNullOrEmpty(reportPath) && !string.IsNullOrEmpty(RemittanceID.ToString()) && !string.IsNullOrEmpty(MonthYear.ToString()) && !string.IsNullOrEmpty(Period.ToString()))
+                {
+                    SetSiteMapValues(RemittanceID, MonthYear, Period);
+                    ReportingServiceViewModel model = new ReportingServiceViewModel(
+                        reportPath,
+                        new List<Microsoft.Reporting.WebForms.ReportParameter>()
+                        {
+                            new Microsoft.Reporting.WebForms.ReportParameter("RemittanceID", RemittanceID.ToString(), false),
+                            new Microsoft.Reporting.WebForms.ReportParameter("MonthYear", MonthYear.ToString(), false),
+                            new Microsoft.Reporting.WebForms.ReportParameter("Period", Period.ToString(), false)
+                        });
+
+                    model.PageSourceUrl = SiteMaps.Current.FindSiteMapNodeFromKey("JetFuelNonconformityInvoice").Url;
+                    return this.View("Report/ViewReport", model);
+                }
+            }
+            catch (BusinessException ex)
+            {
+                Logger.Error(string.Format(LogMessages.ErrorRetrieveInfo, this.moduleName, this.userInfo));
+                Logger.Error(ex.Message, ex);
+                Trace.TraceError(string.Format(LogMessages.ErrorRetrieveInfo, this.moduleName, this.userInfo));
+                Trace.TraceError(ex.Message, ex);
+                this.ViewBag.ErrorMessage = FrontMessage.GetExceptionErrorMessage(ex.Number);
+            }
+
+            return this.RedirectToAction("NationalJetFuelNonconformityProcess", new
+            {
+                RemittanceID = RemittanceID,
+                MonthYear = MonthYear,
+                Period = Period
+            });
+        }
+
+        /// <summary>
+        /// Nonconformities the document PDF.
+        /// </summary>
+        /// <param name="RemittanceID">The remittance identifier.</param>
+        /// <param name="MonthYear">The month year.</param>
+        /// <param name="Period">The period.</param>
+        /// <param name="DocumentDate">The document date.</param>
+        /// <param name="Month">The month.</param>
+        /// <returns></returns>
+        [CustomAuthorize(Roles = "NTLJETREC-PRINTREP")]
+        public ActionResult NonconformityDocumentPDF(string RemittanceID, string MonthYear, string Period, DateTime DocumentDate, string Month)
+        {
+            string reportPath = string.Empty;
+            PageReportDto pageReportDto = new PageReportDto();
+            try
+            {
+                pageReportDto = this.pageReportBusiness.GetPageReportByPageName("NonconformityDocumentParameter");
+
+                if (pageReportDto != null)
+                {
+                    reportPath = pageReportDto.PathReport;
+                }
+
+                if (!string.IsNullOrEmpty(reportPath) && !string.IsNullOrEmpty(RemittanceID.ToString()) && !string.IsNullOrEmpty(MonthYear.ToString()) && !string.IsNullOrEmpty(Period.ToString()))
+                {
+                    SetSiteMapValues(RemittanceID, MonthYear, Period);
+                    ReportingServiceViewModel model = new ReportingServiceViewModel(
+                        reportPath,
+                        new List<Microsoft.Reporting.WebForms.ReportParameter>()
+                        {
+                            new Microsoft.Reporting.WebForms.ReportParameter("RemittanceID", RemittanceID.ToString(), false),
+                            new Microsoft.Reporting.WebForms.ReportParameter("MonthYear", MonthYear.ToString(), false),
+                            new Microsoft.Reporting.WebForms.ReportParameter("Period", Period.ToString(), false),
+                            new Microsoft.Reporting.WebForms.ReportParameter("DocumentDate", DocumentDate.ToString(), false),
+                            new Microsoft.Reporting.WebForms.ReportParameter("Month", Month.ToString(), false)
+                        });
+
+                    model.PageSourceUrl = SiteMaps.Current.FindSiteMapNodeFromKey("JetFuelNonconformityInvoice").Url;
+                    return this.View("Report/ViewReport", model);
+                }
+            }
+            catch (BusinessException ex)
+            {
+                Logger.Error(string.Format(LogMessages.ErrorRetrieveInfo, this.moduleName, this.userInfo));
+                Logger.Error(ex.Message, ex);
+                Trace.TraceError(string.Format(LogMessages.ErrorRetrieveInfo, this.moduleName, this.userInfo));
+                Trace.TraceError(ex.Message, ex);
+                this.ViewBag.ErrorMessage = FrontMessage.GetExceptionErrorMessage(ex.Number);
+            }
+
+            return this.RedirectToAction("NationalJetFuelNonconformityProcess", new
+            {
+                RemittanceID = RemittanceID,
+                MonthYear = MonthYear,
+                Period = Period
+            });
+        }
+
+        /// <summary>
+        /// Exports the nonconformity load log.
+        /// </summary>
+        /// <param name="RemittanceID">The remittance identifier.</param>
+        /// <param name="MonthYear">The month year.</param>
+        /// <param name="Period">The period.</param>
+        /// <returns></returns>
+        [CustomAuthorize(Roles = "NTLJETREC-PRINTREP")]
+        public ActionResult ExportNonconformityLoadLog(string RemittanceID, string MonthYear, string Period)
+        {
+            string reportPath = string.Empty;
+            PageReportDto pageReportDto = new PageReportDto();
+            try
+            {
+                pageReportDto = this.pageReportBusiness.GetPageReportByPageName("ExportNonconformityLoadLog");
+
+                if (pageReportDto != null)
+                {
+                    reportPath = pageReportDto.PathReport;
+                }
+
+                if (!string.IsNullOrEmpty(reportPath) && !string.IsNullOrEmpty(RemittanceID.ToString()) && !string.IsNullOrEmpty(MonthYear.ToString()) && !string.IsNullOrEmpty(Period.ToString()))
+                {
+                    SetSiteMapValues(RemittanceID, MonthYear, Period);
+                    ReportingServiceViewModel model = new ReportingServiceViewModel(
+                        reportPath,
+                        new List<Microsoft.Reporting.WebForms.ReportParameter>()
+                        {
+                            new Microsoft.Reporting.WebForms.ReportParameter("RemittanceID", RemittanceID.ToString(), false),
+                            new Microsoft.Reporting.WebForms.ReportParameter("MonthYear", MonthYear.ToString(), false),
+                            new Microsoft.Reporting.WebForms.ReportParameter("Period", Period.ToString(), false)
+                        });
+
+                    model.PageSourceUrl = SiteMaps.Current.FindSiteMapNodeFromKey("JetFuelNonconformityInvoice").Url;
+                    return this.View("Report/ViewReport", model);
+                }
+            }
+            catch (BusinessException ex)
+            {
+                Logger.Error(string.Format(LogMessages.ErrorRetrieveInfo, this.moduleName, this.userInfo));
+                Logger.Error(ex.Message, ex);
+                Trace.TraceError(string.Format(LogMessages.ErrorRetrieveInfo, this.moduleName, this.userInfo));
+                Trace.TraceError(ex.Message, ex);
+                this.ViewBag.ErrorMessage = FrontMessage.GetExceptionErrorMessage(ex.Number);
+            }
+
+            return this.RedirectToAction("NationalJetFuelNonconformityProcess", new
+            {
+                RemittanceID = RemittanceID,
+                MonthYear = MonthYear,
+                Period = Period
+            });
+        }
+
+        /// <summary>
+        /// Closes the nonconformity.
+        /// </summary>
+        /// <param name="RemittanceID">The remittance identifier.</param>
+        /// <param name="MonthYear">The month year.</param>
+        /// <param name="Period">The period.</param>
+        /// <returns></returns>
+        [CustomAuthorize(Roles = "NTLJETREC-NONCONFOR")]
+        public ActionResult CloseNonconformity(string RemittanceID, string MonthYear, string Period)
+        {
+            if (string.IsNullOrWhiteSpace(RemittanceID) || string.IsNullOrWhiteSpace(MonthYear) || string.IsNullOrWhiteSpace(Period))
+            {
+                Logger.Error(string.Format(LogMessages.ErrorNullObject, this.controllerName));
+                Trace.TraceError(string.Format(LogMessages.ErrorCreate, this.controllerName, this.userInfo));
+                this.ViewBag.ErrorMessage = FrontMessage.GetExceptionErrorMessage(13);
+                return this.RedirectToAction("NationalJetFuelNonconformityProcess", new
+                {
+                    RemittanceID = RemittanceID,
+                    MonthYear = MonthYear,
+                    Period = Period
+                });
+            }
+
+            try
+            {
+                NationalJetFuelInvoiceControlDto process = new NationalJetFuelInvoiceControlDto
+                {
+                    RemittanceID = RemittanceID,
+                    MonthYear = MonthYear,
+                    Period = Period
+                };
+                this.invoiceControlBusiness.CloseNonconformity(process);
+                this.TempData["OperationSuccess"] = Resource.CloseNonconformity;
+                return this.RedirectToAction("NationalJetFuelNonconformityProcess", new
+                {
+                    RemittanceID = RemittanceID,
+                    MonthYear = MonthYear,
+                    Period = Period
+                });
+            }
+            catch (BusinessException exception)
+            {
+                Logger.Error(string.Format(LogMessages.ErrorUpdate, this.controllerName, this.userInfo));
+                Logger.Error(exception.Message, exception);
+                Trace.TraceError(string.Format(LogMessages.ErrorUpdate, this.controllerName, this.userInfo));
+                Trace.TraceError(exception.Message, exception);
+                this.ViewBag.ErrorMessage = FrontMessage.GetExceptionErrorMessage(exception.Number);
+                return this.RedirectToAction("NationalJetFuelNonconformityProcess", new
+                {
+                    RemittanceID = RemittanceID,
+                    MonthYear = MonthYear,
+                    Period = Period
+                });
+            }
+        }
+
+        /// <summary>
+        /// Opens the nonconformity.
+        /// </summary>
+        /// <param name="RemittanceID">The remittance identifier.</param>
+        /// <param name="MonthYear">The month year.</param>
+        /// <param name="Period">The period.</param>
+        /// <returns></returns>
+        [CustomAuthorize(Roles = "NTLJETREC-NONCONFOR")]
+        public ActionResult OpenNonconformity(string RemittanceID, string MonthYear, string Period)
+        {
+            if (string.IsNullOrWhiteSpace(RemittanceID) || string.IsNullOrWhiteSpace(MonthYear) || string.IsNullOrWhiteSpace(Period))
+            {
+                Logger.Error(string.Format(LogMessages.ErrorNullObject, this.controllerName));
+                Trace.TraceError(string.Format(LogMessages.ErrorCreate, this.controllerName, this.userInfo));
+                this.ViewBag.ErrorMessage = FrontMessage.GetExceptionErrorMessage(13);
+                return this.RedirectToAction("NationalJetFuelNonconformityProcess", new
+                {
+                    RemittanceID = RemittanceID,
+                    MonthYear = MonthYear,
+                    Period = Period
+                });
+            }
+
+            try
+            {
+                NationalJetFuelInvoiceControlDto process = new NationalJetFuelInvoiceControlDto
+                {
+                    RemittanceID = RemittanceID,
+                    MonthYear = MonthYear,
+                    Period = Period
+                };
+                this.invoiceControlBusiness.OpenNonconformity(process);
+                this.TempData["OperationSuccess"] = Resource.OpenNonconformity;
+                return this.RedirectToAction("NationalJetFuelNonconformityProcess", new
+                {
+                    RemittanceID = RemittanceID,
+                    MonthYear = MonthYear,
+                    Period = Period
+                });
+            }
+            catch (BusinessException exception)
+            {
+                Logger.Error(string.Format(LogMessages.ErrorUpdate, this.controllerName, this.userInfo));
+                Logger.Error(exception.Message, exception);
+                Trace.TraceError(string.Format(LogMessages.ErrorUpdate, this.controllerName, this.userInfo));
+                Trace.TraceError(exception.Message, exception);
+                this.ViewBag.ErrorMessage = FrontMessage.GetExceptionErrorMessage(exception.Number);
+                return this.RedirectToAction("NationalJetFuelNonconformityProcess", new
+                {
+                    RemittanceID = RemittanceID,
+                    MonthYear = MonthYear,
+                    Period = Period
+                });
+            }
         }
 
         /// <summary>

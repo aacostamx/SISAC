@@ -44,11 +44,17 @@ namespace VOI.SISAC.Business.MapConfiguration
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="FinanceMaps"/> class.
+        /// </summary>
+        public FinanceMaps()
+        { }
+
+        /// <summary>
         /// ExchangeRatesMap Map Method
         /// </summary>
         private void ExchangeRatesMap()
         {
-            Mapper.CreateMap<ExchangeRates, ExchangeRatesDto>()
+            CreateMap<ExchangeRates, ExchangeRatesDto>()
                 .ReverseMap();
         }
 
@@ -58,7 +64,7 @@ namespace VOI.SISAC.Business.MapConfiguration
         private void Map()
         {
             /*
-             * En esta sección se registran las conversiones que realizará Automapper.
+             * En esta sección se registran las conversiones que realizará Auto
              * 
              * Automapper convierte de manera automática las conversiones
              * entre objetos que sus propiedades tienen el mismo nombre
@@ -71,7 +77,7 @@ namespace VOI.SISAC.Business.MapConfiguration
 
             // Para convertir de un Currency a un CurrencyDto,
             // se hará de la siguiente manera:
-            Mapper.CreateMap<Currency, CurrencyDto>()
+            CreateMap<Currency, CurrencyDto>()
 
                 // t: Entidad destino (CurrencyDto).
                 // f: Etindad origen (Currency).
@@ -86,7 +92,7 @@ namespace VOI.SISAC.Business.MapConfiguration
                 .ReverseMap();
 
 
-            Mapper.CreateMap<AccountingAccount, AccountingAccountDto>()
+            CreateMap<AccountingAccount, AccountingAccountDto>()
 
                 // t: Entidad destino (AccountingAccountDto).
                 // f: Etindad origen (AccountingAccount).
@@ -100,7 +106,7 @@ namespace VOI.SISAC.Business.MapConfiguration
                 // La conversión sera también en doble vía de AccountingAccountDto a AccountingAccount.
                 .ReverseMap();
 
-            Mapper.CreateMap<LiabilityAccount, LiabilityAccountDto>()
+            CreateMap<LiabilityAccount, LiabilityAccountDto>()
 
                 // t: Entidad destino (AccountingAccountDto).
                 // f: Etindad origen (AccountingAccount).
@@ -128,7 +134,7 @@ namespace VOI.SISAC.Business.MapConfiguration
              * Se realiza el mapeo de CostCenter a CostCenterDto
              * */
 
-            Mapper.CreateMap<CostCenter, CostCenterDto>()
+            CreateMap<CostCenter, CostCenterDto>()
 
                 // t: Entidad destino (CostCenterDto).
                 // f: Entidad origen (CostCenter).
@@ -145,7 +151,7 @@ namespace VOI.SISAC.Business.MapConfiguration
                 .ReverseMap();
 
             //Provider Section
-            Mapper.CreateMap<Provider, ProviderDto>()
+            CreateMap<Provider, ProviderDto>()
                 .ForMember(t => t.ProviderNumber, f => f.MapFrom(r => r.ProviderNumber))
                 .ForMember(t => t.ProviderName, f => f.MapFrom(r => r.ProviderName))
                 .ForMember(t => t.ProviderShortName, f => f.MapFrom(r => r.ProviderShortName))
@@ -153,7 +159,7 @@ namespace VOI.SISAC.Business.MapConfiguration
                 .ReverseMap();
 
             //Taxes Section
-            Mapper.CreateMap<Tax, TaxDto>()
+            CreateMap<Tax, TaxDto>()
                 .ForMember(t => t.TaxCode, f => f.MapFrom(r => r.TaxCode))
                 .ForMember(t => t.TaxName, f => f.MapFrom(r => r.TaxName))
                 //.ForMember(t => t.TaxValue, f => f.MapFrom(r => r.TaxValue))
@@ -161,15 +167,15 @@ namespace VOI.SISAC.Business.MapConfiguration
                 .ReverseMap();
 
             //InternationalFuelContract Section
-            Mapper.CreateMap<InternationalFuelContract, InternationalFuelContractDto>()
+            CreateMap<InternationalFuelContract, InternationalFuelContractDto>()
                 .ReverseMap();
 
             //InternationalFuelContractConcept Section
-            Mapper.CreateMap<InternationalFuelContractConcept, InternationalFuelContractConceptDto>()
+            CreateMap<InternationalFuelContractConcept, InternationalFuelContractConceptDto>()
                 .ReverseMap();
 
             //InternationalFuelRate Section
-            Mapper.CreateMap<InternationalFuelRate, InternationalFuelRateDto>()
+            CreateMap<InternationalFuelRate, InternationalFuelRateDto>()
                 .ReverseMap();
         }
 
@@ -178,17 +184,17 @@ namespace VOI.SISAC.Business.MapConfiguration
         /// </summary>
         private void AirportServiceContractMap()
         {
-            Mapper.CreateMap<AirportServiceContract, AirportServiceContractDto>()
+            CreateMap<AirportServiceContract, AirportServiceContractDto>()
                 .ReverseMap();
         }
 
         /// <summary>
         /// National fuel contract maps.
         /// </summary>
-        private static void NationalFuelContractMap()
+        private void NationalFuelContractMap()
         {
             // Contract maps
-            Mapper.CreateMap<NationalFuelContract, NationalFuelContractDto>()
+            CreateMap<NationalFuelContract, NationalFuelContractDto>()
                 .ForMember(c => c.AirlineName, r => r.MapFrom(f => f.Airline.AirlineName))
                 .ForMember(c => c.StationName, r => r.MapFrom(f => f.Airport.StationName))
                 .ForMember(c => c.ServiceDescription, r => r.MapFrom(f => f.Service.ServiceName))
@@ -201,20 +207,20 @@ namespace VOI.SISAC.Business.MapConfiguration
                 .ForMember(c => c.OperationTypeName, r => r.MapFrom(f => f.OperationType.OperationName))
                 .ForMember(c => c.CCNumber, r => r.MapFrom(f => f.CostCenterNumber));
 
-            Mapper.CreateMap<NationalFuelContractDto, NationalFuelContract>()
+            CreateMap<NationalFuelContractDto, NationalFuelContract>()
                 .ForMember(c => c.CostCenterNumber, r => r.MapFrom(f => f.CCNumber));
 
             // Concept maps
-            Mapper.CreateMap<NationalFuelContractConcept, NationalFuelContractConceptDto>()
+            CreateMap<NationalFuelContractConcept, NationalFuelContractConceptDto>()
                 .ForMember(c => c.ChargeFactorTypeName, r => r.MapFrom(f => f.ChargeFactorType.ChargeFactorTypeName))
                 .ForMember(c => c.FuelConceptName, r => r.MapFrom(f => f.FuelConcept.FuelConceptName))
                 .ForMember(c => c.FuelConceptTypeName, r => r.MapFrom(f => f.FuelConceptType.FuelConceptTypeName))
                 .ForMember(c => c.ProviderName, r => r.MapFrom(f => f.Provider.ProviderName));
 
-            Mapper.CreateMap<NationalFuelContractConceptDto, NationalFuelContractConcept>();
+            CreateMap<NationalFuelContractConceptDto, NationalFuelContractConcept>();
 
             // Rate maps
-            Mapper.CreateMap<NationalFuelRate, NationalFuelRateDto>()
+            CreateMap<NationalFuelRate, NationalFuelRateDto>()
                 .ForMember(c => c.StationName, r => r.MapFrom(f => f.Airport.StationName))
                 .ForMember(c => c.ServiceName, r => r.MapFrom(f => f.Service.ServiceName))
                 .ForMember(c => c.ProviderName, r => r.MapFrom(f => f.Provider.ProviderName))
@@ -222,7 +228,7 @@ namespace VOI.SISAC.Business.MapConfiguration
                 .ForMember(c => c.CurrencyName, r => r.MapFrom(f => f.Currency.CurrencyName))
                 .ForMember(c => c.ScheduleTypeName, r => r.MapFrom(f => f.ScheduleType.ScheduleTypeName));
 
-            Mapper.CreateMap<NationalFuelRateDto, NationalFuelRate>();
+            CreateMap<NationalFuelRateDto, NationalFuelRate>();
         }
     }
 }

@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ToolsVersion="2.0">
-  <State>$base64$PFNvdXJjZUNvbnRyb2xJbmZvIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOmRkbDI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDAzL2VuZ2luZS8yIiB4bWxuczpkZGwyXzI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDAzL2VuZ2luZS8yLzIiIHhtbG5zOmRkbDEwMF8xMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDA4L2VuZ2luZS8xMDAvMTAwIiB4bWxuczpkZGwyMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEwL2VuZ2luZS8yMDAiIHhtbG5zOmRkbDIwMF8yMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEwL2VuZ2luZS8yMDAvMjAwIiB4bWxuczpkZGwzMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDExL2VuZ2luZS8zMDAiIHhtbG5zOmRkbDMwMF8zMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDExL2VuZ2luZS8zMDAvMzAwIiB4bWxuczpkZGw0MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEyL2VuZ2luZS80MDAiIHhtbG5zOmRkbDQwMF80MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEyL2VuZ2luZS80MDAvNDAwIiB4bWxuczpkd2Q9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vRGF0YVdhcmVob3VzZS9EZXNpZ25lci8xLjAiPg0KICA8RW5hYmxlZD50cnVlPC9FbmFibGVkPg0KICA8UHJvamVjdE5hbWU+U0FLPC9Qcm9qZWN0TmFtZT4NCiAgPEF1eFBhdGg+U0FLPC9BdXhQYXRoPg0KICA8TG9jYWxQYXRoPlNBSzwvTG9jYWxQYXRoPg0KICA8UHJvdmlkZXI+U0FLPC9Qcm92aWRlcj4NCjwvU291cmNlQ29udHJvbEluZm8+</State>
+  <State>$base64$PFNvdXJjZUNvbnRyb2xJbmZvIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOmRkbDI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDAzL2VuZ2luZS8yIiB4bWxuczpkZGwyXzI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDAzL2VuZ2luZS8yLzIiIHhtbG5zOmRkbDEwMF8xMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDA4L2VuZ2luZS8xMDAvMTAwIiB4bWxuczpkZGwyMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEwL2VuZ2luZS8yMDAiIHhtbG5zOmRkbDIwMF8yMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEwL2VuZ2luZS8yMDAvMjAwIiB4bWxuczpkZGwzMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDExL2VuZ2luZS8zMDAiIHhtbG5zOmRkbDMwMF8zMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDExL2VuZ2luZS8zMDAvMzAwIiB4bWxuczpkZGw0MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEyL2VuZ2luZS80MDAiIHhtbG5zOmRkbDQwMF80MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEyL2VuZ2luZS80MDAvNDAwIiB4bWxuczpkZGw1MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEzL2VuZ2luZS81MDAiIHhtbG5zOmRkbDUwMF81MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEzL2VuZ2luZS81MDAvNTAwIiB4bWxuczpkd2Q9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vRGF0YVdhcmVob3VzZS9EZXNpZ25lci8xLjAiPg0KICA8RW5hYmxlZD50cnVlPC9FbmFibGVkPg0KICA8UHJvamVjdE5hbWU+U0FLPC9Qcm9qZWN0TmFtZT4NCiAgPEF1eFBhdGg+U0FLPC9BdXhQYXRoPg0KICA8TG9jYWxQYXRoPlNBSzwvTG9jYWxQYXRoPg0KICA8UHJvdmlkZXI+U0FLPC9Qcm92aWRlcj4NCjwvU291cmNlQ29udHJvbEluZm8+</State>
   <DataSources>
     <ProjectItem>
-      <Name>dsSISAC.rds</Name>
-      <FullPath>dsSISAC.rds</FullPath>
+      <Name>DS_SISAC.rds</Name>
+      <FullPath>DS_SISAC.rds</FullPath>
     </ProjectItem>
   </DataSources>
   <DataSets>
+    <ProjectItem>
+      <Name>DownloadNonReconciledCostGroup.rsd</Name>
+      <FullPath>DownloadNonReconciledCostGroup.rsd</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>dsBoardingInformation.rsd</Name>
+      <FullPath>dsBoardingInformation.rsd</FullPath>
+    </ProjectItem>
     <ProjectItem>
       <Name>dsetJetFuelNationalProvisionDetail.rsd</Name>
       <FullPath>dsetJetFuelNationalProvisionDetail.rsd</FullPath>
@@ -46,6 +54,34 @@
     </ProjectItem>
   </DataSets>
   <Reports>
+    <ProjectItem>
+      <Name>A319.rdl</Name>
+      <FullPath>A319.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>A320.rdl</Name>
+      <FullPath>A320.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>A321.rdl</Name>
+      <FullPath>A321.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>DownloadCanditateInvoiceRecords.rdl</Name>
+      <FullPath>DownloadCanditateInvoiceRecords.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>DownloadNonReconciledCostGroup.rdl</Name>
+      <FullPath>DownloadNonReconciledCostGroup.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>DownloadNonReconciledInvoiceDetail.rdl</Name>
+      <FullPath>DownloadNonReconciledInvoiceDetail.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>ExportNonconformityLoadLog.rdl</Name>
+      <FullPath>ExportNonconformityLoadLog.rdl</FullPath>
+    </ProjectItem>
     <ProjectItem>
       <Name>GendecArrival.rdl</Name>
       <FullPath>GendecArrival.rdl</FullPath>
@@ -87,6 +123,22 @@
       <FullPath>JetFuelTicket.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>ManifestArrival.rdl</Name>
+      <FullPath>ManifestArrival.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>ManifestArrivalMex.rdl</Name>
+      <FullPath>ManifestArrivalMex.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>ManifestDeparture.rdl</Name>
+      <FullPath>ManifestDeparture.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>ManifestDepartureMex.rdl</Name>
+      <FullPath>ManifestDepartureMex.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>NationalJetFuelCostError.rdl</Name>
       <FullPath>NationalJetFuelCostError.rdl</FullPath>
     </ProjectItem>
@@ -115,6 +167,10 @@
       <FullPath>NationalJetFuelReconciliationDetail.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>NationalJetFuelReconciliationManualLoadLog.rdl</Name>
+      <FullPath>NationalJetFuelReconciliationManualLoadLog.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>NationalJetFuelReportTicket.rdl</Name>
       <FullPath>NationalJetFuelReportTicket.rdl</FullPath>
     </ProjectItem>
@@ -123,12 +179,12 @@
       <FullPath>NationalJetFuelTicket.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>PassengerInformation.rdl</Name>
-      <FullPath>PassengerInformation.rdl</FullPath>
+      <Name>NonconformityDocumentParameter.rdl</Name>
+      <FullPath>NonconformityDocumentParameter.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>ManifestDeparture.rdl</Name>
-      <FullPath>ManifestDeparture.rdl</FullPath>
+      <Name>PassengerInformation.rdl</Name>
+      <FullPath>PassengerInformation.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
@@ -138,11 +194,11 @@
       <Options>
         <OutputPath>bin\Debug</OutputPath>
         <TargetServerVersion>SSRS2008R2</TargetServerVersion>
-        <TargetServerURL>http://10.10.32.62/ReportServer</TargetServerURL>
-        <TargetFolder>SISAC_CERT/Reports</TargetFolder>
-        <TargetDataSourceFolder>SISAC_CERT/</TargetDataSourceFolder>
+        <TargetServerURL>http://10.10.51.43:81/ReportServer</TargetServerURL>
+        <TargetFolder>SISAC/Reports</TargetFolder>
+        <TargetDataSourceFolder>SISAC/</TargetDataSourceFolder>
         <OverwriteDataSources>true</OverwriteDataSources>
-        <TargetDatasetFolder>SISAC_CERT/Datasets</TargetDatasetFolder>
+        <TargetDatasetFolder>SISAC/Datasets</TargetDatasetFolder>
         <OverwriteDatasets>true</OverwriteDatasets>
         <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
       </Options>

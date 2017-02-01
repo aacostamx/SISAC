@@ -95,6 +95,26 @@
                 <th data-field="DateReconciled" data-halign="center" data-align="center">
                     <strong>@VOI.SISAC.Web.Resources.Resource.DateReconciled</strong>
                 </th>
+
+                <th data-field="CountNonconformityRecords" data-halign="center" data-align="center">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.CountNonconformityRecords</strong>
+                </th>
+
+                <th data-field="NonconformitySubtotalAmount" data-halign="center" data-align="center">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.NonconformitySubtotalAmount</strong>
+                </th>
+
+                <th data-field="DateNonconformity" data-halign="center" data-align="center">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.DateNonconformity</strong>
+                </th>
+
+                <th data-field="NonconformityReference" data-halign="center" data-align="center">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.NonconformityReference</strong>
+                </th>
+
+                <th data-field="NonconformityStatusCode" data-halign="center" data-align="center">
+                    <strong>@VOI.SISAC.Web.Resources.Resource.NonconfirmityStatusCode</strong>
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -140,6 +160,21 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.DateReconciled)
                         </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CountNonconformityRecords)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NonconformitySubtotalAmount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateNonconformity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NonconformityReference)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NonconformityStatusCode)
+                        </td>
                     </tr>
                 }
             }
@@ -155,6 +190,10 @@
         @if (User.IsInRole("NTLJETREC-RECON"))
         {
             <li data-item="ReconcileManual"><a><i class="fa fa-calculator fa-fw"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.ReconcileManual</a></li>
+        }
+        @if (User.IsInRole("NTLJETREC-NONCONFOR"))
+        {
+            <li data-item="ManageNonconformities"><a><i class="fa fa-calculator fa-fw"></i>&nbsp;@VOI.SISAC.Web.Resources.Resource.ManageNonconformities</a></li>
         }
         @if (User.IsInRole("NTLJETREC-PRINTREP"))
         {
@@ -186,6 +225,11 @@
                 }
                 if ($el.data("item") == 'ReconcileManual') {
                     var url = '@Url.Action("NationalJetFuelReconcileManualProcess", "NationalJetFuelReconcileInvoice")';
+                    url = url.concat('?RemittanceID=' + $.trim(row.RemittanceID) + '&' + 'MonthYear=' + $.trim(row.MonthYear) + '&' + 'Period=' + $.trim(row.Period));
+                    window.location = url;
+                }
+                if ($el.data("item") == 'ManageNonconformities') {
+                    var url = '@Url.Action("NationalJetFuelNonconformityProcess", "NationalJetFuelReconcileInvoice")';
                     url = url.concat('?RemittanceID=' + $.trim(row.RemittanceID) + '&' + 'MonthYear=' + $.trim(row.MonthYear) + '&' + 'Period=' + $.trim(row.Period));
                     window.location = url;
                 }

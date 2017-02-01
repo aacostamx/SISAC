@@ -33,6 +33,12 @@
         data-page-size="10">
         <thead>
             <tr>
+                @if (User.IsInRole("MANTIMECON-UPD") || User.IsInRole("MANTIMECON-DEL"))
+                {
+                    <th>
+                        <strong>@Resource.Actions</strong>
+                    </th>
+                }
                 <th data-field="ManifestTimeConfigID" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
                     <strong>@Html.DisplayNameFor(model => model.ManifestTimeConfigID)</strong>
                 </th>
@@ -51,12 +57,6 @@
                 <th data-field="DepartureMinutesMax" data-halign="center" data-align="center" data-sortable="true">
                     <strong>@Html.DisplayNameFor(model => model.DepartureMinutesMax)</strong>
                 </th>
-                @if (User.IsInRole("MANTIMECON-UPD") || User.IsInRole("MANTIMECON-DEL")) 
-                { 
-                    <th>
-                        <strong>@Resource.Actions</strong>
-                    </th>
-                }
             </tr>
         </thead>
         <tbody>
@@ -65,6 +65,19 @@
                 foreach (var item in Model)
                 {
                 <tr>
+                    @if (User.IsInRole("MANTIMECON-UPD") || User.IsInRole("MANTIMECON-DEL"))
+                    {
+                        <td>
+                            @if (User.IsInRole("MANTIMECON-UPD"))
+                            {
+                                <button class="btn btn-default" type="button" name="Edit" title=@Resource.Edit onclick="location.href='@Url.Action("Edit", "ManifestTimeConfig", new { id = item.ManifestTimeConfigID })'"><i class="fa fa-pencil fa-fw"></i></button>
+                            }
+                            @if (User.IsInRole("MANTIMECON-DEL"))
+                            {
+                                <button class="btn btn-default" type="button" name="Delete" title=@Resource.Delete onclick="location.href='@Url.Action("Delete", "ManifestTimeConfig", new { id = item.ManifestTimeConfigID })'"><i class="fa fa-trash-o fa-fw"></i></button>
+                            }
+                        </td>
+                    }
                     <td>
                         @Html.DisplayFor(modelItem => item.ManifestTimeConfigID)
                     </td>
@@ -83,19 +96,6 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.DepartureMinutesMax)
                     </td>
-                    @if (User.IsInRole("MANTIMECON-UPD") || User.IsInRole("MANTIMECON-DEL")) 
-                    { 
-                        <td>
-                            @if (User.IsInRole("MANTIMECON-UPD"))
-                            { 
-                                <button class="btn btn-default" type="button" name="Edit" title=@Resource.Edit onclick="location.href='@Url.Action("Edit", "ManifestTimeConfig", new { id = item.ManifestTimeConfigID })'"><i class="fa fa-pencil fa-fw"></i></button>
-                            }
-                            @if (User.IsInRole("MANTIMECON-DEL"))
-                            { 
-                                <button class="btn btn-default" type="button" name="Delete" title=@Resource.Delete onclick="location.href='@Url.Action("Delete", "ManifestTimeConfig", new { id = item.ManifestTimeConfigID })'"><i class="fa fa-trash-o fa-fw"></i></button>
-                            }
-                        </td>
-                    }
                 </tr>
                 }
             }

@@ -6,6 +6,7 @@
 
 namespace VOI.SISAC.Services.MapConfig
 {
+    using System;
     using Business.Dto.Itineraries;
     using global::AutoMapper;
     using Models.Files;
@@ -15,6 +16,12 @@ namespace VOI.SISAC.Services.MapConfig
     /// </summary>
     public class ItineraryAPIMaps : Profile
     {
+        /// <summary>
+        /// Gets the name of the profile.
+        /// </summary>
+        /// <value>
+        /// The name of the profile.
+        /// </value>
         public override string ProfileName
         {
             get
@@ -28,9 +35,17 @@ namespace VOI.SISAC.Services.MapConfig
             Map();
         }
 
-        private static void Map()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ItineraryAPIMaps"/> class.
+        /// </summary>
+        public ItineraryAPIMaps()
         {
-            Mapper.CreateMap<ItineraryDto, ItineraryFile>()
+            
+        }
+
+        private void Map()
+        {
+            CreateMap<ItineraryDto, ItineraryFile>()
                 .ForMember(t => t.FLTNUM, f => f.MapFrom(r => r.FlightNumber))
                 .ForMember(t => t.ACREGNUMBER, f => f.MapFrom(r => r.EquipmentNumber))
                 .ForMember(t => t.DEP, f => f.MapFrom(r => r.DepartureStation))

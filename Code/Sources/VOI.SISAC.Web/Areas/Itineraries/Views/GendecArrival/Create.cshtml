@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = Resource.GendecArrivalTitle;
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var cultureForm = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+    var cultureForm = System.Threading.Thread.CurrentThread.CurrentUICulture.Name;
     var users = this.ViewBag.Users as List<VOI.SISAC.Business.Dto.Catalogs.GenericCatalogDto>;
     bool isClose = Model == null ? false : Model.Closed;
     var totalCrews = Model.Itinerary.Airplane == null ? 0 : Model.Itinerary.Airplane.CrewCapacity;
@@ -56,6 +56,7 @@
                             class="table"
                             data-unique-id="CrewID"
                             data-toggle="table"
+                            data-locale="@cultureForm.ToString()"
                             data-mobile-responsive="true">
 
                             <thead>
@@ -148,6 +149,7 @@
                         data-unique-id="CrewID"
                         class="table"
                         data-toggle="table"
+                        data-locale="@cultureForm.ToString()"
                         data-mobile-responsive="true">
 
                         <thead>
@@ -367,8 +369,8 @@
     @Scripts.Render("~/bundles/SweetAlertJS")
     @Scripts.Render("~/bundles/CommonFunctions")
     @Scripts.Render("~/bundles/bootstrapdtimejs")
+    @Scripts.Render("~/bundles/bootstrapTable")
 
-    <script src="~/Scripts/bootstrap-table.js"></script>
     <script type="text/javascript">
         var currentLang = '@cultureForm.ToString()';
         var isClose = '@isClose';

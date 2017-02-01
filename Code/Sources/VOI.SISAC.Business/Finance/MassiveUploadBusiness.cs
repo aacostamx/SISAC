@@ -263,6 +263,20 @@ namespace VOI.SISAC.Business.Finance
                 return errors;
             }
 
+            // Validate dependency amoung MultiRateFlag and Rate and CurrencyCode
+            errors = ValidateDependencyMultiRateFlag(contracts).ToList();
+            if (errors.Count > 0)
+            {
+                return errors;
+            }
+
+            //validate when Service Calculation Type == 4 "CÁLCULO ESPECIAL" applies StoredName
+            errors = ValidateCalculationTypeStored(contracts).ToList();
+            if (errors.Count > 0)
+            {
+                return errors;
+            }
+
             // Validate Max date records
             errors = this.IsServiceContractDuplicate(contracts).ToList();
             if (errors.Count > 0)
@@ -432,6 +446,54 @@ namespace VOI.SISAC.Business.Finance
                 {
                     errors.Add("If AirplanetWeightFlag is set to 0 then AirplaneWeightDescription, AirplaneWeightUnit and AirplaneWeightMultiplier must be empty");
                 }
+            }
+
+            return errors;
+        }
+        
+        /// <summary>
+        /// Validates the dependency Multi Rate Flag.
+        /// </summary>
+        /// <param name="contracts">The contracts.</param>
+        /// <returns>List of errors.</returns>
+        private static IList<string> ValidateDependencyMultiRateFlag(IList<AirportServiceContractDto> contracts)
+        {
+            List<string> errors = new List<string>();
+            foreach (AirportServiceContractDto item in contracts)
+            {
+                if (item.MultiRateFlag == false
+                    && (string.IsNullOrWhiteSpace(item.CurrencyCode)
+                    || item.Rate == null))
+                {
+                    errors.Add("If MultiRateFlag is set to 0 then CurrencyCode and Rate must hava a value.");
+                }
+                else if (item.MultiRateFlag
+                    && (!string.IsNullOrWhiteSpace(item.CurrencyCode)
+                    || item.Rate != null))
+                {
+                    errors.Add("If MultiRateFlag is set to 1 then CurrencyCode and Rate must be empty");
+                }
+            }
+
+            return errors;
+        }
+
+        private static IList<string> ValidateCalculationTypeStored(IList<AirportServiceContractDto> contracts)
+        {
+            List<string> errors = new List<string>();
+            foreach (AirportServiceContractDto item in contracts)
+            {
+                //lalo20170130
+                //if (item.CalculationTypeId == 4
+                //    && string.IsNullOrWhiteSpace(item.ProcedureName))
+                //{
+                //    errors.Add("If CalculationTypeId is set to 4 (CÁLCULO ESPECIAL) then ProcedureName must hava a value.");
+                //}
+                //else if (item.CalculationTypeId != 4
+                //    && !string.IsNullOrWhiteSpace(item.ProcedureName))
+                //{
+                //    errors.Add("If CalculationTypeId is not set to 4 (CÁLCULO ESPECIAL) then ProcedureName must be empty.");
+                //}
             }
 
             return errors;
@@ -643,11 +705,19 @@ namespace VOI.SISAC.Business.Finance
         /// Validates if the currencies exist.
         /// </summary>
         /// <param name="currencies">The currencies.</param>
+        /// <param name="acceptNull">if set to <c>true</c> ignores NULL values to validate.</param>
         /// <returns>List of errors if exist otherwise NULL.</returns>
-        private IList<string> ValidateCurrency(IList<string> currencies)
+        private IList<string> ValidateCurrency(IList<string> currencies, bool acceptNull)
         {
             List<string> errors = new List<string>();
             List<string> result = this.currencyRepository.ValidatedIfCurrencyExist(currencies).ToList();
+
+            if (acceptNull && result.Contains(null))
+            {
+                ////List<string> nullValues = result.FindAll(item => item == null);
+                result.RemoveAll(item => item == null);
+            }
+
             if (result.Count > 0)
             {
                 errors.Add("Currency code(s) not found.");
@@ -714,7 +784,7 @@ namespace VOI.SISAC.Business.Finance
             errors.AddRange(this.ValidateLiabilityAccount(contracts.Select(c => c.LiabilityAccountNumber).ToList()));
 
             // Validate Currency
-            errors.AddRange(this.ValidateCurrency(contracts.Select(c => c.CurrencyCode).ToList()));
+            errors.AddRange(this.ValidateCurrency(contracts.Select(c => c.CurrencyCode).ToList(), true));
 
             // Validate Federal Tax
             errors.AddRange(this.ValidateTax(contracts.Select(c => c.FederalTaxCode).ToList(), true));
@@ -764,7 +834,7 @@ namespace VOI.SISAC.Business.Finance
             errors.AddRange(this.ValidateLiabilityAccount(contracts.Select(c => c.LiabilityAccountNumber).ToList()));
 
             // Validate Currency
-            errors.AddRange(this.ValidateCurrency(contracts.Select(c => c.CurrencyCode).ToList()));
+            errors.AddRange(this.ValidateCurrency(contracts.Select(c => c.CurrencyCode).ToList(), false));
 
             // concepts
             foreach (InternationalFuelContractDto internationalFuelContractDto in contracts)
@@ -821,6 +891,7 @@ namespace VOI.SISAC.Business.Finance
         /// <returns>List of errors.</returns>
         private IList<string> AirportServiceContractLoadCode(IList<AirportServiceContractDto> contracts)
         {
+            //IList<Procedure> procedureFullList = this.procedureRepository.GetAll();
             IList<OperationType> operationTypeFullList = this.operationTypeRepository.GetAll();
             IList<ServiceType> serviceTypeFullList = this.serviceTypeRepository.GetAll();
             IList<ServiceCalculationType> serviceCalculationTypeFullList = this.serviceCalculationTypeRepository.GetAll();
@@ -830,6 +901,17 @@ namespace VOI.SISAC.Business.Finance
 
             foreach (AirportServiceContractDto item in contracts)
             {
+                //lalo20170130
+                //Procedure procedure = procedureFullList.FirstOrDefault(e => e.ProcedureName == item.OperationType.ProcedureName);
+                //if (procedure != null)
+                //{
+                //    item.ProcedureCode = procedure.ProcedureCode;
+                //}
+                //else
+                //{
+                //    errors.Add("Procedure not found: " + item.OperationType.ProcedureName + ".");
+                //}
+
                 OperationType operation = operationTypeFullList.FirstOrDefault(e => e.OperationName == item.OperationType.OperationName);
                 if (operation != null)
                 {

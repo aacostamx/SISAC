@@ -70,6 +70,12 @@ namespace VOI.SISAC.Dal.Configuration.Process
             this.Property(e => e.ReconciledSubtotalAmount)
             .HasPrecision(18, 5);
 
+            this.Property(e => e.NonconformitySubtotalAmount)
+            .HasPrecision(18, 5);
+
+            this.Property(e => e.NonconformityReference)
+            .IsUnicode(false);
+
             this.Property(e => e.StatusProcessCode)
             .IsUnicode(false);
 
@@ -81,6 +87,9 @@ namespace VOI.SISAC.Dal.Configuration.Process
 
             this.Property(e => e.ConfirmationStatusCode)
             .IsUnicode(false);
+
+            this.Property(e => e.NonconformityStatusCode)
+                .IsUnicode(false);
             
             this.HasMany(e => e.NationalJetFuelInvoiceDetails)
             .WithRequired(e => e.NationalJetFuelInvoiceControl)

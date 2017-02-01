@@ -31,6 +31,12 @@
         data-page-size="10">
         <thead>
             <tr>
+                @if (User.IsInRole("PROVIDER-UPD") || User.IsInRole("PROVIDER-DEL"))
+                {
+                    <th data-field="Acctions" data-align="center" data-halign="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
+                    </th>
+                }
                 <th data-field="ProviderNumber" data-halign="center" data-align="center" data-sortable="true">
                     <strong>@Html.DisplayNameFor(model => model.ProviderNumber)</strong>
                 </th>
@@ -40,27 +46,12 @@
                 <th data-field="ProviderShortName" data-halign="center" data-align="center" data-sortable="true">
                     <strong>@Html.DisplayNameFor(model => model.ProviderShortName)</strong>
                 </th>
-                @if (User.IsInRole("PROVIDER-UPD") || User.IsInRole("PROVIDER-DEL"))
-                {
-                    <th data-field="Acctions" data-align="center" data-halign="center">
-                        <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
-                    </th>
-                }
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProviderNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProviderName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProviderShortName)
-                    </td>
                     @if (User.IsInRole("PROVIDER-UPD") || User.IsInRole("PROVIDER-DEL"))
                     {
                         <td>
@@ -74,6 +65,15 @@
                             }
                         </td>
                     }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProviderNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProviderName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProviderShortName)
+                    </td>
                 </tr>
             }
         </tbody>

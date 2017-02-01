@@ -16,7 +16,7 @@ namespace VOI.SISAC.Entities.Itineraries
     /// Timeline Entity
     /// </summary>
     [Table("Itinerary.Timeline")]
-    public partial class Timeline : Paged
+    public partial class Timeline
     {
 
         /// <summary>
@@ -26,6 +26,33 @@ namespace VOI.SISAC.Entities.Itineraries
         {
             TimelineMovements = new List<TimelineMovement>();
         }
+
+        /// <summary>
+        /// Gets or sets the row.
+        /// </summary>
+        /// <value>
+        /// The row.
+        /// </value>
+        [NotMapped]
+        public long? Row { get; set; }
+
+        /// <summary>
+        /// Gets or sets the maximum row.
+        /// </summary>
+        /// <value>
+        /// The maximum row.
+        /// </value>
+        [NotMapped]
+        public long? MaxRow { get; set; }
+
+        /// <summary>
+        /// Gets or sets the minimum row.
+        /// </summary>
+        /// <value>
+        /// The minimum row.
+        /// </value>
+        [NotMapped]
+        public long? MinRow { get; set; }
 
         /// <summary>
         /// Gets or sets the sequence.

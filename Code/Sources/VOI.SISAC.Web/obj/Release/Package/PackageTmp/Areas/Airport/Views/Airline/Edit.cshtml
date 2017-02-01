@@ -46,16 +46,32 @@
                     @Html.EditorFor(model => model.Division, new { htmlAttributes = new { @class = "form-control specialInput", @onkeypress = "return commonFunctions.validarMaxLengthAlfanumerico(event, this, 10);", @onkeyup = "return commonFunctions.validarMaxLengthAlfabetico(event, this, 10)" } })
                     @Html.ValidationMessageFor(model => model.Division, "", new { @class = "text-danger" })
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    @Html.LabelFor(model => model.BusinessName, new { @class = "subtitle_h5 control-label required-field" })
+                    @Html.TextAreaFor(model => model.BusinessName, new
+                    {
+                        @class = "inputForm form-control",
+                        @onkeypress = "return commonFunctions.validarComentarios(event, this)",
+                        @onkeyup = "return commonFunctions.validarComentarios(event, this)",
+                        @cols = 90,
+                        @rows = 1,
+                        @maxlength = "100"
+                    })
+                    @Html.ValidationMessageFor(model => model.BusinessName, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <br />
-                    <input onclick="location.href='@Url.Action("Index", "Airline")    '" type="reset" class="btnVolaris" value="@VOI.SISAC.Web.Resources.Resource.Back" title="@VOI.SISAC.Web.Resources.Resource.Back">
-                    <input type="submit" value="@VOI.SISAC.Web.Resources.Resource.Save" title="@VOI.SISAC.Web.Resources.Resource.Save" class="btnVolaris">
-                    <br />
+                    <button type="button" class="btn btn-default" name="back-btn" title="@Resource.Back" onclick="location.href='@Url.Action("Index", "Airline")'">
+                        <i class="fa fa-arrow-left fa-fw"></i>&nbsp;@Resource.Back
+                    </button>
+                    <button type="submit" class="btn btn-default btn-green" name="back-btn" title="@Resource.Save">
+                        <i class="fa fa-floppy-o fa-fw"></i>&nbsp;@Resource.Save
+                    </button>
                 </div>
             </div>
         </div>

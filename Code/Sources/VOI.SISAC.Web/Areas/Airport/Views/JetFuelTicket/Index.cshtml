@@ -61,6 +61,12 @@
             data-export-data-type="all">
             <thead>
                 <tr>
+                    @if (User.IsInRole("JETFUELTIC-UPD") || User.IsInRole("JETFUELTIC-DEL") || User.IsInRole("JETFUELTIC-VIE") || User.IsInRole("JETFUELTIC-PRINTREP"))
+                    {
+                        <th data-field="Acctions" data-align="center" data-halign="center">
+                            <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
+                        </th>
+                    }
                     <th data-field="JetFuelTicketID" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
                         <strong>@Html.DisplayNameFor(model => model.JetFuelTicketID)</strong>
                     </th>
@@ -127,12 +133,6 @@
                     <th data-field="Remarks" data-halign="center" data-align="center" data-sortable="true">
                         <strong>@Html.DisplayNameFor(model => model.Remarks)</strong>
                     </th>
-                    @if (User.IsInRole("JETFUELTIC-UPD") || User.IsInRole("JETFUELTIC-DEL") || User.IsInRole("JETFUELTIC-VIE") || User.IsInRole("JETFUELTIC-PRINTREP")) 
-                    { 
-                        <th data-field="Acctions" data-align="center" data-halign="center">
-                            <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
-                        </th>
-                    }
                 </tr>
             </thead>
             <tbody>
@@ -141,6 +141,27 @@
                     foreach (var item in Model)
                     {
                     <tr>
+                        @if (User.IsInRole("JETFUELTIC-UPD") || User.IsInRole("JETFUELTIC-DEL") || User.IsInRole("JETFUELTIC-VIE") || User.IsInRole("JETFUELTIC-PRINTREP"))
+                        {
+                            <td>
+                                @if (User.IsInRole("JETFUELTIC-VIE"))
+                                {
+                                    <button class="btn btn-default" type="button" name="Details" title="@VOI.SISAC.Web.Resources.Resource.Details" onclick="location.href='@Url.Action("Details", "JetFuelTicket", new { id = item.JetFuelTicketID, Sequence = Sequence, AirlineCode = AirlineCode, FlightNumber = FlightNumber, ItineraryKey = ItineraryKey, OperationTypeName = OperationTypeName })'"><i class="fa fa-eye fa-fw"></i></button>
+                                }
+                                @if (User.IsInRole("JETFUELTIC-PRINTREP"))
+                                {
+                                    <button class="btn btn-default" type="button" name="VerReporte" title="@VOI.SISAC.Web.Resources.Resource.Export" onclick="location.href='@Url.Action("VerReporte", "JetFuelTicket", new { id = item.JetFuelTicketID })'"><i class="fa-fw glyphicon glyphicon-export icon-share"></i></button>
+                                }
+                                @if (User.IsInRole("JETFUELTIC-UPD"))
+                                {
+                                    <button class="btn btn-default btn-green" type="button" name="Edit" title="@VOI.SISAC.Web.Resources.Resource.Edit" onclick="location.href='@Url.Action("Edit", "JetFuelTicket", new { id = item.JetFuelTicketID, Sequence = Sequence, AirlineCode = AirlineCode, FlightNumber = FlightNumber, ItineraryKey = ItineraryKey, OperationTypeName = OperationTypeName })'"><i class="fa fa-pencil fa-fw"></i></button>
+                                }
+                                @if (User.IsInRole("JETFUELTIC-DEL"))
+                                {
+                                    <button class="btn btn-default btn-green" type="button" name="Delete" title="@VOI.SISAC.Web.Resources.Resource.Delete" onclick="location.href='@Url.Action("Delete", "JetFuelTicket", new { id = item.JetFuelTicketID })'"><i class="fa fa-trash-o fa-fw"></i></button>
+                                }
+                            </td>
+                        }    
                         <td>
                             @Html.DisplayFor(modelItem => item.JetFuelTicketID)
                         </td>
@@ -208,27 +229,6 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Remarks)
                         </td>
-                        @if (User.IsInRole("JETFUELTIC-UPD") || User.IsInRole("JETFUELTIC-DEL") || User.IsInRole("JETFUELTIC-VIE") || User.IsInRole("JETFUELTIC-PRINTREP")) 
-                        {
-                            <td>
-                                @if (User.IsInRole("JETFUELTIC-VIE"))
-                                {
-                                    <button class="btn btn-default" type="button" name="Details" title="@VOI.SISAC.Web.Resources.Resource.Details" onclick="location.href='@Url.Action("Details", "JetFuelTicket", new { id = item.JetFuelTicketID, Sequence = Sequence, AirlineCode = AirlineCode, FlightNumber = FlightNumber, ItineraryKey = ItineraryKey, OperationTypeName = OperationTypeName })'"><i class="fa fa-eye fa-fw"></i></button>
-                                }
-                                @if (User.IsInRole("JETFUELTIC-UPD"))
-                                {
-                                    <button class="btn btn-default" type="button" name="Edit" title="@VOI.SISAC.Web.Resources.Resource.Edit" onclick="location.href='@Url.Action("Edit", "JetFuelTicket", new { id = item.JetFuelTicketID, Sequence = Sequence, AirlineCode = AirlineCode, FlightNumber = FlightNumber, ItineraryKey = ItineraryKey, OperationTypeName = OperationTypeName })'"><i class="fa fa-pencil fa-fw"></i></button>
-                                }
-                                @if (User.IsInRole("JETFUELTIC-DEL"))
-                                {
-                                    <button class="btn btn-default" type="button" name="Delete" title="@VOI.SISAC.Web.Resources.Resource.Delete" onclick="location.href='@Url.Action("Delete", "JetFuelTicket", new { id = item.JetFuelTicketID })'"><i class="fa fa-trash-o fa-fw"></i></button>
-                                }
-                                @if (User.IsInRole("JETFUELTIC-PRINTREP"))
-                                {
-                                    <button class="btn btn-default" type="button" name="VerReporte" title="@VOI.SISAC.Web.Resources.Resource.Export" onclick="location.href='@Url.Action("VerReporte", "JetFuelTicket", new { id = item.JetFuelTicketID })'"><i class="fa-fw glyphicon glyphicon-export icon-share"></i></button>
-                                }
-                            </td>
-                        }    
                     </tr>
                     }
                 }

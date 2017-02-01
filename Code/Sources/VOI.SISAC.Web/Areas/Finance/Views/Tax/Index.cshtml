@@ -32,31 +32,22 @@
         data-page-size="10">
         <thead>
             <tr>
+                @if (User.IsInRole("TAX-UPD") || User.IsInRole("TAX-DEL"))
+                {
+                    <th data-field="Acctions" data-align="center" data-halign="center"><strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong></th>
+                }
                 <th data-field="TaxCode" data-halign="center" data-align="center" data-sortable="true">
                     <strong>@Html.DisplayNameFor(model => model.TaxCode)</strong>
                 </th>
                 <th data-field="TaxName" data-halign="left" data-align="left" data-sortable="true">
                     <strong>@Html.DisplayNameFor(model => model.TaxName)</strong>
                 </th>
-                @if (User.IsInRole("TAX-UPD") || User.IsInRole("TAX-DEL"))
-                {
-                    <th data-field="Acctions" data-align="center" data-halign="center"><strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong></th>
-                }
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TaxCode)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TaxName)
-                    </td>
-                    @*<td>
-                            @Html.DisplayFor(modelItem => item.TaxValue)
-                        </td>*@
                     @if (User.IsInRole("TAX-UPD") || User.IsInRole("TAX-DEL"))
                     {
                         <td>
@@ -70,6 +61,15 @@
                             }
                         </td>
                     }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TaxCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TaxName)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.TaxValue)
+                        </td>*@
                 </tr>
 
             }

@@ -331,7 +331,7 @@ var PassengerController = {
             event.returnValue = false;
             return false;
         }
-    },        
+    },
     validarMaxLengthAlfanumerico: function (e, Control) {
         PassengerController.upperCase(Control);
         PassengerController.deshabiliarEspacio(e);
@@ -381,7 +381,81 @@ var PassengerController = {
                 }
             });
         }
-    }
+    },
+    validateAddInfo: function () {
+
+        if (parseInt($("#dip-tot").html()) != parseInt($('#dip-pi').html())
+            || parseInt($("#ext-tot").html()) != parseInt($('#ext-pi').html())
+            || parseInt($("#inf-tot").html()) != parseInt($('#int-pi').html())
+            || parseInt($("#tran-tot").html()) != parseInt($('#tra-pi').html())
+            || parseInt($("#con-tot").html()) != parseInt($('#con-pi').html())
+            || parseInt($("#exempt-tot").html()) != parseInt($('#oth-pi').html())
+            || parseInt($("#totals").html()) != parseInt($('#tot-pi').html())
+            || parseInt($("#pay-tua-tot").html()) != parseInt($('#pg-tua-pi').html()))
+        {
+            if (currentLang.includes("es")) {
+                messageEmptyFields = "El desgloce de clientes no concuerda con los totales previamente capturados.";
+                typeOfAlert = "Advertencia";
+            }
+            else {
+                messageEmptyFields = "The amount of clients does not match with the previous totals.";
+                typeOfAlert = "Warning";
+            }
+            swal({
+                title: typeOfAlert,
+                text: messageEmptyFields,
+                type: "warning",
+                confirmButtonColor: "#83217a",
+                animation: "slide-from-top",
+                timer: 12000
+            })
+            return;
+        }
+
+        $('#AdditionalInformation_AdultInternational').val($('#adu-int').val());
+        $('#AdditionalInformation_AdultNational').val($('#adu-nat').val());
+        $('#AdditionalInformation_MinorInternational').val($('#mid-int').val());
+        $('#AdditionalInformation_MinorNational').val($('#mid-nat').val());
+        $('#AdditionalInformation_CommissionInternational').val($('#ext-int').val());
+        $('#AdditionalInformation_CommissionNational').val($('#ext-nat').val());
+        $('#AdditionalInformation_ConnectionInternational').val($('#con-int').val());
+        $('#AdditionalInformation_ConnectionNational').val($('#con-nat').val());
+
+        $('#AdditionalInformation_DiplomaticInternational').val($('#dip-int').val());
+        $('#AdditionalInformation_DiplomaticNational').val($('#dip-nat').val());
+        $('#AdditionalInformation_InfantInternational').val($('#inf-int').val());
+        $('#AdditionalInformation_InfantNational').val($('#inf-nat').val());
+        $('#AdditionalInformation_OtherInternational').val($('#exempt-int').val());
+        $('#AdditionalInformation_OtherNational').val($('#exempt-nat').val());
+        $('#AdditionalInformation_TransitoryInternational').val($('#tran-int').val());
+        $('#AdditionalInformation_TransitoryNational').val($('#tran-nat').val());
+
+        $('#AdditionalInformation_PaxDni').val($('#pax-dni-val').val());
+
+        $('#add-info-modal').modal('hide');
+    },
+    sumAdditionalInfo: function () {
+        $("#pay-tua-nat").html(parseInt($("#adu-nat").val()) + parseInt($("#mid-nat").val()));
+        $("#pay-tua-int").html(parseInt($("#adu-int").val()) + parseInt($("#mid-int").val()));
+        $("#pay-tua-tot").html(parseInt($("#pay-tua-int").html()) + parseInt($("#pay-tua-nat").html()));
+
+        $("#dip-tot").html(parseInt($("#dip-int").val()) + parseInt($("#dip-nat").val()));
+        $("#ext-tot").html(parseInt($("#ext-int").val()) + parseInt($("#ext-nat").val()));
+        $("#inf-tot").html(parseInt($("#inf-int").val()) + parseInt($("#inf-nat").val()));
+        $("#tran-tot").html(parseInt($("#tran-int").val()) + parseInt($("#tran-nat").val()));
+        $("#con-tot").html(parseInt($("#con-int").val()) + parseInt($("#con-nat").val()));
+        $("#exempt-tot").html(parseInt($("#exempt-int").val()) + parseInt($("#exempt-nat").val()));
+        
+        $("#totals").html(
+            parseInt($("#dip-tot").html()) +
+            parseInt($("#ext-tot").html()) +
+            parseInt($("#inf-tot").html()) +
+            parseInt($("#tran-tot").html()) +
+            parseInt($("#con-tot").html()) +
+            parseInt($("#exempt-tot").html()) +
+            parseInt($("#pay-tua-tot").html()));
+        
+    },
 }
 
 $(document).ready(function () {
@@ -408,6 +482,46 @@ $(document).ready(function () {
         PassengerController.getPrevFlight();
     }
 });
+
+$(".info").bind("mousemove", function (event) {
+    var position = $(this).position();
+    $(this).next().css({
+        top: event.offsetY + position.top + 5 + "px",
+        left: event.offsetX + position.left + 5 + "px"
+    }).show();
+}).bind("mouseout", function () {
+    $("div.tooltip-popup").hide();
+});
+
+$('#add-info-modal').on('show.bs.modal', function (e) {
+    var locals = parseInt($('#LocalAdults').val()) + parseInt($('#LocalTeenage').val());
+    var infants = parseInt($('#ChildrenCabinA').val()) + parseInt($('#ChildrenCabinB').val());
+    var trans = parseInt($('#TransitoryAdults').val()) + parseInt($('#TransitoryTeenage').val());
+    var conn = parseInt($('#ConnectionAdults').val()) + parseInt($('#ConnectionTeenage').val());
+
+    var total = parseInt($('#LocalAdults').val()) +
+                parseInt($('#LocalTeenage').val()) +
+                parseInt($('#ChildrenCabinA').val()) +
+                parseInt($('#ChildrenCabinB').val()) +
+                parseInt($('#TransitoryAdults').val()) +
+                parseInt($('#TransitoryTeenage').val()) +
+                parseInt($('#ConnectionAdults').val()) +
+                parseInt($('#ConnectionTeenage').val()) +
+                parseInt($('#Diplomatic').val()) +
+                parseInt($('#ExtraCrew').val()) +
+                parseInt($('#Other').val());
+
+    $('#pg-tua-pi').html(locals);
+    $('#dip-pi').html($('#Diplomatic').val());
+    $('#ext-pi').html($('#ExtraCrew').val());
+    $('#int-pi').html(infants);
+    $('#tra-pi').html(trans);
+    $('#con-pi').html(conn);
+    $('#oth-pi').html($('#Other').val());
+    $('#tot-pi').html(total);
+
+    PassengerController.sumAdditionalInfo();
+})
 
 window.onerror = function (message, url, linenumber) {
     console.log('Message: ' + message);

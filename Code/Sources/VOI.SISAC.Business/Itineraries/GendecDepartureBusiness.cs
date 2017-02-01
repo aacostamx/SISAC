@@ -220,7 +220,8 @@ namespace VOI.SISAC.Business.Itineraries
                 mail.IsBodyHtml = true;
                 //SmtpClient smtp = new SmtpClient("10.10.32.5");
                 SmtpClient smtp = new SmtpClient("127.127.0.1");
-                Notifications.ServiceNotificationsClient wcf = new Notifications.ServiceNotificationsClient();
+                VOINotifications.ServiceNotificationsClient wcf = new VOINotifications.ServiceNotificationsClient();
+
                 try
                 {
                     string token = string.Empty;

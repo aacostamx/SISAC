@@ -64,7 +64,7 @@ namespace VOI.SISAC.Business.Airport
         /// </summary>
         /// <param name="crewDto">The crew dto.</param>
         /// <returns>number of integer matches</returns>
-        int ValidateFields(CrewDto crewDto);
+        List<string> ValidateFields(CrewDto crewDto);
 
         /// <summary>
         /// Gets all crew by identifier.

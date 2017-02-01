@@ -8,13 +8,11 @@ namespace VOI.SISAC.Web.MapConfiguration
 {
     using System;
     using AutoMapper;
-    using VOI.SISAC.Business.Dto;
-    using VOI.SISAC.Business.Dto.Finances;
-    using VOI.SISAC.Web.Models.VO.Finance;
-    using Models.Files;
-    using System.Linq;
     using Business.Dto.Airports;
     using Business.Dto.Catalogs;
+    using Models.Files;
+    using VOI.SISAC.Business.Dto.Finances;
+    using VOI.SISAC.Web.Models.VO.Finance;
 
     /// <summary>
     /// Configurations for the maps between Entities and Dto's
@@ -35,10 +33,6 @@ namespace VOI.SISAC.Web.MapConfiguration
             }
         }
 
-        /// <summary>
-        /// Override this method in a derived class and call the CreateMap method to associate that map with this profile.
-        /// Avoid calling the <see cref="T:AutoMapper.Mapper" /> class from this method.
-        /// </summary>
         protected override void Configure()
         {
             Map();
@@ -50,101 +44,109 @@ namespace VOI.SISAC.Web.MapConfiguration
             NationalFuelContractMap();
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FinanceWebMaps"/> class.
+        /// </summary>
+        public FinanceWebMaps()
+        {
+            
+        }
+
         private void ExchangeRatesMap()
         {
-            Mapper.CreateMap<ExchangeRatesDto, ExchangeRatesVO>()
-              .ReverseMap();
+            CreateMap<ExchangeRatesDto, ExchangeRatesVO>()
+                .ReverseMap();
         }
 
         /// <summary>
         /// Files the helper map.
         /// </summary>
-        private static void FileHelperMap()
+        private void FileHelperMap()
         {
-            Mapper.CreateMap<InternationalFuelContractFile, InternationalFuelContractConceptDto>()
+            CreateMap<InternationalFuelContractFile, InternationalFuelContractConceptDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<InternationalFuelContractFile, FuelConceptDto>()
+            CreateMap<InternationalFuelContractFile, FuelConceptDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<InternationalFuelContractFile, FuelConceptTypeDto>()
+            CreateMap<InternationalFuelContractFile, FuelConceptTypeDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<InternationalFuelContractFile, ChargeFactorTypeDto>()
+            CreateMap<InternationalFuelContractFile, ChargeFactorTypeDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<InternationalFuelContractFile, ProviderDto>()
+            CreateMap<InternationalFuelContractFile, ProviderDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<InternationalFuelContractFile, OperationTypeDto>()
+            CreateMap<InternationalFuelContractFile, OperationTypeDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<InternationalFuelContractFile, InternationalFuelContractDto>()
+            CreateMap<InternationalFuelContractFile, InternationalFuelContractDto>()
                 .ForMember(c => c.OperationType, r => r.ResolveUsing(f => new OperationTypeDto() { OperationName = f.OperationName }))
-                 .ReverseMap();
+                .ReverseMap();
         }
 
         /// <summary>
         /// Files the service contract map.
         /// </summary>
-        private static void FileServiceContractMap()
+        private void FileServiceContractMap()
         {
-            Mapper.CreateMap<AirportServiceContractFile, AirportServiceContractDto>()
+            CreateMap<AirportServiceContractFile, AirportServiceContractDto>()
                 .ForMember(c => c.OperationType, r => r.ResolveUsing(f => new OperationTypeDto() { OperationName = f.OperationName }))
                 .ForMember(c => c.ServiceType, r => r.ResolveUsing(f => new ServiceTypeDto() { ServiceTypeName = f.ServiceTypeName }))
                 .ForMember(c => c.ServiceCalculationType, r => r.ResolveUsing(f => new ServiceCalculationTypeDto() { CalculationTypeName = f.CalculationTypeName }))
                 .ForMember(c => c.AirplaneWeightType, r => r.ResolveUsing(f => new AirplaneWeightTypeDto() { AirplaneWeightName = f.AirplaneWeightName }))
                 .ForMember(c => c.AirplaneWeightMeasureType, r => r.ResolveUsing(f => new AirplaneWeightMeasureTypeDto() { AirplaneWeightMeasureName = f.AirplaneWeightMeasureName }))
                 .ReverseMap();
-            Mapper.CreateMap<InternationalFuelRatesFile, InternationalFuelRateDto>()
+            CreateMap<InternationalFuelRatesFile, InternationalFuelRateDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<InternationalFuelRatesFile, InternationalFuelContractDto>()
+            CreateMap<InternationalFuelRatesFile, InternationalFuelContractDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<InternationalFuelRatesFile, InternationalFuelRateFileDto>()
+            CreateMap<InternationalFuelRatesFile, InternationalFuelRateFileDto>()
                 .ReverseMap();
         }
 
         /// <summary>
         /// Configures the mappers between clases.
         /// </summary>
-        private static void Map()
+        private void Map()
         {
-            Mapper.CreateMap<CurrencyDto, CurrencyVO>()
+            CreateMap<CurrencyDto, CurrencyVO>()
                 .ReverseMap();
 
-            Mapper.CreateMap<ProviderDto, ProviderVO>()
+            CreateMap<ProviderDto, ProviderVO>()
               .ReverseMap();
 
-            Mapper.CreateMap<TaxDto, TaxVO>()
+            CreateMap<TaxDto, TaxVO>()
                 .ReverseMap();
 
-            Mapper.CreateMap<AccountingAccountDto, AccountingAccountVO>()
+            CreateMap<AccountingAccountDto, AccountingAccountVO>()
                 .ReverseMap();
 
-            Mapper.CreateMap<LiabilityAccountDto, LiabilityAccountVO>()
+            CreateMap<LiabilityAccountDto, LiabilityAccountVO>()
                 .ReverseMap();
 
-            Mapper.CreateMap<CostCenterDto, CostCenterVO>()
+            CreateMap<CostCenterDto, CostCenterVO>()
                 .ReverseMap();
 
-            Mapper.CreateMap<InternationalFuelContractDto, InternationalFuelContractVO>()
+            CreateMap<InternationalFuelContractDto, InternationalFuelContractVO>()
                 .ReverseMap();
 
-            Mapper.CreateMap<InternationalFuelContractConceptDto, InternationalFuelContractConceptVO>()
+            CreateMap<InternationalFuelContractConceptDto, InternationalFuelContractConceptVO>()
                 .ReverseMap();
 
-            Mapper.CreateMap<InternationalFuelRateDto, InternationalFuelRateVO>()
+            CreateMap<InternationalFuelRateDto, InternationalFuelRateVO>()
                 .ReverseMap();
         }
 
         /// <summary>
         /// Maps between AirportServiceContract Dto and VO.
         /// </summary>
-        private static void AirporServiceContractMap()
+        private void AirporServiceContractMap()
         {
-            Mapper.CreateMap<AirportServiceContractDto, AirportServiceContractVO>()
+            CreateMap<AirportServiceContractDto, AirportServiceContractVO>()
                  .ForMember(t => t.AirlineName, f => f.MapFrom(r => r.Airline.AirlineName))
                  .ForMember(t => t.StationName, f => f.MapFrom(r => r.Airport.StationName))
                  .ForMember(t => t.ServiceName, f => f.MapFrom(r => r.Service.ServiceName))
@@ -162,15 +164,15 @@ namespace VOI.SISAC.Web.MapConfiguration
                  .ForMember(t => t.CalculationTypeName, f => f.MapFrom(r => r.ServiceCalculationType.CalculationTypeName))
                  .ForMember(t => t.AirplaneWeightName, f => f.MapFrom(r => r.AirplaneWeightType.AirplaneWeightName))
                  .ForMember(t => t.AirplaneWeightUnitName, f => f.MapFrom(r => r.AirplaneWeightMeasureType.AirplaneWeightMeasureName))
-                .ReverseMap();
+                 .ReverseMap();
         }
 
         /// <summary>
         /// Maps between AirportServiceContractDto and ContractParametersVO.
         /// </summary>
-        private static void ContractParametersMap()
+        private void ContractParametersMap()
         {
-            Mapper.CreateMap<ContractParametersVO, AirportServiceContractDto>()
+            CreateMap<ContractParametersVO, AirportServiceContractDto>()
                 .ForMember(t => t.EffectiveDate, f => f.MapFrom(r => r.EffectiveDateParameter))
                 .ForMember(t => t.AirlineCode, f => f.MapFrom(r => r.AirlineDescription))
                 .ForMember(t => t.StationCode, f => f.MapFrom(r => r.AirportDescription))
@@ -183,27 +185,27 @@ namespace VOI.SISAC.Web.MapConfiguration
         /// <summary>
         /// Maps the nationals fuel contract objects.
         /// </summary>
-        private static void NationalFuelContractMap()
+        private void NationalFuelContractMap()
         {
-            Mapper.CreateMap<NationalFuelContractVO, NationalFuelContractDto>()
+            CreateMap<NationalFuelContractVO, NationalFuelContractDto>()
                 .ReverseMap();
-            Mapper.CreateMap<NationalFuelContractConceptVO, NationalFuelContractConceptDto>()
+            CreateMap<NationalFuelContractConceptVO, NationalFuelContractConceptDto>()
                 .ReverseMap();
-            
+
             // From parameters to dto
-            Mapper.CreateMap<NationalFuelContractSearchVO, NationalFuelContractDto>()
+            CreateMap<NationalFuelContractSearchVO, NationalFuelContractDto>()
                 .ReverseMap();
 
             // From file to Dto and vice versa
-            Mapper.CreateMap<NationalFuelContractFile, NationalFuelContractDto>()
+            CreateMap<NationalFuelContractFile, NationalFuelContractDto>()
                 .ReverseMap();
-            Mapper.CreateMap<NationalFuelContractFile, NationalFuelContractConceptDto>()
+            CreateMap<NationalFuelContractFile, NationalFuelContractConceptDto>()
                 .ReverseMap();
 
             // From file to Dto and vice versa
-            Mapper.CreateMap<NationalFuelRateFile, NationalFuelRateDto>()
+            CreateMap<NationalFuelRateFile, NationalFuelRateDto>()
                 .ReverseMap();
-            Mapper.CreateMap<NationalFuelRateVO, NationalFuelRateDto>()
+            CreateMap<NationalFuelRateVO, NationalFuelRateDto>()
                 .ReverseMap();
         }
     }

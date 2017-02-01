@@ -310,6 +310,46 @@ namespace VOI.SISAC.Web.Models.VO.Process
         public int? RecordsProcessed { get; set; }
 
         /// <summary>
+        /// Gets or sets the count nonconformity records.
+        /// </summary>
+        /// <value>
+        /// The count nonconformity records.
+        /// </value>
+        public int? CountNonconformityRecords { get; set; }
+
+        /// <summary>
+        /// Gets or sets the nonconformity subtotal amount.
+        /// </summary>
+        /// <value>
+        /// The nonconformity subtotal amount.
+        /// </value>
+        public decimal? NonconformitySubtotalAmount { get; set; }
+
+        /// <summary>
+        /// Gets or sets the date nonconformity.
+        /// </summary>
+        /// <value>
+        /// The date nonconformity.
+        /// </value>
+        public DateTime? DateNonconformity { get; set; }
+
+        /// <summary>
+        /// Gets or sets the nonconformity reference.
+        /// </summary>
+        /// <value>
+        /// The nonconformity reference.
+        /// </value>
+        public string NonconformityReference { get; set; }
+
+        /// <summary>
+        /// Gets or sets the nonconfirmity status code.
+        /// </summary>
+        /// <value>
+        /// The nonconfirmity status code.
+        /// </value>
+        public string NonconformityStatusCode { get; set; }
+
+        /// <summary>
         /// Gets or sets the total rows.
         /// </summary>
         /// <value>

@@ -4437,6 +4437,14 @@
             The other international.
             </value>
         </member>
+        <member name="P:VOI.SISAC.Business.Dto.Airports.AdditionalPassengerInformationDto.PaxDni">
+            <summary>
+            Gets or sets the pax dni.
+            </summary>
+            <value>
+            The pax dni.
+            </value>
+        </member>
         <member name="T:VOI.SISAC.Business.Dto.Airports.AirlineDto">
             <summary>
             Class Dto Airline
@@ -4490,6 +4498,7 @@
             The division.
             </value>
         </member>
+        <!-- Badly formed XML comment ignored for member "P:VOI.SISAC.Business.Dto.Airports.AirlineDto.BusinessName" -->
         <member name="P:VOI.SISAC.Business.Dto.Airports.AirlineDto.CostCenters">
             <summary>
             Gets or sets the cost centers.
@@ -6541,6 +6550,35 @@
               <c>true</c> if status; otherwise, <c>false</c>.
             </value>
         </member>
+        <member name="T:VOI.SISAC.Business.Dto.Catalogs.ProcedureCalculationDto">
+            <summary>
+            Operation type Data transfer object
+            </summary>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Catalogs.ProcedureCalculationDto.ProcedureCode">
+            <summary>
+            Gets or sets the procedure code.
+            </summary>
+            <value>
+            The procedure code.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Catalogs.ProcedureCalculationDto.ProcedureName">
+            <summary>
+            Gets or sets the name of the procedure.
+            </summary>
+            <value>
+            The name of the procedure.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Catalogs.ProcedureCalculationDto.ProcedureDBName">
+            <summary>
+            Gets or sets the name of the procedure database.
+            </summary>
+            <value>
+            The name of the procedure database.
+            </value>
+        </member>
         <member name="T:VOI.SISAC.Business.Dto.Catalogs.OperationTypeDto">
             <summary>
             Operation type Data transfer object
@@ -8157,6 +8195,14 @@
             The name of the compartment type.
             </value>
         </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDetailDto.MaximumWeight">
+            <summary>
+            Gets or sets the maximum weight.
+            </summary>
+            <value>
+            The maximum weight.
+            </value>
+        </member>
         <member name="T:VOI.SISAC.Business.Dto.Itineraries.ManifestDepartureBoardingDto">
             <summary>
             ManifestDepartureBoardingDto
@@ -8991,6 +9037,30 @@
             <summary>
             Initializes a new instance of the <see cref="T:VOI.SISAC.Business.Dto.Itineraries.TimelineDto"/> class.
             </summary>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineDto.Row">
+            <summary>
+            Gets or sets the row.
+            </summary>
+            <value>
+            The row.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineDto.MaxRow">
+            <summary>
+            Gets or sets the maximum row.
+            </summary>
+            <value>
+            The maximum row.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineDto.MinRow">
+            <summary>
+            Gets or sets the minimum row.
+            </summary>
+            <value>
+            The minimum row.
+            </value>
         </member>
         <member name="P:VOI.SISAC.Business.Dto.Itineraries.TimelineDto.Sequence">
             <summary>
@@ -11405,6 +11475,46 @@
             The records processed.
             </value>
         </member>
+        <member name="P:VOI.SISAC.Business.Dto.Process.NationalJetFuelInvoiceControlDto.CountNonconformityRecords">
+            <summary>
+            Gets or sets the count nonconformity records.
+            </summary>
+            <value>
+            The count nonconformity records.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Process.NationalJetFuelInvoiceControlDto.NonconformitySubtotalAmount">
+            <summary>
+            Gets or sets the nonconformity subtotal amount.
+            </summary>
+            <value>
+            The nonconformity subtotal amount.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Process.NationalJetFuelInvoiceControlDto.DateNonconformity">
+            <summary>
+            Gets or sets the date nonconformity.
+            </summary>
+            <value>
+            The date nonconformity.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Process.NationalJetFuelInvoiceControlDto.NonconformityReference">
+            <summary>
+            Gets or sets the nonconformity reference.
+            </summary>
+            <value>
+            The nonconformity reference.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Process.NationalJetFuelInvoiceControlDto.NonconformityStatusCode">
+            <summary>
+            Gets or sets the nonconfirmity status code.
+            </summary>
+            <value>
+            The nonconfirmity status code.
+            </value>
+        </member>
         <member name="P:VOI.SISAC.Business.Dto.Process.NationalJetFuelInvoiceControlDto.TotalRows">
             <summary>
             Gets or sets the total rows.
@@ -11808,6 +11918,14 @@
             </summary>
             <value>
             The reconciliation status.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Business.Dto.Process.NationalJetFuelInvoiceDetailDto.NonconformityFlag">
+            <summary>
+            Gets or sets the nonconformity flag.
+            </summary>
+            <value>
+            The nonconformity flag.
             </value>
         </member>
         <member name="P:VOI.SISAC.Business.Dto.Process.NationalJetFuelInvoiceDetailDto.NationalJetFuelInvoiceControl">
@@ -17691,6 +17809,13 @@
             <param name="contracts">The contracts.</param>
             <returns>List of errors.</returns>
         </member>
+        <member name="M:VOI.SISAC.Business.Finance.MassiveUploadBusiness.ValidateDependencyMultiRateFlag(System.Collections.Generic.IList{VOI.SISAC.Business.Dto.Finances.AirportServiceContractDto})">
+            <summary>
+            Validates the dependency Multi Rate Flag.
+            </summary>
+            <param name="contracts">The contracts.</param>
+            <returns>List of errors.</returns>
+        </member>
         <member name="M:VOI.SISAC.Business.Finance.MassiveUploadBusiness.ValidateCombosRelationship(System.Collections.Generic.IList{VOI.SISAC.Business.Dto.Finances.AirportServiceContractDto})">
             <summary>
             Validates the combos relationship.
@@ -17754,11 +17879,12 @@
             <param name="liabilityAccountNumbers">The liability account numbers.</param>
             <returns>List of errors if exist otherwise NULL.</returns>
         </member>
-        <member name="M:VOI.SISAC.Business.Finance.MassiveUploadBusiness.ValidateCurrency(System.Collections.Generic.IList{System.String})">
+        <member name="M:VOI.SISAC.Business.Finance.MassiveUploadBusiness.ValidateCurrency(System.Collections.Generic.IList{System.String},System.Boolean)">
             <summary>
             Validates if the currencies exist.
             </summary>
             <param name="currencies">The currencies.</param>
+            <param name="acceptNull">if set to <c>true</c> ignores NULL values to validate.</param>
             <returns>List of errors if exist otherwise NULL.</returns>
         </member>
         <member name="M:VOI.SISAC.Business.Finance.MassiveUploadBusiness.ValidateTax(System.Collections.Generic.IList{System.String},System.Boolean)">
@@ -18364,6 +18490,13 @@
             <param name="endDate">The end date.</param>
             <returns></returns>
         </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.ITimelineBusiness.GetTimelinePaged(VOI.SISAC.Business.Dto.Itineraries.TimelineDto)">
+            <summary>
+            Gets the timeline paged.
+            </summary>
+            <param name="flight">The flight.</param>
+            <returns></returns>
+        </member>
         <member name="T:VOI.SISAC.Business.Itineraries.IManifestDepartureBusiness">
             <summary>
             Interface for Manifest departure logic
@@ -18544,6 +18677,14 @@
             </summary>
             <param name="startDate">The start date.</param>
             <param name="endDate">The end date.</param>
+            <returns></returns>
+            <exception cref="T:VOI.SISAC.Business.ExceptionBusiness.BusinessException"></exception>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.TimelineBusiness.GetTimelinePaged(VOI.SISAC.Business.Dto.Itineraries.TimelineDto)">
+            <summary>
+            Gets the timeline paged.
+            </summary>
+            <param name="flight">The flight.</param>
             <returns></returns>
             <exception cref="T:VOI.SISAC.Business.ExceptionBusiness.BusinessException"></exception>
         </member>
@@ -19203,15 +19344,63 @@
             The airplane repository
             </summary>
         </member>
-        <member name="M:VOI.SISAC.Business.Itineraries.ItineraryBusiness.#ctor(VOI.SISAC.Dal.Infrastructure.IUnitOfWork,VOI.SISAC.Dal.Repository.Itineraries.IItineraryRepository,VOI.SISAC.Dal.Repository.Airports.IAirportRepository,VOI.SISAC.Dal.Repository.Airports.IAirplaneRepository,VOI.SISAC.Dal.Repository.Itineraries.IItineraryLogRepository)">
+        <member name="F:VOI.SISAC.Business.Itineraries.ItineraryBusiness.timelineRepository">
             <summary>
-            Initializes a new instance of the <see cref="T:VOI.SISAC.Business.Itineraries.ItineraryBusiness" /> class.
+            The timeline repository
             </summary>
-            <param name="unitOfWork">Unit of Work</param>
-            <param name="itineraryRepository">Itinerary Repository</param>
-            <param name="airportRepository">airport repository</param>
-            <param name="airplaneRepository">airplane repository</param>
-            <param name="itineraryLogRepository">airport repository</param>
+        </member>
+        <member name="F:VOI.SISAC.Business.Itineraries.ItineraryBusiness.manifestArrivalRepository">
+            <summary>
+            The manifest arrival repository
+            </summary>
+        </member>
+        <member name="F:VOI.SISAC.Business.Itineraries.ItineraryBusiness.manifestDepartureRepository">
+            <summary>
+            The manifest departure repository
+            </summary>
+        </member>
+        <member name="F:VOI.SISAC.Business.Itineraries.ItineraryBusiness.passengerInformationRepository">
+            <summary>
+            The passenger information repository
+            </summary>
+        </member>
+        <member name="F:VOI.SISAC.Business.Itineraries.ItineraryBusiness.manifestDepartureBoardingRepository">
+            <summary>
+            The manifest departure boarding repository
+            </summary>
+        </member>
+        <member name="F:VOI.SISAC.Business.Itineraries.ItineraryBusiness.airportServiceRepository">
+            <summary>
+            The airport service repository
+            </summary>
+        </member>
+        <member name="F:VOI.SISAC.Business.Itineraries.ItineraryBusiness.nationalJetFuelTicketRepository">
+            <summary>
+            The national jet fuel ticket repository
+            </summary>
+        </member>
+        <member name="F:VOI.SISAC.Business.Itineraries.ItineraryBusiness.jetFuelTicketRepository">
+            <summary>
+            The jet fuel ticket repository
+            </summary>
+        </member>
+        <member name="M:VOI.SISAC.Business.Itineraries.ItineraryBusiness.#ctor(VOI.SISAC.Dal.Infrastructure.IUnitOfWork,VOI.SISAC.Dal.Repository.Itineraries.IItineraryRepository,VOI.SISAC.Dal.Repository.Airports.IAirportRepository,VOI.SISAC.Dal.Repository.Airports.IAirplaneRepository,VOI.SISAC.Dal.Repository.Itineraries.IItineraryLogRepository,VOI.SISAC.Dal.Repository.Itineraries.ITimelineRepository,VOI.SISAC.Dal.Repository.Airports.INationalJetFuelTicketRepository,VOI.SISAC.Dal.Repository.Airports.IJetFuelTicketRepository,VOI.SISAC.Dal.Repository.Itineraries.IManifestArrivalRepository,VOI.SISAC.Dal.Repository.Itineraries.IManifestDepartureRepository,VOI.SISAC.Dal.Repository.Itineraries.IManifestDepartureBoardingRepository,VOI.SISAC.Dal.Repository.Airports.IAirportServiceRepository,VOI.SISAC.Dal.Repository.Airports.IPassengerInformationRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:VOI.SISAC.Business.Itineraries.ItineraryBusiness"/> class.
+            </summary>
+            <param name="unitOfWork">The unit of work.</param>
+            <param name="itineraryRepository">The itinerary repository.</param>
+            <param name="airportRepository">The airport repository.</param>
+            <param name="airplaneRepository">The airplane repository.</param>
+            <param name="itineraryLogRepository">The itinerary log repository.</param>
+            <param name="timelineRepository">The timeline repository.</param>
+            <param name="nationalJetFuelTicketRepository">The national jet fuel ticket repository.</param>
+            <param name="jetFuelTicketRepository">The jet fuel ticket repository.</param>
+            <param name="manifestArrivalRepository">The manifest arrival repository.</param>
+            <param name="manifestDepartureRepository">The manifest departure repository.</param>
+            <param name="manifestDepartureBoardingRepository">The manifest departure boarding repository.</param>
+            <param name="airportServiceRepository">The airport service repository.</param>
+            <param name="passengerInformationRepository">The passenger information repository.</param>
         </member>
         <member name="M:VOI.SISAC.Business.Itineraries.ItineraryBusiness.GetAllFlightsByDay">
             <summary>
@@ -19393,6 +19582,11 @@
             Avoid calling the <see cref="T:AutoMapper.Mapper" /> class from this method.
             </summary>
         </member>
+        <member name="M:VOI.SISAC.Business.MapConfiguration.ProcessMaps.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:VOI.SISAC.Business.MapConfiguration.ProcessMaps"/> class.
+            </summary>
+        </member>
         <member name="M:VOI.SISAC.Business.MapConfiguration.ProcessMaps.Map">
             <summary>
             Configures the mappers between clases.
@@ -19420,6 +19614,11 @@
             <summary>
             Override this method in a derived class and call the CreateMap method to associate that map with this profile.
             Avoid calling the <see cref="T:AutoMapper.Mapper" /> class from this method.
+            </summary>
+        </member>
+        <member name="M:VOI.SISAC.Business.MapConfiguration.AirportMaps.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:VOI.SISAC.Business.MapConfiguration.AirportMaps"/> class.
             </summary>
         </member>
         <member name="M:VOI.SISAC.Business.MapConfiguration.AirportMaps.PassengerInformationMaps">
@@ -19536,6 +19735,11 @@
             Avoid calling the <see cref="T:AutoMapper.Mapper" /> class from this method.
             </summary>
         </member>
+        <member name="M:VOI.SISAC.Business.MapConfiguration.CatalogMaps.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:VOI.SISAC.Business.MapConfiguration.CatalogMaps"/> class.
+            </summary>
+        </member>
         <member name="M:VOI.SISAC.Business.MapConfiguration.CatalogMaps.ReconciliationToleranceMap">
             <summary>
             Reconciliations the tolerance map.
@@ -19610,6 +19814,11 @@
             Avoid calling the <see cref="T:AutoMapper.Mapper" /> class from this method.
             </summary>
         </member>
+        <member name="M:VOI.SISAC.Business.MapConfiguration.FinanceMaps.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:VOI.SISAC.Business.MapConfiguration.FinanceMaps"/> class.
+            </summary>
+        </member>
         <member name="M:VOI.SISAC.Business.MapConfiguration.FinanceMaps.ExchangeRatesMap">
             <summary>
             ExchangeRatesMap Map Method
@@ -19649,6 +19858,11 @@
             Avoid calling the <see cref="T:AutoMapper.Mapper" /> class from this method.
             </summary>
         </member>
+        <member name="M:VOI.SISAC.Business.MapConfiguration.ItinerariesMaps.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:VOI.SISAC.Business.MapConfiguration.ItinerariesMaps"/> class.
+            </summary>
+        </member>
         <member name="M:VOI.SISAC.Business.MapConfiguration.ItinerariesMaps.Map">
             <summary>
             Maps this instance.
@@ -19671,6 +19885,12 @@
             <summary>
             Override this method in a derived class and call the CreateMap method to associate that map with this profile.
             Avoid calling the <see cref="T:AutoMapper.Mapper" /> class from this method.
+            </summary>
+        </member>
+        <member name="M:VOI.SISAC.Business.MapConfiguration.SecurityMaps.#ctor">
+            <summary>
+            Override this method in a derived class and call the CreateMap method to associate that map with this profile.
+            Avoid calling the <see cref="T:AutoMapper" /> class from this method.
             </summary>
         </member>
         <member name="T:VOI.SISAC.Business.Process.IJetFuelLogErrorBusiness">
@@ -19722,6 +19942,13 @@
         <member name="M:VOI.SISAC.Business.Process.INationalJetFuelInvoiceControlBusiness.ValidateManualReconcile(System.Data.DataTable)">
             <summary>
             Validates the manual reconcile.
+            </summary>
+            <param name="reconcileInfo">The reconcile information.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Business.Process.INationalJetFuelInvoiceControlBusiness.ValidateNonconformity(System.Data.DataTable)">
+            <summary>
+            Validates the nonconformity.
             </summary>
             <param name="reconcileInfo">The reconcile information.</param>
             <returns></returns>
@@ -19781,6 +20008,27 @@
             Reverts the manual reconcile process.
             </summary>
             <param name="processDto">The process dto.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Business.Process.INationalJetFuelInvoiceControlBusiness.RevertNonconformityProcess(VOI.SISAC.Business.Dto.Process.NationalJetFuelInvoiceControlDto)">
+            <summary>
+            Reverts the nonconformity process.
+            </summary>
+            <param name="processDto">The process dto.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Business.Process.INationalJetFuelInvoiceControlBusiness.CloseNonconformity(VOI.SISAC.Business.Dto.Process.NationalJetFuelInvoiceControlDto)">
+            <summary>
+            Closes the nonconformity.
+            </summary>
+            <param name="process">The process.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Business.Process.INationalJetFuelInvoiceControlBusiness.OpenNonconformity(VOI.SISAC.Business.Dto.Process.NationalJetFuelInvoiceControlDto)">
+            <summary>
+            Opens the nonconformity.
+            </summary>
+            <param name="process">The process.</param>
             <returns></returns>
         </member>
         <member name="T:VOI.SISAC.Business.Process.INationalJetFuelInvoiceDetailBusiness">
@@ -20453,6 +20701,14 @@
             <returns></returns>
             <exception cref="T:VOI.SISAC.Business.ExceptionBusiness.BusinessException"></exception>
         </member>
+        <member name="M:VOI.SISAC.Business.Process.NationalJetFuelInvoiceControlBusiness.ValidateNonconformity(System.Data.DataTable)">
+            <summary>
+            Validates the nonconformity.
+            </summary>
+            <param name="reconcileInfo">The reconcile information.</param>
+            <returns></returns>
+            <exception cref="T:VOI.SISAC.Business.ExceptionBusiness.BusinessException"></exception>
+        </member>
         <member name="M:VOI.SISAC.Business.Process.NationalJetFuelInvoiceControlBusiness.DeletedNationalInvoicePolicy(VOI.SISAC.Business.Dto.Process.NationalJetFuelInvoiceControlDto)">
             <summary>
             Deleteds the national invoice policy.
@@ -20517,6 +20773,30 @@
         <member name="M:VOI.SISAC.Business.Process.NationalJetFuelInvoiceControlBusiness.RevertManualReconcileProcess(VOI.SISAC.Business.Dto.Process.NationalJetFuelInvoiceControlDto)">
             <summary>
             Reverts the manual reconcile process.
+            </summary>
+            <param name="processDto">The process dto.</param>
+            <returns></returns>
+            <exception cref="T:VOI.SISAC.Business.ExceptionBusiness.BusinessException"></exception>
+        </member>
+        <member name="M:VOI.SISAC.Business.Process.NationalJetFuelInvoiceControlBusiness.RevertNonconformityProcess(VOI.SISAC.Business.Dto.Process.NationalJetFuelInvoiceControlDto)">
+            <summary>
+            Reverts the nonconformity process.
+            </summary>
+            <param name="processDto">The process dto.</param>
+            <returns></returns>
+            <exception cref="T:VOI.SISAC.Business.ExceptionBusiness.BusinessException"></exception>
+        </member>
+        <member name="M:VOI.SISAC.Business.Process.NationalJetFuelInvoiceControlBusiness.CloseNonconformity(VOI.SISAC.Business.Dto.Process.NationalJetFuelInvoiceControlDto)">
+            <summary>
+            Closes the nonconformity.
+            </summary>
+            <param name="processDto">The process dto.</param>
+            <returns></returns>
+            <exception cref="T:VOI.SISAC.Business.ExceptionBusiness.BusinessException"></exception>
+        </member>
+        <member name="M:VOI.SISAC.Business.Process.NationalJetFuelInvoiceControlBusiness.OpenNonconformity(VOI.SISAC.Business.Dto.Process.NationalJetFuelInvoiceControlDto)">
+            <summary>
+            Opens the nonconformity.
             </summary>
             <param name="processDto">The process dto.</param>
             <returns></returns>

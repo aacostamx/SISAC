@@ -371,11 +371,11 @@ namespace VOI.SISAC.Web.Models.VO.Finance
         /// The rate.
         /// </value>
         [Display(Name = "Rate", ResourceType = typeof(Resources.Resource))]
-        [Required(ErrorMessageResourceType = typeof(Resources.Resource),
-                  ErrorMessageResourceName = "RequiredField")]
+        [RequiredIf("MultiRateFlag", false, ErrorMessageResourceType = typeof(Resources.Resource),
+            ErrorMessageResourceName = "RequiredField")]
         [DisplayFormat(ApplyFormatInEditMode = true,
             DataFormatString = "{0:0.00000}")]
-        public decimal Rate { get; set; }
+        public decimal? Rate { get; set; }
 
         /// <summary>
         /// Gets or sets the currency code.
@@ -385,8 +385,8 @@ namespace VOI.SISAC.Web.Models.VO.Finance
         /// The currency code.
         /// </value>
         [Display(Name = "CurrencyCode", ResourceType = typeof(Resources.Resource))]
-        [Required(ErrorMessageResourceType = typeof(Resources.Resource),
-                  ErrorMessageResourceName = "RequiredField")]
+        [RequiredIf("MultiRateFlag", false, ErrorMessageResourceType = typeof(Resources.Resource),
+            ErrorMessageResourceName = "RequiredField")]
         [StringLength(3, ErrorMessageResourceType = typeof(Resources.Resource),
             ErrorMessageResourceName = "LengthMax3")]
         public string CurrencyCode { get; set; }

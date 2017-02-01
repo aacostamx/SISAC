@@ -6,6 +6,7 @@
 
 namespace VOI.SISAC.Business.MapConfiguration
 {
+    using System;
     using AutoMapper;
     using VOI.SISAC.Business.Dto.Itineraries;
     using VOI.SISAC.Entities.Itineraries;
@@ -39,31 +40,37 @@ namespace VOI.SISAC.Business.MapConfiguration
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="ItinerariesMaps"/> class.
+        /// </summary>
+        public ItinerariesMaps()
+        { }
+
+        /// <summary>
         /// Maps this instance.
         /// </summary>
         private void Map()
         {
-            Mapper.CreateMap<Itinerary, ItineraryDto>()
+            CreateMap<Itinerary, ItineraryDto>()
                 .ForMember(c => c.GendecDepartureIsClose, f => f.MapFrom(r => r.GendecDepartures.Closed))
                 .ForMember(c => c.GendecArrivalIsClose, f => f.MapFrom(r => r.GendecArrivals.Closed))
                 .ReverseMap();
 
-            Mapper.CreateMap<ItineraryLog, ItineraryLogDto>()
+            CreateMap<ItineraryLog, ItineraryLogDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<ItineraryDto, ItineraryLogDto>()
+            CreateMap<ItineraryDto, ItineraryLogDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<GendecDeparture, GendecDepartureDto>()
+            CreateMap<GendecDeparture, GendecDepartureDto>()
                .ReverseMap();
 
-            Mapper.CreateMap<GendecArrival, GendecArrivalDto>()
+            CreateMap<GendecArrival, GendecArrivalDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<ItinerarySearch, ItinerarySearchDto>()
-                .ReverseMap();            
+            CreateMap<ItinerarySearch, ItinerarySearchDto>()
+                .ReverseMap();
 
-            Mapper.CreateMap<ManifestDeparture, ManifestDepartureDto>()
+            CreateMap<ManifestDeparture, ManifestDepartureDto>()
                 .ForMember(c => c.ArrivalStationCode, f => f.MapFrom(w => w.ArrivalStation))
                 .ForMember(c => c.DepartureStationCode, f => f.MapFrom(w => w.DepartureStation))
                 .ForMember(c => c.ScaleStationCode, f => f.MapFrom(w => w.ScaleStation))
@@ -72,34 +79,26 @@ namespace VOI.SISAC.Business.MapConfiguration
                 .ForMember(c => c.InfantTickets, f => f.MapFrom(w => w.InfantsTickets))
                 .ReverseMap();
 
-            Mapper.CreateMap<ManifestDepartureDto, ManifestDeparture>()
-                .ForMember(c => c.ArrivalStation, f => f.MapFrom(w => w.ArrivalStationCode))
-                .ForMember(c => c.DepartureStation, f => f.MapFrom(w => w.DepartureStationCode))
-                .ForMember(c => c.ScaleStation, f => f.MapFrom(w => w.ScaleStationCode))
-                .ForMember(c => c.UserAuthorizeId, f => f.MapFrom(w => w.UserIdAuthorize))
-                .ForMember(c => c.UserSignatureId, f => f.MapFrom(w => w.UserIdSignature))
-                .ForMember(c => c.InfantsTickets, f => f.MapFrom(w => w.InfantTickets))
+            CreateMap<AdditionalDepartureInformation, AdditionalDepartureInformationDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<AdditionalDepartureInformation, AdditionalDepartureInformationDto>()
+            CreateMap<AdditionalArrivalInformation, AdditionalArrivalInformationDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<AdditionalArrivalInformation, AdditionalArrivalInformationDto>()
+            CreateMap<ManifestDepartureBoarding, ManifestDepartureBoardingDto>()
                 .ReverseMap();
 
-            Mapper.CreateMap<ManifestDepartureBoarding, ManifestDepartureBoardingDto>()
-                .ReverseMap();
-
-            Mapper.CreateMap<ManifestDepartureBoardingDetail, ManifestDepartureBoardingDetailDto>()
+            CreateMap<ManifestDepartureBoardingDetail, ManifestDepartureBoardingDetailDto>()
                 .ForMember(c => c.CompartmentTypeName, f => f.MapFrom(r => r.CompartmentTypeConfig.CompartmentTypeName))
+                .ForMember(c => c.MaximumWeight, f => f.MapFrom(r => r.CompartmentTypeConfig.MaximumWeight))
                 .ReverseMap();
 
-            Mapper.CreateMap<ManifestDepartureBoardingInformation, ManifestDepartureBoardingInformationDto>()
+            CreateMap<ManifestDepartureBoardingInformation, ManifestDepartureBoardingInformationDto>()
                 .ForMember(c => c.CompartmentTypeInformationName, f => f.MapFrom(r => r.CompartmentTypeInformation.CompartmentTypeInformationName))
                 .ForMember(c => c.CompartmentTypeName, f => f.MapFrom(r => r.CompartmentTypeConfig.CompartmentTypeName))
                 .ReverseMap();
 
-            Mapper.CreateMap<ManifestArrival, ManifestArrivalDto>()
+            CreateMap<ManifestArrival, ManifestArrivalDto>()
                 .ForMember(c => c.ArrivalStationCode, f => f.MapFrom(w => w.ArrivalStation))
                 .ForMember(c => c.DepartureStationCode, f => f.MapFrom(w => w.DepartureStation))
                 .ForMember(c => c.LastScaleStationCode, f => f.MapFrom(w => w.LastScaleStation))
@@ -107,18 +106,10 @@ namespace VOI.SISAC.Business.MapConfiguration
                 .ForMember(c => c.UserIdSignature, f => f.MapFrom(w => w.UserSignatureId))
                 .ReverseMap();
 
-            Mapper.CreateMap<ManifestArrivalDto, ManifestArrival>()
-                .ForMember(c => c.ArrivalStation, f => f.MapFrom(w => w.ArrivalStationCode))
-                .ForMember(c => c.DepartureStation, f => f.MapFrom(w => w.DepartureStationCode))
-                .ForMember(c => c.LastScaleStation, f => f.MapFrom(w => w.LastScaleStationCode))
-                .ForMember(c => c.UserAuthorizeId, f => f.MapFrom(w => w.UserIdAuthorize))
-                .ForMember(c => c.UserSignatureId, f => f.MapFrom(w => w.UserIdSignature))
+            CreateMap<TimelineDto, Timeline>()
                 .ReverseMap();
 
-            Mapper.CreateMap<TimelineDto, Timeline>()
-                .ReverseMap();
-
-            Mapper.CreateMap<TimelineMovementDto, TimelineMovement>()
+            CreateMap<TimelineMovementDto, TimelineMovement>()
                 .ReverseMap();
         }
     }

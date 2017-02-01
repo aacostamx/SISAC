@@ -138,5 +138,28 @@ namespace VOI.SISAC.Business.Itineraries
 
             return sucess;
         }
+
+        /// <summary>
+        /// Gets the timeline paged.
+        /// </summary>
+        /// <param name="flight">The flight.</param>
+        /// <returns></returns>
+        /// <exception cref="BusinessException"></exception>
+        public IList<TimelineDto> GetTimelinePaged(TimelineDto flight)
+        {
+            var timelineDto = new List<TimelineDto>();
+
+            try
+            {
+                timelineDto = Mapper.Map<List<TimelineDto>>(this.timelineRepository.GetTimelinePaged(new Timeline() { Sequence = flight.Sequence, AirlineCode = flight.AirlineCode, FlightNumber = flight.FlightNumber, ItineraryKey = flight.ItineraryKey }));
+
+            }
+            catch (Exception ex)
+            {
+                throw new BusinessException(Messages.FailedRetrievedRecords + Messages.SeeInnerException, ex);
+            }
+
+            return timelineDto;
+        }
     }
 }

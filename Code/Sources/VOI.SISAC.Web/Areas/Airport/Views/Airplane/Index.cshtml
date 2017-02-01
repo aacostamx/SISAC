@@ -39,6 +39,12 @@
                data-export-data-type="all">
             <thead>
                 <tr>
+                    @if (User.IsInRole("AIRPLANE-DEL") || User.IsInRole("AIRPLANE-UPD"))
+                    {
+                        <th data-field="Acctions" data-align="center" data-halign="center">
+                            <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
+                        </th>
+                    }
                     <th data-field="EquipmentNumber" data-halign="center" data-align="center" data-sortable="true">
                         <strong>@Html.DisplayNameFor(model => model.EquipmentNumber)</strong>
                     </th>
@@ -87,18 +93,25 @@
                     <th data-field="Magnitude" data-halign="center" data-align="center" data-sortable="true">
                         <strong>@Html.DisplayNameFor(model => model.Magnitude)</strong>
                     </th>
-                    @if (User.IsInRole("AIRPLANE-DEL") || User.IsInRole("AIRPLANE-UPD"))
-                    {
-                        <th data-field="Acctions" data-align="center" data-halign="center">
-                            <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
-                        </th>
-                    }
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
                     <tr>
+                        @if (User.IsInRole("AIRPLANE-DEL") || User.IsInRole("AIRPLANE-UPD"))
+                        {
+                            <td>
+                                @if (User.IsInRole("AIRPLANE-UPD"))
+                                {
+                                    <button class="btn btn-default" type="button" name="Edit" title="@VOI.SISAC.Web.Resources.Resource.Edit" onclick="location.href='@Url.Action("Edit", "Airplane", new { id = item.EquipmentNumber })'"><i class="fa fa-pencil fa-fw"></i></button>
+                                }
+                                @if (User.IsInRole("AIRPLANE-DEL"))
+                                {
+                                    <button class="btn btn-default" type="button" name="Delete" title="@VOI.SISAC.Web.Resources.Resource.Delete" onclick="location.href='@Url.Action("Delete", "Airplane", new { id = item.EquipmentNumber })'"><i class="fa fa-trash-o fa-fw"></i></button>
+                                }
+                            </td>
+                        }
                         <td>
                             @Html.DisplayFor(modelItem => item.EquipmentNumber)
                         </td>
@@ -147,19 +160,6 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Magnitude)
                         </td>
-                        @if (User.IsInRole("AIRPLANE-DEL") || User.IsInRole("AIRPLANE-UPD"))
-                        {
-                            <td>
-                                @if (User.IsInRole("AIRPLANE-UPD"))
-                                {
-                                    <button class="btn btn-default" type="button" name="Edit" title="@VOI.SISAC.Web.Resources.Resource.Edit" onclick="location.href='@Url.Action("Edit", "Airplane", new { id = item.EquipmentNumber })'"><i class="fa fa-pencil fa-fw"></i></button>
-                                }
-                                @if (User.IsInRole("AIRPLANE-DEL"))
-                                {
-                                    <button class="btn btn-default" type="button" name="Delete" title="@VOI.SISAC.Web.Resources.Resource.Delete" onclick="location.href='@Url.Action("Delete", "Airplane", new { id = item.EquipmentNumber })'"><i class="fa fa-trash-o fa-fw"></i></button>
-                                }
-                            </td>
-                        }
                     </tr>
                 }
             </tbody>

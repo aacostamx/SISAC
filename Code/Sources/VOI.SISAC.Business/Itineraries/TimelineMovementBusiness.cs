@@ -161,7 +161,7 @@ namespace VOI.SISAC.Business.Itineraries
 
             try
             {
-                movementDto = Mapper.Map<TimelineMovementDto>(this.movementRepository.Find(c => c.ID == movement.ID));
+                movementDto = Mapper.Map<TimelineMovementDto>(this.movementRepository.GetTimelineMovement(new TimelineMovement { ID = movement.ID }));
             }
             catch (Exception ex)
             {

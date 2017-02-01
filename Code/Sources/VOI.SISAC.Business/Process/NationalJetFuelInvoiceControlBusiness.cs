@@ -179,6 +179,58 @@ namespace VOI.SISAC.Business.Process
         }
 
         /// <summary>
+        /// Validates the nonconformity.
+        /// </summary>
+        /// <param name="reconcileInfo">The reconcile information.</param>
+        /// <returns></returns>
+        /// <exception cref="BusinessException"></exception>
+        public IList<string> ValidateNonconformity(DataTable reconcileInfo)
+        {
+            if (reconcileInfo == null)
+            {
+                return null;
+            }
+
+            try
+            {
+                List<string> remittancesFound = new List<string>();
+                List<RemittanceIDValidate> remittances = new List<RemittanceIDValidate>();
+                remittances = this.invoiceControlRepository.ValidateNonconformity(reconcileInfo).ToList();
+
+                if (remittances.FirstOrDefault(c => c.Verify == 99) != null && remittances.FirstOrDefault(c => c.Verify == 99).Verify == 99)
+                {
+                    remittancesFound.Add("Contact the Database Administrator.");
+                    return remittancesFound;
+                }
+
+                if (remittances.FirstOrDefault(c => c.Verify == 98) != null && remittances.FirstOrDefault(c => c.Verify == 98).Verify == 98)
+                {
+                    remittancesFound.Add("Some records were not loaded, check Load Log.");
+                    return remittancesFound;
+                }
+
+                if (remittances.FirstOrDefault(c => c.Verify == 97) != null && remittances.FirstOrDefault(c => c.Verify == 97).Verify == 97)
+                {
+                    remittancesFound.Add("Different errors to invalid Equipment Number");
+                    return remittancesFound;
+                }
+
+                if (remittances.FirstOrDefault(c => c.Verify == 96) != null && remittances.FirstOrDefault(c => c.Verify == 96).Verify == 96)
+                {
+                    remittancesFound.Add("Remittance is closed in National Jet Fuel Invoice Control");
+                    return remittancesFound;
+                }
+
+                remittancesFound.AddRange(remittances.Where(c => c.Verify == 1).Select(c => '{' + c.RemittanceID + ',' + c.MonthYear + ',' + c.Period + '}'));
+                return remittancesFound;
+            }
+            catch (Exception exception)
+            {
+                throw new BusinessException(Messages.FailedRetrievedRecords + Messages.SeeInnerException, exception);
+            }
+        }
+
+        /// <summary>
         /// Deleteds the national invoice policy.
         /// </summary>
         /// <param name="invoice">The invoice.</param>
@@ -388,6 +440,86 @@ namespace VOI.SISAC.Business.Process
                 throw new BusinessException(Messages.FailedUpdateRecord + Messages.SeeInnerException, ex);
             }
             return revert;
+        }
+
+        /// <summary>
+        /// Reverts the nonconformity process.
+        /// </summary>
+        /// <param name="processDto">The process dto.</param>
+        /// <returns></returns>
+        /// <exception cref="BusinessException"></exception>
+        public int RevertNonconformityProcess(NationalJetFuelInvoiceControlDto processDto)
+        {
+            var revert = 0;
+
+            try
+            {
+                var process = new NationalJetFuelInvoiceControl { RemittanceID = processDto.RemittanceID, MonthYear = processDto.MonthYear, Period = processDto.Period, TypeProcess = NationalReconcileTypeProcess.NationalReconcileProcessRevert };
+                revert = this.invoiceControlRepository.RevertNonconformityProcess(process);
+            }
+            catch (Exception ex)
+            {
+                throw new BusinessException(Messages.FailedUpdateRecord + Messages.SeeInnerException, ex);
+            }
+            return revert;
+        }
+
+        /// <summary>
+        /// Closes the nonconformity.
+        /// </summary>
+        /// <param name="processDto">The process dto.</param>
+        /// <returns></returns>
+        /// <exception cref="BusinessException"></exception>
+        public bool CloseNonconformity(NationalJetFuelInvoiceControlDto processDto)
+        {
+            if (processDto == null)
+            {
+                return false;
+            }
+
+            try
+            {
+                NationalJetFuelInvoiceControl process = this.invoiceControlRepository.FindNationalJetFuelInvoiceControl(Mapper.Map<NationalJetFuelInvoiceControl>(processDto));
+                process.NonconformityStatusCode = "CLOSED";
+                //process.ConfirmedByUserName = processDto.ConfirmedByUserName;
+                //process.ConfirmationDate = processDto.ConfirmationDate;
+                this.invoiceControlRepository.Update(process);
+                this.unitOfWork.Commit();
+                return true;
+            }
+            catch (Exception exception)
+            {
+                throw new BusinessException(Messages.FailedUpdateRecord + Messages.SeeInnerException, exception);
+            }
+        }
+
+        /// <summary>
+        /// Opens the nonconformity.
+        /// </summary>
+        /// <param name="processDto">The process dto.</param>
+        /// <returns></returns>
+        /// <exception cref="BusinessException"></exception>
+        public bool OpenNonconformity(NationalJetFuelInvoiceControlDto processDto)
+        {
+            if (processDto == null)
+            {
+                return false;
+            }
+
+            try
+            {
+                NationalJetFuelInvoiceControl process = this.invoiceControlRepository.FindNationalJetFuelInvoiceControl(Mapper.Map<NationalJetFuelInvoiceControl>(processDto));
+                process.NonconformityStatusCode = "OPEN";
+                //process.ConfirmedByUserName = processDto.ConfirmedByUserName;
+                //process.ConfirmationDate = processDto.ConfirmationDate;
+                this.invoiceControlRepository.Update(process);
+                this.unitOfWork.Commit();
+                return true;
+            }
+            catch (Exception exception)
+            {
+                throw new BusinessException(Messages.FailedUpdateRecord + Messages.SeeInnerException, exception);
+            }
         }
     }
 }

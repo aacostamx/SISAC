@@ -33,18 +33,18 @@
         data-page-size="10">
         <thead>
             <tr>
+                @if (User.IsInRole("FUELCONCEP-UPD") || User.IsInRole("FUELCONCEP-DEL"))
+                {
+                    <th data-field="Acctions" data-align="center" data-halign="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
+                    </th>
+                }
                 <th data-field="FuelConceptID" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
                     <strong>@Html.DisplayNameFor(model => model.FuelConceptID)</strong>
                 </th>
                 <th data-field="FuelConceptName" data-halign="left" data-align="left" data-sortable="true">
                     <strong>@Html.DisplayNameFor(model => model.FuelConceptName)</strong>
                 </th>
-                @if (User.IsInRole("FUELCONCEP-UPD") || User.IsInRole("FUELCONCEP-DEL")) 
-                { 
-                    <th data-field="Acctions" data-align="center" data-halign="center">
-                        <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
-                    </th>
-                }
             </tr>
         </thead>
         <tbody>
@@ -53,25 +53,25 @@
                 foreach (var item in Model)
                 {
                 <tr>
+                    @if (User.IsInRole("FUELCONCEP-UPD") || User.IsInRole("FUELCONCEP-DEL"))
+                    {
+                        <td>
+                            @if (User.IsInRole("FUELCONCEP-UPD"))
+                            {
+                                <button class="btn btn-default" type="button" name="Edit" title="@VOI.SISAC.Web.Resources.Resource.Edit" onclick="location.href='@Url.Action("Edit", "FuelConcept", new { id = item.FuelConceptID })'"><i class="fa fa-pencil fa-fw"></i></button>
+                            }
+                            @if (User.IsInRole("FUELCONCEP-DEL"))
+                            {
+                                <button class="btn btn-default" type="button" name="Delete" title="@VOI.SISAC.Web.Resources.Resource.Delete" onclick="location.href='@Url.Action("Delete", "FuelConcept", new { id = item.FuelConceptID })'"><i class="fa fa-trash-o fa-fw"></i></button>
+                            }
+                        </td>
+                    }
                     <td>
                         @Html.DisplayFor(modelItem => item.FuelConceptID)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.FuelConceptName)
                     </td>
-                    @if (User.IsInRole("FUELCONCEP-UPD") || User.IsInRole("FUELCONCEP-DEL")) 
-                    {
-                        <td>
-                            @if (User.IsInRole("FUELCONCEP-UPD"))
-                            { 
-                                <button class="btn btn-default" type="button" name="Edit" title="@VOI.SISAC.Web.Resources.Resource.Edit" onclick="location.href='@Url.Action("Edit", "FuelConcept", new { id = item.FuelConceptID })'"><i class="fa fa-pencil fa-fw"></i></button>
-                            }
-                            @if (User.IsInRole("FUELCONCEP-DEL"))
-                            { 
-                                <button class="btn btn-default" type="button" name="Delete" title="@VOI.SISAC.Web.Resources.Resource.Delete" onclick="location.href='@Url.Action("Delete", "FuelConcept", new { id = item.FuelConceptID })'"><i class="fa fa-trash-o fa-fw"></i></button>                         
-                            }
-                        </td>
-                    }
                 </tr>
                 }
             }

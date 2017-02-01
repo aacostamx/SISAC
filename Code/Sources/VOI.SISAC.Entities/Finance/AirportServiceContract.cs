@@ -261,7 +261,7 @@ namespace VOI.SISAC.Entities.Finance
         /// <value>
         /// The rate.
         /// </value>
-        public decimal Rate { get; set; }
+        public decimal? Rate { get; set; }
 
         /// <summary>
         /// Gets or sets the currency code.

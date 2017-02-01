@@ -33,30 +33,24 @@
            data-page-size="10">
         <thead>
             <tr>
-                <th data-field="ServiceCode" data-halign="center" data-align="center" data-sortable="true">
-                    <strong>@Html.DisplayNameFor(model => model.ServiceCode)</strong>
-                </th>
-                <th data-field="ServiceName" data-halign="left" data-align="left" data-sortable="true">
-                    <strong>@Html.DisplayNameFor(model => model.ServiceName)</strong>
-                </th>
                 @if (User.IsInRole("SERVICE-UPD") || User.IsInRole("SERVICE-DEL"))
                 {
                     <th data-field="Acctions" data-align="center" data-halign="center">
                         <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
                     </th>
                 }
+                <th data-field="ServiceCode" data-halign="center" data-align="center" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.ServiceCode)</strong>
+                </th>
+                <th data-field="ServiceName" data-halign="left" data-align="left" data-sortable="true">
+                    <strong>@Html.DisplayNameFor(model => model.ServiceName)</strong>
+                </th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ServiceCode)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ServiceName)
-                    </td>
                     @if (User.IsInRole("SERVICE-UPD") || User.IsInRole("SERVICE-DEL"))
                     {
                         <td>
@@ -70,6 +64,12 @@
                             }
                         </td>
                     }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ServiceCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ServiceName)
+                    </td>
                 </tr>
             }
         </tbody>

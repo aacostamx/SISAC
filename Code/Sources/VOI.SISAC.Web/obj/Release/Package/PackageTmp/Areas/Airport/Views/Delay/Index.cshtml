@@ -36,6 +36,12 @@
            data-page-size="10">
         <thead>
             <tr>
+                @if (User.IsInRole("DELAY-UPD") || User.IsInRole("DELAY-DEL"))
+                {
+                    <th data-field="@Resource.Actions" data-align="center" data-halign="center">
+                        <strong>@Resource.Actions</strong>
+                    </th>
+                }
                 <th data-field="DelayCode" data-halign="center" data-align="center" data-sortable="true">
                     <strong>@Html.DisplayNameFor(model => model.DelayCode)</strong>
                 </th>
@@ -48,12 +54,6 @@
                 <th data-field="UnderControl" data-halign="center" data-align="center" data-sortable="true">
                     <strong>@Html.DisplayNameFor(model => model.UnderControl)</strong>
                 </th>
-                @if (User.IsInRole("DELAY-UPD") || User.IsInRole("DELAY-DEL"))
-                {
-                    <th data-field="@Resource.Actions" data-align="center" data-halign="center">
-                        <strong>@Resource.Actions</strong>
-                    </th>
-                }
             </tr>
         </thead>
         <tbody>
@@ -62,6 +62,19 @@
                 foreach (var item in Model)
                 {
                     <tr>
+                        @if (User.IsInRole("DELAY-UPD") || User.IsInRole("DELAY-DEL"))
+                        {
+                            <td>
+                                @if (User.IsInRole("DELAY-UPD"))
+                                {
+                                    <button class="btn btn-default" type="button" name="Edit" title=@Resource.Edit onclick="location.href='@Url.Action("Edit","Delay", new { id = item.DelayCode } )'"><i class="fa fa-pencil fa-fw"></i></button>
+                                }
+                                @if (User.IsInRole("DELAY-DEL"))
+                                {
+                                    <button class="btn btn-default" type="button" name="Delete" title=@Resource.Delete onclick="location.href='@Url.Action("Delete","Delay", new { id = item.DelayCode } )'"><i class="fa fa-trash-o fa-fw"></i></button>
+                                }
+                            </td>
+                        }
                         <td>
                             @Html.DisplayFor(modelItem => item.DelayCode)
                         </td>
@@ -78,22 +91,9 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.UnderControl)
                         </td>
-                        @if (User.IsInRole("DELAY-UPD") || User.IsInRole("DELAY-DEL"))
-                        {
-                            <td>
-                                @if (User.IsInRole("DELAY-UPD"))
-                                {
-                                    <button class="btn btn-default" type="button" name="Edit" title=@Resource.Edit onclick="location.href='@Url.Action("Edit","Delay", new { id = item.DelayCode } )'"><i class="fa fa-pencil fa-fw"></i></button>
-                                }
-                                @if (User.IsInRole("DELAY-DEL"))
-                                {
-                                    <button class="btn btn-default" type="button" name="Delete" title=@Resource.Delete onclick="location.href='@Url.Action("Delete","Delay", new { id = item.DelayCode } )'"><i class="fa fa-trash-o fa-fw"></i></button>
-                                }
-                            </td>
-                        }
                     </tr>
-                                    }
-                                }
+                    }
+                }
         </tbody>
     </table>
 </div>

@@ -52,6 +52,13 @@ namespace VOI.SISAC.Business.Process
         IList<string> ValidateManualReconcile(DataTable reconcileInfo);
 
         /// <summary>
+        /// Validates the nonconformity.
+        /// </summary>
+        /// <param name="reconcileInfo">The reconcile information.</param>
+        /// <returns></returns>
+        IList<string> ValidateNonconformity(DataTable reconcileInfo);
+
+        /// <summary>
         /// Deletes the national invoice policy.
         /// </summary>
         /// <param name="invoice">The invoice.</param>
@@ -107,5 +114,26 @@ namespace VOI.SISAC.Business.Process
         /// <param name="processDto">The process dto.</param>
         /// <returns></returns>
         int RevertManualReconcileProcess(NationalJetFuelInvoiceControlDto processDto);
+
+        /// <summary>
+        /// Reverts the nonconformity process.
+        /// </summary>
+        /// <param name="processDto">The process dto.</param>
+        /// <returns></returns>
+        int RevertNonconformityProcess(NationalJetFuelInvoiceControlDto processDto);
+
+        /// <summary>
+        /// Closes the nonconformity.
+        /// </summary>
+        /// <param name="process">The process.</param>
+        /// <returns></returns>
+        bool CloseNonconformity(NationalJetFuelInvoiceControlDto process);
+
+        /// <summary>
+        /// Opens the nonconformity.
+        /// </summary>
+        /// <param name="process">The process.</param>
+        /// <returns></returns>
+        bool OpenNonconformity(NationalJetFuelInvoiceControlDto process);
     }
 }

@@ -22,6 +22,7 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
     /// <summary>
     /// Aircraft movement message controller
     /// </summary>
+    [CustomAuthorize]
     public class AircraftMovementMessageController : BaseController
     {
         /// <summary>
@@ -56,7 +57,7 @@ namespace VOI.SISAC.Web.Areas.Itineraries.Controllers
                 Environment.UserDomainName,
                 Environment.UserName,
                 Environment.MachineName);
-            this.moduleName = "MVTC Controller";
+            this.moduleName = "MVT Controller";
         }
 
         /// <summary>

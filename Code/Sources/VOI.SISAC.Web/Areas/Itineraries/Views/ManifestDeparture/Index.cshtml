@@ -307,7 +307,7 @@
                         </div>
                     </div>
                 </div>
-
+                <br />
                 @*embarque*@
                 @Html.Partial("Partial/_BoardingInformation")
                 <div class="panel panel-default">
@@ -585,7 +585,7 @@
             </button>
             @if (User.IsInRole("MANIFDEP-PRINTREP"))
             { 
-                <button type="submit" class="btn btn-default btn-green" name="report-btn" title="@Resource.Report"  onclick="location.href='@Url.Action("ViewReport", "ManifestDeparture", new { Sequence = Model.Sequence, AirlineCode = Model.AirlineCode, FlightNumber = Model.FlightNumber, ItineraryKey = Model.ItineraryKey })'" tabindex="30">
+                <button type="button" class="btn btn-default btn-green" name="report-btn" title="@Resource.Report"  onclick="location.href='@Url.Action("ViewReport", "ManifestDeparture", new { Sequence = Model.Sequence, AirlineCode = Model.AirlineCode, FlightNumber = Model.FlightNumber, ItineraryKey = Model.ItineraryKey, DepartureStationCode = Model.DepartureStationCode })'" tabindex="30">
                     <i class="fa-fw glyphicon glyphicon-export icon-share"></i>&nbsp;@Resource.Report
                 </button>
             }

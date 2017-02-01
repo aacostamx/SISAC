@@ -34,6 +34,12 @@
         data-page-size="10">
         <thead>
             <tr>
+                @if (User.IsInRole("GPU-DEL") || User.IsInRole("GPU-UPD"))
+                {
+                    <th data-halign="center" data-align="center">
+                        <strong>@Resource.Actions</strong>
+                    </th>
+                }
                 <th data-field="GpuCode" data-halign="center" data-align="center" data-sortable="true">
                     <strong>@Html.DisplayNameFor(model => model.GpuCode)</strong>
                 </th>
@@ -43,18 +49,25 @@
                 <th data-field="StationCode" data-halign="center" data-align="center" data-sortable="true">
                     <strong>@Html.DisplayNameFor(model => model.StationCode)</strong>
                 </th>
-                @if (User.IsInRole("GPU-DEL") || User.IsInRole("GPU-UPD"))
-                { 
-                    <th data-halign="center" data-align="center">
-                        <strong>@Resource.Actions</strong>
-                    </th>
-                }
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
+                    @if (User.IsInRole("GPU-DEL") || User.IsInRole("GPU-UPD"))
+                    {
+                        <td>
+                            @if (User.IsInRole("GPU-UPD"))
+                            {
+                                <button class="btn btn-default" type="button" name="Edit" title=@Resource.Edit onclick="location.href='@Url.Action("Edit", "Gpu", new { id = item.GpuCode.Trim() })'"><i class="fa fa-pencil fa-fw"></i></button>
+                            }
+                            @if (User.IsInRole("GPU-DEL"))
+                            {
+                                <button class="btn btn-default" type="button" name="Delete" title=@Resource.Delete onclick="location.href='@Url.Action("Delete", "Gpu", new { id = item.GpuCode.Trim() })'"><i class="fa fa-trash-o fa-fw"></i></button>
+                            }
+                        </td>
+                    }
                     <td>
                         @Html.DisplayFor(modelItem => item.GpuCode)
                     </td>
@@ -64,19 +77,6 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.StationCode)
                     </td>
-                     @if (User.IsInRole("GPU-DEL") || User.IsInRole("GPU-UPD"))
-                    {
-                        <td>
-                            @if (User.IsInRole("GPU-UPD"))
-                            { 
-                                <button class="btn btn-default" type="button" name="Edit" title=@Resource.Edit onclick="location.href='@Url.Action("Edit", "Gpu", new { id = item.GpuCode.Trim() })'"><i class="fa fa-pencil fa-fw"></i></button>
-                            }
-                            @if (User.IsInRole("GPU-DEL"))
-                            { 
-                                <button class="btn btn-default" type="button" name="Delete" title=@Resource.Delete onclick="location.href='@Url.Action("Delete", "Gpu", new { id = item.GpuCode.Trim() })'"><i class="fa fa-trash-o fa-fw"></i></button>
-                            }
-                        </td>
-                    }
                 </tr>
             }
         </tbody>

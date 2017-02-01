@@ -63,9 +63,26 @@ namespace VOI.SISAC.Web
             bundles.Add(new StyleBundle("~/bundles/TreeSelectCSS").Include(
                 "~/Content/jquery.tree-multiselect.css"));
 
-            /*--CSS TreeSelectCSS --*/
+            /*--CSS BootstrapMultiselectCSS --*/
             bundles.Add(new StyleBundle("~/bundles/BootstrapMultiselectCSS").Include(
                 "~/Content/bootstrap-multiselect.css"));
+
+            /*--CSS TimelineCSS --*/
+            bundles.Add(new StyleBundle("~/bundles/TimelineCSS").Include(
+                "~/Content/timeline.css",
+                "~/Content/genericons.css",
+                "~/Content/wpex.css"));
+
+            /*--CSS ButtonHoverCSS --*/
+            bundles.Add(new StyleBundle("~/bundles/ButtonHoverCSS").Include(
+                "~/Content/button_hover.css"));
+
+            /*--CSS CircleMenuCSS --*/
+            bundles.Add(new StyleBundle("~/bundles/CircleMenuCSS").Include(
+                "~/Content/circle-menu.css"));
+
+
+
 
             /*--JS Jquery Script --*/
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
@@ -321,6 +338,18 @@ namespace VOI.SISAC.Web
             /*--JS Manifest Arrival Script --*/
             bundles.Add(new ScriptBundle("~/bundles/ManifestArrivalJS").Include(
                 "~/Scripts/SISAC/Itinerary/ManifestArrival.js"));
+
+            /*--JS Timeline Scroll Script --*/
+            bundles.Add(new ScriptBundle("~/bundles/TimelineScrollJS").Include(
+                "~/Scripts/timeline-scroll.js"));
+
+            /*--JS Circle Menu Script --*/
+            bundles.Add(new ScriptBundle("~/bundles/CircleMenuJS").Include(
+                "~/Scripts/circleMenu.js"));
+
+            /*--JS Timeline Script --*/
+            bundles.Add(new ScriptBundle("~/bundles/TimelineJS").Include(
+                "~/Scripts/SISAC/Itinerary/Timeline.js"));
         }
     }
 }

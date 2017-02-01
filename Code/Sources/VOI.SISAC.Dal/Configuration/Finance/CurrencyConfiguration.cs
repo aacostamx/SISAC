@@ -40,7 +40,7 @@ namespace VOI.SISAC.Dal.Configuration
 
             // Relationships
             this.HasMany(c => c.AirportServiceContracts)
-                .WithRequired(s => s.Currency)
+                .WithOptional(s => s.Currency)
                 .HasForeignKey(c => c.CurrencyCode);
 
             this.HasMany(e => e.ExchangeRates)

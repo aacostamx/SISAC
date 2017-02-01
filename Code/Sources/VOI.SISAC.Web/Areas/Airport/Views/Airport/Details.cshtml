@@ -40,8 +40,9 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
             <br />
-            <input onclick="location.href='@Url.Action("Index","Airport")'" type="reset" class="btnVolaris" value=@Resource.Back>
-            <input onclick="location.href='@Url.Action("Edit","Airport", new { id = Model.StationCode } )'" type="submit" class="btnVolaris" value="Editar">
+            <button type="button" class="btn btn-default" name="back-btn" title="@Resource.Back" onclick="location.href='@Url.Action("Index", "Airport")'">
+                <i class="fa fa-arrow-left fa-fw"></i>&nbsp;@Resource.Back
+            </button>
             <br />
         </div>
 

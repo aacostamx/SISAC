@@ -202,7 +202,8 @@ namespace VOI.SISAC.Web.Areas.Airport.Controllers
             {
                 itineraryDto = this.itinerary.FindFlightById(Sequence, AirlineCode, FlightNumber, ItineraryKey);
 
-                jetFuelTicketVo = Mapper.Map<IList<JetFuelTicketDto>, IList<JetFuelTicketVO>>(this.jetFuelTicketBusiness.GetJetFuelTickets(itineraryDto, OperationTypeName));
+                var jetFuels = this.jetFuelTicketBusiness.GetJetFuelTickets(itineraryDto, OperationTypeName);
+                jetFuelTicketVo = Mapper.Map<IList<JetFuelTicketDto>, IList<JetFuelTicketVO>>(jetFuels);
 
                 //Para mostrar partialView en index
                 ItineraryVO itineraryVO = new ItineraryVO();

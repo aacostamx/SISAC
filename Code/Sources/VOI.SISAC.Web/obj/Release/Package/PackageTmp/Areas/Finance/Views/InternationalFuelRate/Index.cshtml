@@ -53,6 +53,12 @@
            data-page-size="10">
         <thead>
             <tr>
+                @if (User.IsInRole("IFUELRATE-UPD") || User.IsInRole("IFUELRATE-DEL"))
+                {
+                    <th data-field="Acctions" data-align="center" data-halign="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
+                    </th>
+                }
                 <th data-field="InternationalFuelRateID" data-halign="center" data-align="center" data-sortable="true" data-visible="false">
                     <strong>@Html.DisplayNameFor(model => model.InternationalFuelContractConcepts.FirstOrDefault().InternationalFuelRate.LastOrDefault().InternationalFuelRateID)</strong>
                 </th>
@@ -71,12 +77,6 @@
                 <th data-field="Rate" data-halign="center" data-align="center" data-sortable="true">
                     <strong>@Html.DisplayNameFor(model => model.InternationalFuelContractConcepts.FirstOrDefault().InternationalFuelRate.LastOrDefault().Rate)</strong>
                 </th>
-                @if (User.IsInRole("IFUELRATE-UPD") || User.IsInRole("IFUELRATE-DEL"))
-                {
-                    <th data-field="Acctions" data-align="center" data-halign="center">
-                        <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
-                    </th>
-                }
             </tr>
         </thead>
         <tbody>
@@ -85,6 +85,33 @@
                 foreach (var item in Model.InternationalFuelContractConcepts.FirstOrDefault().InternationalFuelRate)
                 {
                     <tr>
+                        @if (User.IsInRole("IFUELRATE-UPD") || User.IsInRole("IFUELRATE-DEL"))
+                        {
+                            <td>
+                                @if (ViewBag.search == "search")
+                                {
+                                    if (User.IsInRole("IFUELRATE-UPD"))
+                                    {
+                                        <button disabled class="btn btn-default" type="button" name="Edit" title="@VOI.SISAC.Web.Resources.Resource.Edit" onclick="location.href='@Url.Action("Edit", "InternationalFuelRate", new { id = item.InternationalFuelRateID })'"><i class="fa fa-pencil"></i></button>
+                                    }
+                                    if (User.IsInRole("IFUELRATE-DEL"))
+                                    {
+                                        <button disabled class="btn btn-default" type="button" name="Delete" title="@VOI.SISAC.Web.Resources.Resource.Delete" onclick="location.href='@Url.Action("Delete", "InternationalFuelRate", new { id = item.InternationalFuelRateID })'"><i class="fa fa-trash"></i></button>
+                                    }
+                                }
+                                else
+                                {
+                                    if (User.IsInRole("IFUELRATE-UPD"))
+                                    {
+                                        <button class="btn btn-default" type="button" name="Edit" title="@VOI.SISAC.Web.Resources.Resource.Edit" onclick="location.href='@Url.Action("Edit", "InternationalFuelRate", new { id = item.InternationalFuelRateID })'"><i class="fa fa-pencil"></i></button>
+                                    }
+                                    if (User.IsInRole("IFUELRATE-DEL"))
+                                    {
+                                        <button class="btn btn-default" type="button" name="Delete" title="@VOI.SISAC.Web.Resources.Resource.Delete" onclick="location.href='@Url.Action("Delete", "InternationalFuelRate", new { id = item.InternationalFuelRateID })'"><i class="fa fa-trash"></i></button>
+                                    }
+                                }
+                            </td>
+                        }
                         <td>
                             @Html.DisplayFor(modelItem => item.InternationalFuelRateID)
                         </td>
@@ -103,33 +130,6 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Rate)
                         </td>
-                        @if (User.IsInRole("IFUELRATE-UPD") || User.IsInRole("IFUELRATE-DEL"))
-                        {
-                            <td>
-                                @if (ViewBag.search == "search")
-                                {
-                                    if (User.IsInRole("IFUELRATE-UPD"))
-                                    {
-                                        <button disabled class="btn btn-default" type="button" name="Edit" title="@VOI.SISAC.Web.Resources.Resource.Edit" onclick="location.href='@Url.Action("Edit", "InternationalFuelRate", new { id = item.InternationalFuelRateID })'"><i class="fa fa-pencil"></i></button>
-                                    }
-                                    if (User.IsInRole("IFUELRATE-DEL"))
-                                    {                                       
-                                        <button disabled class="btn btn-default" type="button" name="Delete" title="@VOI.SISAC.Web.Resources.Resource.Delete" onclick="location.href='@Url.Action("Delete", "InternationalFuelRate", new { id = item.InternationalFuelRateID })'"><i class="fa fa-trash"></i></button>
-                                    }    
-                                }
-                                else
-                                {
-                                    if (User.IsInRole("IFUELRATE-UPD"))
-                                    {
-                                        <button class="btn btn-default" type="button" name="Edit" title="@VOI.SISAC.Web.Resources.Resource.Edit" onclick="location.href='@Url.Action("Edit", "InternationalFuelRate", new { id = item.InternationalFuelRateID })'"><i class="fa fa-pencil"></i></button>
-                                    }
-                                    if (User.IsInRole("IFUELRATE-DEL"))
-                                    {    
-                                        <button class="btn btn-default" type="button" name="Delete" title="@VOI.SISAC.Web.Resources.Resource.Delete" onclick="location.href='@Url.Action("Delete", "InternationalFuelRate", new { id = item.InternationalFuelRateID })'"><i class="fa fa-trash"></i></button>
-                                    }    
-                                }
-                            </td>
-                        }
                     </tr>
                 }
             }

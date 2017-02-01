@@ -43,7 +43,6 @@ namespace VOI.SISAC.Dal.Repository.Itineraries
                     .Include(c => c.TimelineMovements.Select(d => d.Provider))
                     .Where(c => c.Itinerary.EquipmentNumber == flight.Itinerary.EquipmentNumber)
                     .OrderBy(or => or.Itinerary.DepartureDate)
-                    .Take(20)
                     .ToList();
             }
             catch (Exception ex)
@@ -73,6 +72,74 @@ namespace VOI.SISAC.Dal.Repository.Itineraries
                     c.FlightNumber == flight.FlightNumber &&
                     c.ItineraryKey == flight.ItineraryKey)
                     .FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message, ex);
+            }
+
+            return timeline;
+        }
+
+        /// <summary>
+        /// Gets the timeline paged.
+        /// </summary>
+        /// <param name="flight">The flight.</param>
+        /// <returns></returns>
+        public List<Timeline> GetTimelinePaged(Timeline flight)
+        {
+            var timeline = new List<Timeline>();
+
+            try
+            {
+                var vwTimeline = this.DbContext.VW_TimelineOrder
+                    .Where(c => c.Sequence == flight.Sequence &&
+                    c.AirlineCode == flight.AirlineCode &&
+                    c.FlightNumber == flight.FlightNumber &&
+                    c.ItineraryKey == flight.ItineraryKey)
+                    .FirstOrDefault();
+
+                if (vwTimeline != null)
+                {
+                    var top = vwTimeline.Row - 2;
+                    var button = vwTimeline.Row + 2;
+
+                    var universe = this.DbContext.VW_TimelineOrder.Where(c => c.EquipmentNumber == vwTimeline.EquipmentNumber).ToList();
+                    var max = universe.Max(c => c.Row);
+                    var min = universe.ToList().Min(c => c.Row);
+
+                    var vwList = this.DbContext.VW_TimelineOrder.Where(c => c.EquipmentNumber == vwTimeline.EquipmentNumber &&
+                        c.Row >= top && c.Row <= button)
+                        .ToList();
+
+                    foreach (var item in vwList)
+                    {
+                        var timelineDB = new Timeline();
+
+                        timelineDB = this.DbContext.Timeline
+                            .Include(c => c.Itinerary)
+                            .Include(c => c.TimelineMovements)
+                            .Include(c => c.TimelineMovements.Select(d => d.MovementType))
+                            .Include(c => c.TimelineMovements.Select(d => d.OperationType))
+                            .Include(c => c.TimelineMovements.Select(d => d.Provider))
+                            .Where(c => c.Sequence == item.Sequence &&
+                            c.AirlineCode == item.AirlineCode &&
+                            c.FlightNumber == item.FlightNumber &&
+                            c.ItineraryKey == item.ItineraryKey)
+                            .FirstOrDefault();
+
+                        timelineDB.Row = item.Row;
+                        timelineDB.MaxRow = max;
+                        timelineDB.MinRow = min;
+
+                        if (!string.IsNullOrEmpty(timelineDB.ItineraryKey))
+                        {
+                            timeline.Add(timelineDB);
+                        }
+                    }
+
+                    timeline = timeline.OrderBy(c => c.Itinerary.DepartureDate).ToList();
+                }
             }
             catch (Exception ex)
             {

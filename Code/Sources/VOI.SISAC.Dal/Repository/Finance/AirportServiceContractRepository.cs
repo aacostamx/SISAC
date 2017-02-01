@@ -295,7 +295,8 @@ namespace VOI.SISAC.Dal.Repository.Finance
                 .Include(a => a.FederalTax)
                 .Include(a => a.StateTax)
                 .Include(a => a.AirportTax)
-                .Include(a => a.ServiceCalculationType).ToList();
+                .Include(a => a.ServiceCalculationType)
+                .ToList();
         }
     }
 }

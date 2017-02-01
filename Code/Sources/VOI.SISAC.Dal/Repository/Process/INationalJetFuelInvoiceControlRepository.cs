@@ -39,6 +39,13 @@ namespace VOI.SISAC.Dal.Repository.Process
         /// <returns></returns>
         IList<RemittanceIDValidate> ValidateManualReconcile(DataTable reconcileInfo);
 
+        /// <summary>
+        /// Validates the nonconformity.
+        /// </summary>
+        /// <param name="reconcileInfo">The reconcile information.</param>
+        /// <returns></returns>
+        IList<RemittanceIDValidate> ValidateNonconformity(DataTable reconcileInfo);
+
         ///// <summary>
         ///// Counts the invoices in remittens.
         ///// </summary>
@@ -119,5 +126,12 @@ namespace VOI.SISAC.Dal.Repository.Process
         /// <param name="process">The process.</param>
         /// <returns></returns>
         int RevertManualReconcileProcess(NationalJetFuelInvoiceControl process);
+
+        /// <summary>
+        /// Reverts the nonconformity process.
+        /// </summary>
+        /// <param name="process">The process.</param>
+        /// <returns></returns>
+        int RevertNonconformityProcess(NationalJetFuelInvoiceControl process);
     }
 }

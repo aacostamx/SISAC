@@ -8,9 +8,6 @@ namespace VOI.SISAC.Web.Models.VO.Itineraries
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using VOI.SISAC.Web.Models.Attributes;
-    using Airport;
 
     /// <summary>
     /// Timeline View Object
@@ -23,8 +20,33 @@ namespace VOI.SISAC.Web.Models.VO.Itineraries
         /// </summary>
         public TimelineVO()
         {
+            Itinerary = new ItineraryVO();
             TimelineMovements = new List<TimelineMovementVO>();
         }
+
+        /// <summary>
+        /// Gets or sets the row.
+        /// </summary>
+        /// <value>
+        /// The row.
+        /// </value>
+        public long? Row { get; set; }
+
+        /// <summary>
+        /// Gets or sets the maximum row.
+        /// </summary>
+        /// <value>
+        /// The maximum row.
+        /// </value>
+        public long? MaxRow { get; set; }
+
+        /// <summary>
+        /// Gets or sets the minimum row.
+        /// </summary>
+        /// <value>
+        /// The minimum row.
+        /// </value>
+        public long? MinRow { get; set; }
 
         /// <summary>
         /// Gets or sets the sequence.
@@ -161,6 +183,38 @@ namespace VOI.SISAC.Web.Models.VO.Itineraries
         /// The end date.
         /// </value>
         public DateTime? EndDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [next timeline].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [next timeline]; otherwise, <c>false</c>.
+        /// </value>
+        public bool NextTimeline { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [last timeline].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [last timeline]; otherwise, <c>false</c>.
+        /// </value>
+        public bool LastTimeline { get; set; }
+
+        /// <summary>
+        /// Gets or sets the current timeline.
+        /// </summary>
+        /// <value>
+        /// The current timeline.
+        /// </value>
+        public bool CurrentTimeline { get; set; }
+
+        /// <summary>
+        /// Gets or sets the itinerary.
+        /// </summary>
+        /// <value>
+        /// The itinerary.
+        /// </value>
+        public ItineraryVO Itinerary { get; set; }
 
         /// <summary>
         /// Gets or sets the timeline movement.

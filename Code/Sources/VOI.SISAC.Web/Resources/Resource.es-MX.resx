@@ -190,7 +190,7 @@
     <value>Nombre Aerolínea</value>
   </data>
   <data name="AirlineShortName" xml:space="preserve">
-    <value>Nombre Corto de Aerolínea</value>
+    <value>Nombre Corto</value>
   </data>
   <data name="AirlineTitle" xml:space="preserve">
     <value>Catálogo de Aerolíneas</value>
@@ -241,7 +241,7 @@
     <value>Servicios Aeropuerto</value>
   </data>
   <data name="AirportServiceContractMenu" xml:space="preserve">
-    <value>Contrato de Servicios</value>
+    <value>Contrato de Servicio Aeroportuario</value>
   </data>
   <data name="AirportServiceID" xml:space="preserve">
     <value>Airport Servicio ID</value>
@@ -985,7 +985,7 @@
     <value>Cuentas Pasivo</value>
   </data>
   <data name="LiabilityAccountName" xml:space="preserve">
-    <value>Nombre Cuenta</value>
+    <value>Cuenta Pasivo</value>
   </data>
   <data name="LiabilityAccountNameRequired" xml:space="preserve">
     <value>Nombre es Requerido</value>
@@ -2373,5 +2373,80 @@ Ej. 01-15 (primeros quince días)</comment>
   </data>
   <data name="AdditionalInformation" xml:space="preserve">
     <value>Información Adcional</value>
+  </data>
+  <data name="PaxDni" xml:space="preserve">
+    <value>Pax DNI</value>
+  </data>
+  <data name="PayTua" xml:space="preserve">
+    <value>Pagan TUA</value>
+  </data>
+  <data name="ShowPreviousInformation" xml:space="preserve">
+    <value>Mostrar información capturada</value>
+  </data>
+  <data name="CountNonconformityRecords" xml:space="preserve">
+    <value>#Regs Inconf</value>
+  </data>
+  <data name="DateNonconformity" xml:space="preserve">
+    <value>Fch/Hr Inconformados</value>
+  </data>
+  <data name="NonconformityReference" xml:space="preserve">
+    <value>Referencia Inconformados</value>
+  </data>
+  <data name="NonconformitySubtotalAmount" xml:space="preserve">
+    <value>Imp. Inconformado</value>
+  </data>
+  <data name="ManageInvoiceRemittanceNonconformities" xml:space="preserve">
+    <value>Gestionar Inconformidades de Remesa</value>
+  </data>
+  <data name="ManageNonconformities" xml:space="preserve">
+    <value>Gestionar Inconformidades</value>
+  </data>
+  <data name="NonconfirmityStatusCode" xml:space="preserve">
+    <value>Estatus de Inconformidad</value>
+  </data>
+  <data name="DownloadCanditateInvoiceRecords" xml:space="preserve">
+    <value>Descargar Registros de Remesa Candidatos</value>
+  </data>
+  <data name="Movement" xml:space="preserve">
+    <value>Movimiento</value>
+  </data>
+  <data name="MovementDetail" xml:space="preserve">
+    <value>Detalle Movimiento</value>
+  </data>
+  <data name="MovementType" xml:space="preserve">
+    <value>Tipo Movimiento</value>
+  </data>
+  <data name="MovementDate" xml:space="preserve">
+    <value>Fecha Movimiento</value>
+  </data>
+  <data name="MovementDescription" xml:space="preserve">
+    <value>Descripción Movimiento</value>
+  </data>
+  <data name="DocumentDate" xml:space="preserve">
+    <value>Fecha del Documento</value>
+  </data>
+  <data name="GeneratePDF" xml:space="preserve">
+    <value>Generar PDF</value>
+  </data>
+  <data name="GenerateNonconformityPDF" xml:space="preserve">
+    <value>Generar documento de Inconformidad</value>
+  </data>
+  <data name="CloseNonconformity" xml:space="preserve">
+    <value>Cerrado para Inconformar</value>
+  </data>
+  <data name="OpenNonconformity" xml:space="preserve">
+    <value>Abierto para Inconformar</value>
+  </data>
+  <data name="RemainingFuel" xml:space="preserve">
+    <value>Combustible Restante</value>
+  </data>
+  <data name="BusinessName" xml:space="preserve">
+    <value>Razón Social</value>
+  </data>
+  <data name="NonconformityFilePath" xml:space="preserve">
+    <value>~/Files/Templates/CanditateInvoiceRecords.txt</value>
+  </data>
+  <data name="ServiceTypeCode" xml:space="preserve">
+    <value>Tipo de Servicio</value>
   </data>
 </root>

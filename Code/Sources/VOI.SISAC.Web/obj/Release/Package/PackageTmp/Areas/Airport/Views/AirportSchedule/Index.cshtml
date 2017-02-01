@@ -40,6 +40,11 @@
                data-export-data-type="all">
             <thead>
                 <tr>
+                    @* @if (User.IsInRole("DRINKWATER-UPD") || User.IsInRole("DRINKWATER-DEL")){*@
+                    <th data-field="Acctions" data-align="center" data-halign="center">
+                        <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
+                    </th>
+                    @* }*@
                     <th data-field="StationCode" data-halign="center" data-align="center" data-sortable="true">
                         <strong>@Html.DisplayNameFor(model => model.StationCode)</strong>
                     </th>
@@ -52,30 +57,12 @@
                     <th data-field="EndTimeSchedule" data-halign="center" data-align="center" data-sortable="true">
                         <strong>@Html.DisplayNameFor(model => model.EndTimeSchedule)</strong>
                     </th>
-                   @* @if (User.IsInRole("DRINKWATER-UPD") || User.IsInRole("DRINKWATER-DEL"))
-                    {
-                        *@<th data-field="Acctions" data-align="center" data-halign="center">
-                            <strong>@VOI.SISAC.Web.Resources.Resource.Actions</strong>
-                        </th>
-                   @* }*@
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.StationCode)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ScheduleTypeCode)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.StartTimeSchedule)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.EndTimeSchedule)
-                        </td>
                         @if (User.IsInRole("AIRPSCHE-UPD") || User.IsInRole("AIRPSCHE-DEL"))
                         {
                             <td>
@@ -89,6 +76,18 @@
                                 }
                             </td>
                         }
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StationCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ScheduleTypeCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartTimeSchedule)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EndTimeSchedule)
+                        </td>
                     </tr>
                 }
             </tbody>

@@ -336,6 +336,16 @@
             </summary>
             <seealso cref="!:System.Data.Entity.ModelConfiguration.EntityTypeConfiguration&lt;VOI.SISAC.Entities.Catalog.ReconciliationTolerance&gt;" />
         </member>
+        <member name="T:VOI.SISAC.Dal.Configuration.Catalog.ProcedureCalculationConfiguration">
+            <summary>
+            ProcedureCalculationConfiguration Class
+            </summary>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Configuration.Catalog.ProcedureCalculationConfiguration.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:VOI.SISAC.Dal.Configuration.Catalog.ProcedureCalculationConfiguration"/> class.
+            </summary>
+        </member>
         <member name="T:VOI.SISAC.Dal.Configuration.Catalog.ScheduleTypeConfiguration">
             <summary>
             ScheduleTypeConfiguration Class
@@ -4336,6 +4346,13 @@
             Interface Timeline Movement
             </summary>
         </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.ITimelineMovementRepository.GetTimelineMovement(VOI.SISAC.Entities.Itineraries.TimelineMovement)">
+            <summary>
+            Gets the timeline movement.
+            </summary>
+            <param name="movement">The movement.</param>
+            <returns></returns>
+        </member>
         <member name="T:VOI.SISAC.Dal.Repository.Itineraries.ITimelineRepository">
             <summary>
             Interface ITimeline Repository
@@ -4361,6 +4378,13 @@
             </summary>
             <param name="startDate">The start date.</param>
             <param name="endDate">The end date.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.ITimelineRepository.GetTimelinePaged(VOI.SISAC.Entities.Itineraries.Timeline)">
+            <summary>
+            Gets the timeline paged.
+            </summary>
+            <param name="timeline">The timeline.</param>
             <returns></returns>
         </member>
         <member name="T:VOI.SISAC.Dal.Repository.Itineraries.ManifestDepartureBoardingDetailRepository">
@@ -4462,6 +4486,13 @@
             </summary>
             <param name="factory">The factory.</param>
         </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.TimelineMovementRepository.GetTimelineMovement(VOI.SISAC.Entities.Itineraries.TimelineMovement)">
+            <summary>
+            Gets the timeline movement.
+            </summary>
+            <param name="move">The move.</param>
+            <returns></returns>
+        </member>
         <member name="T:VOI.SISAC.Dal.Repository.Itineraries.TimelineRepository">
             <summary>
             class Timeline Repository
@@ -4483,6 +4514,13 @@
         <member name="M:VOI.SISAC.Dal.Repository.Itineraries.TimelineRepository.GetTimelineByFlight(VOI.SISAC.Entities.Itineraries.Timeline)">
             <summary>
             Gets the timeline by flight.
+            </summary>
+            <param name="flight">The flight.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Itineraries.TimelineRepository.GetTimelinePaged(VOI.SISAC.Entities.Itineraries.Timeline)">
+            <summary>
+            Gets the timeline paged.
             </summary>
             <param name="flight">The flight.</param>
             <returns></returns>
@@ -5105,6 +5143,13 @@
             <param name="reconcileInfo">The reconcile information.</param>
             <returns></returns>
         </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Process.INationalJetFuelInvoiceControlRepository.ValidateNonconformity(System.Data.DataTable)">
+            <summary>
+            Validates the nonconformity.
+            </summary>
+            <param name="reconcileInfo">The reconcile information.</param>
+            <returns></returns>
+        </member>
         <member name="M:VOI.SISAC.Dal.Repository.Process.INationalJetFuelInvoiceControlRepository.GetPaginatedData(System.Int32,System.Int32)">
             <summary>
             Gets the paginated data.
@@ -5175,6 +5220,13 @@
         <member name="M:VOI.SISAC.Dal.Repository.Process.INationalJetFuelInvoiceControlRepository.RevertManualReconcileProcess(VOI.SISAC.Entities.Process.NationalJetFuelInvoiceControl)">
             <summary>
             Reverts the manual reconcile process.
+            </summary>
+            <param name="process">The process.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Process.INationalJetFuelInvoiceControlRepository.RevertNonconformityProcess(VOI.SISAC.Entities.Process.NationalJetFuelInvoiceControl)">
+            <summary>
+            Reverts the nonconformity process.
             </summary>
             <param name="process">The process.</param>
             <returns></returns>
@@ -5579,6 +5631,13 @@
             <param name="reconcileInfo">The reconcile information.</param>
             <returns></returns>
         </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Process.NationalJetFuelInvoiceControlRepository.ValidateNonconformity(System.Data.DataTable)">
+            <summary>
+            Validates the nonconformity.
+            </summary>
+            <param name="reconcileInfo">The reconcile information.</param>
+            <returns></returns>
+        </member>
         <member name="M:VOI.SISAC.Dal.Repository.Process.NationalJetFuelInvoiceControlRepository.GetPaginatedData(System.Int32,System.Int32)">
             <summary>
             Gets the paginated data.
@@ -5651,6 +5710,13 @@
         <member name="M:VOI.SISAC.Dal.Repository.Process.NationalJetFuelInvoiceControlRepository.RevertManualReconcileProcess(VOI.SISAC.Entities.Process.NationalJetFuelInvoiceControl)">
             <summary>
             Reverts the manual reconcile process.
+            </summary>
+            <param name="process">The process.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Dal.Repository.Process.NationalJetFuelInvoiceControlRepository.RevertNonconformityProcess(VOI.SISAC.Entities.Process.NationalJetFuelInvoiceControl)">
+            <summary>
+            Reverts the nonconformity process.
             </summary>
             <param name="process">The process.</param>
             <returns></returns>
@@ -7276,6 +7342,14 @@
             The type of the movement.
             </value>
         </member>
+        <member name="P:VOI.SISAC.Dal.SisacContext.ProcedureCalculations">
+            <summary>
+            Gets or sets the procedure calculations.
+            </summary>
+            <value>
+            The procedure calculations.
+            </value>
+        </member>
         <member name="P:VOI.SISAC.Dal.SisacContext.Departments">
             <summary>
             Gets or sets the departments.
@@ -7462,6 +7536,14 @@
             </summary>
             <value>
             The timeline movement.
+            </value>
+        </member>
+        <member name="P:VOI.SISAC.Dal.SisacContext.VW_TimelineOrder">
+            <summary>
+            Gets or sets the vw timeline order.
+            </summary>
+            <value>
+            The vw timeline order.
             </value>
         </member>
         <member name="P:VOI.SISAC.Dal.SisacContext.CalculationStatus">
@@ -7710,6 +7792,13 @@
         <member name="M:VOI.SISAC.Dal.SisacContext.UploadManualReconcile(System.Data.DataTable)">
             <summary>
             Uploads the manual reconcile.
+            </summary>
+            <param name="reconcileInfo">The reconcile information.</param>
+            <returns></returns>
+        </member>
+        <member name="M:VOI.SISAC.Dal.SisacContext.UploadNonconformity(System.Data.DataTable)">
+            <summary>
+            Uploads the nonconformity.
             </summary>
             <param name="reconcileInfo">The reconcile information.</param>
             <returns></returns>
