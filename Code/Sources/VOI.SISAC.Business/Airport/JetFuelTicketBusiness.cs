@@ -1,5 +1,5 @@
 ﻿//----------------------------------------------------------------------------
-// <copyright file="JetFuelTicketBusiness.cs" company="Volaris">
+// <copyright file="JetFuelTicketBusiness.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //----------------------------------------------------------------------------

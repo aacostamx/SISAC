@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="IAirportRepository.cs" company="Volaris">
+// <copyright file="IAirportRepository.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //-------------------------------------------------------------------

@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="IMenuRepository.cs" company="Volaris">
+// <copyright file="IMenuRepository.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //----------------------------------------------------------------------

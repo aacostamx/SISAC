@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="PassengerInformationRepository.cs" company="Volaris">
+// <copyright file="PassengerInformationRepository.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //-------------------------------------------------------------------

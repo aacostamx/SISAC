@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="NationalInvoiceVO.cs" company="Volaris">
+// <copyright file="NationalInvoiceVO.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------

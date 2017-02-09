@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="DelayConfiguration.cs" company="Volaris">
+// <copyright file="DelayConfiguration.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------

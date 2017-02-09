@@ -1,4 +1,4 @@
-﻿// <copyright file="CompanyDepartmentConfiguration.cs" company="Volaris">
+﻿// <copyright file="CompanyDepartmentConfiguration.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 

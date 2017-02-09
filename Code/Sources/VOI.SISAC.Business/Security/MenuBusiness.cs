@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="MenuBusiness.cs" company="Volaris">
+// <copyright file="MenuBusiness.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------

@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="ITimelineMovementBusiness.cs" company="Volaris">
+// <copyright file="ITimelineMovementBusiness.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------

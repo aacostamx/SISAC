@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="Paged.cs" company="Volaris">
+// <copyright file="Paged.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------

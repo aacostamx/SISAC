@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="ItineraryDto.cs" company="Volaris">
+// <copyright file="ItineraryDto.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------

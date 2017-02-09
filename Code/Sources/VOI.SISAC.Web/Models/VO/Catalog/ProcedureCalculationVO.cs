@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="ProcedureCalculationVO.cs" company="Volaris">
+// <copyright file="ProcedureCalculationVO.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //--------------------------------------------------------------------

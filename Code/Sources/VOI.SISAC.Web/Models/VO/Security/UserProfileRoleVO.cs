@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="UserProfileRoleVO.cs" company="Volaris">
+// <copyright file="UserProfileRoleVO.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //----------------------------------------------------------------------

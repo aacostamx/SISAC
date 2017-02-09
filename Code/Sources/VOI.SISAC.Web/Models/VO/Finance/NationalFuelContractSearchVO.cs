@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="NationalFuelContractSearchVO.cs" company="Volaris">
+// <copyright file="NationalFuelContractSearchVO.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------

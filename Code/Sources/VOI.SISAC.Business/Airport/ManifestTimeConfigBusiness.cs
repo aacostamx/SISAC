@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="ManifestTimeConfigBusiness.cs" company="Volaris">
+// <copyright file="ManifestTimeConfigBusiness.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //----------------------------------------------------------------------

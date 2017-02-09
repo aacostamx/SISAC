@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="IModule.cs" company="Volaris">
+// <copyright file="IModule.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="IServiceCalculationTypeRepository.cs" company="Volaris">
+// <copyright file="IServiceCalculationTypeRepository.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //-------------------------------------------------------------------

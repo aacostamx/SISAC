@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="AccountingAccountVO.cs" company="Volaris">
+// <copyright file="AccountingAccountVO.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------

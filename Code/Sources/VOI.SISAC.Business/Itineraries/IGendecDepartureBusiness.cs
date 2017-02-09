@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="IGenderDepartureBusiness.cs" company="Volaris">
+// <copyright file="IGenderDepartureBusiness.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------

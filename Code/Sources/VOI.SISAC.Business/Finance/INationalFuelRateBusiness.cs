@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="INationalFuelRateBusiness.cs" company="Volaris">
+// <copyright file="INationalFuelRateBusiness.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //-------------------------------------------------------------------

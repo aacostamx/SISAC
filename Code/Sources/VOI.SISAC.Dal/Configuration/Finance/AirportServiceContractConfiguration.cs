@@ -1,5 +1,5 @@
 ﻿//---------------------------------------------------------------------------------
-// <copyright file="AirportServiceContractConfiguration.cs" company="Volaris">
+// <copyright file="AirportServiceContractConfiguration.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //---------------------------------------------------------------------------------

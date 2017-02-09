@@ -1,5 +1,5 @@
 ﻿//--------------------------------------------------------------------------------
-// <copyright file="ManifestDepartureBoardingDetailConfiguration.cs" company="Volaris">
+// <copyright file="ManifestDepartureBoardingDetailConfiguration.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //-------------------------------------------------------------------------------

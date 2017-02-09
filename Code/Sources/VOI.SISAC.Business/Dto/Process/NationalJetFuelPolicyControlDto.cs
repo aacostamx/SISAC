@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="NationalJetFuelPolicyControlDto.cs" company="Volaris">
+// <copyright file="NationalJetFuelPolicyControlDto.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------

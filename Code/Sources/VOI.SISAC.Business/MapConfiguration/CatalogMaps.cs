@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="CatalogMaps.cs" company="Volaris">
+// <copyright file="CatalogMaps.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //----------------------------------------------------------------

@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="AircraftMovementMessageController.cs" company="Volaris">
+// <copyright file="AircraftMovementMessageController.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------

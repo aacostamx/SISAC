@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="AirportMaps.cs" company="Volaris">
+// <copyright file="AirportMaps.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------

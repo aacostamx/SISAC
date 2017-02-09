@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------------------
-// <copyright file="NationalJetFuelInvoicePolicyBusiness.cs" company="Volaris">
+// <copyright file="NationalJetFuelInvoicePolicyBusiness.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------------------

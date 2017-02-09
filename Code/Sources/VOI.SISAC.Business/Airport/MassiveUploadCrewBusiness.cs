@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="MassiveUploadCrewBusiness.cs" company="Volaris">
+// <copyright file="MassiveUploadCrewBusiness.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //----------------------------------------------------------------------

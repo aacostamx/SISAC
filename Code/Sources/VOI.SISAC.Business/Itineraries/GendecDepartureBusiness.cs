@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="GendecDepartureBusiness.cs" company="Volaris">
+// <copyright file="GendecDepartureBusiness.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------
@@ -424,7 +424,7 @@ namespace VOI.SISAC.Business.Itineraries
             strb.Append("<tr style='mso-yfti-irow:1;height:36.75pt'>");
             strb.Append("<td style='width:483.0pt;padding:0cm 0cm 0cm 0cm;height:36.75pt' width='644'>");
             strb.Append("<p>");
-            strb.Append("<img id='_x0000_i1025' alt=' Volaris ' border='0' height='49' src='http://imagen.http://aacosta.com.mx/com.mx/correos/promocion/2009/Noviembre/20091113_mailing_confirmacion_gift_cards/heder_gifcards.jpg' width='664' /></p>");
+            strb.Append("<img id='_x0000_i1025' alt=' AACOSTA ' border='0' height='49' src='http://imagen.http://aacosta.com.mx/com.mx/correos/promocion/2009/Noviembre/20091113_mailing_confirmacion_gift_cards/heder_gifcards.jpg' width='664' /></p>");
             strb.Append("</td>");
             strb.Append("</tr>");
             strb.Append("<tr style='mso-yfti-irow:2;height:357.0pt'>");
@@ -609,7 +609,7 @@ namespace VOI.SISAC.Business.Itineraries
             strb.Append("<td style='width:343pt; padding:0cm 0cm 0cm 0cm; height: 18px;' valign='top' class='style2'>");
             strb.Append("<p>");
             strb.Append("<a href='" + sitio + "/###id###/###em###/###vu###/###ky###' target='_blank'>");
-            strb.Append("<img id='_x0000_i1025' alt=' Volaris ' border='0' height='27' src='http://imagen.http://aacosta.com.mx/com.mx/correos/Servicios%20Aeroportuarios/btnAutorizar.png' width='149' />");
+            strb.Append("<img id='_x0000_i1025' alt=' AACOSTA ' border='0' height='27' src='http://imagen.http://aacosta.com.mx/com.mx/correos/Servicios%20Aeroportuarios/btnAutorizar.png' width='149' />");
             strb.Append("</a>");
             strb.Append("</p>");
             strb.Append("</td>");

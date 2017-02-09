@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="JetFuelCalculationResultParametersDto.cs" company="Volaris">
+// <copyright file="JetFuelCalculationResultParametersDto.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="InternationalFuelRateDto.cs" company="Volaris">
+// <copyright file="InternationalFuelRateDto.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------

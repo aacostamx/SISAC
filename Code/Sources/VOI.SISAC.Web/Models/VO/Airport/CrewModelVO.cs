@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="CrewModelVO.cs" company="Volaris">
+// <copyright file="CrewModelVO.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //---------------------------------------------------------------

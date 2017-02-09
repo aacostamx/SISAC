@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="UploadItineraryController.cs" company="Volaris">
+// <copyright file="UploadItineraryController.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 ﻿//--------------------------------------------------------------------
-// <copyright file="PageReportRepository.cs" company="Volaris">
+// <copyright file="PageReportRepository.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //--------------------------------------------------------------------

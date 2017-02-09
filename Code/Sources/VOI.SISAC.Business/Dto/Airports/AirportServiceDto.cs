@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="AirportServiceDto.cs" company="Volaris">
+// <copyright file="AirportServiceDto.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------

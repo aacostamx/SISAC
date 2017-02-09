@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="GenericNotificationBusiness.cs" company="Volaris">
+// <copyright file="GenericNotificationBusiness.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------
@@ -117,7 +117,7 @@ namespace VOI.SISAC.Business.Common
                 "<meta http-equiv=\'X-UA-Compatible\' content=\'IE=edge\'>\n" +
                 "<meta name=\'format-detection\' content=\'telephone=no\'>\n" +
                 "<title>\n" +
-                "Volaris - Carga Automatica de Itinerario\n" +
+                "AACOSTA - Carga Automatica de Itinerario\n" +
                 "</title>\n" +
                 "<style type=\'text/css\'>\n" +
                 "body \n" +
@@ -150,7 +150,7 @@ namespace VOI.SISAC.Business.Common
                 "<td class=\'container-padding content\' align=\'left\' style=\'padding-left:24px;padding-right:24px;padding-top:12px;padding-bottom:12px;background-color:#ffffff\'>\n" +
                 "<br>\n" +
                 "<div>\n" +
-                "<img style=\'display: block;margin-left: auto;margin-right: auto\' alt=\'Volaris\' src=\'https://www.http://aacosta.com.mx/com/Static/img/volaris-new-logo.jpg\'>\n" +
+                "<img style=\'display: block;margin-left: auto;margin-right: auto\' alt=\'AACOSTA\' src=\'https://www.http://aacosta.com.mx/com/Static/img/AACOSTA-new-logo.jpg\'>\n" +
                 "</div>\n" +
                 "<br>\n" +
                 "<br>\n" +
@@ -203,7 +203,7 @@ namespace VOI.SISAC.Business.Common
                 "<tr>\n" +
                 "<td class=\'container-padding footer-text\' align=\'left\' style=\'font-family:Helvetica, Arial, sans-serif;font-size:12px;line-height:16px;color:#aaaaaa;padding-left:24px;padding-right:24px\'>\n" +
                 "<br>\n" +
-                "<br> \u00ae " + DateTime.Now.Year.ToString() + " Volaris y su logo son marcas registradas de Volaris\n" +
+                "<br> \u00ae " + DateTime.Now.Year.ToString() + " AACOSTA y su logo son marcas registradas de AACOSTA\n" +
                 "<br>\n" +
                 "<a href=\'https://www.http://aacosta.com.mx/com/\' style=\'color:#aaaaaa\'>https://www.http://aacosta.com.mx/com/</a>\n" +
                 "<br>\n" +

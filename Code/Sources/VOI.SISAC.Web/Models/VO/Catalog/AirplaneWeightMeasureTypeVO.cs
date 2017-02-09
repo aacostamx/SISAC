@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="AirplaneWeightMeasureTypeVO.cs" company="Volaris">
+// <copyright file="AirplaneWeightMeasureTypeVO.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //---------------------------------------------------------------------

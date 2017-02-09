@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="CostCenterConfiguration.cs" company="Volaris">
+// <copyright file="CostCenterConfiguration.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //--------------------------------------------------------------------

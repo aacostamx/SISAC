@@ -1,4 +1,4 @@
-﻿// <copyright file="InternationalFuelRateConfiguration.cs" company="Volaris">
+﻿// <copyright file="InternationalFuelRateConfiguration.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 

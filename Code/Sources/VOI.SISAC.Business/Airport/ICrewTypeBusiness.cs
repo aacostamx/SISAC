@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="ICrewTypeBusiness.cs" company="Volaris">
+// <copyright file="ICrewTypeBusiness.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //---------------------------------------------------------------------

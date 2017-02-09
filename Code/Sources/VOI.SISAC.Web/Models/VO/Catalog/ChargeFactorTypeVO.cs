@@ -1,5 +1,5 @@
 ﻿//----------------------------------------------------------------
-// <copyright file="ChargeFactorTypeVO.cs" company="Volaris">
+// <copyright file="ChargeFactorTypeVO.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //----------------------------------------------------------------

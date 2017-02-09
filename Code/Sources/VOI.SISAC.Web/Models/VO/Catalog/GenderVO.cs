@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="GenderVO.cs" company="Volaris">
+// <copyright file="GenderVO.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //---------------------------------------------------------------

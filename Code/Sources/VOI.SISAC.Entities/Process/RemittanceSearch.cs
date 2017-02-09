@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="RemittanceSearch.cs" company="Volaris">
+// <copyright file="RemittanceSearch.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------

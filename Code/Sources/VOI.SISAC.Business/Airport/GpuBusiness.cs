@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="GpuBusiness.cs" company="Volaris">
+// <copyright file="GpuBusiness.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //----------------------------------------------------------------------

@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="PolicyRequestInformation.cs" company="Volaris">
+// <copyright file="PolicyRequestInformation.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------

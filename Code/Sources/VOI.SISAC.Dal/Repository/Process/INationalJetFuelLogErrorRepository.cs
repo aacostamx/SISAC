@@ -1,5 +1,5 @@
 ﻿//----------------------------------------------------------------------------
-// <copyright file="INationalJetFuelLogErrorRepository.cs" company="Volaris">
+// <copyright file="INationalJetFuelLogErrorRepository.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //----------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="User.cs" company="Volaris">
+// <copyright file="User.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -103,7 +103,7 @@ namespace VOI.SISAC.Entities.Security
         //[Column(TypeName = "numeric")]
         //public decimal? License { get; set; }
         /// <summary>
-        /// Gets or sets user volaris
+        /// Gets or sets user AACOSTA
         /// </summary>
         public bool UserVolaris { get; set; }
         /// <summary>

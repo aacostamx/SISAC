@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="GendecArrivalDto.cs" company="Volaris">
+// <copyright file="GendecArrivalDto.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------

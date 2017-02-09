@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="JetFuelProvisionVO.cs" company="Volaris">
+// <copyright file="JetFuelProvisionVO.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------

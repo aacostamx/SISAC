@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="DocumentStatus.cs" company="Volaris">
+// <copyright file="DocumentStatus.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="Timeline.cs" company="Volaris">
+// <copyright file="Timeline.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------

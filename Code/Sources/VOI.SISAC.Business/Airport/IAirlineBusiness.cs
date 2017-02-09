@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="IAirlineBusiness.cs" company="Volaris">
+// <copyright file="IAirlineBusiness.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //--------------------------------------------------------------

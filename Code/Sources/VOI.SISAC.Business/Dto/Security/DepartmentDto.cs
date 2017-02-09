@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="DepartmentDto.cs" company="Volaris">
+// <copyright file="DepartmentDto.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //----------------------------------------------------------------------

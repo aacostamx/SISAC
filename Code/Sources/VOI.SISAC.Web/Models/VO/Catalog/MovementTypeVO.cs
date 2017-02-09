@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="MovementTypeVO.cs" company="Volaris">
+// <copyright file="MovementTypeVO.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------

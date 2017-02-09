@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="RemittanceIDValidate.cs" company="Volaris">
+// <copyright file="RemittanceIDValidate.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------

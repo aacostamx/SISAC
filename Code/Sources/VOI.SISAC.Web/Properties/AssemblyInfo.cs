@@ -10,10 +10,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("VOI.SISAC.Web")]
 [assembly: AssemblyDescription("Sistema Integral de Servicios Aeroportuarios y Combustible")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Volaris")]
+[assembly: AssemblyCompany("AACOSTA")]
 [assembly: AssemblyProduct("VOI.SISAC.Web")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
-[assembly: AssemblyTrademark("VOLARIS")]
+[assembly: AssemblyTrademark("AACOSTA")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 

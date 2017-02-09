@@ -1,4 +1,4 @@
-﻿// <copyright file="UpperStringHelper.cs" company="Volaris">
+﻿// <copyright file="UpperStringHelper.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //------------------------------------------------------------------

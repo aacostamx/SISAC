@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="FunctionalAreaRepository.cs" company="Volaris">
+// <copyright file="FunctionalAreaRepository.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //--------------------------------------------------------------------

@@ -1,5 +1,5 @@
 ﻿//-------------------------------------------------------------------
-// <copyright file="FuelConceptTypeRepository.cs" company="Volaris">
+// <copyright file="FuelConceptTypeRepository.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //------------------------------------------------------------------

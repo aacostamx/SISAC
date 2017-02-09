@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="PagedVO.cs" company="Volaris">
+// <copyright file="PagedVO.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------

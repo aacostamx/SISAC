@@ -1,4 +1,4 @@
-﻿// <copyright file="AirportServiceContractVO.cs" company="Volaris">
+﻿// <copyright file="AirportServiceContractVO.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //------------------------------------------------------------------

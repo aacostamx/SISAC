@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="TimelineMovementConfiguration.cs" company="Volaris">
+// <copyright file="TimelineMovementConfiguration.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------

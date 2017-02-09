@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="LoginVO.cs" company="Volaris">
+// <copyright file="LoginVO.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------

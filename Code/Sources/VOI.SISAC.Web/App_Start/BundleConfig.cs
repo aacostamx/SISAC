@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="BundleConfig.cs" company="Volaris">
-// Copyright(c) Volaris - Todos los derechos reservados.
+// <copyright file="BundleConfig.cs" company="AACOSTA">
+// Copyright(c) AACOSTA - Todos los derechos reservados.
 // </copyright>
 //-----------------------------------------------------------------------
 namespace VOI.SISAC.Web

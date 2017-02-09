@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="TaxDto.cs" company="Volaris">
+// <copyright file="TaxDto.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------

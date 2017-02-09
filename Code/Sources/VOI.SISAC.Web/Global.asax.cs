@@ -1,6 +1,6 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="Global.asax.cs" company="Volaris">
-//     Copyright(c) Volaris - Todos los derechos reservados.
+// <copyright file="Global.asax.cs" company="AACOSTA">
+//     Copyright(c) AACOSTA - Todos los derechos reservados.
 // </copyright>
 //-----------------------------------------------------------------------
 

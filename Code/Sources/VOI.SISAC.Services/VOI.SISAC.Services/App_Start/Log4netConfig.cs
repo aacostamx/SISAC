@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="Log4netConfig.cs" company="Volaris">
+// <copyright file="Log4netConfig.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------

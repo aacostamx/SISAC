@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="LiabilityAccount.cs" company="Volaris">
+// <copyright file="LiabilityAccount.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------

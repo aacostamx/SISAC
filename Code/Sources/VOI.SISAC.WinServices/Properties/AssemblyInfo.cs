@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("VOI.SISAC.WinServices")]
 [assembly: AssemblyDescription("Carga Automática de Itinerario")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Volaris")]
+[assembly: AssemblyCompany("AACOSTA")]
 [assembly: AssemblyProduct("VOI.SISAC.WinServices")]
-[assembly: AssemblyCopyright("Copyright © Volaris 2016")]
+[assembly: AssemblyCopyright("Copyright © AACOSTA 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

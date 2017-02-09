@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="OperationTypeConfiguration.cs" company="Volaris">
+// <copyright file="OperationTypeConfiguration.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //----------------------------------------------------------------------

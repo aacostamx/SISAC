@@ -41,7 +41,7 @@ namespace VOI.SISAC.WinServices
             // 
             // serviceInstaller1
             // 
-            this.serviceInstaller1.Description = "Volaris - Carga Automática de Itinerario";
+            this.serviceInstaller1.Description = "AACOSTA - Carga Automática de Itinerario";
             this.serviceInstaller1.ServiceName = "ItineraryUpload";
             this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             // 

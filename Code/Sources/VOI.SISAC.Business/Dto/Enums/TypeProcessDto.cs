@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="TypeProcessDto.cs" company="Volaris">
+// <copyright file="TypeProcessDto.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------

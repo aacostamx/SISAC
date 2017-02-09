@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="InternationalFuelContractDto.cs" company="Volaris">
+// <copyright file="InternationalFuelContractDto.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------

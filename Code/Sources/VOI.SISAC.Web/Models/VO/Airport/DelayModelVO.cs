@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="DelayModelVO.cs" company="Volaris">
+// <copyright file="DelayModelVO.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //----------------------------------------------------------------------

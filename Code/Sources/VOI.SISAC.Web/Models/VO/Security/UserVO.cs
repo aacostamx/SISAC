@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="UserVO.cs" company="Volaris">
+// <copyright file="UserVO.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -149,10 +149,10 @@ namespace VOI.SISAC.Web.Models.VO.Security
         public System.DateTime CreationDate { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether [user volaris].
+        /// Gets or sets a value indicating whether [user AACOSTA].
         /// </summary>
         /// <value>
-        ///   <c>true</c> if [user volaris]; otherwise, <c>false</c>.
+        ///   <c>true</c> if [user AACOSTA]; otherwise, <c>false</c>.
         /// </value>
         [Display(Name = "UserVolaris", ResourceType = typeof(Resources.Resource))]
         [Required(ErrorMessageResourceType = typeof(Resources.Resource),

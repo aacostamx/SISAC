@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------
-// <copyright file="Country.cs" company="Volaris">
+// <copyright file="Country.cs" company="AACOSTA">
 //     Copyright (c) http://aacosta.com.mx/ All rights reserved.
 // </copyright>
 //-------------------------------------------------------------------

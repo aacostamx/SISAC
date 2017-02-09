@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------------
-// <copyright file="RequiredIfAttribute.cs" company="Volaris">
-//     Copyright(c) Volaris - Todos los derechos reservados.
+// <copyright file="RequiredIfAttribute.cs" company="AACOSTA">
+//     Copyright(c) AACOSTA - Todos los derechos reservados.
 // </copyright>
 //--------------------------------------------------------------------------
 
