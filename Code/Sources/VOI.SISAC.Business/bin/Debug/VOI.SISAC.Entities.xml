@@ -11148,7 +11148,7 @@
         </member>
         <member name="P:VOI.SISAC.Entities.Security.User.UserVolaris">
             <summary>
-            Gets or sets user volaris
+            Gets or sets user AACOSTA
             </summary>
         </member>
         <member name="P:VOI.SISAC.Entities.Security.User.Status">

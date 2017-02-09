@@ -20879,10 +20879,10 @@
         </member>
         <member name="P:VOI.SISAC.Web.Models.VO.Security.UserVO.UserVolaris">
             <summary>
-            Gets or sets a value indicating whether [user volaris].
+            Gets or sets a value indicating whether [user AACOSTA].
             </summary>
             <value>
-              <c>true</c> if [user volaris]; otherwise, <c>false</c>.
+              <c>true</c> if [user AACOSTA]; otherwise, <c>false</c>.
             </value>
         </member>
         <member name="P:VOI.SISAC.Web.Models.VO.Security.UserVO.Status">
